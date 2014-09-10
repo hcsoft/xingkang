@@ -12,7 +12,7 @@
  */
 
 error_reporting(E_ALL & ~E_NOTICE);
-define('BASE_ROOT_PATH',str_replace('\/','\\',dirname(__FILE__)));
+define('BASE_ROOT_PATH',str_replace('\\','/',dirname(__FILE__)));
 /**
  * 安装判断
  */
@@ -26,7 +26,7 @@ if (!is_file(BASE_ROOT_PATH."/shop/install/lock") && is_file(BASE_ROOT_PATH."/sh
 }
 define('BASE_CORE_PATH',BASE_ROOT_PATH.'/core');
 define('BASE_DATA_PATH',BASE_ROOT_PATH.'/data');
-define('DS','\\');
+define('DS','/');
 define('InShopNC',true);
 define('StartTime',microtime(true));
 define('TIMESTAMP',time());
