@@ -49,12 +49,9 @@ class Db
      */
     public static function query($sql, $host = 'sqlserver')
     {
-//        echo $sql.'111<br>';
         $host = 'sqlserver';
         self::connect($host);
         if (C('debug')) addUpTime('queryStartTime');
-//        echo $sql;
-//        echo '<br>';
         $lowstr = strtolower($sql);
         //处理 limit
         $limitindex = strpos($lowstr, ' limit ');
@@ -80,7 +77,6 @@ class Db
                 $whereindex = $limitindex;
             }
             $tableastr = substr($sql, $fromindex + 6, $whereindex - $fromindex - 6);
-//            echo $tableastr.'<br>';
             $tmp_table = explode(',', $tableastr);
             for ($i = 0; $i < count($tmp_table); $i++) {
                 $tmp_strs = explode('.', str_replace('`', '', $tmp_table[$i]));
@@ -90,36 +86,27 @@ class Db
                     $tmp_table[$i] = $tmp_strs[0];
                 }
             }
-//            echo '<br>orderindex=='.$orderindex.'<br>';
             if ($orderindex && $orderindex > 0) {
                 $byindex = strpos($lowstr, ' by ', $orderindex);
                 $orderby = substr($sql, $byindex + 4, $limitindex - $byindex - 4);
             } else {
-//                echo '<br>do?=='.$tmp_table[0].'<br>';
                 if(strpos($tmp_table[0],MS_DBPRE)<=0){
                     $tmp_table[0] = MS_DBPRE.$tmp_table[0];
                 }
-//                echo 'exec sp_pkeys ' .  $tmp_table[0] .'<br>';
                 $result = self::$link[$host]->query('exec sp_pkeys ' .  explode(' ', $tmp_table[0])[0] );
                 $keys = [];
                 while ($tmp = $result->fetch(PDO::FETCH_OBJ)) {
                     $keys[] = $tmp->COLUMN_NAME;
                 }
-//                echo '<br>do?=='.$orderindex.'<br>';
-//                var_dump($keys);
-//                echo '<br>do?=='.$orderindex.'<br>';
                 $orderby = implode(',', $keys);
             }
-//            echo $sql.'<br>';
             $selectindex = strpos($lowstr, 'select ');
-//            echo substr($sql,0,$fromindex+6).'<br>';
 
             if($whereindex<=0){
                 $sql = substr($sql,0,$fromindex+6) . implode(',',$tmp_table);
             }else{
                 $sql = substr($sql,0,$fromindex+6) . implode(',',$tmp_table).substr($sql,$whereindex);
             }
-//            echo $sql.'<br>';
             $limitindex = strpos(strtolower($sql), ' limit ');
             $sql = substr($sql, $selectindex + 7, $limitindex - $selectindex - 7);
 
@@ -139,7 +126,6 @@ class Db
         $sql = str_replace('FROM_UNIXTIME(','(',$sql);
         $sql = str_replace('HOUR(','datepart(hour,',$sql);
         $sql = str_replace('!(','not(',$sql);
-//        echo $sql.'<br>';
         $query = self::$link[$host]->query($sql);
         if (C('debug')) addUpTime('queryEndTime');
         if ($query === false) {
@@ -247,11 +233,6 @@ class Db
             $count_sql = 'SELECT ' . $param['count'] . '  count FROM [' . MS_DBPRE . $param['table'] . '] [' . $param['table'] . '] ' . $param['index'] . ' ' . $param['where'] . $param['where_group'];
             $sql = 'SELECT ' . $param['field'] . ' FROM [' . MS_DBPRE . $param['table'] . '] as [' . $param['table'] . '] ' . $param['index'] . ' ' . $param['where'] . $param['where_group'] . $param['where_order'];
         }
-//        echo  'sql<br>';
-//        echo 'countsql<br>';
-//        echo $count_sql.'<br>';
-//        echo $sql.'<br>';
-//        echo '<br>============'.MS_DBPRE.'||||||||||||||||||||||||<br>';
         //limit ，如果有分页对象的话，那么优先分页对象
         if ($obj_page instanceof Page) {
             $count_query = self::query($count_sql, $host);
@@ -265,7 +246,6 @@ class Db
 //            if (isset($_cache[$key])) return $_cache[$key];
 //        }
 //
-        echo $sql.'<br>';
 
         $result = self::query($sql, $host);
         while ($tmp = $result->fetch(PDO::FETCH_ASSOC)) {

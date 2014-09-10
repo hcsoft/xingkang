@@ -650,8 +650,6 @@ class ModelDb{
 
     public function select($options=array()) {
     	static $_cache = array();
-//        var_dump($options);
-//        echo '<br>';
 		$sql = $this->buildSelectSql($options);
         if ($options['cache'] !== false){
             $key =  is_string($cache['cache_key']) ? $cache['cache_key'] : md5($sql);
@@ -659,7 +657,6 @@ class ModelDb{
             	return $_cache[$key];
             }
         }
-//        echo $sql.'<br>';
         $result = DB::getAll($sql,$options['lock'] === true ? 'master' : 'slave');
         if ($options['cache'] !== false && !isset($_cache[$key])){
         	$_cache[$key] = $result;
@@ -674,7 +671,6 @@ class ModelDb{
 				$options['limit'] = $page->getLimitStart().",".$page->getEachNum();
 			}
     	}
-//        echo '<br>$this->selectSql<br>'.$this->selectSql.'<br>';
         $presql = $this->selectSql;
         if(isset ($options['field'] )){
             $fields = explode(',', $options['field']);
