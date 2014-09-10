@@ -33,6 +33,6 @@ title="<?php echo $lang['login_index_password_pattern'];?>">
   </div>
 </div>
 <div class="bottom">
-  <h5>Powered by SZGR</h5>
+<!--  <h5>Powered by SZGR</h5>-->
   <h6   > © 恒辰科技有限公司版权所有</a></h6>
 </div>

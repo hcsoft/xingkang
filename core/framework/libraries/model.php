@@ -645,10 +645,13 @@ class ModelDb{
     protected $comparison      = array('eq'=>'=','neq'=>'<>','gt'=>'>','egt'=>'>=','lt'=>'<','elt'=>'<=','notlike'=>'NOT LIKE','like'=>'LIKE','in'=>'IN','not in'=>'NOT IN');
     // 查询表达式
     protected $selectSql  =     'SELECT%DISTINCT% %FIELD% FROM %TABLE%%INDEX%%JOIN%%WHERE%%GROUP%%HAVING%%ORDER%%LIMIT% %UNION%';
+    protected $selectSqlSimple  =     'SELECT%DISTINCT% %FIELD% FROM %TABLE%%INDEX%%JOIN%%WHERE%%GROUP%%HAVING%';
 
 
     public function select($options=array()) {
     	static $_cache = array();
+//        var_dump($options);
+//        echo '<br>';
 		$sql = $this->buildSelectSql($options);
         if ($options['cache'] !== false){
             $key =  is_string($cache['cache_key']) ? $cache['cache_key'] : md5($sql);
@@ -656,6 +659,7 @@ class ModelDb{
             	return $_cache[$key];
             }
         }
+//        echo $sql.'<br>';
         $result = DB::getAll($sql,$options['lock'] === true ? 'master' : 'slave');
         if ($options['cache'] !== false && !isset($_cache[$key])){
         	$_cache[$key] = $result;
@@ -670,7 +674,22 @@ class ModelDb{
 				$options['limit'] = $page->getLimitStart().",".$page->getEachNum();
 			}
     	}
-        $sql  = $this->parseSql($this->selectSql,$options);
+//        echo '<br>$this->selectSql<br>'.$this->selectSql.'<br>';
+        $presql = $this->selectSql;
+        if(isset ($options['field'] )){
+            $fields = explode(',', $options['field']);
+            $flag = false;
+            for($i=0;$i<count($fields);$i++){
+                if(strpos(strtolower($fields[$i]),'count(')<0){
+                    $flag = true;
+                }
+            }
+        }
+        if(!$flag){
+            $presql = $this->selectSqlSimple;
+        }
+
+        $sql  = $this->parseSql($presql,$options);
         $sql .= $this->parseLock(isset($options['lock'])?$options['lock']:false);
         return $sql;
     }

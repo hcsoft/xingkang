@@ -274,7 +274,7 @@ function addFavorite(url, title) {
       <td class="menutd" valign="top" width="161"><div id="mainMenu" class="main-menu">
           <?php echo $output['left_nav'];?>
         </div><div class="copyright">
-        <p>Powered By <em><a href="http://110.76.46.229/" target="_blank">SZGR</a></em></p>
+        <p>恒辰科技</p>
         </div></td>
       <td valign="top" width="100%"><iframe src="" id="workspace" name="workspace" style="overflow: visible;" frameborder="0" width="100%" height="100%" scrolling="yes" onload="window.parent"></iframe></td>
     </tr>

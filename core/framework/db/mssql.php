@@ -49,6 +49,7 @@ class Db
      */
     public static function query($sql, $host = 'sqlserver')
     {
+//        echo $sql.'111<br>';
         $host = 'sqlserver';
         self::connect($host);
         if (C('debug')) addUpTime('queryStartTime');
@@ -121,11 +122,12 @@ class Db
 //            echo $sql.'<br>';
             $limitindex = strpos(strtolower($sql), ' limit ');
             $sql = substr($sql, $selectindex + 7, $limitindex - $selectindex - 7);
-//            echo $sql.'<br>';
+
             if (count($limitnum) > 1) {
                 $start = intval($limitnum[0]);
-                $end = intval($limitnum[1]);
-                $sql = 'select * from ( SELECT TOP ' . $end . ' row_number() OVER (order by ' . $orderby . ') rownum,  ' . $sql . ')tb WHERE   tb.rownum > ' . $start . ' ORDER BY tb.rownum ASC  ';
+                $len = intval($limitnum[1]);
+                $end = $start+$len;
+                $sql = 'select * from ( SELECT TOP ' . $end . ' row_number() OVER (order by ' . $orderby . ') rownum,  ' . $sql . ')tb WHERE   tb.rownum  > ' . $start . ' ORDER BY tb.rownum ASC  ';
             } else {
                 $start = 0;
                 $end = intval($limitnum[0]);
@@ -134,9 +136,6 @@ class Db
 
         }
         //处理 concat
-//        self::changeconcat($sql);
-//        var_dump($sql);
-//        echo '<br>';
         $sql = str_replace('FROM_UNIXTIME(','(',$sql);
         $sql = str_replace('HOUR(','datepart(hour,',$sql);
         $sql = str_replace('!(','not(',$sql);
@@ -237,27 +236,37 @@ class Db
             for ($i = 1; $i < count($tmp_table); $i++) {
                 $tmp_sql .= $param['join_type'] . ' [' . MS_DBPRE . $tmp_table[$i] . '] as [' . $tmp_table[$i] . '] ON ' . $param['join_on'][$i - 1] . ' ';
             }
-            $sql = 'SELECT ' . $param['field'] . ' FROM [' . MS_DBPRE . $tmp_table[0] . '] as [' . $tmp_table[0] . '] ' . $tmp_sql . ' ' . $param['where'] . $param['where_group'] . $param['where_order'];
-
             //如果有分页，那么计算信息总数
             $count_sql = 'SELECT ' . $param['count'] . '  count FROM [' . MS_DBPRE . $tmp_table[0] . '] as [' . $tmp_table[0] . '] ' . $tmp_sql . ' ' . $param['where'] . $param['where_group'];
+
+            $sql = 'SELECT ' . $param['field'] . ' FROM [' . MS_DBPRE . $tmp_table[0] . '] as [' . $tmp_table[0] . '] ' . $tmp_sql . ' ' . $param['where'] . $param['where_group'] . $param['where_order'];
+
+
         } else {
-            $sql = 'SELECT ' . $param['field'] . ' FROM [' . MS_DBPRE . $param['table'] . '] as [' . $param['table'] . '] ' . $param['index'] . ' ' . $param['where'] . $param['where_group'] . $param['where_order'];
+
             $count_sql = 'SELECT ' . $param['count'] . '  count FROM [' . MS_DBPRE . $param['table'] . '] [' . $param['table'] . '] ' . $param['index'] . ' ' . $param['where'] . $param['where_group'];
+            $sql = 'SELECT ' . $param['field'] . ' FROM [' . MS_DBPRE . $param['table'] . '] as [' . $param['table'] . '] ' . $param['index'] . ' ' . $param['where'] . $param['where_group'] . $param['where_order'];
         }
-        echo '<br>============'.MS_DBPRE.'||||||||||||||||||||||||<br>';
+//        echo  'sql<br>';
+//        echo 'countsql<br>';
+//        echo $count_sql.'<br>';
+//        echo $sql.'<br>';
+//        echo '<br>============'.MS_DBPRE.'||||||||||||||||||||||||<br>';
         //limit ，如果有分页对象的话，那么优先分页对象
         if ($obj_page instanceof Page) {
             $count_query = self::query($count_sql, $host);
-            $count_fetch = mysqli_fetch_array($count_query, MYSQLI_ASSOC);
+            $count_fetch = $count_query->fetchall($count_query, MYSQLI_ASSOC);
             $obj_page->setTotalNum($count_fetch['count']);
             $param['limit'] = $obj_page->getLimitStart() . "," . $obj_page->getEachNum();
         }
+//
+//        if ($param['cache'] !== false) {
+//            $key = is_string($param['cache_key']) ? $param['cache_key'] : md5($sql);
+//            if (isset($_cache[$key])) return $_cache[$key];
+//        }
+//
+        echo $sql.'<br>';
 
-        if ($param['cache'] !== false) {
-            $key = is_string($param['cache_key']) ? $param['cache_key'] : md5($sql);
-            if (isset($_cache[$key])) return $_cache[$key];
-        }
         $result = self::query($sql, $host);
         while ($tmp = $result->fetch(PDO::FETCH_ASSOC)) {
             $array[] = $tmp;
@@ -522,7 +531,7 @@ class Db
         $sql = ' select name from Sysobjects where xtype=\'U\' order by name';
         $result = self::query($sql, $host);
         $array = array();
-        while ($tmp = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        while ($tmp = $result->fetch($result, MYSQLI_ASSOC)) {
             $array[] = $tmp;
         }
         return $array;
@@ -540,7 +549,7 @@ class Db
         self::connect($host);
         $sql = 'SHOW CREATE TABLE ' . $GLOBALS['config']['tablepre'] . $table;
         $result = self::query($sql, $host);
-        $result = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $result = $result->fetchall($result, MYSQLI_ASSOC);
         return $result['Create Table'];
     }
 
@@ -569,7 +578,7 @@ class Db
             and  b.name <>'sysname'";
         $result = self::query($sql, $host);
         $array = array();
-        while ($tmp = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        while ($tmp = $result->fetch($result, MYSQLI_ASSOC)) {
             $array[$tmp['Field']] = array(
                 'name' => $tmp['name'],
                 'type' => $tmp['type'],
@@ -591,7 +600,8 @@ class Db
     {
         $host = 'sqlserver';
         self::connect($host);
-        $result = mysqli_get_server_info(self::$link[$host]);
+//        $result = mysqli_get_server_info(self::$link[$host]);
+        $result= null;
         return $result;
     }
 

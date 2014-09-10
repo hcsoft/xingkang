@@ -126,7 +126,7 @@ class BaseCircleControl{
 	 * SEO
 	 */
 	protected function circleSEO($title= '') {
-        Tpl::output('html_title',$title.' '.C('circle_seotitle').' - Powered by ShopNC');
+        Tpl::output('html_title',$title.' '.C('circle_seotitle').' - Powered by HCSoft');
         Tpl::output('seo_keywords',C('circle_seokeywords'));
         Tpl::output('seo_description',C('circle_seodescription'));
 	}
