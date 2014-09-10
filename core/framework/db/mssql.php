@@ -129,7 +129,7 @@ class Db
         $query = self::$link[$host]->query($sql);
         if (C('debug')) addUpTime('queryEndTime');
         if ($query === false) {
-            $error = 'Db Error: ' . mysqli_error(self::$link[$host]);
+            $error = 'Db Error: ' . self::$link[$host]->errorInfo();
             if (C('debug')) {
                 throw_exception($error . '<br/>' . $sql);
             } else {
@@ -236,7 +236,7 @@ class Db
         //limit ，如果有分页对象的话，那么优先分页对象
         if ($obj_page instanceof Page) {
             $count_query = self::query($count_sql, $host);
-            $count_fetch = $count_query->fetchall($count_query, MYSQLI_ASSOC);
+            $count_fetch = $count_query->fetchall(PDO::FETCH_ASSOC);
             $obj_page->setTotalNum($count_fetch['count']);
             $param['limit'] = $obj_page->getLimitStart() . "," . $obj_page->getEachNum();
         }
@@ -511,7 +511,7 @@ class Db
         $sql = ' select name from Sysobjects where xtype=\'U\' order by name';
         $result = self::query($sql, $host);
         $array = array();
-        while ($tmp = $result->fetch($result, MYSQLI_ASSOC)) {
+        while ($tmp = $result->fetch(PDO::FETCH_ASSOC)) {
             $array[] = $tmp;
         }
         return $array;
@@ -529,7 +529,7 @@ class Db
         self::connect($host);
         $sql = 'SHOW CREATE TABLE ' . $GLOBALS['config']['tablepre'] . $table;
         $result = self::query($sql, $host);
-        $result = $result->fetchall($result, MYSQLI_ASSOC);
+        $result = $result->fetchall(PDO::FETCH_ASSOC);
         return $result['Create Table'];
     }
 
@@ -558,7 +558,7 @@ class Db
             and  b.name <>'sysname'";
         $result = self::query($sql, $host);
         $array = array();
-        while ($tmp = $result->fetch($result, MYSQLI_ASSOC)) {
+        while ($tmp = $result->fetch(PDO::FETCH_ASSOC)) {
             $array[$tmp['Field']] = array(
                 'name' => $tmp['name'],
                 'type' => $tmp['type'],
@@ -627,7 +627,7 @@ class Db
             $result = self::$link[$host]->commit();
             self::$link[$host]->autocommit(true); //开启自动提交
             self::$iftransacte = true;
-            if (!$result) throw_exception("Db Error: " . mysqli_error(self::$link[$host]));
+            if (!$result) throw_exception("Db Error: " . self::$link[$host]->errorInfo());
         }
     }
 
@@ -637,7 +637,7 @@ class Db
             $result = self::$link[$host]->rollback();
             self::$link[$host]->autocommit(true);
             self::$iftransacte = true;
-            if (!$result) throw_exception("Db Error: " . mysqli_error(self::$link[$host]));
+            if (!$result) throw_exception("Db Error: " . self::$link[$host]->errorInfo());
         }
     }
 }

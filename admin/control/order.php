@@ -62,7 +62,7 @@ class orderControl extends SystemControl{
 
         Tpl::output('order_list',$order_list);
         Tpl::output('show_page',$model_order->showpage());
-        Tpl::showpage('[order].index');
+        Tpl::showpage('order.index');
 	}
 
 	/**
@@ -180,7 +180,7 @@ class orderControl extends SystemControl{
 	        }
 	        Tpl::output('payment_list',$payment_list);
 
-	        Tpl::showpage('[order].receive_pay');exit();
+	        Tpl::showpage('order.receive_pay');exit();
 	    }
 
 	    //下单，支付被冻结的预存款
@@ -253,7 +253,7 @@ class orderControl extends SystemControl{
 		}
 
 		Tpl::output('order_info',$order_info);
-        Tpl::showpage('[order].view');
+        Tpl::showpage('order.view');
 	}
 
 	/**
