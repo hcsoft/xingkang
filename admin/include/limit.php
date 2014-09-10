@@ -86,8 +86,9 @@ $_limit =  array(
 		array('name'=>$lang['nc_stataftersale'], 	'op'=>null, 'act'=>'stat_aftersale'),
 		)),
     array('name'=>$lang['nc_healthplatform'], 'child'=>array(
-        array('name'=>'回访抽查', 'op'=>null, 'act'=>'healthplatform'),
-        array('name'=>'统计', 'op'=>null, 'act'=>'healthplatform'),
+        array('name'=>'回访抽查', 'op'=>'index', 'act'=>'healthplatform'),
+        array('name'=>'统计', 'op'=>'statistical', 'act'=>'healthplatform'),
+        array('name'=>'测试', 'op'=>'test', 'act'=>'healthplatform'),
     )),
 );
 
