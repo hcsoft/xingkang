@@ -1,0 +1,7 @@
+/wap/js/config.js
+/data/log
+/data/config/config.ini.php
+/data/session
+/data/cache/*
+/data/cache/*.php
+/data/cache

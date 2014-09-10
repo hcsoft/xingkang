@@ -1,0 +1,98 @@
+  #mainmenu ul.nav > li.dropdown:hover > .dropdown-menu{
+  display: block;
+ }
+
+.megamenu .menu-icon{
+	background-position:center center;
+	padding-left:23px;
+	display:block;
+}
+	.megamenu .menu-title{
+		display:block
+	}	
+	.megamenu .menu-desc{
+		display:block;
+		font-size:11px
+	}
+.megamenu  .menu-content{
+}
+
+
+.megamenu li.mega-group > a .caret{
+	display:none;
+}
+.nav.megamenu > li.homepage.open, .nav.megamenu > li.homepage:hover {
+	background: none;
+}
+.megamenu li.homepage a {
+    background: url(../image/default/icon-home.png) no-repeat scroll left center;
+    display: block;
+    overflow: hidden;
+    padding-left: 0;
+    text-indent: -9999em;
+    width: 20px;
+}
+
+.megamenu ul{
+	margin:0;
+	padding:0
+}
+.megamenu ul li{
+	list-style:none;
+}
+.nav.megamenu > li.open,
+.nav.megamenu > li:hover {
+    background: url(../image/default/bg_menu_hover.png) repeat-x scroll right center;
+}
+
+.nav.megamenu > li:last-child {
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+}
+.dropdown-submenu > a:after {
+ 
+    margin-right: -10px;
+    margin-top: -22px;
+}
+.megamenu .mega-col{
+
+}
+.fullwidth {
+
+}
+
+.megamenu .mega-group  > a .menu-title {
+   font-family: lora;
+    font-size: 16px;
+    line-height: 30px;
+}
+.megamenu .mega-group  > a .menu-title .caret {
+	display: none;
+}
+
+.dropdown-submenu > a:after, .dropdown-submenu > a:before {
+    display: none;
+}
+#mainmenu .navbar .navbar-inner ul.nav li.open .dropdown-submenu a b.arrow, #mainmenu .navbar .navbar-inner ul.nav li.open .dropdown-submenu a b.caret {
+	display: none;}
+
+
+.nav.megamenu ul li.mega-group{
+ padding:0;
+ background: none;
+ border-bottom: none;
+ }
+ 
+ .dropdown-submenu > .dropdown-menu {
+    border-radius: 0 6px 6px 6px;
+    left: 100%;
+    margin-left: -1px;
+    margin-top: -6px;
+    top: 0;
+}
+li.dropdown-submenu {
+	position:relative;
+}

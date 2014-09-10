@@ -1,0 +1,37 @@
+.newsletter_block .description {
+    padding:0px;
+}
+.newsletter_block .title_block, .newsletter_block h4 {
+    padding: 15px 15px 0px 0px;
+    text-shadow: 0 1px 0 #FFFFFF;
+    font-size: 16px;
+    font-family: "Montserrat",Helvetica,Arial,sans-serif;
+    text-align: left;
+    text-transform: uppercase;
+    color: black;
+}
+
+.newsletter_block p{
+	padding:0px;
+}
+.newsletter_block input.inputNew {
+    border-color: 1px solid #CCCCCC;
+    color: #999999;
+    font-size: 13px;
+    height: 34px;
+    padding: 0 5px;
+    position: relative;
+    top: 0px;
+    width: 265px;
+    background: #fff;
+}
+.newsletter_block input.button_mini {
+    border: 0 none;
+    cursor: pointer;
+    height: 34px;
+    left: -4px;
+    position: relative;
+    width: 95px;
+    color: White;
+    font-size: 14px;
+}

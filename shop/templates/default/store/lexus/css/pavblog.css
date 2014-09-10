@@ -1,0 +1,203 @@
+
+.clearfix {
+    *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0;
+}
+.clearfix:after {
+    clear: both;
+}
+.pav-header  { position:relative  }
+.pav-header .rss-wrapper{
+    width:30px;	height:30px;	display:block; position:absolute;right:0; top:0; background:url(../image/icon-rss.png) no-repeat center center;
+    overflow:hidden; text-indent:-999em;
+}
+
+.pav-blogs{
+    border: 1px solid #F1F1F1;
+}
+.pav-blogs .blog-body{
+    margin-top:10px;
+}
+.blog-meta span{
+    padding:0px 10px;
+    font-size: 13px;
+}
+
+.blog-meta ul {
+    margin:  10px 0;
+    text-align: right;
+    color: #909090;
+    font-size: 11px;
+}
+.blog-meta ul li {
+    padding-bottom: 5px;
+    margin-bottom: 2px;
+}
+.blog-meta ul li span  { 
+    font-size: 12px;
+}
+/**
+* Category Page
+*/
+
+.pav-blogs .image {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.pav-blogs .blog-item img {
+    margin-right:  10px;
+}
+.pav-blogs .blog-item {
+    border-bottom: 1px solid #F1F1F1;
+    margin: 0 10px;
+    padding: 15px 0px;
+}
+.pav-blogs .blog-item .blog-title {
+    text-transform: none;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.pav-blogs .blog-item .description {
+    margin-bottom: 10px;
+}
+
+.pav-blogs .pagination{
+    border: 0px;
+    padding-right: 10px;
+}
+/**
+* Blog Page
+*/
+.pav-blog{
+    padding-bottom: 20px;
+}
+.pav-blog .blog-meta {
+    overflow: hidden;
+}
+.pav-blog .blog-meta > span {
+    display: block;
+    float: left;
+    font-size: 90%;
+    font-style: italic;
+    font-weight: bold;
+    padding: 0 10px 5px;
+}
+.pav-blog .blog-meta > span:first-child {
+    padding-left: 0;
+}
+.pav-blog .blog-meta > span:last-child {
+    font-size: 90%;
+}
+.pav-blog .blog-meta > span span {
+    font-weight: normal;
+}
+
+.pav-blog .blog-content, .pav-blog .blog-bottom { margin-bottom:20px; }
+.pav-comment,.pav-blog .blog-bottom { 
+    padding-top: 10px;
+}
+.pav-blog .blog-tags {
+   margin-bottom: 15px;
+}
+.pav-comment .buttons-wrap{padding-left: 10px;}
+.pav-blog .blog-tags a{
+   margin: 0 2px;
+   font-style: italic;
+}
+.comment-item {
+    padding-bottom:10px;
+}
+.comment-item  img{
+    padding-right:12px;
+}
+.comment-wrap{
+    overflow:hidden;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E5E5E5;
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -webkit-transition: all 0.3s ease-out 0s;	
+}
+.comment-wrap .comment-meta{
+    border-bottom: 1px solid #E5E5E5;
+    font-size: 11px;
+    margin: -20px -20px 10px;
+    padding: 10px 20px;
+}
+.comment-wrap .comment-meta > span { font-weight:bold; }
+.comment-wrap .comment-meta > span  span{ font-weight:normal; }
+.blog-social  .social-wrap > div { float:left; }
+.blog-social .social-heading{ padding-right:12px; }
+
+.comment-link{
+    background: none repeat scroll 0 0 #F4F4F4;
+    border-left: 1px solid #E5E5E5;
+    display: block;
+    float: right;
+    font-weight: bold;
+    margin: -11px -20px -10px 0;
+    padding: 10px 20px;
+}
+
+
+#comment-form .message{ background:#FCF8E3; padding: 12px; color:#000; margin:12px ;}
+#comment-form .comment-warning{ color:#B94A48  } 
+
+#comment-form .input-group{	clear:both; padding: 6px 0;	}
+#comment-form label{  
+    display: block;
+    float: left;
+    line-height: 27px;
+    margin: 0;
+    width: 20%;
+}
+#comment-form input, #comment-form textarea{
+    display: block;
+    margin: 0;
+    width: 77%;
+}
+
+#comment-form  .recaptcha{padding:12px; }
+#comment-form  .recaptcha input { width: 140px; height:27px; display:inline; margin:0 12px; }
+
+/**
+* Module
+*/
+.pavblogs-comments-box  .pav-comment { padding:10px ;border-bottom:1px dashed  #F4F4F4  }
+.pavblogs-comments-box  .pav-comment:last-child{ border-bottom:none; }
+.pavblogs-comments-box img{ padding-right:12px; }
+.comment-author {
+    color: #C83A3A;
+}
+
+
+/*category*/
+
+.pavblock .image {
+    float: left;
+    margin-right: 10px;
+}
+.pavblock .image img {
+    margin-bottom: 0;
+}
+.pavblock .blog-title {
+    margin-bottom: 10px;
+}
+
+.children-wrap,
+.children-wrap .sub-description,
+.children-wrap img {
+    margin-top:  10px;
+}
+

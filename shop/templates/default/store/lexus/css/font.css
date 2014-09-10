@@ -1,0 +1,22 @@
+
+@font-face {
+    font-family: 'SourceSansPro-Regular';
+    src: url('../font/SourceSansPro-Regular.eot');
+    src: url('../font/SourceSansPro-Regular.eot?#iefix') format('embedded-opentype'),
+    	 url('../font/SourceSansPro-Regular.ttf.woff') format('truetype'),
+         url('../font/SourceSansPro-Regular.otf.woff') format('truetype'),
+         url('../font/SourceSansPro-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+	font-family: 'SourceSansPro-SemiBold';
+    src: url('../font/SourceSansPro-Semibold.eot');
+    src: url('../font/SourceSansPro-Semibold.eot?#iefix') format('embedded-opentype'),
+    	 url('../font/SourceSansPro-Semibold.ttf.woff') format('truetype'),
+         url('../font/SourceSansPro-Semibold.otf.woff') format('truetype'),
+         url('../font/SourceSansPro-Semibold.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

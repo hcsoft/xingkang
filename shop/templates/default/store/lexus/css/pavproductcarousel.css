@@ -1,0 +1,6 @@
+.productcarousel {
+	position: relative;
+}
+.productcarousel .carousel-control{
+	z-index:10
+}

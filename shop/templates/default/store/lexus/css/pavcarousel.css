@@ -1,0 +1,21 @@
+.pavcarousel{
+	margin:0 40px;
+}
+.pavcarousel .carousel-inner{
+	overflow: hidden;
+}
+.pavcarousel .carousel-control{
+	top: 40%;
+	margin: -10px 0;	
+	background: transparent;
+	border:2px solid #292929;
+	border-radius: 20px; 
+	height: 27px;
+	padding:0 8px;
+}
+.pavcarousel .carousel-control.left{
+	left: -40px;
+}
+.pavcarousel .carousel-control.right{
+	right: -40px;
+}

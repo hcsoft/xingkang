@@ -1,0 +1,29 @@
+
+/* customize for body */ 
+body #page { background-color:#ccc9c8} 
+a:hover { color:#183cf0} 
+body #page { background-image:url(../../image/pattern/pattern9.png)} 
+
+/* customize for topbar */ 
+
+/* customize for header-main */ 
+
+/* customize for pav-mainnav */ 
+
+/* customize for search */ 
+#search input { background-color:#a13da1} 
+
+/* customize for footer-top */ 
+
+/* customize for footer-center */ 
+
+/* customize for powered */ 
+
+/* customize for product */ 
+.product-block .price { color:#092333} 
+.price .price-new { color:#752175} 
+.price .price-old { color:#eb0000} 
+.wishlist a { background-color:#eb1aeb} 
+
+/* customize for modules */ 
+.sidebar .box .box-heading { background-color:#854285} 

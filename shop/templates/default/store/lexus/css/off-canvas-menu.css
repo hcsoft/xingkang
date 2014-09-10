@@ -1,0 +1,135 @@
+/**
+ * OFF CANVAS MENU 
+ */
+@media (min-width: 979px)  {
+	body.off-canvas-active > * {
+		transform:translateX(0px) !important;
+		-webkit-transform:translateX(0px) !important;
+
+	}
+	body.off-canvas-active #page-container{
+		position: inherit!important;
+	}
+	#off-canvas-nav {
+		display:none;
+	}
+}
+
+.off-canvas body > *, #off-canvas-nav .pavo-mainnav  {
+	transition:all 500ms ease 0s;
+}
+body.off-canvas-active > * {
+	transform:translateX(250px);
+	-webkit-transform:translateX(250px);
+}
+
+body.off-canvas-active #page-container{
+	position:fixed;
+}
+body.off-canvas-inactive #page-container {
+	position: inherit;
+}
+body.off-canvas-inactive > * {
+	transform:translateX(0px);
+	-webkit-transform:translateX(0px);	
+}
+body.off-canvas-inactive >#off-canvas-nav{
+	 overflow:hidden;
+}
+body.off-canvas-active >#off-canvas-nav .pavo-mainnav {
+	left: -256px;
+}
+
+.off-canvas body{ overflow-x: hidden; }
+#page-container{ position: relative;}
+
+
+#off-canvas-nav {
+    backface-visibility: hidden;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 0px;
+
+}
+#off-canvas-nav .pavo-mainnav {
+	width:210px;
+	padding: 12px 18px;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: -500px;
+	background: #ffffff;
+	height: 100 
+}
+
+
+#off-canvas-nav .megamenu li.home a {
+	 height: auto;
+	 width: auto;
+	 text-indent: inherit;
+	 background: none;
+}
+#off-canvas-nav .megamenu .mega-cols{ width: 100%; min-width:inherit; }
+
+#off-canvas-nav .dropdown-menu{
+	position: relative;
+	 display: block;
+	 left: 0;
+	 right: 0;
+	 top: 0;
+	 float: none;
+	border: none;
+	 box-shadow: none;
+	 margin: 0;
+	  padding: 0 10px;
+
+}
+#off-canvas-nav .dropdown-mega,
+#off-canvas-nav  li.mega-group .dropdown-menu {
+	padding: 0 15px;
+}
+#off-canvas-nav .mega-col {
+	display: block;
+	width: 100%;
+	position: relative;
+}
+#off-canvas-nav .megamenu .mega-group > a .menu-title {
+	font-size:  13px;
+}
+#off-canvas-nav .dropdown-menu img{ width: 100%; }
+#off-canvas-nav #off-canvas-button {   background: #FFF; padding: 12px 0px; font-weight: bold;  }
+#off-canvas-nav #off-canvas-button span{ 
+	font-weight: bold; 
+	margin-right: 12px ; 
+	background: url(../image/default/icon-close.png) no-repeat left top scroll;
+}
+#off-canvas-nav .dropdown .dropdown-menu li,#off-canvas-nav .megamenu .dropdown-mega li {
+	 background:  none;
+}
+#off-canvas-nav .nav > li:hover, 
+#off-canvas-nav .nav > li > a:hover, #off-canvas-nav .nav > li > a:focus {
+	 background:  none;
+}
+#off-canvas-nav .megamenu li.homepage a {
+	 height: auto;
+	 width: auto;
+	 text-indent: inherit;
+}
+#off-canvas-nav .nav li {
+	 border:none;
+	 padding:  0;
+}
+#off-canvas-nav ul li a {
+	 border-bottom:  1px solid #e0e0e0;
+	 display:  block;
+	 line-height: 30px;
+}
+#off-canvas-nav .nav > li > a {  
+	font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding:  5px 0;
+    line-height: 35px;
+}

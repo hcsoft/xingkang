@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>店铺首页</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<link rel="stylesheet" type="text/css" href="../css/store_detail.css">
+	<script type="text/javascript" src="../js/zepto.min.js"></script>
+	<script type="text/javascript" src="../js/config.js"></script>
+</head>
+
+
+<body id="home-320">
+	<header>
+		
+		<div class="header-wrap">
+			<div class="htsearch-wrap">
+				<input type="text" class="htsearch-input clr-999 input-search-icon" value="" id="keyword" placeholder="搜索店铺商品"/>
+				<a href="javascript:void(0);" class="it-is-me"></a>
+				<!--a href="javascript:void(0);" class="it-is-me"></a-->
+			</div>
+		</div>
+		
+		
+		 
+	</header>
+	<div id="home-cnt-wp"></div>
+	<div>
+		<a href="javascript:void();"><span class="more">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;更多</span>
+		<span class="icon-more"></span></a>
+	</div>
+	
+	<div id="footer"></div>
+	<input type='hidden' name='store_id' value=''>
+</body>
+
+
+<script type="text/html" id="home_body">
+
+	<div id='mySwipe'class='swiper-container'>
+		<div class='swipe-wrap'>
+		  <%for(i=0;i<store_ad_list.length;i++){%>	
+		  <a class="swipe-item home1" href="product_detail.html?goods_id=231" keyword="<%=store_ad_list[i].keyword %>"><img src="<%=store_ad_list[i].image%>"></a>
+		  <%}%>
+		</div>
+		<div class="swipe-paginat"></div>	
+	</div>
+	
+
+	<%if(home1.length>1){ %> 
+	<%for(i=0;i<home1.length;i++){%> 
+		<div class="home-categroy-home1 clearfix" >
+		<a href="product_detail.html?goods_id=231;"  class="item_img">
+			<img src="<%=home1[i].image%>">
+		</a>
+		</div>	
+	<%}%>
+	<%}%>
+
+	<%if(home2.length>1){ %> 
+	<div class="home-categroy-home2  clearfix" >
+	<%for(i=0;i<home2.length;i++){%>
+	
+		<a href="javascript:void(0)" class="item_img <%if(i==1){%>fright<%}else{%>fleft<%}%> home" keyword="<%=home2[i].keyword %>">
+			<img src="<%=home2[i].image%>">
+		</a>
+	
+	<%}%>
+	</div>
+	<%}%>
+	
+	<%if(home41.length>1){ %> 
+	<div class="home-categroy-home4  clearfix" >
+	<%for(i=0;i<home41.length;i++){%>
+		<a href="javascript:void(0)" class="home4_item_img" keyword="<%=home41[i].keyword %>">
+			<img src="<%=home41[i].image%>">
+		</a>
+		<% if (i<4){ continue;}%>
+		
+	<%}%>
+	</div>
+	<%}%>
+	
+	<%if(homeMap.length>1){ %> 
+	<table class="home-cnt home-hot clearfix">
+		<%
+			for (var i = 0;i<homeMap.length;i++){
+		%>
+		<tr>
+			<%for (var j=0;j<homeMap[i].length;j++){
+				if(homeMap[i][j]){
+			%>
+				<td>    
+					<a href="javascript:void(0);" class="hhot-item clearfix" title="<%=homeMap[i][j].goods_name%>">
+						<img src="<%=homeMap[i][j].goods_image_url%>"/>						
+						<span class="hhot-name"><%=homeMap[i][j].goods_sub_name%></span><br>
+						<span class="hhot-price">￥<%=homeMap[i][j].goods_price%></span><br>
+						
+					</a>
+				</td>
+			<%}}%>
+		</tr>
+		<%}%>
+	</table>
+	<%}%>
+
+	
+	
+	
+	
+</script>
+<!-- //goods_id  goods_price  goods_marketprice goods_salenum -->
+<script type="text/javascript" src="../js/template.js"></script>
+<script type="text/javascript" src="../js/touch.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/swipe.js"></script>
+<script type="text/javascript" src="../js/tmpl/store_detail.js"></script>
+<script type="text/javascript" src="../js/tmpl/footer.js"></script>
+
+
+</html>
