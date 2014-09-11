@@ -40,7 +40,7 @@ $(document).ready(function(){
 	}else{
 		$('#mainMenu>ul').first().css('display','block');
 		//第一次进入后台时，默认定到欢迎界面
-		$('#item_welcome').addClass('selected');
+//		$('#item_welcome').addClass('selected');
         eval( $("#nav >ul >li:first-child > a").attr("onclick"));
 //		$('#workspace').attr('src','index.php?act=dashboard&op=welcome');
 	}

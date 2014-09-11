@@ -111,7 +111,7 @@
           <td class="w60 align-center"><?php echo $v['goods_commonid'];?></td>
           <td class="w60 picture"><div class="size-56x56"><span class="thumb size-56x56"><i></i><img src="<?php echo thumb($v, 60);?>" onload="javascript:DrawImage(this,56,56);"/></span></div></td>
           <td class="goods-name w270"><p><span><?php echo $v['goods_name'];?></span></p>
-            <p class="store"><?php echo $lang['goods_index_store_name'];?>:<?php echo $v['store_name'];?></p></td>
+            <p class="store">:<?php echo $v['store_name'];?></p></td>
           <td><p><?php echo $v['brand_name'];?></p>
             <p><?php echo $v['gc_name'];?></p></td>
           <td class="align-center"><?php echo $lang['currency'].$v['goods_price']?></td>

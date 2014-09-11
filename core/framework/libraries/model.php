@@ -645,7 +645,7 @@ class ModelDb{
     protected $comparison      = array('eq'=>'=','neq'=>'<>','gt'=>'>','egt'=>'>=','lt'=>'<','elt'=>'<=','notlike'=>'NOT LIKE','like'=>'LIKE','in'=>'IN','not in'=>'NOT IN');
     // 查询表达式
     protected $selectSql  =     'SELECT%DISTINCT% %FIELD% FROM %TABLE%%INDEX%%JOIN%%WHERE%%GROUP%%HAVING%%ORDER%%LIMIT% %UNION%';
-    protected $selectSqlSimple  =     'SELECT%DISTINCT% %FIELD% FROM %TABLE%%INDEX%%JOIN%%WHERE%%GROUP%%HAVING%';
+    protected $selectSqlSimple  =     'SELECT%DISTINCT% %FIELD% FROM %TABLE%%INDEX%%JOIN%%WHERE%%GROUP%%HAVING%%LIMIT% %UNION%';
 
 
     public function select($options=array()) {
@@ -680,8 +680,10 @@ class ModelDb{
                     $flag = true;
                 }
             }
+        }else{
+            $flag = true;
         }
-        if(!$flag){
+        if(!($flag)){
             $presql = $this->selectSqlSimple;
         }
 

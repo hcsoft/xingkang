@@ -126,6 +126,7 @@ class Db
         $sql = str_replace('FROM_UNIXTIME(','(',$sql);
         $sql = str_replace('HOUR(','datepart(hour,',$sql);
         $sql = str_replace('!(','not(',$sql);
+
         $query = self::$link[$host]->query($sql);
         if (C('debug')) addUpTime('queryEndTime');
         if ($query === false) {
@@ -173,87 +174,78 @@ class Db
         self::connect($host);
         static $_cache = array();
 
-        if (empty($param)) throw_exception('Db Error: select param is empty!');
-
-        if (empty($param['field'])) {
+        if (empty($param)){
+            throw_exception('Db Error: select param is empty!');
+        }
+        if (empty($param['field'])){
             $param['field'] = '*';
         }
-        if (empty($param['count'])) {
+        if (empty($param['count'])){
             $param['count'] = 'count(*)';
         }
-
-        if (isset($param['index'])) {
-            $param['index'] = 'USE INDEX (' . $param['index'] . ')';
+        if (isset($param['index'])){
+            $param['index'] = 'USE INDEX ('.$param['index'].')';
         }
-
-        if (trim($param['where']) != '') {
-            if (strtoupper(substr(trim($param['where']), 0, 5)) != 'WHERE') {
-                if (strtoupper(substr(trim($param['where']), 0, 3)) == 'AND') {
-                    $param['where'] = substr(trim($param['where']), 3);
+        if (trim($param['where']) != ''){
+            if (strtoupper(substr(trim($param['where']),0,5)) != 'WHERE'){
+                if (strtoupper(substr(trim($param['where']),0,3)) == 'AND'){
+                    $param['where'] = substr(trim($param['where']),3);
                 }
-                $param['where'] = 'WHERE ' . $param['where'];
+                $param['where'] = 'WHERE '.$param['where'];
             }
-        } else {
-            $param['where'] = '';
         }
         $param['where_group'] = '';
-        if (!empty($param['group'])) {
-            $param['where_group'] .= ' group by ' . $param['group'];
+        if (!empty($param['group'])){
+            $param['where_group'] .= ' group by '.$param['group'];
         }
         $param['where_order'] = '';
-        if (!empty($param['order'])) {
-            $param['where_order'] .= ' order by ' . $param['order'];
+        if (!empty($param['order'])){
+            $param['where_order'] .= ' order by '.$param['order'];
         }
-
-        //判断是否是联表
-        $tmp_table = explode(',', $param['table']);
-        if (!empty($tmp_table) && count($tmp_table) > 1) {
-            //判断join表数量和join条件是否一致
-            if ((count($tmp_table) - 1) != count($param['join_on'])) {
+        //判断是否是联表查询
+        $tmp_table = explode(',',$param['table']);
+        if (!empty($tmp_table) && count($tmp_table) > 1){
+            if ((count($tmp_table)-1) != count($param['join_on'])){
                 throw_exception('Db Error: join number is wrong!');
             }
-
-            //trim 掉空白字符
-            foreach ($tmp_table as $key => $val) {
-                $tmp_table[$key] = trim($val);
+            foreach($tmp_table as $key=>$val){
+                $tmp_table[$key] = trim($val) ;
             }
-
             //拼join on 语句
-            for ($i = 1; $i < count($tmp_table); $i++) {
-                $tmp_sql .= $param['join_type'] . ' [' . MS_DBPRE . $tmp_table[$i] . '] as [' . $tmp_table[$i] . '] ON ' . $param['join_on'][$i - 1] . ' ';
+            for ($i=1;$i<count($tmp_table);$i++){
+                $tmp_sql .= $param['join_type'].' ['.MS_DBPRE.$tmp_table[$i].'] ['.$tmp_table[$i].'] ON '.$param['join_on'][$i-1].' ';
             }
-            //如果有分页，那么计算信息总数
-            $count_sql = 'SELECT ' . $param['count'] . '  count FROM [' . MS_DBPRE . $tmp_table[0] . '] as [' . $tmp_table[0] . '] ' . $tmp_sql . ' ' . $param['where'] . $param['where_group'];
+            $sql = 'SELECT '.$param['field'].' FROM ['.MS_DBPRE.$tmp_table[0].'] ['.$tmp_table[0].'] '.$tmp_sql.' '.$param['where'].$param['where_group'].$param['where_order'];
 
-            $sql = 'SELECT ' . $param['field'] . ' FROM [' . MS_DBPRE . $tmp_table[0] . '] as [' . $tmp_table[0] . '] ' . $tmp_sql . ' ' . $param['where'] . $param['where_group'] . $param['where_order'];
-
-
-        } else {
-
-            $count_sql = 'SELECT ' . $param['count'] . '  count FROM [' . MS_DBPRE . $param['table'] . '] [' . $param['table'] . '] ' . $param['index'] . ' ' . $param['where'] . $param['where_group'];
-            $sql = 'SELECT ' . $param['field'] . ' FROM [' . MS_DBPRE . $param['table'] . '] as [' . $param['table'] . '] ' . $param['index'] . ' ' . $param['where'] . $param['where_group'] . $param['where_order'];
+            //如果有分页，计算信息总数
+            $count_sql = 'SELECT '.$param['count'].' as count FROM ['.MS_DBPRE.$tmp_table[0].'] ['.$tmp_table[0].'] '.$tmp_sql.' '.$param['where'].$param['where_group'];
+        }else {
+            $sql = 'SELECT '.$param['field'].' FROM ['.MS_DBPRE.$param['table'].'] as ['.$param['table'].'] '.$param['index'].' '.$param['where'].$param['where_group'].$param['where_order'];
+            $count_sql = 'SELECT '.$param['count'].' as count FROM ['.MS_DBPRE.$param['table'].'] as ['.$param['table'].'] '.$param['index'].' '.$param['where'].$param['where_group'];
         }
+
         //limit ，如果有分页对象的话，那么优先分页对象
-        if ($obj_page instanceof Page) {
-            $count_query = self::query($count_sql, $host);
-            $count_fetch = $count_query->fetchall(PDO::FETCH_ASSOC);
+        if ($obj_page instanceof Page ){
+            $count_query = self::query($count_sql);
+            $count_fetch = $count_query->fetchAll(PDO::FETCH_ASSOC);
             $obj_page->setTotalNum($count_fetch['count']);
-            $param['limit'] = $obj_page->getLimitStart() . "," . $obj_page->getEachNum();
+            $param['limit'] = $obj_page->getLimitStart().",".$obj_page->getEachNum();
         }
-//
-//        if ($param['cache'] !== false) {
-//            $key = is_string($param['cache_key']) ? $param['cache_key'] : md5($sql);
-//            if (isset($_cache[$key])) return $_cache[$key];
-//        }
-//
-
-        $result = self::query($sql, $host);
-        while ($tmp = $result->fetch(PDO::FETCH_ASSOC)) {
+        if ($param['limit'] != ''){
+            $sql .= ' limit '.$param['limit'];
+        }
+        if ($param['cache'] !== false){
+            $key =  is_string($param['cache_key'])?$param['cache_key']:md5($sql);
+            if (isset($_cache[$key])) return $_cache[$key];
+        }
+        $result = self::query($sql,$host);
+        while ($tmp=$count_query){
             $array[] = $tmp;
         }
-        if ($param['cache'] !== false && !isset($_cache[$key])) {
+        if ($param['cache'] !== false && !isset($_cache[$key])){
             $_cache[$key] = $array;
         }
+
         return $array;
     }
 

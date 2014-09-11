@@ -4,7 +4,7 @@ defined('InShopNC') or exit('Access Invalid!');
  * index
  */
 $lang['login_index_title_01']					= 'ShopNC【B2B2C】电商系统';
-$lang['login_index_title_02']					= '平台管理中心';
+$lang['login_index_title_02']					= '社区连锁管理平台';
 $lang['login_index_title_03']					= '商城&nbsp;&nbsp;|&nbsp;&nbsp;资讯&nbsp;&nbsp;|&nbsp;&nbsp;圈子&nbsp;&nbsp;|&nbsp;&nbsp;微商城&nbsp;&nbsp;|&nbsp;&nbsp;统计';
 $lang['login_index_username_null']				= '用户名不能为空';
 $lang['login_index_password_null']				= '密码不能为空';

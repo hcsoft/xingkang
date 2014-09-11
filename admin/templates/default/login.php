@@ -3,9 +3,9 @@
 <div class="bg-dot"></div>
 <div class="login-layout">
   <div class="top">
-    <h5>恒辰科技电商系统<em></em></h5>
+    <h5>新康医疗<em></em></h5>
     <h2><?php echo $lang['login_index_title_02'];?></h2>
-    <h6><?php echo $lang['login_index_title_03'];?></h6>
+<!--    <h6>--><?php //echo $lang['login_index_title_03'];?><!--</h6>-->
   </div>
   <div class="box">
     <form method="post" id="form_login">
