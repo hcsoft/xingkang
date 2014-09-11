@@ -112,11 +112,11 @@
             <tr class="thead">
                 <th class="w24"></th>
                 <th class="w24"></th>
-                <th class="align-center">平台货号</th>
+                <th class="align-center">商品编码</th>
                 <th colspan="2"><?php echo $lang['goods_index_name']; ?></th>
                 <th class="align-center">规格</th>
                 <th class="align-center">单位</th>
-                <th><?php echo $lang['goods_index_brand']; ?>&<?php echo $lang['goods_index_class_name']; ?></th>
+                <th>厂家场地</th>
                 <th class="align-center">价格</th>
                 <th class="align-center">库存</th>
                 <th class="align-center">商品状态</th>
