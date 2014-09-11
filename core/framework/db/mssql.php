@@ -270,7 +270,7 @@ class Db
         $sql = 'INSERT INTO [' . MS_DBPRE . $table_name . '] (' . implode(',', $fields) . ') VALUES(' . implode(',', $value) . ')';
 
         //当数据库没有自增ID的情况下，返回 是否成功
-        $result = self::query($sql, $host);
+        $result = self::query($sql, $host)->exec();
         $insert_id = self::getLastId($host);
         return $insert_id ? $insert_id : $result;
     }
@@ -301,7 +301,7 @@ class Db
             $values[] = '(' . implode(',', $value) . ')';
         }
         $sql = 'INSERT INTO [' . MS_DBPRE . $table_name . '] (' . implode(',', $fields) . ') VALUES ' . implode(',', $values);
-        $result = self::query($sql, $host);
+        $result = self::query($sql, $host)->exec();
         $insert_id = self::getLastId($host);
         return $insert_id ? $insert_id : $result;
     }
@@ -350,7 +350,7 @@ class Db
             }
         }
         $sql = 'UPDATE [' . MS_DBPRE . $table_name . ']  SET ' . $string_value . ' ' . $where;
-        $result = self::query($sql, $host);
+        $result = self::query($sql, $host)->exec();
         return $result;
     }
 
@@ -373,7 +373,7 @@ class Db
                 $where = ' WHERE ' . $where;
             }
             $sql = 'DELETE FROM [' . MS_DBPRE . $table_name . '] ' . $where;
-            return self::query($sql, $host);
+            return self::query($sql, $host)->exec();
         } else {
             throw_exception('Db Error: the condition of delete is empty!');
         }
@@ -388,7 +388,7 @@ class Db
     {
         $host = 'sqlserver';
         self::connect($host);
-        $id = self::query('SELECT @@IDENTITY as id', $host)[0][0];
+        $id = self::query('SELECT @@IDENTITY as id', $host)->fetchall(PDO::FETCH_NUM);
         return $id;
     }
 
