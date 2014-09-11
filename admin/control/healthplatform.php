@@ -110,7 +110,7 @@ class healthplatformControl extends SystemControl
                         a.id,
                         a.checkdate
                         ,a.checkopt
-                        ,b.name  'checktype'
+                        ,b.value  'checktype'
                         ,a.checktable
                         ,a.checktableid
                         ,a.fileno
