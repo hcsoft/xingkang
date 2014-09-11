@@ -31,7 +31,7 @@
                 <th><label for="search_goods_name"> <?php echo $lang['goods_index_name']; ?></label></th>
                 <td><input type="text" value="<?php echo $output['search']['search_goods_name']; ?>"
                            name="search_goods_name" id="search_goods_name" class="txt"></td>
-                <th><label for="search_commonid">平台货号</label></th>
+                <th><label for="search_commonid">商品编码</label></th>
                 <td><input type="text" value="<?php echo $output['search']['search_commonid'] ?>" name="search_commonid"
                            id="search_commonid" class="txt"/></td>
                 <th><label><?php echo $lang['goods_index_class_name']; ?></label></th>
@@ -50,9 +50,9 @@
 
             </tr>
             <tr>
-                <th><label for="search_store_name"><?php echo $lang['goods_index_store_name']; ?></label></th>
-                <td><input type="text" value="<?php echo $output['search']['search_store_name']; ?>"
-                           name="search_store_name" id="search_store_name" class="txt"></td>
+<!--                <th><label for="search_store_name">--><?php //echo $lang['goods_index_store_name']; ?><!--</label></th>-->
+<!--                <td><input type="text" value="--><?php //echo $output['search']['search_store_name']; ?><!--"-->
+<!--                           name="search_store_name" id="search_store_name" class="txt"></td>-->
                 <th><label><?php echo $lang['goods_index_brand']; ?></label></th>
                 <td><select name="search_brand_id">
                         <option value=""><?php echo $lang['nc_please_choose']; ?>...</option>
@@ -118,7 +118,6 @@
                 <th class="align-center">单位</th>
                 <th>厂家场地</th>
                 <th class="align-center">价格</th>
-                <th class="align-center">库存</th>
                 <th class="align-center">商品状态</th>
                 <th class="align-center">审核状态</th>
                 <th class="w48 align-center"><?php echo $lang['nc_handle']; ?> </th>
@@ -154,7 +153,7 @@
                             <p><?php echo $v['gc_name']; ?></p></p>
                         </td>
                         <td class="align-center"><?php echo $lang['currency'] . number_format($v['goods_price'], 2) ?></td>
-                        <td class="align-center"><?php echo $output['storage_array'][$v['goods_commonid']]['sum'] ?></td>
+<!--                        <td class="align-center">--><?php //echo $output['storage_array'][$v['goods_commonid']]['sum'] ?><!--</td>-->
                         <td class="align-center"><?php echo $output['state'][$v['goods_state']]; ?></td>
                         <td class="align-center"><?php echo $output['verify'][$v['goods_verify']]; ?></td>
                         <td class="align-center"><p><a

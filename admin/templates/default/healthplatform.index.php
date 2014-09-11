@@ -117,7 +117,7 @@
                             <?php echo $v->checktype ?>
                         </td>
                         <td class="">
-                            <p>操作员：<span style="color:blue"><?php echo $v->checkopt ?></span></p>
+                            <p>操作员：<span style="color:blue"><?php echo $v->inputperson ?></span></p>
 
                             <p>回访时间：<span
                                     style="color:blue"><?php echo date('Y-m-d', strtotime($v->checkdate)) ?></span></p>
@@ -204,6 +204,25 @@
             </tfoot>
         </table>
     </form>
+    <div id="spotdialog" title="抽查">
+        <span id="errormsg" style="color:red;width:100%;display:block;text-align: center;"></span>
+
+        <form>
+            <input type="hidden" id='spotid' name="spotid">
+
+            <p>抽查时间：<input style="color:blue;" id="spotdate" name="spotdate" readonly
+                           value="<?php echo date('Y-m-d', time()) ?>"></p>
+
+            <p>抽查结果：<input id="spotresult_pass" name="spotresult" type="radio" value="通过" checked></input>
+                <label for="spotresult_pass" style="cursor:pointer">通过</label>
+                <input id="spotresult_false" name="spotresult" type="radio" value="虚报"></input>
+                <label for="spotresult_false" style="cursor:pointer">虚报</label>
+                <input id="spotresult_unknown" name="spotresult" type="radio" value="未确认"></input>
+                <label for="spotresult_unknown" style="cursor:pointer">未确认</label></p>
+
+            <p>原&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因：<input style="color:blue;" id="reason" name="reason" value=""></p>
+        </form>
+    </div>
 </div>
 
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
@@ -299,22 +318,4 @@
         display:none;
     }
 </style>
-<div id="spotdialog" title="抽查">
-    <span id="errormsg" style="color:red;width:100%;display:block;text-align: center;"></span>
 
-    <form>
-        <input type="hidden" id='spotid' name="spotid">
-
-        <p>抽查时间：<input style="color:blue;" id="spotdate" name="spotdate" readonly
-                       value="<?php echo date('Y-m-d', time()) ?>"></p>
-
-        <p>抽查结果：<input id="spotresult_pass" name="spotresult" type="radio" value="通过" checked></input>
-            <label for="spotresult_pass" style="cursor:pointer">通过</label>
-            <input id="spotresult_false" name="spotresult" type="radio" value="虚报"></input>
-            <label for="spotresult_false" style="cursor:pointer">虚报</label>
-            <input id="spotresult_unknown" name="spotresult" type="radio" value="未确认"></input>
-            <label for="spotresult_unknown" style="cursor:pointer">未确认</label></p>
-
-        <p>原&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因：<input style="color:blue;" id="reason" name="reason" value=""></p>
-    </form>
-</div>

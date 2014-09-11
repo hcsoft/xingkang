@@ -49,8 +49,8 @@ class healthplatformControl extends SystemControl
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
-        $sql = 'from spotcheck_main a  left join spotcheck_spot spot on a.id = spot.spotid, export_main b , healthfile hf, personalinfo info
-         where a.checktype = b.id and b.type=21 and a.fileno = hf.fileno and hf.fileno = info.fileno ';
+        $sql = 'from spotcheck_main a  left join spotcheck_spot spot on a.id = spot.spotid, spotcheck_type b , healthfile hf, personalinfo info
+         where a.checktype = b.code  and a.fileno = hf.fileno and hf.fileno = info.fileno ';
         if ($_REQUEST['search_phone']) {
             $sql = $sql . ' and a.phone like \'%' . $_REQUEST['search_phone'] . '%\'';
         }
@@ -131,6 +131,8 @@ class healthplatformControl extends SystemControl
                         ,a.remark
                         ,a.inputdate
                         ,a.updatedate
+                        ,a.inputperson
+                        ,a.orgid
                             $sql order by  a.inputdate)zzzz where rownum>$startnum )zzzzz order by rownum";
         $stmt = $conn->query($tsql);
         $data_list = array();
