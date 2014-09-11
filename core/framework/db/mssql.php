@@ -171,8 +171,6 @@ class Db
     public static function select($param, $obj_page = '', $host = 'sqlserver')
     {
         $host = 'sqlserver';
-        var_dump($param);
-        echo '<br>';
         self::connect($host);
         static $_cache = array();
 
@@ -240,7 +238,6 @@ class Db
             $key =  is_string($param['cache_key'])?$param['cache_key']:md5($sql);
             if (isset($_cache[$key])) return $_cache[$key];
         }
-        echo $sql.'<br>';
         $result = self::query($sql,$host);
         while ($tmp=$result->fetch(PDO::FETCH_ASSOC)){
             $array[] = $tmp;
@@ -248,8 +245,6 @@ class Db
         if ($param['cache'] !== false && !isset($_cache[$key])){
             $_cache[$key] = $array;
         }
-        var_dump($array);
-        echo '<br>';
 
         return $array;
     }
