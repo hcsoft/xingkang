@@ -171,6 +171,8 @@ class Db
     public static function select($param, $obj_page = '', $host = 'sqlserver')
     {
         $host = 'sqlserver';
+        var_dump($param);
+        echo '<br>';
         self::connect($host);
         static $_cache = array();
 
@@ -238,13 +240,16 @@ class Db
             $key =  is_string($param['cache_key'])?$param['cache_key']:md5($sql);
             if (isset($_cache[$key])) return $_cache[$key];
         }
+        echo $sql.'<br>';
         $result = self::query($sql,$host);
-        while ($tmp=$count_query){
+        while ($tmp=$result->fetch(PDO::FETCH_ASSOC)){
             $array[] = $tmp;
         }
         if ($param['cache'] !== false && !isset($_cache[$key])){
             $_cache[$key] = $array;
         }
+        var_dump($array);
+        echo '<br>';
 
         return $array;
     }
@@ -270,7 +275,7 @@ class Db
         $sql = 'INSERT INTO [' . MS_DBPRE . $table_name . '] (' . implode(',', $fields) . ') VALUES(' . implode(',', $value) . ')';
 
         //当数据库没有自增ID的情况下，返回 是否成功
-        $result = self::query($sql, $host)->exec();
+        $result = self::query($sql, $host);
         $insert_id = self::getLastId($host);
         return $insert_id ? $insert_id : $result;
     }
@@ -301,7 +306,7 @@ class Db
             $values[] = '(' . implode(',', $value) . ')';
         }
         $sql = 'INSERT INTO [' . MS_DBPRE . $table_name . '] (' . implode(',', $fields) . ') VALUES ' . implode(',', $values);
-        $result = self::query($sql, $host)->exec();
+        $result = self::query($sql, $host);
         $insert_id = self::getLastId($host);
         return $insert_id ? $insert_id : $result;
     }
@@ -350,7 +355,7 @@ class Db
             }
         }
         $sql = 'UPDATE [' . MS_DBPRE . $table_name . ']  SET ' . $string_value . ' ' . $where;
-        $result = self::query($sql, $host)->exec();
+        $result = self::query($sql, $host);
         return $result;
     }
 
@@ -373,7 +378,7 @@ class Db
                 $where = ' WHERE ' . $where;
             }
             $sql = 'DELETE FROM [' . MS_DBPRE . $table_name . '] ' . $where;
-            return self::query($sql, $host)->exec();
+            return self::query($sql, $host);
         } else {
             throw_exception('Db Error: the condition of delete is empty!');
         }
