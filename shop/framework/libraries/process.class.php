@@ -8,10 +8,10 @@ defined('InShopNC') or exit('Access Invalid!');
 
 class processClass{
 
-	const MAX_LOGIN = 3;	//密码连续输入多少次被暂时锁定
-	const MAX_COMMIT = 2;	//连续评论多少次被暂时锁定
-	const MAX_REG = 2;		//连续注册多少个账号被暂时锁定
-	const MAX_FORGET = 3;	//找回密码输入多少次被暂时锁定
+	const MAX_LOGIN = 100;	//密码连续输入多少次被暂时锁定
+	const MAX_COMMIT = 200;	//连续评论多少次被暂时锁定
+	const MAX_REG = 200;		//连续注册多少个账号被暂时锁定
+	const MAX_FORGET = 300;	//找回密码输入多少次被暂时锁定
 
 	/**
 	 * 是否启用验证
