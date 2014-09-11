@@ -232,11 +232,7 @@
       href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
 <script type="text/javascript">
     $(function () {
-        $('#spot_start_time').datepicker({dateFormat: 'yy-mm-dd'});
-        $('#spot_end_time').datepicker({dateFormat: 'yy-mm-dd'});
-        $('#input_start_time').datepicker({dateFormat: 'yy-mm-dd'});
-        $('#input_end_time').datepicker({dateFormat: 'yy-mm-dd'});
-//        $('#spot_start_time , #spot_end_time,#input_start_time,#input_end_time').datepicker({dateFormat: 'yy-mm-dd'});
+        $('#spot_start_time , #spot_end_time,#input_start_time,#input_end_time').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
             $('input[name="op"]').val('index');
             $('#formSearch').submit();
@@ -313,6 +309,9 @@
 
     #spotresult_unknown:checked + label {
         color: sienna;
+    }
+    #ui-datepicker-div{
+        display: none;
     }
 </style>
 

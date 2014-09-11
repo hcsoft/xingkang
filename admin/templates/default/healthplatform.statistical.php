@@ -151,11 +151,7 @@
       href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
 <script type="text/javascript">
     $(function () {
-        $('#spot_start_time').datepicker({dateFormat: 'yy-mm-dd'});
-        $('#spot_end_time').datepicker({dateFormat: 'yy-mm-dd'});
-        $('#input_start_time').datepicker({dateFormat: 'yy-mm-dd'});
-        $('#input_end_time').datepicker({dateFormat: 'yy-mm-dd'});
-//        $('#spot_start_time , #spot_end_time,#input_start_time,#input_end_time').datepicker({dateFormat: 'yy-mm-dd'});
+        $('#spot_start_time , #spot_end_time').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
             $('input[name="op"]').val('statistical');
             $('#formSearch').submit();
@@ -233,23 +229,7 @@
     #spotresult_unknown:checked + label {
         color: sienna;
     }
+    #ui-datepicker-div{
+        display: none;
+    }
 </style>
-<div id="spotdialog" title="抽查">
-    <span id="errormsg" style="color:red;width:100%;display:block;text-align: center;"></span>
-
-    <form>
-        <input type="hidden" id='spotid' name="spotid">
-
-        <p>抽查时间：<input style="color:blue;" id="spotdate" name="spotdate" readonly
-                       value="<?php echo date('Y-m-d', time()) ?>"></p>
-
-        <p>抽查结果：<input id="spotresult_pass" name="spotresult" type="radio" value="通过" checked></input>
-            <label for="spotresult_pass" style="cursor:pointer">通过</label>
-            <input id="spotresult_false" name="spotresult" type="radio" value="虚报"></input>
-            <label for="spotresult_false" style="cursor:pointer">虚报</label>
-            <input id="spotresult_unknown" name="spotresult" type="radio" value="未确认"></input>
-            <label for="spotresult_unknown" style="cursor:pointer">未确认</label></p>
-
-        <p>原&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因：<input style="color:blue;" id="reason" name="reason" value=""></p>
-    </form>
-</div>
