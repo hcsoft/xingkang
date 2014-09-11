@@ -314,8 +314,5 @@
     #spotresult_unknown:checked + label {
         color: sienna;
     }
-    .ui-helper-clearfix:after{
-        display:none;
-    }
 </style>
 

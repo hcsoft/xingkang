@@ -170,9 +170,9 @@ class healthplatformControl extends SystemControl
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         $sql = ' from spotcheck_main a  left join spotcheck_spot spot on a.id = spot.spotid,
-         export_main b , healthfile hf, personalinfo info,
+         spotcheck_type b , healthfile hf, personalinfo info,
          Organization org , sam_taxempcode emp
-         where a.checktype = b.id and b.type=21 and a.fileno = hf.fileno
+         where a.checktype = b.code and a.fileno = hf.fileno
          and hf.fileno = info.fileno and a.checkopt = emp.loginname
          and emp.org_id = org.id  ';
         if ($_REQUEST['search_phone']) {
