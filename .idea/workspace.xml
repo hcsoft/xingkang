@@ -52,10 +52,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="healthplatform.index.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="healthplatform.index.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/healthplatform.index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="312" column="4" selection-start="14139" selection-end="14187" vertical-scroll-proportion="-12.0625" vertical-offset="3789" max-vertical-offset="4522">
+            <state line="25" column="41" selection-start="1228" selection-end="1228" vertical-scroll-proportion="0.5065123" vertical-offset="0" max-vertical-offset="4522">
               <folding>
                 <element signature="n#style#0;n#span#0;n#p#0;n#td#2;n#tr#0;n#tbody#0;n#thead#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#p#1;n#td#2;n#tr#0;n#tbody#0;n#thead#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
@@ -81,10 +81,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="healthplatform.statistical.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="healthplatform.statistical.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/healthplatform.statistical.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="233" column="5" selection-start="11489" selection-end="11489" vertical-scroll-proportion="0.9022346" vertical-offset="2616" max-vertical-offset="3374">
+            <state line="22" column="41" selection-start="1089" selection-end="1089" vertical-scroll-proportion="-13.391304" vertical-offset="0" max-vertical-offset="3374">
               <folding />
             </state>
           </provider>
@@ -152,8 +152,8 @@
         <option value="$PROJECT_DIR$/core/framework/db/mssql.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/goods.index.php" />
         <option value="$PROJECT_DIR$/admin/control/healthplatform.php" />
-        <option value="$PROJECT_DIR$/admin/templates/default/healthplatform.index.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/healthplatform.statistical.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/healthplatform.index.php" />
       </list>
     </option>
   </component>
@@ -558,7 +558,11 @@
       <created>1410470243433</created>
       <updated>1410470243433</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="1,调整查询条件">
+      <created>1410471196050</created>
+      <updated>1410471196050</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -889,9 +893,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/healthplatform.statistical.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="41" selection-start="1089" selection-end="1089" vertical-scroll-proportion="-13.391304" vertical-offset="0" max-vertical-offset="3374">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/healthplatform.index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="312" column="4" selection-start="14139" selection-end="14187" vertical-scroll-proportion="-12.0625" vertical-offset="3789" max-vertical-offset="4522">
+        <state line="25" column="41" selection-start="1228" selection-end="1228" vertical-scroll-proportion="0.5065123" vertical-offset="0" max-vertical-offset="4522">
           <folding>
             <element signature="n#style#0;n#span#0;n#p#0;n#td#2;n#tr#0;n#tbody#0;n#thead#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#p#1;n#td#2;n#tr#0;n#tbody#0;n#thead#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
@@ -913,13 +924,6 @@
             <element signature="n#style#0;n#label#2;n#p#1;n#form#0;n#div#2;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#p#2;n#form#0;n#div#2;n#div#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/healthplatform.statistical.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="233" column="5" selection-start="11489" selection-end="11489" vertical-scroll-proportion="0.9022346" vertical-offset="2616" max-vertical-offset="3374">
-          <folding />
         </state>
       </provider>
     </entry>

@@ -20,10 +20,10 @@
                 <th><label>回访类型</label></th>
                 <td colspan="1"><select name="search_spottype" class="querySelect">
                         <option value="">全部</option>
-                        <option value="13" <?php if ($_GET['search_spottype'] == '13'){ ?>selected<?php } ?>>居民健康档案</option>
-                        <option value="14" <?php if ($_GET['search_spottype'] == '14'){ ?>selected<?php } ?>>老年人体检</option>
-                        <option value="15" <?php if ($_GET['search_spottype'] == '15'){ ?>selected<?php } ?>>高血压随访</option>
-                        <option value="16" <?php if ($_GET['search_spottype'] == '16'){ ?>selected<?php } ?>>糖尿病随访</option>
+                        <option value="01" <?php if ($_GET['search_spottype'] == '13'){ ?>selected<?php } ?>>居民健康档案</option>
+                        <option value="02" <?php if ($_GET['search_spottype'] == '14'){ ?>selected<?php } ?>>老年人体检</option>
+                        <option value="03" <?php if ($_GET['search_spottype'] == '15'){ ?>selected<?php } ?>>高血压随访</option>
+                        <option value="04" <?php if ($_GET['search_spottype'] == '16'){ ?>selected<?php } ?>>糖尿病随访</option>
                     </select></td>
                 </td>
                 <th><label>姓名</label></th>
