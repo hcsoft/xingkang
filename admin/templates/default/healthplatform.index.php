@@ -20,10 +20,10 @@
                 <th><label>回访类型</label></th>
                 <td colspan="1"><select name="search_spottype" class="querySelect">
                         <option value="">全部</option>
-                        <option value="01" <?php if ($_GET['search_spottype'] == '13'){ ?>selected<?php } ?>>居民健康档案</option>
-                        <option value="02" <?php if ($_GET['search_spottype'] == '14'){ ?>selected<?php } ?>>老年人体检</option>
-                        <option value="03" <?php if ($_GET['search_spottype'] == '15'){ ?>selected<?php } ?>>高血压随访</option>
-                        <option value="04" <?php if ($_GET['search_spottype'] == '16'){ ?>selected<?php } ?>>糖尿病随访</option>
+                        <option value="01" <?php if ($_GET['search_spottype'] == '01'){ ?>selected<?php } ?>>居民健康档案</option>
+                        <option value="02" <?php if ($_GET['search_spottype'] == '02'){ ?>selected<?php } ?>>老年人体检</option>
+                        <option value="03" <?php if ($_GET['search_spottype'] == '03'){ ?>selected<?php } ?>>高血压随访</option>
+                        <option value="04" <?php if ($_GET['search_spottype'] == '04'){ ?>selected<?php } ?>>糖尿病随访</option>
                     </select></td>
                 </td>
                 <th><label>姓名</label></th>
@@ -93,20 +93,20 @@
             <thead>
             <tr class="thead">
                 <th>&nbsp;</th>
-                <th class="align-center">回访类型</th>
+                <th class="align-center">回访<br>类型</th>
                 <th class="align-center">操作员</th>
-                <th class="align-center">基本信息</th>
-                <th class="align-center">联系方式</th>
-                <th class="align-center">顾客类型</th>
-                <th class="align-center">生日礼物</th>
-                <th class="align-center">办卡情况</th>
+                <th class="align-center">基本<br>信息</th>
+                <th class="align-center">联系<br>方式</th>
+                <th class="align-center">顾客<br>类型</th>
+                <th class="align-center">生日<br>礼物</th>
+                <th class="align-center">办卡<br>情况</th>
                 <th class="align-center">满意度</th>
-                <th class="align-center">常购产品</th>
-                <th class="align-center">站点选择原因</th>
+                <th class="align-center">常购<br>产品</th>
+                <th class="align-center">站点<br>选择<br>原因</th>
                 <th class="align-center">建议</th>
-                <th class="align-center">其他需求</th>
+                <th class="align-center">其他<br>需求</th>
                 <th class="align-center">备注</th>
-                <th class="align-center">抽查情况</th>
+                <th class="align-center">抽查<br>情况</th>
             </tr>
             <tbody>
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
@@ -116,7 +116,7 @@
                         <td class=" align-center">
                             <?php echo $v->checktype ?>
                         </td>
-                        <td class="">
+                        <td class="w132">
                             <p>操作员：<span style="color:blue"><?php echo $v->inputperson ?></span></p>
 
                             <p>回访时间：<span
@@ -127,7 +127,7 @@
                         </td>
 
 
-                        <td class="">
+                        <td class="w108">
                             <!-- <p>档案编号：<?php echo $v->fileno ?></p>-->
                             <p>姓名：<span style="color:blue"><?php echo $v->name ?></span></p>
 
