@@ -97,15 +97,19 @@
                 <th class="align-center">操作员</th>
                 <th class="align-center">基本<br>信息</th>
                 <th class="align-center">联系<br>方式</th>
-                <th class="align-center">顾客<br>类型</th>
-                <th class="align-center">生日<br>礼物</th>
+                <th class="align-center">其他类型</th>
+<!--                <th class="align-center">生日<br>礼物</th>-->
                 <th class="align-center">办卡<br>情况</th>
+                <!--
                 <th class="align-center">满意度</th>
                 <th class="align-center">常购<br>产品</th>
                 <th class="align-center">站点<br>选择<br>原因</th>
                 <th class="align-center">建议</th>
                 <th class="align-center">其他<br>需求</th>
                 <th class="align-center">备注</th>
+                -->
+                <th class="align-center">回访内容</th>
+                <th class="align-center">回访内容</th>
                 <th class="align-center">抽查<br>情况</th>
             </tr>
             <tbody>
@@ -141,20 +145,26 @@
 
                             <p>地址：<span style="color:blue"><?php echo $v->address ?></span></p>
                         </td>
-                        <td class=" align-center">
-                            <?php echo $v->itype ?>
+                        <td class="">
+                            <p>顾客类型：<span
+                                    style="color:blue"><?php echo $v->itype ?></span></p>
+                            <p>生日礼物：<span
+                                    style="color:blue"><?php echo $v->getgift ?></span></p>
                         </td>
-                        <td class=" align-center">
-                            <?php echo $v->getgift ?>
-                        </td>
-                        <td class="w84 align-center">
-                            <p>慢&nbsp;病&nbsp;&nbsp;卡：<span style="color:blue"><?php echo $v->bischronic ?></span></p>
+                        <td class="w84">
+                            <p>慢性病卡：<span style="color:blue"><?php echo $v->bischronic ?></span></p>
 
                             <p>公务员卡：<span style="color:blue"><?php echo $v->bisservant ?></span></p>
                         </td>
-                        <td class=" align-center">
-                            <?php echo $v->serversatisfaction ?>
+                        <td class=" ">
+                            <p>满意度：<span
+                                    style="color:blue"><?php echo $v->serversatisfaction ?></span></p>
+                            <p>常购产品：<span
+                                    style="color:blue"><?php echo $v->oftenbuydrug ?></span></p>
+                            <p>选择站点原因：<span
+                                    style="color:blue"><?php echo $v->acceptreason ?></span></p>
                         </td>
+                        <!--
                         <td class=" align-center">
                             <?php echo $v->oftenbuydrug ?>
                         </td>
@@ -169,6 +179,15 @@
                         </td>
                         <td class="w84 align-center">
                             <?php echo $v->remark ?>
+                        </td>
+                        -->
+                        <td class=" ">
+                            <p>建议：<span
+                                    style="color:blue"><?php echo $v->advices ?></span></p>
+                            <p>其他需求：<span
+                                    style="color:blue"><?php echo $v->elseneed ?></span></p>
+                            <p>备注：<span
+                                    style="color:blue"><?php echo $v->remark ?></span></p>
                         </td>
                         <td class="w108">
                             <?php if ($v->spotinfo) { ?>
