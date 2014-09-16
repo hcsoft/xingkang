@@ -17,6 +17,9 @@
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
+                <td>会员卡号</td>
+                <td><input type="text" value="<?php echo $output['member_id']; ?>" name="member_id"
+                           class="txt"></td>
                 <td><select name="search_field_name">
                         <option
                             <?php if ($output['search_field_name'] == 'member_name'){ ?>selected='selected'<?php } ?>
@@ -86,7 +89,7 @@
             <thead>
             <tr class="thead">
                 <th>&nbsp;</th>
-                <th colspan="2"><?php echo $lang['member_index_name'] ?></th>
+                <th class="align-center" colspan="2"><?php echo $lang['member_index_name'] ?></th>
                 <th class="align-center">基本信息</th>
                 <th class="align-center">卡情况</th>
                 <th class="align-center">办卡渠道</th>
@@ -109,7 +112,10 @@
                                         } ?>?<?php echo microtime(); ?>"
                                         onload="javascript:DrawImage(this,44,44);"/></span></div>
                         </td>
-                        <td><p class="name"><!--会员名:<strong><?php echo $v['member_name']; ?></strong>-->
+                        <td>
+                            <p class="name"><!--会员名:<strong><?php echo $v['member_name']; ?></strong>-->
+                                卡号: <?php echo $v['member_id']; ?></p>
+                            <p class="name"><!--会员名:<strong><?php echo $v['member_name']; ?></strong>-->
                                 姓名: <?php echo $v['member_truename']; ?></p>
 
                             <p class="smallfont">电话:&nbsp;<?php echo $v['Mobile']; ?></p>

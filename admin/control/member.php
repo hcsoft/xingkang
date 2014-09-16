@@ -41,6 +41,9 @@ class memberControl extends SystemControl{
     				break;
     		}
 		}
+        if ($_GET['member_id'] != '') {
+            $condition['member_id'] = array('like', '%' . trim($_GET['member_id']) . '%');
+        }
 		switch ($_GET['search_state']){
 			case 'no_informallow':
 				$condition['inform_allow'] = '2';
@@ -73,7 +76,8 @@ class memberControl extends SystemControl{
 			}
 		}
 
-		Tpl::output('search_sort',trim($_GET['search_sort']));
+		Tpl::output('member_id',trim($_GET['member_id']));
+        Tpl::output('search_sort',trim($_GET['search_sort']));
 		Tpl::output('search_field_name',trim($_GET['search_field_name']));
 		Tpl::output('search_field_value',trim($_GET['search_field_value']));
 		Tpl::output('member_list',$member_list);
