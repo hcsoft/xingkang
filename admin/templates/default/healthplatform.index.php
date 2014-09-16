@@ -93,13 +93,13 @@
             <thead>
             <tr class="thead">
                 <th>&nbsp;</th>
-                <th class="align-center">回访<br>类型</th>
+                <th class="align-center">回访类型</th>
                 <th class="align-center">操作员</th>
-                <th class="align-center">基本<br>信息</th>
-                <th class="align-center">联系<br>方式</th>
+                <th class="align-center">基本信息</th>
+                <th class="align-center">联系方式</th>
                 <th class="align-center">其他类型</th>
 <!--                <th class="align-center">生日<br>礼物</th>-->
-                <th class="align-center">办卡<br>情况</th>
+                <th class="align-center">办卡情况</th>
                 <!--
                 <th class="align-center">满意度</th>
                 <th class="align-center">常购<br>产品</th>
@@ -108,9 +108,8 @@
                 <th class="align-center">其他<br>需求</th>
                 <th class="align-center">备注</th>
                 -->
-                <th class="align-center">回访内容</th>
-                <th class="align-center">回访内容</th>
-                <th class="align-center">抽查<br>情况</th>
+                <th class="align-center" colspan="2">回访内容</th>
+                <th class="align-center">抽查情况</th>
             </tr>
             <tbody>
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
