@@ -190,7 +190,109 @@ class goodsControl extends SystemControl{
         Tpl::output('commonids', $_GET['id']);
         Tpl::showpage('goods.verify_remark', 'null_layout');
     }
-    
+
+    /**
+     * 库存管理
+     */
+
+    public function stockOp() {
+
+
+
+
+
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $page = new Page();
+        $page->setEachNum(10);
+        $page->setNowPage($_REQUEST["curpage"]);
+        $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
+        $endnum = $page->getEachNum() * ($page->getNowPage());
+        $sql = 'from shopnc_goods_common good  left join Center_DrugStock stock on good.goods_commonid = stock.iDrug_ID
+         where 1=1 ';
+
+        if ($_GET['search_goods_name'] != '') {
+            $sql = $sql . ' and good.goods_name like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+        }
+        if (intval($_GET['search_commonid']) > 0) {
+            $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']) ;
+        }
+        if ($_GET['search_store_name'] != '') {
+            $sql = $sql . ' and good.store_name like \'%' . trim($_GET['search_store_name']) . '%\'';
+        }
+        if (intval($_GET['search_brand_id']) > 0) {
+            $sql = $sql . ' and good.brand_id = ' . intval($_GET['search_brand_id']) . '';
+        }
+        if (intval($_GET['cate_id']) > 0) {
+            $sql = $sql . ' and good.gc_id = ' . intval($_GET['cate_id']) ;
+        }
+        if (in_array($_GET['search_state'], array('0','1','10'))) {
+            $sql = $sql . ' and good.goods_state  =' . $_GET['search_state'] ;
+        }
+        if (in_array($_GET['search_verify'], array('0','1','10'))) {
+            $sql = $sql . ' and good.goods_verify = ' . $_GET['search_verify'] ;
+        }
+
+
+        $countsql = " select count(*)  $sql ";
+//        echo $countsql;
+        $stmt = $conn->query($countsql);
+//        echo $countsql;
+        $total = $stmt->fetch(PDO::FETCH_NUM);
+        $page->setTotalNum($total[0]);
+        $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.goods_commonid) rownum,
+                        *
+                            $sql order by  good.goods_commonid)zzzz where rownum>$startnum )zzzzz order by rownum";
+        $stmt = $conn->query($tsql);
+        $goods_list = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $goods_list[] = $row;
+//            $newstmt = $conn->query(" select * from Center_DrugStocksub where idrug_id = '$row->goods_commonid'");
+//            $row->detail = $newstmt->fetch(PDO::FETCH_OBJ);
+        }
+
+//        var_dump($goods_list);
+        Tpl::output('goods_list', $goods_list);
+        Tpl::output('page', $page->show());
+
+        $goods_class = Model('goods_class')->getTreeClassList ( 1 );
+        // 品牌
+        $condition = array();
+        $condition['brand_apply'] = '1';
+        $brand_list = Model('brand')->getBrandList ( $condition );
+
+        Tpl::output('search', $_GET);
+        Tpl::output('goods_class', $goods_class);
+        Tpl::output('brand_list', $brand_list);
+
+        Tpl::output('state', array('1' => '出售中', '0' => '仓库中', '10' => '违规下架'));
+
+        Tpl::output('verify', array('1' => '通过', '0' => '未通过', '10' => '等待审核'));
+
+        Tpl::showpage('goods.stock');
+    }
+
+
+    /**
+     * ajax获取商品列表
+     */
+    public function get_goods_stock_ajaxOp() {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $commonid = $_GET['commonid'];
+        if ($commonid <= 0) {
+            echo 'false';exit();
+        }
+        $newstmt = $conn->query(" select * from Center_DrugStocksub where idrug_id = '$commonid'");
+        $goods_list = $newstmt->fetchAll(PDO::FETCH_ASSOC);
+
+        /**
+         * 转码
+         */
+        if (strtoupper(CHARSET) == 'GBK') {
+            Language::getUTF8($goods_list);
+        }
+        echo json_encode($goods_list);
+    }
+
     /**
      * ajax获取商品列表
      */

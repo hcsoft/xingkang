@@ -5,9 +5,8 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/templates/default/goods.stock.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/goods.php" afterPath="$PROJECT_DIR$/admin/control/goods.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/include/limit.php" afterPath="$PROJECT_DIR$/admin/include/limit.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/member.index.php" afterPath="$PROJECT_DIR$/admin/templates/default/member.index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/member.php" afterPath="$PROJECT_DIR$/admin/control/member.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/include/menu.php" afterPath="$PROJECT_DIR$/admin/include/menu.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/framework/libraries/model.php" afterPath="$PROJECT_DIR$/core/framework/libraries/model.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -31,25 +30,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="goods.index.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.index.php">
+      <file leaf-file-name="goods.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/control/goods.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="151" column="0" selection-start="8858" selection-end="8858" vertical-scroll-proportion="0.0" vertical-offset="1848" max-vertical-offset="3948">
-              <folding />
+            <state line="254" column="42" selection-start="8977" selection-end="8977" vertical-scroll-proportion="-20.086956" vertical-offset="3094" max-vertical-offset="4774">
+              <folding>
+                <marker date="1410839133659" expanded="true" signature="8254:8503" placeholder="SELECT * FRO..*..." />
+                <marker date="1410839133659" expanded="true" signature="8271:8316" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1410839133659" expanded="true" signature="8287:8316" placeholder="SELECT TOP $..." />
+                <marker date="1410839133659" expanded="true" signature="9856:9918" placeholder="select * fro..Center_DrugStocksub..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="goods.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/control/goods.php">
+      <file leaf-file-name="model.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/framework/libraries/model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="198" column="32" selection-start="6497" selection-end="6497" vertical-scroll-proportion="0.0" vertical-offset="2772" max-vertical-offset="5796">
-              <folding>
-                <marker date="1410744332430" expanded="true" signature="11537:12693" placeholder="SELECT * FRO..*..." />
-                <marker date="1410744332430" expanded="true" signature="11554:11599" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1410744332430" expanded="true" signature="11570:11599" placeholder="SELECT TOP $..." />
-                <marker date="1410744332430" expanded="true" signature="12897:12951" placeholder="select * fro..spotcheck_spot..." />
-              </folding>
+            <state line="500" column="24" selection-start="14827" selection-end="14836" vertical-scroll-proportion="-0.0" vertical-offset="7000" max-vertical-offset="15540">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -57,15 +56,50 @@
       <file leaf-file-name="healthplatform.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/healthplatform.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="149" column="26" selection-start="5631" selection-end="5637" vertical-scroll-proportion="0.0" vertical-offset="1784" max-vertical-offset="3822">
+            <state line="141" column="61" selection-start="5310" selection-end="5455" vertical-scroll-proportion="3.652174" vertical-offset="2058" max-vertical-offset="3822">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="goods.stock.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.stock.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="126" column="101" selection-start="7292" selection-end="7292" vertical-scroll-proportion="0.4341534" vertical-offset="1464" max-vertical-offset="3822">
               <folding>
-                <marker date="1410470208421" expanded="true" signature="3976:5132" placeholder="SELECT * FRO..*..." />
-                <marker date="1410470208421" expanded="true" signature="3993:4038" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1410470208421" expanded="true" signature="4009:4038" placeholder="SELECT TOP $..." />
-                <marker date="1410470208421" expanded="true" signature="5336:5390" placeholder="select * fro..spotcheck_spot..." />
-                <marker date="1410470208421" expanded="true" signature="6073:6201" placeholder="insert into ..." />
-                <marker date="1410470208421" expanded="true" signature="10583:10637" placeholder="select * fro..spotcheck_spot..." />
+                <element signature="n#style#0;n#i#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#1;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#2;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#0;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#1;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#0;n#td#9;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#span#0;n#p#0;n#td#9;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#1;n#td#9;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#0;n#td#10;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#1;n#td#10;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#0;n#td#11;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <marker date="1410839591167" expanded="false" signature="11814:11826" placeholder="..." />
+                <marker date="1410839591167" expanded="true" signature="11892:11903" placeholder="..." />
+                <marker date="1410839591167" expanded="true" signature="11994:12005" placeholder="..." />
+                <marker date="1410839591167" expanded="true" signature="12138:12149" placeholder="..." />
+                <marker date="1410839591167" expanded="true" signature="12311:12322" placeholder="..." />
+                <marker date="1410839591167" expanded="true" signature="12484:12495" placeholder="..." />
+                <marker date="1410839591167" expanded="true" signature="12667:12678" placeholder="..." />
+                <marker date="1410839591167" expanded="true" signature="12824:12835" placeholder="..." />
+                <marker date="1410839591167" expanded="true" signature="13003:13014" placeholder="..." />
+                <marker date="1410839591167" expanded="true" signature="13181:13192" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="goods.index.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="187" column="17" selection-start="10435" selection-end="11046" vertical-scroll-proportion="-15.217391" vertical-offset="2268" max-vertical-offset="3948">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -73,61 +107,7 @@
       <file leaf-file-name="healthplatform.index.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/healthplatform.index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="43" selection-start="5665" selection-end="5665" vertical-scroll-proportion="0.0" vertical-offset="1246" max-vertical-offset="4774">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="member.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/admin/control/member.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="13" selection-start="1593" selection-end="1593" vertical-scroll-proportion="0.2017291" vertical-offset="714" max-vertical-offset="3514">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="member.index.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/member.index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="75" selection-start="905" selection-end="914" vertical-scroll-proportion="-12.173913" vertical-offset="0" max-vertical-offset="2758">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="goods.stock.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.stock.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="20" selection-start="415" selection-end="415" vertical-scroll-proportion="0.0" vertical-offset="112" max-vertical-offset="3780">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="menu.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/include/menu.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="58" selection-start="3384" selection-end="3395" vertical-scroll-proportion="0.0" vertical-offset="1485" max-vertical-offset="3822">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="limit.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/include/limit.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="43" selection-start="1495" selection-end="1495" vertical-scroll-proportion="0.0" vertical-offset="311" max-vertical-offset="2114">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="brand.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/control/brand.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="24" selection-start="427" selection-end="427" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="6300">
+            <state line="221" column="20" selection-start="10894" selection-end="11244" vertical-scroll-proportion="-23.73913" vertical-offset="2548" max-vertical-offset="4774">
               <folding />
             </state>
           </provider>
@@ -183,7 +163,6 @@
         <option value="$PROJECT_DIR$/admin/templates/default/login.php" />
         <option value="$PROJECT_DIR$/shop/framework/libraries/process.class.php" />
         <option value="$PROJECT_DIR$/core/framework/function/core.php" />
-        <option value="$PROJECT_DIR$/core/framework/libraries/model.php" />
         <option value="$PROJECT_DIR$/admin/control/login.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/layout/msg_layout.php" />
         <option value="$PROJECT_DIR$/core/framework/db/mssql.php" />
@@ -192,11 +171,12 @@
         <option value="$PROJECT_DIR$/admin/templates/default/healthplatform.statistical.php" />
         <option value="$PROJECT_DIR$/admin/include/limit.php" />
         <option value="$PROJECT_DIR$/admin/include/menu.php" />
-        <option value="$PROJECT_DIR$/admin/control/goods.php" />
-        <option value="$PROJECT_DIR$/admin/templates/default/goods.stock.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/healthplatform.index.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/member.index.php" />
         <option value="$PROJECT_DIR$/admin/control/member.php" />
+        <option value="$PROJECT_DIR$/core/framework/libraries/model.php" />
+        <option value="$PROJECT_DIR$/admin/control/goods.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/goods.stock.php" />
       </list>
     </option>
   </component>
@@ -553,7 +533,11 @@
       <created>1410829256222</created>
       <updated>1410829256222</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="1,会员增加了会员id的查询条件">
+      <created>1410830100251</created>
+      <updated>1410830100251</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -569,7 +553,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.240625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.153125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -586,7 +570,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24151435" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32898173" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -613,7 +597,8 @@
     <MESSAGE value="1,增加了商品的显示内容" />
     <MESSAGE value="1,调整查询条件" />
     <MESSAGE value="1,调整抽查的列表显示" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,调整抽查的列表显示" />
+    <MESSAGE value="1,会员增加了会员id的查询条件" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,会员增加了会员id的查询条件" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -774,11 +759,6 @@
         <state line="12" column="47" selection-start="281" selection-end="281" vertical-scroll-proportion="-5.9565215" vertical-offset="31" max-vertical-offset="11564" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/framework/libraries/model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="685" column="8" selection-start="19708" selection-end="19777" vertical-scroll-proportion="-6.3541665" vertical-offset="9285" max-vertical-offset="15456" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/control.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="236" column="26" selection-start="6550" selection-end="6550" vertical-scroll-proportion="-11.478261" vertical-offset="3040" max-vertical-offset="4046" />
@@ -814,11 +794,6 @@
         <state line="23" column="10" selection-start="722" selection-end="722" vertical-scroll-proportion="-9.130435" vertical-offset="112" max-vertical-offset="714" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/framework/db/mssql.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="247" column="0" selection-start="9382" selection-end="9382" vertical-scroll-proportion="0.8742138" vertical-offset="3041" max-vertical-offset="8974" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/healthplatform.statistical.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="23" column="34" selection-start="1206" selection-end="1206" vertical-scroll-proportion="0.0" vertical-offset="322" max-vertical-offset="3374" />
@@ -826,83 +801,102 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/brand.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="24" selection-start="427" selection-end="427" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="6300">
+        <state line="17" column="24" selection-start="427" selection-end="427" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="6300" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/include/limit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="43" selection-start="1495" selection-end="1495" vertical-scroll-proportion="0.0" vertical-offset="311" max-vertical-offset="2114" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/include/menu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="58" selection-start="3384" selection-end="3395" vertical-scroll-proportion="0.0" vertical-offset="1485" max-vertical-offset="3822" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/member.index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="75" selection-start="905" selection-end="914" vertical-scroll-proportion="-12.173913" vertical-offset="0" max-vertical-offset="2758" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/control/member.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="13" selection-start="1593" selection-end="1593" vertical-scroll-proportion="0.8407821" vertical-offset="252" max-vertical-offset="3514" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/framework/db/mssql.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="269" column="41" selection-start="9999" selection-end="10002" vertical-scroll-proportion="2.2778583" vertical-offset="2192" max-vertical-offset="8974" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/framework/libraries/model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="500" column="24" selection-start="14827" selection-end="14836" vertical-scroll-proportion="0.0" vertical-offset="7000" max-vertical-offset="15540">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/healthplatform.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="149" column="26" selection-start="5631" selection-end="5637" vertical-scroll-proportion="0.0" vertical-offset="1784" max-vertical-offset="3822">
-          <folding>
-            <marker date="1410470208421" expanded="true" signature="3976:5132" placeholder="SELECT * FRO..*..." />
-            <marker date="1410470208421" expanded="true" signature="3993:4038" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1410470208421" expanded="true" signature="4009:4038" placeholder="SELECT TOP $..." />
-            <marker date="1410470208421" expanded="true" signature="5336:5390" placeholder="select * fro..spotcheck_spot..." />
-            <marker date="1410470208421" expanded="true" signature="6073:6201" placeholder="insert into ..." />
-            <marker date="1410470208421" expanded="true" signature="10583:10637" placeholder="select * fro..spotcheck_spot..." />
-          </folding>
+        <state line="141" column="61" selection-start="5310" selection-end="5455" vertical-scroll-proportion="3.652174" vertical-offset="2058" max-vertical-offset="3822">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="0" selection-start="8858" selection-end="8858" vertical-scroll-proportion="0.0" vertical-offset="1848" max-vertical-offset="3948">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/include/limit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="43" selection-start="1495" selection-end="1495" vertical-scroll-proportion="0.0" vertical-offset="311" max-vertical-offset="2114">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/include/menu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="58" selection-start="3384" selection-end="3395" vertical-scroll-proportion="0.0" vertical-offset="1485" max-vertical-offset="3822">
+        <state line="187" column="17" selection-start="10435" selection-end="11046" vertical-scroll-proportion="-15.217391" vertical-offset="2268" max-vertical-offset="3948">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/goods.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="198" column="32" selection-start="6497" selection-end="6497" vertical-scroll-proportion="0.0" vertical-offset="2772" max-vertical-offset="5796">
+        <state line="254" column="42" selection-start="8977" selection-end="8977" vertical-scroll-proportion="-20.086956" vertical-offset="3094" max-vertical-offset="4774">
           <folding>
-            <marker date="1410744332430" expanded="true" signature="11537:12693" placeholder="SELECT * FRO..*..." />
-            <marker date="1410744332430" expanded="true" signature="11554:11599" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1410744332430" expanded="true" signature="11570:11599" placeholder="SELECT TOP $..." />
-            <marker date="1410744332430" expanded="true" signature="12897:12951" placeholder="select * fro..spotcheck_spot..." />
+            <marker date="1410839133659" expanded="true" signature="8254:8503" placeholder="SELECT * FRO..*..." />
+            <marker date="1410839133659" expanded="true" signature="8271:8316" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1410839133659" expanded="true" signature="8287:8316" placeholder="SELECT TOP $..." />
+            <marker date="1410839133659" expanded="true" signature="9856:9918" placeholder="select * fro..Center_DrugStocksub..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.stock.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="20" selection-start="415" selection-end="415" vertical-scroll-proportion="0.0" vertical-offset="112" max-vertical-offset="3780">
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/healthplatform.index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="43" selection-start="5665" selection-end="5665" vertical-scroll-proportion="0.0" vertical-offset="1246" max-vertical-offset="4774">
+        <state line="221" column="20" selection-start="10894" selection-end="11244" vertical-scroll-proportion="-23.73913" vertical-offset="2548" max-vertical-offset="4774">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/member.index.php">
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.stock.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="75" selection-start="905" selection-end="914" vertical-scroll-proportion="-12.173913" vertical-offset="0" max-vertical-offset="2758">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/member.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="13" selection-start="1593" selection-end="1593" vertical-scroll-proportion="0.2017291" vertical-offset="714" max-vertical-offset="3514">
-          <folding />
+        <state line="126" column="101" selection-start="7292" selection-end="7292" vertical-scroll-proportion="0.4341534" vertical-offset="1464" max-vertical-offset="3822">
+          <folding>
+            <element signature="n#style#0;n#i#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#1;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#2;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#1;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#td#9;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#span#0;n#p#0;n#td#9;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#1;n#td#9;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#td#10;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#1;n#td#10;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#td#11;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <marker date="1410839591167" expanded="false" signature="11814:11826" placeholder="..." />
+            <marker date="1410839591167" expanded="true" signature="11892:11903" placeholder="..." />
+            <marker date="1410839591167" expanded="true" signature="11994:12005" placeholder="..." />
+            <marker date="1410839591167" expanded="true" signature="12138:12149" placeholder="..." />
+            <marker date="1410839591167" expanded="true" signature="12311:12322" placeholder="..." />
+            <marker date="1410839591167" expanded="true" signature="12484:12495" placeholder="..." />
+            <marker date="1410839591167" expanded="true" signature="12667:12678" placeholder="..." />
+            <marker date="1410839591167" expanded="true" signature="12824:12835" placeholder="..." />
+            <marker date="1410839591167" expanded="true" signature="13003:13014" placeholder="..." />
+            <marker date="1410839591167" expanded="true" signature="13181:13192" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
