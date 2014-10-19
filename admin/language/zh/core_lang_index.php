@@ -11,7 +11,7 @@ $lang['solution'] = '解決方案';
 $lang['please_login_in'] = '請登錄';
 $lang['shopnc_bbs'] = '官方論壇';
 $lang['found_answer'] = '，將您發現的問題告訴我們，並尋求幫助！';
-$lang['company_name'] = '天津市網城創想科技有限責任公司';
+$lang['company_name'] = '恒辰科技有限公司';
 
 $lang['has_been_canceled'] = '已取消';
 $lang['pending_payment'] = '待付款';

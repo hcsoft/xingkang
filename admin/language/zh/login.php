@@ -16,4 +16,4 @@ $lang['login_index_checkcode']					= '驗證碼';
 $lang['login_index_change_checkcode']			= '看不清,點擊更換驗證碼';
 $lang['login_index_back_to_homepage']			= '返回商城首頁';
 $lang['login_index_forget_password']			= '忘記了密碼';
-$lang['login_index_shopnc']						= '天津市網城創想科技有限責任公司';
+$lang['login_index_shopnc']						= '恒辰科技有限公司';

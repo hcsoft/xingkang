@@ -79,18 +79,18 @@
     <table class="table tb-type2 nobdb datatable">
         <thead>
         <tr class="thead">
-            <th class="align-center" colspan="3">单据编号</th>
+            <th class="align-center" colspan="2">单据编号</th>
             <th class="align-center" colspan="10">入库</th>
         </tr>
         <tr class="thead">
             <th class="align-center">总票据</th>
-            <th class="align-center">单据编号</th>
+<!--            <th class="align-center">单据编号</th>-->
             <th class="align-center">明细号</th>
             <th class="align-center">发生日期</th>
             <th class="align-center">商品类型</th>
             <th class="align-center">单据类型</th>
-            <th class="align-center">企业/库房/部门</th>
-            <th class="align-center">库房</th>
+            <th class="align-center">制单机构</th>
+            <th class="align-center">下级机构</th>
             <th class="align-center">商品编码</th>
             <th class="align-center">数量</th>
             <th class="align-center">进价金额</th>
@@ -104,9 +104,9 @@
                     <td class=" align-center">
                         <?php echo $v->iBuy_TicketID ?>
                     </td>
-                    <td class=" align-center">
-                        <?php echo $v->sBuy_A6 ?>
-                    </td>
+<!--                    <td class=" align-center">-->
+<!--                        --><?php //echo $v->sBuy_A6 ?>
+<!--                    </td>-->
                     <td class=" align-center">
                         <?php echo $v->iBuy_ID ?>
                     </td>
