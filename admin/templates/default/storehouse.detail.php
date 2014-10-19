@@ -80,7 +80,7 @@
         <thead>
         <tr class="thead">
             <th class="align-center" colspan="3">单据编号</th>
-            <th class="align-center" colspan="8">入库</th>
+            <th class="align-center" colspan="10">入库</th>
         </tr>
         <tr class="thead">
             <th class="align-center">总票据</th>
