@@ -6,8 +6,8 @@
 <title><?php echo $output['html_title'];?></title>
 <meta name="keywords" content="<?php echo $GLOBALS['setting_config']['site_keywords']; ?>" />
 <meta name="description" content="<?php echo $GLOBALS['setting_config']['site_description']; ?>" />
-<meta name="author" content="ShopNC">
-<meta name="copyright" content="ShopNC Inc. All Rights Reserved">
+<meta name="author" content="hcsoft">
+<meta name="copyright" content="hcsoft Inc. All Rights Reserved">
 <link href="<?php echo SHOP_TEMPLATES_URL;?>/css/base.css" rel="stylesheet" type="text/css">
 <link href="<?php echo SHOP_TEMPLATES_URL;?>/css/home_header.css" rel="stylesheet" type="text/css">
 <link href="<?php echo SHOP_RESOURCE_SITE_URL;?>/font/font-awesome/css/font-awesome.min.css" rel="stylesheet" />

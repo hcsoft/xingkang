@@ -6,8 +6,8 @@
 <title><?php echo empty($output['seo_title'])?$output['html_title']:$output['seo_title'].'-'.$output['html_title'];?></title>
 <meta name="keywords" content="<?php echo $output['seo_keywords']; ?>" />
 <meta name="description" content="<?php echo $output['seo_description']; ?>" />
-<meta name="author" content="ShopNC">
-<meta name="copyright" content="ShopNC Inc. All Rights Reserved">
+<meta name="author" content="hcsoft">
+<meta name="copyright" content="hcsoft Inc. All Rights Reserved">
 <link href="<?php echo CMS_TEMPLATES_URL;?>/css/base.css" rel="stylesheet" type="text/css">
 <link href="<?php echo CMS_TEMPLATES_URL;?>/css/layout.css" rel="stylesheet" type="text/css">
 <!--[if IE 6]><style type="text/css">body { _behavior: url(<?php echo CMS_TEMPLATES_URL;?>/css/csshover.htc);}</style><![endif]-->

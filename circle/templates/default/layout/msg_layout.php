@@ -6,8 +6,8 @@
 <title><?php echo $output['html_title'];?></title>
 <meta name="keywords" content="<?php echo $GLOBALS['setting_config']['site_keywords']; ?>" />
 <meta name="description" content="<?php echo $GLOBALS['setting_config']['site_description']; ?>" />
-<meta name="author" content="ShopNC">
-<meta name="copyright" content="ShopNC Inc. All Rights Reserved">
+<meta name="author" content="hcsoft">
+<meta name="copyright" content="hcsoft Inc. All Rights Reserved">
 <link href="<?php echo CIRCLE_TEMPLATES_URL;?>/css/layout.css" rel="stylesheet" type="text/css">
 <!--[if IE 6]><style type="text/css">body { _behavior: url(<?php echo CIRCLE_TEMPLATES_URL;?>/css/csshover.htc);}</style><![endif]-->
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

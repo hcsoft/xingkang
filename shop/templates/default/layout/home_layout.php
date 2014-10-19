@@ -6,8 +6,8 @@
 <title><?php echo $output['html_title'];?></title>
 <meta name="keywords" content="<?php echo $output['seo_keywords']; ?>" />
 <meta name="description" content="<?php echo $output['seo_description']; ?>" />
-<meta name="author" content="ShopNC">
-<meta name="copyright" content="ShopNC Inc. All Rights Reserved">
+<meta name="author" content="hcsoft">
+<meta name="copyright" content="hcsoft Inc. All Rights Reserved">
 <?php echo html_entity_decode($GLOBALS['setting_config']['qq_appcode'],ENT_QUOTES); ?><?php echo html_entity_decode($GLOBALS['setting_config']['sina_appcode'],ENT_QUOTES); ?><?php echo html_entity_decode($GLOBALS['setting_config']['share_qqzone_appcode'],ENT_QUOTES); ?><?php echo html_entity_decode($GLOBALS['setting_config']['share_sinaweibo_appcode'],ENT_QUOTES); ?>
 <style type="text/css">
 body {

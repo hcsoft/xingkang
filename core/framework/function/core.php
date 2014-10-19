@@ -134,7 +134,7 @@ function showMessage($msg,$url='',$show_type='html',$msg_type='succ',$is_show=1,
 			echo '<dt><p /></dt>';
 			echo '<dd>'.$lang['error_notice_operate'].'</dd>';
 			echo '<dd><p /><p /><p /><p /></dd>';
-			echo '<dd><p /><p /><p /><p />Copyright 2007-2014 ShopNC, All Rights Reserved '.$lang['company_name'].'</dd>';
+			echo '<dd><p /><p /><p /><p />Copyright 2007-2014 hcsoft, All Rights Reserved '.$lang['company_name'].'</dd>';
 			echo '</dl>';
 			echo '</body>';
 			echo '</html>';

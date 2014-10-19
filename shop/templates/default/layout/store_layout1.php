@@ -7,8 +7,8 @@
 <title><?php echo $output['html_title'];?></title>
 <meta name="keywords" content="<?php echo $output['seo_keywords']; ?>" />
 <meta name="description" content="<?php echo $output['seo_description']; ?>" />
-<meta name="author" content="ShopNC">
-<meta name="copyright" content="ShopNC Inc. All Rights Reserved">
+<meta name="author" content="hcsoft">
+<meta name="copyright" content="hcsoft Inc. All Rights Reserved">
 <link href="<?php echo SHOP_TEMPLATES_URL;?>/css/base.css" rel="stylesheet" type="text/css">
 <link href="<?php echo SHOP_TEMPLATES_URL;?>/css/shop.css" rel="stylesheet" type="text/css">
 <link href="<?php echo SHOP_TEMPLATES_URL;?>/store/<?php echo $output['store_info']['store_theme'];?>/style.css" rel="stylesheet" type="text/css">

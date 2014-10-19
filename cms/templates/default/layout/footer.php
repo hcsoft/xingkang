@@ -26,7 +26,7 @@
     <?php }?>
     <?php }?>
   </p>
-  Copyright 2007-2014 ShopNC Inc.,All rights reserved.<br />
+  Copyright 2007-2014 hcsoft Inc.,All rights reserved.<br />
   Powered by <?php echo $GLOBALS['setting_config']['shopnc_version'];?>
   <?php echo $GLOBALS['setting_config']['icp_number']; ?><br />
   <?php echo html_entity_decode($GLOBALS['setting_config']['statistics_code'],ENT_QUOTES); ?> </div>

@@ -7,8 +7,8 @@
 <title><?php echo $output['special_detail']['special_title']; ?></title>
 <meta name="keywords" content="<?php echo $output['special_detail']['special_title']; ?>" />
 <meta name="description" content="<?php echo $output['special_detail']['special_title']; ?>" />
-<meta name="author" content="ShopNC">
-<meta name="copyright" content="ShopNC Inc. All Rights Reserved">
+<meta name="author" content="hcsoft">
+<meta name="copyright" content="hcsoft Inc. All Rights Reserved">
 <style type="text/css">
 #body { color: #333333; background-color: <?php echo $output['special_detail']['special_background_color'];?>; background-image: url(<?php echo getCMSSpecialImageUrl($output['special_detail']['special_background']);?>); background-repeat: <?php echo $output['special_detail']['special_repeat'];?>; background-position: top center; width: 100%; padding: 0; margin: 0; overflow: hidden;}
 img { border: 0; vertical-align: top; }

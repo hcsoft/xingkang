@@ -7,8 +7,8 @@
 <title><?php echo ($lang['nc_member_path_'.$output['menu_sign']]==''?'':$lang['nc_member_path_'.$output['menu_sign']].'_').$output['html_title'];?></title>
 <meta name="keywords" content="<?php echo C('site_keywords'); ?>" />
 <meta name="description" content="<?php echo C('site_description'); ?>" />
-<meta name="author" content="ShopNC">
-<meta name="copyright" content="ShopNC Inc. All Rights Reserved">
+<meta name="author" content="hcsoft">
+<meta name="copyright" content="hcsoft Inc. All Rights Reserved">
 <link href="<?php echo SHOP_TEMPLATES_URL;?>/css/base.css" rel="stylesheet" type="text/css">
 <link href="<?php echo SHOP_TEMPLATES_URL;?>/css/sns.css" rel="stylesheet" type="text/css">
 <link id="skin_link" href="<?php echo SHOP_TEMPLATES_URL;?>/sns/style/<?php echo $output['skin_style'];?>.css" rel="stylesheet" type="text/css">
