@@ -45,7 +45,13 @@ $arr = array(
             'text'	=> $lang['nc_stat']),
             9 => array(
                 'args'	=> 'healthplatform',
-                'text'	=> $lang['nc_healthplatform'])
+                'text'	=> $lang['nc_healthplatform']),
+            10 => array(
+                'args'	=> 'storehouse',
+                'text'	=> '仓库'),
+            11 => array(
+                'args'	=> 'community',
+                'text'	=> '社区')
 		),
 		'left' =>array(
 
@@ -117,7 +123,9 @@ $arr = array(
 					array('args'=>'sharesetting,sns_sharesetting,member',	'text'=>$lang['nc_binding_manage']),
 					array('args'=>'class_list,sns_malbum,member',			'text'=>$lang['nc_member_album_manage']),
 					array('args'=>'tracelist,snstrace,member',				'text'=>$lang['nc_snstrace']),
-					array('args'=>'member_tag,sns_member,member',			'text'=>$lang['nc_member_tag'])
+					array('args'=>'member_tag,sns_member,member',			'text'=>$lang['nc_member_tag']),
+                    array('args'=>'consumesum,member,member',			'text'=>'消费汇总'),
+                    array('args'=>'rechargesum,member,member',			'text'=>'充值下账汇总')
 				)
 			),
 			5 => array(
@@ -175,11 +183,29 @@ $arr = array(
 			),
             9 => array(
                 'nav' => 'healthplatform',
-                'text' => $lang['nc_healthplatform'],
+                'text' => '业务督导',
                 'list' => array(
-                    array('args'=>'index,healthplatform,healthplatform',			'text'=>$lang['nc_spotcheck']),
+                    array('args'=>'index,healthplatform,healthplatform',			'text'=>'回访抽查'),
                     array('args'=>'statistical,healthplatform,healthplatform',			'text'=>'统计'),
                     array('args'=>'test,healthplatform,healthplatform',			'text'=>'测试')
+                )
+            ),
+            10 => array(
+                'nav' => 'storehouse',
+                'text' => '仓库',
+                'list' => array(
+                    array('args'=>'detail,storehouse,storehouse',			'text'=>'仓库单据明细'),
+                    array('args'=>'sum,storehouse,storehouse',			'text'=>'仓库单据汇总')
+                )
+            ),
+            11 => array(
+                'nav' => 'community',
+                'text' => '社区',
+                'list' => array(
+                    array('args'=>'incomedetail,community,community',			'text'=>'收入明细查询'),
+                    array('args'=>'incomesum,community,community',			'text'=>'收入汇总查询'),
+                    array('args'=>'prescriptiondetail,community,community',			'text'=>'处方明细查询'),
+                    array('args'=>'prescriptionsum,community,community',			'text'=>'处方汇总查询')
                 )
             )
 		)

@@ -10,7 +10,11 @@
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/admincp.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/common.js" charset="utf-8"></script>
+<!--<script type="text/javascript" src="--><?php //echo RESOURCE_SITE_URL;?><!--/js/jquery.treeview/jquery.treeview.js" charset="utf-8"></script>-->
+
 <link href="<?php echo ADMIN_TEMPLATES_URL;?>/css/skin_0.css" rel="stylesheet" type="text/css" id="cssfile2" />
+<link href="<?php echo RESOURCE_SITE_URL;?>/js/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/ztree/js/jquery.ztree.all-3.5.min.js"></script>
 <script type="text/javascript">
 SITEURL = '<?php echo SHOP_SITE_URL;?>';
 RESOURCE_SITE_URL = '<?php echo RESOURCE_SITE_URL;?>';

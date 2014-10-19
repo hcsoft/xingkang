@@ -238,6 +238,7 @@ class Db
             $key =  is_string($param['cache_key'])?$param['cache_key']:md5($sql);
             if (isset($_cache[$key])) return $_cache[$key];
         }
+        echo $sql;
         $result = self::query($sql,$host);
         while ($tmp=$result->fetch(PDO::FETCH_ASSOC)){
             $array[] = $tmp;
@@ -410,15 +411,24 @@ class Db
         if (is_array($wfield)) {
             $where = array();
             foreach ($wfield as $k => $v) {
-                $where[] = $v . "='" . $value[$k] . "'";
+                if(is_numeric($value[$k])){
+                    $where[] = $v . "=" . $value[$k] . "";
+                }else{
+                    $where[] = $v . "='" . $value[$k] . "'";
+                }
             }
             $where = implode(' and ', $where);
         } else {
-            $where = $wfield . "='" . $value . "'";
+            if(is_numeric($value)){
+                $where = $wfield . "=" . $value . "";
+            }else{
+                $where = $wfield . "='" . $value . "'";
+            }
         }
 
         $sql = "SELECT " . $fields . " FROM [" . MS_DBPRE . $table . "] WHERE " . $where;
-        $result = self::query($sql, $host);
+        $result = self::query($sql, $host)->fetchall(PDO::FETCH_ASSOC);
+
         return $result;
     }
 
@@ -473,7 +483,7 @@ class Db
             }
         }
         $sql = 'SELECT COUNT(*) as [count] FROM [' . MS_DBPRE . $table . '] [' . $table . '] ' . (isset($where) ? $where : '');
-        $result = self::query($sql, $host);
+        $result = self::query($sql, $host)->fetchall(PDO::FETCH_NUM);
         return $result['count'];
     }
 

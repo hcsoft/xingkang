@@ -182,6 +182,7 @@ class adminControl extends SystemControl{
 			$data['admin_gid'] = intval($_POST['gid']);
 			//查询管理员信息
 			$admin_model = Model('admin');
+//            var_dump($data);
 			$result = $admin_model->updateAdmin($data);
 			if ($result){
 				$this->log(L('nc_edit,limit_admin').'[ID:'.intval($_GET['admin_id']).']',1);
@@ -194,7 +195,7 @@ class adminControl extends SystemControl{
 			$admin_model = Model('admin');
 			$admininfo = $admin_model->getOneAdmin(intval($_GET['admin_id']));
 			if (!is_array($admininfo) || count($admininfo)<=0){
-				showMessage(Language::get('admin_edit_admin_error'),'index.php?act=admin&op=admin');
+				showMessage(Language::get('admin_edit_admin_error'),'index.php?act=admin&op=admin','html','succ',1,200000);
 			}
 			Tpl::output('admininfo',$admininfo);
 			Tpl::output('top_link',$this->sublink($this->links,'admin'));

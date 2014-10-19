@@ -249,4 +249,6 @@ $lang['nc_memory_cost']		= "占用内存";
  */
 $lang['nc_healthplatform']		= "业务督导";
 $lang['nc_spotcheck'] = "回访抽查";
+$lang['nc_storehouse']		= "仓库";
+$lang['nc_community'] = "社区";
 ?>

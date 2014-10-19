@@ -49,6 +49,8 @@ $_limit =  array(
 	    array('name'=>$lang['nc_snstrace'], 'op'=>null, 'act'=>'snstrace'),
 		array('name'=>$lang['nc_member_tag'], 'op'=>null, 'act'=>'sns_member'),
 		array('name'=>$lang['nc_member_predepositmanage'], 'op'=>null, 'act'=>'predeposit'),
+        array('name'=>'消费汇总', 'op'=>'consumesum', 'act'=>'member'),
+        array('name'=>'充值下账汇总', 'op'=>'rechargesum', 'act'=>'member'),
 		)),
 	array('name'=>$lang['nc_trade'], 'child'=>array(
 		array('name'=>$lang['nc_order_manage'], 'op'=>null, 'act'=>'order'),
@@ -87,11 +89,21 @@ $_limit =  array(
 		array('name'=>$lang['nc_statmarketing'], 'op'=>null, 'act'=>'stat_marketing'),
 		array('name'=>$lang['nc_stataftersale'], 	'op'=>null, 'act'=>'stat_aftersale'),
 		)),
-    array('name'=>$lang['nc_healthplatform'], 'child'=>array(
+    array('name'=>'业务督导', 'child'=>array(
         array('name'=>'回访抽查', 'op'=>'index', 'act'=>'healthplatform'),
         array('name'=>'统计', 'op'=>'statistical', 'act'=>'healthplatform'),
         array('name'=>'测试', 'op'=>'test', 'act'=>'healthplatform'),
     )),
+    array('name'=>'仓库', 'child'=>array(
+        array('name'=>'仓库单据明细', 'op'=>'detail', 'act'=>'storehouse'),
+        array('name'=>'仓库单据汇总', 'op'=>'sum', 'act'=>'storehouse')
+    )),
+    array('name'=>'社区', 'child'=>array(
+        array('name'=>'收入明细查询', 'op'=>'incomedetail', 'act'=>'community'),
+        array('name'=>'收入汇总查询', 'op'=>'incomesum', 'act'=>'community'),
+        array('name'=>'处方明细查询', 'op'=>'prescriptiondetail', 'act'=>'community'),
+        array('name'=>'处方汇总查询', 'op'=>'prescriptionsum', 'act'=>'community'),
+    ))
 );
 
 if (C('mobile_isuse') !== NULL){

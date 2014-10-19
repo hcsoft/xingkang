@@ -40,7 +40,7 @@ class adminModel{
 		$condition_str = '';
 		
 		if ($condition['admin_id'] != ''){
-			$condition_str .= " and admin_id = '". $condition['admin_id'] ."'";
+			$condition_str .= " and admin_id = ". $condition['admin_id'] ."";
 		}
 		if ($condition['admin_name'] != ''){
 			$condition_str .= " and admin_name = '". $condition['admin_name'] ."'";
@@ -126,9 +126,10 @@ class adminModel{
 		if (is_array($param)){
 			$tmp = array();
 			foreach ($param as $k => $v){
-				$tmp[$k] = $v;
+                if($k != 'admin_id')
+				    $tmp[$k] = $v;
 			}
-			$where = " admin_id = '". $param['admin_id'] ."'";
+			$where = " admin_id = ". $param['admin_id'] ."";
 			$result = Db::update('admin',$tmp,$where);
 			return $result;
 		}else {
@@ -144,7 +145,7 @@ class adminModel{
 	 */
 	public function delAdmin($id){
 		if (intval($id) > 0){
-			$where = " admin_id = '". intval($id) ."'";
+			$where = " admin_id = ". intval($id) ."";
 			$result = Db::delete('admin',$where);
 			return $result;
 		}else {
