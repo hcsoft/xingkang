@@ -89,7 +89,7 @@ class healthfileControl extends SystemControl
 //        echo $countsql;
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
-        $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.inputdate) rownum,
+        $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.inputdate desc) rownum,
                         a.fileno,
                         a.name,
                         a.address,
@@ -98,7 +98,7 @@ class healthfileControl extends SystemControl
                         b.idnumber,
                         emp.username,
                         a.inputdate
-                        $sql order by  a.inputdate )zzzz where rownum>$startnum )zzzzz order by rownum";
+                        $sql order by  a.inputdate desc )zzzz where rownum>$startnum )zzzzz order by rownum";
 //        echo $sql;
         $stmt = $conn->query($tsql);
         $data_list = array();
