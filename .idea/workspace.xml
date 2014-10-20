@@ -80,14 +80,14 @@
       <file leaf-file-name="healthfile.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/control/healthfile.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="139" column="58" selection-start="5111" selection-end="5111" vertical-scroll-proportion="0.39106146" vertical-offset="1666" max-vertical-offset="3542">
+            <state line="167" column="93" selection-start="6224" selection-end="6224" vertical-scroll-proportion="0.9385475" vertical-offset="1666" max-vertical-offset="3542">
               <folding>
-                <marker date="1413778841907" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
-                <marker date="1413778841907" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1413778841907" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
-                <marker date="1413778841907" expanded="true" signature="6164:6229" placeholder="SELECT * FRO..*..." />
-                <marker date="1413778841907" expanded="true" signature="7144:7272" placeholder="insert into ..." />
-                <marker date="1413778841907" expanded="true" signature="7690:7802" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1413779123368" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
+                <marker date="1413779123368" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1413779123368" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
+                <marker date="1413779123368" expanded="true" signature="6164:6229" placeholder="SELECT * FRO..*..." />
+                <marker date="1413779123368" expanded="true" signature="7144:7272" placeholder="insert into ..." />
+                <marker date="1413779123368" expanded="true" signature="7690:7802" placeholder="select b.id ..map_org_wechat..." />
               </folding>
             </state>
           </provider>
@@ -934,7 +934,11 @@
       <created>1413778667473</created>
       <updated>1413778667473</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="1,增加了默认时间">
+      <created>1413778854047</created>
+      <updated>1413778854047</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1291,14 +1295,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/healthfile.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="58" selection-start="5111" selection-end="5111" vertical-scroll-proportion="0.39106146" vertical-offset="1666" max-vertical-offset="3542">
+        <state line="167" column="93" selection-start="6224" selection-end="6224" vertical-scroll-proportion="0.9385475" vertical-offset="1666" max-vertical-offset="3542">
           <folding>
-            <marker date="1413778841907" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
-            <marker date="1413778841907" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1413778841907" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
-            <marker date="1413778841907" expanded="true" signature="6164:6229" placeholder="SELECT * FRO..*..." />
-            <marker date="1413778841907" expanded="true" signature="7144:7272" placeholder="insert into ..." />
-            <marker date="1413778841907" expanded="true" signature="7690:7802" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1413779123368" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
+            <marker date="1413779123368" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1413779123368" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
+            <marker date="1413779123368" expanded="true" signature="6164:6229" placeholder="SELECT * FRO..*..." />
+            <marker date="1413779123368" expanded="true" signature="7144:7272" placeholder="insert into ..." />
+            <marker date="1413779123368" expanded="true" signature="7690:7802" placeholder="select b.id ..map_org_wechat..." />
           </folding>
         </state>
       </provider>
