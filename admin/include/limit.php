@@ -103,9 +103,10 @@ $_limit =  array(
         array('name'=>'收入汇总查询', 'op'=>'incomesum', 'act'=>'community'),
         array('name'=>'处方明细查询', 'op'=>'prescriptiondetail', 'act'=>'community'),
         array('name'=>'处方汇总查询', 'op'=>'prescriptionsum', 'act'=>'community'),
-    )),
-    array('name'=>'健康档案', 'child'=>array(
-        array('name'=>'档案查询', 'op'=>'query', 'act'=>'healthfile')
+        array('name'=>'消费汇总', 'op'=>'consumesum', 'act'=>'member'),
+        array('name'=>'充值下账汇总', 'op'=>'rechargesum', 'act'=>'member'),
+        array('name'=>'健康档案查询', 'op'=>'query', 'act'=>'healthfile'),
+        array('name'=>'健康档案汇总', 'op'=>'sum', 'act'=>'healthfile')
     ))
 );
 

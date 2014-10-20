@@ -80,6 +80,7 @@
             <th class="align-center">档案编号</th>
             <th class="align-center">姓名</th>
             <th class="align-center">地址</th>
+            <th class="align-center">电话</th>
             <th class="align-center">性别</th>
             <th class="align-center">生日</th>
             <th class="align-center">身份证号</th>
@@ -98,6 +99,9 @@
                     </td>
                     <td class=" align-center">
                         <?php echo $v->address ?>
+                    </td>
+                    <td class=" align-center">
+                        <?php echo $v->tel ?>
                     </td>
                     <td class=" align-center">
                         <?php echo $v->sex ?>

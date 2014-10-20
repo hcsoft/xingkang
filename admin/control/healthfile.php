@@ -93,6 +93,7 @@ class healthfileControl extends SystemControl
                         a.fileno,
                         a.name,
                         a.address,
+                        a.tel,
                         b.sex,
                         b.birthday,
                         b.idnumber,
@@ -124,6 +125,55 @@ class healthfileControl extends SystemControl
         //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
         Tpl::output('page', $page->show());
         Tpl::showpage('healthfile.query');
+    }
+
+    public function sumOp()
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $this->getTreeData();
+
+        $where = '   ';
+        $orgs = '32,45,48,64,98,132,238,1419,1489,1542,1994';
+        if ($_GET['query_start_time']) {
+            $where = $where . ' and a.inputdate >=\'\'' . $_GET['query_start_time'] . '\'\'';
+        }
+
+        if ($_GET['query_end_time']) {
+            $where = $where . ' and a.inputdate < dateadd(day,1,\'\'' . $_GET['query_end_time'] . '\'\')';
+        }
+//
+//        if ($_GET['idnumber']) {
+//            $where  = $where . ' and b.idnumber  = \'' . $_GET['idnumber'] . '\'';
+//        }
+//
+//        if ($_GET['name']) {
+//            $where = $where . ' and a.name  like \'\'' . $_GET['name'] . '%\'\'';
+//        }
+        //处理树的参数
+        $checkednode = $_GET['checkednode'];
+        if($checkednode && isset($checkednode) && count($checkednode)>0){
+            $where = $where . " and emp.org_id  in ($checkednode) ";
+        }
+
+//        $countsql = " select count(*)  $sql ";
+//        echo $countsql;
+//        $stmt = $conn->query($countsql);
+//        echo $countsql;
+//        $total = $stmt->fetch(PDO::FETCH_NUM);
+//        $page->setTotalNum($total[0]);
+        $tsql = "SET NOCOUNT ON; Exec InputPersonProc_SP_new 'admin','100',' $where ','111111','0' , '$orgs';SET NOCOUNT off; ";
+//        echo $tsql;
+        $stmt = $conn->prepare($tsql);
+        $stmt->execute();
+        $data_list = array();
+        while ($row = $stmt->fetchObject()) {
+            array_push($data_list, $row);
+        }
+
+        Tpl::output('data_list', $data_list);
+        //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
+//        Tpl::output('page', $page->show());
+        Tpl::showpage('healthfile.sum');
     }
 
 

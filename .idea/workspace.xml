@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/healthfile.php" afterPath="$PROJECT_DIR$/admin/control/healthfile.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/healthfile.query.php" afterPath="$PROJECT_DIR$/admin/templates/default/healthfile.query.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/include/limit.php" afterPath="$PROJECT_DIR$/admin/include/limit.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/include/menu.php" afterPath="$PROJECT_DIR$/admin/include/menu.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -29,7 +32,7 @@
       <file leaf-file-name="menu.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/include/menu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="0" selection-start="413" selection-end="413" vertical-scroll-proportion="-9.73913" vertical-offset="0" max-vertical-offset="4326">
+            <state line="208" column="62" selection-start="9988" selection-end="9988" vertical-scroll-proportion="-19.956522" vertical-offset="2453" max-vertical-offset="4242">
               <folding />
             </state>
           </provider>
@@ -47,7 +50,7 @@
       <file leaf-file-name="healthfile.query.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.query.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="80" selection-start="988" selection-end="988" vertical-scroll-proportion="-4.9791665" vertical-offset="195" max-vertical-offset="3052">
+            <state line="82" column="39" selection-start="2984" selection-end="2984" vertical-scroll-proportion="-1.4375" vertical-offset="1079" max-vertical-offset="3108">
               <folding>
                 <element signature="n#style#0;n#div#0;n#form#1;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -55,10 +58,19 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="healthfile.sum.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.sum.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="103" column="54" selection-start="3869" selection-end="3884" vertical-scroll-proportion="-26.913044" vertical-offset="823" max-vertical-offset="3066">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="storehouse.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="240" column="8" selection-start="9428" selection-end="9631" vertical-scroll-proportion="-4.5" vertical-offset="3144" max-vertical-offset="4368">
+            <state line="245" column="16" selection-start="9648" selection-end="9648" vertical-scroll-proportion="-5.9583335" vertical-offset="3144" max-vertical-offset="4368">
               <folding />
             </state>
           </provider>
@@ -67,14 +79,24 @@
       <file leaf-file-name="healthfile.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/control/healthfile.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="114" selection-start="3295" selection-end="3295" vertical-scroll-proportion="0.43560058" vertical-offset="973" max-vertical-offset="2786">
+            <state line="165" column="21" selection-start="6093" selection-end="6093" vertical-scroll-proportion="0.813314" vertical-offset="1748" max-vertical-offset="3486">
               <folding>
-                <marker date="1413773621639" expanded="true" signature="3198:3690" placeholder="SELECT * FRO..*..." />
-                <marker date="1413773621639" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1413773621639" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
-                <marker date="1413773621639" expanded="true" signature="5105:5233" placeholder="insert into ..." />
-                <marker date="1413773621639" expanded="true" signature="5651:5763" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1413777669609" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
+                <marker date="1413777669609" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1413777669609" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
+                <marker date="1413777669609" expanded="true" signature="5954:6019" placeholder="SELECT * FRO..*..." />
+                <marker date="1413777669609" expanded="true" signature="6934:7062" placeholder="insert into ..." />
+                <marker date="1413777669609" expanded="true" signature="7480:7592" placeholder="select b.id ..map_org_wechat..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mssqlpdo.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/framework/db/mssqlpdo.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="9" selection-start="184" selection-end="189" vertical-scroll-proportion="-3.0434783" vertical-offset="0" max-vertical-offset="252">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -93,7 +115,7 @@
       <file leaf-file-name="limit.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/include/limit.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="106" column="23" selection-start="6379" selection-end="6383" vertical-scroll-proportion="-11.304348" vertical-offset="1224" max-vertical-offset="2324">
+            <state line="105" column="5" selection-start="6357" selection-end="6357" vertical-scroll-proportion="-20.826086" vertical-offset="991" max-vertical-offset="2338">
               <folding />
             </state>
           </provider>
@@ -112,7 +134,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/shop/framework/libraries/process.class.php" />
         <option value="$PROJECT_DIR$/admin/control/login.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/layout/msg_layout.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/goods.index.php" />
@@ -158,10 +179,11 @@
         <option value="$PROJECT_DIR$/circle/templates/default/layout/msg_layout.php" />
         <option value="$PROJECT_DIR$/cms/templates/default/layout/top.php" />
         <option value="$PROJECT_DIR$/microshop/templates/default/layout/top.php" />
-        <option value="$PROJECT_DIR$/admin/include/menu.php" />
-        <option value="$PROJECT_DIR$/admin/include/limit.php" />
-        <option value="$PROJECT_DIR$/admin/templates/default/healthfile.query.php" />
         <option value="$PROJECT_DIR$/core/framework/db/mssql.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/healthfile.query.php" />
+        <option value="$PROJECT_DIR$/admin/include/limit.php" />
+        <option value="$PROJECT_DIR$/admin/include/menu.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/healthfile.sum.php" />
         <option value="$PROJECT_DIR$/admin/control/healthfile.php" />
       </list>
     </option>
@@ -757,8 +779,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\workspace\xingkang\admin\control" />
       <recent name="D:\workspace\xingkang\admin\templates\default" />
+      <recent name="D:\workspace\xingkang\admin\control" />
       <recent name="D:\workspace\xingkang\data\resource\js\ztree" />
       <recent name="D:\workspace\xingkang\data\resource\js\jquery.treeview" />
       <recent name="D:\workspace\xingkang\shop\templates\default\store\lexus\css" />
@@ -891,7 +913,15 @@
       <created>1413773444199</created>
       <updated>1413773444199</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="1,档案按日期倒序排列">
+      <created>1413773654494</created>
+      <updated>1413773654494</updated>
+    </task>
+    <task id="LOCAL-00026" summary="1,增加了档案汇总查询">
+      <created>1413777699085</created>
+      <updated>1413777699085</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -957,22 +987,14 @@
     <MESSAGE value="1,hcsoft" />
     <MESSAGE value="1,增减健康档案查询" />
     <MESSAGE value="1,去掉echo" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,去掉echo" />
+    <MESSAGE value="1,档案按日期倒序排列" />
+    <MESSAGE value="1,增加了档案汇总查询" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,增加了档案汇总查询" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/resource/js/ztree/css/demo.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="31" selection-start="1107" selection-end="1107" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="532" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/resource/js/ztree/js/jquery.ztree.all-3.5.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2324" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/resource/js/jquery.treeview/jquery.treeview.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="0" selection-start="135" selection-end="135" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="1120" />
@@ -1229,17 +1251,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/include/menu.php">
+    <entry file="file://$PROJECT_DIR$/core/framework/db/mssql.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="413" selection-end="413" vertical-scroll-proportion="-9.73913" vertical-offset="0" max-vertical-offset="4326">
+        <state line="237" column="81" selection-start="9063" selection-end="9063" vertical-scroll-proportion="-3.9166667" vertical-offset="3130" max-vertical-offset="9114">
+          <folding>
+            <marker date="1413773428196" expanded="true" signature="17755:17814" placeholder="select name ..Sysobjects..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="245" column="16" selection-start="9648" selection-end="9648" vertical-scroll-proportion="-5.9583335" vertical-offset="3144" max-vertical-offset="4368">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/include/limit.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="23" selection-start="6379" selection-end="6383" vertical-scroll-proportion="-11.304348" vertical-offset="1224" max-vertical-offset="2324">
+        <state line="105" column="5" selection-start="6357" selection-end="6357" vertical-scroll-proportion="-20.826086" vertical-offset="991" max-vertical-offset="2338">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/framework/db/mssqlpdo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="9" selection-start="184" selection-end="189" vertical-scroll-proportion="-3.0434783" vertical-offset="0" max-vertical-offset="252">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/include/menu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="208" column="62" selection-start="9988" selection-end="9988" vertical-scroll-proportion="-19.956522" vertical-offset="2453" max-vertical-offset="4242">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.query.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="82" column="39" selection-start="2984" selection-end="2984" vertical-scroll-proportion="-1.4375" vertical-offset="1079" max-vertical-offset="3108">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1250,40 +1304,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.sum.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="240" column="8" selection-start="9428" selection-end="9631" vertical-scroll-proportion="-4.5" vertical-offset="3144" max-vertical-offset="4368">
+        <state line="103" column="54" selection-start="3869" selection-end="3884" vertical-scroll-proportion="-26.913044" vertical-offset="823" max-vertical-offset="3066">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.query.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="80" selection-start="988" selection-end="988" vertical-scroll-proportion="-4.9791665" vertical-offset="195" max-vertical-offset="3052">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#form#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/framework/db/mssql.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="237" column="81" selection-start="9063" selection-end="9063" vertical-scroll-proportion="-3.9166667" vertical-offset="3130" max-vertical-offset="9114">
-          <folding>
-            <marker date="1413773428196" expanded="true" signature="17755:17814" placeholder="select name ..Sysobjects..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/healthfile.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="114" selection-start="3295" selection-end="3295" vertical-scroll-proportion="0.43560058" vertical-offset="973" max-vertical-offset="2786">
+        <state line="165" column="21" selection-start="6093" selection-end="6093" vertical-scroll-proportion="0.813314" vertical-offset="1748" max-vertical-offset="3486">
           <folding>
-            <marker date="1413773621639" expanded="true" signature="3198:3690" placeholder="SELECT * FRO..*..." />
-            <marker date="1413773621639" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1413773621639" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
-            <marker date="1413773621639" expanded="true" signature="5105:5233" placeholder="insert into ..." />
-            <marker date="1413773621639" expanded="true" signature="5651:5763" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1413777669609" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
+            <marker date="1413777669609" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1413777669609" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
+            <marker date="1413777669609" expanded="true" signature="5954:6019" placeholder="SELECT * FRO..*..." />
+            <marker date="1413777669609" expanded="true" signature="6934:7062" placeholder="insert into ..." />
+            <marker date="1413777669609" expanded="true" signature="7480:7592" placeholder="select b.id ..map_org_wechat..." />
           </folding>
         </state>
       </provider>
