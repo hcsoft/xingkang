@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/healthfile.php" afterPath="$PROJECT_DIR$/admin/control/healthfile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/healthfile.query.php" afterPath="$PROJECT_DIR$/admin/templates/default/healthfile.query.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/include/limit.php" afterPath="$PROJECT_DIR$/admin/include/limit.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/include/menu.php" afterPath="$PROJECT_DIR$/admin/include/menu.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -50,7 +47,7 @@
       <file leaf-file-name="healthfile.query.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.query.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="82" column="39" selection-start="2984" selection-end="2984" vertical-scroll-proportion="-1.4375" vertical-offset="1079" max-vertical-offset="3108">
+            <state line="109" column="115" selection-start="4172" selection-end="4211" vertical-scroll-proportion="-9.3125" vertical-offset="1079" max-vertical-offset="3108">
               <folding>
                 <element signature="n#style#0;n#div#0;n#form#1;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -79,14 +76,14 @@
       <file leaf-file-name="healthfile.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/control/healthfile.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="165" column="21" selection-start="6093" selection-end="6093" vertical-scroll-proportion="0.813314" vertical-offset="1748" max-vertical-offset="3486">
+            <state line="136" column="31" selection-start="4935" selection-end="4935" vertical-scroll-proportion="0.34442836" vertical-offset="1666" max-vertical-offset="3514">
               <folding>
-                <marker date="1413777669609" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
-                <marker date="1413777669609" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1413777669609" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
-                <marker date="1413777669609" expanded="true" signature="5954:6019" placeholder="SELECT * FRO..*..." />
-                <marker date="1413777669609" expanded="true" signature="6934:7062" placeholder="insert into ..." />
-                <marker date="1413777669609" expanded="true" signature="7480:7592" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1413778318449" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
+                <marker date="1413778318449" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1413778318449" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
+                <marker date="1413778318449" expanded="true" signature="6072:6137" placeholder="SELECT * FRO..*..." />
+                <marker date="1413778318449" expanded="true" signature="7052:7180" placeholder="insert into ..." />
+                <marker date="1413778318449" expanded="true" signature="7598:7710" placeholder="select b.id ..map_org_wechat..." />
               </folding>
             </state>
           </provider>
@@ -921,7 +918,11 @@
       <created>1413777699085</created>
       <updated>1413777699085</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="1,增加了档案汇总查询">
+      <created>1413777761998</created>
+      <updated>1413777761998</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1260,13 +1261,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="245" column="16" selection-start="9648" selection-end="9648" vertical-scroll-proportion="-5.9583335" vertical-offset="3144" max-vertical-offset="4368">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/include/limit.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="105" column="5" selection-start="6357" selection-end="6357" vertical-scroll-proportion="-20.826086" vertical-offset="991" max-vertical-offset="2338">
@@ -1288,15 +1282,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.query.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="39" selection-start="2984" selection-end="2984" vertical-scroll-proportion="-1.4375" vertical-offset="1079" max-vertical-offset="3108">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#form#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/storehouse.detail.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="10" selection-start="1221" selection-end="1222" vertical-scroll-proportion="-5.478261" vertical-offset="336" max-vertical-offset="3416">
@@ -1311,16 +1296,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="245" column="16" selection-start="9648" selection-end="9648" vertical-scroll-proportion="-5.9583335" vertical-offset="3144" max-vertical-offset="4368">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.query.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="115" selection-start="4172" selection-end="4211" vertical-scroll-proportion="-9.3125" vertical-offset="1079" max-vertical-offset="3108">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/healthfile.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="165" column="21" selection-start="6093" selection-end="6093" vertical-scroll-proportion="0.813314" vertical-offset="1748" max-vertical-offset="3486">
+        <state line="136" column="31" selection-start="4935" selection-end="4935" vertical-scroll-proportion="0.34442836" vertical-offset="1666" max-vertical-offset="3514">
           <folding>
-            <marker date="1413777669609" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
-            <marker date="1413777669609" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1413777669609" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
-            <marker date="1413777669609" expanded="true" signature="5954:6019" placeholder="SELECT * FRO..*..." />
-            <marker date="1413777669609" expanded="true" signature="6934:7062" placeholder="insert into ..." />
-            <marker date="1413777669609" expanded="true" signature="7480:7592" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1413778318449" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
+            <marker date="1413778318449" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1413778318449" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
+            <marker date="1413778318449" expanded="true" signature="6072:6137" placeholder="SELECT * FRO..*..." />
+            <marker date="1413778318449" expanded="true" signature="7052:7180" placeholder="insert into ..." />
+            <marker date="1413778318449" expanded="true" signature="7598:7710" placeholder="select b.id ..map_org_wechat..." />
           </folding>
         </state>
       </provider>
