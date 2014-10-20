@@ -51,7 +51,10 @@ $arr = array(
                 'text'	=> '仓库'),
             11 => array(
                 'args'	=> 'community',
-                'text'	=> '社区')
+                'text'	=> '社区'),
+            12 => array(
+                'args'	=> 'healthfile',
+                'text'	=> '健康档案')
 		),
 		'left' =>array(
 
@@ -206,6 +209,13 @@ $arr = array(
                     array('args'=>'incomesum,community,community',			'text'=>'收入汇总查询'),
                     array('args'=>'prescriptiondetail,community,community',			'text'=>'处方明细查询'),
                     array('args'=>'prescriptionsum,community,community',			'text'=>'处方汇总查询')
+                )
+            ),
+            12 => array(
+                'nav' => 'healthfile',
+                'text' => '社区',
+                'list' => array(
+                    array('args'=>'query,healthfile,healthfile',	'text'=>'档案查询')
                 )
             )
 		)
