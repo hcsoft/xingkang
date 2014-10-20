@@ -134,8 +134,10 @@ class healthfileControl extends SystemControl
 
         $where = '   ';
         $orgs = '32,45,48,64,98,132,238,1419,1489,1542,1994';
-        $_GET['query_start_time'] = date('Y-m-d', today());
-        $_GET['query_end_time'] = date('Y-m-d', today());
+        if(!isset($_GET['query_start_time']))
+        $_GET['query_start_time'] = date('Y-m-d', getdate());
+        if(!isset($_GET['query_end_time']))
+            $_GET['query_end_time'] = date('Y-m-d', getdate());
         if ($_GET['query_start_time']) {
             $where = $where . ' and a.inputdate >=\'\'' . $_GET['query_start_time'] . '\'\'';
         }
