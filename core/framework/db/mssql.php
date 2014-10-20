@@ -238,7 +238,7 @@ class Db
             $key =  is_string($param['cache_key'])?$param['cache_key']:md5($sql);
             if (isset($_cache[$key])) return $_cache[$key];
         }
-        echo $sql;
+//        echo $sql;
         $result = self::query($sql,$host);
         while ($tmp=$result->fetch(PDO::FETCH_ASSOC)){
             $array[] = $tmp;
