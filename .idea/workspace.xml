@@ -47,7 +47,7 @@
       <file leaf-file-name="healthfile.query.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.query.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="109" column="115" selection-start="4172" selection-end="4211" vertical-scroll-proportion="0.0" vertical-offset="1079" max-vertical-offset="3108">
+            <state line="109" column="115" selection-start="4172" selection-end="4211" vertical-scroll-proportion="-19.434782" vertical-offset="1079" max-vertical-offset="3108">
               <folding />
             </state>
           </provider>
@@ -56,7 +56,7 @@
       <file leaf-file-name="healthfile.sum.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.sum.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="103" column="54" selection-start="3869" selection-end="3884" vertical-scroll-proportion="0.0" vertical-offset="1442" max-vertical-offset="3066">
+            <state line="103" column="54" selection-start="3869" selection-end="3884" vertical-scroll-proportion="-0.0" vertical-offset="1442" max-vertical-offset="3066">
               <folding />
             </state>
           </provider>
@@ -65,8 +65,14 @@
       <file leaf-file-name="storehouse.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="245" column="16" selection-start="9648" selection-end="9648" vertical-scroll-proportion="0.0" vertical-offset="3144" max-vertical-offset="4368">
-              <folding />
+            <state line="245" column="16" selection-start="9648" selection-end="9648" vertical-scroll-proportion="-12.434783" vertical-offset="3144" max-vertical-offset="4368">
+              <folding>
+                <marker date="1413690639021" expanded="true" signature="2847:3633" placeholder="SELECT * FRO..*..." />
+                <marker date="1413690639021" expanded="true" signature="2864:2909" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1413690639021" expanded="true" signature="2880:2909" placeholder="SELECT TOP $..." />
+                <marker date="1413690639021" expanded="true" signature="5402:5530" placeholder="insert into ..." />
+                <marker date="1413690639021" expanded="true" signature="5948:6060" placeholder="select b.id ..map_org_wechat..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,14 +80,14 @@
       <file leaf-file-name="healthfile.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/control/healthfile.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="139" column="12" selection-start="5068" selection-end="5068" vertical-scroll-proportion="0.39106146" vertical-offset="1666" max-vertical-offset="3542">
+            <state line="139" column="58" selection-start="5111" selection-end="5111" vertical-scroll-proportion="0.39106146" vertical-offset="1666" max-vertical-offset="3542">
               <folding>
-                <marker date="1413778486481" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
-                <marker date="1413778486481" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1413778486481" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
-                <marker date="1413778486481" expanded="true" signature="6170:6235" placeholder="SELECT * FRO..*..." />
-                <marker date="1413778486481" expanded="true" signature="7150:7278" placeholder="insert into ..." />
-                <marker date="1413778486481" expanded="true" signature="7696:7808" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1413778841907" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
+                <marker date="1413778841907" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1413778841907" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
+                <marker date="1413778841907" expanded="true" signature="6164:6229" placeholder="SELECT * FRO..*..." />
+                <marker date="1413778841907" expanded="true" signature="7144:7272" placeholder="insert into ..." />
+                <marker date="1413778841907" expanded="true" signature="7690:7802" placeholder="select b.id ..map_org_wechat..." />
               </folding>
             </state>
           </provider>
@@ -924,7 +930,11 @@
       <created>1413778332022</created>
       <updated>1413778332022</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="1,增加了默认时间">
+      <created>1413778667473</created>
+      <updated>1413778667473</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -934,6 +944,7 @@
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -957,7 +968,6 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4686684" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1259,30 +1269,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.query.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="245" column="16" selection-start="9648" selection-end="9648" vertical-scroll-proportion="0.0" vertical-offset="3144" max-vertical-offset="4368">
+        <state line="109" column="115" selection-start="4172" selection-end="4211" vertical-scroll-proportion="-19.434782" vertical-offset="1079" max-vertical-offset="3108">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.query.php">
+    <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="115" selection-start="4172" selection-end="4211" vertical-scroll-proportion="0.0" vertical-offset="1079" max-vertical-offset="3108">
-          <folding />
+        <state line="245" column="16" selection-start="9648" selection-end="9648" vertical-scroll-proportion="-12.434783" vertical-offset="3144" max-vertical-offset="4368">
+          <folding>
+            <marker date="1413690639021" expanded="true" signature="2847:3633" placeholder="SELECT * FRO..*..." />
+            <marker date="1413690639021" expanded="true" signature="2864:2909" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1413690639021" expanded="true" signature="2880:2909" placeholder="SELECT TOP $..." />
+            <marker date="1413690639021" expanded="true" signature="5402:5530" placeholder="insert into ..." />
+            <marker date="1413690639021" expanded="true" signature="5948:6060" placeholder="select b.id ..map_org_wechat..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/healthfile.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="12" selection-start="5068" selection-end="5068" vertical-scroll-proportion="0.39106146" vertical-offset="1666" max-vertical-offset="3542">
+        <state line="139" column="58" selection-start="5111" selection-end="5111" vertical-scroll-proportion="0.39106146" vertical-offset="1666" max-vertical-offset="3542">
           <folding>
-            <marker date="1413778486481" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
-            <marker date="1413778486481" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1413778486481" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
-            <marker date="1413778486481" expanded="true" signature="6170:6235" placeholder="SELECT * FRO..*..." />
-            <marker date="1413778486481" expanded="true" signature="7150:7278" placeholder="insert into ..." />
-            <marker date="1413778486481" expanded="true" signature="7696:7808" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1413778841907" expanded="true" signature="3198:3721" placeholder="SELECT * FRO..*..." />
+            <marker date="1413778841907" expanded="true" signature="3215:3260" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1413778841907" expanded="true" signature="3231:3260" placeholder="SELECT TOP $..." />
+            <marker date="1413778841907" expanded="true" signature="6164:6229" placeholder="SELECT * FRO..*..." />
+            <marker date="1413778841907" expanded="true" signature="7144:7272" placeholder="insert into ..." />
+            <marker date="1413778841907" expanded="true" signature="7690:7802" placeholder="select b.id ..map_org_wechat..." />
           </folding>
         </state>
       </provider>
