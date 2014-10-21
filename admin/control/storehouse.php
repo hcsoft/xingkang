@@ -122,7 +122,7 @@ class storehouseControl extends SystemControl
                         null as sBuy_DrugUnit,
                         sum(fBuy_TaxMoney) as fBuy_TaxMoney,
                         sum(fBuy_RetailMoney) as fBuy_RetailMoney,
-                        sum(fBuy_RetailMoney)-sum(fBuy_TaxPrice) as diffmoney
+                        sum(fBuy_RetailMoney)-sum(fBuy_TaxMoney) as diffmoney
                         $sql  ";
 //        echo $sql;
         $totalstmt = $conn->query($totalsql);

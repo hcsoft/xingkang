@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/js/multiselect/jquery.multiselect.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/js/multiselect/jquery.multiselect.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/healthfile.query.php" afterPath="$PROJECT_DIR$/admin/templates/default/healthfile.query.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/healthfile.sum.php" afterPath="$PROJECT_DIR$/admin/templates/default/healthfile.sum.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/layout/layout.php" afterPath="$PROJECT_DIR$/admin/templates/default/layout/layout.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/storehouse.detail.php" afterPath="$PROJECT_DIR$/admin/templates/default/storehouse.detail.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/storehouse.php" afterPath="$PROJECT_DIR$/admin/control/storehouse.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/storehouse.sum.php" afterPath="$PROJECT_DIR$/admin/templates/default/storehouse.sum.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -94,14 +87,14 @@
       <file leaf-file-name="storehouse.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="122" column="41" selection-start="4921" selection-end="4934" vertical-scroll-proportion="0.35311145" vertical-offset="1464" max-vertical-offset="4774">
+            <state line="124" column="63" selection-start="5084" selection-end="5084" vertical-scroll-proportion="0.3936324" vertical-offset="1464" max-vertical-offset="4774">
               <folding>
-                <marker date="1413863992191" expanded="true" signature="553:665" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1413863992191" expanded="true" signature="3298:4210" placeholder="SELECT * FRO..*..." />
-                <marker date="1413863992191" expanded="true" signature="3315:3360" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1413863992191" expanded="true" signature="3331:3360" placeholder="SELECT TOP $..." />
-                <marker date="1413863992191" expanded="true" signature="5979:6107" placeholder="insert into ..." />
-                <marker date="1413863992191" expanded="true" signature="6525:6637" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1413864272809" expanded="true" signature="553:665" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1413864272809" expanded="true" signature="3298:4210" placeholder="SELECT * FRO..*..." />
+                <marker date="1413864272809" expanded="true" signature="3315:3360" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1413864272809" expanded="true" signature="3331:3360" placeholder="SELECT TOP $..." />
+                <marker date="1413864272809" expanded="true" signature="5979:6107" placeholder="insert into ..." />
+                <marker date="1413864272809" expanded="true" signature="6525:6637" placeholder="select b.id ..map_org_wechat..." />
               </folding>
             </state>
           </provider>
@@ -931,7 +924,11 @@
       <created>1413854543323</created>
       <updated>1413854543323</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="1,修改了仓库明细,增加字段等">
+      <created>1413864015577</created>
+      <updated>1413864015577</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1320,14 +1317,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="41" selection-start="4921" selection-end="4934" vertical-scroll-proportion="0.35311145" vertical-offset="1464" max-vertical-offset="4774">
+        <state line="124" column="63" selection-start="5084" selection-end="5084" vertical-scroll-proportion="0.3936324" vertical-offset="1464" max-vertical-offset="4774">
           <folding>
-            <marker date="1413863992191" expanded="true" signature="553:665" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1413863992191" expanded="true" signature="3298:4210" placeholder="SELECT * FRO..*..." />
-            <marker date="1413863992191" expanded="true" signature="3315:3360" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1413863992191" expanded="true" signature="3331:3360" placeholder="SELECT TOP $..." />
-            <marker date="1413863992191" expanded="true" signature="5979:6107" placeholder="insert into ..." />
-            <marker date="1413863992191" expanded="true" signature="6525:6637" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1413864272809" expanded="true" signature="553:665" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1413864272809" expanded="true" signature="3298:4210" placeholder="SELECT * FRO..*..." />
+            <marker date="1413864272809" expanded="true" signature="3315:3360" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1413864272809" expanded="true" signature="3331:3360" placeholder="SELECT TOP $..." />
+            <marker date="1413864272809" expanded="true" signature="5979:6107" placeholder="insert into ..." />
+            <marker date="1413864272809" expanded="true" signature="6525:6637" placeholder="select b.id ..map_org_wechat..." />
           </folding>
         </state>
       </provider>
