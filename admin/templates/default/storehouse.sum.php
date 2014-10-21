@@ -2,18 +2,47 @@
 <style>
     .datatable {
         position: absolute;
-        width: 80%;
+        width: 90%;
         right: 0;
     }
 
     .datatable th, .datatable td {
         border: solid 1px #DEEFFB;
     }
+
+    .typeselect {
+        display: none;
+    }
+
+    .typeselect + label {
+        width: 90%;
+        height: 30px;
+        line-height: 30px;
+        margin: 1px auto;
+        border: 1px solid #DEEFFB;
+        border-radius: 5px;
+        display: block;
+        text-align: center;
+    }
+
+    .typeselect:checked + label {
+        background-color: #DEEFFB;
+    }
+
+    .leftdiv {
+        position: absolute;
+        left: 0;
+        width: 10%;
+        top: 0;
+        bottom: 0;
+        border-right: 1px solid #fff;
+        padding-top: 7px;
+    }
 </style>
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>仓库单据明细</h3>
+            <h3>仓库单据汇总</h3>
         </div>
     </div>
     <div class="fixed-empty"></div>
@@ -21,21 +50,22 @@
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" value="storehouse" name="act">
         <input type="hidden" value="sum" name="op">
-        <input type="hidden" name="checkednode" id="checkednode" value=""/>
+        <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
-                <th><label>单据类型</label></th>
-                <td colspan="1"><select name="search_type" class="querySelect">
-                        <option value="-1" selected >全部</option>
-                        <option value="0" <?php if ($_GET['search_type'] == '0'){ ?>selected<?php } ?>>期初入库</option>
-                        <option value="1" <?php if ($_GET['search_type'] == '1'){ ?>selected<?php } ?>>采购入库</option>
-                        <option value="2" <?php if ($_GET['search_type'] == '2'){ ?>selected<?php } ?>>购进退回</option>
-                        <option value="3" <?php if ($_GET['search_type'] == '3'){ ?>selected<?php } ?>>盘盈</option>
-                        <option value="5" <?php if ($_GET['search_type'] == '5'){ ?>selected<?php } ?>>领用</option>
-                        <option value="12" <?php if ($_GET['search_type'] == '12'){ ?>selected<?php } ?>>盘亏</option>
-                        <option value="14" <?php if ($_GET['search_type'] == '14'){ ?>selected<?php } ?>>领用退回</option>
-                        <option value="50" <?php if ($_GET['search_type'] == '50'){ ?>selected<?php } ?>>采购计划</option>
+                <th><label>选择机构</label></th>
+                <td colspan="1"><select name="orgids[]" id="orgids" class="orgSelect" multiple>
+                        <?php
+                        $orgids = $_GET['orgids'];
+                        if (!isset($orgids)) {
+                            $orgids = array();
+                        }
+                        foreach ($output['treelist'] as $k => $v) {
+                            ?>
+                            <option value="<?php echo $v->id; ?>"
+                                    <?php if (in_array($v->id, $orgids)){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
+                        <?php } ?>
                     </select></td>
                 </td>
                 <th><label for="query_start_time">发生日期</label></th>
@@ -49,7 +79,6 @@
                     <input type='checkbox' name="sumtype[]" value="org" id="sumtype_org"  <?php if (in_array('org',$sumtype)){ ?>checked<?php } ?>><label for="sumtype_org">领用部门</label>
                     <input type='checkbox' name="sumtype[]" value="store" id="sumtype_store" <?php if (in_array('store',$sumtype)){ ?>checked<?php } ?>><label for="sumtype_store">库房</label>
                     <input type='checkbox' name="sumtype[]" value="goods" id="sumtype_goods" <?php if (in_array('goods',$sumtype)){ ?>checked<?php } ?>><label for="sumtype_goods">商品</label>
-                    <input type='checkbox' name="sumtype[]" value="person" id="sumtype_person" <?php if (in_array('person',$sumtype)){ ?>checked<?php } ?>><label for="sumtype_person">经手人</label>
                     <input type='checkbox' name="sumtype[]" value="year" id="sumtype_year" <?php if (in_array('year',$sumtype)){ ?>checked<?php } ?>><label for="sumtype_year">年</label>
                     <input type='checkbox' name="sumtype[]" value="month" id="sumtype_month" <?php if (in_array('month',$sumtype)){ ?>checked<?php } ?>><label for="sumtype_month">月</label>
                     <input type='checkbox' name="sumtype[]" value="day" id="sumtype_day" <?php if (in_array('day',$sumtype)){ ?>checked<?php } ?>><label for="sumtype_day">日</label>
@@ -85,8 +114,14 @@
     <form method="post" id="form_member" style='position: relative;'>
         <input type="hidden" name="form_submit" value="ok"/>
 
-        <div style="position: absolute;left:0;width:20%;top:0;bottom:0;border-right:1px solid #fff">
-            <ul id="lefttree" class="ztree" style="width:260px; overflow:auto;"></ul>
+        <div class="leftdiv">
+            <?php
+            foreach ($output['types'] as $k => $v) {
+                ?>
+                <input type="radio" class="typeselect" id="types_<?php echo $k ?>" value="<?php echo $k?>"
+                       name="search_type_select" <?php if ($_GET['search_type'] == $k) echo 'checked' ?> >
+                <label for="types_<?php echo $k ?>"><?php echo $v ?></label>
+            <?php } ?>
         </div>
         <table class="table tb-type2 nobdb datatable">
             <thead>
@@ -103,9 +138,10 @@
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
                 <?php foreach ($output['data_list'] as $k => $v) { ?>
                     <tr class="hover member">
-                        <?php foreach ($output['col'] as $key => $item) {     ?>
-                                    <th class="align-left"><?php echo $v->$key?></th>
-                                <?php  }?>
+                        <?php foreach ($output['col'] as $key => $item) {
+                            ?>
+                            <th class="align-left"><?php if(substr($key,-5) == 'count')  echo number_format($v->$key,0); else  echo $v->$key;?></th>
+                        <?php  }?>
                         <td class=" align-right">
                             <?php echo number_format($v->taxmoney, 3)?>
                         </td>
@@ -134,42 +170,38 @@
         charset="utf-8"></script>
 <link rel="stylesheet" type="text/css"
       href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
+<link href="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        //生成树
-        var setting = {
-            check: {
-                enable: true
-            },
-            data: {
-                simpleData: {
-                    enable: true
-                }
-            },
-            callback:{
-                onCheck:function(event,treeid,treenode){
-                    var nodes = lefttreeObj.getCheckedNodes(true);
-                    var checkednode = [];
-                    for(var idx in nodes){
-                        var node = nodes[idx];
-                        console.log(node);
-                        if(!node.isParent){
-                            checkednode.push (node.id);
-                        }
-                    }
-                    console.log(checkednode);
-                    console.log(checkednode.join(","));
-                    $("#checkednode").val(checkednode.join(","));
-                    $('#ncsubmit').click();
-
-                }
+        //生成机构下拉
+        function orgtext(n1, n2, list) {
+            var texts = [];
+            for (var idx in list) {
+                texts.push($(list[idx]).attr("title"));
             }
-        };
-        var zNodes =<?php echo json_encode($output['treedata']); ?>;
-        var lefttreeObj = $.fn.zTree.init($("#lefttree"), setting, zNodes);
+            return texts.join('<br>');
+        }
+
+        $("#orgids").multiselect(
+            {
+                checkAllText: '选择全部',
+                uncheckAllText: '清除选择',
+                noneSelectedText: '未选择',
+                selectedText: orgtext
+            }
+        );
+        //点击事件
+        $(".typeselect").change(function(){
+            $("#search_type").val($('input[name="search_type_select"]:checked').val());
+            $('#ncsubmit').click();
+        });
         //生成日期
-        $('#query_start_time , #query_end_time').datepicker({dateFormat: 'yy-mm-dd'});
+        $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
+            $("#search_type").val($('input[name="search_type_select"]:checked').val());
             if($(":checkbox[name='sumtype[]'][checked]").length<=0){
                 $("#sumtype_org").attr("checked", true);
             }

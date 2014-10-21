@@ -15,26 +15,20 @@ class storehouseControl extends SystemControl
     public function __construct()
     {
         parent::__construct();
-        Language::read('stat');
-        import('function.statistics');
-        import('function.datehelper');
-        $model = Model('stat');
-        //存储参数
-        $this->search_arr = $_REQUEST;
-        //处理搜索时间
-        if (in_array($_REQUEST['op'], array('list'))) {
-            $this->search_arr = $model->dealwithSearchTime($this->search_arr);
-            //获得系统年份
-            $year_arr = getSystemYearArr();
-            //获得系统月份
-            $month_arr = getSystemMonthArr();
-            //获得本月的周时间段
-            $week_arr = getMonthWeekArr($this->search_arr['week']['current_year'], $this->search_arr['week']['current_month']);
-            Tpl::output('year_arr', $year_arr);
-            Tpl::output('month_arr', $month_arr);
-            Tpl::output('week_arr', $week_arr);
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $treesql = 'select  b.id , b.name,b.districtnumber,b.parentid pId from map_org_wechat a, Organization b where a.orgid = b.id ';
+        $treestmt = $conn->query($treesql);
+        $this->treedata_list = array();
+        while ($row = $treestmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($this->treedata_list, $row);
         }
-        Tpl::output('search_arr', $this->search_arr);
+        Tpl::output('treelist', $this->treedata_list);
+        $this->getTreeData();
+        $types = array(0=>'期初入库',1=>'采购入库',2=>'购进退回',3=>'盘盈',5=>'领用',12=>'盘亏',14=>'领用退回',50=>'采购计划',);
+        Tpl::output('types',$types);
+        $goodtype = array(0=>'药品',1=>'卫生用品',2=>'诊疗项目',3=>'特殊材料');
+        Tpl::output('goodtype',$goodtype);
+
     }
 
     /**
@@ -43,8 +37,6 @@ class storehouseControl extends SystemControl
     public function detailOp()
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
-        $this->getTreeData();
-
         //处理数据
         $page = new Page();
         $page->setEachNum(10);
@@ -67,6 +59,19 @@ class storehouseControl extends SystemControl
         if ($_GET['query_end_time']) {
             $sql = $sql . ' and a.dBuy_Date < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
         }
+
+        if ($_GET['orgids']) {
+            if($_GET['search_type'] == 0 || $_GET['search_type'] == 1){
+                $orgarray = array();
+                foreach($_GET['orgids'] as $v){
+                    $orgarray[] = -($v+1000);
+                }
+                $sql = $sql . ' and a.SaleOrgID in ('. implode(',',$orgarray).' )';
+            }else{
+                $sql = $sql . ' and a.OrgID in ( '. implode(',',$_GET['orgids']).')';
+            }
+
+        }
         //处理树的参数
         $checkednode = $_GET['checkednode'];
         if($checkednode && isset($checkednode) && count($checkednode)>0){
@@ -74,9 +79,7 @@ class storehouseControl extends SystemControl
         }
 
         $countsql = " select count(*)  $sql ";
-//        echo $countsql;
         $stmt = $conn->query($countsql);
-//        echo $countsql;
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dBuy_Date) rownum,
@@ -117,7 +120,7 @@ class storehouseControl extends SystemControl
                         null as iDrug_ID,
                         null as fBuy_FactNum,
                         null as sBuy_DrugUnit,
-                        sum(fBuy_TaxPrice) as fBuy_TaxMoney,
+                        sum(fBuy_TaxMoney) as fBuy_TaxMoney,
                         sum(fBuy_RetailMoney) as fBuy_RetailMoney,
                         sum(fBuy_RetailMoney)-sum(fBuy_TaxPrice) as diffmoney
                         $sql  ";
@@ -127,10 +130,6 @@ class storehouseControl extends SystemControl
             array_push($data_list, $row);
         }
         Tpl::output('data_list', $data_list);
-        $types = array(0=>'期初入库',1=>'采购入库',2=>'购进退回',3=>'盘盈',5=>'领用',12=>'盘亏',14=>'领用退回',50=>'采购计划',);
-        $goodtype = array(0=>'药品',1=>'卫生用品',2=>'诊疗项目',3=>'特殊材料');
-        Tpl::output('types',$types);
-        Tpl::output('goodtype',$goodtype);
         //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
         Tpl::output('page', $page->show());
         Tpl::showpage('storehouse.detail');
@@ -206,14 +205,18 @@ class storehouseControl extends SystemControl
     public function sumOp()
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
-        $this->getTreeData();
-
+        if(!isset($_GET['search_type'])){
+            $_GET['search_type'] = '1';
+        }
         //处理数据
         $sumtypewhere = Array(
             'org'=>'d.name as "OrgId"',
             'store'=>'c.name as "SaleOrgID"',
-            'goods'=> array(0=>'goods.sDrug_TradeName as "sDrug_TradeName" ',1=>' goods.sDrug_Spec as "sDrug_TradeName"  ',2=>'goods.sDrug_Brand as "sDrug_Brand"'),
-            'person'=>'a.iBuy_CAPerson as "iBuy_CAPerson" ',
+            'goods'=> array(0=>'goods.sDrug_TradeName as "sDrug_TradeName" '
+                            ,1=>' goods.sDrug_Spec as "sDrug_Spec"  '
+                            ,2=>' goods.sDrug_Unit as "sDrug_Unit" '
+                            ,3=>'goods.sDrug_Brand as "sDrug_Brand" '
+                            ,4=>'sum(fBuy_FactNum) as "drugcount" '),
             'year'=>'year(a.dBuy_Date) as  "year"',
             'month'=>'month(a.dBuy_Date) as  "month"',
             'day'=>' day(a.dBuy_Date) as  "day" '
@@ -221,8 +224,7 @@ class storehouseControl extends SystemControl
         $sumtypestr = Array(
             'org'=>array('OrgId'=>'领用部门'),
             'store'=>array('SaleOrgID'=>'库房'),
-            'goods'=>array('sDrug_TradeName'=>'商品名称','sDrug_Spec'=>'规格','sDrug_Brand'=>'产地'),
-            'person'=>array('iBuy_CAPerson'=>'经手人'),
+            'goods'=>array('sDrug_TradeName'=>'商品名称','sDrug_Spec'=>'规格','sDrug_Brand'=>'产地','sDrug_Unit'=>'单位','drugcount'=>'数量'),
             'year'=>array('year'=>'年'),
             'month'=>array('month'=>'月'),
             'day'=>array('day'=>'日')
@@ -248,9 +250,17 @@ class storehouseControl extends SystemControl
         }
 
         //处理树的参数
-        $checkednode = $_GET['checkednode'];
-        if($checkednode && isset($checkednode) && count($checkednode)>0){
-            $sql = $sql . " and a.SaleOrgID  in ($checkednode) ";
+        if ($_GET['orgids']) {
+            if($_GET['search_type'] == 0 || $_GET['search_type'] == 1){
+                $orgarray = array();
+                foreach($_GET['orgids'] as $v){
+                    $orgarray[] = -($v+1000);
+                }
+                $sql = $sql . ' and a.SaleOrgID in ('. implode(',',$orgarray).' )';
+            }else{
+                $sql = $sql . ' and a.OrgID in ( '. implode(',',$_GET['orgids']).')';
+            }
+
         }
         //处理汇总条件
         $sumtype = $_GET['sumtype'];
@@ -266,17 +276,25 @@ class storehouseControl extends SystemControl
                 if(is_array($sumtypewhere[$v])){
                     foreach($sumtypewhere[$v] as $item){
                         array_push($sumcol,$item);
-                        array_push($totalcol, ' null as '.explode(' as ',$item)[1]);
-                        array_push($groupbycol,explode(' as ',$item)[0]);
+                        $itemsplit = explode(' as ',$item);
+                        array_push($totalcol, ' null as '.$itemsplit[1]);
+                        $str = strtolower(str_replace(' ','',trim($itemsplit[0])));
+                        if(substr($str,0,4)!='sum(' && substr($str,0,6)!='count(' )
+                            array_push($groupbycol,$itemsplit[0]);
                     }
                 }else{
                     array_push($sumcol,$sumtypewhere[$v]);
-                    array_push($totalcol, ' null as '.explode(' as ',$sumtypewhere[$v])[1]);
-                    array_push($groupbycol,explode(' as ',$sumtypewhere[$v])[0]);
+                    $itemsplit = explode(' as ',$sumtypewhere[$v]);
+                    array_push($totalcol, ' null as '.$itemsplit[1]);
+                    $str = strtolower(str_replace(' ','',trim($itemsplit[0])));
+                    if(substr($str,0,4)!='sum(' && substr($str,0,6)!='count(' )
+                        array_push($groupbycol,$itemsplit[0]);
                 }
             }
         }
+//        var_dump($totalcol);
         $totalcol[0] = '\'总计：\' as '. explode(' as ',$totalcol[0])[1];
+//        var_dump($totalcol);
         $totalcolstr = join(',',$totalcol);
         $sumcolstr = join(',',$sumcol);
         $groupbycolstr = join(',',$groupbycol);
@@ -291,6 +309,7 @@ class storehouseControl extends SystemControl
         //处理合计
         $totalsql = " select $totalcolstr , sum(fBuy_TaxMoney) taxmoney, sum(fBuy_RetailMoney) retailmoney , sum(fBuy_RetailMoney) - sum(fBuy_TaxMoney) diffmoney
                         $sql ";
+//        echo $totalsql;
         $totalstmt = $conn->query($totalsql);
         while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
             array_push($data_list, $row);
@@ -307,8 +326,7 @@ class storehouseControl extends SystemControl
                 }
             }
         }
-        $types = array(0=>'期初入库',1=>'采购入库',2=>'购进退回',3=>'盘盈',5=>'领用',12=>'盘亏',14=>'领用退回',50=>'采购计划',);
-        Tpl::output('types',$types);
+//        var_dump($col);
         Tpl::output('col',$col);
         Tpl::showpage('storehouse.sum');
     }
