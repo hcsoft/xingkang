@@ -51,9 +51,11 @@ class storehouseControl extends SystemControl
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
-        $sql = 'from Center_Buy a  , Center_Drug b , Organization c, Organization d where a.iDrug_ID = b.iDrug_ID '.
-                ' and a.SaleOrgID = -( c.id +1000) and a.orgid = d.id  ';
-
+        $sql = 'from Center_Buy a  , Center_Drug b , Organization c, Organization d,shopnc_goods_common good  where a.iDrug_ID = b.iDrug_ID '.
+                ' and a.SaleOrgID = -( c.id +1000) and a.orgid = d.id and a.iDrug_ID = good.goods_commonid  ';
+        if(!isset($_GET['search_type'])){
+            $_GET['search_type'] = '1';
+        }
         if (gettype($_GET['search_type'])=='string' && intval($_GET['search_type'])>=0 ) {
             $sql = $sql . ' and  a.iBuy_Type = \''.$_GET['search_type'].'\'';
         }
@@ -86,6 +88,9 @@ class storehouseControl extends SystemControl
                         a.iBuy_Type,
                         d.name OrgId,
                         c.name SaleOrgID,
+                        good.sdrug_chemname,
+                        good.spec_name,
+                        good.sdrug_unit,
                         a.iDrug_ID,
                         a.fBuy_FactNum,
                         a.sBuy_DrugUnit,
@@ -122,6 +127,10 @@ class storehouseControl extends SystemControl
             array_push($data_list, $row);
         }
         Tpl::output('data_list', $data_list);
+        $types = array(0=>'期初入库',1=>'采购入库',2=>'购进退回',3=>'盘盈',5=>'领用',12=>'盘亏',14=>'领用退回',50=>'采购计划',);
+        $goodtype = array(0=>'药品',1=>'卫生用品',2=>'诊疗项目',3=>'特殊材料');
+        Tpl::output('types',$types);
+        Tpl::output('goodtype',$goodtype);
         //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
         Tpl::output('page', $page->show());
         Tpl::showpage('storehouse.detail');
@@ -298,6 +307,8 @@ class storehouseControl extends SystemControl
                 }
             }
         }
+        $types = array(0=>'期初入库',1=>'采购入库',2=>'购进退回',3=>'盘盈',5=>'领用',12=>'盘亏',14=>'领用退回',50=>'采购计划',);
+        Tpl::output('types',$types);
         Tpl::output('col',$col);
         Tpl::showpage('storehouse.sum');
     }

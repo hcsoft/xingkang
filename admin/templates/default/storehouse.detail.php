@@ -27,7 +27,7 @@
         <tr>
             <th><label>单据类型</label></th>
             <td colspan="1"><select name="search_type" class="querySelect">
-                    <option value="-1" selected >全部</option>
+<!--                    <option value="-1" selected >全部</option>-->
                     <option value="0" <?php if ($_GET['search_type'] == '0'){ ?>selected<?php } ?>>期初入库</option>
                     <option value="1" <?php if ($_GET['search_type'] == '1'){ ?>selected<?php } ?>>采购入库</option>
                     <option value="2" <?php if ($_GET['search_type'] == '2'){ ?>selected<?php } ?>>购进退回</option>
@@ -80,7 +80,7 @@
         <thead>
         <tr class="thead">
             <th class="align-center" colspan="2">单据编号</th>
-            <th class="align-center" colspan="10">入库</th>
+            <th class="align-center" colspan="12">入库</th>
         </tr>
         <tr class="thead">
             <th class="align-center">总票据</th>
@@ -89,9 +89,13 @@
             <th class="align-center">发生日期</th>
             <th class="align-center">商品类型</th>
             <th class="align-center">单据类型</th>
-            <th class="align-center">制单机构</th>
-            <th class="align-center">下级机构</th>
+<!--            <th class="align-center">制单机构</th>-->
+            <th class="align-center">机构</th>
+<!--            <th class="align-center">供应商</th>-->
             <th class="align-center">商品编码</th>
+            <th class="align-center">商品名称</th>
+            <th class="align-center">规格</th>
+            <th class="align-center">单位</th>
             <th class="align-center">数量</th>
             <th class="align-center">进价金额</th>
             <th class="align-center">零价金额</th>
@@ -114,19 +118,28 @@
                         <?php  if($v->dBuy_Date == null )echo ''; else  echo date('Y-m-d', strtotime($v->dBuy_Date)); ?>
                     </td>
                     <td class=" align-center">
-                        <?php echo $v->iDrug_RecType ?>
+                        <?php echo $output['goodtype'][$v->iDrug_RecType] ?>
                     </td>
                     <td class=" align-center">
-                        <?php echo $v->iBuy_Type ?>
+                        <?php echo $output['types'][$v->iBuy_Type] ?>
                     </td>
+<!--                    <td class=" align-center">-->
+<!--                        --><?php //echo $v->OrgId ?>
+<!--                    </td>-->
                     <td class=" align-center">
-                        <?php echo $v->OrgId ?>
-                    </td>
-                    <td class=" align-center">
-                        <?php echo $v->SaleOrgID ?>
+                        <?php if ($_GET['search_type'] == '1'){ echo $v->SaleOrgID ;} else { echo $v->OrgId; } ?>
                     </td>
                     <td class=" align-center">
                         <?php echo $v->iDrug_ID ?>
+                    </td>
+                    <td class=" align-left">
+                        <?php echo $v->sdrug_chemname ?>
+                    </td>
+                    <td class=" align-left">
+                        <?php echo $v->spec_name ?>
+                    </td>
+                    <td class=" align-left">
+                        <?php echo $v->sdrug_unit ?>
                     </td>
                     <td class=" align-center">
                         <?php  if($v->dBuy_Date == null )echo ''; else echo number_format($v->fBuy_FactNum, 0).$v->sBuy_DrugUnit;  ?>
