@@ -156,9 +156,10 @@ class healthfileControl extends SystemControl
         //处理树的参数
         $checkednode = $_GET['checkednode'];
         if($checkednode && isset($checkednode) && count($checkednode)>0){
-            $where = $where . " and emp.org_id  in ($checkednode) ";
+            $orgs = $checkednode;
         }
-
+//        echo $orgs;
+//        die;
 //        $countsql = " select count(*)  $sql ";
 //        echo $countsql;
 //        $stmt = $conn->query($countsql);

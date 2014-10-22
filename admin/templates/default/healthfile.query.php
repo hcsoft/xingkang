@@ -53,14 +53,6 @@
                 <span class="arrow"></span></div>
         </th>
     </tr>
-    <tr>
-        <td>
-            <ul>
-                <li><?php echo $lang['member_index_help1']; ?></li>
-                <li><?php echo $lang['member_index_help2']; ?></li>
-            </ul>
-        </td>
-    </tr>
     </tbody>
 </table>
 <form method="post" id="form_member" style='position: relative;'>

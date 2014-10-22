@@ -34,7 +34,7 @@
         left: 0;
         width: 10%;
         top: 0;
-        bottom: 0;
+        /*bottom: 0;*/
         border-right: 1px solid #fff;
         padding-top: 7px;
     }
@@ -90,17 +90,10 @@
                     <span class="arrow"></span></div>
             </th>
         </tr>
-        <tr>
-            <td>
-                <ul>
-                    <li><?php echo $lang['member_index_help1']; ?></li>
-                    <li><?php echo $lang['member_index_help2']; ?></li>
-                </ul>
-            </td>
-        </tr>
         </tbody>
     </table>
-    <form method="post" id="form_member" style='position: relative;'>
+    <div  style='position: relative;display: block;'>
+    <form method="post" id="form_member">
         <input type="hidden" name="form_submit" value="ok"/>
         <div class="leftdiv">
             <?php
@@ -211,6 +204,7 @@
             </tfoot>
         </table>
     </form>
+    </div>
 </div>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"

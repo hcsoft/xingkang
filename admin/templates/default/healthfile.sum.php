@@ -46,14 +46,6 @@
                 <span class="arrow"></span></div>
         </th>
     </tr>
-    <tr>
-        <td>
-            <ul>
-                <li><?php echo $lang['member_index_help1']; ?></li>
-                <li><?php echo $lang['member_index_help2']; ?></li>
-            </ul>
-        </td>
-    </tr>
     </tbody>
 </table>
 <form method="post" id="form_member" style='position: relative;'>
@@ -180,6 +172,7 @@
         //生成日期
         $('#query_start_time , #query_end_time').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
+            $("#checkednode").val(checkednode.join(","));
             $('#formSearch').submit();
         });
     });
