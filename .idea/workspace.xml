@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/healthfile.php" afterPath="$PROJECT_DIR$/admin/control/healthfile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/healthfile.query.php" afterPath="$PROJECT_DIR$/admin/templates/default/healthfile.query.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/healthfile.sum.php" afterPath="$PROJECT_DIR$/admin/templates/default/healthfile.sum.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/storehouse.detail.php" afterPath="$PROJECT_DIR$/admin/templates/default/storehouse.detail.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/storehouse.sum.php" afterPath="$PROJECT_DIR$/admin/templates/default/storehouse.sum.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -87,7 +83,7 @@
       <file leaf-file-name="healthfile.sum.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.sum.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="174" column="57" selection-start="7014" selection-end="7014" vertical-scroll-proportion="0.72625697" vertical-offset="1916" max-vertical-offset="3024">
+            <state line="182" column="13" selection-start="7274" selection-end="7274" vertical-scroll-proportion="0.76536316" vertical-offset="2000" max-vertical-offset="3150">
               <folding />
             </state>
           </provider>
@@ -950,7 +946,11 @@
       <created>1413864293543</created>
       <updated>1413864293543</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="1,修改了档案汇总">
+      <created>1413973618851</created>
+      <updated>1413973618851</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -960,6 +960,7 @@
     <frame x="-8" y="-8" width="1612" height="876" extended-state="0" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -983,7 +984,6 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4686684" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1021,7 +1021,8 @@
     <MESSAGE value="1,增加了默认时间" />
     <MESSAGE value="1,修改了仓库明细,增加字段等" />
     <MESSAGE value="1,修改了仓库明细,进销差错误" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,修改了仓库明细,进销差错误" />
+    <MESSAGE value="1,修改了档案汇总" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,修改了档案汇总" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1309,7 +1310,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/healthfile.sum.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="174" column="57" selection-start="7014" selection-end="7014" vertical-scroll-proportion="0.72625697" vertical-offset="1916" max-vertical-offset="3024">
+        <state line="182" column="13" selection-start="7274" selection-end="7274" vertical-scroll-proportion="0.76536316" vertical-offset="2000" max-vertical-offset="3150">
           <folding />
         </state>
       </provider>

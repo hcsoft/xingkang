@@ -172,6 +172,15 @@
         //生成日期
         $('#query_start_time , #query_end_time').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
+            var nodes = lefttreeObj.getCheckedNodes(true);
+            var checkednode = [];
+            for(var idx in nodes){
+                var node = nodes[idx];
+                console.log(node);
+                if(!node.isParent){
+                    checkednode.push (node.id);
+                }
+            }
             $("#checkednode").val(checkednode.join(","));
             $('#formSearch').submit();
         });
