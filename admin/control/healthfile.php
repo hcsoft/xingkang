@@ -166,7 +166,7 @@ class healthfileControl extends SystemControl
 //        echo $countsql;
 //        $total = $stmt->fetch(PDO::FETCH_NUM);
 //        $page->setTotalNum($total[0]);
-        $tsql = "SET NOCOUNT ON; Exec InputPersonProc_SP_new 'admin','100',' $where ','100100','0' , '$orgs';SET NOCOUNT off; ";
+        $tsql = "SET NOCOUNT ON; Exec InputPersonProc_SP_new 'admin','100',' $where ','111100','0' , '$orgs';SET NOCOUNT off; ";
 //        echo $tsql;
         $stmt = $conn->prepare($tsql);
         $stmt->execute();
