@@ -119,15 +119,6 @@
             </tr>
         <?php } ?>
         </tbody>
-        <tfoot class="tfoot">
-        <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
-            <tr>
-                <td colspan="22">
-                    <div class="pagination"> <?php echo $output['page']; ?> </div>
-                </td>
-            </tr>
-        <?php } ?>
-        </tfoot>
     </table>
     </div>
 
@@ -170,7 +161,6 @@
                     console.log(checkednode.join(","));
                     $("#checkednode").val(checkednode.join(","));
                     $('#ncsubmit').click();
-
                 }
             }
         };
@@ -178,7 +168,9 @@
         var lefttreeObj = $.fn.zTree.init($("#lefttree"), setting, zNodes);
         //生成日期
         $('#query_start_time , #query_end_time').datepicker({dateFormat: 'yy-mm-dd'});
+        var isclicking = false;
         $('#ncsubmit').click(function () {
+
             var nodes = lefttreeObj.getCheckedNodes(true);
             var checkednode = [];
             for(var idx in nodes){
@@ -189,7 +181,11 @@
                 }
             }
             $("#checkednode").val(checkednode.join(","));
-            $('#formSearch').submit();
+            if(!isclicking){
+                isclicking = true;
+                $('#formSearch').submit();
+            }
+
         });
     });
 

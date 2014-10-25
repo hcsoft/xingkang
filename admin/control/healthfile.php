@@ -131,9 +131,8 @@ class healthfileControl extends SystemControl
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         $this->getTreeData();
-
         $where = '   ';
-        $orgs = '32,45,48,64,98,132,238,1419,1489,1542,1994';
+        $orgs = '1,32,45,48,64,98,132,238,1419,1489,1542,1994';
         if(!isset($_GET['query_start_time']))
         $_GET['query_start_time'] = date('Y-m-d', time());
         if(!isset($_GET['query_end_time']))
