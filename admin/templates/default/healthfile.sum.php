@@ -50,7 +50,7 @@
     </tr>
     </tbody>
 </table>
-    <div style="width:100%;height:500px;position:  relative;">
+    <div style="width:100%;height:510px;position:  relative;">
 <form method="post" id="form_member" style='position: relative;height:100%;'>
 
     <input type="hidden" name="form_submit" value="ok"/>

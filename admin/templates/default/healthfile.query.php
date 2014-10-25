@@ -9,6 +9,10 @@
     .datatable th, .datatable td {
         border: solid 1px #DEEFFB;
     }
+    #lefttree{
+        height:100%;
+        width:90% !important;
+    }
 </style>
 <div class="page">
 <div class="fixed-bar">
@@ -55,11 +59,12 @@
     </tr>
     </tbody>
 </table>
-<form method="post" id="form_member" style='position: relative;'>
+<div style="width:100%;height:510px;position:  relative;">
+<form method="post" id="form_member" style='position: relative;height:100%;position: relative;'>
     <input type="hidden" name="form_submit" value="ok"/>
 
 
-    <div style="position: absolute;left:0;width:20%;top:0;bottom:0;border-right:1px solid #fff">
+    <div style="position: absolute;left:0;width:20%;top:0px;bottom:0;border-right:1px solid #fff;display: inline-block;z-index: 0;clear: both;">
         <ul id="lefttree" class="ztree" style="width:260px; overflow:auto;"></ul>
     </div>
     <table class="table tb-type2 nobdb datatable">
@@ -129,6 +134,7 @@
         </tfoot>
     </table>
 </form>
+    </div>
 </div>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"
