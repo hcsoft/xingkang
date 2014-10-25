@@ -51,6 +51,7 @@
         <input type="hidden" value="storehouse" name="act">
         <input type="hidden" value="sum" name="op">
         <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
+        <input type="hidden" name="checked" id="checked" value="<?php echo $_GET['checked']?>"/>
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
@@ -74,15 +75,7 @@
                     <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>" id="query_end_time"
                            name="query_end_time"/></td>
                 <th><label>汇总类型</label></th>
-                <td colspan="1">
-                    <?php $sumtype = $_GET['sumtype']; if($sumtype==null){$sumtype= Array();} ?>
-                    <input type='checkbox' name="sumtype[]" value="org" id="sumtype_org"  <?php if (in_array('org',$sumtype)){ ?>checked<?php } ?>><label for="sumtype_org">领用部门</label>
-                    <input type='checkbox' name="sumtype[]" value="store" id="sumtype_store" <?php if (in_array('store',$sumtype)){ ?>checked<?php } ?>><label for="sumtype_store">库房</label>
-                    <input type='checkbox' name="sumtype[]" value="goods" id="sumtype_goods" <?php if (in_array('goods',$sumtype)){ ?>checked<?php } ?>><label for="sumtype_goods">商品</label>
-                    <input type='checkbox' name="sumtype[]" value="year" id="sumtype_year" <?php if (in_array('year',$sumtype)){ ?>checked<?php } ?>><label for="sumtype_year">年</label>
-                    <input type='checkbox' name="sumtype[]" value="month" id="sumtype_month" <?php if (in_array('month',$sumtype)){ ?>checked<?php } ?>><label for="sumtype_month">月</label>
-                    <input type='checkbox' name="sumtype[]" value="day" id="sumtype_day" <?php if (in_array('day',$sumtype)){ ?>checked<?php } ?>><label for="sumtype_day">日</label>
-
+                <td colspan="1" id="sumtypetr">
                 </td>
                 </td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
@@ -108,17 +101,18 @@
 
         <div class="leftdiv">
             <?php
-            foreach ($output['types'] as $k => $v) {
+            foreach ($output['config'] as $k => $v) {
                 ?>
                 <input type="radio" class="typeselect" id="types_<?php echo $k ?>" value="<?php echo $k?>"
                        name="search_type_select" <?php if ($_GET['search_type'] == $k) echo 'checked' ?> >
-                <label for="types_<?php echo $k ?>"><?php echo $v ?></label>
+                <label for="types_<?php echo $k ?>"><?php echo $v['text'] ?></label>
             <?php } ?>
         </div>
         <table class="table tb-type2 nobdb datatable">
             <thead>
             <tr class="thead">
-                <?php foreach ($output['col'] as $k => $v) {
+                <th class="align-center">序号</th>
+                <?php foreach ($output['displaytext'] as $k => $v) {
                     ?>
                     <th class="align-center"><?php echo $v?></th>
                 <?php  }?>
@@ -130,9 +124,12 @@
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
                 <?php foreach ($output['data_list'] as $k => $v) { ?>
                     <tr class="hover member">
-                        <?php foreach ($output['col'] as $key => $item) {
+                        <td class=" align-center">
+                            <?php echo $k+1?>
+                        </td>
+                        <?php foreach ($output['displaycol'] as $key => $item) {
                             ?>
-                            <th class="align-left"><?php if(substr($key,-5) == 'count')  echo number_format($v->$key,0); else  echo $v->$key;?></th>
+                            <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else  echo $v->$item;?></th>
                         <?php  }?>
                         <td class=" align-right">
                             <?php echo number_format($v->taxmoney, 3)?>
@@ -167,7 +164,11 @@
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/js/jquery.ztree.all-3.5.min.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.min.js"></script>
 <script type="text/javascript">
+    var config = <?php echo json_encode($output[config]);?>;
+
+    var checked = getchecked('<?php echo $_GET['checked'];?>');
     $(function () {
+        initSumtype ();
         //生成机构下拉
         function orgtext(n1, n2, list) {
             var texts = [];
@@ -185,43 +186,72 @@
                 selectedText: orgtext
             }
         );
+
         //点击事件
         $(".typeselect").change(function(){
-            $("#search_type").val($('input[name="search_type_select"]:checked').val());
+            initSumtype();
             $('#ncsubmit').click();
         });
         //生成日期
         $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
-            $("#search_type").val($('input[name="search_type_select"]:checked').val());
-            if($(":checkbox[name='sumtype[]'][checked]").length<=0){
-                $("#sumtype_org").attr("checked", true);
+            var sumtypes =$(":checkbox[name='sumtype[]'][checked]");
+            if(sumtypes.length<=0){
+                $("#sumtype_good").attr("checked", true);
+                sumtypes =$(":checkbox[name='sumtype[]'][checked]");
             }
+            var search_type_select = $('input[name="search_type_select"]:checked').val();
+            $("#search_type").val($('input[name="search_type_select"]:checked').val());
+            checked[search_type_select] = [];
+            for(var i =0 ;i < sumtypes.length;i++){
+                checked[search_type_select].push( $(sumtypes[i]).val());
+            }
+            $("#checked").val(makechecked(checked));
             $('#formSearch').submit();
         });
     });
-    function showspot(id, elem) {
-        console.log(elem);
-
-        $("#spotid").val(id);
-        $("#reason").val();
-        $("#errormsg").html("");
-        $("#spotdialog").dialog("option", "position", { my: "right top", at: "left bottom", of: $(elem) });
-        $("#spotresult_pass").prop("checked", true);
-
-        $("#spotdialog").dialog("open");
+    function makechecked(arr){
+        var retarr = [];
+        for (var row in checked){
+            if(checked[row])
+                retarr.push(row+':'+checked[row].join(','));
+        }
+        return retarr.join(";");
     }
-    function showmsg(msg) {
-        $("#spotdialog-message").html(msg);
-        $("#spotdialog").dialog("open");
+    function getchecked(str){
+        var ret = {};
+        var data = str.split(";");
+        for(var idx in data){
+            var strs = data[idx].split(":");
+            if(strs.length>1){
+                var values = strs[1].split(",");
+                ret[strs[0]] = values;
+            }
+        }
+        return ret;
     }
-    function error(msg) {
-        $("#errormsg").css("color", "red");
-        $("#errormsg").html(msg);
-    }
-    function success(msg) {
-        $("#errormsg").css("color", "green");
-        $("#errormsg").html(msg);
+    function initSumtype(){
+        var cfg = config[$('input[name="search_type_select"]:checked').val()];
+        var checkeditem = checked[$('input[name="search_type_select"]:checked').val()];
+        console.log(cfg);
+        $("#sumtypetr").html('');
+        for(var key in cfg['sumcol']){
+            var value = cfg['sumcol'][key];
+            var ischecked = false ;
+            if(checkeditem){
+                for(var i = 0 ;i < checkeditem.length;i++){
+                    if(checkeditem[i]==key){
+                        ischecked = true;
+                        break;
+                    }
+                }
+            }
+            if(ischecked){
+                $("#sumtypetr").append("<input type='checkbox' name='sumtype[]'  id='sumtype_"+key+"' checked value='"+key+"' ><label for='sumtype_"+key+"'>"+value.text+"</label>");
+            }else{
+                $("#sumtypetr").append("<input type='checkbox' name='sumtype[]'  id='sumtype_"+key+"' value='"+key+"' ><label for='sumtype_"+key+"'>"+value.text+"</label>");
+            }
+        }
     }
 </script>
 <style>

@@ -34,6 +34,13 @@ class healthfileControl extends SystemControl
             Tpl::output('month_arr', $month_arr);
             Tpl::output('week_arr', $week_arr);
         }
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $stmt = $conn->query(' select distinct orgid from map_org_wechat order by orgid ');
+        $this->orgidarray = array();
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            array_push($this->orgidarray, $row[0]);
+        }
+        $this->getTreeData();
         Tpl::output('search_arr', $this->search_arr);
     }
 
@@ -43,7 +50,6 @@ class healthfileControl extends SystemControl
     public function queryOp()
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
-        $this->getTreeData();
 
         //处理数据
         $page = new Page();
@@ -53,14 +59,7 @@ class healthfileControl extends SystemControl
         $endnum = $page->getEachNum() * ($page->getNowPage());
         $sql = 'from healthfile a  , personalinfo b , sam_taxempcode emp, district dist '.
                 ' where a.fileno = b.fileno  and a.inputpersonid = emp.loginname and a.districtnumber = dist.id
-                 and emp.org_id in(
-                 32,45,48,64,98,132,238,1419,1489,1542,1994)
-                 ';
-
-
-//        if (gettype($_GET['orgid'])=='string' && intval($_GET['orgid'])>=0 ) {
-//            $sql = $sql . ' and  emp.org_id = \''.$_GET['orgid'].'\'';
-//        }
+                 and emp.org_id in(' .implode(',',$this->orgidarray). ')';
 
         if ($_GET['query_start_time']) {
             $sql = $sql . ' and a.inputdate >=\'' . $_GET['query_start_time'] . '\'';
@@ -130,9 +129,8 @@ class healthfileControl extends SystemControl
     public function sumOp()
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
-        $this->getTreeData();
         $where = '   ';
-        $orgs = '1,32,45,48,64,98,132,238,1419,1489,1542,1994';
+        $orgs = implode(',',$this->orgidarray);
         if(!isset($_GET['query_start_time']))
         $_GET['query_start_time'] = date('Y-m-d', time());
         if(!isset($_GET['query_end_time']))

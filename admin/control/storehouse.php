@@ -9,6 +9,7 @@
  */
 defined('InShopNC') or exit('Access Invalid!');
 require(BASE_DATA_PATH . '/../core/framework/db/mssql.php');
+
 class storehouseControl extends SystemControl
 {
 
@@ -24,10 +25,21 @@ class storehouseControl extends SystemControl
         }
         Tpl::output('treelist', $this->treedata_list);
         $this->getTreeData();
-        $types = array(0=>'期初入库',1=>'采购入库',2=>'购进退回',3=>'盘盈',5=>'领用',12=>'盘亏',14=>'领用退回',50=>'采购计划',);
-        Tpl::output('types',$types);
-        $goodtype = array(0=>'药品',1=>'卫生用品',2=>'诊疗项目',3=>'特殊材料');
-        Tpl::output('goodtype',$goodtype);
+        $stmt = $conn->query(' select * from Center_cod_storetype order by code ');
+        $this->types = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($this->types, $row);
+        }
+//        $this->types = array(0 => '期初入库', 1 => '采购入库', 2 => '购进退回', 3 => '盘盈', 5 => '领用', 12 => '盘亏', 14 => '领用退回', 50 => '采购计划',);
+        Tpl::output('types', $this->types);
+        $this->goodtype = array(0 => '药品', 1 => '卫生用品', 2 => '诊疗项目', 3 => '特殊材料');
+        Tpl::output('goodtype', $this->goodtype);
+
+        $stmt = $conn->query(' select distinct orgid from map_org_wechat order by orgid ');
+        $this->orgidarray = array();
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            array_push($this->orgidarray, $row[0]);
+        }
 
     }
 
@@ -43,13 +55,13 @@ class storehouseControl extends SystemControl
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
-        $sql = 'from Center_Buy a  , Center_Drug b , Organization c, Organization d,shopnc_goods_common good  where a.iDrug_ID = b.iDrug_ID '.
-                ' and a.SaleOrgID = -( c.id +1000) and a.orgid = d.id and a.iDrug_ID = good.goods_commonid  ';
-        if(!isset($_GET['search_type'])){
+        $sql = 'from Center_Buy a  , Center_Drug b , Organization c, Organization d,shopnc_goods_common good  where a.iDrug_ID = b.iDrug_ID ' .
+            ' and a.SaleOrgID = -( c.id +1000) and a.orgid = d.id and a.iDrug_ID = good.goods_commonid  ';
+        if (!isset($_GET['search_type'])) {
             $_GET['search_type'] = '1';
         }
-        if (gettype($_GET['search_type'])=='string' && intval($_GET['search_type'])>=0 ) {
-            $sql = $sql . ' and  a.iBuy_Type = \''.$_GET['search_type'].'\'';
+        if (gettype($_GET['search_type']) == 'string' && intval($_GET['search_type']) >= 0) {
+            $sql = $sql . ' and  a.iBuy_Type = \'' . $_GET['search_type'] . '\'';
         }
 
         if ($_GET['query_start_time']) {
@@ -61,20 +73,20 @@ class storehouseControl extends SystemControl
         }
 
         if ($_GET['orgids']) {
-            if($_GET['search_type'] == 0 || $_GET['search_type'] == 1){
+            if ($_GET['search_type'] == 0 || $_GET['search_type'] == 1) {
                 $orgarray = array();
-                foreach($_GET['orgids'] as $v){
-                    $orgarray[] = -($v+1000);
+                foreach ($_GET['orgids'] as $v) {
+                    $orgarray[] = -($v + 1000);
                 }
-                $sql = $sql . ' and a.SaleOrgID in ('. implode(',',$orgarray).' )';
-            }else{
-                $sql = $sql . ' and a.OrgID in ( '. implode(',',$_GET['orgids']).')';
+                $sql = $sql . ' and a.SaleOrgID in (' . implode(',', $orgarray) . ' )';
+            } else {
+                $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
             }
 
         }
         //处理树的参数
         $checkednode = $_GET['checkednode'];
-        if($checkednode && isset($checkednode) && count($checkednode)>0){
+        if ($checkednode && isset($checkednode) && count($checkednode) > 0) {
             $sql = $sql . " and a.SaleOrgID  in ($checkednode) ";
         }
 
@@ -144,18 +156,19 @@ class storehouseControl extends SystemControl
             $id = $_REQUEST['id'];
             $spotid = $_REQUEST['spotid'];
             $spotdate = $_REQUEST['spotdate'];
-            $result = $_REQUEST['spotresult'] == null ?"":$_REQUEST['spotresult'];
-            $reason = $_REQUEST['reason'] == null ?"":$_REQUEST['reason'];
+            $result = $_REQUEST['spotresult'] == null ? "" : $_REQUEST['spotresult'];
+            $reason = $_REQUEST['reason'] == null ? "" : $_REQUEST['reason'];
             $sql = " insert into spotcheck_spot (spotid,spotdate,result,reason,inputdate) values('$spotid','$spotdate','$result','$reason',getdate())";
             $conn->exec($sql);
             echo json_encode(array('success' => true, 'msg' => '保存成功!'));
         } catch (Exception $e) {
-            echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+            echo json_encode(array('success' => false, 'msg' => '异常!' . $e->getMessage()));
         }
         exit;
     }
 
-    private function getTreeData(){
+    private function getTreeData()
+    {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 
         //查询机构树的类型
@@ -170,31 +183,31 @@ class storehouseControl extends SystemControl
         //处理树选择节点
         $checkednode = $_GET['checkednode'];
         $checkednodearray = array();
-        if(isset($checkednode)){
-            $checkednodearray = explode(',',$checkednode);
+        if (isset($checkednode)) {
+            $checkednodearray = explode(',', $checkednode);
         }
         //处理父节点
-        $root = array(id=> -1 , name=> "全部", open=> true,halfCheck =>false);
-        if($checkednode && isset($checkednode) && count($checkednode)>0){
+        $root = array(id => -1, name => "全部", open => true, halfCheck => false);
+        if ($checkednode && isset($checkednode) && count($checkednode) > 0) {
             $root['checked'] = true;
         }
-        array_push($treedata_list,(object)$root);
-        for($i =0 ; $i < count($treedata_list);$i++){
+        array_push($treedata_list, (object)$root);
+        for ($i = 0; $i < count($treedata_list); $i++) {
             $item = $treedata_list[$i];
             $idmap[$item->id] = $item->id;
         }
-        for($i =0 ; $i < count($treedata_list);$i++){
+        for ($i = 0; $i < count($treedata_list); $i++) {
             $item = $treedata_list[$i];
-            if($item->id>=0){
-                $item->id  = -(1000+$item->id);
+            if ($item->id >= 0) {
+                $item->id = -(1000 + $item->id);
             }
-            if(!isset($idmap[$item->pid])){
+            if (!isset($idmap[$item->pid])) {
                 $item->pId = -1;
             }
         }
 
-        foreach($treedata_list as &$v){
-            if(in_array($v->id,$checkednodearray)){
+        foreach ($treedata_list as &$v) {
+            if (in_array($v->id, $checkednodearray)) {
                 $v->checked = true;
             }
         }
@@ -205,41 +218,92 @@ class storehouseControl extends SystemControl
     public function sumOp()
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
-        if(!isset($_GET['search_type'])){
-            $_GET['search_type'] = '1';
+        if (!isset($_GET['search_type'])) {
+            $_GET['search_type'] = '0';
         }
-        //处理数据
-        $sumtypewhere = Array(
-            'org'=>'d.name as "OrgId"',
-            'store'=>'c.name as "SaleOrgID"',
-            'goods'=> array(0=>'goods.sDrug_TradeName as "sDrug_TradeName" '
-                            ,1=>' goods.sDrug_Spec as "sDrug_Spec"  '
-                            ,2=>' goods.sDrug_Unit as "sDrug_Unit" '
-                            ,3=>'goods.sDrug_Brand as "sDrug_Brand" '
-                            ,4=>'sum(fBuy_FactNum) as "drugcount" '),
-            'year'=>'year(a.dBuy_Date) as  "year"',
-            'month'=>'month(a.dBuy_Date) as  "month"',
-            'day'=>' day(a.dBuy_Date) as  "day" '
+        $sqlarray = array('iBuy_Type' => 'storetype.name as "iBuy_Type"',
+            'customname' => ' custom.sCustomer_Name as "customname" ',
+            'sDrug_Spec' => ' goods.sDrug_Spec as "sDrug_Spec" ',
+            'sDrug_Unit' => ' goods.sDrug_Unit as "sDrug_Unit" ',
+            'sDrug_Brand' => ' goods.sDrug_Brand as "sDrug_Brand" ',
+            'drugcount' => ' sum(fBuy_FactNum) as "drugcount" ',
+            'year' => ' year(a.dBuy_Date) as "year" ',
+            'month' => ' month(a.dBuy_Date) as  "month" ',
+            'day' => ' day(a.dBuy_Date) as "day" ',
+            'sDrug_TradeName' => ' goods.sDrug_TradeName as "sDrug_TradeName"  ',
+            'OrgID' => ' c.name as "OrgID" '
         );
-        $sumtypestr = Array(
-            'org'=>array('OrgId'=>'领用部门'),
-            'store'=>array('SaleOrgID'=>'库房'),
-            'goods'=>array('sDrug_TradeName'=>'商品名称','sDrug_Spec'=>'规格','sDrug_Brand'=>'产地','sDrug_Unit'=>'单位','drugcount'=>'数量'),
-            'year'=>array('year'=>'年'),
-            'month'=>array('month'=>'月'),
-            'day'=>array('day'=>'日')
-        );
+        $config = array(0 => array('text' => '采购金额汇总',
+            'sqlwher' => ' and iBuy_Type in (1,2) ',
+            'sumcol' => array('iBuy_Type' => array(name => 'iBuy_Type', 'text' => '单据类型', map => $this->types),
+                'customname' => array(name => 'customname', 'text' => '供货企业'),
+                'good' => array('text' => '商品',
+                    'cols' => array(0 => array(name => 'sDrug_TradeName', 'text' => '商品名称')
+                    , 1 => array(name => 'sDrug_Spec', 'text' => '规格')
+                    , 2 => array(name => 'sDrug_Unit', 'text' => '单位')
+                    , 3 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
+                    , 4 => array(name => 'drugcount', 'text' => '数量'))),
+                'year' => array('text' => '年', name=>'year' ),
+                'month' => array('text' => '月', name=>'month'),
+                'day' => array('text' => '日', name=>'day'),
+            ))
+        , 1 => array('text' => '领用金额汇总',
+                'sqlwher' => ' and  iBuy_Type in (5,14) ',
+                'sumcol' => array('type' => array('name' => 'OrgID', 'text' => '领用部门'),
+                    'good' => array('text' => '商品',
+                        'cols' => array(0 => array(name => 'sDrug_TradeName', 'text' => '商品名称')
+                        , 1 => array(name => 'sDrug_Spec', 'text' => '规格')
+                        , 2 => array(name => 'sDrug_Unit', 'text' => '单位')
+                        , 3 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
+                        , 4 => array(name => 'drugcount', 'text' => '数量'))),
+                    'year' => array('text' => '年', name=>'year' ),
+                    'month' => array('text' => '月', name=>'month'),
+                    'day' => array('text' => '日', name=>'day'),
+                ))
+        , 2 => array('text' => '盈亏金额汇总',
+                'sqlwher' => ' and  iBuy_Type in (3,4,12) ',
+                'sumcol' => array('iBuy_Type' => array(name=>'iBuy_Type', 'text' => '单据类型'),
+                    'good' => array('text' => '商品',
+                        'cols' => array(0 => array(name => 'sDrug_TradeName', 'text' => '商品名称')
+                        , 1 => array(name => 'sDrug_Spec', 'text' => '规格')
+                        , 2 => array(name => 'sDrug_Unit', 'text' => '单位')
+                        , 3 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
+                        , 4 => array(name => 'drugcount', 'text' => '数量'))),
+                    'year' => array('text' => '年', name=>'year' ),
+                    'month' => array('text' => '月', name=>'month'),
+                    'day' => array('text' => '日', name=>'day'),
+                ))
+        , 3 => array('text' => '采购计划数量汇总',
+                'sqlwher' => ' and iBuy_Type in (50) ',
+                'sumcol' => array('OrgID' => array('name' => 'OrgID', 'text' => '采购计划机构'),
+                    'good' => array('text' => '商品',
+                        'cols' => array(0 => array(name => 'sDrug_TradeName', 'text' => '商品名称')
+                        , 1 => array(name => 'sDrug_Spec', 'text' => '规格')
+                        , 2 => array(name => 'sDrug_Unit', 'text' => '单位')
+                        , 3 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
+                        , 4 => array(name => 'drugcount', 'text' => '数量'))),
+                    'year' => array('text' => '年', name=>'year' ),
+                    'month' => array('text' => '月', name=>'month'),
+                    'day' => array('text' => '日', name=>'day'),
+                )));
+        Tpl::output('config', $config);
+
+        //处理汇总字段
+        $sumtype = $_GET['sumtype'];
+        if ($sumtype == null) {
+            $sumtype = array(0 => "good");
+            $_GET['sumtype'] = $sumtype;
+        }
+        $checked = $_GET['checked'];
         $page = new Page();
         $page->setEachNum(10);
         $page->setNowPage($_REQUEST["curpage"]);
-        $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
-        $endnum = $page->getEachNum() * ($page->getNowPage());
-        $sql = 'from Center_Buy a  , Center_Drug b , Organization c, Organization d ,shopnc_goods_common goods where a.iDrug_ID = b.iDrug_ID '.
-            ' and a.SaleOrgID = -( c.id +1000) and a.orgid = d.id  and a.iDrug_ID = goods.goods_commonid ';
-
-        if (gettype($_GET['search_type'])=='string' && intval($_GET['search_type'])>=0 ) {
-            $sql = $sql . ' and  a.iBuy_Type = \''.$_GET['search_type'].'\'';
-        }
+        $sql = 'from Center_Buy a  , Center_Drug b ,
+                    Organization c, Organization d ,
+                      shopnc_goods_common goods,Center_Customer custom ,
+                      Center_cod_storetype storetype  where a.iDrug_ID = b.iDrug_ID ' .
+            ' and a.SaleOrgID = -( c.id +1000) and a.orgid = d.id  and a.iDrug_ID = goods.goods_commonid
+                and a.iCustomer_ID = custom.iCustomer_ID and a.iBuy_Type = storetype.code';
 
         if ($_GET['query_start_time']) {
             $sql = $sql . ' and a.dBuy_Date >=\'' . $_GET['query_start_time'] . '\'';
@@ -251,53 +315,64 @@ class storehouseControl extends SystemControl
 
         //处理树的参数
         if ($_GET['orgids']) {
-            if($_GET['search_type'] == 0 || $_GET['search_type'] == 1){
+            if ($_GET['search_type'] == 0 || $_GET['search_type'] == 1) {
                 $orgarray = array();
-                foreach($_GET['orgids'] as $v){
-                    $orgarray[] = -($v+1000);
+                foreach ($_GET['orgids'] as $v) {
+                    $orgarray[] = -($v + 1000);
                 }
-                $sql = $sql . ' and a.SaleOrgID in ('. implode(',',$orgarray).' )';
-            }else{
-                $sql = $sql . ' and a.OrgID in ( '. implode(',',$_GET['orgids']).')';
+                $sql = $sql . ' and a.SaleOrgID in (' . implode(',', $orgarray) . ' )';
+            } else {
+                $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
             }
+        }
 
-        }
-        //处理汇总条件
-        $sumtype = $_GET['sumtype'];
-        if($sumtype==null){
-            $sumtype = array(0=>"org");
-            $_GET['sumtype'] = $sumtype;
-        }
+        $search_type = $_GET['search_type'];
+//        echo $search_type;
+        $colconfig = $config[intval($search_type)];
+//        var_dump($config[intval($search_type)]);
+        $displaycol = array();
+        $displaytext = array();
         $sumcol = array();
         $totalcol = array();
         $groupbycol = array();
-        foreach($sumtype as $i=>$v){
-            if(isset($sumtypewhere[$v])){
-                if(is_array($sumtypewhere[$v])){
-                    foreach($sumtypewhere[$v] as $item){
-                        array_push($sumcol,$item);
-                        $itemsplit = explode(' as ',$item);
-                        array_push($totalcol, ' null as '.$itemsplit[1]);
-                        $str = strtolower(str_replace(' ','',trim($itemsplit[0])));
-                        if(substr($str,0,4)!='sum(' && substr($str,0,6)!='count(' )
-                            array_push($groupbycol,$itemsplit[0]);
+        foreach ($sumtype as $i => $v) {
+//            var_dump($colconfig['sumcol'][$v]);
+            if(isset($colconfig['sqlwher'])){
+                $sql = $sql . $colconfig['sqlwher'];
+            }
+            if (isset($colconfig['sumcol'][$v])) {
+                if (isset($colconfig['sumcol'][$v]['cols'])) {
+                    foreach ($colconfig['sumcol'][$v]['cols'] as $item) {
+//                        echo $item['name'] . '<br>';
+                        array_push($sumcol, $sqlarray[$item['name']]);
+                        array_push($displaycol, $item['name']);
+                        array_push($displaytext, $item['text']);
+                        $itemsplit = explode(' as ', $sqlarray[$item['name']]);
+                        array_push($totalcol, ' null as ' . $itemsplit[1]);
+                        $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+                        if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+                            array_push($groupbycol, $itemsplit[0]);
                     }
-                }else{
-                    array_push($sumcol,$sumtypewhere[$v]);
-                    $itemsplit = explode(' as ',$sumtypewhere[$v]);
-                    array_push($totalcol, ' null as '.$itemsplit[1]);
-                    $str = strtolower(str_replace(' ','',trim($itemsplit[0])));
-                    if(substr($str,0,4)!='sum(' && substr($str,0,6)!='count(' )
-                        array_push($groupbycol,$itemsplit[0]);
+                } else {
+                    $item = $colconfig['sumcol'][$v];
+                    array_push($sumcol, $sqlarray[$item['name']]);
+                    array_push($displaycol, $item['name']);
+                    array_push($displaytext, $item['text']);
+                    $itemsplit = explode(' as ', $sqlarray[$item['name']]);
+                    array_push($totalcol, ' null as ' . $itemsplit[1]);
+                    $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+                    if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+                        array_push($groupbycol, $itemsplit[0]);
                 }
             }
         }
 //        var_dump($totalcol);
-        $totalcol[0] = '\'总计：\' as '. explode(' as ',$totalcol[0])[1];
+        $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
 //        var_dump($totalcol);
-        $totalcolstr = join(',',$totalcol);
-        $sumcolstr = join(',',$sumcol);
-        $groupbycolstr = join(',',$groupbycol);
+        $totalcolstr = join(',', $totalcol);
+        $sumcolstr = join(',', $sumcol);
+        $groupbycolstr = join(',', $groupbycol);
+//        echo $sumcolstr;
         $tsql = " select $sumcolstr , sum(fBuy_TaxMoney) taxmoney, sum(fBuy_RetailMoney) retailmoney , sum(fBuy_RetailMoney) - sum(fBuy_TaxMoney) diffmoney
                         $sql group by $groupbycolstr order by $groupbycolstr ";
 //        echo $tsql;
@@ -319,15 +394,16 @@ class storehouseControl extends SystemControl
         Tpl::output('page', $page->show());
         //处理需要显示的列
         $col = array();
-        foreach($sumtype as $i=>$v){
-            if(isset($sumtypestr[$v])){
-                foreach($sumtypestr[$v] as $key=>$item){
-                    $col[$key] =$item;
+        foreach ($sumtype as $i => $v) {
+            if (isset($sumtypestr[$v])) {
+                foreach ($sumtypestr[$v] as $key => $item) {
+                    $col[$key] = $item;
                 }
             }
         }
 //        var_dump($col);
-        Tpl::output('col',$col);
+        Tpl::output('displaycol', $displaycol);
+        Tpl::output('displaytext', $displaytext);
         Tpl::showpage('storehouse.sum');
     }
 
