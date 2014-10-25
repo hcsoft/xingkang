@@ -99,16 +99,16 @@
             <?php
             foreach ($output['types'] as $k => $v) {
                 ?>
-                <input type="radio" class="typeselect" id="types_<?php echo $k ?>" value="<?php echo $k?>"
-                       name="search_type_select" <?php if ($_GET['search_type'] == $k) echo 'checked' ?> >
-                <label for="types_<?php echo $k ?>"><?php echo $v ?></label>
+                <input type="radio" class="typeselect" id="types_<?php echo $v->code ?>" value="<?php echo $v->code?>"
+                       name="search_type_select" <?php if ($_GET['search_type'] == $v->code) echo 'checked' ?> >
+                <label for="types_<?php echo $v->code ?>"><?php echo $v->name ?></label>
             <?php } ?>
         </div>
         <table class="table tb-type2 nobdb datatable">
             <thead>
             <tr class="thead">
                 <th class="align-center" colspan="2">单据编号</th>
-                <th class="align-center" colspan="12">入库</th>
+                <th class="align-center" colspan="12">信息</th>
             </tr>
             <tr class="thead">
                 <th class="align-center">总票据</th>
@@ -149,7 +149,7 @@
                             <?php echo $output['goodtype'][$v->iDrug_RecType] ?>
                         </td>
                         <td class=" align-center">
-                            <?php echo $output['types'][$v->iBuy_Type] ?>
+                            <?php echo $v->iBuy_Type ?>
                         </td>
                         <!--                    <td class=" align-center">-->
                         <!--                        --><?php //echo $v->OrgId ?>

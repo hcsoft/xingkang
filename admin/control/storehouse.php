@@ -55,8 +55,10 @@ class storehouseControl extends SystemControl
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
-        $sql = 'from Center_Buy a  , Center_Drug b , Organization c, Organization d,shopnc_goods_common good  where a.iDrug_ID = b.iDrug_ID ' .
-            ' and a.SaleOrgID = -( c.id +1000) and a.orgid = d.id and a.iDrug_ID = good.goods_commonid  ';
+        $sql = 'from Center_Buy a  , Center_Drug b , Organization c, Organization d,shopnc_goods_common good ,
+            Center_cod_storetype storetype
+            where a.iDrug_ID = b.iDrug_ID ' .
+            ' and a.SaleOrgID = -( c.id +1000) and a.orgid = d.id and a.iDrug_ID = good.goods_commonid and a.iBuy_Type = storetype.code ';
         if (!isset($_GET['search_type'])) {
             $_GET['search_type'] = '1';
         }
@@ -100,7 +102,7 @@ class storehouseControl extends SystemControl
                         a.iBuy_ID,
                         a.dBuy_Date,
                         b.iDrug_RecType,
-                        a.iBuy_Type,
+                        storetype.name as 'iBuy_Type',
                         d.name OrgId,
                         c.name SaleOrgID,
                         good.sdrug_chemname,
