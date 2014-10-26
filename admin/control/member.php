@@ -17,6 +17,14 @@ class memberControl extends SystemControl{
 	public function __construct(){
 		parent::__construct();
 		Language::read('member');
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $treesql = 'select  b.id , b.name,b.districtnumber,b.parentid pId from map_org_wechat a, Organization b where a.orgid = b.id ';
+        $treestmt = $conn->query($treesql);
+        $this->treedata_list = array();
+        while ($row = $treestmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($this->treedata_list, $row);
+        }
+        Tpl::output('treelist', $this->treedata_list);
 	}
 
 	/**
@@ -241,5 +249,277 @@ class memberControl extends SystemControl{
 				break;
 		}
 	}
+
+    public function consumesumOp()
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        if (!isset($_GET['search_type'])) {
+            $_GET['search_type'] = '0';
+        }
+        $sqlarray = array('membername' => 'member.sName as "membername"',
+            'memberid' => ' member.sMemberID as "memberid" ',
+            'year' => ' year(a.dCO_Date) as "year" ',
+            'month' => ' month(a.dCO_Date) as  "month" ',
+            'day' => ' day(a.dCO_Date) as "day" ',
+            'OrgID' => ' org.name as "OrgID" '
+        );
+        $config = array('sumcol' => array('OrgID' => array(name => 'OrgID', 'text' => '机构'),
+            'member' => array('text' => '会员', name=>'member',
+                'cols' => array(0 => array(name => 'memberid', 'text' => '会员号码')
+                , 1 => array(name => 'membername', 'text' => '会员名称'))),
+            'year' => array('text' => '年', name=>'year' ),
+            'month' => array('text' => '月', name=>'month'),
+            'day' => array('text' => '日', name=>'day'),
+        ));
+        Tpl::output('config', $config);
+
+        //处理汇总字段
+        $sumtype = $_GET['sumtype'];
+        if ($sumtype == null) {
+            $sumtype = array(0 => "OrgID");
+            $_GET['sumtype'] = $sumtype;
+        }
+        $checked = $_GET['checked'];
+        $page = new Page();
+        $page->setEachNum(10);
+        $page->setNowPage($_REQUEST["curpage"]);
+        $sql = 'from Center_CheckOut a  , Center_codes ico, Center_codes gather,Center_codes state,Center_codes tag,
+            Center_Person person , Organization org , Center_MemberInfo member
+          where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
+           and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
+           and  a.iCO_State = state.code and state.type=\'iCO_State\'
+           and  a.iCO_Tag = tag.code and tag.type=\'iCO_Tag\'
+           and a.orgid = org.id
+           and a.iCO_MakePerson = person.iPerson_ID
+           and a.sMemberID = member.sMemberID';
+
+        if ($_GET['query_start_time']) {
+            $sql = $sql . ' and a.dCO_Date >=\'' . $_GET['query_start_time'] . '\'';
+        }
+
+        if ($_GET['query_end_time']) {
+            $sql = $sql . ' and a.dCO_Date < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
+        }
+
+        //处理树的参数
+        if ($_GET['orgids']) {
+            $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+        }
+
+        $search_type = $_GET['search_type'];
+//        echo $search_type;
+        $colconfig = $config;
+//        var_dump($config[intval($search_type)]);
+        $displaycol = array();
+        $displaytext = array();
+        $sumcol = array();
+        $totalcol = array();
+        $groupbycol = array();
+        foreach ($sumtype as $i => $v) {
+//            var_dump($colconfig['sumcol'][$v]);
+            if(isset($colconfig['sqlwher'])){
+                $sql = $sql . $colconfig['sqlwher'];
+            }
+            if (isset($colconfig['sumcol'][$v])) {
+                if (isset($colconfig['sumcol'][$v]['cols'])) {
+
+                    foreach ($colconfig['sumcol'][$v]['cols'] as $item) {
+//                        echo $item['name'] . '<br>';
+                        array_push($sumcol, $sqlarray[$item['name']]);
+                        array_push($displaycol, $item['name']);
+                        array_push($displaytext, $item['text']);
+                        $itemsplit = explode(' as ', $sqlarray[$item['name']]);
+                        array_push($totalcol, ' null as ' . $itemsplit[1]);
+                        $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+                        if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+                            array_push($groupbycol, $itemsplit[0]);
+                    }
+                } else {
+                    $item = $colconfig['sumcol'][$v];
+                    array_push($sumcol, $sqlarray[$item['name']]);
+                    array_push($displaycol, $item['name']);
+                    array_push($displaytext, $item['text']);
+                    $itemsplit = explode(' as ', $sqlarray[$item['name']]);
+                    array_push($totalcol, ' null as ' . $itemsplit[1]);
+                    $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+                    if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+                        array_push($groupbycol, $itemsplit[0]);
+                }
+            }
+        }
+//        var_dump($totalcol);
+        $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
+//        var_dump($totalcol);
+        $totalcolstr = join(',', $totalcol);
+        $sumcolstr = join(',', $sumcol);
+        $groupbycolstr = join(',', $groupbycol);
+//        echo $sumcolstr;
+        $tsql = " select $sumcolstr ,sum(fCO_GetMoney) getmoney
+                        $sql group by $groupbycolstr order by $groupbycolstr ";
+//        echo $tsql;
+        $stmt = $conn->query($tsql);
+        $data_list = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($data_list, $row);
+        }
+        //处理合计
+        $totalsql = " select $totalcolstr ,  sum(fCO_GetMoney) getmoney
+                        $sql ";
+//        echo $totalsql;
+        $totalstmt = $conn->query($totalsql);
+        while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($data_list, $row);
+        }
+        Tpl::output('data_list', $data_list);
+        //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
+        Tpl::output('page', $page->show());
+        //处理需要显示的列
+        $col = array();
+        foreach ($sumtype as $i => $v) {
+            if (isset($sumtypestr[$v])) {
+                foreach ($sumtypestr[$v] as $key => $item) {
+                    $col[$key] = $item;
+                }
+            }
+        }
+//        var_dump($col);
+        Tpl::output('displaycol', $displaycol);
+        Tpl::output('displaytext', $displaytext);
+        Tpl::showpage('member.consume.sum');
+    }
+
+    public function rechargesumOp()
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        if (!isset($_GET['search_type'])) {
+            $_GET['search_type'] = '0';
+        }
+        $sqlarray = array('ChargePerson' => 'person.sPerson_Name as "ChargePerson"',
+            'type' => ' type.name as "type" ',
+            'state' => ' state.name as "state" ',
+            'year' => ' year(a.RechargeDate) as "year" ',
+            'month' => ' month(a.RechargeDate) as  "month" ',
+            'day' => ' day(a.RechargeDate) as "day" ',
+            'OrgID' => ' org.name as "OrgID" '
+        );
+        $config = array('sumcol' => array('OrgID' => array(name => 'OrgID', 'text' => '机构'),
+            'ChargePerson' => array(name => 'ChargePerson', 'text' => '收款人'),
+            'type' => array(name => 'type', 'text' => '类型'),
+            'state' => array(name => 'state', 'text' => '状态'),
+            'year' => array('text' => '年', name=>'year' ),
+            'month' => array('text' => '月', name=>'month'),
+            'day' => array('text' => '日', name=>'day'),
+        ));
+        Tpl::output('config', $config);
+
+        //处理汇总字段
+        $sumtype = $_GET['sumtype'];
+        if ($sumtype == null) {
+            $sumtype = array(0 => "OrgID");
+            $_GET['sumtype'] = $sumtype;
+        }
+        $checked = $_GET['checked'];
+        $page = new Page();
+        $page->setEachNum(10);
+        $page->setNowPage($_REQUEST["curpage"]);
+        $sql = 'from Center_MemberRecharge a  , Organization org ,Center_codes state,Center_codes type ,Center_Person person
+            where  a.orgid = org.id
+            and a.State = state.code and state.type=\'recharge_State\'
+            and a.Type =  type.code and type.type=\'recharge_Type\'
+            and a.ChargePerson = person.iPerson_ID and state in (0,1) ';
+
+        if ($_GET['query_start_time']) {
+            $sql = $sql . ' and a.RechargeDate >=\'' . $_GET['query_start_time'] . '\'';
+        }
+
+        if ($_GET['query_end_time']) {
+            $sql = $sql . ' and a.RechargeDate < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
+        }
+
+        //处理树的参数
+        if ($_GET['orgids']) {
+            $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+        }
+
+        $search_type = $_GET['search_type'];
+//        echo $search_type;
+        $colconfig = $config;
+//        var_dump($config[intval($search_type)]);
+        $displaycol = array();
+        $displaytext = array();
+        $sumcol = array();
+        $totalcol = array();
+        $groupbycol = array();
+        foreach ($sumtype as $i => $v) {
+//            var_dump($colconfig['sumcol'][$v]);
+            if(isset($colconfig['sqlwher'])){
+                $sql = $sql . $colconfig['sqlwher'];
+            }
+            if (isset($colconfig['sumcol'][$v])) {
+                if (isset($colconfig['sumcol'][$v]['cols'])) {
+                    foreach ($colconfig['sumcol'][$v]['cols'] as $item) {
+//                        echo $item['name'] . '<br>';
+                        array_push($sumcol, $sqlarray[$item['name']]);
+                        array_push($displaycol, $item['name']);
+                        array_push($displaytext, $item['text']);
+                        $itemsplit = explode(' as ', $sqlarray[$item['name']]);
+                        array_push($totalcol, ' null as ' . $itemsplit[1]);
+                        $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+                        if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+                            array_push($groupbycol, $itemsplit[0]);
+                    }
+                } else {
+                    $item = $colconfig['sumcol'][$v];
+                    array_push($sumcol, $sqlarray[$item['name']]);
+                    array_push($displaycol, $item['name']);
+                    array_push($displaytext, $item['text']);
+                    $itemsplit = explode(' as ', $sqlarray[$item['name']]);
+                    array_push($totalcol, ' null as ' . $itemsplit[1]);
+                    $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+                    if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+                        array_push($groupbycol, $itemsplit[0]);
+                }
+            }
+        }
+//        var_dump($totalcol);
+        $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
+//        var_dump($totalcol);
+        $totalcolstr = join(',', $totalcol);
+        $sumcolstr = join(',', $sumcol);
+        $groupbycolstr = join(',', $groupbycol);
+//        echo $sumcolstr;
+        $tsql = " select $sumcolstr , sum(RechargeMoney) rechargemMoney,sum(GiveMoney) givemoney , sum(RechargeMoney+GiveMoney) allmoney
+                        $sql group by $groupbycolstr order by $groupbycolstr ";
+//        echo $tsql;
+        $stmt = $conn->query($tsql);
+        $data_list = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($data_list, $row);
+        }
+        //处理合计
+        $totalsql = " select $totalcolstr , count(1) cliniccount
+                        $sql ";
+//        echo $totalsql;
+        $totalstmt = $conn->query($totalsql);
+        while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($data_list, $row);
+        }
+        Tpl::output('data_list', $data_list);
+        //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
+        Tpl::output('page', $page->show());
+        //处理需要显示的列
+        $col = array();
+        foreach ($sumtype as $i => $v) {
+            if (isset($sumtypestr[$v])) {
+                foreach ($sumtypestr[$v] as $key => $item) {
+                    $col[$key] = $item;
+                }
+            }
+        }
+//        var_dump($col);
+        Tpl::output('displaycol', $displaycol);
+        Tpl::output('displaytext', $displaytext);
+        Tpl::showpage('member.recharge.sum');
+    }
 
 }

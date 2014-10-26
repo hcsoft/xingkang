@@ -35,11 +35,6 @@ class communityControl extends SystemControl
         $this->goodtype = array(0 => '药品', 1 => '卫生用品', 2 => '诊疗项目', 3 => '特殊材料');
         Tpl::output('goodtype', $this->goodtype);
 
-        $stmt = $conn->query(' select distinct orgid from map_org_wechat order by orgid ');
-        $this->orgidarray = array();
-        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            array_push($this->orgidarray, $row[0]);
-        }
 
     }
 

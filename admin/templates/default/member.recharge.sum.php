@@ -42,14 +42,14 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>处方汇总查询</h3>
+            <h3>充值下账汇总</h3>
         </div>
     </div>
     <div class="fixed-empty"></div>
 
     <form method="get" name="formSearch" id="formSearch">
-        <input type="hidden" value="community" name="act">
-        <input type="hidden" value="prescriptionsum" name="op">
+        <input type="hidden" value="member" name="act">
+        <input type="hidden" value="rechargesum" name="op">
         <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
         <input type="hidden" name="checked" id="checked" value="<?php echo $_GET['checked']?>"/>
         <table class="tb-type1 noborder search">
@@ -69,7 +69,7 @@
                         <?php } ?>
                     </select></td>
                 </td>
-                <th><label for="query_start_time">发生日期</label></th>
+                <th><label for="query_start_time">充值日期</label></th>
                 <td><input class="txt date" type="text" value="<?php echo $_GET['query_start_time']; ?>"
                            id="query_start_time" name="query_start_time">
                     <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>" id="query_end_time"
@@ -111,7 +111,9 @@
                     ?>
                     <th class="align-center"><?php echo $v?></th>
                 <?php  }?>
-                <th class="align-center">人次</th>
+                <th class="align-center">充值金额</th>
+                <th class="align-center">赠送金额</th>
+                <th class="align-center">产生金额</th>
             </tr>
             <tbody>
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
@@ -125,7 +127,13 @@
                             <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else  echo $v->$item;?></th>
                         <?php  }?>
                         <td class=" align-right">
-                            <?php echo number_format($v->cliniccount, 0)?>
+                            <?php echo number_format($v->rechargemMoney, 2)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->givemoney, 2)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->allmoney, 2)?>
                         </td>
                     </tr>
                 <?php } ?>

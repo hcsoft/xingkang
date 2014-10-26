@@ -42,7 +42,7 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>处方明细查询</h3>
+            <h3>收入明细查询</h3>
         </div>
     </div>
     <div class="fixed-empty"></div>
