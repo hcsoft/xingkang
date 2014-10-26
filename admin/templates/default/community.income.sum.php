@@ -2,7 +2,7 @@
 <style>
     .datatable {
         position: absolute;
-        width: 90%;
+        width: 100%;
         right: 0;
     }
 
@@ -34,7 +34,7 @@
         left: 0;
         width: 10%;
         top: 0;
-        /*bottom: 0;*/
+        bottom: 0;
         border-right: 1px solid #fff;
         padding-top: 7px;
     }
@@ -42,15 +42,16 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>仓库单据明细</h3>
+            <h3>仓库单据汇总</h3>
         </div>
     </div>
     <div class="fixed-empty"></div>
 
     <form method="get" name="formSearch" id="formSearch">
-        <input type="hidden" value="storehouse" name="act">
-        <input type="hidden" value="detail" name="op">
+        <input type="hidden" value="community" name="act">
+        <input type="hidden" value="incomesum" name="op">
         <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
+        <input type="hidden" name="checked" id="checked" value="<?php echo $_GET['checked']?>"/>
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
@@ -71,9 +72,17 @@
                 <th><label for="query_start_time">发生日期</label></th>
                 <td><input class="txt date" type="text" value="<?php echo $_GET['query_start_time']; ?>"
                            id="query_start_time" name="query_start_time">
-                    <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>"
-                           id="query_end_time"
+                    <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>" id="query_end_time"
                            name="query_end_time"/></td>
+                <th><label>汇总类型</label></th>
+                <td colspan="1" id="sumtypetr">
+                    <?php foreach ($output['config']['sumcol'] as $k => $v) { ?>
+                        <input type='checkbox' name='sumtype[]'  id='sumtype_<?php echo $v['name']; ?>' <?php if(in_array( $v['name'],$_GET['sumtype'])) echo 'checked'; ?>
+                               value='<?php echo $v['name']; ?>' >
+
+                        <label for='sumtype_<?php echo $v['name']; ?>'><?php echo $v['text']; ?></label>
+                    <?php } ?>
+                </td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
                 </td>
@@ -92,120 +101,50 @@
         </tr>
         </tbody>
     </table>
-    <div  style='position: relative;display: block;'>
-    <form method="post" id="form_member">
+    <form method="post" id="form_member" style='position: relative;'>
         <input type="hidden" name="form_submit" value="ok"/>
-        <div class="leftdiv">
-            <?php
-            foreach ($output['types'] as $k => $v) {
-                ?>
-                <input type="radio" class="typeselect" id="types_<?php echo $v->code ?>" value="<?php echo $v->code?>"
-                       name="search_type_select" <?php if ($_GET['search_type'] == $v->code) echo 'checked' ?> >
-                <label for="types_<?php echo $v->code ?>"><?php echo $v->name ?></label>
-            <?php } ?>
-        </div>
         <table class="table tb-type2 nobdb datatable">
             <thead>
             <tr class="thead">
-                <th class="align-center" colspan="2">单据编号</th>
-                <th class="align-center" colspan="12">信息</th>
-            </tr>
-            <tr class="thead">
-                <th class="align-center">总票据</th>
-                <!--            <th class="align-center">单据编号</th>-->
-                <th class="align-center">明细号</th>
-                <th class="align-center">发生日期</th>
-                <th class="align-center">商品类型</th>
-                <th class="align-center">单据类型</th>
-                <!--            <th class="align-center">制单机构</th>-->
-                <th class="align-center">机构</th>
-                <!--            <th class="align-center">供应商</th>-->
-                <th class="align-center">商品编码</th>
-                <th class="align-center">商品名称</th>
-                <th class="align-center">规格</th>
-                <th class="align-center">单位</th>
-                <th class="align-center">数量</th>
-                <th class="align-center">进价金额</th>
-                <th class="align-center">零价金额</th>
-                <th class="align-center">进销差</th>
+                <th class="align-center">序号</th>
+                <?php foreach ($output['displaytext'] as $k => $v) {
+                    ?>
+                    <th class="align-center"><?php echo $v?></th>
+                <?php  }?>
+                <th class="align-center">收取金额</th>
+                <th class="align-center">支付金额</th>
             </tr>
             <tbody>
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
                 <?php foreach ($output['data_list'] as $k => $v) { ?>
                     <tr class="hover member">
                         <td class=" align-center">
-                            <?php echo $v->iBuy_TicketID ?>
+                            <?php echo $k+1?>
                         </td>
-                        <!--                    <td class=" align-center">-->
-                        <!--                        --><?php //echo $v->sBuy_A6 ?>
-                        <!--                    </td>-->
-                        <td class=" align-center">
-                            <?php echo $v->iBuy_ID ?>
-                        </td>
-                        <td class=" align-center">
-                            <?php if ($v->dBuy_Date == null) echo ''; else  echo date('Y-m-d', strtotime($v->dBuy_Date)); ?>
-                        </td>
-                        <td class=" align-center">
-                            <?php echo $output['goodtype'][$v->iDrug_RecType] ?>
-                        </td>
-                        <td class=" align-center">
-                            <?php echo $v->iBuy_Type ?>
-                        </td>
-                        <!--                    <td class=" align-center">-->
-                        <!--                        --><?php //echo $v->OrgId ?>
-                        <!--                    </td>-->
-                        <td class=" align-center">
-                            <?php if ($_GET['search_type'] == '1') {
-                                echo $v->SaleOrgID;
-                            } else {
-                                echo $v->OrgId;
-                            } ?>
-                        </td>
-                        <td class=" align-center">
-                            <?php echo $v->iDrug_ID ?>
-                        </td>
-                        <td class=" align-left">
-                            <?php echo $v->sdrug_chemname ?>
-                        </td>
-                        <td class=" align-left">
-                            <?php echo $v->spec_name ?>
-                        </td>
-                        <td class=" align-left">
-                            <?php echo $v->sdrug_unit ?>
-                        </td>
-                        <td class=" align-center">
-                            <?php if ($v->dBuy_Date == null) echo ''; else echo number_format($v->fBuy_FactNum, 0) . $v->sBuy_DrugUnit; ?>
+                        <?php foreach ($output['displaycol'] as $key => $item) {
+                            ?>
+                            <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else  echo $v->$item;?></th>
+                        <?php  }?>
+                        <td class=" align-right">
+                            <?php echo number_format($v->getmoney, 3)?>
                         </td>
                         <td class=" align-right">
-                            <?php echo number_format($v->fBuy_TaxMoney, 2) ?>
-                        </td>
-                        <td class=" align-right">
-                            <?php echo number_format($v->fBuy_RetailMoney, 2) ?>
-                        </td>
-                        <td class=" align-right">
-                            <?php echo number_format($v->diffmoney, 2) ?>
+                            <?php echo number_format($v->paymoney, 3)?>
                         </td>
                     </tr>
                 <?php } ?>
             <?php } else { ?>
                 <tr class="no_data">
-                    <td colspan="14"><?php echo $lang['nc_no_record'] ?></td>
+                    <td colspan="11"><?php echo $lang['nc_no_record'] ?></td>
                 </tr>
             <?php } ?>
             </tbody>
             <tfoot class="tfoot">
-            <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
-                <tr>
-                    <td colspan="14">
-                        <div class="pagination"> <?php echo $output['page']; ?> </div>
-                    </td>
-                </tr>
-            <?php } ?>
             </tfoot>
         </table>
     </form>
-    </div>
 </div>
+
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"
         charset="utf-8"></script>
@@ -216,6 +155,9 @@
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/js/jquery.ztree.all-3.5.min.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.min.js"></script>
 <script type="text/javascript">
+    var config = <?php echo json_encode($output[config]);?>;
+
+    var checked = getchecked('<?php echo $_GET['checked'];?>');
     $(function () {
         //生成机构下拉
         function orgtext(n1, n2, list) {
@@ -234,31 +176,46 @@
                 selectedText: orgtext
             }
         );
-        //点击事件
-        $(".typeselect").change(function(){
-            $("#search_type").val($('input[name="search_type_select"]:checked').val());
-            $('#ncsubmit').click();
-        });
+
         //生成日期
         $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
+            var sumtypes =$(":checkbox[name='sumtype[]'][checked]");
+            if(sumtypes.length<=0){
+                $("#sumtype_good").attr("checked", true);
+                sumtypes =$(":checkbox[name='sumtype[]'][checked]");
+            }
+            var search_type_select = $('input[name="search_type_select"]:checked').val();
             $("#search_type").val($('input[name="search_type_select"]:checked').val());
+            checked[search_type_select] = [];
+            for(var i =0 ;i < sumtypes.length;i++){
+                checked[search_type_select].push( $(sumtypes[i]).val());
+            }
+            $("#checked").val(makechecked(checked));
             $('#formSearch').submit();
         });
     });
+    function makechecked(arr){
+        var retarr = [];
+        for (var row in checked){
+            if(checked[row])
+                retarr.push(row+':'+checked[row].join(','));
+        }
+        return retarr.join(";");
+    }
+    function getchecked(str){
+        var ret = {};
+        var data = str.split(";");
+        for(var idx in data){
+            var strs = data[idx].split(":");
+            if(strs.length>1){
+                var values = strs[1].split(",");
+                ret[strs[0]] = values;
+            }
+        }
+        return ret;
+    }
 
-    function showmsg(msg) {
-        $("#spotdialog-message").html(msg);
-        $("#spotdialog").dialog("open");
-    }
-    function error(msg) {
-        $("#errormsg").css("color", "red");
-        $("#errormsg").html(msg);
-    }
-    function success(msg) {
-        $("#errormsg").css("color", "green");
-        $("#errormsg").html(msg);
-    }
 </script>
 <style>
     #spotresult_pass:checked + label {

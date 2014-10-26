@@ -25,7 +25,7 @@ class storehouseControl extends SystemControl
         }
         Tpl::output('treelist', $this->treedata_list);
         $this->getTreeData();
-        $stmt = $conn->query(' select * from Center_cod_storetype order by code ');
+        $stmt = $conn->query(' select * from Center_codes where type=\'iBuy_Type\' order by code ');
         $this->types = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             array_push($this->types, $row);
@@ -56,9 +56,10 @@ class storehouseControl extends SystemControl
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
         $sql = 'from Center_Buy a  , Center_Drug b , Organization c, Organization d,shopnc_goods_common good ,
-            Center_cod_storetype storetype
+            Center_codes storetype
             where a.iDrug_ID = b.iDrug_ID ' .
-            ' and a.SaleOrgID = -( c.id +1000) and a.orgid = d.id and a.iDrug_ID = good.goods_commonid and a.iBuy_Type = storetype.code ';
+            ' and a.SaleOrgID = -( c.id +1000) and a.orgid = d.id and a.iDrug_ID = good.goods_commonid
+             and a.iBuy_Type = storetype.code and storetype.type=\'iBuy_Type\' ';
         if (!isset($_GET['search_type'])) {
             $_GET['search_type'] = '1';
         }
@@ -303,9 +304,9 @@ class storehouseControl extends SystemControl
         $sql = 'from Center_Buy a  , Center_Drug b ,
                     Organization c, Organization d ,
                       shopnc_goods_common goods,Center_Customer custom ,
-                      Center_cod_storetype storetype  where a.iDrug_ID = b.iDrug_ID ' .
+                      Center_codes storetype  where a.iDrug_ID = b.iDrug_ID ' .
             ' and a.SaleOrgID = -( c.id +1000) and a.orgid = d.id  and a.iDrug_ID = goods.goods_commonid
-                and a.iCustomer_ID = custom.iCustomer_ID and a.iBuy_Type = storetype.code';
+                and a.iCustomer_ID = custom.iCustomer_ID and a.iBuy_Type = storetype.code and storetype.type=\'iBuy_Type\'';
 
         if ($_GET['query_start_time']) {
             $sql = $sql . ' and a.dBuy_Date >=\'' . $_GET['query_start_time'] . '\'';

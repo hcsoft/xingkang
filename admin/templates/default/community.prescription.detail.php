@@ -2,7 +2,7 @@
 <style>
     .datatable {
         position: absolute;
-        width: 90%;
+        width: 100%;
         right: 0;
     }
 
@@ -42,14 +42,14 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>仓库单据明细</h3>
+            <h3>处方明细查询</h3>
         </div>
     </div>
     <div class="fixed-empty"></div>
 
     <form method="get" name="formSearch" id="formSearch">
-        <input type="hidden" value="storehouse" name="act">
-        <input type="hidden" value="detail" name="op">
+        <input type="hidden" value="community" name="act">
+        <input type="hidden" value="prescriptiondetail" name="op">
         <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
         <table class="tb-type1 noborder search">
             <tbody>
@@ -68,7 +68,7 @@
                         <?php } ?>
                     </select></td>
                 </td>
-                <th><label for="query_start_time">发生日期</label></th>
+                <th><label for="query_start_time">就诊日期</label></th>
                 <td><input class="txt date" type="text" value="<?php echo $_GET['query_start_time']; ?>"
                            id="query_start_time" name="query_start_time">
                     <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>"
@@ -95,108 +95,98 @@
     <div  style='position: relative;display: block;'>
     <form method="post" id="form_member">
         <input type="hidden" name="form_submit" value="ok"/>
-        <div class="leftdiv">
-            <?php
-            foreach ($output['types'] as $k => $v) {
-                ?>
-                <input type="radio" class="typeselect" id="types_<?php echo $v->code ?>" value="<?php echo $v->code?>"
-                       name="search_type_select" <?php if ($_GET['search_type'] == $v->code) echo 'checked' ?> >
-                <label for="types_<?php echo $v->code ?>"><?php echo $v->name ?></label>
-            <?php } ?>
-        </div>
+
         <table class="table tb-type2 nobdb datatable">
             <thead>
+<!--            <tr class="thead">-->
+<!--                <th class="align-center" colspan="2">单据编号</th>-->
+<!--                <th class="align-center" colspan="12">信息</th>-->
+<!--            </tr>-->
             <tr class="thead">
-                <th class="align-center" colspan="2">单据编号</th>
-                <th class="align-center" colspan="12">信息</th>
-            </tr>
-            <tr class="thead">
-                <th class="align-center">总票据</th>
+                <th class="align-center">序号</th>
+                <th class="align-center">姓名</th>
                 <!--            <th class="align-center">单据编号</th>-->
-                <th class="align-center">明细号</th>
-                <th class="align-center">发生日期</th>
-                <th class="align-center">商品类型</th>
-                <th class="align-center">单据类型</th>
+                <th class="align-center">性别</th>
+                <th class="align-center">就诊年龄</th>
+                <th class="align-center">就诊日期</th>
+                <th class="align-center">诊断</th>
                 <!--            <th class="align-center">制单机构</th>-->
-                <th class="align-center">机构</th>
+                <th class="align-center">过敏史</th>
                 <!--            <th class="align-center">供应商</th>-->
-                <th class="align-center">商品编码</th>
-                <th class="align-center">商品名称</th>
-                <th class="align-center">规格</th>
-                <th class="align-center">单位</th>
-                <th class="align-center">数量</th>
-                <th class="align-center">进价金额</th>
-                <th class="align-center">零价金额</th>
-                <th class="align-center">进销差</th>
+                <th class="align-center">主要症状及体征</th>
+                <th class="align-center">处理意见</th>
+                <th class="align-center">科室</th>
+                <th class="align-center">医生</th>
+                <th class="align-center">电话</th>
+                <th class="align-center">现住址</th>
+                <th class="align-center">联系人</th>
+                <th class="align-center">身份证号</th>
+                <th class="align-center">档案编号</th>
             </tr>
             <tbody>
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
                 <?php foreach ($output['data_list'] as $k => $v) { ?>
                     <tr class="hover member">
                         <td class=" align-center">
-                            <?php echo $v->iBuy_TicketID ?>
-                        </td>
-                        <!--                    <td class=" align-center">-->
-                        <!--                        --><?php //echo $v->sBuy_A6 ?>
-                        <!--                    </td>-->
-                        <td class=" align-center">
-                            <?php echo $v->iBuy_ID ?>
+                            <?php echo $k+1 ?>
                         </td>
                         <td class=" align-center">
-                            <?php if ($v->dBuy_Date == null) echo ''; else  echo date('Y-m-d', strtotime($v->dBuy_Date)); ?>
+                            <?php echo $v->sSickName ?>
                         </td>
                         <td class=" align-center">
-                            <?php echo $output['goodtype'][$v->iDrug_RecType] ?>
+                            <?php echo $v->sSex ?>
                         </td>
                         <td class=" align-center">
-                            <?php echo $v->iBuy_Type ?>
-                        </td>
-                        <!--                    <td class=" align-center">-->
-                        <!--                        --><?php //echo $v->OrgId ?>
-                        <!--                    </td>-->
-                        <td class=" align-center">
-                            <?php if ($_GET['search_type'] == '1') {
-                                echo $v->SaleOrgID;
-                            } else {
-                                echo $v->OrgId;
-                            } ?>
+                            <?php echo $v->sShowAge ?>
                         </td>
                         <td class=" align-center">
-                            <?php echo $v->iDrug_ID ?>
+                            <?php if ($v->ClinicDate == null) echo ''; else  echo date('Y-m-d', strtotime($v->ClinicDate)); ?>
+                        </td>
+                        <td class=" align-center">
+                            <?php echo $v->Diagnosis ?>
+                        </td>
+                        <td class=" align-center">
+                            <?php echo $v->AllergyHistory ?>
+                        </td>
+                        <td class=" align-center">
+                            <?php echo $v->Signs ?>
                         </td>
                         <td class=" align-left">
-                            <?php echo $v->sdrug_chemname ?>
+                            <?php echo $v->Opinion ?>
                         </td>
                         <td class=" align-left">
-                            <?php echo $v->spec_name ?>
+                            <?php echo $v->Section ?>
                         </td>
                         <td class=" align-left">
-                            <?php echo $v->sdrug_unit ?>
+                            <?php echo $v->Doctor ?>
                         </td>
-                        <td class=" align-center">
-                            <?php if ($v->dBuy_Date == null) echo ''; else echo number_format($v->fBuy_FactNum, 0) . $v->sBuy_DrugUnit; ?>
+                        <td class=" align-left">
+                            <?php echo $v->sPhone ?>
                         </td>
-                        <td class=" align-right">
-                            <?php echo number_format($v->fBuy_TaxMoney, 2) ?>
+                        <td class=" align-left">
+                            <?php echo $v->sAddress ?>
                         </td>
-                        <td class=" align-right">
-                            <?php echo number_format($v->fBuy_RetailMoney, 2) ?>
+                        <td class=" align-left">
+                            <?php echo $v->sLinkman ?>
                         </td>
-                        <td class=" align-right">
-                            <?php echo number_format($v->diffmoney, 2) ?>
+                        <td class=" align-left">
+                            <?php echo $v->sIDCard ?>
+                        </td>
+                        <td class=" align-left">
+                            <?php echo $v->sFileNo ?>
                         </td>
                     </tr>
                 <?php } ?>
             <?php } else { ?>
                 <tr class="no_data">
-                    <td colspan="14"><?php echo $lang['nc_no_record'] ?></td>
+                    <td colspan="16"><?php echo $lang['nc_no_record'] ?></td>
                 </tr>
             <?php } ?>
             </tbody>
             <tfoot class="tfoot">
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
                 <tr>
-                    <td colspan="14">
+                    <td colspan="16">
                         <div class="pagination"> <?php echo $output['page']; ?> </div>
                     </td>
                 </tr>
