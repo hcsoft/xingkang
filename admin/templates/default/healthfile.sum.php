@@ -23,6 +23,7 @@
 <form method="get" name="formSearch" id="formSearch">
     <input type="hidden" value="healthfile" name="act">
     <input type="hidden" value="sum" name="op">
+    <input type="hidden" id ='export' name="export" value="false">
     <input type="hidden" name="checkednode" id="checkednode" value=""/>
     <table class="tb-type1 noborder search">
         <tbody>

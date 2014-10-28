@@ -280,4 +280,37 @@ class SystemControl{
 		$data['url']		= $_REQUEST['act'].'&'.$_REQUEST['op'];
 		return Model('admin_log')->insert($data);
 	}
+
+    public final function exportdata($sql = '', $titles = array(0=>'test1',1=>'test2',2=>'test3'), $sheetname =''){
+        require(BASE_PATH.'/include/ExcelWriterXML.php');
+        $xml = new ExcelWriterXML($sheetname.'.xls');
+        $xml->docAuthor('hcsoft');
+        $format = $xml->addStyle('StyleHeader');
+        $format->fontBold();
+        $format->alignRotate(45);
+        $sheet = $xml->addSheet($sheetname);
+        foreach($titles as $i =>$v){
+            $sheet->writeString(1,$i+1,$v);
+        }
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        //查询sql
+        try{
+//            echo $sql;
+            $stmt = $conn->query($sql);
+            $rowindex = 2;
+            while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+                foreach($row as $i=>$v){
+//                    echo $v.'<br>';
+//                    echo $i;
+                    $sheet->writeString($rowindex,$i+1,strval($v));
+                }
+                $rowindex = $rowindex+1;
+            }
+        }catch (Exception $e){
+            $sheet->writeString(2,1,'导出异常!请与系统管理员联系!异常信息:'+$e->getMessage());
+        }
+        $xml->sendHeaders();
+        $xml->writeData();
+        die  ;
+    }
 }

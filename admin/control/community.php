@@ -176,6 +176,7 @@ class communityControl extends SystemControl
             $sql = $sql . " and a.orgid  in ($checkednode) ";
         }
 
+
         $moneycol = array('fCO_Foregift','fCO_Balance','fCO_FactMoney','fCO_IncomeMoney','fCO_GetMoney','fCO_PayMoney',
             'fCO_Card','fCO_Cash','fCO_StartMoney','fCO_Medicare','fCO_SelfCost','fCO_SelfPay','fCO_HospitalSubsidy',
             'fCO_BeforeSubsidy','fOweMoney','fCO_PosPay','fRecharge','fConsume','fRechargeBalance','fConsumeBalance',
@@ -229,6 +230,24 @@ class communityControl extends SystemControl
                         a.fAddScale,
                         org.name as 'OrgID'
                         $sql order by  a.dCO_Date desc)zzzz where rownum>$startnum )zzzzz order by rownum";
+        $exportsql = "SELECT  row_number() over( order by  a.dCO_Date desc) rownum,
+                        ico.name as 'iCO_Type',
+                        a.dCO_Date,
+                        a.dCO_MakeDate,
+                        person.sPerson_Name 'iCO_MakePerson',
+                        a.fCO_Foregift,
+                        a.fCO_Balance,
+                        a.fCO_FactMoney,
+                        a.fCO_IncomeMoney ,
+                        a.fCO_GetMoney,
+                        a.fCO_PayMoney,
+                        a.sCO_CapitalMoney
+                        $sql order by  a.dCO_Date desc ";
+//        echo $_GET['export']=='true';
+//        echo $_GET['export'];
+        if(isset($_GET['export']) && $_GET['export']=='true'){
+            $this->exportdata($exportsql,array('序号','类型','结算日期','制单日期','收费员','押金','结算余额','实际金额','结算金额','收取金额','支付金额','金额大写'),'测试');
+        }
         $stmt = $conn->query($tsql);
         $data_list = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {

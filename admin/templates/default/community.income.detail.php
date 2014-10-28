@@ -50,6 +50,7 @@
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" value="community" name="act">
         <input type="hidden" value="incomedetail" name="op">
+        <input type="hidden" id ='export' name="export" value="false">
         <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
         <table class="tb-type1 noborder search">
             <tbody>
@@ -85,6 +86,9 @@
                            name="query_end_time"/></td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
+                </td>
+                <td><a href="javascript:void(0);" id="ncexport" class=" "
+                       title="导出">导出</a>
                 </td>
             </tr>
             </tbody>
@@ -218,7 +222,12 @@
         //生成日期
         $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
+            $("#export").val('false');
             $("#search_type").val($('input[name="search_type_select"]:checked').val());
+            $('#formSearch').submit();
+        });
+        $('#ncexport').click(function () {
+            $("#export").val('true');
             $('#formSearch').submit();
         });
     });

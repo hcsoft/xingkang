@@ -50,6 +50,7 @@
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" value="member" name="act">
         <input type="hidden" value="consumesum" name="op">
+        <input type="hidden" id ='export' name="export" value="false">
         <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
         <input type="hidden" name="checked" id="checked" value="<?php echo $_GET['checked']?>"/>
         <table class="tb-type1 noborder search">
