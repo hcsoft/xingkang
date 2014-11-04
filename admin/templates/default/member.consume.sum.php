@@ -87,6 +87,9 @@
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
                 </td>
+                <td><a href="javascript:void(0);" id="ncexport" class="btn-export "
+                       title="导出"></a>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -112,7 +115,6 @@
                     ?>
                     <th class="align-center"><?php echo $v?></th>
                 <?php  }?>
-                <th class="align-center">消费金额</th>
             </tr>
             <tbody>
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
@@ -177,6 +179,23 @@
         //生成日期
         $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
+            $("#export").val('false');
+            var sumtypes =$(":checkbox[name='sumtype[]'][checked]");
+            if(sumtypes.length<=0){
+                $("#sumtype_good").attr("checked", true);
+                sumtypes =$(":checkbox[name='sumtype[]'][checked]");
+            }
+            var search_type_select = $('input[name="search_type_select"]:checked').val();
+            $("#search_type").val($('input[name="search_type_select"]:checked').val());
+            checked[search_type_select] = [];
+            for(var i =0 ;i < sumtypes.length;i++){
+                checked[search_type_select].push( $(sumtypes[i]).val());
+            }
+            $("#checked").val(makechecked(checked));
+            $('#formSearch').submit();
+        });
+        $('#ncexport').click(function () {
+            $("#export").val('true');
             var sumtypes =$(":checkbox[name='sumtype[]'][checked]");
             if(sumtypes.length<=0){
                 $("#sumtype_good").attr("checked", true);

@@ -281,7 +281,7 @@ class SystemControl{
 		return Model('admin_log')->insert($data);
 	}
 
-    public final function exportdata($sql = '', $titles = array(0=>'test1',1=>'test2',2=>'test3'), $sheetname =''){
+    public final function exportdata($sql = ' select \'测试成功\' ', $titles = array('测试导出'), $sheetname ='导出'){
         require(BASE_PATH.'/include/ExcelWriterXML.php');
         $xml = new ExcelWriterXML($sheetname.'.xls');
         $xml->docAuthor('hcsoft');
@@ -295,13 +295,10 @@ class SystemControl{
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询sql
         try{
-//            echo $sql;
             $stmt = $conn->query($sql);
             $rowindex = 2;
             while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
                 foreach($row as $i=>$v){
-//                    echo $v.'<br>';
-//                    echo $i;
                     $sheet->writeString($rowindex,$i+1,strval($v));
                 }
                 $rowindex = $rowindex+1;
@@ -312,5 +309,48 @@ class SystemControl{
         $xml->sendHeaders();
         $xml->writeData();
         die  ;
+    }
+
+    public final function exportxlsx($sqls = ' select \'测试成功\' ', $titles = array('测试导出'), $sheetname ='导出'){
+        require(BASE_PATH.'/include/PHPExcel.php');
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("hcsoft");
+        $sheet = $objPHPExcel->setActiveSheetIndex(0);
+        $sheet->setTitle($sheetname);
+        foreach($titles as $i =>$v){
+            $sheet->setCellValue(chr($i+65).'1',$v);
+        }
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        //查询sql
+        try{
+            $rowindex = 2;
+            if(is_array($sqls)){
+                foreach($sqls as $i=>$sql){
+                    $stmt = $conn->query($sql);
+                    while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+                        foreach($row as $i=>$v){
+                            $sheet->setCellValue(chr($i+65).strval($rowindex),strval($v));
+                        }
+                        $rowindex = $rowindex+1;
+                    }
+                }
+            }else{
+                $stmt = $conn->query($sqls);
+                while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+                    foreach($row as $i=>$v){
+                        $sheet->setCellValue(chr($i+65).strval($rowindex),strval($v));
+                    }
+                    $rowindex = $rowindex+1;
+                }
+            }
+        }catch (Exception $e){
+            $sheet->writeString(2,1,'导出异常!请与系统管理员联系!异常信息:'+$e->getMessage());
+        }
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$sheetname.'.xlsx"');
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+        exit;
     }
 }

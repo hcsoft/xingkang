@@ -100,6 +100,30 @@ class communityControl extends SystemControl
                         a.sHealthCardID
                         $sql order by  a.ClinicDate desc)zzzz where rownum>$startnum )zzzzz order by rownum";
 //        echo $sql;
+        $exportsql = " SELECT row_number() over( order by  a.ClinicDate desc) rownum,
+                        a.sSickName,
+                        a.sSex,
+                        a.sShowAge,
+                        a.ClinicDate,
+                        a.Diagnosis,
+                        a.AllergyHistory,
+                        a.Signs ,
+                        a.Opinion,
+                        a.Section,
+                        a.Doctor,
+                        a.sPhone,
+                        a.sAddress,
+                        a.sLinkman,
+                        a.sIDCard,
+                        a.sFileNo,
+                        a.sHealthCardID
+                        $sql order by  a.ClinicDate desc ";
+//        echo $_GET['export']=='true';
+//        echo $_GET['export'];
+        if(isset($_GET['export']) && $_GET['export']=='true'){
+            $this->exportxlsx($exportsql,array('序号','姓名','性别','就诊年龄','就诊日期','诊断','过敏史','主要症状及体征',
+                    '处理意见','科室','医生','电话','现住址','联系人','身份证号','档案编号'),'处方明细');
+        }
         $stmt = $conn->query($tsql);
         $data_list = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
@@ -230,23 +254,37 @@ class communityControl extends SystemControl
                         a.fAddScale,
                         org.name as 'OrgID'
                         $sql order by  a.dCO_Date desc)zzzz where rownum>$startnum )zzzzz order by rownum";
-        $exportsql = "SELECT  row_number() over( order by  a.dCO_Date desc) rownum,
-                        ico.name as 'iCO_Type',
-                        a.dCO_Date,
-                        a.dCO_MakeDate,
-                        person.sPerson_Name 'iCO_MakePerson',
-                        a.fCO_Foregift,
-                        a.fCO_Balance,
-                        a.fCO_FactMoney,
-                        a.fCO_IncomeMoney ,
-                        a.fCO_GetMoney,
-                        a.fCO_PayMoney,
-                        a.sCO_CapitalMoney
+//        $exportsql = "SELECT  row_number() over( order by  a.dCO_Date desc) rownum,
+//                        ico.name as 'iCO_Type',
+//                        a.dCO_Date,
+//                        a.dCO_MakeDate,
+//                        person.sPerson_Name 'iCO_MakePerson',
+//                        a.fCO_Foregift,
+//                        a.fCO_Balance,
+//                        a.fCO_FactMoney,
+//                        a.fCO_IncomeMoney ,
+//                        a.fCO_GetMoney,
+//                        a.fCO_PayMoney,
+//                        a.sCO_CapitalMoney
+//                        $sql order by  a.dCO_Date desc ";
+
+        $exportsql = "SELECT  row_number() over( order by  a.dCO_Date desc) as '序号',
+                        ico.name as '类型',
+                        a.dCO_Date '结算日期',
+                        a.dCO_MakeDate '制单日期',
+                        person.sPerson_Name '收费员',
+                        a.fCO_Foregift '押金',
+                        a.fCO_Balance '结算余额',
+                        a.fCO_FactMoney '实际金额',
+                        a.fCO_IncomeMoney '结算金额' ,
+                        a.fCO_GetMoney '收取金额',
+                        a.fCO_PayMoney '支付金额',
+                        a.sCO_CapitalMoney '金额大写'
                         $sql order by  a.dCO_Date desc ";
 //        echo $_GET['export']=='true';
 //        echo $_GET['export'];
         if(isset($_GET['export']) && $_GET['export']=='true'){
-            $this->exportdata($exportsql,array('序号','类型','结算日期','制单日期','收费员','押金','结算余额','实际金额','结算金额','收取金额','支付金额','金额大写'),'测试');
+            $this->exportxlsx($exportsql,array('序号','类型','结算日期','制单日期','收费员','押金','结算余额','实际金额','结算金额','收取金额','支付金额','金额大写'),'收入明细');
         }
         $stmt = $conn->query($tsql);
         $data_list = array();
@@ -413,6 +451,7 @@ class communityControl extends SystemControl
                 }
             }
         }
+        array_push($displaytext, '人次');
 //        var_dump($totalcol);
         $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
 //        var_dump($totalcol);
@@ -422,6 +461,12 @@ class communityControl extends SystemControl
 //        echo $sumcolstr;
         $tsql = " select $sumcolstr , count(1) cliniccount
                         $sql group by $groupbycolstr order by $groupbycolstr ";
+        $totalsql = " select $totalcolstr , count(1) cliniccount
+                        $sql ";
+        if(isset($_GET['export']) && $_GET['export']=='true'){
+            $this->exportxlsx(array(0=>$tsql,1=>$totalsql),$displaytext,'处方汇总');
+        }
+
 //        echo $tsql;
         $stmt = $conn->query($tsql);
         $data_list = array();
@@ -429,8 +474,7 @@ class communityControl extends SystemControl
             array_push($data_list, $row);
         }
         //处理合计
-        $totalsql = " select $totalcolstr , count(1) cliniccount
-                        $sql ";
+
 //        echo $totalsql;
         $totalstmt = $conn->query($totalsql);
         while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
@@ -439,6 +483,8 @@ class communityControl extends SystemControl
         Tpl::output('data_list', $data_list);
         //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
         Tpl::output('page', $page->show());
+
+
         //处理需要显示的列
         $col = array();
         foreach ($sumtype as $i => $v) {
@@ -550,6 +596,8 @@ class communityControl extends SystemControl
                 }
             }
         }
+        array_push($displaytext, '收取金额');
+        array_push($displaytext, '支付金额');
 //        var_dump($totalcol);
         $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
 //        var_dump($totalcol);
@@ -560,14 +608,19 @@ class communityControl extends SystemControl
         $tsql = " select $sumcolstr , sum(fCO_PayMoney) paymoney, sum(fCO_GetMoney) getmoney
                         $sql group by $groupbycolstr order by $groupbycolstr ";
 //        echo $tsql;
+        //处理合计
+        $totalsql = " select $totalcolstr , sum(fCO_PayMoney) paymoney, sum(fCO_GetMoney) getmoney
+                        $sql ";
+
+        if(isset($_GET['export']) && $_GET['export']=='true'){
+            $this->exportxlsx(array(0=>$tsql,1=>$totalsql),$displaytext,'收入汇总');
+        }
         $stmt = $conn->query($tsql);
         $data_list = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             array_push($data_list, $row);
         }
-        //处理合计
-        $totalsql = " select $totalcolstr , sum(fCO_PayMoney) paymoney, sum(fCO_GetMoney) getmoney
-                        $sql ";
+
 //        echo $totalsql;
         $totalstmt = $conn->query($totalsql);
         while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {

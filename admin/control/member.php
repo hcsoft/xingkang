@@ -347,6 +347,7 @@ class memberControl extends SystemControl{
                 }
             }
         }
+        array_push($displaytext, '消费金额');
 //        var_dump($totalcol);
         $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
 //        var_dump($totalcol);
@@ -357,14 +358,18 @@ class memberControl extends SystemControl{
         $tsql = " select $sumcolstr ,sum(fCO_GetMoney) getmoney
                         $sql group by $groupbycolstr order by $groupbycolstr ";
 //        echo $tsql;
+        //处理合计
+        $totalsql = " select $totalcolstr ,  sum(fCO_GetMoney) getmoney
+                        $sql ";
+        if(isset($_GET['export']) && $_GET['export']=='true'){
+            $this->exportxlsx(array(0=>$tsql,1=>$totalsql),$displaytext,'消费汇总');
+        }
         $stmt = $conn->query($tsql);
         $data_list = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             array_push($data_list, $row);
         }
-        //处理合计
-        $totalsql = " select $totalcolstr ,  sum(fCO_GetMoney) getmoney
-                        $sql ";
+
 //        echo $totalsql;
         $totalstmt = $conn->query($totalsql);
         while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
@@ -481,6 +486,9 @@ class memberControl extends SystemControl{
                 }
             }
         }
+        array_push($displaytext, '充值金额');
+        array_push($displaytext, '赠送金额');
+        array_push($displaytext, '产生金额');
 //        var_dump($totalcol);
         $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
 //        var_dump($totalcol);
@@ -490,15 +498,18 @@ class memberControl extends SystemControl{
 //        echo $sumcolstr;
         $tsql = " select $sumcolstr , sum(RechargeMoney) rechargemMoney,sum(GiveMoney) givemoney , sum(RechargeMoney+GiveMoney) allmoney
                         $sql group by $groupbycolstr order by $groupbycolstr ";
-//        echo $tsql;
+        //处理合计
+        $totalsql = " select $totalcolstr , count(1) cliniccount
+                        $sql ";
+        if(isset($_GET['export']) && $_GET['export']=='true'){
+            $this->exportxlsx(array(0=>$tsql,1=>$totalsql),$displaytext,'充值下账汇总');
+        }
         $stmt = $conn->query($tsql);
         $data_list = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             array_push($data_list, $row);
         }
-        //处理合计
-        $totalsql = " select $totalcolstr , count(1) cliniccount
-                        $sql ";
+
 //        echo $totalsql;
         $totalstmt = $conn->query($totalsql);
         while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
