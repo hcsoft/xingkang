@@ -87,8 +87,8 @@
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
                 </td>
-                <td><a href="javascript:void(0);" id="ncexport" class=" "
-                       title="导出">导出</a>
+                <td><a href="javascript:void(0);" id="ncexport" class="btn-export "
+                       title="导出"></a>
                 </td>
             </tr>
             </tbody>
@@ -228,6 +228,7 @@
         });
         $('#ncexport').click(function () {
             $("#export").val('true');
+            $("#search_type").val($('input[name="search_type_select"]:checked').val());
             $('#formSearch').submit();
         });
     });

@@ -9,6 +9,7 @@
 try {
     $conn = new PDO( "sqlsrv:Server=127.0.0.1,1433;Database=pmhs_km", 'sa', '11111111');
     $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+//    $conn->setAttribute( PDO::SQLSRV_ATTR_ENCODING, PDO::SQLSRV_ENCODING_DEFAULT );
 }
 
 catch( PDOException $e ) {

@@ -154,7 +154,14 @@ final class Base{
 			if (!@include_once(BASE_CORE_PATH.'/framework/db/'.strtolower(DBDRIVER).'.php')){
 				exit("Class Error: {$class}.isn't exists!");
 			}
-		}else{
+		}elseif (strtolower(substr($class,0,8)) == 'phpexcel'){
+            $pClassFilePath = PHPEXCEL_ROOT .
+                str_replace('_',DIRECTORY_SEPARATOR,$class) .
+                '.php';
+            if (!@include_once($pClassFilePath)){
+                exit("Class Error: {$class}.isn't exists!");
+            }
+        }else{
 			if (!@include_once(BASE_CORE_PATH.'/framework/libraries/'.$class.'.php')){
 				exit("Class Error: {$class}.isn't exists!");
 			}
