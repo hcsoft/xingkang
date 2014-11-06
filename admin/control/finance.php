@@ -120,8 +120,8 @@ class financeControl extends SystemControl
             'month' => ' month(a.dSale_MakeDate) as  "month" ',
             'day' => ' day(a.dSale_MakeDate) as "day" ',
             'OrgID' => ' org.name as "OrgID" ' ,
-            'dSale_MakeDate' =>' replace( CONVERT( CHAR(10), a.dSale_MakeDate, 102), '.', '-') as "dSale_MakeDate" ',
-            'dSale_GatherDate' =>' replace( CONVERT( CHAR(10), a.dSale_GatherDate , 102), '.', '-')as "dSale_GatherDate" ',
+            'dSale_MakeDate' =>' replace( CONVERT( CHAR(10), a.dSale_MakeDate, 102), \'.\', \'-\') as "dSale_MakeDate" ',
+            'dSale_GatherDate' =>' replace( CONVERT( CHAR(10), a.dSale_GatherDate , 102), \'.\', \'-\') as "dSale_GatherDate" ',
         );
         $config = array('sumcol' => array('OrgID' => array(name => 'OrgID', 'text' => '机构'),
             'Section' => array(name => 'Section', 'text' => '统计科室'),

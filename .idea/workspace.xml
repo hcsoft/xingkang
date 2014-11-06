@@ -112,12 +112,12 @@
       <file leaf-file-name="finance.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="123" column="82" selection-start="4817" selection-end="4817" vertical-scroll-proportion="0.45833334" vertical-offset="1414" max-vertical-offset="3794">
+            <state line="226" column="21" selection-start="9701" selection-end="9701" vertical-scroll-proportion="0.47916666" vertical-offset="2842" max-vertical-offset="3794">
               <folding>
-                <marker date="1415262604359" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1415262604359" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
-                <marker date="1415262604359" expanded="true" signature="1987:2115" placeholder="insert into ..." />
-                <marker date="1415262604359" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1415263027655" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1415263027655" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
+                <marker date="1415263027655" expanded="true" signature="1987:2115" placeholder="insert into ..." />
+                <marker date="1415263027655" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
               </folding>
             </state>
           </provider>
@@ -858,7 +858,11 @@
       <created>1415262357931</created>
       <updated>1415262357931</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="1,日期处理成yyyy-mm-dd格式">
+      <created>1415262646404</created>
+      <updated>1415262646404</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -909,7 +913,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="1,调整查询条件" />
     <MESSAGE value="1,调整抽查的列表显示" />
     <MESSAGE value="1,会员增加了会员id的查询条件" />
     <MESSAGE value="1,增加了库存管理" />
@@ -934,7 +937,8 @@
     <MESSAGE value="1,增加导出" />
     <MESSAGE value="1,增加了财务菜单&#10;2,财务菜单增加了收入统计" />
     <MESSAGE value="1,去掉sql" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,去掉sql" />
+    <MESSAGE value="1,日期处理成yyyy-mm-dd格式" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,日期处理成yyyy-mm-dd格式" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1249,12 +1253,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="82" selection-start="4817" selection-end="4817" vertical-scroll-proportion="0.45833334" vertical-offset="1414" max-vertical-offset="3794">
+        <state line="226" column="21" selection-start="9701" selection-end="9701" vertical-scroll-proportion="0.47916666" vertical-offset="2842" max-vertical-offset="3794">
           <folding>
-            <marker date="1415262604359" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1415262604359" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
-            <marker date="1415262604359" expanded="true" signature="1987:2115" placeholder="insert into ..." />
-            <marker date="1415262604359" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1415263027655" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1415263027655" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
+            <marker date="1415263027655" expanded="true" signature="1987:2115" placeholder="insert into ..." />
+            <marker date="1415263027655" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
           </folding>
         </state>
       </provider>
