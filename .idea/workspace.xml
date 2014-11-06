@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/finance.php" afterPath="$PROJECT_DIR$/admin/control/finance.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/finance.sum.php" afterPath="$PROJECT_DIR$/admin/templates/default/finance.sum.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -80,10 +80,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="finance.sum.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="finance.sum.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.sum.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="48" selection-start="2859" selection-end="2876" vertical-scroll-proportion="-21.913044" vertical-offset="602" max-vertical-offset="3836">
+            <state line="76" column="47" selection-start="2630" selection-end="2644" vertical-scroll-proportion="0.6875" vertical-offset="602" max-vertical-offset="3836">
               <folding />
             </state>
           </provider>
@@ -109,10 +109,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="finance.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="finance.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="223" column="20" selection-start="9488" selection-end="9488" vertical-scroll-proportion="0.41666666" vertical-offset="2842" max-vertical-offset="3794">
+            <state line="223" column="20" selection-start="9488" selection-end="9488" vertical-scroll-proportion="-12.173913" vertical-offset="2842" max-vertical-offset="3794">
               <folding>
                 <marker date="1415263521668" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
                 <marker date="1415263521668" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
@@ -297,8 +297,8 @@
         <option value="$PROJECT_DIR$/core/framework/db/connectmssql.php" />
         <option value="$PROJECT_DIR$/admin/include/limit.php" />
         <option value="$PROJECT_DIR$/admin/include/menu.php" />
-        <option value="$PROJECT_DIR$/admin/templates/default/finance.sum.php" />
         <option value="$PROJECT_DIR$/admin/control/finance.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/finance.sum.php" />
       </list>
     </option>
   </component>
@@ -874,7 +874,11 @@
       <created>1415263358058</created>
       <updated>1415263358058</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="1,解决除0的错误">
+      <created>1415263539593</created>
+      <updated>1415263539593</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1256,22 +1260,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.sum.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="48" selection-start="2859" selection-end="2876" vertical-scroll-proportion="-21.913044" vertical-offset="602" max-vertical-offset="3836">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="223" column="20" selection-start="9488" selection-end="9488" vertical-scroll-proportion="0.41666666" vertical-offset="2842" max-vertical-offset="3794">
+        <state line="223" column="20" selection-start="9488" selection-end="9488" vertical-scroll-proportion="-12.173913" vertical-offset="2842" max-vertical-offset="3794">
           <folding>
             <marker date="1415263521668" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
             <marker date="1415263521668" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
             <marker date="1415263521668" expanded="true" signature="1987:2115" placeholder="insert into ..." />
             <marker date="1415263521668" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.sum.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="47" selection-start="2630" selection-end="2644" vertical-scroll-proportion="0.6875" vertical-offset="602" max-vertical-offset="3836">
+          <folding />
         </state>
       </provider>
     </entry>
