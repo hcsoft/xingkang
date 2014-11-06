@@ -114,13 +114,13 @@ class financeControl extends SystemControl
             $_GET['search_type'] = '0';
         }
         $sqlarray = array(
-            'classname' => ' class.sClass_ID+\'.\'+class.sClass_Name as "classname"',
+            'classname' => ' case when class.sClass_ID is not null then class.sClass_ID+\'.\'+class.sClass_Name  else \'\' end as "classname" ',
             'Section' => 'a.StatSection as "Section"',
             'execSection' => ' ',
             'Doctor' => ' a.DoctorName as "Doctor" ',
-            'year' => ' year(a.dSale_MakeDate) as "year" ',
-            'month' => ' month(a.dSale_MakeDate) as  "month" ',
-            'day' => ' day(a.dSale_MakeDate) as "day" ',
+            'year' => ' year(a.dSale_GatherDate) as "year" ',
+            'month' => ' month(a.dSale_GatherDate) as  "month" ',
+            'day' => ' day(a.dSale_GatherDate) as "day" ',
             'OrgID' => ' org.name as "OrgID" ' ,
             'dSale_MakeDate' =>' replace( CONVERT( CHAR(10), a.dSale_MakeDate, 102), \'.\', \'-\') as "dSale_MakeDate" ',
             'dSale_GatherDate' =>' replace( CONVERT( CHAR(10), a.dSale_GatherDate , 102), \'.\', \'-\') as "dSale_GatherDate" ',
@@ -131,8 +131,9 @@ class financeControl extends SystemControl
             'Section' => array(name => 'Section', 'text' => '统计科室'),
 //            'execSection' => array(name => 'execSection', 'text' => '执行科室'),
             'Doctor' => array(name => 'Doctor', 'text' => '医生'),
-            'dSale_MakeDate' => array('text' => '制单日期', name=>'dSale_MakeDate' ),
-            'dSale_GatherDate' => array('text' => '结算日期', name=>'dSale_GatherDate'),
+            'year' => array('text' => '年', name=>'year' ),
+            'month' => array('text' => '月', name=>'month'),
+            'day' => array('text' => '日', name=>'day'),
         ));
         Tpl::output('config', $config);
 
@@ -146,8 +147,11 @@ class financeControl extends SystemControl
         $page = new Page();
         $page->setEachNum(10);
         $page->setNowPage($_REQUEST["curpage"]);
-        $sql = 'from Center_ClinicSale a  , shopnc_goods_common good , Center_Class class , Organization org
-                where  a.iDrug_ID = good.goods_commonid and good.iDrug_StatClass = class.iClass_ID and  a.orgid = org.id ';
+        $sql = 'from Center_ClinicSale a
+                left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
+                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID
+                , Organization org
+                where   a.orgid = org.id ';
 
         if ($_GET['query_start_time']) {
             $sql = $sql . ' and a.dSale_MakeDate >=\'' . $_GET['query_start_time'] . '\'';
