@@ -224,7 +224,10 @@ class financeControl extends SystemControl
                     case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
                         $sql group by $groupbycolstr order by $groupbycolstr ";
 //        echo $tsql;
-        $totalsql = " select $totalcolstr , count(1) cliniccount
+        $totalsql = " select $totalcolstr , sum(fSale_TaxFactMoney) taxmoney ,
+                    sum(fSale_NoTaxMoney) notaxmoney ,
+                    sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
+                    case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
                         $sql ";
         if(isset($_GET['export']) && $_GET['export']=='true'){
             $this->exportxlsx(array(0=>$tsql,1=>$totalsql),$displaytext,'收入统计');
