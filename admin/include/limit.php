@@ -109,7 +109,7 @@ $_limit =  array(
         array('name'=>'健康档案汇总', 'op'=>'sum', 'act'=>'healthfile')
     )),
     array('name'=>'财务', 'child'=>array(
-        array('name'=>'收入统计', 'op'=>'financesum', 'act'=>'finance'),
+        array('name'=>'门诊收入统计', 'op'=>'financesum', 'act'=>'finance'),
         array('name'=>'仓库单据明细', 'op'=>'detail', 'act'=>'storehouse'),
         array('name'=>'仓库单据汇总', 'op'=>'sum', 'act'=>'storehouse')
     ))

@@ -220,7 +220,7 @@ $arr = array(
                 'nav' => 'finance',
                 'text' => '财务',
                 'list' => array(
-                    array('args'=>'financesum,finance,finance',			'text'=>'收入统计'),
+                    array('args'=>'financesum,finance,finance',			'text'=>'门诊收入统计'),
                     array('args'=>'detail,storehouse,finance',			'text'=>'仓库单据明细'),
                     array('args'=>'sum,storehouse,finance',			'text'=>'仓库单据汇总')
                 )

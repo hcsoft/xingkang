@@ -70,12 +70,15 @@
                         <?php } ?>
                     </select></td>
                 </td>
+                <!--
                 <th><label for="query_start_time">制单日期</label></th>
                 <td><input class="txt date" type="text" value="<?php echo $_GET['query_start_time']; ?>"
                            id="query_start_time" name="query_start_time">
                     <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>" id="query_end_time"
                            name="query_end_time"/></td>
+                            -->
                 <th><label for="gather_start_time">结算日期</label></th>
+
                 <td><input class="txt date" type="text" value="<?php echo $_GET['gather_start_time']; ?>"
                            id="gather_start_time" name="gather_start_time">
                     <input class="txt date" type="text" value="<?php echo $_GET['gather_end_time']; ?>" id="gather_end_time"

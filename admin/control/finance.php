@@ -113,7 +113,9 @@ class financeControl extends SystemControl
         if (!isset($_GET['search_type'])) {
             $_GET['search_type'] = '0';
         }
-        $sqlarray = array('Section' => 'a.StatSection as "Section"',
+        $sqlarray = array(
+            'classname' => ' class.sClass_Name as "classname"',
+            'Section' => 'a.StatSection as "Section"',
             'execSection' => ' ',
             'Doctor' => ' a.DoctorName as "Doctor" ',
             'year' => ' year(a.dSale_MakeDate) as "year" ',
@@ -123,7 +125,9 @@ class financeControl extends SystemControl
             'dSale_MakeDate' =>' replace( CONVERT( CHAR(10), a.dSale_MakeDate, 102), \'.\', \'-\') as "dSale_MakeDate" ',
             'dSale_GatherDate' =>' replace( CONVERT( CHAR(10), a.dSale_GatherDate , 102), \'.\', \'-\') as "dSale_GatherDate" ',
         );
-        $config = array('sumcol' => array('OrgID' => array(name => 'OrgID', 'text' => '机构'),
+        $config = array('sumcol' => array(
+            'OrgID' => array(name => 'OrgID', 'text' => '机构'),
+            'classname' => array(name => 'classname', 'text' => '财务分类'),
             'Section' => array(name => 'Section', 'text' => '统计科室'),
 //            'execSection' => array(name => 'execSection', 'text' => '执行科室'),
             'Doctor' => array(name => 'Doctor', 'text' => '医生'),
@@ -135,7 +139,7 @@ class financeControl extends SystemControl
         //处理汇总字段
         $sumtype = $_GET['sumtype'];
         if ($sumtype == null) {
-            $sumtype = array(0 => "OrgID");
+            $sumtype = array(0 => "OrgID",1=>"classname");
             $_GET['sumtype'] = $sumtype;
         }
         $checked = $_GET['checked'];
