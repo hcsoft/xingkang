@@ -221,7 +221,7 @@ class financeControl extends SystemControl
                     sum(fSale_TaxFactMoney) taxmoney ,
                     sum(fSale_NoTaxMoney) notaxmoney ,
                     sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
-                    (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney)  grossprofitrate
+                    ( case when sum(fSale_TaxFactMoney) =0 then 0 else sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
                         $sql group by $groupbycolstr order by $groupbycolstr ";
 //        echo $tsql;
         $totalsql = " select $totalcolstr , count(1) cliniccount

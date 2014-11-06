@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/finance.php" afterPath="$PROJECT_DIR$/admin/control/finance.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -111,12 +112,12 @@
       <file leaf-file-name="finance.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="226" column="21" selection-start="9701" selection-end="9701" vertical-scroll-proportion="0.47916666" vertical-offset="2842" max-vertical-offset="3794">
+            <state line="223" column="146" selection-start="9614" selection-end="9614" vertical-scroll-proportion="0.41666666" vertical-offset="2842" max-vertical-offset="3794">
               <folding>
-                <marker date="1415263027655" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1415263027655" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
-                <marker date="1415263027655" expanded="true" signature="1987:2115" placeholder="insert into ..." />
-                <marker date="1415263027655" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1415263330259" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1415263330259" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
+                <marker date="1415263330259" expanded="true" signature="1987:2115" placeholder="insert into ..." />
+                <marker date="1415263330259" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
               </folding>
             </state>
           </provider>
@@ -865,7 +866,11 @@
       <created>1415263037753</created>
       <updated>1415263037753</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="1,日期处理成yyyy-mm-dd格式">
+      <created>1415263045092</created>
+      <updated>1415263045092</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1256,12 +1261,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="226" column="21" selection-start="9701" selection-end="9701" vertical-scroll-proportion="0.47916666" vertical-offset="2842" max-vertical-offset="3794">
+        <state line="223" column="146" selection-start="9614" selection-end="9614" vertical-scroll-proportion="0.41666666" vertical-offset="2842" max-vertical-offset="3794">
           <folding>
-            <marker date="1415263027655" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1415263027655" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
-            <marker date="1415263027655" expanded="true" signature="1987:2115" placeholder="insert into ..." />
-            <marker date="1415263027655" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1415263330259" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1415263330259" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
+            <marker date="1415263330259" expanded="true" signature="1987:2115" placeholder="insert into ..." />
+            <marker date="1415263330259" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
           </folding>
         </state>
       </provider>
