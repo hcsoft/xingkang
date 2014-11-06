@@ -51,7 +51,11 @@ $arr = array(
                 'text'	=> '仓库'),
             11 => array(
                 'args'	=> 'community',
-                'text'	=> '社区')
+                'text'	=> '社区'),
+            12 => array(
+                'args' => 'finance',
+                'text' => '财务'
+            )
 		),
 		'left' =>array(
 
@@ -210,6 +214,15 @@ $arr = array(
                     array('args'=>'rechargesum,member,community',			'text'=>'充值下账汇总'),
                     array('args'=>'query,healthfile,community',	'text'=>'健康档案查询'),
                     array('args'=>'sum,healthfile,community',	'text'=>'健康档案汇总'),
+                )
+            ),
+            12 => array(
+                'nav' => 'finance',
+                'text' => '财务',
+                'list' => array(
+                    array('args'=>'financesum,finance,finance',			'text'=>'收入统计'),
+                    array('args'=>'detail,storehouse,finance',			'text'=>'仓库单据明细'),
+                    array('args'=>'sum,storehouse,finance',			'text'=>'仓库单据汇总')
                 )
             )
 		)
