@@ -223,7 +223,7 @@ class financeControl extends SystemControl
                     sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
                     (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney)  grossprofitrate
                         $sql group by $groupbycolstr order by $groupbycolstr ";
-        echo $tsql;
+//        echo $tsql;
         $totalsql = " select $totalcolstr , count(1) cliniccount
                         $sql ";
         if(isset($_GET['export']) && $_GET['export']=='true'){
