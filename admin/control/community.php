@@ -514,10 +514,12 @@ class communityControl extends SystemControl
             'day' => ' day(a.dCO_Date) as "day" ',
             'OrgID' => ' org.name as "OrgID" '
         );
-        $config = array('sumcol' => array('iCO_Type' => array(name => 'iCO_Type', 'text' => '类型', map => $this->types),
+        $config = array('sumcol' => array(
+            'OrgID' => array(name => 'OrgID', 'text' => '结算机构'),
+            'iCO_Type' => array(name => 'iCO_Type', 'text' => '类型', map => $this->types),
             'iCO_MakePerson' => array(name => 'iCO_MakePerson', 'text' => '收费员'),
             'iCO_GatherType' => array(name => 'iCO_GatherType', 'text' => '医保类型'),
-            'OrgID' => array(name => 'OrgID', 'text' => '结算机构'),
+
             'year' => array('text' => '年', name=>'year' ),
             'month' => array('text' => '月', name=>'month'),
             'day' => array('text' => '日', name=>'day'),

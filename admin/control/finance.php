@@ -114,7 +114,7 @@ class financeControl extends SystemControl
             $_GET['search_type'] = '0';
         }
         $sqlarray = array(
-            'classname' => ' class.sClass_Name as "classname"',
+            'classname' => ' class.sClass_ID+\'.\'+class.sClass_Name as "classname"',
             'Section' => 'a.StatSection as "Section"',
             'execSection' => ' ',
             'Doctor' => ' a.DoctorName as "Doctor" ',
