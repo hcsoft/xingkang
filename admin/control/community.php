@@ -507,7 +507,9 @@ class communityControl extends SystemControl
             $_GET['search_type'] = '0';
         }
         $sqlarray = array('iCO_Type' => 'ico.name as "iCO_Type"',
-            'iCO_MakePerson' => ' person.sPerson_Name as "iCO_MakePerson" ',
+            'MakePerson' => ' sMakePerson as "MakePerson" ',
+            'section' => ' sStatSection as "section" ',
+            'doctor' => ' sDoctor as "doctor" ',
             'iCO_GatherType' => ' gather.name as "iCO_GatherType" ',
             'year' => ' year(a.dCO_Date) as "year" ',
             'month' => ' left(convert(varchar,dCO_Date,112),6) as  "month" ',
@@ -516,9 +518,13 @@ class communityControl extends SystemControl
 
         );
         $config = array('sumcol' => array(
-            'OrgID' => array(name => 'OrgID', 'text' => '结算机构'),
+            'OrgID' => array(name => 'OrgID', 'text' => '机构'),
             'iCO_Type' => array(name => 'iCO_Type', 'text' => '类型', map => $this->types),
-            'iCO_MakePerson' => array(name => 'iCO_MakePerson', 'text' => '收费员'),
+            'section' => array(name => 'section', 'text' => '科室'),
+            'doctor' => array(name => 'doctor', 'text' => '医生'),
+            'MakePerson' => array(name => 'MakePerson', 'text' => '收费员'),
+            'iCO_GatherType' => array(name => 'iCO_GatherType', 'text' => '医保类型'),
+            'iCO_GatherType' => array(name => 'iCO_GatherType', 'text' => '医保类型'),
             'iCO_GatherType' => array(name => 'iCO_GatherType', 'text' => '医保类型'),
             'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
             'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
@@ -537,13 +543,12 @@ class communityControl extends SystemControl
         $page->setEachNum(10);
         $page->setNowPage($_REQUEST["curpage"]);
         $sql = 'from Center_CheckOut a  , Center_codes ico, Center_codes gather,Center_codes state,Center_codes tag,
-            Center_Person person , Organization org
+            Organization org
           where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
            and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
            and  a.iCO_State = state.code and state.type=\'iCO_State\'
            and  a.iCO_Tag = tag.code and tag.type=\'iCO_Tag\'
-           and a.orgid = org.id
-           and a.iCO_MakePerson = person.iPerson_ID ';
+           and a.orgid = org.id ';
 
         if ($_GET['query_start_time']) {
             $sql = $sql . ' and a.dCO_Date >=\'' . $_GET['query_start_time'] . '\'';
