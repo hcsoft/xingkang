@@ -128,11 +128,36 @@
                             <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else  echo $v->$item;?></th>
                         <?php  }?>
                         <td class=" align-right">
-                            <?php echo number_format($v->getmoney, 3)?>
+                            <?php echo number_format($v->factmoney, 3)?>
                         </td>
                         <td class=" align-right">
-                            <?php echo number_format($v->paymoney, 3)?>
+                            <?php echo number_format($v->incomemoney, 3)?>
                         </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->medicare, 3)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->cardmoney, 3)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->cashmoney, 3)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->postpaymoney, 3)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->cliniccount, 0)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->sumfRecharge, 3)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->sumfConsume, 3)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->scaletomoney, 3)?>
+                        </td>
+
                     </tr>
                 <?php } ?>
             <?php } else { ?>

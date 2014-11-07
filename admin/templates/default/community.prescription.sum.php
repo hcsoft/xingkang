@@ -42,7 +42,7 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>处方汇总查询</h3>
+            <h3>就诊情况汇总</h3>
         </div>
     </div>
     <div class="fixed-empty"></div>

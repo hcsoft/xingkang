@@ -512,7 +512,7 @@ class communityControl extends SystemControl
             'year' => ' year(a.dCO_Date) as "year" ',
             'month' => ' left(convert(varchar,dCO_Date,112),6) as  "month" ',
             'day' => ' convert(varchar,dCO_Date,112) as "day" ',
-            'OrgID' => ' org.name as "OrgID" ',
+            'OrgID' => ' org.name as "OrgID" '
 
         );
         $config = array('sumcol' => array(
@@ -520,7 +520,6 @@ class communityControl extends SystemControl
             'iCO_Type' => array(name => 'iCO_Type', 'text' => '类型', map => $this->types),
             'iCO_MakePerson' => array(name => 'iCO_MakePerson', 'text' => '收费员'),
             'iCO_GatherType' => array(name => 'iCO_GatherType', 'text' => '医保类型'),
-
             'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
             'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
             'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
@@ -530,7 +529,7 @@ class communityControl extends SystemControl
         //处理汇总字段
         $sumtype = $_GET['sumtype'];
         if ($sumtype == null) {
-            $sumtype = array(0 => "iCO_Type");
+            $sumtype = array(0 => "OrgID");
             $_GET['sumtype'] = $sumtype;
         }
         $checked = $_GET['checked'];
@@ -599,8 +598,16 @@ class communityControl extends SystemControl
                 }
             }
         }
-        array_push($displaytext, '收取金额');
-        array_push($displaytext, '支付金额');
+        array_push($displaytext, '应缴现金');
+        array_push($displaytext, '处方金额');
+        array_push($displaytext, '统筹支付');
+        array_push($displaytext, '医保卡支付');
+        array_push($displaytext, '现金支付');
+        array_push($displaytext, '银行卡付');
+        array_push($displaytext, '处方总数');
+        array_push($displaytext, '预存下账');
+        array_push($displaytext, '赠送下账');
+        array_push($displaytext, '积分下账金额');
 //        var_dump($totalcol);
         $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
 //        var_dump($totalcol);
@@ -608,11 +615,32 @@ class communityControl extends SystemControl
         $sumcolstr = join(',', $sumcol);
         $groupbycolstr = join(',', $groupbycol);
 //        echo $sumcolstr;
-        $tsql = " select $sumcolstr , sum(fCO_PayMoney) paymoney, sum(fCO_GetMoney) getmoney
+        $tsql = " select $sumcolstr ,
+                    Sum(fCO_InComeMoney - fCO_Medicare  - fCO_Card - fCO_PosPay - fRecharge  - fConsume - fScaleToMoney) factmoney,
+                    Sum(fCO_InComeMoney) incomemoney,
+                    Sum(fCO_Medicare) medicare,
+                    Sum(fCO_Card) cardmoney,
+                    Sum(fCO_Cash) cashmoney,
+                    Sum(fCO_PosPay) postpaymoney,
+                    Sum( case when RecipeID > 0 and fCO_IncomeMoney>0  then 1  when  RecipeID > 0 and fCO_IncomeMoney<0 then  -1 end ) cliniccount,
+                    Sum(fRecharge) sumfRecharge,
+                    Sum(fConsume) sumfConsume,
+                    Sum(fScaleToMoney) scaletomoney
+
                         $sql group by $groupbycolstr order by $groupbycolstr ";
 //        echo $tsql;
         //处理合计
-        $totalsql = " select $totalcolstr , sum(fCO_PayMoney) paymoney, sum(fCO_GetMoney) getmoney
+        $totalsql = " select $totalcolstr ,
+                    Sum(fCO_InComeMoney - fCO_Medicare  - fCO_Card - fCO_PosPay - fRecharge  - fConsume - fScaleToMoney) factmoney,
+                    Sum(fCO_InComeMoney) incomemoney,
+                    Sum(fCO_Medicare) medicare,
+                    Sum(fCO_Card) cardmoney,
+                    Sum(fCO_Cash) cashmoney,
+                    Sum(fCO_PosPay) postpaymoney,
+                    Sum( case when RecipeID > 0 and fCO_IncomeMoney>0  then 1  when  RecipeID > 0 and fCO_IncomeMoney<0 then  -1 end ) cliniccount,
+                    Sum(fRecharge) sumfRecharge,
+                    Sum(fConsume) sumfConsume,
+                    Sum(fScaleToMoney) scaletomoney
                         $sql ";
 
         if(isset($_GET['export']) && $_GET['export']=='true'){
