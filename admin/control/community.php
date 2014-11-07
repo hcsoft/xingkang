@@ -373,16 +373,16 @@ class communityControl extends SystemControl
         $sqlarray = array('Section' => 'a.Section as "Section"',
             'Doctor' => ' a.Doctor as "Doctor" ',
             'year' => ' year(a.ClinicDate) as "year" ',
-            'month' => ' month(a.ClinicDate) as  "month" ',
-            'day' => ' day(a.ClinicDate) as "day" ',
+            'month' => ' left(convert(varchar,ClinicDate,112),6) as  "month" ',
+            'day' => ' convert(varchar,ClinicDate,112) as "day" ',
             'OrgID' => ' org.name as "OrgID" '
         );
         $config = array('sumcol' => array('OrgID' => array(name => 'OrgID', 'text' => '机构', map => $this->types),
             'Section' => array(name => 'Section', 'text' => '科室'),
             'Doctor' => array(name => 'Doctor', 'text' => '医生'),
-            'year' => array('text' => '年', name=>'year' ),
-            'month' => array('text' => '月', name=>'month'),
-            'day' => array('text' => '日', name=>'day'),
+            'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
+            'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
+            'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
         ));
         Tpl::output('config', $config);
 
@@ -510,9 +510,10 @@ class communityControl extends SystemControl
             'iCO_MakePerson' => ' person.sPerson_Name as "iCO_MakePerson" ',
             'iCO_GatherType' => ' gather.name as "iCO_GatherType" ',
             'year' => ' year(a.dCO_Date) as "year" ',
-            'month' => ' month(a.dCO_Date) as  "month" ',
-            'day' => ' day(a.dCO_Date) as "day" ',
-            'OrgID' => ' org.name as "OrgID" '
+            'month' => ' left(convert(varchar,dCO_Date,112),6) as  "month" ',
+            'day' => ' convert(varchar,dCO_Date,112) as "day" ',
+            'OrgID' => ' org.name as "OrgID" ',
+
         );
         $config = array('sumcol' => array(
             'OrgID' => array(name => 'OrgID', 'text' => '结算机构'),
@@ -520,9 +521,9 @@ class communityControl extends SystemControl
             'iCO_MakePerson' => array(name => 'iCO_MakePerson', 'text' => '收费员'),
             'iCO_GatherType' => array(name => 'iCO_GatherType', 'text' => '医保类型'),
 
-            'year' => array('text' => '年', name=>'year' ),
-            'month' => array('text' => '月', name=>'month'),
-            'day' => array('text' => '日', name=>'day'),
+            'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
+            'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
+            'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
         ));
         Tpl::output('config', $config);
 

@@ -259,17 +259,17 @@ class memberControl extends SystemControl{
         $sqlarray = array('membername' => 'member.sName as "membername"',
             'memberid' => ' member.sMemberID as "memberid" ',
             'year' => ' year(a.dCO_Date) as "year" ',
-            'month' => ' month(a.dCO_Date) as  "month" ',
-            'day' => ' day(a.dCO_Date) as "day" ',
+            'month' => ' left(convert(varchar,dCO_Date,112),6) as  "month" ',
+            'day' => ' convert(varchar,dCO_Date,112) as "day" ',
             'OrgID' => ' org.name as "OrgID" '
         );
         $config = array('sumcol' => array('OrgID' => array(name => 'OrgID', 'text' => '机构'),
             'member' => array('text' => '会员', name=>'member',
                 'cols' => array(0 => array(name => 'memberid', 'text' => '会员号码')
                 , 1 => array(name => 'membername', 'text' => '会员名称'))),
-            'year' => array('text' => '年', name=>'year' ),
-            'month' => array('text' => '月', name=>'month'),
-            'day' => array('text' => '日', name=>'day'),
+            'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
+            'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
+            'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
         ));
         Tpl::output('config', $config);
 
@@ -403,17 +403,17 @@ class memberControl extends SystemControl{
             'type' => ' type.name as "type" ',
             'state' => ' state.name as "state" ',
             'year' => ' year(a.RechargeDate) as "year" ',
-            'month' => ' month(a.RechargeDate) as  "month" ',
-            'day' => ' day(a.RechargeDate) as "day" ',
+            'month' => ' left(convert(varchar,RechargeDate,112),6) as  "month" ',
+            'day' => ' convert(varchar,RechargeDate,112) as "day" ',
             'OrgID' => ' org.name as "OrgID" '
         );
         $config = array('sumcol' => array('OrgID' => array(name => 'OrgID', 'text' => '机构'),
             'ChargePerson' => array(name => 'ChargePerson', 'text' => '收款人'),
             'type' => array(name => 'type', 'text' => '类型'),
             'state' => array(name => 'state', 'text' => '状态'),
-            'year' => array('text' => '年', name=>'year' ),
-            'month' => array('text' => '月', name=>'month'),
-            'day' => array('text' => '日', name=>'day'),
+            'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
+            'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
+            'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
         ));
         Tpl::output('config', $config);
 

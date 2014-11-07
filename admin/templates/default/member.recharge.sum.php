@@ -79,7 +79,7 @@
                 <td colspan="1" id="sumtypetr">
                     <?php foreach ($output['config']['sumcol'] as $k => $v) { ?>
                         <input type='checkbox' name='sumtype[]'  id='sumtype_<?php echo $v['name']; ?>' <?php if(in_array( $v['name'],$_GET['sumtype'])) echo 'checked'; ?>
-                               value='<?php echo $v['name']; ?>' >
+                               value='<?php echo $v['name']; ?>' onclick="sumuncheck('sumtype_','<?php echo $v['uncheck']; ?>')">
 
                         <label for='sumtype_<?php echo $v['name']; ?>'><?php echo $v['text']; ?></label>
                     <?php } ?>
@@ -236,6 +236,14 @@
             }
         }
         return ret;
+    }
+    function sumuncheck(pre,ids){
+        if(ids){
+            var idarray = ids.split(",");
+            for(var i = 0 ;i <idarray.length;i++){
+                $("#"+pre+idarray[i]).prop("checked",false);
+            }
+        }
     }
 
 </script>

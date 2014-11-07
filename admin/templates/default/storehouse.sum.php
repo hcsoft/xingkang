@@ -247,9 +247,17 @@
                 }
             }
             if(ischecked){
-                $("#sumtypetr").append("<input type='checkbox' name='sumtype[]'  id='sumtype_"+key+"' checked value='"+key+"' ><label for='sumtype_"+key+"'>"+value.text+"</label>");
+                $("#sumtypetr").append("<input type='checkbox' name='sumtype[]'  id='sumtype_"+key+"' checked value='"+key+"' onclick=\"sumuncheck('sumtype_','"+value.uncheck+"')\" ><label for='sumtype_"+key+"'>"+value.text+"</label>");
             }else{
-                $("#sumtypetr").append("<input type='checkbox' name='sumtype[]'  id='sumtype_"+key+"' value='"+key+"' ><label for='sumtype_"+key+"'>"+value.text+"</label>");
+                $("#sumtypetr").append("<input type='checkbox' name='sumtype[]'  id='sumtype_"+key+"' value='"+key+"'onclick=\"sumuncheck('sumtype_','"+value.uncheck+"')\" ><label for='sumtype_"+key+"'>"+value.text+"</label>");
+            }
+        }
+    }
+    function sumuncheck(pre,ids){
+        if(ids){
+            var idarray = ids.split(",");
+            for(var i = 0 ;i <idarray.length;i++){
+                $("#"+pre+idarray[i]).prop("checked",false);
             }
         }
     }

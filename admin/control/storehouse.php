@@ -231,8 +231,8 @@ class storehouseControl extends SystemControl
             'sDrug_Brand' => ' goods.sDrug_Brand as "sDrug_Brand" ',
             'drugcount' => ' sum(fBuy_FactNum) as "drugcount" ',
             'year' => ' year(a.dBuy_Date) as "year" ',
-            'month' => ' month(a.dBuy_Date) as  "month" ',
-            'day' => ' day(a.dBuy_Date) as "day" ',
+            'month' => ' left(convert(varchar,dBuy_Date,112),6) as  "month" ',
+            'day' => ' convert(varchar,dBuy_Date,112) as "day" ',
             'sDrug_TradeName' => ' goods.sDrug_TradeName as "sDrug_TradeName"  ',
             'OrgID' => ' c.name as "OrgID" '
         );
@@ -246,9 +246,9 @@ class storehouseControl extends SystemControl
                     , 2 => array(name => 'sDrug_Unit', 'text' => '单位')
                     , 3 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
                     , 4 => array(name => 'drugcount', 'text' => '数量'))),
-                'year' => array('text' => '年', name=>'year' ),
-                'month' => array('text' => '月', name=>'month'),
-                'day' => array('text' => '日', name=>'day'),
+                'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
+                'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
+                'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
             ))
         , 1 => array('text' => '领用金额汇总',
                 'sqlwher' => ' and  iBuy_Type in (5,14) ',
@@ -259,9 +259,9 @@ class storehouseControl extends SystemControl
                         , 2 => array(name => 'sDrug_Unit', 'text' => '单位')
                         , 3 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
                         , 4 => array(name => 'drugcount', 'text' => '数量'))),
-                    'year' => array('text' => '年', name=>'year' ),
-                    'month' => array('text' => '月', name=>'month'),
-                    'day' => array('text' => '日', name=>'day'),
+                    'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
+                    'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
+                    'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
                 ))
         , 2 => array('text' => '盈亏金额汇总',
                 'sqlwher' => ' and  iBuy_Type in (3,4,12) ',
@@ -272,9 +272,9 @@ class storehouseControl extends SystemControl
                         , 2 => array(name => 'sDrug_Unit', 'text' => '单位')
                         , 3 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
                         , 4 => array(name => 'drugcount', 'text' => '数量'))),
-                    'year' => array('text' => '年', name=>'year' ),
-                    'month' => array('text' => '月', name=>'month'),
-                    'day' => array('text' => '日', name=>'day'),
+                    'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
+                    'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
+                    'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
                 ))
         , 3 => array('text' => '采购计划数量汇总',
                 'sqlwher' => ' and iBuy_Type in (50) ',
@@ -285,9 +285,9 @@ class storehouseControl extends SystemControl
                         , 2 => array(name => 'sDrug_Unit', 'text' => '单位')
                         , 3 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
                         , 4 => array(name => 'drugcount', 'text' => '数量'))),
-                    'year' => array('text' => '年', name=>'year' ),
-                    'month' => array('text' => '月', name=>'month'),
-                    'day' => array('text' => '日', name=>'day'),
+                    'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
+                    'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
+                    'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
                 )));
         Tpl::output('config', $config);
 

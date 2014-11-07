@@ -119,21 +119,22 @@ class financeControl extends SystemControl
             'execSection' => ' ',
             'Doctor' => ' a.DoctorName as "Doctor" ',
             'year' => ' year(a.dSale_GatherDate) as "year" ',
-            'month' => ' month(a.dSale_GatherDate) as  "month" ',
-            'day' => ' day(a.dSale_GatherDate) as "day" ',
+            'month' => ' left(convert(varchar,dSale_GatherDate,112),6) as  "month" ',
+            'day' => ' convert(varchar,dSale_GatherDate,112) as "day" ',
             'OrgID' => ' org.name as "OrgID" ' ,
             'dSale_MakeDate' =>' replace( CONVERT( CHAR(10), a.dSale_MakeDate, 102), \'.\', \'-\') as "dSale_MakeDate" ',
             'dSale_GatherDate' =>' replace( CONVERT( CHAR(10), a.dSale_GatherDate , 102), \'.\', \'-\') as "dSale_GatherDate" ',
         );
         $config = array('sumcol' => array(
             'OrgID' => array(name => 'OrgID', 'text' => '机构'),
-            'classname' => array(name => 'classname', 'text' => '财务分类'),
+
             'Section' => array(name => 'Section', 'text' => '统计科室'),
+            'classname' => array(name => 'classname', 'text' => '财务分类'),
 //            'execSection' => array(name => 'execSection', 'text' => '执行科室'),
             'Doctor' => array(name => 'Doctor', 'text' => '医生'),
-            'year' => array('text' => '年', name=>'year' ),
-            'month' => array('text' => '月', name=>'month'),
-            'day' => array('text' => '日', name=>'day'),
+            'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
+            'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
+            'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
         ));
         Tpl::output('config', $config);
 
