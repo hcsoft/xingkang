@@ -274,4 +274,216 @@ class financeControl extends SystemControl
         Tpl::output('displaytext', $displaytext);
         Tpl::showpage('finance.sum');
     }
+
+    public function financegoodsumOp()
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        if (!isset($_GET['search_type'])) {
+            $_GET['search_type'] = '0';
+        }
+        $sqlarray = array(
+            'classname' => ' case when class.sClass_ID is not null then class.sClass_ID+\'.\'+class.sClass_Name  else \'\' end as "classname" ',
+            'Section' => 'a.StatSection as "Section"',
+            'execSection' => ' ',
+            'Doctor' => ' a.DoctorName as "Doctor" ',
+            'year' => ' year(a.dSale_GatherDate) as "year" ',
+            'month' => ' left(convert(varchar,dSale_GatherDate,112),6) as  "month" ',
+            'day' => ' convert(varchar,dSale_GatherDate,112) as "day" ',
+            'OrgID' => ' org.name as "OrgID" ' ,
+            'dSale_MakeDate' =>' replace( CONVERT( CHAR(10), a.dSale_MakeDate, 102), \'.\', \'-\') as "dSale_MakeDate" ',
+            'dSale_GatherDate' =>' replace( CONVERT( CHAR(10), a.dSale_GatherDate , 102), \'.\', \'-\') as "dSale_GatherDate" ',
+            'sDrug_Spec' => ' goods.sDrug_Spec as "sDrug_Spec" ',
+            'sDrug_Unit' => ' goods.sDrug_Unit as "sDrug_Unit" ',
+            'sDrug_Brand' => ' goods.sDrug_Brand as "sDrug_Brand" ',
+
+            'sDrug_TradeName' => ' goods.sDrug_TradeName as "sDrug_TradeName"  ',
+        );
+        $config = array('sumcol' => array(
+            'OrgID' => array(name => 'OrgID', 'text' => '机构'),
+            'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
+            'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
+            'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
+        ));
+        Tpl::output('config', $config);
+
+        //处理汇总字段
+        $sumtype = $_GET['sumtype'];
+        if ($sumtype == null) {
+            $sumtype = array();
+            $_GET['sumtype'] = $sumtype;
+        }
+        $checked = $_GET['checked'];
+        $page = new Page();
+        $page->setEachNum(10);
+        $page->setNowPage($_REQUEST["curpage"]);
+        $sql = 'from Center_ClinicSale a
+                left join  shopnc_goods_common goods  on a.iDrug_ID = goods.goods_commonid
+                left join Center_Class class on   goods.iDrug_StatClass = class.iClass_ID
+                , Organization org
+                where   a.orgid = org.id ';
+
+        if ($_GET['query_start_time']) {
+            $sql = $sql . ' and a.dSale_MakeDate >=\'' . $_GET['query_start_time'] . '\'';
+        }
+
+        if ($_GET['query_end_time']) {
+            $sql = $sql . ' and a.dSale_MakeDate < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
+        }
+
+        if ($_GET['gather_start_time']) {
+            $sql = $sql . ' and a.dSale_GatherDate >=\'' . $_GET['gather_start_time'] . '\'';
+        }
+
+        if ($_GET['gather_end_time']) {
+            $sql = $sql . ' and a.dSale_GatherDate < dateadd(day,1,\'' . $_GET['gather_end_time'] . '\')';
+        }
+
+        //处理树的参数
+        if ($_GET['orgids']) {
+            $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+        }
+
+        $search_type = $_GET['search_type'];
+//        echo $search_type;
+        $colconfig = $config;
+//        var_dump($config[intval($search_type)]);
+        $displaycol = array();
+        $displaytext = array();
+        $sumcol = array();
+        $totalcol = array();
+        $groupbycol = array();
+        foreach ($sumtype as $i => $v) {
+//            var_dump($colconfig['sumcol'][$v]);
+            if(isset($colconfig['sqlwher'])){
+                $sql = $sql . $colconfig['sqlwher'];
+            }
+            if (isset($colconfig['sumcol'][$v])) {
+                if (isset($colconfig['sumcol'][$v]['cols'])) {
+                    foreach ($colconfig['sumcol'][$v]['cols'] as $item) {
+//                        echo $item['name'] . '<br>';
+                        array_push($sumcol, $sqlarray[$item['name']]);
+                        array_push($displaycol, $item['name']);
+                        array_push($displaytext, $item['text']);
+                        $itemsplit = explode(' as ', $sqlarray[$item['name']]);
+                        array_push($totalcol, ' null as ' . $itemsplit[1]);
+                        $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+                        if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+                            array_push($groupbycol, $itemsplit[0]);
+                    }
+                } else {
+                    $item = $colconfig['sumcol'][$v];
+                    array_push($sumcol, $sqlarray[$item['name']]);
+                    array_push($displaycol, $item['name']);
+                    array_push($displaytext, $item['text']);
+                    $itemsplit = explode(' as ', $sqlarray[$item['name']]);
+                    array_push($totalcol, ' null as ' . $itemsplit[1]);
+                    $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+                    if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+                        array_push($groupbycol, $itemsplit[0]);
+                }
+            }
+        }
+        array_push($displaytext, '商品名称');
+        array_push($displaytext, '规格');
+        array_push($displaytext, '单位');
+        array_push($displaytext, '产地厂牌');
+        array_push($displaytext, '数量');
+        array_push($displaytext, '单价');
+        array_push($displaytext, '金额');
+        array_push($displaytext, '成本');
+        array_push($displaytext, '毛利');
+        array_push($displaytext, '毛利率');
+//        var_dump($totalcol);
+        if(count($totalcol)>0)
+            $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
+//        var_dump($totalcol);
+        if(count($totalcol)>0)
+            $totalcolstr = join(',', $totalcol).',';
+        if(count($sumcol)>0)
+            $sumcolstr = join(',', $sumcol).',';
+        if(count($groupbycol)>0)
+            $groupbycolstr = join(',', $groupbycol).',';
+//        echo $sumcolstr;
+        $tsql = " select
+                    $sumcolstr
+                    goods.sDrug_TradeName as sDrug_TradeName,
+                    goods.sDrug_Spec as sDrug_Spec,
+                    goods.sDrug_Unit as sDrug_Unit,
+                    goods.sDrug_Brand as sDrug_Brand,
+                    sum(fSale_Num) drugcount ,
+                    case when sum(fSale_Num) =0 then 0 else  sum(fSale_TaxFactMoney)/ sum(fSale_Num) end as fSale_TaxPrice,
+                    sum(fSale_TaxFactMoney) taxmoney ,
+                    sum(fSale_NoTaxMoney) notaxmoney ,
+                    sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
+                    case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
+                        $sql group by  $groupbycolstr goods.sDrug_TradeName ,
+                    goods.sDrug_Spec ,
+                    goods.sDrug_Unit ,
+                    goods.sDrug_Brand  order by $groupbycolstr goods.sDrug_TradeName ,
+                    goods.sDrug_Spec ,
+                    goods.sDrug_Unit ,
+                    goods.sDrug_Brand ";
+//        echo $tsql;
+        if(count($totalcol)>0){
+            $totalsql = " select $totalcolstr
+                    '' as sDrug_TradeName,
+                    '' as sDrug_Spec,
+                    '' as sDrug_Unit,
+                    '' as sDrug_Brand,
+                    sum(fSale_Num) drugcount ,
+                    0 as fSale_TaxPrice,
+                    sum(fSale_TaxFactMoney) taxmoney ,
+                    sum(fSale_NoTaxMoney) notaxmoney ,
+                    sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
+                    case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
+                        $sql ";
+        }else{
+            $totalsql = " select '总计：' as sDrug_TradeName,
+                    '' as sDrug_Spec,
+                    '' as sDrug_Unit,
+                    '' as sDrug_Brand,
+                    sum(fSale_Num) drugcount ,
+                    0 as fSale_TaxPrice,
+                    sum(fSale_TaxFactMoney) taxmoney ,
+                    sum(fSale_NoTaxMoney) notaxmoney ,
+                    sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
+                    case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
+                        $sql ";
+        }
+        if(isset($_GET['export']) && $_GET['export']=='true'){
+            $this->exportxlsx(array(0=>$tsql,1=>$totalsql),$displaytext,'收入统计');
+        }
+
+//        echo $totalsql;
+        $stmt = $conn->query($tsql);
+        $data_list = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($data_list, $row);
+        }
+        //处理合计
+
+//        echo $totalsql;
+        $totalstmt = $conn->query($totalsql);
+        while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($data_list, $row);
+        }
+        Tpl::output('data_list', $data_list);
+        //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
+        Tpl::output('page', $page->show());
+
+
+        //处理需要显示的列
+        $col = array();
+        foreach ($sumtype as $i => $v) {
+            if (isset($sumtypestr[$v])) {
+                foreach ($sumtypestr[$v] as $key => $item) {
+                    $col[$key] = $item;
+                }
+            }
+        }
+//        var_dump($col);
+        Tpl::output('displaycol', $displaycol);
+        Tpl::output('displaytext', $displaytext);
+        Tpl::showpage('finance.good.sum');
+    }
 }

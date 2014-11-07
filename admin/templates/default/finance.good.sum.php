@@ -42,14 +42,14 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>门诊收入统计</h3>
+            <h3>单品毛利分析</h3>
         </div>
     </div>
     <div class="fixed-empty"></div>
 
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" value="finance" name="act">
-        <input type="hidden" value="financesum" name="op">
+        <input type="hidden" value="financegoodsum" name="op">
         <input type="hidden" id ='export' name="export" value="false">
         <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
         <input type="hidden" name="checked" id="checked" value="<?php echo $_GET['checked']?>"/>
@@ -131,10 +131,30 @@
                         <td class=" align-center">
                             <?php echo $k+1?>
                         </td>
+
                         <?php foreach ($output['displaycol'] as $key => $item) {
                             ?>
                             <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else  echo $v->$item;?></th>
                         <?php  }?>
+                        <td class=" align-right">
+                            <?php echo $v->sDrug_TradeName?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo $v->sDrug_Spec?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo $v->sDrug_Unit?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo $v->sDrug_Brand?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->drugcount, 0)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->fSale_TaxPrice, 3)?>
+                        </td>
+
                         <td class=" align-right">
                             <?php echo number_format($v->taxmoney, 3)?>
                         </td>
