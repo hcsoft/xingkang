@@ -166,13 +166,12 @@ class communityControl extends SystemControl
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
         $sql = 'from Center_CheckOut a  , Center_codes ico, Center_codes gather,Center_codes state,Center_codes tag,
-            Center_Person person , Organization org
+             Organization org
           where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
            and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
            and  a.iCO_State = state.code and state.type=\'iCO_State\'
            and  a.iCO_Tag = tag.code and tag.type=\'iCO_Tag\'
-           and a.orgid = org.id
-           and a.iCO_MakePerson = person.iPerson_ID ';
+           and a.orgid = org.id  ';
 //        if (!isset($_GET['search_type'])) {
 //            $_GET['search_type'] = '1';
 //        }
@@ -213,7 +212,7 @@ class communityControl extends SystemControl
         $page->setTotalNum($total[0]);
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dCO_Date desc) rownum,
                         ico.name as 'iCO_Type',
-                        person.sPerson_Name 'iCO_MakePerson',
+                        sMakePerson 'iCO_MakePerson',
                         a.dCO_Date,
                         a.dCO_MakeDate,
                         a.fCO_Foregift,
@@ -272,7 +271,7 @@ class communityControl extends SystemControl
                         ico.name as '类型',
                         a.dCO_Date '结算日期',
                         a.dCO_MakeDate '制单日期',
-                        person.sPerson_Name '收费员',
+                        sMakePerson  '收费员',
                         a.fCO_Foregift '押金',
                         a.fCO_Balance '结算余额',
                         a.fCO_FactMoney '实际金额',

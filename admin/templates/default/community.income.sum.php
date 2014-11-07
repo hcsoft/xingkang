@@ -42,7 +42,7 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>收入汇总查询</h3>
+            <h3>门诊收费员报表</h3>
         </div>
     </div>
     <div class="fixed-empty"></div>
@@ -70,7 +70,7 @@
                         <?php } ?>
                     </select></td>
                 </td>
-                <th><label for="query_start_time">发生日期</label></th>
+                <th><label for="query_start_time">结算日期</label></th>
                 <td><input class="txt date" type="text" value="<?php echo $_GET['query_start_time']; ?>"
                            id="query_start_time" name="query_start_time">
                     <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>" id="query_end_time"
