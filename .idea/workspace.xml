@@ -91,13 +91,13 @@
       <file leaf-file-name="finance.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.476257" vertical-offset="5553" max-vertical-offset="6930">
-              <caret line="421" column="64" selection-start-line="421" selection-start-column="64" selection-end-line="421" selection-end-column="64" />
+            <state vertical-scroll-proportion="0.6522346" vertical-offset="4041" max-vertical-offset="6930">
+              <caret line="322" column="51" selection-start-line="322" selection-start-column="51" selection-end-line="322" selection-end-column="51" />
               <folding>
-                <marker date="1415413480066" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1415413480066" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
-                <marker date="1415413480066" expanded="true" signature="1987:2115" placeholder="insert into ..." />
-                <marker date="1415413480066" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1415414094950" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1415414094950" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
+                <marker date="1415414094950" expanded="true" signature="1987:2115" placeholder="insert into ..." />
+                <marker date="1415414094950" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
               </folding>
             </state>
           </provider>
@@ -853,7 +853,13 @@
       <option name="project" value="LOCAL" />
       <updated>1415354825925</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="1,商品毛利分析增加了数量为零的不显示">
+      <created>1415413525122</created>
+      <option name="number" value="00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1415413525122</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -865,6 +871,7 @@
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -888,7 +895,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2689295" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -909,7 +915,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="1,档案按日期倒序排列" />
     <MESSAGE value="1,增加了档案汇总查询" />
     <MESSAGE value="1,增加了默认时间" />
     <MESSAGE value="1,修改了仓库明细,增加字段等" />
@@ -934,7 +939,8 @@
     <MESSAGE value="1,修改了门诊收费员报表,增加了字段" />
     <MESSAGE value="1,修改了checkout表字段变更导致的问题" />
     <MESSAGE value="1,增加了商品毛利分析" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,增加了商品毛利分析" />
+    <MESSAGE value="1,商品毛利分析增加了数量为零的不显示" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,商品毛利分析增加了数量为零的不显示" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1323,13 +1329,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.476257" vertical-offset="5553" max-vertical-offset="6930">
-          <caret line="421" column="64" selection-start-line="421" selection-start-column="64" selection-end-line="421" selection-end-column="64" />
+        <state vertical-scroll-proportion="0.6522346" vertical-offset="4041" max-vertical-offset="6930">
+          <caret line="322" column="51" selection-start-line="322" selection-start-column="51" selection-end-line="322" selection-end-column="51" />
           <folding>
-            <marker date="1415413480066" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1415413480066" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
-            <marker date="1415413480066" expanded="true" signature="1987:2115" placeholder="insert into ..." />
-            <marker date="1415413480066" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1415414094950" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1415414094950" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
+            <marker date="1415414094950" expanded="true" signature="1987:2115" placeholder="insert into ..." />
+            <marker date="1415414094950" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
           </folding>
         </state>
       </provider>
