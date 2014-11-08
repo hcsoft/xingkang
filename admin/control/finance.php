@@ -107,6 +107,84 @@ class financeControl extends SystemControl
         Tpl::output('treedata', $treedata_list);
     }
 
+
+    public function saledetailOp()
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        //处理数据
+        $page = new Page();
+        $page->setEachNum(10);
+        $page->setNowPage($_REQUEST["curpage"]);
+        $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
+        $endnum = $page->getEachNum() * ($page->getNowPage());
+        $sql = ' from Center_ClinicSale a
+                left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
+                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID
+                , Organization org
+                where   a.orgid = org.id  ';
+        if (!isset($_GET['search_type'])) {
+            $_GET['search_type'] = '1';
+        }
+
+        if ($_GET['query_start_time']) {
+            $sql = $sql . ' and a.dSale_MakeDate >=\'' . $_GET['query_start_time'] . '\'';
+        }
+
+        if ($_GET['query_end_time']) {
+            $sql = $sql . ' and a.dSale_MakeDate < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
+        }
+
+        if ($_GET['orgids']) {
+            if ($_GET['search_type'] == 0 || $_GET['search_type'] == 1) {
+                $orgarray = array();
+                foreach ($_GET['orgids'] as $v) {
+                    $orgarray[] = -($v + 1000);
+                }
+                $sql = $sql . ' and a.SaleOrgID in (' . implode(',', $orgarray) . ' )';
+            } else {
+                $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+            }
+
+        }
+        //处理树的参数
+        $checkednode = $_GET['checkednode'];
+        if ($checkednode && isset($checkednode) && count($checkednode) > 0) {
+            $sql = $sql . " and a.SaleOrgID  in ($checkednode) ";
+        }
+
+        $countsql = " select count(*)  $sql ";
+        $stmt = $conn->query($countsql);
+        $total = $stmt->fetch(PDO::FETCH_NUM);
+        $page->setTotalNum($total[0]);
+        $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
+                        a.sSale_id ,
+                        a.dSale_MakeDate,
+                        good.sDrug_TradeName ,
+                        a.ItemType ,
+                        good.sDrug_Spec ,
+                        good.sDrug_Unit ,
+                        good.sDrug_Brand ,
+                        a.fSale_Num ,
+                        a.fSale_TaxPrice ,
+                        a.fSale_TaxFactMoney ,
+                        org.name,
+                        a.StatSection,
+                        a.DoctorName,
+                        a.sClinicKey ,
+                        a.ida_id
+                        $sql order by  a.dSale_MakeDate desc)zzzz where rownum>$startnum )zzzzz order by rownum";
+//        echo $sql;
+        $stmt = $conn->query($tsql);
+        $data_list = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($data_list, $row);
+        }
+        Tpl::output('data_list', $data_list);
+        //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
+        Tpl::output('page', $page->show());
+        Tpl::showpage('finance.saledetail');
+    }
+
     public function financesumOp()
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');

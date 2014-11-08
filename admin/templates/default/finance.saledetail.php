@@ -34,7 +34,7 @@
         left: 0;
         width: 10%;
         top: 0;
-        bottom: 0;
+        /*bottom: 0;*/
         border-right: 1px solid #fff;
         padding-top: 7px;
     }
@@ -42,17 +42,16 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>单品毛利分析</h3>
+            <h3>销售明细查询</h3>
         </div>
     </div>
     <div class="fixed-empty"></div>
 
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" value="finance" name="act">
-        <input type="hidden" value="financegoodsum" name="op">
+        <input type="hidden" value="saledetail" name="op">
         <input type="hidden" id ='export' name="export" value="false">
         <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
-        <input type="hidden" name="checked" id="checked" value="<?php echo $_GET['checked']?>"/>
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
@@ -70,28 +69,21 @@
                         <?php } ?>
                     </select></td>
                 </td>
-                <!--
+                <th><label>类型</label></th>
+                <td colspan="1">
+                    <select name="types" id ='types' >
+                        <option value="">全部</option>
+                        <?php  foreach ($output['types'] as $k => $v) {                      ?>
+                            <option value="<?php echo $v->code; ?>" <?php if ($v->code== $_GET['types']){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
+                        <?php } ?>
+                    </select>
+                </td>
                 <th><label for="query_start_time">制单日期</label></th>
                 <td><input class="txt date" type="text" value="<?php echo $_GET['query_start_time']; ?>"
                            id="query_start_time" name="query_start_time">
-                    <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>" id="query_end_time"
+                    <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>"
+                           id="query_end_time"
                            name="query_end_time"/></td>
-                            -->
-                <th><label for="gather_start_time">结算日期</label></th>
-
-                <td><input class="txt date" type="text" value="<?php echo $_GET['gather_start_time']; ?>"
-                           id="gather_start_time" name="gather_start_time">
-                    <input class="txt date" type="text" value="<?php echo $_GET['gather_end_time']; ?>" id="gather_end_time"
-                           name="gather_end_time"/></td>
-                <th><label>汇总类型</label></th>
-                <td colspan="1" id="sumtypetr">
-                    <?php foreach ($output['config']['sumcol'] as $k => $v) { ?>
-                        <input type='checkbox' name='sumtype[]'  id='sumtype_<?php echo $v['name']; ?>' <?php if(in_array( $v['name'],$_GET['sumtype'])) echo 'checked'; ?>
-                               value='<?php echo $v['name']; ?>' onclick="sumuncheck('sumtype_','<?php echo $v['uncheck']; ?>')" >
-
-                        <label for='sumtype_<?php echo $v['name']; ?>'><?php echo $v['text']; ?></label>
-                    <?php } ?>
-                </td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
                 </td>
@@ -113,74 +105,103 @@
         </tr>
         </tbody>
     </table>
-    <form method="post" id="form_member" style='position: relative;'>
+    <div  style='position: relative;display: block;'>
+    <form method="post" id="form_member">
         <input type="hidden" name="form_submit" value="ok"/>
         <table class="table tb-type2 nobdb datatable">
             <thead>
+
             <tr class="thead">
                 <th class="align-center">序号</th>
-                <?php foreach ($output['displaytext'] as $k => $v) {
-                    ?>
-                    <th class="align-center"><?php echo $v?></th>
-                <?php  }?>
+                <th class="align-center">单据编号</th>
+                <th class="align-center">制单日期</th>
+                <th class="align-center">项目名称</th>
+                <th class="align-center">项目类型</th>
+                <th class="align-center">规格</th>
+                <th class="align-center">单位</th>
+                <th class="align-center">产地/厂商</th>
+                <th class="align-center">数量</th>
+                <th class="align-center">单价</th>
+                <th class="align-center">金额</th>
+                <th class="align-center">机构</th>
+                <th class="align-center">科室</th>
+                <th class="align-center">医生</th>
+                <th class="align-center">就诊流水</th>
+                <th class="align-center">处方流水</th>
             </tr>
             <tbody>
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
                 <?php foreach ($output['data_list'] as $k => $v) { ?>
                     <tr class="hover member">
                         <td class=" align-center">
-                            <?php echo $k+1?>
+                            <?php echo $k+1 ?>
                         </td>
-
-                        <?php foreach ($output['displaycol'] as $key => $item) {
-                            ?>
-                            <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else  echo $v->$item;?></th>
-                        <?php  }?>
-                        <td class=" align-left">
-                            <?php echo $v->sDrug_TradeName?>
+                        <td class=" align-center" nowrap>
+                            <?php echo $v->sSale_id ?>
+                        </td>
+                        <td class=" align-center" nowrap>
+                            <?php if ($v->dSale_MakeDate == null) echo ''; else  echo date('Y-m-d', strtotime($v->dSale_MakeDate)); ?>
                         </td>
                         <td class=" align-left">
-                            <?php echo $v->sDrug_Spec?>
+                            <?php echo $v->sDrug_TradeName ?>
+                        </td>
+                        <td class=" align-left" nowrap>
+                            <?php echo $v->ItemType ?>
+                        </td>
+                        <td class=" align-left" nowrap>
+                            <?php echo $v->sDrug_Spec ?>
+                        </td>
+                        <td class=" align-left" nowrap>
+                            <?php echo $v->sDrug_Unit ?>
                         </td>
                         <td class=" align-left">
-                            <?php echo $v->sDrug_Unit?>
+                            <?php echo $v->sDrug_Brand ?>
                         </td>
-                        <td class=" align-left">
-                            <?php echo $v->sDrug_Brand?>
+                        <td class=" align-right" nowrap>
+                            <?php echo number_format($v->fSale_Num,0) ?>
                         </td>
-                        <td class=" align-right">
-                            <?php echo number_format($v->drugcount, 0)?>
+                        <td class=" align-right" nowrap>
+                            <?php echo number_format($v->fSale_TaxPrice,3) ?>
                         </td>
-                        <td class=" align-right">
-                            <?php echo number_format($v->fSale_TaxPrice, 3)?>
+                        <td class=" align-right" nowrap>
+                            <?php echo number_format($v->fSale_TaxFactMoney,3) ?>
                         </td>
-
-                        <td class=" align-right">
-                            <?php echo number_format($v->taxmoney, 3)?>
+                        <td class=" align-center" nowrap>
+                            <?php echo $v->name ?>
                         </td>
-                        <td class=" align-right">
-                            <?php echo number_format($v->notaxmoney, 3)?>
+                        <td class=" align-center" nowrap>
+                            <?php echo $v->StatSection ?>
                         </td>
-                        <td class=" align-right">
-                            <?php echo number_format($v->grossprofit, 3)?>
+                        <td class=" align-center" nowrap>
+                            <?php echo $v->DoctorName ?>
                         </td>
-                        <td class=" align-right">
-                            <?php echo number_format($v->grossprofitrate, 3)?>
+                        <td class=" align-center" nowrap>
+                            <?php echo $v->sClinicKey ?>
+                        </td>
+                        <td class=" align-center" nowrap>
+                            <?php echo $v->ida_id ?>
                         </td>
                     </tr>
                 <?php } ?>
             <?php } else { ?>
                 <tr class="no_data">
-                    <td colspan="11"><?php echo $lang['nc_no_record'] ?></td>
+                    <td colspan="16"><?php echo $lang['nc_no_record'] ?></td>
                 </tr>
             <?php } ?>
             </tbody>
             <tfoot class="tfoot">
+            <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
+                <tr>
+                    <td colspan="16">
+                        <div class="pagination"> <?php echo $output['page']; ?> </div>
+                    </td>
+                </tr>
+            <?php } ?>
             </tfoot>
         </table>
     </form>
+    </div>
 </div>
-
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"
         charset="utf-8"></script>
@@ -191,9 +212,6 @@
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/js/jquery.ztree.all-3.5.min.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.min.js"></script>
 <script type="text/javascript">
-    var config = <?php echo json_encode($output[config]);?>;
-
-    var checked = getchecked('<?php echo $_GET['checked'];?>');
     $(function () {
         //生成机构下拉
         function orgtext(n1, n2, list) {
@@ -212,71 +230,37 @@
                 selectedText: orgtext
             }
         );
-
+        //点击事件
+        $(".typeselect").change(function(){
+            $("#search_type").val($('input[name="search_type_select"]:checked').val());
+            $('#ncsubmit').click();
+        });
         //生成日期
         $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
             $("#export").val('false');
-            var sumtypes =$(":checkbox[name='sumtype[]'][checked]");
-            if(sumtypes.length<=0){
-                $("#sumtype_good").attr("checked", true);
-                sumtypes =$(":checkbox[name='sumtype[]'][checked]");
-            }
-            var search_type_select = $('input[name="search_type_select"]:checked').val();
             $("#search_type").val($('input[name="search_type_select"]:checked').val());
-            checked[search_type_select] = [];
-            for(var i =0 ;i < sumtypes.length;i++){
-                checked[search_type_select].push( $(sumtypes[i]).val());
-            }
-            $("#checked").val(makechecked(checked));
             $('#formSearch').submit();
         });
         $('#ncexport').click(function () {
             $("#export").val('true');
-            var sumtypes =$(":checkbox[name='sumtype[]'][checked]");
-            if(sumtypes.length<=0){
-                $("#sumtype_good").attr("checked", true);
-                sumtypes =$(":checkbox[name='sumtype[]'][checked]");
-            }
-            var search_type_select = $('input[name="search_type_select"]:checked').val();
             $("#search_type").val($('input[name="search_type_select"]:checked').val());
-            checked[search_type_select] = [];
-            for(var i =0 ;i < sumtypes.length;i++){
-                checked[search_type_select].push( $(sumtypes[i]).val());
-            }
-            $("#checked").val(makechecked(checked));
             $('#formSearch').submit();
         });
     });
-    function makechecked(arr){
-        var retarr = [];
-        for (var row in checked){
-            if(checked[row])
-                retarr.push(row+':'+checked[row].join(','));
-        }
-        return retarr.join(";");
-    }
-    function getchecked(str){
-        var ret = {};
-        var data = str.split(";");
-        for(var idx in data){
-            var strs = data[idx].split(":");
-            if(strs.length>1){
-                var values = strs[1].split(",");
-                ret[strs[0]] = values;
-            }
-        }
-        return ret;
-    }
-    function sumuncheck(pre,ids){
-        if(ids){
-            var idarray = ids.split(",");
-            for(var i = 0 ;i <idarray.length;i++){
-                $("#"+pre+idarray[i]).prop("checked",false);
-            }
-        }
-    }
 
+    function showmsg(msg) {
+        $("#spotdialog-message").html(msg);
+        $("#spotdialog").dialog("open");
+    }
+    function error(msg) {
+        $("#errormsg").css("color", "red");
+        $("#errormsg").html(msg);
+    }
+    function success(msg) {
+        $("#errormsg").css("color", "green");
+        $("#errormsg").html(msg);
+    }
 </script>
 <style>
     #spotresult_pass:checked + label {

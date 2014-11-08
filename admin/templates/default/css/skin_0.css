@@ -486,6 +486,8 @@ td.picture div { background:#FFF; float: left;/* if IE7/8/9*/ *text-align: cente
 		.table td.group p.goods a:hover { text-decoration: underline; color: #390;}
 
 .align-center {text-align:center;}
+.align-left {text-align:left;}
+.align-right {text-align:right;}
 .nowrap { white-space: nowrap;}
 .nobg{ background: transparent none no-repeat scroll 0 0 !important;}
 .space th { font-weight: 600; color: #329ED1; background-color: #F3FBFE;}
