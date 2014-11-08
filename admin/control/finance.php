@@ -388,7 +388,7 @@ class financeControl extends SystemControl
         array_push($displaytext, '单位');
         array_push($displaytext, '产地厂牌');
         array_push($displaytext, '数量');
-        array_push($displaytext, '单价');
+        array_push($displaytext, '平均单价');
         array_push($displaytext, '金额');
         array_push($displaytext, '成本');
         array_push($displaytext, '毛利');
@@ -419,10 +419,10 @@ class financeControl extends SystemControl
                         $sql group by  $groupbycolstr goods.sDrug_TradeName ,
                     goods.sDrug_Spec ,
                     goods.sDrug_Unit ,
-                    goods.sDrug_Brand  order by $groupbycolstr goods.sDrug_TradeName ,
+                    goods.sDrug_Brand  having sum(fSale_Num) >0  order by $groupbycolstr goods.sDrug_TradeName ,
                     goods.sDrug_Spec ,
                     goods.sDrug_Unit ,
-                    goods.sDrug_Brand ";
+                    goods.sDrug_Brand  ";
 //        echo $tsql;
         if(count($totalcol)>0){
             $totalsql = " select $totalcolstr
