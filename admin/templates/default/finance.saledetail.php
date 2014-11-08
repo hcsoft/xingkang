@@ -51,7 +51,6 @@
         <input type="hidden" value="finance" name="act">
         <input type="hidden" value="saledetail" name="op">
         <input type="hidden" id ='export' name="export" value="false">
-        <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
@@ -69,12 +68,12 @@
                         <?php } ?>
                     </select></td>
                 </td>
-                <th><label>类型</label></th>
+                <th><label>项目类型</label></th>
                 <td colspan="1">
-                    <select name="types" id ='types' >
+                    <select name="itemtype" id ='itemtype' >
                         <option value="">全部</option>
-                        <?php  foreach ($output['types'] as $k => $v) {                      ?>
-                            <option value="<?php echo $v->code; ?>" <?php if ($v->code== $_GET['types']){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
+                        <?php  foreach ($output['goodtype'] as $k => $v) {                      ?>
+                            <option value="<?php echo $v; ?>" <?php if ($v== $_GET['itemtype']){ ?>selected<?php } ?>><?php echo $v; ?></option>
                         <?php } ?>
                     </select>
                 </td>
@@ -230,21 +229,14 @@
                 selectedText: orgtext
             }
         );
-        //点击事件
-        $(".typeselect").change(function(){
-            $("#search_type").val($('input[name="search_type_select"]:checked').val());
-            $('#ncsubmit').click();
-        });
         //生成日期
         $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
             $("#export").val('false');
-            $("#search_type").val($('input[name="search_type_select"]:checked').val());
             $('#formSearch').submit();
         });
         $('#ncexport').click(function () {
             $("#export").val('true');
-            $("#search_type").val($('input[name="search_type_select"]:checked').val());
             $('#formSearch').submit();
         });
     });
