@@ -138,6 +138,12 @@ class financeControl extends SystemControl
             $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
 
         }
+        if ($_GET['search_goods_name'] != '') {
+            $sql = $sql . ' and good.goods_name like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+        }
+        if (intval($_GET['search_commonid']) > 0) {
+            $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']) ;
+        }
         //处理树的参数
         $checkednode = $_GET['checkednode'];
         if ($checkednode && isset($checkednode) && count($checkednode) > 0) {
@@ -258,6 +264,12 @@ class financeControl extends SystemControl
 
         if ($_GET['gather_end_time']) {
             $sql = $sql . ' and a.dSale_GatherDate < dateadd(day,1,\'' . $_GET['gather_end_time'] . '\')';
+        }
+        if ($_GET['search_goods_name'] != '') {
+            $sql = $sql . ' and good.goods_name like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+        }
+        if (intval($_GET['search_commonid']) > 0) {
+            $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']) ;
         }
 
         //处理树的参数
@@ -431,6 +443,13 @@ class financeControl extends SystemControl
         //处理树的参数
         if ($_GET['orgids']) {
             $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+        }
+
+        if ($_GET['search_goods_name'] != '') {
+            $sql = $sql . ' and goods.goods_name like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+        }
+        if (intval($_GET['search_commonid']) > 0) {
+            $sql = $sql . ' and goods.goods_commonid = ' . intval($_GET['search_commonid']) ;
         }
 
         $search_type = $_GET['search_type'];

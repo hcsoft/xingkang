@@ -50,13 +50,31 @@
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" value="storehouse" name="act">
         <input type="hidden" value="sum" name="op">
-        <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
-        <input type="hidden" name="checked" id="checked" value="<?php echo $_GET['checked']?>"/>
+        <input type="hidden" id ='export' name="export" value="false">
+        <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type'] ?>"/>
+        <input type="hidden" name="checked" id="checked" value="<?php echo $_GET['checked'] ?>"/>
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
+                <th><label for="search_goods_name"> 商品名称</label></th>
+                <td><input type="text" value="<?php echo $_GET['search_goods_name']; ?>"
+                           name="search_goods_name" id="search_goods_name" class="txt"></td>
+                <th><label for="query_start_time">发生日期</label></th>
+                <td><input class="txt date" type="text" value="<?php echo $_GET['query_start_time']; ?>"
+                           id="query_start_time" name="query_start_time">
+                    <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>"
+                           id="query_end_time"
+                           name="query_end_time"/></td>
+
+
+
+            </tr>
+            <tr>
+                <th><label for="search_commonid">商品编码</label></th>
+                <td><input type="text" value="<?php echo $_GET['search_commonid'] ?>" name="search_commonid"
+                           id="search_commonid" class="txt"/></td>
                 <th><label>选择机构</label></th>
-                <td colspan="1"><select name="orgids[]" id="orgids" class="orgSelect" multiple>
+                <td colspan="3"><select name="orgids[]" id="orgids" class="orgSelect" multiple>
                         <?php
                         $orgids = $_GET['orgids'];
                         if (!isset($orgids)) {
@@ -69,17 +87,15 @@
                         <?php } ?>
                     </select></td>
                 </td>
-                <th><label for="query_start_time">发生日期</label></th>
-                <td><input class="txt date" type="text" value="<?php echo $_GET['query_start_time']; ?>"
-                           id="query_start_time" name="query_start_time">
-                    <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>" id="query_end_time"
-                           name="query_end_time"/></td>
                 <th><label>汇总类型</label></th>
                 <td colspan="1" id="sumtypetr">
                 </td>
                 </td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
+                </td>
+                <td><a href="javascript:void(0);" id="ncexport" class="btn-export "
+                       title="导出"></a>
                 </td>
             </tr>
             </tbody>
@@ -103,7 +119,7 @@
             <?php
             foreach ($output['config'] as $k => $v) {
                 ?>
-                <input type="radio" class="typeselect" id="types_<?php echo $k ?>" value="<?php echo $k?>"
+                <input type="radio" class="typeselect" id="types_<?php echo $k ?>" value="<?php echo $k ?>"
                        name="search_type_select" <?php if ($_GET['search_type'] == $k) echo 'checked' ?> >
                 <label for="types_<?php echo $k ?>"><?php echo $v['text'] ?></label>
             <?php } ?>
@@ -114,31 +130,31 @@
                 <th class="align-center">序号</th>
                 <?php foreach ($output['displaytext'] as $k => $v) {
                     ?>
-                    <th class="align-center"><?php echo $v?></th>
-                <?php  }?>
-                <th class="align-center">进价金额</th>
-                <th class="align-center">零价金额</th>
-                <th class="align-center">进销差</th>
+                    <th class="align-center"><?php echo $v ?></th>
+                <?php } ?>
+<!--                <th class="align-center">进价金额</th>-->
+<!--                <th class="align-center">零价金额</th>-->
+<!--                <th class="align-center">进销差</th>-->
             </tr>
             <tbody>
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
                 <?php foreach ($output['data_list'] as $k => $v) { ?>
                     <tr class="hover member">
                         <td class=" align-center">
-                            <?php echo $k+1?>
+                            <?php echo $k + 1 ?>
                         </td>
                         <?php foreach ($output['displaycol'] as $key => $item) {
                             ?>
-                            <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else  echo $v->$item;?></th>
-                        <?php  }?>
+                            <th class="align-left"><?php if (substr($item, -5) == 'count') echo number_format($v->$item, 0); else  echo $v->$item; ?></th>
+                        <?php } ?>
                         <td class=" align-right">
-                            <?php echo number_format($v->taxmoney, 3)?>
+                            <?php echo number_format($v->taxmoney, 3) ?>
                         </td>
                         <td class=" align-right">
-                            <?php echo number_format($v->retailmoney, 3)?>
+                            <?php echo number_format($v->retailmoney, 3) ?>
                         </td>
                         <td class=" align-right">
-                            <?php echo number_format($v->diffmoney, 3)?>
+                            <?php echo number_format($v->diffmoney, 3) ?>
                         </td>
                     </tr>
                 <?php } ?>
@@ -168,7 +184,7 @@
 
     var checked = getchecked('<?php echo $_GET['checked'];?>');
     $(function () {
-        initSumtype ();
+        initSumtype();
         //生成机构下拉
         function orgtext(n1, n2, list) {
             var texts = [];
@@ -188,76 +204,93 @@
         );
 
         //点击事件
-        $(".typeselect").change(function(){
+        $(".typeselect").change(function () {
             initSumtype();
             $('#ncsubmit').click();
         });
         //生成日期
         $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
-            var sumtypes =$(":checkbox[name='sumtype[]'][checked]");
-            if(sumtypes.length<=0){
+            $("#export").val('false');
+            var sumtypes = $(":checkbox[name='sumtype[]'][checked]");
+            if (sumtypes.length <= 0) {
                 $("#sumtype_good").attr("checked", true);
-                sumtypes =$(":checkbox[name='sumtype[]'][checked]");
+                sumtypes = $(":checkbox[name='sumtype[]'][checked]");
             }
             var search_type_select = $('input[name="search_type_select"]:checked').val();
             $("#search_type").val($('input[name="search_type_select"]:checked').val());
             checked[search_type_select] = [];
-            for(var i =0 ;i < sumtypes.length;i++){
-                checked[search_type_select].push( $(sumtypes[i]).val());
+            for (var i = 0; i < sumtypes.length; i++) {
+                checked[search_type_select].push($(sumtypes[i]).val());
+            }
+            $("#checked").val(makechecked(checked));
+            $('#formSearch').submit();
+        });
+        $('#ncexport').click(function () {
+            $("#export").val('true');
+            var sumtypes = $(":checkbox[name='sumtype[]'][checked]");
+            if (sumtypes.length <= 0) {
+                $("#sumtype_good").attr("checked", true);
+                sumtypes = $(":checkbox[name='sumtype[]'][checked]");
+            }
+            var search_type_select = $('input[name="search_type_select"]:checked').val();
+            $("#search_type").val($('input[name="search_type_select"]:checked').val());
+            checked[search_type_select] = [];
+            for (var i = 0; i < sumtypes.length; i++) {
+                checked[search_type_select].push($(sumtypes[i]).val());
             }
             $("#checked").val(makechecked(checked));
             $('#formSearch').submit();
         });
     });
-    function makechecked(arr){
+    function makechecked(arr) {
         var retarr = [];
-        for (var row in checked){
-            if(checked[row])
-                retarr.push(row+':'+checked[row].join(','));
+        for (var row in checked) {
+            if (checked[row])
+                retarr.push(row + ':' + checked[row].join(','));
         }
         return retarr.join(";");
     }
-    function getchecked(str){
+    function getchecked(str) {
         var ret = {};
         var data = str.split(";");
-        for(var idx in data){
+        for (var idx in data) {
             var strs = data[idx].split(":");
-            if(strs.length>1){
+            if (strs.length > 1) {
                 var values = strs[1].split(",");
                 ret[strs[0]] = values;
             }
         }
         return ret;
     }
-    function initSumtype(){
+    function initSumtype() {
         var cfg = config[$('input[name="search_type_select"]:checked').val()];
         var checkeditem = checked[$('input[name="search_type_select"]:checked').val()];
         console.log(cfg);
         $("#sumtypetr").html('');
-        for(var key in cfg['sumcol']){
+        for (var key in cfg['sumcol']) {
             var value = cfg['sumcol'][key];
-            var ischecked = false ;
-            if(checkeditem){
-                for(var i = 0 ;i < checkeditem.length;i++){
-                    if(checkeditem[i]==key){
+            var ischecked = false;
+            if (checkeditem) {
+                for (var i = 0; i < checkeditem.length; i++) {
+                    if (checkeditem[i] == key) {
                         ischecked = true;
                         break;
                     }
                 }
             }
-            if(ischecked){
-                $("#sumtypetr").append("<input type='checkbox' name='sumtype[]'  id='sumtype_"+key+"' checked value='"+key+"' onclick=\"sumuncheck('sumtype_','"+value.uncheck+"')\" ><label for='sumtype_"+key+"'>"+value.text+"</label>");
-            }else{
-                $("#sumtypetr").append("<input type='checkbox' name='sumtype[]'  id='sumtype_"+key+"' value='"+key+"'onclick=\"sumuncheck('sumtype_','"+value.uncheck+"')\" ><label for='sumtype_"+key+"'>"+value.text+"</label>");
+            if (ischecked) {
+                $("#sumtypetr").append("<input type='checkbox' name='sumtype[]'  id='sumtype_" + key + "' checked value='" + key + "' onclick=\"sumuncheck('sumtype_','" + value.uncheck + "')\" ><label for='sumtype_" + key + "'>" + value.text + "</label>");
+            } else {
+                $("#sumtypetr").append("<input type='checkbox' name='sumtype[]'  id='sumtype_" + key + "' value='" + key + "'onclick=\"sumuncheck('sumtype_','" + value.uncheck + "')\" ><label for='sumtype_" + key + "'>" + value.text + "</label>");
             }
         }
     }
-    function sumuncheck(pre,ids){
-        if(ids){
+    function sumuncheck(pre, ids) {
+        if (ids) {
             var idarray = ids.split(",");
-            for(var i = 0 ;i <idarray.length;i++){
-                $("#"+pre+idarray[i]).prop("checked",false);
+            for (var i = 0; i < idarray.length; i++) {
+                $("#" + pre + idarray[i]).prop("checked", false);
             }
         }
     }
