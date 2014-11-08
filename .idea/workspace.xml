@@ -48,39 +48,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="goods.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="goods.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/goods.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5232816" vertical-offset="3796" max-vertical-offset="4886">
-              <caret line="288" column="37" selection-start-line="288" selection-start-column="37" selection-end-line="288" selection-end-column="37" />
+            <state vertical-scroll-proportion="-23.652174" vertical-offset="3656" max-vertical-offset="5054">
+              <caret line="300" column="34" selection-start-line="300" selection-start-column="34" selection-end-line="300" selection-end-column="34" />
               <folding>
-                <marker date="1415433874744" expanded="true" signature="8343:8614" placeholder="SELECT * FRO..*..." />
-                <marker date="1415433874744" expanded="true" signature="8360:8582" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1415433874744" expanded="true" signature="8376:8563" placeholder="SELECT TOP :..." />
-                <marker date="1415433874744" expanded="true" signature="9967:10100" placeholder="select org.n..." />
-                <marker date="1415433874744" expanded="true" signature="10266:10399" placeholder="select org.n..." />
-                <marker date="1415433874744" expanded="true" signature="10543:10676" placeholder="select org.n..." />
+                <marker date="1415438317290" expanded="true" signature="8562:8833" placeholder="SELECT * FRO..*..." />
+                <marker date="1415438317290" expanded="true" signature="8579:8801" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1415438317290" expanded="true" signature="8595:8782" placeholder="SELECT TOP :..." />
+                <marker date="1415438317290" expanded="true" signature="10169:10302" placeholder="select org.n..." />
+                <marker date="1415438317290" expanded="true" signature="10677:10810" placeholder="select org.n..." />
+                <marker date="1415438317290" expanded="true" signature="10989:11122" placeholder="select org.n..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="goods.stock.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="goods.stock.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.stock.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.565217" vertical-offset="3150" max-vertical-offset="4284">
-              <caret line="244" column="39" selection-start-line="244" selection-start-column="35" selection-end-line="244" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.325" vertical-offset="2982" max-vertical-offset="5236">
+              <caret line="226" column="49" selection-start-line="226" selection-start-column="49" selection-end-line="226" selection-end-column="49" />
               <folding>
                 <element signature="n#style#0;n#i#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
-                <marker date="1415433243490" expanded="true" signature="8166:8179" placeholder="..." />
-                <marker date="1415433243490" expanded="true" signature="8180:8354" placeholder="..." />
-                <marker date="1415433243490" expanded="true" signature="8222:8328" placeholder="..." />
-                <marker date="1415433243490" expanded="true" signature="8448:8506" placeholder="..." />
-                <marker date="1415433243490" expanded="true" signature="8630:8668" placeholder="..." />
-                <marker date="1415433243490" expanded="true" signature="8744:8851" placeholder="..." />
-                <marker date="1415433243490" expanded="true" signature="8782:8851" placeholder="..." />
-                <marker date="1415433243490" expanded="true" signature="9219:9252" placeholder="..." />
-                <marker date="1415433243490" expanded="true" signature="9602:9721" placeholder="..." />
+                <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -158,8 +150,8 @@
         <option value="$PROJECT_DIR$/admin/templates/default/finance.good.sum.php" />
         <option value="$PROJECT_DIR$/admin/control/finance.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/finance.saledetail.php" />
-        <option value="$PROJECT_DIR$/admin/templates/default/goods.stock.php" />
         <option value="$PROJECT_DIR$/admin/control/goods.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/goods.stock.php" />
       </list>
     </option>
   </component>
@@ -846,7 +838,13 @@
       <option name="project" value="LOCAL" />
       <updated>1415419965363</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="1,修改了库存管理">
+      <created>1415433905615</created>
+      <option name="number" value="00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1415433905615</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -863,14 +861,14 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2689295" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32898173" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18668407" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.239375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.239375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -902,7 +900,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="1,修改了仓库明细,增加字段等" />
     <MESSAGE value="1,修改了仓库明细,进销差错误" />
     <MESSAGE value="1,修改了档案汇总" />
     <MESSAGE value="1,档案汇总增加了儿童和妇女的数据" />
@@ -927,7 +924,8 @@
     <MESSAGE value="1,商品毛利分析增加了数量为零的不显示" />
     <MESSAGE value="1,增加了商品明细查询" />
     <MESSAGE value="1,商品明细查询 完善了导出,增加了项目类型" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,商品明细查询 完善了导出,增加了项目类型" />
+    <MESSAGE value="1,修改了库存管理" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,修改了库存管理" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1328,25 +1326,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.stock.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.565217" vertical-offset="3150" max-vertical-offset="4284">
-          <caret line="244" column="39" selection-start-line="244" selection-start-column="35" selection-end-line="244" selection-end-column="39" />
-          <folding>
-            <element signature="n#style#0;n#i#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
-            <marker date="1415433243490" expanded="true" signature="8166:8179" placeholder="..." />
-            <marker date="1415433243490" expanded="true" signature="8180:8354" placeholder="..." />
-            <marker date="1415433243490" expanded="true" signature="8222:8328" placeholder="..." />
-            <marker date="1415433243490" expanded="true" signature="8448:8506" placeholder="..." />
-            <marker date="1415433243490" expanded="true" signature="8630:8668" placeholder="..." />
-            <marker date="1415433243490" expanded="true" signature="8744:8851" placeholder="..." />
-            <marker date="1415433243490" expanded="true" signature="8782:8851" placeholder="..." />
-            <marker date="1415433243490" expanded="true" signature="9219:9252" placeholder="..." />
-            <marker date="1415433243490" expanded="true" signature="9602:9721" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.391304" vertical-offset="1428" max-vertical-offset="5880">
@@ -1366,15 +1345,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/goods.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5232816" vertical-offset="3796" max-vertical-offset="4886">
-          <caret line="288" column="37" selection-start-line="288" selection-start-column="37" selection-end-line="288" selection-end-column="37" />
+        <state vertical-scroll-proportion="-23.652174" vertical-offset="3656" max-vertical-offset="5054">
+          <caret line="300" column="34" selection-start-line="300" selection-start-column="34" selection-end-line="300" selection-end-column="34" />
           <folding>
-            <marker date="1415433874744" expanded="true" signature="8343:8614" placeholder="SELECT * FRO..*..." />
-            <marker date="1415433874744" expanded="true" signature="8360:8582" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1415433874744" expanded="true" signature="8376:8563" placeholder="SELECT TOP :..." />
-            <marker date="1415433874744" expanded="true" signature="9967:10100" placeholder="select org.n..." />
-            <marker date="1415433874744" expanded="true" signature="10266:10399" placeholder="select org.n..." />
-            <marker date="1415433874744" expanded="true" signature="10543:10676" placeholder="select org.n..." />
+            <marker date="1415438317290" expanded="true" signature="8562:8833" placeholder="SELECT * FRO..*..." />
+            <marker date="1415438317290" expanded="true" signature="8579:8801" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1415438317290" expanded="true" signature="8595:8782" placeholder="SELECT TOP :..." />
+            <marker date="1415438317290" expanded="true" signature="10169:10302" placeholder="select org.n..." />
+            <marker date="1415438317290" expanded="true" signature="10677:10810" placeholder="select org.n..." />
+            <marker date="1415438317290" expanded="true" signature="10989:11122" placeholder="select org.n..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.stock.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.325" vertical-offset="2982" max-vertical-offset="5236">
+          <caret line="226" column="49" selection-start-line="226" selection-start-column="49" selection-end-line="226" selection-end-column="49" />
+          <folding>
+            <element signature="n#style#0;n#i#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

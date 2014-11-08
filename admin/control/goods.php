@@ -70,6 +70,8 @@ class goodsControl extends SystemControl{
         if (in_array($_GET['search_verify'], array('0','1','10'))) {
             $where['goods_verify'] = $_GET['search_verify'];
         }
+
+
         
         switch ($_GET['type']) {
             // 禁售
@@ -197,8 +199,6 @@ class goodsControl extends SystemControl{
 
     public function stockOp() {
 
-
-
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         $page = new Page();
         $page->setEachNum(10);
@@ -230,6 +230,12 @@ class goodsControl extends SystemControl{
         if (in_array($_GET['search_verify'], array('0','1','10'))) {
             $sql = $sql . ' and good.goods_verify = ' . $_GET['search_verify'] ;
         }
+        if ($_GET['allowzero'] && $_GET['allowzero']=='true') {
+            $sql = $sql . '   '  ;
+        }else{
+            $sql = $sql . ' and (stock.fDS_OStock <> 0 or  stock.fDS_LeastOStock  <> 0)  '  ;
+        }
+
 
 
         $countsql = " select count(*)  $sql ";
@@ -280,13 +286,19 @@ class goodsControl extends SystemControl{
         if ($commonid <= 0) {
             echo 'false';exit();
         }
-        $newstmt = $conn->query(" select org.name 'OrgName', * from Center_DrugStocksub sub left join Organization org on sub.orgid=org.id where idrug_id = '$commonid'");
+        $sql = " select org.name 'OrgName', * from Center_DrugStocksub sub left join Organization org on sub.orgid=org.id where idrug_id = '$commonid'";
+        if($_GET['zeroallow'] && $_GET['zeroallow']=='true'){
+        }else{
+            $sql = $sql.' and (sub.fBS_OStock <> 0 or  sub.fBS_LeastOStock  <> 0)';
+        }
+        $newstmt = $conn->query($sql);
 
 //        $stmt = $conn->query($tsql);
         $goods_list = array();
         while ($row = $newstmt->fetch(PDO::FETCH_ASSOC)) {
 //            array_push($row," select org.name 'OrgName', * from Center_DrugStocksub sub left join Organization org on sub.orgid=org.id where idrug_id = '$commonid'");
             array_push($goods_list, $row);
+            array_push($row,$sql);
         }
 
 //        $goods_list = $newstmt->fetchAll(PDO::FETCH_ASSOC);

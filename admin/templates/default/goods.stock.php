@@ -42,6 +42,8 @@
                 <th><label for="search_commonid">商品编码</label></th>
                 <td><input type="text" value="<?php echo $output['search']['search_commonid'] ?>" name="search_commonid"
                            id="search_commonid" class="txt"/></td>
+                <td><input type="checkbox" value="true" <?php if($output['search']['allowzero'] =='true')  echo checked; ?> name="allowzero"
+                           id="allowzero" /> <label for="allowzero">显示零库存</label></td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a></td>
                 <td class="w120">&nbsp;</td>
@@ -160,13 +162,14 @@
                     </tr>
                     <tr style="display:none;">
                         <td colspan="21">
+                            <div><input onchange="rowzeroallowchange(this)" type="checkbox" class="rowzeroallow" id="rowzeroallow_<?php echo $k;?>"/> <label for="rowzeroallow_<?php echo $k;?>">显示零库存</label> </div>
                             <div class="ncsc-goods-sku ps-container"></div>
                         </td>
                     </tr>
                 <?php } ?>
             <?php } else { ?>
                 <tr class="no_data">
-                    <td colspan="15">无数据<?php echo $lang['nc_no_record']; ?></td>
+                    <td colspan="22">无数据<?php echo $lang['nc_no_record']; ?></td>
                 </tr>
             <?php } ?>
             </tbody>
@@ -213,28 +216,38 @@
         });
 
         // ajax获取商品列表
-        $('i[nctype="ajaxGoodsList"]').toggle(
+        $('i[nctype="ajaxGoodsList"]').parent().parent().toggle(
             function () {
-                $(this).removeClass('icon-plus-sign').addClass('icon-minus-sign');
-                var _parenttr = $(this).parents('tr');
-                var _commonid = $(this).attr('data-comminid');
+
+                var obj = $(this).find('i[nctype="ajaxGoodsList"]');
+                $(obj).removeClass('icon-plus-sign').addClass('icon-minus-sign');
+
+                var _parenttr = $(obj).parents('tr');
+//                _parenttr.next().show();return;
+                var _commonid = $(obj).attr('data-comminid');
                 var _div = _parenttr.next().find('.ncsc-goods-sku');
-                if (_div.html() == '') {
-                    $.getJSON('index.php?act=goods&op=get_goods_stock_ajax', {commonid: _commonid}, function (data) {
+//                if (_div.html() == '') {
+                var param = {commonid: _commonid};
+
+                    if($(this).children("input.rowzeroallow").length>0){
+                        if($(this).children("input.rowzeroallow")[0].prop("checked")=="true"){
+                            param['zeroallow']='true';
+                        }
+                    }
+                    $.getJSON('index.php?act=goods&op=get_goods_stock_ajax', param, function (data) {
                         console.trace(data);
+                        _div.html('');
                         if (data != 'false' && data.length>0) {
                             var vtable = $('<table class="table tb-type2 nobdb subdatatable"></table>');
                             var vtrhead = $('<tr class="thead"></tr>')
                             $('<th rowspan="2">机构</th>').appendTo(vtrhead);
                             $('<th rowspan="2">批号</th>').appendTo(vtrhead);
                             $('<th rowspan="2">有效期</th>').appendTo(vtrhead);
-//                            $('<th>库存进价</th>').appendTo(vtrhead);
-//                            $('<th>库存零价</th>').appendTo(vtrhead);
                             $('<th colspan="2">常规单位库存</th>').appendTo(vtrhead);
                             $('<th colspan="2">最小单位库存</th>').appendTo(vtrhead);
-                            $('<th rowspan="2">零价金额</th>').appendTo(vtrhead);
-                            $('<th rowspan="2">进价金额</th>').appendTo(vtrhead);
-                            $('<th rowspan="2">进销差</th>').appendTo(vtrhead);
+//                            $('<th rowspan="2">零价金额</th>').appendTo(vtrhead);
+//                            $('<th rowspan="2">进价金额</th>').appendTo(vtrhead);
+//                            $('<th rowspan="2">进销差</th>').appendTo(vtrhead);
                             var vtrhead1 = $('<tr class="thead"></tr>');
                             $('<th>可售</th>').appendTo(vtrhead1);
                             $('<th>实际</th>').appendTo(vtrhead1);
@@ -245,17 +258,14 @@
                             $.each(data, function (i, o) {
                                 $('<tr><td class="align-left">' + o.OrgName + '</td>'+
                                  '<td class="align-center">' + o.sBS_Batch + '</td>'+
-//                                '<td>' + o.sBS_Batch + '</td>'+
                                 '<td class="align-center">'  + (""+ o.dBS_UsefulLife).substr(0,10) + '</td>'+
-//                                '<td>￥' + Math.round(o.fBS_BuyPrice*1000)/1000 + '</td>'+
-//                                '<td>￥' + Math.round(o.fBS_LeastBuyPrice*1000)/1000 + '</td>'+
                                 '<td class="align-right">' + Math.round(o.fBS_OStock) + '</td>'+
                                 '<td class="align-right">' + Math.round(o.fBS_SStock) + '</td>'+
                                 '<td class="align-right">' + Math.round(o.fBS_LeastOStock) + '</td>'+
                                 '<td class="align-right">' + Math.round(o.fBS_LeastSStock) + '</td>'+
-                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_RetailPrice  + o.fBS_LeastOStock * o.fBS_LeastRetailPrice  )*1000)/1000 + '</td>'+
-                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_BuyPrice +  o.fBS_LeastOStock * o.fBS_LeastBuyPrice)*1000)/1000 + '</td>'+
-                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_RetailPrice - o.fBS_OStock * o.fBS_BuyPrice + o.fBS_LeastOStock * o.fBS_LeastRetailPrice - o.fBS_LeastOStock * o.fBS_LeastBuyPrice)*1000)/1000 + '</td>'+
+//                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_RetailPrice  + o.fBS_LeastOStock * o.fBS_LeastRetailPrice  )*1000)/1000 + '</td>'+
+//                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_BuyPrice +  o.fBS_LeastOStock * o.fBS_LeastBuyPrice)*1000)/1000 + '</td>'+
+//                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_RetailPrice - o.fBS_OStock * o.fBS_BuyPrice + o.fBS_LeastOStock * o.fBS_LeastRetailPrice - o.fBS_LeastOStock * o.fBS_LeastBuyPrice)*1000)/1000 + '</td>'+
                                     '</tr>').appendTo(vtable);
                             });
                             vtable.appendTo(_div);
@@ -265,17 +275,75 @@
 //                            _div.perfectScrollbar();
                         }
                     });
-                } else {
-                    _parenttr.next().show()
-                }
+//                } else {
+//                    _parenttr.next().show()
+//                }
             },
             function () {
-                $(this).removeClass('icon-minus-sign').addClass('icon-plus-sign');
-                $(this).parents('tr').next().hide();
+                var obj = $(this).find('i[nctype="ajaxGoodsList"]');
+                $(obj).removeClass('icon-minus-sign').addClass('icon-plus-sign');
+                $(obj).parents('tr').next().hide();
             }
         );
+
     });
 
+    function rowzeroallowchange ( src) {
+        var obj = $(src).parent().parent().parent().prev().find('i[nctype="ajaxGoodsList"]');
+        var _parenttr = $(src).parent().parent().parent().prev();
+        var _commonid = $(obj).attr('data-comminid');
+        var _div = _parenttr.next().find('.ncsc-goods-sku');
+//                if (_div.html() == '') {
+        var param = {commonid: _commonid};
+
+        if($(src).prop("checked")==true){
+            param['zeroallow']='true';
+        }
+        $.getJSON('index.php?act=goods&op=get_goods_stock_ajax', param, function (data) {
+            console.trace(data);
+            _div.html('');
+            if (data != 'false' && data.length>0) {
+                var vtable = $('<table class="table tb-type2 nobdb subdatatable"></table>');
+                var vtrhead = $('<tr class="thead"></tr>')
+                $('<th rowspan="2">机构</th>').appendTo(vtrhead);
+                $('<th rowspan="2">批号</th>').appendTo(vtrhead);
+                $('<th rowspan="2">有效期</th>').appendTo(vtrhead);
+                $('<th colspan="2">常规单位库存</th>').appendTo(vtrhead);
+                $('<th colspan="2">最小单位库存</th>').appendTo(vtrhead);
+//                            $('<th rowspan="2">零价金额</th>').appendTo(vtrhead);
+//                            $('<th rowspan="2">进价金额</th>').appendTo(vtrhead);
+//                            $('<th rowspan="2">进销差</th>').appendTo(vtrhead);
+                var vtrhead1 = $('<tr class="thead"></tr>');
+                $('<th>可售</th>').appendTo(vtrhead1);
+                $('<th>实际</th>').appendTo(vtrhead1);
+                $('<th>可售</th>').appendTo(vtrhead1);
+                $('<th>实际</th>').appendTo(vtrhead1);
+                vtrhead.appendTo(vtable);
+                vtrhead1.appendTo(vtable);
+                $.each(data, function (i, o) {
+                    $('<tr><td class="align-left">' + o.OrgName + '</td>'+
+                    '<td class="align-center">' + o.sBS_Batch + '</td>'+
+                    '<td class="align-center">'  + (""+ o.dBS_UsefulLife).substr(0,10) + '</td>'+
+                    '<td class="align-right">' + Math.round(o.fBS_OStock) + '</td>'+
+                    '<td class="align-right">' + Math.round(o.fBS_SStock) + '</td>'+
+                    '<td class="align-right">' + Math.round(o.fBS_LeastOStock) + '</td>'+
+                    '<td class="align-right">' + Math.round(o.fBS_LeastSStock) + '</td>'+
+//                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_RetailPrice  + o.fBS_LeastOStock * o.fBS_LeastRetailPrice  )*1000)/1000 + '</td>'+
+//                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_BuyPrice +  o.fBS_LeastOStock * o.fBS_LeastBuyPrice)*1000)/1000 + '</td>'+
+//                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_RetailPrice - o.fBS_OStock * o.fBS_BuyPrice + o.fBS_LeastOStock * o.fBS_LeastRetailPrice - o.fBS_LeastOStock * o.fBS_LeastBuyPrice)*1000)/1000 + '</td>'+
+                    '</tr>').appendTo(vtable);
+                });
+                vtable.appendTo(_div);
+                _parenttr.next().show();
+                // 计算div的宽度
+                _div.css('width', document.body.clientWidth - 54);
+//                            _div.perfectScrollbar();
+            }
+        });
+//                } else {
+//                    _parenttr.next().show()
+//                }
+    }
     // 获得选中ID
     function getId() {
         var str = '';
