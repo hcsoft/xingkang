@@ -3,6 +3,26 @@
 <!--[if IE 7]>
 <link rel="stylesheet" href="<?php echo ADMIN_TEMPLATES_URL;?>/css/font/font-awesome/css/font-awesome-ie7.min.css">
 <![endif]-->
+<style>
+
+.datatable th, .datatable td {
+    border: solid 1px #DEEFFB;
+}
+.subdatatable  th{
+    text-align: center;
+    word-break:keep-all;
+}
+.subdatatable  th, .subdatatable td {
+    border: solid 1px #79a1fb;
+}
+.subdatatable .thead{
+    background-color: #d3d3d3;
+}
+.ncsc-goods-sku.ps-container{
+    background-color:transparent;
+    border:none;
+}
+</style>
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
@@ -22,52 +42,11 @@
                 <th><label for="search_commonid">商品编码</label></th>
                 <td><input type="text" value="<?php echo $output['search']['search_commonid'] ?>" name="search_commonid"
                            id="search_commonid" class="txt"/></td>
-                <th><label><?php echo $lang['goods_index_class_name']; ?></label></th>
-                <td id="gcategory" colspan="8"><input type="hidden" id="cate_id" name="cate_id" value=""
-                                                      class="mls_id"/>
-                    <input type="hidden" id="cate_name" name="cate_name" value="" class="mls_names"/>
-                    <select class="querySelect">
-                        <option><?php echo $lang['nc_please_choose']; ?>...</option>
-                        <?php if (!empty($output['goods_class']) && is_array($output['goods_class'])) { ?>
-                            <?php foreach ($output['goods_class'] as $val) { ?>
-                                <option value="<?php echo $val['gc_id']; ?>"
-                                        <?php if ($output['search']['cate_id'] == $val['gc_id']){ ?>selected<?php } ?>><?php echo $val['gc_name']; ?></option>
-                            <?php } ?>
-                        <?php } ?>
-                    </select></td>
-
-            </tr>
-            <tr>
-                <th><label><?php echo $lang['goods_index_brand']; ?></label></th>
-                <td><select name="search_brand_id">
-                        <option value=""><?php echo $lang['nc_please_choose']; ?>...</option>
-                        <?php if (!empty($output['brand_list']) && is_array($output['brand_list'])) { ?>
-                            <?php foreach ($output['brand_list'] as $k => $v) { ?>
-                                <option value="<?php echo $v['brand_id']; ?>"
-                                        <?php if ($output['search']['search_brand_id'] == $v['brand_id']){ ?>selected<?php } ?>><?php echo $v['brand_name']; ?></option>
-                            <?php } ?>
-                        <?php } ?>
-                    </select></td>
-                <th><label><?php echo $lang['goods_index_show']; ?></label></th>
-                <td><select name="search_state">
-                        <option value=""><?php echo $lang['nc_please_choose']; ?>...</option>
-                        <?php foreach ($output['state'] as $key => $val) { ?>
-                            <option value="<?php echo $key; ?>"
-                                    <?php if ($output['search']['search_state'] != '' && $output['search']['search_state'] == $key){ ?>selected<?php } ?>><?php echo $val; ?></option>
-                        <?php } ?>
-                    </select></td>
-                <th><label>等待审核</label></th>
-                <td><select name="search_verify">
-                        <option value=""><?php echo $lang['nc_please_choose']; ?>...</option>
-                        <?php foreach ($output['verify'] as $key => $val) { ?>
-                            <option value="<?php echo $key; ?>"
-                                    <?php if ($output['search']['search_verify'] != '' && $output['search']['search_verify'] == $key){ ?>selected<?php } ?>><?php echo $val; ?></option>
-                        <?php } ?>
-                    </select></td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a></td>
                 <td class="w120">&nbsp;</td>
             </tr>
+
             </tbody>
         </table>
     </form>
@@ -92,18 +71,46 @@
     </table>
     <form method='post' id="form_goods" action="<?php echo urlAdmin('goods', 'goods_del'); ?>">
         <input type="hidden" name="form_submit" value="ok"/>
-        <table class="table tb-type2">
+        <table class="table tb-type2 datatable">
             <thead>
             <tr class="thead">
-                <th class="w24"></th>
-                <th class="w24"></th>
-                <th class="align-center">商品编码</th>
-                <th colspan="2"><?php echo $lang['goods_index_name']; ?></th>
-                <th class="align-center">规格</th>
-                <th class="align-center">单位</th>
-                <th>厂家场地</th>
-                <th class="align-center">价格</th>
-                <th class="align-center" colspan="2">库存</th>
+                <th nowrap rowspan="3" class="w24"></th>
+                <th nowrap rowspan="3"  class="w24"></th>
+                <th nowrap rowspan="3"  class="align-center">商品编码</th>
+                <th nowrap  rowspan="3"  colspan=""><?php echo $lang['goods_index_name']; ?></th>
+                <th nowrap  colspan="3"  class="align-center">规格</th>
+
+                <th nowrap  rowspan="3" >厂家/产地</th>
+<!--                <th class="align-center" >库存</th>-->
+<!--                <th class="align-center" >最小单位库存</th>-->
+<!--                <th class="align-center">常规单位价格</th>-->
+<!--                <th class="align-center">最小单位价格</th>-->
+<!--                <th class="align-center">金额</th>-->
+<!--                <th class="align-center">进销差</th>-->
+
+                <th  nowrap colspan="5" class="align-center" >常规单位</th>
+                <th nowrap  colspan="5" class="align-center" >最小单位</th>
+                <th  nowrap rowspan="3" class="align-center">零价金额</th>
+                <th nowrap  rowspan="3" class="align-center">进价金额</th>
+                <th nowrap  rowspan="3" class="align-center">进销差</th>
+            </tr>
+            <tr>
+                <th nowrap  rowspan="2" class="align-center" >完整</th>
+                <th nowrap  rowspan="2" class="align-center" >含量</th>
+                <th nowrap  rowspan="2" class="align-center" >包装</th>
+                <th nowrap  rowspan="2" class="align-center" >单位</th>
+                <th nowrap  colspan="2" class="align-center" >库存</th>
+                <th nowrap   rowspan="2" class="align-center">零价</th>
+                <th  nowrap rowspan="2"  class="align-center">进价</th>
+                <th nowrap  rowspan="2" class="align-center" >单位</th>
+                <th nowrap  colspan="2" class="align-center" >库存</th>
+                <th nowrap   rowspan="2" class="align-center">零价</th>
+                <th  nowrap rowspan="2"  class="align-center">进价</th>
+            <tr>
+                <th nowrap  class="align-center" >可售</th>
+                <th nowrap  class="align-center" >实际</th>
+                <th nowrap  class="align-center" >可售</th>
+                <th nowrap  class="align-center" >实际</th>
             </tr>
             </thead>
             <tbody>
@@ -111,44 +118,48 @@
                 ?>
                 <?php foreach ($output['goods_list'] as $k => $v) {                 ?>
                     <tr class="hover edit">
-                        <td><input type="checkbox" name="id[]" value="<?php echo $v['goods_commonid']; ?>"
+                        <td nowrap><input type="checkbox" name="id[]" value="<?php echo $v['goods_commonid']; ?>"
                                    class="checkitem"></td>
-                        <td><i class="icon-plus-sign" style="cursor: pointer;" nctype="ajaxGoodsList"
+                        <td nowrap><i class="icon-plus-sign" style="cursor: pointer;" nctype="ajaxGoodsList"
                                data-comminid="<?php echo $v['goods_commonid']; ?>"
                                title="点击展开查看此商品全部规格；规格值过多时请横向拖动区域内的滚动条进行浏览。"></i></td>
-                        <td class="w60 align-center"><?php echo $v['goods_commonid']; ?></td>
-                        <td class="w60 picture">
-                            <div class="size-56x56"><span class="thumb size-56x56"><i></i><img
-                                        src="<?php echo thumb($v, 60); ?>" onload="javascript:DrawImage(this,56,56);"/></span>
-                            </div>
-                        </td>
+                        <td nowrap class="w60 align-center"><?php echo $v['goods_commonid']; ?></td>
+<!--                        <td class="w60 picture">-->
+<!--                            <div class="size-56x56"><span class="thumb size-56x56"><i></i><img-->
+<!--                                        src="--><?php //echo thumb($v, 60); ?><!--" onload="javascript:DrawImage(this,56,56);"/></span>-->
+<!--                            </div>-->
+<!--                        </td>-->
                         <td class="goods-name w270"><p><span><?php echo $v['goods_name']; ?></span></p>
                         </td>
-                        <td><p>完整规格: <span style="color:blue;"><?php echo $v['sDrug_Spec']; ?></span></p>
+                        <td><?php echo $v['sDrug_Spec']; ?></td>
+                        <td><?php echo $v['sDrug_Content']; ?></td>
+                        <td><?php echo $v['sDrug_PackSpec']; ?></td>
 
-                            <p>含量规格: <span style="color:blue;"><?php echo $v['sDrug_Content']; ?></span></p>
 
-                            <p>包装规格: <span style="color:blue;"><?php echo $v['sDrug_PackSpec']; ?></span></p></td>
-                        <td><p>常规单位: <span style="color:blue;"><?php echo $v['sDrug_Unit']; ?></span></p>
-
-                            <p>最小单位: <span style="color:blue;"><?php echo $v['sDrug_LeastUnit']; ?></span></p></td>
                         <td><p><?php echo $v['brand_name']; ?></p>
 
                             <p><?php echo $v['gc_name']; ?></p></p>
                         </td>
-                        <td class="align-center"><?php echo $lang['currency'] . number_format($v['goods_price'], 2) ?></td>
-                        <td class="align-center"><p>可售库存：<span style="color:blue;"><span style="color:blue;"><?php echo number_format($v['fDS_AdjustNum'],0); ?></span></p>
-                            <p>实际库存：<span style="color:blue;"><?php echo number_format($v['fDS_LeastAdjustNum'],0); ?></span></p>
-                        </td>
-                        <td class="align-center"><p>零价金额：<span style="color:blue;"><?php echo number_format($v['fDS_LeastRetailPrice'],3); ?></span></p>
-                            <p>进价金额：<span style="color:blue;"><?php echo number_format($v['fDS_BuyPrice'],3); ?></span></p>
-                        </td>
-                        <td class="align-center"><p>进销差：<span style="color:blue;"><?php echo number_format($v['fDS_LeastSStock'],0); ?></span></p>
-                        </td>
+                        <td><?php echo $v['sDrug_Unit']; ?></td>
+                        <td><?php echo number_format($v['fDS_OStock'],0); ?></td>
+                        <td><?php echo number_format($v['fDS_SStock'],0); ?></td>
+                        <td><?php echo number_format($v['fDS_RetailPrice'],3); ?></td>
+                        <td><?php echo number_format($v['fDS_BuyPrice'],3); ?></td>
+                        <td><?php echo $v['sDrug_LeastUnit'] ?></td>
+                        <td><?php echo number_format($v['fDS_LeastOStock'],3); ?></td>
+                        <td><?php echo number_format($v['fDS_LeastSStock'],3); ?></td>
+                        <td><?php echo number_format($v['fDS_LeastRetailPrice'],3); ?></td>
+                        <td><?php echo number_format($v['fDS_LeastBuyPrice'],3); ?></td>
+                        <td><?php echo number_format($v['fDS_RetailPrice']*$v['fDS_OStock']+$v['fDS_LeastRetailPrice']*$v['fDS_LeastOStock'],3); ?></td>
+                        <td><?php echo number_format($v['fDS_BuyPrice']*$v['fDS_OStock']+$v['fDS_LeastBuyPrice']*$v['fDS_LeastOStock'],3); ?></td>
+                        <td><?php echo number_format($v['fDS_RetailPrice']*$v['fDS_OStock']-$v['fDS_BuyPrice']*$v['fDS_OStock'] +
+                                $v['fDS_LeastRetailPrice']*$v['fDS_LeastOStock'] - $v['fDS_LeastBuyPrice']*$v['fDS_LeastOStock']
+                                ,3); ?></td>
+
 
                     </tr>
                     <tr style="display:none;">
-                        <td colspan="20">
+                        <td colspan="21">
                             <div class="ncsc-goods-sku ps-container"></div>
                         </td>
                     </tr>
@@ -180,9 +191,9 @@
 <script type="text/javascript">
     var SITEURL = "<?php echo SHOP_SITE_URL; ?>";
     $(function () {
-        gcategoryInit("gcategory");
+//        gcategoryInit("gcategory");
         $('#ncsubmit').click(function () {
-            $('input[name="op"]').val('stock');
+//            $('input[name="op"]').val('stock');
             $('#formSearch').submit();
         });
 
@@ -211,21 +222,43 @@
                 if (_div.html() == '') {
                     $.getJSON('index.php?act=goods&op=get_goods_stock_ajax', {commonid: _commonid}, function (data) {
                         console.trace(data);
-                        if (data != 'false') {
-                            var _ul = $('<ul class="ncsc-goods-sku-list"></ul>');
+                        if (data != 'false' && data.length>0) {
+                            var vtable = $('<table class="table tb-type2 nobdb subdatatable"></table>');
+                            var vtrhead = $('<tr class="thead"></tr>')
+                            $('<th rowspan="2">机构</th>').appendTo(vtrhead);
+                            $('<th rowspan="2">批号</th>').appendTo(vtrhead);
+                            $('<th rowspan="2">有效期</th>').appendTo(vtrhead);
+//                            $('<th>库存进价</th>').appendTo(vtrhead);
+//                            $('<th>库存零价</th>').appendTo(vtrhead);
+                            $('<th colspan="2">常规单位库存</th>').appendTo(vtrhead);
+                            $('<th colspan="2">最小单位库存</th>').appendTo(vtrhead);
+                            $('<th rowspan="2">零价金额</th>').appendTo(vtrhead);
+                            $('<th rowspan="2">进价金额</th>').appendTo(vtrhead);
+                            $('<th rowspan="2">进销差</th>').appendTo(vtrhead);
+                            var vtrhead1 = $('<tr class="thead"></tr>');
+                            $('<th>可售</th>').appendTo(vtrhead1);
+                            $('<th>实际</th>').appendTo(vtrhead1);
+                            $('<th>可售</th>').appendTo(vtrhead1);
+                            $('<th>实际</th>').appendTo(vtrhead1);
+                            vtrhead.appendTo(vtable);
+                            vtrhead1.appendTo(vtable);
                             $.each(data, function (i, o) {
-                                $('<li style="width:200px;"><div style="" title="库房：' + o.DepotName + '"><p>库房：<span style="color:blue;">' + o.DepotName + '</span></p>'+
-                                    '<p>批号：<span style="color:blue;"><em title="￥' + o.sBS_Batch + '">' + o.sBS_Batch + '</em></span></div>'+
-                                    '<p>有效期至：<span style="color:blue;"><em title="￥' + o.dBS_UsefulLife + '">' + (""+ o.dBS_UsefulLife).substr(0,10) + '</em></span></div>'+
-                                    '<p>库存进价：<span style="color:blue;"><em title="￥' + o.fBS_BuyPrice + '">￥' + Math.round(o.fBS_BuyPrice*1000)/1000 + '</em></span></div>'+
-                                    '<p>库存零价：<span style="color:blue;"><em title="￥' + o.fBS_LeastBuyPrice + '">￥' + Math.round(o.fBS_LeastBuyPrice*1000)/1000 + '</em></span></div>'+
-                                    '<p>库存数量：<span style="color:blue;"><em title="' + o.fBS_SStock + '">' + Math.round(o.fBS_SStock) + '</em></span></div>'+
-                                    '<p>零价金额：<span style="color:blue;"><em title="￥' + o.fBS_RetailPrice + '">￥' + Math.round(o.fBS_RetailPrice*1000)/1000 + '</em></span></div>'+
-                                    '<p>进价金额：<span style="color:blue;"><em title="￥' + o.fBS_RetailPrice + '">￥' + Math.round(o.fBS_RetailPrice*1000)/1000 + '</em></span></div>'+
-                                    '<p>进销差：<span style="color:blue;"><em title="￥' + o.fBS_LeastSStock + '">' + Math.round(o.fBS_LeastSStock) + '</em></span></div>'+
-                                    '</li>').appendTo(_ul);
+                                $('<tr><td class="align-left">' + o.OrgName + '</td>'+
+                                 '<td class="align-center">' + o.sBS_Batch + '</td>'+
+//                                '<td>' + o.sBS_Batch + '</td>'+
+                                '<td class="align-center">'  + (""+ o.dBS_UsefulLife).substr(0,10) + '</td>'+
+//                                '<td>￥' + Math.round(o.fBS_BuyPrice*1000)/1000 + '</td>'+
+//                                '<td>￥' + Math.round(o.fBS_LeastBuyPrice*1000)/1000 + '</td>'+
+                                '<td class="align-right">' + Math.round(o.fBS_OStock) + '</td>'+
+                                '<td class="align-right">' + Math.round(o.fBS_SStock) + '</td>'+
+                                '<td class="align-right">' + Math.round(o.fBS_LeastOStock) + '</td>'+
+                                '<td class="align-right">' + Math.round(o.fBS_LeastSStock) + '</td>'+
+                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_RetailPrice  + o.fBS_LeastOStock * o.fBS_LeastRetailPrice  )*1000)/1000 + '</td>'+
+                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_BuyPrice +  o.fBS_LeastOStock * o.fBS_LeastBuyPrice)*1000)/1000 + '</td>'+
+                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_RetailPrice - o.fBS_OStock * o.fBS_BuyPrice + o.fBS_LeastOStock * o.fBS_LeastRetailPrice - o.fBS_LeastOStock * o.fBS_LeastBuyPrice)*1000)/1000 + '</td>'+
+                                    '</tr>').appendTo(vtable);
                             });
-                            _ul.appendTo(_div);
+                            vtable.appendTo(_div);
                             _parenttr.next().show();
                             // 计算div的宽度
                             _div.css('width', document.body.clientWidth - 54);

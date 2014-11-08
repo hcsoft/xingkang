@@ -199,16 +199,15 @@ class goodsControl extends SystemControl{
 
 
 
-
-
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         $page = new Page();
         $page->setEachNum(10);
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
-        $sql = 'from shopnc_goods_common good  left join Center_DrugStock stock on good.goods_commonid = stock.iDrug_ID
-         where 1=1 ';
+        $sql = 'from Center_DrugStock stock  left join shopnc_goods_common good   on good.goods_commonid = stock.iDrug_ID
+            left join Organization org on stock.orgid = org.id
+         where good.idrug_rectype in (0,1,3) ';
 
         if ($_GET['search_goods_name'] != '') {
             $sql = $sql . ' and good.goods_name like \'%' .  trim($_GET['search_goods_name']) . '%\'';
@@ -240,7 +239,7 @@ class goodsControl extends SystemControl{
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.goods_commonid) rownum,
-                        *
+                        org.name as OrgName,  *
                             $sql order by  good.goods_commonid)zzzz where rownum>$startnum )zzzzz order by rownum";
         $stmt = $conn->query($tsql);
         $goods_list = array();
@@ -281,9 +280,18 @@ class goodsControl extends SystemControl{
         if ($commonid <= 0) {
             echo 'false';exit();
         }
-        $newstmt = $conn->query(" select * from Center_DrugStocksub where idrug_id = '$commonid'");
-        $goods_list = $newstmt->fetchAll(PDO::FETCH_ASSOC);
+        $newstmt = $conn->query(" select org.name 'OrgName', * from Center_DrugStocksub sub left join Organization org on sub.orgid=org.id where idrug_id = '$commonid'");
 
+//        $stmt = $conn->query($tsql);
+        $goods_list = array();
+        while ($row = $newstmt->fetch(PDO::FETCH_ASSOC)) {
+//            array_push($row," select org.name 'OrgName', * from Center_DrugStocksub sub left join Organization org on sub.orgid=org.id where idrug_id = '$commonid'");
+            array_push($goods_list, $row);
+        }
+
+//        $goods_list = $newstmt->fetchAll(PDO::FETCH_ASSOC);
+//        echo "{sql:\" select org.name 'OrgName', * from Center_DrugStocksub sub left join Organization org on sub.orgid=org.id where idrug_id = '$commonid' \"}";
+//        die;
         /**
          * 转码
          */

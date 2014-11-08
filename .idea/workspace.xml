@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/finance.php" afterPath="$PROJECT_DIR$/admin/control/finance.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/finance.saledetail.php" afterPath="$PROJECT_DIR$/admin/templates/default/finance.saledetail.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/goods.php" afterPath="$PROJECT_DIR$/admin/control/goods.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/goods.stock.php" afterPath="$PROJECT_DIR$/admin/templates/default/goods.stock.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -29,32 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="community.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/control/community.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.130435" vertical-offset="3556" max-vertical-offset="9632">
-              <caret line="269" column="8" selection-start-line="269" selection-start-column="8" selection-end-line="281" selection-end-column="57" />
-              <folding>
-                <marker date="1415348250393" expanded="true" signature="553:665" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1415348250393" expanded="true" signature="989:1054" placeholder="select * fro..Center_codes..." />
-                <marker date="1415348250393" expanded="true" signature="3110:3901" placeholder="SELECT * FRO..*..." />
-                <marker date="1415348250393" expanded="true" signature="3127:3869" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1415348250393" expanded="true" signature="3143:3850" placeholder="SELECT TOP :..." />
-                <marker date="1415348250393" expanded="true" signature="8832:10732" placeholder="SELECT * FRO..*..." />
-                <marker date="1415348250393" expanded="true" signature="8849:10700" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1415348250393" expanded="true" signature="8865:10681" placeholder="SELECT TOP :..." />
-                <marker date="1415348250393" expanded="true" signature="13098:13226" placeholder="insert into ..." />
-                <marker date="1415348250393" expanded="true" signature="13651:13763" placeholder="select b.id ..map_org_wechat..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="storehouse.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.956522" vertical-offset="420" max-vertical-offset="5880">
-              <caret line="48" column="4" selection-start-line="48" selection-start-column="4" selection-end-line="150" selection-end-column="5" />
+            <state vertical-scroll-proportion="-13.391304" vertical-offset="1428" max-vertical-offset="5880">
+              <caret line="124" column="9" selection-start-line="120" selection-start-column="8" selection-end-line="124" selection-end-column="9" />
               <folding>
                 <marker date="1415325963739" expanded="true" signature="554:666" placeholder="select b.id ..map_org_wechat..." />
                 <marker date="1415325963739" expanded="true" signature="990:1055" placeholder="select * fro..Center_codes..." />
@@ -69,121 +48,50 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="menu.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/include/menu.php">
+      <file leaf-file-name="goods.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin/control/goods.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.26087" vertical-offset="2688" max-vertical-offset="4452">
-              <caret line="222" column="89" selection-start-line="222" selection-start-column="20" selection-end-line="222" selection-end-column="89" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="limit.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/include/limit.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.869565" vertical-offset="1313" max-vertical-offset="2436">
-              <caret line="110" column="39" selection-start-line="110" selection-start-column="39" selection-end-line="110" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="finance.sum.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.sum.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-26.782608" vertical-offset="0" max-vertical-offset="3976">
-              <caret line="44" column="18" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="community.income.detail.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/community.income.detail.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="616" max-vertical-offset="3808">
-              <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="finance.good.sum.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.good.sum.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="39.565216" vertical-offset="2394" max-vertical-offset="4256">
-              <caret line="106" column="30" selection-start-line="106" selection-start-column="30" selection-end-line="106" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="consulting.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/control/consulting.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.869565" vertical-offset="126" max-vertical-offset="966">
-              <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="finance.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.73913" vertical-offset="1397" max-vertical-offset="8190">
-              <caret line="124" column="29" selection-start-line="124" selection-start-column="29" selection-end-line="124" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.5232816" vertical-offset="3796" max-vertical-offset="4886">
+              <caret line="288" column="37" selection-start-line="288" selection-start-column="37" selection-end-line="288" selection-end-column="37" />
               <folding>
-                <marker date="1415419893197" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1415419893197" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
-                <marker date="1415419893197" expanded="true" signature="1987:2115" placeholder="insert into ..." />
-                <marker date="1415419893197" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1415419893197" expanded="true" signature="5645:6469" placeholder="SELECT * FRO..*..." />
-                <marker date="1415419893197" expanded="true" signature="5662:6437" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1415419893197" expanded="true" signature="5678:6418" placeholder="SELECT TOP :..." />
+                <marker date="1415433874744" expanded="true" signature="8343:8614" placeholder="SELECT * FRO..*..." />
+                <marker date="1415433874744" expanded="true" signature="8360:8582" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1415433874744" expanded="true" signature="8376:8563" placeholder="SELECT TOP :..." />
+                <marker date="1415433874744" expanded="true" signature="9967:10100" placeholder="select org.n..." />
+                <marker date="1415433874744" expanded="true" signature="10266:10399" placeholder="select org.n..." />
+                <marker date="1415433874744" expanded="true" signature="10543:10676" placeholder="select org.n..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="finance.saledetail.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.saledetail.php">
+      <file leaf-file-name="goods.stock.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.stock.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5792507" vertical-offset="578" max-vertical-offset="3920">
-              <caret line="70" column="29" selection-start-line="70" selection-start-column="29" selection-end-line="70" selection-end-column="29" />
-              <folding />
+            <state vertical-scroll-proportion="-11.565217" vertical-offset="3150" max-vertical-offset="4284">
+              <caret line="244" column="39" selection-start-line="244" selection-start-column="35" selection-end-line="244" selection-end-column="39" />
+              <folding>
+                <element signature="n#style#0;n#i#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+                <marker date="1415433243490" expanded="true" signature="8166:8179" placeholder="..." />
+                <marker date="1415433243490" expanded="true" signature="8180:8354" placeholder="..." />
+                <marker date="1415433243490" expanded="true" signature="8222:8328" placeholder="..." />
+                <marker date="1415433243490" expanded="true" signature="8448:8506" placeholder="..." />
+                <marker date="1415433243490" expanded="true" signature="8630:8668" placeholder="..." />
+                <marker date="1415433243490" expanded="true" signature="8744:8851" placeholder="..." />
+                <marker date="1415433243490" expanded="true" signature="8782:8851" placeholder="..." />
+                <marker date="1415433243490" expanded="true" signature="9219:9252" placeholder="..." />
+                <marker date="1415433243490" expanded="true" signature="9602:9721" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="skin_0.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/css/skin_0.css">
+      <file leaf-file-name="storehouse.sum.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/templates/default/storehouse.sum.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.16" vertical-offset="6592" max-vertical-offset="20258">
-              <caret line="489" column="30" selection-start-line="489" selection-start-column="30" selection-end-line="489" selection-end-column="30" />
-              <folding>
-                <marker date="1415418026194" expanded="true" signature="577:601" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="5747:5801" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="6760:6814" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="39158:39174" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="39200:39216" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="42986:43003" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="43029:43045" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="44144:44161" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="44187:44203" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="45961:45978" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="46004:46020" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="55055:55072" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="55098:55114" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="61187:61203" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="61229:61245" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="71254:71270" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="71296:71312" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="91396:91413" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="106505:106521" placeholder="{...}" />
-                <marker date="1415418026194" expanded="true" signature="106547:106563" placeholder="{...}" />
-              </folding>
+            <state vertical-scroll-proportion="-11.086957" vertical-offset="1397" max-vertical-offset="4032">
+              <caret line="118" column="39" selection-start-line="118" selection-start-column="27" selection-end-line="118" selection-end-column="39" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -201,8 +109,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/circle/templates/default/layout/footer.php" />
-        <option value="$PROJECT_DIR$/cms/templates/default/layout/footer.php" />
         <option value="$PROJECT_DIR$/core/framework/function/core.php" />
         <option value="$PROJECT_DIR$/microshop/templates/default/layout/footer.php" />
         <option value="$PROJECT_DIR$/shop/templates/default/layout/member_pub_layout.php" />
@@ -252,6 +158,8 @@
         <option value="$PROJECT_DIR$/admin/templates/default/finance.good.sum.php" />
         <option value="$PROJECT_DIR$/admin/control/finance.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/finance.saledetail.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/goods.stock.php" />
+        <option value="$PROJECT_DIR$/admin/control/goods.php" />
       </list>
     </option>
   </component>
@@ -932,7 +840,13 @@
       <option name="project" value="LOCAL" />
       <updated>1415419009383</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="1,商品明细查询 完善了导出,增加了项目类型">
+      <created>1415419965363</created>
+      <option name="number" value="00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1415419965363</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -945,30 +859,30 @@
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2689295" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32898173" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.239375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -988,7 +902,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="1,增加了默认时间" />
     <MESSAGE value="1,修改了仓库明细,增加字段等" />
     <MESSAGE value="1,修改了仓库明细,进销差错误" />
     <MESSAGE value="1,修改了档案汇总" />
@@ -1013,20 +926,14 @@
     <MESSAGE value="1,增加了商品毛利分析" />
     <MESSAGE value="1,商品毛利分析增加了数量为零的不显示" />
     <MESSAGE value="1,增加了商品明细查询" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,增加了商品明细查询" />
+    <MESSAGE value="1,商品明细查询 完善了导出,增加了项目类型" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,商品明细查询 完善了导出,增加了项目类型" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/circle/templates/default/layout/msg_layout.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="112" max-vertical-offset="1358">
-          <caret line="8" column="35" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/circle/templates/default/layout/circle_layout.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16620111" vertical-offset="7" max-vertical-offset="882">
@@ -1076,13 +983,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/goods.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="177.39131" vertical-offset="4080" max-vertical-offset="4774">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/resource/js/jquery.treeview/jquery.treeview.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="3458">
@@ -1122,13 +1022,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="994" max-vertical-offset="2002">
           <caret line="86" column="23" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/storehouse.detail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.130434" vertical-offset="2416" max-vertical-offset="4004">
-          <caret line="204" column="16" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1253,13 +1146,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/storehouse.sum.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3248" max-vertical-offset="4032">
-          <caret line="262" column="5" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/community.prescription.detail.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33240223" vertical-offset="252" max-vertical-offset="4004">
@@ -1343,26 +1229,26 @@
         <state vertical-scroll-proportion="-10.16" vertical-offset="6592" max-vertical-offset="20258">
           <caret line="489" column="30" selection-start-line="489" selection-start-column="30" selection-end-line="489" selection-end-column="30" />
           <folding>
-            <marker date="1415418026194" expanded="true" signature="577:601" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="5747:5801" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="6760:6814" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="39158:39174" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="39200:39216" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="42986:43003" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="43029:43045" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="44144:44161" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="44187:44203" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="45961:45978" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="46004:46020" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="55055:55072" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="55098:55114" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="61187:61203" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="61229:61245" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="71254:71270" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="71296:71312" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="91396:91413" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="106505:106521" placeholder="{...}" />
-            <marker date="1415418026194" expanded="true" signature="106547:106563" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1415418026194" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -1375,38 +1261,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.956522" vertical-offset="420" max-vertical-offset="5880">
-          <caret line="48" column="4" selection-start-line="48" selection-start-column="4" selection-end-line="150" selection-end-column="5" />
-          <folding>
-            <marker date="1415325963739" expanded="true" signature="554:666" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1415325963739" expanded="true" signature="990:1055" placeholder="select * fro..Center_codes..." />
-            <marker date="1415325963739" expanded="true" signature="1543:1599" placeholder="select disti..map_org_wechat..." />
-            <marker date="1415325963739" expanded="true" signature="4000:4930" placeholder="SELECT * FRO..*..." />
-            <marker date="1415325963739" expanded="true" signature="4017:4898" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1415325963739" expanded="true" signature="4033:4879" placeholder="SELECT TOP :..." />
-            <marker date="1415325963739" expanded="true" signature="6705:6833" placeholder="insert into ..." />
-            <marker date="1415325963739" expanded="true" signature="7258:7370" placeholder="select b.id ..map_org_wechat..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/community.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.130435" vertical-offset="3556" max-vertical-offset="9632">
           <caret line="269" column="8" selection-start-line="269" selection-start-column="8" selection-end-line="281" selection-end-column="57" />
           <folding>
-            <marker date="1415348250393" expanded="true" signature="553:665" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1415348250393" expanded="true" signature="989:1054" placeholder="select * fro..Center_codes..." />
-            <marker date="1415348250393" expanded="true" signature="3110:3901" placeholder="SELECT * FRO..*..." />
-            <marker date="1415348250393" expanded="true" signature="3127:3869" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1415348250393" expanded="true" signature="3143:3850" placeholder="SELECT TOP :..." />
-            <marker date="1415348250393" expanded="true" signature="8832:10732" placeholder="SELECT * FRO..*..." />
-            <marker date="1415348250393" expanded="true" signature="8849:10700" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1415348250393" expanded="true" signature="8865:10681" placeholder="SELECT TOP :..." />
-            <marker date="1415348250393" expanded="true" signature="13098:13226" placeholder="insert into ..." />
-            <marker date="1415348250393" expanded="true" signature="13651:13763" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1415348250393" expanded="true" signature="-1:-1" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1415348250393" expanded="true" signature="-1:-1" placeholder="select * fro..Center_codes..." />
+            <marker date="1415348250393" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..*..." />
+            <marker date="1415348250393" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1415348250393" expanded="true" signature="-1:-1" placeholder="SELECT TOP :..." />
+            <marker date="1415348250393" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..*..." />
+            <marker date="1415348250393" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1415348250393" expanded="true" signature="-1:-1" placeholder="SELECT TOP :..." />
+            <marker date="1415348250393" expanded="true" signature="-1:-1" placeholder="insert into ..." />
+            <marker date="1415348250393" expanded="true" signature="-1:-1" placeholder="select b.id ..map_org_wechat..." />
           </folding>
         </state>
       </provider>
@@ -1424,22 +1293,89 @@
         <state vertical-scroll-proportion="-14.73913" vertical-offset="1397" max-vertical-offset="8190">
           <caret line="124" column="29" selection-start-line="124" selection-start-column="29" selection-end-line="124" selection-end-column="29" />
           <folding>
-            <marker date="1415419893197" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1415419893197" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
-            <marker date="1415419893197" expanded="true" signature="1987:2115" placeholder="insert into ..." />
-            <marker date="1415419893197" expanded="true" signature="2540:2652" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1415419893197" expanded="true" signature="5645:6469" placeholder="SELECT * FRO..*..." />
-            <marker date="1415419893197" expanded="true" signature="5662:6437" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1415419893197" expanded="true" signature="5678:6418" placeholder="SELECT TOP :..." />
+            <marker date="1415419893197" expanded="true" signature="-1:-1" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1415419893197" expanded="true" signature="-1:-1" placeholder="select * fro..Center_codes..." />
+            <marker date="1415419893197" expanded="true" signature="-1:-1" placeholder="insert into ..." />
+            <marker date="1415419893197" expanded="true" signature="-1:-1" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1415419893197" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..*..." />
+            <marker date="1415419893197" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1415419893197" expanded="true" signature="-1:-1" placeholder="SELECT TOP :..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.saledetail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5792507" vertical-offset="578" max-vertical-offset="3920">
-          <caret line="70" column="29" selection-start-line="70" selection-start-column="29" selection-end-line="70" selection-end-column="29" />
+        <state vertical-scroll-proportion="-13.826087" vertical-offset="578" max-vertical-offset="3920">
+          <caret line="64" column="30" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/storehouse.detail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.130434" vertical-offset="2416" max-vertical-offset="4004">
+          <caret line="204" column="16" selection-start-line="204" selection-start-column="16" selection-end-line="204" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/storehouse.sum.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.086957" vertical-offset="1397" max-vertical-offset="4032">
+          <caret line="118" column="39" selection-start-line="118" selection-start-column="27" selection-end-line="118" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.stock.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.565217" vertical-offset="3150" max-vertical-offset="4284">
+          <caret line="244" column="39" selection-start-line="244" selection-start-column="35" selection-end-line="244" selection-end-column="39" />
+          <folding>
+            <element signature="n#style#0;n#i#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#form#1;n#div#0;n#!!top" expanded="true" />
+            <marker date="1415433243490" expanded="true" signature="8166:8179" placeholder="..." />
+            <marker date="1415433243490" expanded="true" signature="8180:8354" placeholder="..." />
+            <marker date="1415433243490" expanded="true" signature="8222:8328" placeholder="..." />
+            <marker date="1415433243490" expanded="true" signature="8448:8506" placeholder="..." />
+            <marker date="1415433243490" expanded="true" signature="8630:8668" placeholder="..." />
+            <marker date="1415433243490" expanded="true" signature="8744:8851" placeholder="..." />
+            <marker date="1415433243490" expanded="true" signature="8782:8851" placeholder="..." />
+            <marker date="1415433243490" expanded="true" signature="9219:9252" placeholder="..." />
+            <marker date="1415433243490" expanded="true" signature="9602:9721" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.391304" vertical-offset="1428" max-vertical-offset="5880">
+          <caret line="124" column="9" selection-start-line="120" selection-start-column="8" selection-end-line="124" selection-end-column="9" />
+          <folding>
+            <marker date="1415325963739" expanded="true" signature="554:666" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1415325963739" expanded="true" signature="990:1055" placeholder="select * fro..Center_codes..." />
+            <marker date="1415325963739" expanded="true" signature="1543:1599" placeholder="select disti..map_org_wechat..." />
+            <marker date="1415325963739" expanded="true" signature="4000:4930" placeholder="SELECT * FRO..*..." />
+            <marker date="1415325963739" expanded="true" signature="4017:4898" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1415325963739" expanded="true" signature="4033:4879" placeholder="SELECT TOP :..." />
+            <marker date="1415325963739" expanded="true" signature="6705:6833" placeholder="insert into ..." />
+            <marker date="1415325963739" expanded="true" signature="7258:7370" placeholder="select b.id ..map_org_wechat..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/control/goods.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5232816" vertical-offset="3796" max-vertical-offset="4886">
+          <caret line="288" column="37" selection-start-line="288" selection-start-column="37" selection-end-line="288" selection-end-column="37" />
+          <folding>
+            <marker date="1415433874744" expanded="true" signature="8343:8614" placeholder="SELECT * FRO..*..." />
+            <marker date="1415433874744" expanded="true" signature="8360:8582" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1415433874744" expanded="true" signature="8376:8563" placeholder="SELECT TOP :..." />
+            <marker date="1415433874744" expanded="true" signature="9967:10100" placeholder="select org.n..." />
+            <marker date="1415433874744" expanded="true" signature="10266:10399" placeholder="select org.n..." />
+            <marker date="1415433874744" expanded="true" signature="10543:10676" placeholder="select org.n..." />
+          </folding>
         </state>
       </provider>
     </entry>
