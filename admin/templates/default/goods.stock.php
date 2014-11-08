@@ -228,7 +228,7 @@
                 var _div = _parenttr.next().find('.ncsc-goods-sku');
 //                if (_div.html() == '') {
                 var param = {commonid: _commonid};
-
+                _div.html('');
                     if($(this).children("input.rowzeroallow").length>0){
                         if($(this).children("input.rowzeroallow")[0].prop("checked")=="true"){
                             param['zeroallow']='true';
@@ -236,7 +236,7 @@
                     }
                     $.getJSON('index.php?act=goods&op=get_goods_stock_ajax', param, function (data) {
                         console.trace(data);
-                        _div.html('');
+
                         if (data != 'false' && data.length>0) {
                             var vtable = $('<table class="table tb-type2 nobdb subdatatable"></table>');
                             var vtrhead = $('<tr class="thead"></tr>')
@@ -299,9 +299,10 @@
         if($(src).prop("checked")==true){
             param['zeroallow']='true';
         }
+        _div.html('');
         $.getJSON('index.php?act=goods&op=get_goods_stock_ajax', param, function (data) {
             console.trace(data);
-            _div.html('');
+
             if (data != 'false' && data.length>0) {
                 var vtable = $('<table class="table tb-type2 nobdb subdatatable"></table>');
                 var vtrhead = $('<tr class="thead"></tr>')
