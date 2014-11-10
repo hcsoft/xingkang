@@ -33,6 +33,7 @@
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" name="act" value="goods">
         <input type="hidden" name="op" value="stock">
+        <input type="hidden" id = 'queryorgid' name="queryorgid" value="<?php echo $_GET['orgid']; ?>">
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
@@ -242,7 +243,7 @@
                 var _commonid = $(obj).attr('data-comminid');
                 var _div = _parenttr.next().find('.ncsc-goods-sku');
 //                if (_div.html() == '') {
-                var param = {commonid: _commonid};
+                var param = {commonid: _commonid,orgid:$("#queryorgid").val()};
                 _div.html('');
                     if($(this).children("input.rowzeroallow").length>0){
                         if($(this).children("input.rowzeroallow")[0].prop("checked")=="true"){

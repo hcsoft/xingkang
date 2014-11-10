@@ -32,8 +32,8 @@
       <file leaf-file-name="storehouse.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="119.91304" vertical-offset="4326" max-vertical-offset="6636">
-              <caret line="112" column="37" selection-start-line="112" selection-start-column="37" selection-end-line="112" selection-end-column="37" />
+            <state vertical-scroll-proportion="-28.52174" vertical-offset="2060" max-vertical-offset="6636">
+              <caret line="194" column="24" selection-start-line="194" selection-start-column="20" selection-end-line="194" selection-end-column="24" />
               <folding>
                 <marker date="1415441797537" expanded="true" signature="554:666" placeholder="select b.id ..map_org_wechat..." />
                 <marker date="1415441797537" expanded="true" signature="990:1055" placeholder="select * fro..Center_codes..." />
@@ -51,7 +51,7 @@
       <file leaf-file-name="member.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/member.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-31.73913" vertical-offset="4170" max-vertical-offset="9702">
+            <state vertical-scroll-proportion="-60.95652" vertical-offset="3498" max-vertical-offset="9702">
               <caret line="350" column="8" selection-start-line="350" selection-start-column="8" selection-end-line="350" selection-end-column="8" />
               <folding>
                 <marker date="1415636673044" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
@@ -63,16 +63,16 @@
       <file leaf-file-name="goods.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/control/goods.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47191012" vertical-offset="2688" max-vertical-offset="5250">
-              <caret line="210" column="51" selection-start-line="210" selection-start-column="51" selection-end-line="210" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.52434456" vertical-offset="3962" max-vertical-offset="5264">
+              <caret line="303" column="169" selection-start-line="303" selection-start-column="169" selection-end-line="303" selection-end-column="169" />
               <folding>
-                <marker date="1415638139274" expanded="true" signature="6568:6680" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1415638139274" expanded="true" signature="9159:9430" placeholder="SELECT * FRO..*..." />
-                <marker date="1415638139274" expanded="true" signature="9176:9398" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1415638139274" expanded="true" signature="9192:9379" placeholder="SELECT TOP :..." />
-                <marker date="1415638139274" expanded="true" signature="10766:10899" placeholder="select org.n..." />
-                <marker date="1415638139274" expanded="true" signature="11274:11407" placeholder="select org.n..." />
-                <marker date="1415638139274" expanded="true" signature="11586:11719" placeholder="select org.n..." />
+                <marker date="1415638848367" expanded="true" signature="6568:6680" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1415638848367" expanded="true" signature="9159:9430" placeholder="SELECT * FRO..*..." />
+                <marker date="1415638848367" expanded="true" signature="9176:9398" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1415638848367" expanded="true" signature="9192:9379" placeholder="SELECT TOP :..." />
+                <marker date="1415638848367" expanded="true" signature="10799:10951" placeholder="select org.n..." />
+                <marker date="1415638848367" expanded="true" signature="11326:11459" placeholder="select org.n..." />
+                <marker date="1415638848367" expanded="true" signature="11638:11771" placeholder="select org.n..." />
               </folding>
             </state>
           </provider>
@@ -81,8 +81,8 @@
       <file leaf-file-name="goods.stock.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.stock.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.434783" vertical-offset="348" max-vertical-offset="5460">
-              <caret line="42" column="47" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="47" />
+            <state vertical-scroll-proportion="-8.0" vertical-offset="3246" max-vertical-offset="5474">
+              <caret line="245" column="54" selection-start-line="245" selection-start-column="49" selection-end-line="245" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -884,7 +884,13 @@
       <option name="project" value="LOCAL" />
       <updated>1415636691624</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="1,仓库管理增加了机构选择">
+      <created>1415638207307</created>
+      <option name="number" value="00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1415638207308</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -941,7 +947,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
-    <MESSAGE value="1,档案汇总增加了儿童和妇女的数据" />
     <MESSAGE value="1,解决重复点击导致数据重复的问题" />
     <MESSAGE value="1,完善了仓库汇总" />
     <MESSAGE value="1,修改了由于仓库汇总改动导致的明细模块错误问题" />
@@ -966,7 +971,8 @@
     <MESSAGE value="1,修改了库存管理" />
     <MESSAGE value="1,修改了仓库增加了商品名称和商品编号查询&#10;2,仓库增加了导出" />
     <MESSAGE value="1,修改了消费汇总无会员数据的问题,改成左关联" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,修改了消费汇总无会员数据的问题,改成左关联" />
+    <MESSAGE value="1,仓库管理增加了机构选择" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,仓库管理增加了机构选择" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1295,18 +1301,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/storehouse.detail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.869565" vertical-offset="638" max-vertical-offset="4144">
-          <caret line="70" column="21" selection-start-line="57" selection-start-column="16" selection-end-line="70" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="119.91304" vertical-offset="4326" max-vertical-offset="6636">
-          <caret line="112" column="37" selection-start-line="112" selection-start-column="37" selection-end-line="112" selection-end-column="37" />
+        <state vertical-scroll-proportion="-28.52174" vertical-offset="2060" max-vertical-offset="6636">
+          <caret line="194" column="24" selection-start-line="194" selection-start-column="20" selection-end-line="194" selection-end-column="24" />
           <folding>
             <marker date="1415441797537" expanded="true" signature="554:666" placeholder="select b.id ..map_org_wechat..." />
             <marker date="1415441797537" expanded="true" signature="990:1055" placeholder="select * fro..Center_codes..." />
@@ -1322,7 +1320,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/member.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-31.73913" vertical-offset="4170" max-vertical-offset="9702">
+        <state vertical-scroll-proportion="-60.95652" vertical-offset="3498" max-vertical-offset="9702">
           <caret line="350" column="8" selection-start-line="350" selection-start-column="8" selection-end-line="350" selection-end-column="8" />
           <folding>
             <marker date="1415636673044" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
@@ -1330,26 +1328,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/storehouse.detail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.869565" vertical-offset="638" max-vertical-offset="4144">
+          <caret line="70" column="21" selection-start-line="57" selection-start-column="16" selection-end-line="70" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/goods.stock.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.434783" vertical-offset="348" max-vertical-offset="5460">
-          <caret line="42" column="47" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="47" />
+        <state vertical-scroll-proportion="-8.0" vertical-offset="3246" max-vertical-offset="5474">
+          <caret line="245" column="54" selection-start-line="245" selection-start-column="49" selection-end-line="245" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/goods.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47191012" vertical-offset="2688" max-vertical-offset="5250">
-          <caret line="210" column="51" selection-start-line="210" selection-start-column="51" selection-end-line="210" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.52434456" vertical-offset="3962" max-vertical-offset="5264">
+          <caret line="303" column="169" selection-start-line="303" selection-start-column="169" selection-end-line="303" selection-end-column="169" />
           <folding>
-            <marker date="1415638139274" expanded="true" signature="6568:6680" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1415638139274" expanded="true" signature="9159:9430" placeholder="SELECT * FRO..*..." />
-            <marker date="1415638139274" expanded="true" signature="9176:9398" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1415638139274" expanded="true" signature="9192:9379" placeholder="SELECT TOP :..." />
-            <marker date="1415638139274" expanded="true" signature="10766:10899" placeholder="select org.n..." />
-            <marker date="1415638139274" expanded="true" signature="11274:11407" placeholder="select org.n..." />
-            <marker date="1415638139274" expanded="true" signature="11586:11719" placeholder="select org.n..." />
+            <marker date="1415638848367" expanded="true" signature="6568:6680" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1415638848367" expanded="true" signature="9159:9430" placeholder="SELECT * FRO..*..." />
+            <marker date="1415638848367" expanded="true" signature="9176:9398" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1415638848367" expanded="true" signature="9192:9379" placeholder="SELECT TOP :..." />
+            <marker date="1415638848367" expanded="true" signature="10799:10951" placeholder="select org.n..." />
+            <marker date="1415638848367" expanded="true" signature="11326:11459" placeholder="select org.n..." />
+            <marker date="1415638848367" expanded="true" signature="11638:11771" placeholder="select org.n..." />
           </folding>
         </state>
       </provider>
