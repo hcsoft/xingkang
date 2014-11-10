@@ -1,11 +1,10 @@
 <?php defined('InShopNC') or exit('Access Invalid!'); ?>
 <style>
     .datatable {
-        position: absolute;
+        overflow:auto;
         width: 100%;
         right: 0;
     }
-
     .datatable th, .datatable td {
         border: solid 1px #DEEFFB;
     }
@@ -70,7 +69,7 @@
                         <?php } ?>
                     </select></td>
                 </td>
-                <th><label for="query_start_time">充值日期</label></th>
+                <th><label for="query_start_time">日期范围</label></th>
                 <td><input class="txt date" type="text" value="<?php echo $_GET['query_start_time']; ?>"
                            id="query_start_time" name="query_start_time">
                     <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>" id="query_end_time"
@@ -125,16 +124,22 @@
                         </td>
                         <?php foreach ($output['displaycol'] as $key => $item) {
                             ?>
-                            <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else  echo $v->$item;?></th>
+                            <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else if(substr($item,-3) == 'day')  echo substr($v->$item,0,10); else echo $v->$item;?></th>
                         <?php  }?>
-                        <td class=" align-right">
-                            <?php echo number_format($v->rechargemMoney, 2)?>
+                        <td  class=" align-center">
+                            <p>期初预存:&nbsp;<strong class="red"><?php echo number_format($v->fRechargeInit,2); ?></strong>&nbsp;元</p>
+                            <p>日常充值:&nbsp;<strong class="red"><?php echo number_format($v->fRechargeAdd, 2); ?></strong>&nbsp;元</p>
+                            <p>日常下账:&nbsp;<strong class="red"><?php echo number_format($v->fRechargeBuy, 2); ?></strong>&nbsp;元</p>
+                            <p>赠送金额:&nbsp;<strong class="red"><?php echo number_format($v->GiveMoney, 2); ?></strong>&nbsp;元</p>
+                            <p>赠送下账:&nbsp;<strong class="red"><?php echo number_format($v->GiveSaleMoney, 2); ?></strong>&nbsp;元</p>
+                            <p>积分增减:&nbsp;<strong class="red"><?php echo number_format($v->ScaleBalance, 0); ?></strong>&nbsp;</p>
                         </td>
-                        <td class=" align-right">
-                            <?php echo number_format($v->givemoney, 2)?>
-                        </td>
-                        <td class=" align-right">
-                            <?php echo number_format($v->allmoney, 2)?>
+                        <td  class=" align-center">
+                            <p>预存下账:&nbsp;<strong class="red"><?php echo number_format($v->fRecharge,2); ?></strong>&nbsp;元</p>
+                            <p>赠送下账:&nbsp;<strong class="red"><?php echo number_format($v->fConsume, 2); ?></strong>&nbsp;元</p>
+                            <p>积分下账:&nbsp;<strong class="red"><?php echo number_format($v->fScaleToMoney, 0); ?></strong>&nbsp;</p>
+                            <p>扣减积分:&nbsp;<strong class="red"><?php echo number_format($v->fScale, 0); ?></strong>&nbsp;</p>
+                            <p>赠送积分:&nbsp;<strong class="red"><?php echo number_format($v->fAddScale, 0); ?></strong>&nbsp;</p>
                         </td>
                     </tr>
                 <?php } ?>
