@@ -274,6 +274,8 @@ class memberControl extends SystemControl {
 				break;
 		}
 	}
+	
+	
 	public function consumesumOp() {
 		$conn = require (BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 		if (! isset ( $_GET ['search_type'] )) {
@@ -339,13 +341,12 @@ class memberControl extends SystemControl {
 		$page->setEachNum ( 10 );
 		$page->setNowPage ( $_REQUEST ["curpage"] );
 		$sql = 'from Center_CheckOut a  , Center_codes ico, Center_codes gather,Center_codes state,Center_codes tag,
-            Center_Person person , Organization org , Center_MemberInfo member
+             Organization org , Center_MemberInfo member
           where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
            and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
            and  a.iCO_State = state.code and state.type=\'iCO_State\'
            and  a.iCO_Tag = tag.code and tag.type=\'iCO_Tag\'
            and a.orgid = org.id
-           and a.iCO_MakePerson = person.iPerson_ID
            and a.sMemberID = member.sMemberID';
 		
 		if ($_GET ['query_start_time']) {
@@ -450,6 +451,7 @@ class memberControl extends SystemControl {
 		Tpl::output ( 'displaytext', $displaytext );
 		Tpl::showpage ( 'member.consume.sum' );
 	}
+	
 	public function rechargesumOp() {
 		$conn = require (BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 		if (! isset ( $_GET ['search_type'] )) {
