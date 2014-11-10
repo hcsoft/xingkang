@@ -310,7 +310,7 @@
         var _commonid = $(obj).attr('data-comminid');
         var _div = _parenttr.next().find('.ncsc-goods-sku');
 //                if (_div.html() == '') {
-        var param = {commonid: _commonid};
+        var param = {commonid: _commonid,orgid:$("#queryorgid").val()};
 
         if($(src).prop("checked")==true){
             param['zeroallow']='true';

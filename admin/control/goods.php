@@ -301,7 +301,7 @@ class goodsControl extends SystemControl{
         if ($commonid <= 0) {
             echo 'false';exit();
         }
-        $sql = " select org.name 'OrgName', * from Center_DrugStocksub sub left join Organization org on sub.orgid=org.id where idrug_id = '$commonid' and orgid='$orgid'";
+        $sql = " select org.name 'OrgName', * from Center_DrugStocksub sub left join Organization org on sub.orgid=org.id where idrug_id = '$commonid' and orgid='$orgid' ";
         if($_GET['zeroallow'] && $_GET['zeroallow']=='true'){
         }else{
             $sql = $sql.' and (sub.fBS_OStock <> 0 or  sub.fBS_LeastOStock  <> 0)';
