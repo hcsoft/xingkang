@@ -341,13 +341,12 @@ class memberControl extends SystemControl {
 		$page->setEachNum ( 10 );
 		$page->setNowPage ( $_REQUEST ["curpage"] );
 		$sql = 'from Center_CheckOut a  , Center_codes ico, Center_codes gather,Center_codes state,Center_codes tag,
-             Organization org , Center_MemberInfo member
+             Organization org left join  Center_MemberInfo member on a.sMemberID = member.sMemberID
           where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
            and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
            and  a.iCO_State = state.code and state.type=\'iCO_State\'
            and  a.iCO_Tag = tag.code and tag.type=\'iCO_Tag\'
-           and a.orgid = org.id
-           and a.sMemberID = member.sMemberID';
+           and a.orgid = org.id ';
 		
 		if ($_GET ['query_start_time']) {
 			$sql = $sql . ' and a.dCO_Date >=\'' . $_GET ['query_start_time'] . '\'';
