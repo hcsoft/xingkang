@@ -42,7 +42,7 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>收入汇总查询</h3>
+            <h3>门诊收费员报表</h3>
         </div>
     </div>
     <div class="fixed-empty"></div>
@@ -70,7 +70,7 @@
                         <?php } ?>
                     </select></td>
                 </td>
-                <th><label for="query_start_time">发生日期</label></th>
+                <th><label for="query_start_time">结算日期</label></th>
                 <td><input class="txt date" type="text" value="<?php echo $_GET['query_start_time']; ?>"
                            id="query_start_time" name="query_start_time">
                     <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>" id="query_end_time"
@@ -128,11 +128,36 @@
                             <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else  echo $v->$item;?></th>
                         <?php  }?>
                         <td class=" align-right">
-                            <?php echo number_format($v->getmoney, 3)?>
+                            <?php echo number_format($v->factmoney, 3)?>
                         </td>
                         <td class=" align-right">
-                            <?php echo number_format($v->paymoney, 3)?>
+                            <?php echo number_format($v->incomemoney, 3)?>
                         </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->medicare, 3)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->cardmoney, 3)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->cashmoney, 3)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->postpaymoney, 3)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->cliniccount, 0)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->sumfRecharge, 3)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->sumfConsume, 3)?>
+                        </td>
+                        <td class=" align-right">
+                            <?php echo number_format($v->scaletomoney, 3)?>
+                        </td>
+
                     </tr>
                 <?php } ?>
             <?php } else { ?>

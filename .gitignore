@@ -5,3 +5,4 @@
 /data/cache/*
 /data/cache/*.php
 /data/cache
+/.idea/workspace.xml

@@ -42,7 +42,7 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>收入统计</h3>
+            <h3>门诊收入统计</h3>
         </div>
     </div>
     <div class="fixed-empty"></div>

@@ -74,6 +74,12 @@ class storehouseControl extends SystemControl
         if ($_GET['query_end_time']) {
             $sql = $sql . ' and a.dBuy_Date < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
         }
+        if ($_GET['search_goods_name'] != '') {
+            $sql = $sql . ' and good.goods_name like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+        }
+        if (intval($_GET['search_commonid']) > 0) {
+            $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']) ;
+        }
 
         if ($_GET['orgids']) {
             if ($_GET['search_type'] == 0 || $_GET['search_type'] == 1) {
@@ -118,6 +124,41 @@ class storehouseControl extends SystemControl
 
                         $sql order by  a.dBuy_Date)zzzz where rownum>$startnum )zzzzz order by rownum";
 //        echo $sql;
+        $exportsql = "SELECT
+                        a.iBuy_TicketID,
+                        a.iBuy_ID,
+                        a.dBuy_Date,
+                        b.iDrug_RecType,
+                        storetype.name as 'iBuy_Type',
+                        d.name OrgId,
+                        a.iDrug_ID,
+                        good.sdrug_chemname,
+                        good.spec_name,
+                        good.sdrug_unit,
+                        a.fBuy_FactNum,
+                        a.fBuy_TaxMoney,
+                        a.fBuy_RetailMoney,
+                        a.fBuy_RetailMoney - a.fBuy_TaxMoney as diffmoney
+                        $sql order by  a.dBuy_Date ";
+        $exporttotalsql = "SELECT
+                        '总计：' as iBuy_TicketID,
+                        null as iBuy_ID,
+                        null as dBuy_Date,
+                        null as iDrug_RecType,
+                        null as iBuy_Type,
+                        null as OrgId,
+                        null as iDrug_ID,
+                        null as sdrug_chemname,
+                        null as spec_name,
+                        null as sdrug_unit,
+                        null as fBuy_FactNum,
+                        sum(fBuy_TaxMoney) as fBuy_TaxMoney,
+                        sum(fBuy_RetailMoney) as fBuy_RetailMoney,
+                        sum(fBuy_RetailMoney)-sum(fBuy_TaxMoney) as diffmoney
+                        $sql   ";
+        if(isset($_GET['export']) && $_GET['export']=='true'){
+            $this->exportxlsx(array(0=>$exportsql,1=>$exporttotalsql),array('总票据','明细号','发生日期','商品类型','单据类型','机构','商品编码','商品名称','规格','单位','数量','进价金额','零价金额','进销差'),'仓库单据明细');
+        }
         $stmt = $conn->query($tsql);
         $data_list = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
@@ -315,6 +356,12 @@ class storehouseControl extends SystemControl
         if ($_GET['query_end_time']) {
             $sql = $sql . ' and a.dBuy_Date < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
         }
+        if ($_GET['search_goods_name'] != '') {
+            $sql = $sql . ' and goods.goods_name like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+        }
+        if (intval($_GET['search_commonid']) > 0) {
+            $sql = $sql . ' and goods.goods_commonid = ' . intval($_GET['search_commonid']) ;
+        }
 
         //处理树的参数
         if ($_GET['orgids']) {
@@ -369,6 +416,9 @@ class storehouseControl extends SystemControl
                 }
             }
         }
+        array_push($displaytext, '进价金额');
+        array_push($displaytext, '零价金额');
+        array_push($displaytext, '进销差');
 //        var_dump($totalcol);
         $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
 //        var_dump($totalcol);
@@ -379,14 +429,18 @@ class storehouseControl extends SystemControl
         $tsql = " select $sumcolstr , sum(fBuy_TaxMoney) taxmoney, sum(fBuy_RetailMoney) retailmoney , sum(fBuy_RetailMoney) - sum(fBuy_TaxMoney) diffmoney
                         $sql group by $groupbycolstr order by $groupbycolstr ";
 //        echo $tsql;
+//处理合计
+        $totalsql = " select $totalcolstr , sum(fBuy_TaxMoney) taxmoney, sum(fBuy_RetailMoney) retailmoney , sum(fBuy_RetailMoney) - sum(fBuy_TaxMoney) diffmoney
+                        $sql ";
+        if(isset($_GET['export']) && $_GET['export']=='true'){
+            $this->exportxlsx(array(0=>$tsql,1=>$totalsql),$displaytext,'仓库单据汇总');
+        }
         $stmt = $conn->query($tsql);
         $data_list = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             array_push($data_list, $row);
         }
-        //处理合计
-        $totalsql = " select $totalcolstr , sum(fBuy_TaxMoney) taxmoney, sum(fBuy_RetailMoney) retailmoney , sum(fBuy_RetailMoney) - sum(fBuy_TaxMoney) diffmoney
-                        $sql ";
+
 //        echo $totalsql;
         $totalstmt = $conn->query($totalsql);
         while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {

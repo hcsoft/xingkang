@@ -166,13 +166,12 @@ class communityControl extends SystemControl
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
         $sql = 'from Center_CheckOut a  , Center_codes ico, Center_codes gather,Center_codes state,Center_codes tag,
-            Center_Person person , Organization org
+             Organization org
           where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
            and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
            and  a.iCO_State = state.code and state.type=\'iCO_State\'
            and  a.iCO_Tag = tag.code and tag.type=\'iCO_Tag\'
-           and a.orgid = org.id
-           and a.iCO_MakePerson = person.iPerson_ID ';
+           and a.orgid = org.id  ';
 //        if (!isset($_GET['search_type'])) {
 //            $_GET['search_type'] = '1';
 //        }
@@ -213,7 +212,7 @@ class communityControl extends SystemControl
         $page->setTotalNum($total[0]);
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dCO_Date desc) rownum,
                         ico.name as 'iCO_Type',
-                        person.sPerson_Name 'iCO_MakePerson',
+                        sMakePerson 'iCO_MakePerson',
                         a.dCO_Date,
                         a.dCO_MakeDate,
                         a.fCO_Foregift,
@@ -272,7 +271,7 @@ class communityControl extends SystemControl
                         ico.name as '类型',
                         a.dCO_Date '结算日期',
                         a.dCO_MakeDate '制单日期',
-                        person.sPerson_Name '收费员',
+                        sMakePerson  '收费员',
                         a.fCO_Foregift '押金',
                         a.fCO_Balance '结算余额',
                         a.fCO_FactMoney '实际金额',
@@ -507,20 +506,25 @@ class communityControl extends SystemControl
             $_GET['search_type'] = '0';
         }
         $sqlarray = array('iCO_Type' => 'ico.name as "iCO_Type"',
-            'iCO_MakePerson' => ' person.sPerson_Name as "iCO_MakePerson" ',
+            'MakePerson' => ' sMakePerson as "MakePerson" ',
+            'section' => ' sStatSection as "section" ',
+            'doctor' => ' sDoctor as "doctor" ',
             'iCO_GatherType' => ' gather.name as "iCO_GatherType" ',
             'year' => ' year(a.dCO_Date) as "year" ',
             'month' => ' left(convert(varchar,dCO_Date,112),6) as  "month" ',
             'day' => ' convert(varchar,dCO_Date,112) as "day" ',
-            'OrgID' => ' org.name as "OrgID" ',
+            'OrgID' => ' org.name as "OrgID" '
 
         );
         $config = array('sumcol' => array(
-            'OrgID' => array(name => 'OrgID', 'text' => '结算机构'),
+            'OrgID' => array(name => 'OrgID', 'text' => '机构'),
             'iCO_Type' => array(name => 'iCO_Type', 'text' => '类型', map => $this->types),
-            'iCO_MakePerson' => array(name => 'iCO_MakePerson', 'text' => '收费员'),
+            'section' => array(name => 'section', 'text' => '科室'),
+            'doctor' => array(name => 'doctor', 'text' => '医生'),
+            'MakePerson' => array(name => 'MakePerson', 'text' => '收费员'),
             'iCO_GatherType' => array(name => 'iCO_GatherType', 'text' => '医保类型'),
-
+            'iCO_GatherType' => array(name => 'iCO_GatherType', 'text' => '医保类型'),
+            'iCO_GatherType' => array(name => 'iCO_GatherType', 'text' => '医保类型'),
             'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
             'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
             'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
@@ -530,7 +534,7 @@ class communityControl extends SystemControl
         //处理汇总字段
         $sumtype = $_GET['sumtype'];
         if ($sumtype == null) {
-            $sumtype = array(0 => "iCO_Type");
+            $sumtype = array(0 => "OrgID");
             $_GET['sumtype'] = $sumtype;
         }
         $checked = $_GET['checked'];
@@ -538,13 +542,12 @@ class communityControl extends SystemControl
         $page->setEachNum(10);
         $page->setNowPage($_REQUEST["curpage"]);
         $sql = 'from Center_CheckOut a  , Center_codes ico, Center_codes gather,Center_codes state,Center_codes tag,
-            Center_Person person , Organization org
+            Organization org
           where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
            and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
            and  a.iCO_State = state.code and state.type=\'iCO_State\'
            and  a.iCO_Tag = tag.code and tag.type=\'iCO_Tag\'
-           and a.orgid = org.id
-           and a.iCO_MakePerson = person.iPerson_ID ';
+           and a.orgid = org.id ';
 
         if ($_GET['query_start_time']) {
             $sql = $sql . ' and a.dCO_Date >=\'' . $_GET['query_start_time'] . '\'';
@@ -599,8 +602,16 @@ class communityControl extends SystemControl
                 }
             }
         }
-        array_push($displaytext, '收取金额');
-        array_push($displaytext, '支付金额');
+        array_push($displaytext, '应缴现金');
+        array_push($displaytext, '处方金额');
+        array_push($displaytext, '统筹支付');
+        array_push($displaytext, '医保卡支付');
+        array_push($displaytext, '现金支付');
+        array_push($displaytext, '银行卡付');
+        array_push($displaytext, '处方总数');
+        array_push($displaytext, '预存下账');
+        array_push($displaytext, '赠送下账');
+        array_push($displaytext, '积分下账金额');
 //        var_dump($totalcol);
         $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
 //        var_dump($totalcol);
@@ -608,11 +619,32 @@ class communityControl extends SystemControl
         $sumcolstr = join(',', $sumcol);
         $groupbycolstr = join(',', $groupbycol);
 //        echo $sumcolstr;
-        $tsql = " select $sumcolstr , sum(fCO_PayMoney) paymoney, sum(fCO_GetMoney) getmoney
+        $tsql = " select $sumcolstr ,
+                    Sum(fCO_InComeMoney - fCO_Medicare  - fCO_Card - fCO_PosPay - fRecharge  - fConsume - fScaleToMoney) factmoney,
+                    Sum(fCO_InComeMoney) incomemoney,
+                    Sum(fCO_Medicare) medicare,
+                    Sum(fCO_Card) cardmoney,
+                    Sum(fCO_Cash) cashmoney,
+                    Sum(fCO_PosPay) postpaymoney,
+                    Sum( case when RecipeID > 0 and fCO_IncomeMoney>0  then 1  when  RecipeID > 0 and fCO_IncomeMoney<0 then  -1 end ) cliniccount,
+                    Sum(fRecharge) sumfRecharge,
+                    Sum(fConsume) sumfConsume,
+                    Sum(fScaleToMoney) scaletomoney
+
                         $sql group by $groupbycolstr order by $groupbycolstr ";
 //        echo $tsql;
         //处理合计
-        $totalsql = " select $totalcolstr , sum(fCO_PayMoney) paymoney, sum(fCO_GetMoney) getmoney
+        $totalsql = " select $totalcolstr ,
+                    Sum(fCO_InComeMoney - fCO_Medicare  - fCO_Card - fCO_PosPay - fRecharge  - fConsume - fScaleToMoney) factmoney,
+                    Sum(fCO_InComeMoney) incomemoney,
+                    Sum(fCO_Medicare) medicare,
+                    Sum(fCO_Card) cardmoney,
+                    Sum(fCO_Cash) cashmoney,
+                    Sum(fCO_PosPay) postpaymoney,
+                    Sum( case when RecipeID > 0 and fCO_IncomeMoney>0  then 1  when  RecipeID > 0 and fCO_IncomeMoney<0 then  -1 end ) cliniccount,
+                    Sum(fRecharge) sumfRecharge,
+                    Sum(fConsume) sumfConsume,
+                    Sum(fScaleToMoney) scaletomoney
                         $sql ";
 
         if(isset($_GET['export']) && $_GET['export']=='true'){

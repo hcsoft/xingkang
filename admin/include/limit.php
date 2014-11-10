@@ -101,15 +101,17 @@ $_limit =  array(
     array('name'=>'社区', 'child'=>array(
         array('name'=>'收入明细查询', 'op'=>'incomedetail', 'act'=>'community'),
         array('name'=>'收入汇总查询', 'op'=>'incomesum', 'act'=>'community'),
-        array('name'=>'处方明细查询', 'op'=>'prescriptiondetail', 'act'=>'community'),
-        array('name'=>'处方汇总查询', 'op'=>'prescriptionsum', 'act'=>'community'),
+        array('name'=>'就诊明细查询', 'op'=>'prescriptiondetail', 'act'=>'community'),
+        array('name'=>'就诊情况汇总', 'op'=>'prescriptionsum', 'act'=>'community'),
         array('name'=>'消费汇总', 'op'=>'consumesum', 'act'=>'member'),
         array('name'=>'充值下账汇总', 'op'=>'rechargesum', 'act'=>'member'),
         array('name'=>'健康档案查询', 'op'=>'query', 'act'=>'healthfile'),
         array('name'=>'健康档案汇总', 'op'=>'sum', 'act'=>'healthfile')
     )),
     array('name'=>'财务', 'child'=>array(
+        array('name'=>'销售明细查询', 'op'=>'saledetail', 'act'=>'finance'),
         array('name'=>'门诊收入统计', 'op'=>'financesum', 'act'=>'finance'),
+        array('name'=>'单品毛利分析', 'op'=>'financegoodsum', 'act'=>'finance'),
         array('name'=>'仓库单据明细', 'op'=>'detail', 'act'=>'storehouse'),
         array('name'=>'仓库单据汇总', 'op'=>'sum', 'act'=>'storehouse')
     ))

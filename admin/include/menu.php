@@ -208,8 +208,8 @@ $arr = array(
                 'list' => array(
                     array('args'=>'incomedetail,community,community',			'text'=>'结算单明细查询'),
                     array('args'=>'incomesum,community,community',			'text'=>'门诊收费员报表'),
-                    array('args'=>'prescriptiondetail,community,community',			'text'=>'处方明细查询'),
-                    array('args'=>'prescriptionsum,community,community',			'text'=>'处方汇总查询'),
+                    array('args'=>'prescriptiondetail,community,community',			'text'=>'就诊明细查询'),
+                    array('args'=>'prescriptionsum,community,community',			'text'=>'就诊情况汇总'),
                     array('args'=>'consumesum,member,community',			'text'=>'消费汇总'),
                     array('args'=>'rechargesum,member,community',			'text'=>'充值下账汇总'),
                     array('args'=>'query,healthfile,community',	'text'=>'健康档案查询'),
@@ -220,7 +220,9 @@ $arr = array(
                 'nav' => 'finance',
                 'text' => '财务',
                 'list' => array(
+                    array('args'=>'saledetail,finance,finance',			'text'=>'销售明细查询'),
                     array('args'=>'financesum,finance,finance',			'text'=>'门诊收入统计'),
+                    array('args'=>'financegoodsum,finance,finance',			'text'=>'单品毛利分析'),
                     array('args'=>'detail,storehouse,finance',			'text'=>'仓库单据明细'),
                     array('args'=>'sum,storehouse,finance',			'text'=>'仓库单据汇总')
                 )

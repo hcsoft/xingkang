@@ -50,6 +50,7 @@
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" value="storehouse" name="act">
         <input type="hidden" value="detail" name="op">
+        <input type="hidden" id ='export' name="export" value="false">
         <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
         <table class="tb-type1 noborder search">
             <tbody>
@@ -74,8 +75,17 @@
                     <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>"
                            id="query_end_time"
                            name="query_end_time"/></td>
+                <th><label for="search_goods_name"> 商品名称</label></th>
+                <td><input type="text" value="<?php echo $_GET['search_goods_name']; ?>"
+                           name="search_goods_name" id="search_goods_name" class="txt"></td>
+                <th><label for="search_commonid">商品编码</label></th>
+                <td><input type="text" value="<?php echo $_GET['search_commonid'] ?>" name="search_commonid"
+                           id="search_commonid" class="txt"/></td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
+                </td>
+                <td><a href="javascript:void(0);" id="ncexport" class="btn-export "
+                       title="导出"></a>
                 </td>
             </tr>
             </tbody>
@@ -136,9 +146,6 @@
                         <td class=" align-center">
                             <?php echo $v->iBuy_TicketID ?>
                         </td>
-                        <!--                    <td class=" align-center">-->
-                        <!--                        --><?php //echo $v->sBuy_A6 ?>
-                        <!--                    </td>-->
                         <td class=" align-center">
                             <?php echo $v->iBuy_ID ?>
                         </td>
@@ -151,9 +158,6 @@
                         <td class=" align-center">
                             <?php echo $v->iBuy_Type ?>
                         </td>
-                        <!--                    <td class=" align-center">-->
-                        <!--                        --><?php //echo $v->OrgId ?>
-                        <!--                    </td>-->
                         <td class=" align-center">
                             <?php if ($_GET['search_type'] == '1') {
                                 echo $v->SaleOrgID;
@@ -174,7 +178,7 @@
                             <?php echo $v->sdrug_unit ?>
                         </td>
                         <td class=" align-center">
-                            <?php if ($v->dBuy_Date == null) echo ''; else echo number_format($v->fBuy_FactNum, 0) . $v->sBuy_DrugUnit; ?>
+                            <?php if ($v->fBuy_FactNum == null) echo ''; else echo number_format($v->fBuy_FactNum, 0) . $v->sBuy_DrugUnit; ?>
                         </td>
                         <td class=" align-right">
                             <?php echo number_format($v->fBuy_TaxMoney, 2) ?>
@@ -242,6 +246,12 @@
         //生成日期
         $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
+            $("#export").val('false');
+            $("#search_type").val($('input[name="search_type_select"]:checked').val());
+            $('#formSearch').submit();
+        });
+        $('#ncexport').click(function () {
+            $("#export").val('true');
             $("#search_type").val($('input[name="search_type_select"]:checked').val());
             $('#formSearch').submit();
         });
