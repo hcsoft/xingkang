@@ -36,6 +36,21 @@
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
+                <th><label>选择机构</label></th>
+                <td colspan="1"><select name="orgid" id="orgid" class="orgSelect">
+<!--                        <option value="" >全部</option>-->
+                        <?php
+                        $orgid = $_GET['orgid'];
+                        if (!isset($orgids)) {
+                            $orgids = array();
+                        }
+                        foreach ($output['treelist'] as $k => $v) {
+                            ?>
+                            <option value="<?php echo $v->id; ?>"
+                                    <?php if ($v->id == $orgid){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
+                        <?php } ?>
+                    </select></td>
+                </td>
                 <th><label for="search_goods_name"> <?php echo $lang['goods_index_name']; ?></label></th>
                 <td><input type="text" value="<?php echo $output['search']['search_goods_name']; ?>"
                            name="search_goods_name" id="search_goods_name" class="txt"></td>

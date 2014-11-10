@@ -200,6 +200,17 @@ class goodsControl extends SystemControl{
     public function stockOp() {
 
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $treesql = 'select  b.id , b.name,b.districtnumber,b.parentid pId from map_org_wechat a, Organization b where a.orgid = b.id ';
+        $treestmt = $conn->query($treesql);
+        $treedata_list = array();
+        while ($row = $treestmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($treedata_list, $row);
+        }
+        Tpl::output('treelist', $treedata_list);
+        if(! isset($_GET['orgid'])){
+            $_GET['orgid'] = $treedata_list[0]->id;
+        }
+
         $page = new Page();
         $page->setEachNum(10);
         $page->setNowPage($_REQUEST["curpage"]);
@@ -236,6 +247,9 @@ class goodsControl extends SystemControl{
             $sql = $sql . ' and (stock.fDS_OStock <> 0 or  stock.fDS_LeastOStock  <> 0)  '  ;
         }
 
+        if ($_GET['orgid'] != '') {
+            $sql = $sql . ' and stock.orgid =\'' . $_GET['orgid'] . '\'';
+        }
 
 
         $countsql = " select count(*)  $sql ";
