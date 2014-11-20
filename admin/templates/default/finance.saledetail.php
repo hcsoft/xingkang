@@ -77,6 +77,7 @@
                 <th colspan="2"><label>财务分类</label></th>
                 <td><select name="classtype" id='classtype'>
                         <option value="">全部</option>
+                        <option value="null" <?php if ('null' == $_GET['classtype']){ ?>selected<?php } ?>>未分类</option>
                         <?php foreach ($output['classtypes'] as $k => $v) { ?>
                             <option value="<?php echo $v->iClass_ID; ?>"
                                     <?php if ($v->iClass_ID == $_GET['classtype']){ ?>selected<?php } ?>><?php echo $v->sClass_ID.$v->sClass_Name; ?></option>

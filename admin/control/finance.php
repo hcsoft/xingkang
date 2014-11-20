@@ -150,7 +150,11 @@ class financeControl extends SystemControl
         }
 
         if ($_GET['classtype'] != '') {
-            $sql = $sql . ' and good.iDrug_StatClass =  ' .  trim($_GET['classtype']) ;
+            if($_GET['classtype'] == 'null'){
+                $sql = $sql . ' and good.iDrug_StatClass  is null ' ;
+            }else{
+                $sql = $sql . ' and good.iDrug_StatClass =  ' .  trim($_GET['classtype']) ;
+            }
         }
 
         if (intval($_GET['search_commonid']) > 0) {
