@@ -146,7 +146,7 @@ class financeControl extends SystemControl
 
         }
         if ($_GET['search_goods_name'] != '') {
-            $sql = $sql . ' and good.goods_name like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+            $sql = $sql . ' and a.itemname like \'%' .  trim($_GET['search_goods_name']) . '%\'';
         }
 
         if ($_GET['classtype'] != '') {
@@ -158,7 +158,7 @@ class financeControl extends SystemControl
         }
 
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']) ;
+            $sql = $sql . ' and a.iDrug_ID = ' . intval($_GET['search_commonid']) ;
         }
         //处理树的参数
         $checkednode = $_GET['checkednode'];
@@ -188,7 +188,7 @@ class financeControl extends SystemControl
                         a.sClinicKey ,
                         a.ida_id
                         $sql order by  a.dSale_MakeDate desc)zzzz where rownum>$startnum )zzzzz order by rownum";
-//        echo $sql;
+//        echo $tsql;
         $exportsql = "SELECT  row_number() over( order by  a.dSale_MakeDate desc) rownum,
                         a.sSale_id ,
                         a.dSale_MakeDate,
