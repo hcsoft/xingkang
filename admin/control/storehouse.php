@@ -55,7 +55,7 @@ class storehouseControl extends SystemControl
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
-        $sql = 'from Center_Buy a  , Center_Drug b , Organization c, Organization d,shopnc_goods_common good ,
+        $sql = 'from Center_Buy a  left join Center_Customer custom on a.iCustomer_ID = custom.iCustomer_ID , Center_Drug b , Organization c, Organization d,shopnc_goods_common good ,
             Center_codes storetype
             where a.iDrug_ID = b.iDrug_ID ' .
             ' and a.SaleOrgID = -( c.id +1000) and a.orgid = d.id and a.iDrug_ID = good.goods_commonid
@@ -115,7 +115,7 @@ class storehouseControl extends SystemControl
                         good.sdrug_chemname,
                         good.spec_name,
                         good.sdrug_unit,
-                        good.sDrug_Brand,
+                        custom.sCustomer_Name,
                         a.iDrug_ID,
                         a.fBuy_FactNum,
                         a.sBuy_DrugUnit,
@@ -136,7 +136,7 @@ class storehouseControl extends SystemControl
                         good.sdrug_chemname,
                         good.spec_name,
                         good.sdrug_unit,
-                        good.sDrug_Brand,
+                        custom.sCustomer_Name,
                         a.fBuy_FactNum,
                         a.fBuy_TaxMoney,
                         a.fBuy_RetailMoney,
@@ -153,7 +153,7 @@ class storehouseControl extends SystemControl
                         null as sdrug_chemname,
                         null as spec_name,
                         null as sdrug_unit,
-                        null as sDrug_Brand,
+                        null as sCustomer_Name,
                         null as fBuy_FactNum,
                         sum(fBuy_TaxMoney) as fBuy_TaxMoney,
                         sum(fBuy_RetailMoney) as fBuy_RetailMoney,
@@ -179,7 +179,7 @@ class storehouseControl extends SystemControl
                         null as iDrug_ID,
                         null as fBuy_FactNum,
                         null as sBuy_DrugUnit,
-                        null as sDrug_Brand,
+                        null as sCustomer_Name,
                         sum(fBuy_TaxMoney) as fBuy_TaxMoney,
                         sum(fBuy_RetailMoney) as fBuy_RetailMoney,
                         sum(fBuy_RetailMoney)-sum(fBuy_TaxMoney) as diffmoney

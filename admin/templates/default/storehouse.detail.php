@@ -124,6 +124,7 @@
                 <th class="align-center">总票据</th>
                 <!--            <th class="align-center">单据编号</th>-->
                 <th class="align-center">明细号</th>
+                <th class="align-center">供应商</th>
                 <th class="align-center">发生日期</th>
                 <th class="align-center">商品类型</th>
                 <th class="align-center">单据类型</th>
@@ -134,7 +135,7 @@
                 <th class="align-center">商品名称</th>
                 <th class="align-center">规格</th>
                 <th class="align-center">单位</th>
-                <th class="align-center">产地厂牌</th>
+
                 <th class="align-center">数量</th>
                 <th class="align-center">进价金额</th>
                 <th class="align-center">零价金额</th>
@@ -149,6 +150,9 @@
                         </td>
                         <td class=" align-center" nowrap>
                             <?php echo $v->iBuy_ID ?>
+                        </td>
+                        <td class=" align-left">
+                            <?php echo $v->sCustomer_Name ?>
                         </td>
                         <td class=" align-center" nowrap>
                             <?php if ($v->dBuy_Date == null) echo ''; else  echo date('Y-m-d', strtotime($v->dBuy_Date)); ?>
@@ -178,9 +182,7 @@
                         <td class=" align-left" nowrap>
                             <?php echo $v->sdrug_unit ?>
                         </td>
-                        <td class=" align-left">
-                            <?php echo $v->sDrug_Brand ?>
-                        </td>
+
                         <td class=" align-center" nowrap>
                             <?php if ($v->fBuy_FactNum == null) echo ''; else echo number_format($v->fBuy_FactNum, 0) . $v->sBuy_DrugUnit; ?>
                         </td>
