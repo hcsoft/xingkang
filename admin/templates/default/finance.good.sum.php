@@ -146,6 +146,9 @@
                             <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else  echo $v->$item;?></th>
                         <?php  }?>
                         <td class=" align-left">
+                            <?php echo $v->iDrug_ID?>
+                        </td>
+                        <td class=" align-left">
                             <?php echo $v->sDrug_TradeName?>
                         </td>
                         <td class=" align-left">

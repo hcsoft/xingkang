@@ -270,6 +270,7 @@ class storehouseControl extends SystemControl
             $_GET['search_type'] = '0';
         }
         $sqlarray = array('iBuy_Type' => 'storetype.name as "iBuy_Type"',
+            'iDrug_ID' => ' a.iDrug_ID as "iDrug_ID" ',
             'customname' => ' custom.sCustomer_Name as "customname" ',
             'sDrug_Spec' => ' goods.sDrug_Spec as "sDrug_Spec" ',
             'sDrug_Unit' => ' goods.sDrug_Unit as "sDrug_Unit" ',
@@ -286,11 +287,13 @@ class storehouseControl extends SystemControl
             'sumcol' => array('iBuy_Type' => array(name => 'iBuy_Type', 'text' => '单据类型', map => $this->types),
                 'customname' => array(name => 'customname', 'text' => '供货企业'),
                 'good' => array('text' => '商品',
-                    'cols' => array(0 => array(name => 'sDrug_TradeName', 'text' => '商品名称')
-                    , 1 => array(name => 'sDrug_Spec', 'text' => '规格')
-                    , 2 => array(name => 'sDrug_Unit', 'text' => '单位')
-                    , 3 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
-                    , 4 => array(name => 'drugcount', 'text' => '数量'))),
+                    'cols' => array(
+                        0 => array(name => 'iDrug_ID', 'text' => '商品编码'),
+                        1 => array(name => 'sDrug_TradeName', 'text' => '商品名称')
+                    , 2 => array(name => 'sDrug_Spec', 'text' => '规格')
+                    , 3 => array(name => 'sDrug_Unit', 'text' => '单位')
+                    , 4 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
+                    , 5 => array(name => 'drugcount', 'text' => '数量'))),
                 'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
                 'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
                 'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
@@ -299,11 +302,13 @@ class storehouseControl extends SystemControl
                 'sqlwher' => ' and  iBuy_Type in (5,14) ',
                 'sumcol' => array('type' => array('name' => 'OrgID', 'text' => '领用部门'),
                     'good' => array('text' => '商品',
-                        'cols' => array(0 => array(name => 'sDrug_TradeName', 'text' => '商品名称')
-                        , 1 => array(name => 'sDrug_Spec', 'text' => '规格')
-                        , 2 => array(name => 'sDrug_Unit', 'text' => '单位')
-                        , 3 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
-                        , 4 => array(name => 'drugcount', 'text' => '数量'))),
+                        'cols' => array(
+                            0 => array(name => 'iDrug_ID', 'text' => '商品编码'),
+                            1 => array(name => 'sDrug_TradeName', 'text' => '商品名称')
+                        , 2 => array(name => 'sDrug_Spec', 'text' => '规格')
+                        , 3 => array(name => 'sDrug_Unit', 'text' => '单位')
+                        , 4 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
+                        , 5 => array(name => 'drugcount', 'text' => '数量'))),
                     'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
                     'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
                     'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
@@ -312,11 +317,13 @@ class storehouseControl extends SystemControl
                 'sqlwher' => ' and  iBuy_Type in (3,4,12) ',
                 'sumcol' => array('iBuy_Type' => array(name=>'iBuy_Type', 'text' => '单据类型'),
                     'good' => array('text' => '商品',
-                        'cols' => array(0 => array(name => 'sDrug_TradeName', 'text' => '商品名称')
-                        , 1 => array(name => 'sDrug_Spec', 'text' => '规格')
-                        , 2 => array(name => 'sDrug_Unit', 'text' => '单位')
-                        , 3 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
-                        , 4 => array(name => 'drugcount', 'text' => '数量'))),
+                        'cols' => array(
+                            0 => array(name => 'iDrug_ID', 'text' => '商品编码'),
+                            1 => array(name => 'sDrug_TradeName', 'text' => '商品名称')
+                        , 2 => array(name => 'sDrug_Spec', 'text' => '规格')
+                        , 3 => array(name => 'sDrug_Unit', 'text' => '单位')
+                        , 4 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
+                        , 5 => array(name => 'drugcount', 'text' => '数量'))),
                     'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
                     'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
                     'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
@@ -325,11 +332,13 @@ class storehouseControl extends SystemControl
                 'sqlwher' => ' and iBuy_Type in (50) ',
                 'sumcol' => array('OrgID' => array('name' => 'OrgID', 'text' => '采购计划机构'),
                     'good' => array('text' => '商品',
-                        'cols' => array(0 => array(name => 'sDrug_TradeName', 'text' => '商品名称')
-                        , 1 => array(name => 'sDrug_Spec', 'text' => '规格')
-                        , 2 => array(name => 'sDrug_Unit', 'text' => '单位')
-                        , 3 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
-                        , 4 => array(name => 'drugcount', 'text' => '数量'))),
+                        'cols' => array(
+                            0 => array(name => 'iDrug_ID', 'text' => '商品编码'),
+                            1 => array(name => 'sDrug_TradeName', 'text' => '商品名称')
+                        , 2 => array(name => 'sDrug_Spec', 'text' => '规格')
+                        , 3 => array(name => 'sDrug_Unit', 'text' => '单位')
+                        , 4 => array(name => 'sDrug_Brand', 'text' => '产地厂牌')
+                        , 5 => array(name => 'drugcount', 'text' => '数量'))),
                     'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
                     'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
                     'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),

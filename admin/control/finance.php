@@ -509,6 +509,7 @@ class financeControl extends SystemControl
                 }
             }
         }
+        array_push($displaytext, '商品编码');
         array_push($displaytext, '商品名称');
         array_push($displaytext, '规格');
         array_push($displaytext, '单位');
@@ -532,6 +533,7 @@ class financeControl extends SystemControl
 //        echo $sumcolstr;
         $tsql = " select
                     $sumcolstr
+                    a.iDrug_ID as iDrug_ID,
                     goods.sDrug_TradeName as sDrug_TradeName,
                     goods.sDrug_Spec as sDrug_Spec,
                     goods.sDrug_Unit as sDrug_Unit,
@@ -542,7 +544,7 @@ class financeControl extends SystemControl
                     sum(fSale_NoTaxMoney) notaxmoney ,
                     sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
                     case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
-                        $sql group by  $groupbycolstr goods.sDrug_TradeName ,
+                        $sql group by  $groupbycolstr a.iDrug_ID, goods.sDrug_TradeName ,
                     goods.sDrug_Spec ,
                     goods.sDrug_Unit ,
                     goods.sDrug_Brand  having sum(fSale_Num) >0  order by $groupbycolstr goods.sDrug_TradeName ,
@@ -552,6 +554,7 @@ class financeControl extends SystemControl
 //        echo $tsql;
         if(count($totalcol)>0){
             $totalsql = " select $totalcolstr
+                    '' as iDrug_ID,
                     '' as sDrug_TradeName,
                     '' as sDrug_Spec,
                     '' as sDrug_Unit,
@@ -564,7 +567,8 @@ class financeControl extends SystemControl
                     case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
                         $sql ";
         }else{
-            $totalsql = " select '总计：' as sDrug_TradeName,
+            $totalsql = " select '总计：' as   iDrug_ID,
+                     ''   as sDrug_TradeName,
                     '' as sDrug_Spec,
                     '' as sDrug_Unit,
                     '' as sDrug_Brand,

@@ -216,7 +216,7 @@
                 <tfoot class="tfoot">
                 <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
                     <tr>
-                        <td colspan="16">
+                        <td colspan="17">
                             <div class="pagination"> <?php echo $output['page']; ?> </div>
                         </td>
                     </tr>
