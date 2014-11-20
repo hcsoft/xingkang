@@ -171,6 +171,7 @@ class financeControl extends SystemControl
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
+                        a.iDrug_ID,
                         a.sSale_id ,
                         a.dSale_MakeDate,
                         isnull(good.sDrug_TradeName,a.itemname) as sDrug_TradeName ,

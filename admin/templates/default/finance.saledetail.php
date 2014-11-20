@@ -135,6 +135,7 @@
                     <th class="align-center">序号</th>
                     <th class="align-center">单据编号</th>
                     <th class="align-center">制单日期</th>
+                    <th class="align-center">项目编码</th>
                     <th class="align-center">项目名称</th>
                     <th class="align-center">项目类型</th>
                     <th class="align-center">规格</th>
@@ -161,6 +162,9 @@
                             </td>
                             <td class=" align-center" nowrap>
                                 <?php if ($v->dSale_MakeDate == null) echo ''; else  echo date('Y-m-d', strtotime($v->dSale_MakeDate)); ?>
+                            </td>
+                            <td class=" align-left">
+                                <?php echo $v->iDrug_ID ?>
                             </td>
                             <td class=" align-left">
                                 <?php echo $v->sDrug_TradeName ?>
