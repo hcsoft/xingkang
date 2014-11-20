@@ -117,13 +117,14 @@
                 <th class="align-center">结算日期</th>
                 <th class="align-center">制单日期</th>
                 <th class="align-center">收费员</th>
-                <th class="align-center">押金</th>
-                <th class="align-center">结算余额</th>
-                <th class="align-center">实际金额</th>
-                <th class="align-center">结算金额</th>
-                <th class="align-center">收取金额</th>
-                <th class="align-center">支付金额</th>
-                <th class="align-center">金额大写</th>
+                <th class="align-center">处方金额</th>
+                <th class="align-center">统筹支付</th>
+                <th class="align-center">医保卡支付</th>
+                <th class="align-center">现金支付</th>
+                <th class="align-center">银行卡付</th>
+                <th class="align-center">预存下账</th>
+                <th class="align-center">赠送下账</th>
+                <th class="align-center">积分下账金额</th>
             </tr>
             <tbody>
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
@@ -144,26 +145,29 @@
                         <td class=" align-center">
                             <?php echo $v->iCO_MakePerson ?>
                         </td>
-                        <td class=" align-center">
-                            <?php echo number_format($v->fCO_Foregift,2); ?>
+                        <td class=" align-right">
+                            <?php echo number_format($v->fCO_InComeMoney,2); ?>
                         </td>
-                        <td class=" align-center">
-                            <?php echo number_format($v->fCO_Balance,2);?>
+                        <td class=" align-right">
+                            <?php echo number_format($v->fCO_Medicare,2);?>
                         </td>
-                        <td class=" align-center">
-                            <?php  echo number_format($v->fCO_FactMoney,2);?>
+                        <td class=" align-right">
+                            <?php  echo number_format($v->fCO_Card,2);?>
                         </td>
-                        <td class=" align-left">
-                            <?php  echo number_format($v->fCO_IncomeMoney,2);?>
+                        <td class=" align-right">
+                            <?php  echo number_format($v->fCO_Cash,2);?>
                         </td>
-                        <td class=" align-left">
-                            <?php  echo number_format($v->fCO_GetMoney,2);?>
+                        <td class=" align-right">
+                            <?php  echo number_format($v->fCO_PosPay,2);?>
                         </td>
-                        <td class=" align-left">
-                            <?php  echo number_format($v->fCO_PayMoney,2);?>
+                        <td class=" align-right">
+                            <?php  echo number_format($v->fRecharge,2);?>
                         </td>
-                        <td class=" align-left">
-                            <?php echo $v->sCO_CapitalMoney ?>
+                        <td class=" align-right">
+                            <?php  echo number_format($v->fConsume,2);?>
+                        </td>
+                        <td class=" align-right">
+                            <?php  echo number_format($v->fScaleToMoney,2);?>
                         </td>
                     </tr>
                 <?php } ?>
