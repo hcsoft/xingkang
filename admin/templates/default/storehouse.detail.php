@@ -118,7 +118,7 @@
             <thead>
             <tr class="thead">
                 <th class="align-center" colspan="2">单据编号</th>
-                <th class="align-center" colspan="12">信息</th>
+                <th class="align-center" colspan="13">信息</th>
             </tr>
             <tr class="thead">
                 <th class="align-center">总票据</th>
@@ -134,6 +134,7 @@
                 <th class="align-center">商品名称</th>
                 <th class="align-center">规格</th>
                 <th class="align-center">单位</th>
+                <th class="align-center">产地厂牌</th>
                 <th class="align-center">数量</th>
                 <th class="align-center">进价金额</th>
                 <th class="align-center">零价金额</th>
@@ -143,16 +144,16 @@
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
                 <?php foreach ($output['data_list'] as $k => $v) { ?>
                     <tr class="hover member">
-                        <td class=" align-center">
+                        <td class=" align-center" nowrap>
                             <?php echo $v->iBuy_TicketID ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-center" nowrap>
                             <?php echo $v->iBuy_ID ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-center" nowrap>
                             <?php if ($v->dBuy_Date == null) echo ''; else  echo date('Y-m-d', strtotime($v->dBuy_Date)); ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-center" nowrap>
                             <?php echo $output['goodtype'][$v->iDrug_RecType] ?>
                         </td>
                         <td class=" align-center">
@@ -165,28 +166,31 @@
                                 echo $v->OrgId;
                             } ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-center" nowrap>
                             <?php echo $v->iDrug_ID ?>
                         </td>
-                        <td class=" align-left">
+                        <td class=" align-left" nowrap>
                             <?php echo $v->sdrug_chemname ?>
                         </td>
-                        <td class=" align-left">
+                        <td class=" align-left" nowrap>
                             <?php echo $v->spec_name ?>
                         </td>
-                        <td class=" align-left">
+                        <td class=" align-left" nowrap>
                             <?php echo $v->sdrug_unit ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-left">
+                            <?php echo $v->sDrug_Brand ?>
+                        </td>
+                        <td class=" align-center" nowrap>
                             <?php if ($v->fBuy_FactNum == null) echo ''; else echo number_format($v->fBuy_FactNum, 0) . $v->sBuy_DrugUnit; ?>
                         </td>
-                        <td class=" align-right">
+                        <td class=" align-right" nowrap>
                             <?php echo number_format($v->fBuy_TaxMoney, 2) ?>
                         </td>
-                        <td class=" align-right">
+                        <td class=" align-right" nowrap>
                             <?php echo number_format($v->fBuy_RetailMoney, 2) ?>
                         </td>
-                        <td class=" align-right">
+                        <td class=" align-right" nowrap>
                             <?php echo number_format($v->diffmoney, 2) ?>
                         </td>
                     </tr>
@@ -200,7 +204,7 @@
             <tfoot class="tfoot">
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
                 <tr>
-                    <td colspan="14">
+                    <td colspan="15">
                         <div class="pagination"> <?php echo $output['page']; ?> </div>
                     </td>
                 </tr>

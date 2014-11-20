@@ -34,7 +34,14 @@ class financeControl extends SystemControl
         Tpl::output('types', $this->types);
         $this->goodtype = array(0 => '药品', 1 => '卫生用品', 2 => '诊疗项目', 3 => '特殊材料');
         Tpl::output('goodtype', $this->goodtype);
-
+        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class ';
+        $classstmt = $conn->query($classsql);
+        $classtypes = array();
+        while ($row = $classstmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($classtypes, $row);
+        }
+//        $this->types = array(0 => '期初入库', 1 => '采购入库', 2 => '购进退回', 3 => '盘盈', 5 => '领用', 12 => '盘亏', 14 => '领用退回', 50 => '采购计划',);
+        Tpl::output('classtypes', $classtypes);
 
     }
 
@@ -141,6 +148,11 @@ class financeControl extends SystemControl
         if ($_GET['search_goods_name'] != '') {
             $sql = $sql . ' and good.goods_name like \'%' .  trim($_GET['search_goods_name']) . '%\'';
         }
+
+        if ($_GET['classtype'] != '') {
+            $sql = $sql . ' and good.iDrug_StatClass =  ' .  trim($_GET['classtype']) ;
+        }
+
         if (intval($_GET['search_commonid']) > 0) {
             $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']) ;
         }

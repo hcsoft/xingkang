@@ -74,6 +74,15 @@
                     <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>"
                            id="query_end_time"
                            name="query_end_time"/></td>
+                <th colspan="2"><label>财务分类</label></th>
+                <td><select name="classtype" id='classtype'>
+                        <option value="">全部</option>
+                        <?php foreach ($output['classtypes'] as $k => $v) { ?>
+                            <option value="<?php echo $v->iClass_ID; ?>"
+                                    <?php if ($v->iClass_ID == $_GET['classtype']){ ?>selected<?php } ?>><?php echo $v->sClass_ID.$v->sClass_Name; ?></option>
+                        <?php } ?>
+                    </select>
+                    </td>
             </tr>
             <tr>
 
