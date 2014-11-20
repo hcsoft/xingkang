@@ -173,7 +173,7 @@ class financeControl extends SystemControl
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
                         a.sSale_id ,
                         a.dSale_MakeDate,
-                        good.sDrug_TradeName ,
+                        isnull(good.sDrug_TradeName,a.itemname) as sDrug_TradeName ,
                         a.ItemType ,
                         good.sDrug_Spec ,
                         good.sDrug_Unit ,

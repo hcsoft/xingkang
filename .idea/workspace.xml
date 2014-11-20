@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/finance.php" afterPath="$PROJECT_DIR$/admin/control/finance.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/finance.saledetail.php" afterPath="$PROJECT_DIR$/admin/templates/default/finance.saledetail.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -48,30 +47,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="finance.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="finance.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.6666665" vertical-offset="1946" max-vertical-offset="8680">
-              <caret line="155" column="16" selection-start-line="155" selection-start-column="16" selection-end-line="155" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.67603" vertical-offset="2089" max-vertical-offset="8680">
+              <caret line="175" column="82" selection-start-line="175" selection-start-column="67" selection-end-line="175" selection-end-column="82" />
               <folding>
-                <marker date="1416449638552" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1416449638552" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
-                <marker date="1416449638552" expanded="true" signature="1530:1586" placeholder="select iClas..Center_Class..." />
-                <marker date="1416449638552" expanded="true" signature="2439:2567" placeholder="insert into ..." />
-                <marker date="1416449638552" expanded="true" signature="2992:3104" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1416449638552" expanded="true" signature="6706:7530" placeholder="SELECT * FRO..*..." />
-                <marker date="1416449638552" expanded="true" signature="6723:7498" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1416449638552" expanded="true" signature="6739:7479" placeholder="SELECT TOP :..." />
+                <marker date="1416450258050" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1416450258050" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
+                <marker date="1416450258050" expanded="true" signature="1530:1586" placeholder="select iClas..Center_Class..." />
+                <marker date="1416450258050" expanded="true" signature="2439:2567" placeholder="insert into ..." />
+                <marker date="1416450258050" expanded="true" signature="2992:3104" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1416450258050" expanded="true" signature="6706:7568" placeholder="SELECT * FRO..*..." />
+                <marker date="1416450258050" expanded="true" signature="6723:7536" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1416450258050" expanded="true" signature="6739:7517" placeholder="SELECT TOP :..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="finance.saledetail.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="finance.saledetail.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.saledetail.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4095064" vertical-offset="882" max-vertical-offset="4214">
-              <caret line="79" column="60" selection-start-line="79" selection-start-column="60" selection-end-line="79" selection-end-column="60" />
+            <state vertical-scroll-proportion="-45.652172" vertical-offset="294" max-vertical-offset="4214">
+              <caret line="96" column="46" selection-start-line="96" selection-start-column="46" selection-end-line="96" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -149,8 +148,8 @@
         <option value="$PROJECT_DIR$/admin/templates/default/goods.stock.php" />
         <option value="$PROJECT_DIR$/admin/control/storehouse.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/storehouse.detail.php" />
-        <option value="$PROJECT_DIR$/admin/control/finance.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/finance.saledetail.php" />
+        <option value="$PROJECT_DIR$/admin/control/finance.php" />
       </list>
     </option>
   </component>
@@ -865,7 +864,13 @@
       <option name="project" value="LOCAL" />
       <updated>1416449410461</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="1,销售明细增加了财务分类增加了未分类">
+      <created>1416449751739</created>
+      <option name="number" value="00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1416449751740</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -922,7 +927,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
-    <MESSAGE value="1,修改了由于仓库汇总改动导致的明细模块错误问题" />
     <MESSAGE value="1,解决档案查询左侧树不对齐的问题" />
     <MESSAGE value="1,完成了处方查询&#10;2,完成了处方汇总&#10;3,完成了收入明细查询&#10;4,完成了收入汇总查询" />
     <MESSAGE value="1,消费汇总" />
@@ -947,7 +951,8 @@
     <MESSAGE value="1,仓库管理增加了机构选择" />
     <MESSAGE value="1,仓库明细增加了产地厂牌&#10;2,销售明细增加了财务分类的查询条件" />
     <MESSAGE value="1,仓库明细增加了供货商&#10;2,销售明细增加了财务分类的查询条件" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,仓库明细增加了供货商&#10;2,销售明细增加了财务分类的查询条件" />
+    <MESSAGE value="1,销售明细增加了财务分类增加了未分类" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,销售明细增加了财务分类增加了未分类" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1334,28 +1339,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.saledetail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.6666665" vertical-offset="1946" max-vertical-offset="8680">
-          <caret line="155" column="16" selection-start-line="155" selection-start-column="16" selection-end-line="155" selection-end-column="16" />
-          <folding>
-            <marker date="1416449638552" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1416449638552" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
-            <marker date="1416449638552" expanded="true" signature="1530:1586" placeholder="select iClas..Center_Class..." />
-            <marker date="1416449638552" expanded="true" signature="2439:2567" placeholder="insert into ..." />
-            <marker date="1416449638552" expanded="true" signature="2992:3104" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1416449638552" expanded="true" signature="6706:7530" placeholder="SELECT * FRO..*..." />
-            <marker date="1416449638552" expanded="true" signature="6723:7498" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1416449638552" expanded="true" signature="6739:7479" placeholder="SELECT TOP :..." />
-          </folding>
+        <state vertical-scroll-proportion="-45.652172" vertical-offset="294" max-vertical-offset="4214">
+          <caret line="96" column="46" selection-start-line="96" selection-start-column="46" selection-end-line="96" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.saledetail.php">
+    <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4095064" vertical-offset="882" max-vertical-offset="4214">
-          <caret line="79" column="60" selection-start-line="79" selection-start-column="60" selection-end-line="79" selection-end-column="60" />
-          <folding />
+        <state vertical-scroll-proportion="0.67603" vertical-offset="2089" max-vertical-offset="8680">
+          <caret line="175" column="82" selection-start-line="175" selection-start-column="67" selection-end-line="175" selection-end-column="82" />
+          <folding>
+            <marker date="1416450258050" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1416450258050" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
+            <marker date="1416450258050" expanded="true" signature="1530:1586" placeholder="select iClas..Center_Class..." />
+            <marker date="1416450258050" expanded="true" signature="2439:2567" placeholder="insert into ..." />
+            <marker date="1416450258050" expanded="true" signature="2992:3104" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1416450258050" expanded="true" signature="6706:7568" placeholder="SELECT * FRO..*..." />
+            <marker date="1416450258050" expanded="true" signature="6723:7536" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1416450258050" expanded="true" signature="6739:7517" placeholder="SELECT TOP :..." />
+          </folding>
         </state>
       </provider>
     </entry>
