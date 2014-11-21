@@ -136,7 +136,7 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>系统概览</h3>
+            <h3>系统总览</h3>
         </div>
     </div>
     <div class="fixed-empty"></div>
@@ -180,6 +180,48 @@
                     <li class="w33pre none"><a href="#saletabs-1">饼图</a></li>
                     <li class="w33pre none"><a href="#saletabs-2">柱状图</a></li>
                     <li class="w34pre none"><a href="#saletabs-3">列表</a></li>
+                </ul>
+            </dd>
+
+        </dl>
+        <dl class="member">
+            <dt>
+            <div id="atabs-1" class="showdiv">
+
+            </div>
+            <div id="atabs-2" class="showdiv">
+
+            </div>
+            <div id="atabs-3" class="showdiv">
+
+            </div>
+            </dt>
+            <dd>
+                <ul>
+                    <li class="w33pre none"><a href="#atabs-1">饼图</a></li>
+                    <li class="w33pre none"><a href="#atabs-2">柱状图</a></li>
+                    <li class="w34pre none"><a href="#atabs-3">列表</a></li>
+                </ul>
+            </dd>
+
+        </dl>
+        <dl class="member">
+            <dt>
+            <div id="btabs-1" class="showdiv">
+
+            </div>
+            <div id="btabs-2" class="showdiv">
+
+            </div>
+            <div id="btabs-3" class="showdiv">
+
+            </div>
+            </dt>
+            <dd>
+                <ul>
+                    <li class="w33pre none"><a href="#btabs-1">饼图</a></li>
+                    <li class="w33pre none"><a href="#btabs-2">柱状图</a></li>
+                    <li class="w34pre none"><a href="#btabs-3">列表</a></li>
                 </ul>
             </dd>
 
