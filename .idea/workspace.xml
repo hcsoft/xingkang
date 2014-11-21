@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/include/menu.php" afterPath="$PROJECT_DIR$/admin/include/menu.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/welcome.php" afterPath="$PROJECT_DIR$/admin/templates/default/welcome.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -71,24 +70,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="welcome.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="welcome.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.0" vertical-offset="1495" max-vertical-offset="5894">
-              <caret line="138" column="19" selection-start-line="138" selection-start-column="19" selection-end-line="138" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.2631579" vertical-offset="2419" max-vertical-offset="5894">
+              <caret line="186" column="12" selection-start-line="186" selection-start-column="12" selection-end-line="227" selection-end-column="17" />
               <folding>
                 <element signature="n#style#0;n#h1#0;n#div#2;n#dl#0;n#div#2;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-                <marker date="1416557658348" expanded="true" signature="10449:10500" placeholder="..." />
+                <marker date="1416557759564" expanded="true" signature="10743:10794" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="menu.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="menu.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/include/menu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44972068" vertical-offset="602" max-vertical-offset="4452">
+            <state vertical-scroll-proportion="-14.0" vertical-offset="602" max-vertical-offset="4452">
               <caret line="66" column="89" selection-start-line="66" selection-start-column="84" selection-end-line="66" selection-end-column="89" />
               <folding />
             </state>
@@ -157,8 +156,8 @@
         <option value="$PROJECT_DIR$/admin/control/community.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/community.income.detail.php" />
         <option value="$PROJECT_DIR$/admin/control/dashboard.php" />
-        <option value="$PROJECT_DIR$/admin/templates/default/welcome.php" />
         <option value="$PROJECT_DIR$/admin/include/menu.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/welcome.php" />
       </list>
     </option>
   </component>
@@ -1001,7 +1000,13 @@
       <option name="project" value="LOCAL" />
       <updated>1416555694460</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="1,重新制作欢迎页面">
+      <created>1416557717268</created>
+      <option name="number" value="00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1416557717268</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -1467,23 +1472,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
+    <entry file="file://$PROJECT_DIR$/admin/include/menu.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.0" vertical-offset="1495" max-vertical-offset="5894">
-          <caret line="138" column="19" selection-start-line="138" selection-start-column="19" selection-end-line="138" selection-end-column="19" />
-          <folding>
-            <element signature="n#style#0;n#h1#0;n#div#2;n#dl#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <marker date="1416557658348" expanded="true" signature="10449:10500" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="-14.0" vertical-offset="602" max-vertical-offset="4452">
+          <caret line="66" column="89" selection-start-line="66" selection-start-column="84" selection-end-line="66" selection-end-column="89" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/include/menu.php">
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44972068" vertical-offset="602" max-vertical-offset="4452">
-          <caret line="66" column="89" selection-start-line="66" selection-start-column="84" selection-end-line="66" selection-end-column="89" />
-          <folding />
+        <state vertical-scroll-proportion="0.2631579" vertical-offset="2419" max-vertical-offset="5894">
+          <caret line="186" column="12" selection-start-line="186" selection-start-column="12" selection-end-line="227" selection-end-column="17" />
+          <folding>
+            <element signature="n#style#0;n#h1#0;n#div#2;n#dl#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+            <marker date="1416557759564" expanded="true" signature="10743:10794" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
