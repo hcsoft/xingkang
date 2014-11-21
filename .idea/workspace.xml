@@ -73,12 +73,12 @@
       <file leaf-file-name="welcome.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5576102" vertical-offset="3402" max-vertical-offset="6090">
-              <caret line="271" column="24" selection-start-line="271" selection-start-column="24" selection-end-line="271" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.67709816" vertical-offset="4074" max-vertical-offset="6076">
+              <caret line="325" column="14" selection-start-line="325" selection-start-column="14" selection-end-line="325" selection-end-column="14" />
               <folding>
                 <element signature="n#style#0;n#h1#0;n#div#2;n#dl#0;n#div#2;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-                <marker date="1416558642843" expanded="true" signature="11457:11508" placeholder="..." />
+                <marker date="1416558755581" expanded="true" signature="11430:11481" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -1018,7 +1018,13 @@
       <option name="project" value="LOCAL" />
       <updated>1416557892887</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="1,图表增加了颜色选项">
+      <created>1416558680316</created>
+      <option name="number" value="00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1416558680316</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -1075,7 +1081,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
-    <MESSAGE value="1,日期处理成yyyy-mm-dd格式" />
     <MESSAGE value="1,解决除0的错误" />
     <MESSAGE value="1,解决日期条件错误的问题" />
     <MESSAGE value="1,解决总计错误的问题" />
@@ -1100,7 +1105,8 @@
     <MESSAGE value="1,显示商品的部分增加了商品编码" />
     <MESSAGE value="1,完善了结算单明细查询" />
     <MESSAGE value="1,重新制作欢迎页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,重新制作欢迎页面" />
+    <MESSAGE value="1,图表增加了颜色选项" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,图表增加了颜色选项" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1494,12 +1500,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5576102" vertical-offset="3402" max-vertical-offset="6090">
-          <caret line="271" column="24" selection-start-line="271" selection-start-column="24" selection-end-line="271" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.67709816" vertical-offset="4074" max-vertical-offset="6076">
+          <caret line="325" column="14" selection-start-line="325" selection-start-column="14" selection-end-line="325" selection-end-column="14" />
           <folding>
             <element signature="n#style#0;n#h1#0;n#div#2;n#dl#0;n#div#2;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <marker date="1416558642843" expanded="true" signature="11457:11508" placeholder="..." />
+            <marker date="1416558755581" expanded="true" signature="11430:11481" placeholder="..." />
           </folding>
         </state>
       </provider>

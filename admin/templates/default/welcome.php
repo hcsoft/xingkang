@@ -324,7 +324,6 @@
                     viewDistance: 25
                 }
             },
-            colors:colors,
             title: {
                 text: titletext
             },
