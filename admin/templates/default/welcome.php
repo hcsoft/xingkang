@@ -238,15 +238,20 @@
 <script type="text/javascript">
     var normal = ['week_add_member', 'week_add_product'];
     var work = ['store_joinin', 'store_expired', 'store_expire', 'brand_apply', 'cashlist', 'groupbuy_verify_list', 'points_order', 'complain_new_list', 'complain_handle_list', 'product_verify', 'inform_list', 'refund', 'return', 'cms_article_verify', 'cms_picture_verify', 'circle_verify', 'check_billno', 'pay_billno'];
+    var colorarray=[
+        [ '#90ed7d', '#f7a35c', '#8085e9',     '#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1','#7cb5ec', '#434348'],
+         ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
+             ['#7cb5ec', '#434348', '#90ed7d', '#f7a35c', '#8085e9',     '#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1']
+    ];
     $(document).ready(function () {
         $.getJSON("index.php?act=dashboard&op=chart", function (data) {
             console.log(data);
             //初始化图表
             var orgchartcfg = getData(data['orgdata'], 'name', 'num', ['机构编码', '机构名称'], '共?家机构');
-            initchart(orgchartcfg, '社区建设', '社区数量', '行政区划', 'orgtabs', '共?家机构',{ formatter: showhtml,useHTML: true});
+            initchart(orgchartcfg, '社区建设', '社区数量', '行政区划', 'orgtabs', '共?家机构',{ formatter: showhtml,useHTML: true},2);
 
             var salechartcfg = getData(data['saledata'], 'name', 'num', ['机构编码', '机构名称'], '总销售金额为￥{point.y}元');
-            initchart(salechartcfg, '销售情况', '销售金额', '社区', 'saletabs', getmoney,{ pointFormat: '总销售金额为￥{point.y}元',useHTML: true});
+            initchart(salechartcfg, '销售情况', '销售金额', '社区', 'saletabs', getmoney,{ pointFormat: '总销售金额为￥{point.y}元',useHTML: true},0);
 
 //            var salechartcfg = getData(data['saledata'], 'name', 'num');
 //            initchart(salechartcfg,'消费情况','消费金额','社区','saletabs');
@@ -260,9 +265,17 @@
     function test() {
         return 'aaaa';
     }
-    function initchart(orgchartcfg, titletext, numtext, ytext, tabname, counttext,tooltip) {
+    function initchart(orgchartcfg, titletext, numtext, ytext, tabname, counttext,tooltip,colorindex) {
         console.log(orgchartcfg);
         console.log(counttext);
+        var colors = [];
+        if(colorindex>=0 && colorarray[colorindex]){
+            colors = colorarray[colorindex]
+        }else{
+            colors = colorarray[2];
+        }
+        console.log(colorindex);
+        console.log(colors);
         //初始化饼图
         var orgchart_1 = new Highcharts.Chart({
             chart: {
@@ -274,7 +287,7 @@
                     beta: 0
                 }
             },
-
+            colors:colors,
             title: {
                 text: titletext
             },
@@ -311,6 +324,7 @@
                     viewDistance: 25
                 }
             },
+            colors:colors,
             title: {
                 text: titletext
             },
