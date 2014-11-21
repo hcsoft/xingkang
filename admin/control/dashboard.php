@@ -177,7 +177,7 @@ class dashboardControl extends SystemControl{
         $sql = 'select  b.id , b.name , sum(fCO_IncomeMoney) as num
                     from  Center_CheckOut checkout left join  Organization b  on checkout.OrgID = b.id
                     where checkout.OrgID in (select orgid from map_org_wechat)
-              group by b.id , b.name  ';
+              group by b.id , b.name order by sum(fCO_IncomeMoney) desc   ';
         $stmt = $conn->query($sql);
         $salelist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
