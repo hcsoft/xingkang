@@ -40,9 +40,9 @@ $(document).ready(function(){
 	}else{
 		$('#mainMenu>ul').first().css('display','block');
 		//第一次进入后台时，默认定到欢迎界面
-//		$('#item_welcome').addClass('selected');
+		$('#item_welcome').addClass('selected');
         eval( $("#nav >ul >li:first-child > a").attr("onclick"));
-//		$('#workspace').attr('src','index.php?act=dashboard&op=welcome');
+		$('#workspace').attr('src','index.php?act=dashboard&op=welcome');
 	}
 	$('#iframe_refresh').click(function(){
 		var fr = document.frames ? document.frames("workspace") : document.getElementById("workspace").contentWindow;;

@@ -97,7 +97,7 @@ $(function(){
           <label>数据库表前缀</label>
           <span>
           <input type="text" name="db_prefix" maxlength="20" value="<?php echo $_POST['db_prefix'] ? $_POST['db_prefix'] : 'shopnc_';?>">
-          </span> <em>同一数据库运行多个ShopNC程序时，请修改前缀</em></div>
+          </span> <em>同一数据库运行多个hcsoft程序时，请修改前缀</em></div>
         <div>
           <label>数据库端口</label>
           <span>

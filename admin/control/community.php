@@ -267,23 +267,36 @@ class communityControl extends SystemControl
 //                        a.sCO_CapitalMoney
 //                        $sql order by  a.dCO_Date desc ";
 
+        //
+//        Sum(fCO_InComeMoney - fCO_Medicare  - fCO_Card - fCO_PosPay - fRecharge  - fConsume - fScaleToMoney) factmoney,
+//                    Sum(fCO_InComeMoney) incomemoney,
+//                    Sum(fCO_Medicare) medicare,
+//                    Sum(fCO_Card) cardmoney,
+//                    Sum(fCO_Cash) cashmoney,
+//                    Sum(fCO_PosPay) postpaymoney,
+//                    Sum( case when RecipeID > 0 and fCO_IncomeMoney>0  then 1  when  RecipeID > 0 and fCO_IncomeMoney<0 then  -1 end ) cliniccount,
+//                    Sum(fRecharge) sumfRecharge,
+//                    Sum(fConsume) sumfConsume,
+//                    Sum(fScaleToMoney) scaletomoney
+
         $exportsql = "SELECT  row_number() over( order by  a.dCO_Date desc) as '序号',
                         ico.name as '类型',
                         a.dCO_Date '结算日期',
                         a.dCO_MakeDate '制单日期',
                         sMakePerson  '收费员',
-                        a.fCO_Foregift '押金',
-                        a.fCO_Balance '结算余额',
-                        a.fCO_FactMoney '实际金额',
-                        a.fCO_IncomeMoney '结算金额' ,
-                        a.fCO_GetMoney '收取金额',
-                        a.fCO_PayMoney '支付金额',
-                        a.sCO_CapitalMoney '金额大写'
+                        a.fCO_InComeMoney '处方金额',
+                        a.fCO_Medicare '统筹支付',
+                        a.fCO_Card '医保卡支付',
+                        a.fCO_Cash '现金支付' ,
+                        a.fCO_PosPay '银行卡付',
+                        a.fRecharge '预存下账',
+                        a.fConsume '赠送下账',
+                        a.fScaleToMoney '积分下账金额'
                         $sql order by  a.dCO_Date desc ";
 //        echo $_GET['export']=='true';
 //        echo $_GET['export'];
         if(isset($_GET['export']) && $_GET['export']=='true'){
-            $this->exportxlsx($exportsql,array('序号','类型','结算日期','制单日期','收费员','押金','结算余额','实际金额','结算金额','收取金额','支付金额','金额大写'),'收入明细');
+            $this->exportxlsx($exportsql,array('序号','类型','结算日期','制单日期','收费员','处方金额','统筹支付','医保卡支付','现金支付','银行卡付','预存下账','赠送下账','积分下账金额'),'收入明细');
         }
         $stmt = $conn->query($tsql);
         $data_list = array();

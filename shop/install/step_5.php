@@ -49,8 +49,7 @@
   <div class="final-intro">
     <p><strong>系统管理默认地址:&nbsp;</strong><a href="<?php echo $auto_site_url;?>/admin" target="_blank"><?php echo $auto_site_url;?>/admin</a></p>
     <p><strong>网站首页默认地址:&nbsp;</strong><a href="<?php echo $auto_site_url;?>" target="_blank"><?php echo $auto_site_url;?></a></p>
-    <p><em>如选择安装了演示数据，网站默认会员帐号和密码均为<font style="color: red;">shopnc</font>。<br>网站默认商家帐号：<font style="color: red;">shopnc_seller</font>；密码：<font style="color: red;">shopnc</font>。</em>
-        请下载<a href="http://www.shopnctest.com/b2b2c/2014/test/ShopNC-B2B2C-data.zip" target="_blank">图片文件压缩包</a>
+    <p><em>如选择安装了演示数据，网站默认会员帐号和密码均为<font style="color: red;">hcsoft</font>。<br>网站默认商家帐号：<font style="color: red;">shopnc_seller</font>；密码：<font style="color: red;">shopnc</font>。</em>
         </p>
   </div>
 </div>

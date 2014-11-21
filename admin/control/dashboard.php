@@ -147,7 +147,51 @@ class dashboardControl extends SystemControl{
         if (C('circle_isuse')) {
             $statistics['circle_verify'] = Model('circle')->getCircleUnverifiedCount();
         }
+
         echo json_encode($statistics);
 		exit;
 	}
+
+    public function chartOp(){
+        $statistics = array();
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        //查询社区数量
+        $orgsql = 'select c.id ,  c.name , count(*) as num
+                    from map_org_wechat a, Organization b , District c
+                    where a.orgid = b.id and left(b.DistrictNumber,6) = c.id group by c.id, c.name order by count(*) desc  ';
+        $orgstmt = $conn->query($orgsql);
+        $orgdata_list = array();
+        while ($row = $orgstmt->fetch(PDO::FETCH_OBJ)) {
+            $detailsql = ' select id,name from  Organization  where DistrictNumber like \''.$row->id.'%\' and id in (select orgid from map_org_wechat) ';
+            $detailstmt = $conn->query($detailsql);
+            $detail_list = array();
+            while ($detailrow = $detailstmt->fetch(PDO::FETCH_NUM)) {
+                array_push($detail_list, $detailrow);
+            }
+            $row->details =$detail_list;
+            array_push($orgdata_list, $row);
+        }
+
+        $statistics['orgdata'] = $orgdata_list;
+        //查询销售情况
+        $sql = 'select  b.id , b.name , sum(fCO_IncomeMoney) as num
+                    from  Center_CheckOut checkout left join  Organization b  on checkout.OrgID = b.id
+                    where checkout.OrgID in (select orgid from map_org_wechat)
+              group by b.id , b.name  ';
+        $stmt = $conn->query($sql);
+        $salelist = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+//            $detailsql = ' select id,name from  Organization  where DistrictNumber like \''.$row->id.'%\' and id in (select orgid from map_org_wechat) ';
+//            $detailstmt = $conn->query($detailsql);
+//            $detail_list = array();
+//            while ($detailrow = $detailstmt->fetch(PDO::FETCH_NUM)) {
+//                array_push($detail_list, $detailrow);
+//            }
+            $row->details =array();
+            array_push($salelist, $row);
+        }
+        $statistics['saledata'] = $salelist;
+        echo json_encode($statistics);
+        exit;
+    }
 }
