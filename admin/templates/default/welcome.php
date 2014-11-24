@@ -132,6 +132,10 @@
         opacity: 0.9;
         background-color: #fff;
     }
+    td.head{
+        text-align: left;
+        text-indent: 20px;
+    }
 </style>
 <div class="page">
     <div class="fixed-bar">
@@ -180,6 +184,48 @@
                     <li class="w33pre none"><a href="#saletabs-1">饼图</a></li>
                     <li class="w33pre none"><a href="#saletabs-2">柱状图</a></li>
                     <li class="w34pre none"><a href="#saletabs-3">列表</a></li>
+                </ul>
+            </dd>
+
+        </dl>
+        <dl class="member">
+            <dt>
+            <div id="membertabs-1" class="showdiv">
+
+            </div>
+            <div id="membertabs-2" class="showdiv">
+
+            </div>
+            <div id="membertabs-3" class="showdiv">
+
+            </div>
+            </dt>
+            <dd>
+                <ul>
+                    <li class="w33pre none"><a href="#membertabs-1">饼图</a></li>
+                    <li class="w33pre none"><a href="#membertabs-2">柱状图</a></li>
+                    <li class="w34pre none"><a href="#membertabs-3">列表</a></li>
+                </ul>
+            </dd>
+
+        </dl>
+        <dl class="member">
+            <dt>
+            <div id="consumetabs-1" class="showdiv">
+
+            </div>
+            <div id="consumetabs-2" class="showdiv">
+
+            </div>
+            <div id="consumetabs-3" class="showdiv">
+
+            </div>
+            </dt>
+            <dd>
+                <ul>
+                    <li class="w33pre none"><a href="#consumetabs-1">饼图</a></li>
+                    <li class="w33pre none"><a href="#consumetabs-2">柱状图</a></li>
+                    <li class="w34pre none"><a href="#consumetabs-3">列表</a></li>
                 </ul>
             </dd>
 
@@ -253,6 +299,11 @@
             var salechartcfg = getData(data['saledata'], 'name', 'num', ['机构编码', '机构名称'], '总销售金额为￥{point.y}元');
             initchart(salechartcfg, '销售情况', '销售金额', '社区', 'saletabs', getmoney,{ pointFormat: '总销售金额为￥{point.y}元',useHTML: true},0);
 
+            var memberchartcfg = getData(data['memberdata'], 'name', 'num', ['机构编码', '机构名称'], '总充值金额为￥{point.y}元');
+            initchart(memberchartcfg, '会员充值情况', '充值金额', '社区', 'membertabs', getincome,{ pointFormat: '总充值金额为￥{point.y}元',useHTML: true},0);
+
+            var consumechartcfg = getData(data['consumedata'], 'name', 'num', ['机构编码', '机构名称'], '总消费金额为￥{point.y}元');
+            initchart(consumechartcfg, '会员消费情况', '消费金额', '社区', 'consumetabs', getincome,{ pointFormat: '总消费金额为￥{point.y}元',useHTML: true},0);
 //            var salechartcfg = getData(data['saledata'], 'name', 'num');
 //            initchart(salechartcfg,'消费情况','消费金额','社区','saletabs');
             //初始化标签
@@ -363,16 +414,25 @@
             }else{
                 txt = counttext;
             }
-            html += '<tr class="detailtr" title="" counttext="'+txt+'" count="'+orgchartcfg.piedata[i].details.length+'" text=\''+escape(orgchartcfg.piedata[i].detailhtml)+'\'><td class="head" >' + orgchartcfg.piedata[i].name + '</td><td>' + orgchartcfg.piedata[i].y + '</td></td>';
+            html += '<tr class="detailtr" title="" counttext="'+txt+'" count="'+orgchartcfg.piedata[i].details.length+'" text=\''+escape(orgchartcfg.piedata[i].detailhtml)+'\'>' +
+            '<td class="head" >' + orgchartcfg.piedata[i].name + '</td>' +
+            '<td>' + orgchartcfg.piedata[i].y + '</td></tr>';
         }
         html = '<span style="text-align: center;font-size:18px;margin-top: 30px;">' + titletext + '</span><table class="listtable"><tr><th>' + ytext + '</th><th>' + numtext + '</th></tr>' + html + '</table>';
 //        $( document ).tooltip();
 
         $("#" + tabname + "-3").html(html);
     }
-
+    function gettotal(data){
+        console.log(data);
+        return data;
+    }
     function getmoney(data){
         return '总销售金额为￥'+data.y+"元";
+    }
+
+    function getincome(data){
+        return '总充值金额为￥'+data.y+"元";
     }
 
     function gettext(obj){

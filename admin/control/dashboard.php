@@ -181,16 +181,38 @@ class dashboardControl extends SystemControl{
         $stmt = $conn->query($sql);
         $salelist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-//            $detailsql = ' select id,name from  Organization  where DistrictNumber like \''.$row->id.'%\' and id in (select orgid from map_org_wechat) ';
-//            $detailstmt = $conn->query($detailsql);
-//            $detail_list = array();
-//            while ($detailrow = $detailstmt->fetch(PDO::FETCH_NUM)) {
-//                array_push($detail_list, $detailrow);
-//            }
             $row->details =array();
             array_push($salelist, $row);
         }
         $statistics['saledata'] = $salelist;
+
+        //查询充值情况
+        $sql = 'select  b.id , b.name , sum(RechargeMoney) as num
+                    from  center_MemberRecharge checkout left join  Organization b  on checkout.OrgID = b.id
+                    where checkout.OrgID in (select orgid from map_org_wechat) and checkout.[type]=1
+              group by b.id , b.name having sum(RechargeMoney) >0 order by sum(RechargeMoney) desc   ';
+        $stmt = $conn->query($sql);
+        $memberlist = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $row->details =array();
+            array_push($memberlist, $row);
+        }
+        $statistics['memberdata'] = $memberlist;
+
+        //查询充值情况
+        $sql = 'select  b.id , b.name , sum(-RechargeMoney) as num
+                    from  center_MemberRecharge checkout left join  Organization b  on checkout.OrgID = b.id
+                    where checkout.OrgID in (select orgid from map_org_wechat) and checkout.[type]=2
+              group by b.id , b.name having sum(-RechargeMoney) >0 order by sum(-RechargeMoney) desc   ';
+        $stmt = $conn->query($sql);
+        $consumelist = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $row->details =array();
+            array_push($consumelist, $row);
+        }
+
+        $statistics['consumedata'] = $consumelist;
+
         echo json_encode($statistics);
         exit;
     }
