@@ -181,7 +181,7 @@ class dashboardControl extends SystemControl{
         $stmt = $conn->query($sql);
         $salelist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $row->details =array();
+            $row->details= array();
             array_push($salelist, $row);
         }
         $statistics['saledata'] = $salelist;
@@ -194,7 +194,7 @@ class dashboardControl extends SystemControl{
         $stmt = $conn->query($sql);
         $memberlist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $row->details =array();
+            $row->details= array();
             array_push($memberlist, $row);
         }
         $statistics['memberdata'] = $memberlist;
@@ -207,11 +207,113 @@ class dashboardControl extends SystemControl{
         $stmt = $conn->query($sql);
         $consumelist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $row->details =array();
+            $row->details= array();
             array_push($consumelist, $row);
         }
 
         $statistics['consumedata'] = $consumelist;
+
+
+        //查询回访情况
+        $sql = 'select  b.id , b.name , count(1) as num
+                    from  spotcheck_main checkout left join  Organization b  on checkout.OrgID = b.id
+                    where checkout.OrgID in (select orgid from map_org_wechat) and checktype like \'5%\'
+              group by b.id , b.name having count(1)  >0 order by count(1)  desc   ';
+        $stmt = $conn->query($sql);
+        $spotlist = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $row->details= array();
+            array_push($spotlist, $row);
+        }
+
+        $statistics['spotdata'] = $spotlist;
+
+
+        //查询健康档案情况
+        $sql = 'select  b.id , b.name , count(1) as num
+                    from  healthfile hf , sam_taxempcode checkout left join  Organization b  on checkout.org_id = b.id
+                    where hf.inputpersonid = checkout.loginname and checkout.org_id in (select orgid from map_org_wechat)
+              group by b.id , b.name having count(1)  >0 order by count(1)  desc   ';
+        $stmt = $conn->query($sql);
+        $healthfilelist = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $row->details= array();
+            array_push($healthfilelist, $row);
+        }
+
+        $statistics['healthdata'] = $healthfilelist;
+
+        //查询健康档案回访情况
+        $sql = 'select  b.id , b.name , count(1) as num
+                    from  spotcheck_main checkout left join  Organization b  on checkout.OrgID = b.id
+                    where checkout.OrgID in (select orgid from map_org_wechat) and checktype like \'0%\'
+              group by b.id , b.name having count(1)  >0 order by count(1)  desc   ';
+        $stmt = $conn->query($sql);
+        $healthfilespotlist = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $row->details= array();
+            array_push($healthfilespotlist, $row);
+        }
+
+        $statistics['healthspotdata'] = $healthfilespotlist;
+
+        //查询业务开展数量情况
+        $sql = 'select id , name ,sum(num) num
+                from(
+                select c.id , c.name ,count(1) num from MedicalExam  a  , sam_taxempcode b ,   Organization c
+                where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                group by c.id , c.name
+                union all
+                select c.id , c.name ,count(1) num from HealthFileMaternal  a  , sam_taxempcode b ,   Organization c
+                where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                group by c.id , c.name
+                union all
+                select c.id , c.name ,count(1) num from FirstVistBeforeBorn  a  , sam_taxempcode b ,   Organization c
+                where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                group by c.id , c.name
+                union all
+                select c.id , c.name ,count(1) num from VisitBeforeBorn  a  , sam_taxempcode b ,   Organization c
+                where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                group by c.id , c.name
+                union all
+                select c.id , c.name ,count(1) num from VisitBeforeBorn  a  , sam_taxempcode b ,   Organization c
+                where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                group by c.id , c.name
+                union all
+                select c.id , c.name ,count(1) num from HealthFileChildren  a  , sam_taxempcode b ,   Organization c
+                where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                group by c.id , c.name
+                union all
+                select c.id , c.name ,count(1) num from ChildrenMediExam  a  , sam_taxempcode b ,   Organization c
+                where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                group by c.id , c.name
+                union all
+                select c.id , c.name ,count(1) num from ChildrenMediExam3_6  a  , sam_taxempcode b ,   Organization c
+                where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                group by c.id , c.name
+                union all
+                select c.id , c.name ,count(1) num from HypertensionVisit  a  , sam_taxempcode b ,   Organization c
+                where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                group by c.id , c.name
+                union all
+                select c.id , c.name ,count(1) num from DiabetesVisit  a  , sam_taxempcode b ,   Organization c
+                where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                group by c.id , c.name
+                union all
+                select c.id , c.name ,count(1) num from FuriousVisit  a  , sam_taxempcode b ,   Organization c
+                where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                group by c.id , c.name
+                ) uniontable
+                group by id ,name
+                order by sum(num) desc   ';
+        $stmt = $conn->query($sql);
+        $healthbusinesslist = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $row->details= array();
+            array_push($healthbusinesslist, $row);
+        }
+
+        $statistics['healthbusinessdata'] = $healthbusinesslist;
 
         echo json_encode($statistics);
         exit;

@@ -211,6 +211,27 @@
         </dl>
         <dl class="member">
             <dt>
+            <div id="healthtabs-1" class="showdiv">
+
+            </div>
+            <div id="healthtabs-2" class="showdiv">
+
+            </div>
+            <div id="healthtabs-3" class="showdiv">
+
+            </div>
+            </dt>
+            <dd>
+                <ul>
+                    <li class="w33pre none"><a href="#healthtabs-1">饼图</a></li>
+                    <li class="w33pre none"><a href="#healthtabs-2">柱状图</a></li>
+                    <li class="w34pre none"><a href="#healthtabs-3">列表</a></li>
+                </ul>
+            </dd>
+
+        </dl>
+        <dl class="member">
+            <dt>
             <div id="consumetabs-1" class="showdiv">
 
             </div>
@@ -230,6 +251,75 @@
             </dd>
 
         </dl>
+
+        <dl class="member">
+            <dt>
+            <div id="healthspottabs-1" class="showdiv">
+
+            </div>
+            <div id="healthspottabs-2" class="showdiv">
+
+            </div>
+            <div id="healthspottabs-3" class="showdiv">
+
+            </div>
+            </dt>
+            <dd>
+                <ul>
+                    <li class="w33pre none"><a href="#healthspottabs-1">饼图</a></li>
+                    <li class="w33pre none"><a href="#healthspottabs-2">柱状图</a></li>
+                    <li class="w34pre none"><a href="#healthspottabs-3">列表</a></li>
+                </ul>
+            </dd>
+
+        </dl>
+
+        <dl class="member">
+            <dt>
+            <div id="spottabs-1" class="showdiv">
+
+            </div>
+            <div id="spottabs-2" class="showdiv">
+
+            </div>
+            <div id="spottabs-3" class="showdiv">
+
+            </div>
+            </dt>
+            <dd>
+                <ul>
+                    <li class="w33pre none"><a href="#spottabs-1">饼图</a></li>
+                    <li class="w33pre none"><a href="#spottabs-2">柱状图</a></li>
+                    <li class="w34pre none"><a href="#spottabs-3">列表</a></li>
+                </ul>
+            </dd>
+
+        </dl>
+
+        <dl class="member">
+            <dt>
+            <div id="healthbusinesstabs-1" class="showdiv">
+
+            </div>
+            <div id="healthbusinesstabs-2" class="showdiv">
+
+            </div>
+            <div id="healthbusinesstabs-3" class="showdiv">
+
+            </div>
+            </dt>
+            <dd>
+                <ul>
+                    <li class="w33pre none"><a href="#healthbusinesstabs-1">饼图</a></li>
+                    <li class="w33pre none"><a href="#healthbusinesstabs-2">柱状图</a></li>
+                    <li class="w34pre none"><a href="#healthbusinesstabs-3">列表</a></li>
+                </ul>
+            </dd>
+
+        </dl>
+
+
+
 <!--        <dl class="member">-->
 <!--            <dt>-->
 <!--            <div id="atabs-1" class="showdiv">-->
@@ -303,10 +393,23 @@
             initchart(memberchartcfg, '会员充值情况', '充值金额', '社区', 'membertabs', getincome,{ pointFormat: '总充值金额为￥{point.y}元',useHTML: true},0);
 
             var consumechartcfg = getData(data['consumedata'], 'name', 'num', ['机构编码', '机构名称'], '总消费金额为￥{point.y}元');
-            initchart(consumechartcfg, '会员消费情况', '消费金额', '社区', 'consumetabs', getincome,{ pointFormat: '总消费金额为￥{point.y}元',useHTML: true},0);
+            initchart(consumechartcfg, '会员消费情况', '消费金额', '社区', 'consumetabs', getconsume,{ pointFormat: '总消费金额为￥{point.y}元',useHTML: true},0);
 //            var salechartcfg = getData(data['saledata'], 'name', 'num');
 //            initchart(salechartcfg,'消费情况','消费金额','社区','saletabs');
             //初始化标签
+            var healthfilechartcfg = getData(data['healthdata'], 'name', 'num', ['机构编码', '机构名称'], '总档案数为{point.y}份');
+            initchart(healthfilechartcfg, '健康档案', '档案数量', '社区', 'healthtabs', gethealthfile,{ pointFormat: '总档案数为{point.y}份',useHTML: true},0);
+
+            var spotchartcfg = getData(data['spotdata'], 'name', 'num', ['机构编码', '机构名称'], '总回访数为{point.y}次');
+            initchart(spotchartcfg, '会员回访情况', '回访数', '社区', 'spottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0);
+
+            var healthspotchartcfg = getData(data['healthspotdata'], 'name', 'num', ['机构编码', '机构名称'], '总回访数为{point.y}次');
+            initchart(healthspotchartcfg, '档案回访情况', '回访数', '社区', 'healthspottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0);
+
+            var healthbusinessdata = getData(data['healthbusinessdata'], 'name', 'num', ['机构编码', '机构名称'], '总业务数为{point.y}次');
+            initchart(healthbusinessdata, '业务开展情况', '业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0);
+
+
             $(".member").tabs();
             $(".detailtr").tooltip({content:gettext,track :true,tooltipClass:'mytooltip'});
 //            $(".detailtr").tooltip("open");
@@ -433,6 +536,19 @@
 
     function getincome(data){
         return '总充值金额为￥'+data.y+"元";
+    }
+
+    function getconsume(data){
+        return '总消费金额为￥'+data.y+"元";
+    }
+    function gethealthfile(data){
+        return '总档案数为￥'+data.y+"元";
+    }
+    function getspot(data){
+        return '总回访数为￥'+data.y+"元";
+    }
+    function gethealthbusiness(data){
+        return '总业务数为￥'+data.y+"元";
     }
 
     function gettext(obj){
