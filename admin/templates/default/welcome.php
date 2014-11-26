@@ -542,13 +542,13 @@
         return '总消费金额为￥'+data.y+"元";
     }
     function gethealthfile(data){
-        return '总档案数为￥'+data.y+"元";
+        return '总档案数为'+data.y+"份";
     }
     function getspot(data){
-        return '总回访数为￥'+data.y+"元";
+        return '总回访数为'+data.y+"次";
     }
     function gethealthbusiness(data){
-        return '总业务数为￥'+data.y+"元";
+        return '总业务数为'+data.y+"次";
     }
 
     function gettext(obj){
