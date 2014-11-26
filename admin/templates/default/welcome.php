@@ -136,6 +136,25 @@
         text-align: left;
         text-indent: 20px;
     }
+    .rightpanel{
+        position: absolute;
+        right:10px;
+        /*width:300px;*/
+        padding:5px;
+    }
+    .selectradio{
+        display: none;
+    }
+    .selectradio + label{
+        color:#008000;
+    }
+
+    .selectradio:checked + label{
+        color:red;
+    }
+    .member{
+        position: relative;
+    }
 </style>
 <div class="page">
     <div class="fixed-bar">
@@ -155,7 +174,6 @@
             </div>
             <div id="orgtabs-3" class="showdiv">
                 <h1 style="text-align: center">社区建设</h1>
-
             </div>
             </dt>
             <dd>
@@ -165,9 +183,17 @@
                     <li class="w34pre none"><a href="#orgtabs-3">列表</a></li>
                 </ul>
             </dd>
-
         </dl>
         <dl class="member">
+            <div class="rightpanel" text="sale">
+                <input type="radio" class="selectradio" onclick="updatesale(this)" id="sale_id1" name="sale_id" value="1" checked><label for="sale_id1">全部</label>
+                <input type="radio" class="selectradio" onclick="updatesale(this)" id="sale_id2" name="sale_id" value="2"><label for="sale_id2">今天</label>
+                <input type="radio" class="selectradio" onclick="updatesale(this)" id="sale_id3" name="sale_id" value="3"><label for="sale_id3">本月</label>
+                <input type="radio" class="selectradio" onclick="updatesale(this)" id="sale_id4" name="sale_id" value="4"><label for="sale_id4">本年</label>
+                <input type="radio" class="selectradio" onclick="updatesale(this)" id="sale_id5" name="sale_id" value="5"><label for="sale_id5">昨天</label>
+                <input type="radio" class="selectradio" onclick="updatesale(this)" id="sale_id6" name="sale_id" value="6"><label for="sale_id6">上月</label>
+                <input type="radio" class="selectradio" onclick="updatesale(this)" id="sale_id7" name="sale_id" value="7"><label for="sale_id7">上年</label>
+            </div>
             <dt>
             <div id="saletabs-1" class="showdiv">
 
@@ -189,6 +215,15 @@
 
         </dl>
         <dl class="member">
+            <div class="rightpanel" text="member">
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id1" name="member_id" value="1" checked><label for="member_id1">全部</label>
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id2" name="member_id" value="2"><label for="member_id2">今天</label>
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id3" name="member_id" value="3"><label for="member_id3">本月</label>
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id4" name="member_id" value="4"><label for="member_id4">本年</label>
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id5" name="member_id" value="5"><label for="member_id5">昨天</label>
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id6" name="member_id" value="6"><label for="member_id6">上月</label>
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id7" name="member_id" value="7"><label for="member_id7">上年</label>
+            </div>
             <dt>
             <div id="membertabs-1" class="showdiv">
 
@@ -210,6 +245,15 @@
 
         </dl>
         <dl class="member">
+            <div class="rightpanel" text="healthfile">
+                <input type="radio" class="selectradio" onclick="updatehealthfile(this)" id="healthfile_id1" name="healthfile_id" value="1" checked><label for="healthfile_id1">全部</label>
+                <input type="radio" class="selectradio" onclick="updatehealthfile(this)" id="healthfile_id2" name="healthfile_id" value="2"><label for="healthfile_id2">今天</label>
+                <input type="radio" class="selectradio" onclick="updatehealthfile(this)" id="healthfile_id3" name="healthfile_id" value="3"><label for="healthfile_id3">本月</label>
+                <input type="radio" class="selectradio" onclick="updatehealthfile(this)" id="healthfile_id4" name="healthfile_id" value="4"><label for="healthfile_id4">本年</label>
+                <input type="radio" class="selectradio" onclick="updatehealthfile(this)" id="healthfile_id5" name="healthfile_id" value="5"><label for="healthfile_id5">昨天</label>
+                <input type="radio" class="selectradio" onclick="updatehealthfile(this)" id="healthfile_id6" name="healthfile_id" value="6"><label for="healthfile_id6">上月</label>
+                <input type="radio" class="selectradio" onclick="updatehealthfile(this)" id="healthfile_id7" name="healthfile_id" value="7"><label for="healthfile_id7">上年</label>
+            </div>
             <dt>
             <div id="healthtabs-1" class="showdiv">
 
@@ -231,6 +275,15 @@
 
         </dl>
         <dl class="member">
+            <div class="rightpanel" text="consume">
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id1" name="consume_id" value="1" checked><label for="consume_id1">全部</label>
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id2" name="consume_id" value="2"><label for="consume_id2">今天</label>
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id3" name="consume_id" value="3"><label for="consume_id3">本月</label>
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id4" name="consume_id" value="4"><label for="consume_id4">本年</label>
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id5" name="consume_id" value="5"><label for="consume_id5">昨天</label>
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id6" name="consume_id" value="6"><label for="consume_id6">上月</label>
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id7" name="consume_id" value="7"><label for="consume_id7">上年</label>
+            </div>
             <dt>
             <div id="consumetabs-1" class="showdiv">
 
@@ -253,6 +306,15 @@
         </dl>
 
         <dl class="member">
+            <div class="rightpanel" text="healthfilespot">
+                <input type="radio" class="selectradio" onclick="updatehealthspot(this)" id="healthspot_id1" name="healthspot_id" value="1" checked><label for="healthspot_id1">全部</label>
+                <input type="radio" class="selectradio" onclick="updatehealthspot(this)" id="healthspot_id2" name="healthspot_id" value="2"><label for="healthspot_id2">今天</label>
+                <input type="radio" class="selectradio" onclick="updatehealthspot(this)" id="healthspot_id3" name="healthspot_id" value="3"><label for="healthspot_id3">本月</label>
+                <input type="radio" class="selectradio" onclick="updatehealthspot(this)" id="healthspot_id4" name="healthspot_id" value="4"><label for="healthspot_id4">本年</label>
+                <input type="radio" class="selectradio" onclick="updatehealthspot(this)" id="healthspot_id5" name="healthspot_id" value="5"><label for="healthspot_id5">昨天</label>
+                <input type="radio" class="selectradio" onclick="updatehealthspot(this)" id="healthspot_id6" name="healthspot_id" value="6"><label for="healthspot_id6">上月</label>
+                <input type="radio" class="selectradio" onclick="updatehealthspot(this)" id="healthspot_id7" name="healthspot_id" value="7"><label for="healthspot_id7">上年</label>
+            </div>
             <dt>
             <div id="healthspottabs-1" class="showdiv">
 
@@ -275,6 +337,15 @@
         </dl>
 
         <dl class="member">
+            <div class="rightpanel" text="spot">
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id1" name="spot_id" value="1" checked><label for="spot_id1">全部</label>
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id2" name="spot_id" value="2"><label for="spot_id2">今天</label>
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id3" name="spot_id" value="3"><label for="spot_id3">本月</label>
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id4" name="spot_id" value="4"><label for="spot_id4">本年</label>
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id5" name="spot_id" value="5"><label for="spot_id5">昨天</label>
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id6" name="spot_id" value="6"><label for="spot_id6">上月</label>
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id7" name="spot_id" value="7"><label for="spot_id7">上年</label>
+            </div>
             <dt>
             <div id="spottabs-1" class="showdiv">
 
@@ -297,6 +368,15 @@
         </dl>
 
         <dl class="member">
+            <div class="rightpanel" text="healthbusiness">
+                <input type="radio" class="selectradio" onclick="updatehealthbusiness(this)" id="healthbusiness_id1" name="healthbusiness_id" value="1" checked><label for="healthbusiness_id1">全部</label>
+                <input type="radio" class="selectradio" onclick="updatehealthbusiness(this)" id="healthbusiness_id2" name="healthbusiness_id" value="2"><label for="healthbusiness_id2">今天</label>
+                <input type="radio" class="selectradio" onclick="updatehealthbusiness(this)" id="healthbusiness_id3" name="healthbusiness_id" value="3"><label for="healthbusiness_id3">本月</label>
+                <input type="radio" class="selectradio" onclick="updatehealthbusiness(this)" id="healthbusiness_id4" name="healthbusiness_id" value="4"><label for="healthbusiness_id4">本年</label>
+                <input type="radio" class="selectradio" onclick="updatehealthbusiness(this)" id="healthbusiness_id5" name="healthbusiness_id" value="5"><label for="healthbusiness_id5">昨天</label>
+                <input type="radio" class="selectradio" onclick="updatehealthbusiness(this)" id="healthbusiness_id6" name="healthbusiness_id" value="6"><label for="healthbusiness_id6">上月</label>
+                <input type="radio" class="selectradio" onclick="updatehealthbusiness(this)" id="healthbusiness_id7" name="healthbusiness_id" value="7"><label for="healthbusiness_id7">上年</label>
+            </div>
             <dt>
             <div id="healthbusinesstabs-1" class="showdiv">
 
@@ -379,6 +459,7 @@
          ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
              ['#7cb5ec', '#434348', '#90ed7d', '#f7a35c', '#8085e9',     '#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1']
     ];
+    var charts = {};
     $(document).ready(function () {
         $.getJSON("index.php?act=dashboard&op=chart", function (data) {
             console.log(data);
@@ -409,10 +490,8 @@
             var healthbusinessdata = getData(data['healthbusinessdata'], 'name', 'num', ['机构编码', '机构名称'], '总业务数为{point.y}次');
             initchart(healthbusinessdata, '业务开展情况', '业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0);
 
-
             $(".member").tabs();
             $(".detailtr").tooltip({content:gettext,track :true,tooltipClass:'mytooltip'});
-//            $(".detailtr").tooltip("open");
         });
 
     });
@@ -431,7 +510,7 @@
         console.log(colorindex);
         console.log(colors);
         //初始化饼图
-        var orgchart_1 = new Highcharts.Chart({
+        charts[titletext+'_1'] = new Highcharts.Chart({
             chart: {
                 renderTo: tabname + '-1',
                 type: 'pie',
@@ -465,7 +544,7 @@
             }]
         });
         //初始化柱状图
-        var orgchart_2 = new Highcharts.Chart({
+        charts[titletext+'_2'] = new Highcharts.Chart({
             chart: {
                 renderTo: tabname + '-2',
                 type: 'column',
@@ -508,6 +587,7 @@
         });
         //初始化列表
         var html = '';
+        var sum = 0;
         for (var i = 0; i < orgchartcfg.piedata.length; i++) {
             console.log(orgchartcfg.piedata[i]);
             var txt = '';
@@ -520,12 +600,111 @@
             html += '<tr class="detailtr" title="" counttext="'+txt+'" count="'+orgchartcfg.piedata[i].details.length+'" text=\''+escape(orgchartcfg.piedata[i].detailhtml)+'\'>' +
             '<td class="head" >' + orgchartcfg.piedata[i].name + '</td>' +
             '<td>' + orgchartcfg.piedata[i].y + '</td></tr>';
+            sum +=orgchartcfg.piedata[i].y;
         }
+        html+= '<tr><td class="head" style="font-weight: bold;font-size: 16px;" >合计:</td><td>' + sum + '</td></tr>';
         html = '<span style="text-align: center;font-size:18px;margin-top: 30px;">' + titletext + '</span><table class="listtable"><tr><th>' + ytext + '</th><th>' + numtext + '</th></tr>' + html + '</table>';
 //        $( document ).tooltip();
 
         $("#" + tabname + "-3").html(html);
     }
+
+    function updatesale(obj){
+        var opt = $(obj).parent().attr("text");
+        var type = $(obj).val();
+        $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
+            console.log(data);
+            var salechartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总销售金额为￥{point.y}元');
+            updatechart(salechartcfg, '销售情况', '销售金额', '社区', 'saletabs', getmoney,{ pointFormat: '总销售金额为￥{point.y}元',useHTML: true},0);
+        });
+    }
+    function updatemember(obj){
+        var opt = $(obj).parent().attr("text");
+        var type = $(obj).val();
+        $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
+            console.log(data);
+            var memberchartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总充值金额为￥{point.y}元');
+            updatechart(memberchartcfg, '会员充值情况', '充值金额', '社区', 'membertabs', getincome,{ pointFormat: '总充值金额为￥{point.y}元',useHTML: true},0);
+        });
+    }
+
+     function updateconsume(obj){
+        var opt = $(obj).parent().attr("text");
+        var type = $(obj).val();
+        $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
+            console.log(data);
+            var consumechartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总消费金额为￥{point.y}元');
+            updatechart(consumechartcfg, '会员消费情况', '消费金额', '社区', 'consumetabs', getconsume,{ pointFormat: '总消费金额为￥{point.y}元',useHTML: true},0);
+        });
+    }
+    function updatehealthfile(obj){
+        var opt = $(obj).parent().attr("text");
+        var type = $(obj).val();
+        $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
+            console.log(data);
+            var healthfilechartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总档案数为{point.y}份');
+            updatechart(healthfilechartcfg, '健康档案', '档案数量', '社区', 'healthtabs', gethealthfile,{ pointFormat: '总档案数为{point.y}份',useHTML: true},0);
+        });
+    }
+    function updatespot(obj){
+        var opt = $(obj).parent().attr("text");
+        var type = $(obj).val();
+        $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
+            console.log(data);
+            var spotchartcfg = getData(data,  'name', 'num', ['机构编码', '机构名称'], '总回访数为{point.y}次');
+            updatechart(spotchartcfg, '会员回访情况', '回访数', '社区', 'spottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0);
+        });
+    }
+
+    function updatehealthspot(obj){
+        var opt = $(obj).parent().attr("text");
+        var type = $(obj).val();
+        $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
+            console.log(data);
+            var healthspotchartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总回访数为{point.y}次');
+            updatechart(healthspotchartcfg, '档案回访情况', '回访数', '社区', 'healthspottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0);
+        });
+    }
+
+    function updatehealthbusiness(obj){
+        var opt = $(obj).parent().attr("text");
+        var type = $(obj).val();
+        $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
+            console.log(data);
+            var healthbusinessdata = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总业务数为{point.y}次');
+            updatechart(healthbusinessdata, '业务开展情况', '业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0);
+        });
+    }
+
+    function updatechart(data, titletext, numtext, ytext, tabname, counttext,tooltip,colorindex) {
+        //更新饼图
+        charts[titletext+'_1'].series[0].setData(data.piedata);
+        //更新柱状图
+        charts[titletext+'_2'].series[0].setData(data.piedata);
+        //初更新列表
+        var html = '';
+        var sum = 0;
+        var piedata = data.piedata;
+        for (var i = 0; i < piedata.length; i++) {
+            console.log(piedata[i]);
+            var txt = '';
+            console.log(typeof(counttext));
+            if(typeof(counttext) =='function'){
+                txt = counttext(piedata[i]);
+            }else{
+                txt = counttext;
+            }
+            html += '<tr class="detailtr" title="" counttext="'+txt+'" count="'+piedata[i].details.length+'" text=\''+escape(piedata[i].detailhtml)+'\'>' +
+            '<td class="head" >' + piedata[i].name + '</td>' +
+            '<td>' + piedata[i].y + '</td></tr>';
+            sum +=piedata[i].y;
+        }
+        html+= '<tr><td class="head" style="font-weight: bold;font-size: 16px;" >合计:</td><td>' + sum + '</td></tr>';
+        html = '<span style="text-align: center;font-size:18px;margin-top: 30px;">' + titletext + '</span><table class="listtable"><tr><th>' + ytext + '</th><th>' + numtext + '</th></tr>' + html + '</table>';
+        $( document ).tooltip();
+        $("#" + tabname + "-3").html(html);
+    }
+
     function gettotal(data){
         console.log(data);
         return data;
@@ -559,35 +738,36 @@
         var ret = {colcat: [], coldata: [], piedata: []};
         for (var i = 0; i < data.length; i++) {
             console.log(data[i]);
-            ret.colcat.push(data[i][catname]);
-            ret.coldata.push(parseFloat(data[i][numname]));
-            var html = '';
-            var count = 0;
-            if (data[i]['details'] && data[i]['details'].length && data[i]['details'].length > 0) {
-                html = '<table class="detailtable"><tr>';
-                for (var j = 0; j < detailtitles.length; j++) {
-                    html += '<th nowrap>' + detailtitles[j] + '</th>';
-                }
-                html += '</tr>';
-                for (var j = 0; j < data[i]['details'].length; j++) {
-                    count++;
-                    var item = data[i]['details'][j];
-                    html += '<tr>';
-                    for (var m = 0; m < item.length; m++) {
-                        html += '<td >' + item[m] + '</td>';
+            if(data[i][catname]!='总计:'){
+                ret.colcat.push(data[i][catname]);
+                ret.coldata.push(parseFloat(data[i][numname]));
+                var html = '';
+                var count = 0;
+                if (data[i]['details'] && data[i]['details'].length && data[i]['details'].length > 0) {
+                    html = '<table class="detailtable"><tr>';
+                    for (var j = 0; j < detailtitles.length; j++) {
+                        html += '<th nowrap>' + detailtitles[j] + '</th>';
                     }
                     html += '</tr>';
-                }
-                html += '</table>';
+                    for (var j = 0; j < data[i]['details'].length; j++) {
+                        count++;
+                        var item = data[i]['details'][j];
+                        html += '<tr>';
+                        for (var m = 0; m < item.length; m++) {
+                            html += '<td >' + item[m] + '</td>';
+                        }
+                        html += '</tr>';
+                    }
+                    html += '</table>';
+                };
+                ret.piedata.push({
+                    name: data[i][catname],
+                    counttext: counttext,
+                    y: parseFloat(data[i][numname]),
+                    details: data[i]['details'],
+                    detailhtml: html
+                })
             }
-            ;
-            ret.piedata.push({
-                name: data[i][catname],
-                counttext: counttext,
-                y: parseFloat(data[i][numname]),
-                details: data[i]['details'],
-                detailhtml: html
-            })
         }
         return ret;
     }

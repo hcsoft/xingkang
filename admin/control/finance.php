@@ -220,6 +220,112 @@ class financeControl extends SystemControl
         Tpl::showpage('finance.saledetail');
     }
 
+    public function saledetailmanagerOp()
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        //处理数据
+        $page = new Page();
+        $page->setEachNum(10);
+        $page->setNowPage($_REQUEST["curpage"]);
+        $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
+        $endnum = $page->getEachNum() * ($page->getNowPage());
+        $sql = ' from Center_ClinicSale a
+                left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
+                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID
+                , Organization org
+                where   a.orgid = org.id  ';
+        if ($_GET['itemtype']) {
+            $sql = $sql . ' and a.itemtype =\'' . $_GET['itemtype'] . '\'';
+        }
+
+        if ($_GET['query_start_time']) {
+            $sql = $sql . ' and a.dSale_MakeDate >=\'' . $_GET['query_start_time'] . '\'';
+        }
+
+        if ($_GET['query_end_time']) {
+            $sql = $sql . ' and a.dSale_MakeDate < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
+        }
+
+        if ($_GET['orgids']) {
+            $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+
+        }
+        if ($_GET['search_goods_name'] != '') {
+            $sql = $sql . ' and a.itemname like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+        }
+
+        if ($_GET['classtype'] != '') {
+            if($_GET['classtype'] == 'null'){
+                $sql = $sql . ' and good.iDrug_StatClass  is null ' ;
+            }else{
+                $sql = $sql . ' and good.iDrug_StatClass =  ' .  trim($_GET['classtype']) ;
+            }
+        }
+
+        if (intval($_GET['search_commonid']) > 0) {
+            $sql = $sql . ' and a.iDrug_ID = ' . intval($_GET['search_commonid']) ;
+        }
+        //处理树的参数
+        $checkednode = $_GET['checkednode'];
+        if ($checkednode && isset($checkednode) && count($checkednode) > 0) {
+            $sql = $sql . " and a.SaleOrgID  in ($checkednode) ";
+        }
+
+        $countsql = " select count(*)  $sql ";
+        $stmt = $conn->query($countsql);
+        $total = $stmt->fetch(PDO::FETCH_NUM);
+        $page->setTotalNum($total[0]);
+        $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
+                        a.iDrug_ID,
+                        a.sSale_id ,
+                        a.dSale_MakeDate,
+                        isnull(good.sDrug_TradeName,a.itemname) as sDrug_TradeName ,
+                        a.ItemType ,
+                        good.sDrug_Spec ,
+                        good.sDrug_Unit ,
+                        good.sDrug_Brand ,
+                        a.fSale_Num ,
+                        a.fSale_TaxPrice ,
+                        a.fSale_TaxFactMoney ,
+                        org.name,
+                        a.StatSection,
+                        a.DoctorName,
+                        a.sClinicKey ,
+                        a.ida_id,
+                        a.orgid
+                        $sql order by  a.dSale_MakeDate desc)zzzz where rownum>$startnum )zzzzz order by rownum";
+//        echo $tsql;
+        $exportsql = "SELECT  row_number() over( order by  a.dSale_MakeDate desc) rownum,
+                        a.sSale_id ,
+                        a.dSale_MakeDate,
+                        good.sDrug_TradeName ,
+                        a.ItemType ,
+                        good.sDrug_Spec ,
+                        good.sDrug_Unit ,
+                        good.sDrug_Brand ,
+                        a.fSale_Num ,
+                        a.fSale_TaxPrice ,
+                        a.fSale_TaxFactMoney ,
+                        org.name,
+                        a.StatSection,
+                        a.DoctorName,
+                        a.sClinicKey ,
+                        a.ida_id
+                        $sql order by  a.dSale_MakeDate desc ";
+        if(isset($_GET['export']) && $_GET['export']=='true'){
+            $this->exportxlsx($exportsql,array('序号','单据编号','制单日期','项目名称','项目类型','规格','单位','产地/厂商','数量','单价','金额','机构','科室','医生','就诊流水','处方流水'),'销售明细');
+        }
+        $stmt = $conn->query($tsql);
+        $data_list = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($data_list, $row);
+        }
+        Tpl::output('data_list', $data_list);
+        //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
+        Tpl::output('page', $page->show());
+        Tpl::showpage('finance.saledetailmanager');
+    }
+
     public function financesumOp()
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');

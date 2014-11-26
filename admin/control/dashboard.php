@@ -152,9 +152,10 @@ class dashboardControl extends SystemControl{
 		exit;
 	}
 
-    public function chartOp(){
-        $statistics = array();
+    private function orgchartOp($type){
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+
+
         //查询社区数量
         $orgsql = 'select c.id ,  c.name , count(*) as num
                     from map_org_wechat a, Organization b , District c
@@ -171,69 +172,154 @@ class dashboardControl extends SystemControl{
             $row->details =$detail_list;
             array_push($orgdata_list, $row);
         }
+        return $orgdata_list;
+    }
 
-        $statistics['orgdata'] = $orgdata_list;
+
+    private function salechartOp($type){
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询销售情况
-        $sql = 'select  b.id , b.name , sum(fCO_IncomeMoney) as num
-                    from  Center_CheckOut checkout left join  Organization b  on checkout.OrgID = b.id
-                    where checkout.OrgID in (select orgid from map_org_wechat)
-              group by b.id , b.name order by sum(fCO_IncomeMoney) desc   ';
+        $datesql = '';
+        if($type=='2'){
+            $datesql = ' and checkout.dCO_Date>= \''.date('Y-m-d',time()). '\' and checkout.dCO_Date< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='3'){
+            $datesql = ' and checkout.dCO_Date>= \''.date('Y-m-1',time()). '\' and checkout.dCO_Date< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='4'){
+            $datesql = ' and checkout.dCO_Date>= \''.date('Y-1-1',time()). '\' and checkout.dCO_Date< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='5'){
+            $datesql = ' and checkout.dCO_Date>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.dCO_Date< \''.date('Y-m-d',time()).'\'';
+        }else if($type=='6'){
+            $datesql = ' and checkout.dCO_Date>= \''.date('Y-m-d',strtotime('-1 month')). '\' and checkout.dCO_Date< \''.date('Y-m-1',time()).'\'';
+        }else if($type=='7'){
+            $datesql = ' and checkout.dCO_Date>= \''.date('Y-m-d',strtotime('-1 year')). '\' and checkout.dCO_Date< \''.date('Y-1-1',time()).'\'';
+        }
+        $sql = "select  b.id , b.name , sum(fCO_IncomeMoney) as num
+                    from  Center_CheckOut checkout left join  Organization b   on checkout.OrgID = b.id
+                    where checkout.OrgID in (select orgid from map_org_wechat) $datesql
+              group by b.id , b.name order by sum(fCO_IncomeMoney) desc   ";
+//        throw new Exception($sql);
+
         $stmt = $conn->query($sql);
         $salelist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             $row->details= array();
             array_push($salelist, $row);
         }
-        $statistics['saledata'] = $salelist;
+        return $salelist;
+    }
 
+    private function memberchartOp($type){
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询充值情况
-        $sql = 'select  b.id , b.name , sum(RechargeMoney) as num
+        $datesql = '';
+        if($type=='2'){
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',time()). '\' and checkout.RechargeDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='3'){
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-1',time()). '\' and checkout.RechargeDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='4'){
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-1-1',time()). '\' and checkout.RechargeDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='5'){
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.RechargeDate< \''.date('Y-m-d',time()).'\'';
+        }else if($type=='6'){
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 month')). '\' and checkout.RechargeDate< \''.date('Y-m-1',time()).'\'';
+        }else if($type=='7'){
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and checkout.RechargeDate< \''.date('Y-1-1',time()).'\'';
+        }
+        $sql = "select  b.id , b.name , sum(RechargeMoney) as num
                     from  center_MemberRecharge checkout left join  Organization b  on checkout.OrgID = b.id
-                    where checkout.OrgID in (select orgid from map_org_wechat) and checkout.[type]=1
-              group by b.id , b.name having sum(RechargeMoney) >0 order by sum(RechargeMoney) desc   ';
+                    where checkout.OrgID in (select orgid from map_org_wechat) and checkout.[type]=1 $datesql
+              group by b.id , b.name having sum(RechargeMoney) >0 order by sum(RechargeMoney) desc   ";
         $stmt = $conn->query($sql);
         $memberlist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             $row->details= array();
             array_push($memberlist, $row);
         }
-        $statistics['memberdata'] = $memberlist;
+        return $memberlist;
+    }
 
+    private function consumechartOp($type){
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询充值情况
-        $sql = 'select  b.id , b.name , sum(-RechargeMoney) as num
+        $datesql = '';
+        if($type=='2'){
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',time()). '\' and checkout.RechargeDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='3'){
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-1',time()). '\' and checkout.RechargeDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='4'){
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-1-1',time()). '\' and checkout.RechargeDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='5'){
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.RechargeDate< \''.date('Y-m-d',time()).'\'';
+        }else if($type=='6'){
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 month')). '\' and checkout.RechargeDate< \''.date('Y-m-1',time()).'\'';
+        }else if($type=='7'){
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and checkout.RechargeDate< \''.date('Y-1-1',time()).'\'';
+        }
+        $sql = "select  b.id , b.name , sum(-RechargeMoney) as num
                     from  center_MemberRecharge checkout left join  Organization b  on checkout.OrgID = b.id
-                    where checkout.OrgID in (select orgid from map_org_wechat) and checkout.[type]=2
-              group by b.id , b.name having sum(-RechargeMoney) >0 order by sum(-RechargeMoney) desc   ';
+                    where checkout.OrgID in (select orgid from map_org_wechat) and checkout.[type]=2 $datesql
+              group by b.id , b.name having sum(-RechargeMoney) >0 order by sum(-RechargeMoney) desc   ";
         $stmt = $conn->query($sql);
         $consumelist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             $row->details= array();
             array_push($consumelist, $row);
         }
+        return $consumelist;
+    }
 
-        $statistics['consumedata'] = $consumelist;
-
-
+    private function spotchartOp($type){
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询回访情况
-        $sql = 'select  b.id , b.name , count(1) as num
+        $datesql = '';
+        if($type=='2'){
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',time()). '\' and checkout.checkdate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='3'){
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-1',time()). '\' and checkout.checkdate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='4'){
+            $datesql = ' and checkout.checkdate>= \''.date('Y-1-1',time()). '\' and checkout.checkdate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='5'){
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.checkdate< \''.date('Y-m-d',time()).'\'';
+        }else if($type=='6'){
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 month')). '\' and checkout.checkdate< \''.date('Y-m-1',time()).'\'';
+        }else if($type=='7'){
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and checkout.checkdate< \''.date('Y-1-1',time()).'\'';
+        }
+        $sql = "select  b.id , b.name , count(1) as num
                     from  spotcheck_main checkout left join  Organization b  on checkout.OrgID = b.id
-                    where checkout.OrgID in (select orgid from map_org_wechat) and checktype like \'5%\'
-              group by b.id , b.name having count(1)  >0 order by count(1)  desc   ';
+                    where checkout.OrgID in (select orgid from map_org_wechat) and checktype like '5%' $datesql
+              group by b.id , b.name having count(1)  >0 order by count(1)  desc   ";
+
         $stmt = $conn->query($sql);
         $spotlist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             $row->details= array();
             array_push($spotlist, $row);
         }
+        return $spotlist;
+    }
 
-        $statistics['spotdata'] = $spotlist;
-
-
+    private function healthfilechartOp($type){
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询健康档案情况
-        $sql = 'select  b.id , b.name , count(1) as num
+        $datesql = '';
+        if($type=='2'){
+            $datesql = ' and hf.InputDate>= \''.date('Y-m-d',time()). '\' and hf.InputDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='3'){
+            $datesql = ' and hf.InputDate>= \''.date('Y-m-1',time()). '\' and hf.InputDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='4'){
+            $datesql = ' and hf.InputDate>= \''.date('Y-1-1',time()). '\' and hf.InputDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='5'){
+            $datesql = ' and hf.InputDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and hf.InputDate< \''.date('Y-m-d',time()).'\'';
+        }else if($type=='6'){
+            $datesql = ' and hf.InputDate>= \''.date('Y-m-d',strtotime('-1 month')). '\' and hf.InputDate< \''.date('Y-m-1',time()).'\'';
+        }else if($type=='7'){
+            $datesql = ' and hf.InputDate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and hf.InputDate< \''.date('Y-1-1',time()).'\'';
+        }
+        $sql = "select  b.id , b.name , count(1) as num
                     from  healthfile hf , sam_taxempcode checkout left join  Organization b  on checkout.org_id = b.id
-                    where hf.inputpersonid = checkout.loginname and checkout.org_id in (select orgid from map_org_wechat)
-              group by b.id , b.name having count(1)  >0 order by count(1)  desc   ';
+                    where hf.inputpersonid = checkout.loginname and checkout.org_id in (select orgid from map_org_wechat) $datesql
+              group by b.id , b.name having count(1)  >0 order by count(1)  desc  ";
         $stmt = $conn->query($sql);
         $healthfilelist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
@@ -241,13 +327,30 @@ class dashboardControl extends SystemControl{
             array_push($healthfilelist, $row);
         }
 
-        $statistics['healthdata'] = $healthfilelist;
+        return $healthfilelist;
+    }
 
+    private function healthfilespotchartOp($type){
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询健康档案回访情况
-        $sql = 'select  b.id , b.name , count(1) as num
+        $datesql = '';
+        if($type=='2'){
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',time()). '\' and checkout.checkdate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='3'){
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-1',time()). '\' and checkout.checkdate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='4'){
+            $datesql = ' and checkout.checkdate>= \''.date('Y-1-1',time()). '\' and checkout.checkdate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='5'){
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.checkdate< \''.date('Y-m-d',time()).'\'';
+        }else if($type=='6'){
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 month')). '\' and checkout.checkdate< \''.date('Y-m-1',time()).'\'';
+        }else if($type=='7'){
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and checkout.checkdate< \''.date('Y-1-1',time()).'\'';
+        }
+        $sql = "select  b.id , b.name , count(1) as num
                     from  spotcheck_main checkout left join  Organization b  on checkout.OrgID = b.id
-                    where checkout.OrgID in (select orgid from map_org_wechat) and checktype like \'0%\'
-              group by b.id , b.name having count(1)  >0 order by count(1)  desc   ';
+                    where checkout.OrgID in (select orgid from map_org_wechat) and checktype like '0%' $datesql
+              group by b.id , b.name having count(1)  >0 order by count(1)  desc   ";
         $stmt = $conn->query($sql);
         $healthfilespotlist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
@@ -255,57 +358,85 @@ class dashboardControl extends SystemControl{
             array_push($healthfilespotlist, $row);
         }
 
-        $statistics['healthspotdata'] = $healthfilespotlist;
+        return $healthfilespotlist;
+    }
 
+    private  function healthbusinesschartOp($type){
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询业务开展数量情况
-        $sql = 'select id , name ,sum(num) num
+        $datesql = '';
+        if($type=='2'){
+            $datesql = ' and a.InputDate>= \''.date('Y-m-d',time()). '\' and a.InputDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='3'){
+            $datesql = ' and a.InputDate>= \''.date('Y-m-1',time()). '\' and a.InputDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='4'){
+            $datesql = ' and a.InputDate>= \''.date('Y-1-1',time()). '\' and a.InputDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='5'){
+            $datesql = ' and a.InputDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and a.InputDate< \''.date('Y-m-d',time()).'\'';
+        }else if($type=='6'){
+            $datesql = ' and a.InputDate>= \''.date('Y-m-d',strtotime('-1 month')). '\' and a.InputDate< \''.date('Y-m-1',time()).'\'';
+        }else if($type=='7'){
+            $datesql = ' and a.InputDate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and a.InputDate< \''.date('Y-1-1',time()).'\'';
+        }
+        $sql = "select id , name ,sum(num) num
                 from(
                 select c.id , c.name ,count(1) num from MedicalExam  a  , sam_taxempcode b ,   Organization c
                 where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
                 group by c.id , c.name
                 union all
                 select c.id , c.name ,count(1) num from HealthFileMaternal  a  , sam_taxempcode b ,   Organization c
                 where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
                 group by c.id , c.name
                 union all
                 select c.id , c.name ,count(1) num from FirstVistBeforeBorn  a  , sam_taxempcode b ,   Organization c
                 where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
                 group by c.id , c.name
                 union all
                 select c.id , c.name ,count(1) num from VisitBeforeBorn  a  , sam_taxempcode b ,   Organization c
                 where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
                 group by c.id , c.name
                 union all
-                select c.id , c.name ,count(1) num from VisitBeforeBorn  a  , sam_taxempcode b ,   Organization c
+                select c.id , c.name ,count(1) num from VisitAfterBorn  a  , sam_taxempcode b ,   Organization c
                 where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
                 group by c.id , c.name
                 union all
                 select c.id , c.name ,count(1) num from HealthFileChildren  a  , sam_taxempcode b ,   Organization c
                 where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
                 group by c.id , c.name
                 union all
                 select c.id , c.name ,count(1) num from ChildrenMediExam  a  , sam_taxempcode b ,   Organization c
                 where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
                 group by c.id , c.name
                 union all
                 select c.id , c.name ,count(1) num from ChildrenMediExam3_6  a  , sam_taxempcode b ,   Organization c
                 where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
                 group by c.id , c.name
                 union all
                 select c.id , c.name ,count(1) num from HypertensionVisit  a  , sam_taxempcode b ,   Organization c
                 where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
                 group by c.id , c.name
                 union all
                 select c.id , c.name ,count(1) num from DiabetesVisit  a  , sam_taxempcode b ,   Organization c
                 where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
                 group by c.id , c.name
                 union all
                 select c.id , c.name ,count(1) num from FuriousVisit  a  , sam_taxempcode b ,   Organization c
                 where a.InputPersonID = b.loginname and   b.org_id = c.id  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
                 group by c.id , c.name
                 ) uniontable
                 group by id ,name
-                order by sum(num) desc   ';
+                order by sum(num) desc   ";
         $stmt = $conn->query($sql);
         $healthbusinesslist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
@@ -313,9 +444,34 @@ class dashboardControl extends SystemControl{
             array_push($healthbusinesslist, $row);
         }
 
-        $statistics['healthbusinessdata'] = $healthbusinesslist;
+        return $healthbusinesslist;
+    }
 
+    public function chartOp(){
+        $statistics = array();
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        //查询社区数量
+         $statistics['orgdata'] = $this->orgchartOp('1');
+        //查询销售情况
+        $statistics['saledata'] = $this->salechartOp('1');
+        //查询充值情况
+        $statistics['memberdata'] = $this->memberchartOp('1');
+        //查询充值情况
+        $statistics['consumedata'] = $this->consumechartOp('1');
+        //查询回访情况
+        $statistics['spotdata'] = $this->spotchartOp('1');
+        //查询健康档案情况
+        $statistics['healthdata'] = $this->healthfilechartOp('1');
+        //查询健康档案回访情况
+        $statistics['healthspotdata'] = $this->healthfilespotchartOp('1');
+        //查询业务开展数量情况
+        $statistics['healthbusinessdata'] = $this->healthbusinesschartOp('1');
         echo json_encode($statistics);
         exit;
+    }
+
+    public function chartdetailOp(){
+        $func = $_GET['opt'].'chartOp';
+        echo json_encode($this->$func($_GET['type']));
     }
 }
