@@ -165,7 +165,7 @@ class communityControl extends SystemControl
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
-        $sql = 'from Center_CheckOut a  , Center_codes ico, Center_codes gather,Center_codes state,Center_codes tag,
+        $sql = 'from Center_CheckOut a  left join Center_ClinicLog log on a.sLogKey = log.ClinicKey , Center_codes ico, Center_codes gather,Center_codes state,Center_codes tag,
              Organization org
           where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
            and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
@@ -251,7 +251,8 @@ class communityControl extends SystemControl
                         a.fCanScale,
                         a.fCanGive,
                         a.fAddScale,
-                        org.name as 'OrgID'
+                        org.name as 'OrgID',
+                        log.sSickName
                         $sql order by  a.dCO_Date desc)zzzz where rownum>$startnum )zzzzz order by rownum";
 //        $exportsql = "SELECT  row_number() over( order by  a.dCO_Date desc) rownum,
 //                        ico.name as 'iCO_Type',
@@ -284,6 +285,7 @@ class communityControl extends SystemControl
                         a.dCO_Date '结算日期',
                         a.dCO_MakeDate '制单日期',
                         sMakePerson  '收费员',
+                        log.sSickName '病人姓名',
                         a.fCO_InComeMoney '处方金额',
                         a.fCO_Medicare '统筹支付',
                         a.fCO_Card '医保卡支付',
@@ -296,7 +298,7 @@ class communityControl extends SystemControl
 //        echo $_GET['export']=='true';
 //        echo $_GET['export'];
         if(isset($_GET['export']) && $_GET['export']=='true'){
-            $this->exportxlsx($exportsql,array('序号','类型','结算日期','制单日期','收费员','处方金额','统筹支付','医保卡支付','现金支付','银行卡付','预存下账','赠送下账','积分下账金额'),'收入明细');
+            $this->exportxlsx($exportsql,array('序号','类型','结算日期','制单日期','收费员','病人姓名','处方金额','统筹支付','医保卡支付','现金支付','银行卡付','预存下账','赠送下账','积分下账金额'),'收入明细');
         }
         $stmt = $conn->query($tsql);
         $data_list = array();

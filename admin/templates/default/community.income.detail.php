@@ -117,6 +117,7 @@
                 <th class="align-center">结算日期</th>
                 <th class="align-center">制单日期</th>
                 <th class="align-center">收费员</th>
+                <th class="align-center">病人姓名</th>
                 <th class="align-center">处方金额</th>
                 <th class="align-center">统筹支付</th>
                 <th class="align-center">医保卡支付</th>
@@ -144,6 +145,9 @@
                         </td>
                         <td class=" align-center">
                             <?php echo $v->iCO_MakePerson ?>
+                        </td>
+                        <td class=" align-center">
+                            <?php echo $v->sSickName ?>
                         </td>
                         <td class=" align-right">
                             <?php echo number_format($v->fCO_InComeMoney,2); ?>

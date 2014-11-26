@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/dashboard.php" afterPath="$PROJECT_DIR$/admin/control/dashboard.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/welcome.php" afterPath="$PROJECT_DIR$/admin/templates/default/welcome.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/community.income.detail.php" afterPath="$PROJECT_DIR$/admin/templates/default/community.income.detail.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/community.php" afterPath="$PROJECT_DIR$/admin/control/community.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -29,10 +29,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.52204835" vertical-offset="2433" max-vertical-offset="3150">
+            <state vertical-scroll-proportion="-25.086956" vertical-offset="2223" max-vertical-offset="3150">
               <caret line="200" column="0" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
               <folding>
                 <marker date="1416826633242" expanded="true" signature="5466:5675" placeholder="select c.nam..map_org_wechat..." />
@@ -52,10 +52,41 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="community.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/control/community.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.3333335" vertical-offset="3666" max-vertical-offset="9842">
+              <caret line="287" column="37" selection-start-line="287" selection-start-column="28" selection-end-line="287" selection-end-column="37" />
+              <folding>
+                <marker date="1416966528988" expanded="true" signature="553:665" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1416966528988" expanded="true" signature="989:1054" placeholder="select * fro..Center_codes..." />
+                <marker date="1416966528988" expanded="true" signature="3110:3901" placeholder="SELECT * FRO..*..." />
+                <marker date="1416966528988" expanded="true" signature="3127:3869" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1416966528988" expanded="true" signature="3143:3850" placeholder="SELECT TOP :..." />
+                <marker date="1416966528988" expanded="true" signature="8892:10831" placeholder="SELECT * FRO..*..." />
+                <marker date="1416966528988" expanded="true" signature="8909:10799" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1416966528988" expanded="true" signature="8925:10780" placeholder="SELECT TOP :..." />
+                <marker date="1416966528988" expanded="true" signature="13984:14112" placeholder="insert into ..." />
+                <marker date="1416966528988" expanded="true" signature="14537:14649" placeholder="select b.id ..map_org_wechat..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="community.income.detail.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin/templates/default/community.income.detail.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.23463687" vertical-offset="1918" max-vertical-offset="3920">
+              <caret line="149" column="52" selection-start-line="149" selection-start-column="52" selection-end-line="149" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="member.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/member.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.1041665" vertical-offset="8633" max-vertical-offset="9702">
+            <state vertical-scroll-proportion="0.0" vertical-offset="8633" max-vertical-offset="9702">
               <caret line="641" column="45" selection-start-line="641" selection-start-column="35" selection-end-line="641" selection-end-column="45" />
               <folding>
                 <marker date="1415636673044" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
@@ -67,7 +98,7 @@
       <file leaf-file-name="member.recharge.sum.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/member.recharge.sum.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="24.166666" vertical-offset="2980" max-vertical-offset="3892">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2980" max-vertical-offset="3892">
               <caret line="130" column="103" selection-start-line="130" selection-start-column="91" selection-end-line="130" selection-end-column="103" />
               <folding />
             </state>
@@ -77,7 +108,7 @@
       <file leaf-file-name="finance.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="8.434783" vertical-offset="1958" max-vertical-offset="8750">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1958" max-vertical-offset="8750">
               <caret line="126" column="39" selection-start-line="126" selection-start-column="22" selection-end-line="126" selection-end-column="39" />
               <folding>
                 <marker date="1416452678624" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
@@ -96,7 +127,7 @@
       <file leaf-file-name="welcome.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.0" vertical-offset="3819" max-vertical-offset="6916">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3819" max-vertical-offset="6916">
               <caret line="304" column="12" selection-start-line="304" selection-start-column="12" selection-end-line="304" selection-end-column="12" />
               <folding>
                 <marker date="1416826516983" expanded="true" signature="13285:13336" placeholder="..." />
@@ -108,7 +139,7 @@
       <file leaf-file-name="menu.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/include/menu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.0" vertical-offset="602" max-vertical-offset="4452">
+            <state vertical-scroll-proportion="0.0" vertical-offset="602" max-vertical-offset="4452">
               <caret line="66" column="89" selection-start-line="66" selection-start-column="84" selection-end-line="66" selection-end-column="89" />
               <folding />
             </state>
@@ -174,11 +205,11 @@
         <option value="$PROJECT_DIR$/admin/templates/default/layout/index_layout.php" />
         <option value="$PROJECT_DIR$/admin/control/control.php" />
         <option value="$PROJECT_DIR$/data/resource/js/hightchart/highcharts.js" />
-        <option value="$PROJECT_DIR$/admin/control/community.php" />
-        <option value="$PROJECT_DIR$/admin/templates/default/community.income.detail.php" />
         <option value="$PROJECT_DIR$/admin/include/menu.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/welcome.php" />
         <option value="$PROJECT_DIR$/admin/control/dashboard.php" />
+        <option value="$PROJECT_DIR$/admin/control/community.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/community.income.detail.php" />
       </list>
     </option>
   </component>
@@ -263,102 +294,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="xingkang" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -461,15 +396,15 @@
       <BehatRunner />
       <method />
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-options />
       <gulpfile />
       <tasks />
       <pass-parent-env-vars>false</pass-parent-env-vars>
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <list size="0" />
@@ -1052,7 +987,13 @@
       <option name="project" value="LOCAL" />
       <updated>1416558781034</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="1,增加了会员充值和消费">
+      <created>1416829322252</created>
+      <option name="number" value="00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1416829322252</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -1067,7 +1008,6 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24934725" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1080,12 +1020,13 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24934725" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1109,7 +1050,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
-    <MESSAGE value="1,解决除0的错误" />
     <MESSAGE value="1,解决日期条件错误的问题" />
     <MESSAGE value="1,解决总计错误的问题" />
     <MESSAGE value="1,增加财务分类的字段" />
@@ -1134,7 +1074,8 @@
     <MESSAGE value="1,完善了结算单明细查询" />
     <MESSAGE value="1,重新制作欢迎页面" />
     <MESSAGE value="1,图表增加了颜色选项" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,图表增加了颜色选项" />
+    <MESSAGE value="1,增加了会员充值和消费" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,增加了会员充值和消费" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1287,7 +1228,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2856" max-vertical-offset="3976">
           <caret line="228" column="11" selection-start-line="228" selection-start-column="11" selection-end-line="228" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1316,7 +1256,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7724138" vertical-offset="882" max-vertical-offset="4228">
           <caret line="87" column="38" selection-start-line="87" selection-start-column="38" selection-end-line="87" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1331,7 +1270,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.4804598" vertical-offset="2394" max-vertical-offset="4270">
           <caret line="217" column="24" selection-start-line="217" selection-start-column="24" selection-end-line="217" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1339,7 +1277,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43127963" vertical-offset="1890" max-vertical-offset="4424">
           <caret line="148" column="51" selection-start-line="148" selection-start-column="51" selection-end-line="148" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1347,7 +1284,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8957346" vertical-offset="1540" max-vertical-offset="4494">
           <caret line="137" column="17" selection-start-line="137" selection-start-column="17" selection-end-line="137" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1404,7 +1340,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2548">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1433,22 +1368,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.76953125" vertical-offset="558" max-vertical-offset="4144">
           <caret line="68" column="57" selection-start-line="68" selection-start-column="57" selection-end-line="68" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/community.income.detail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18666667" vertical-offset="1960" max-vertical-offset="3864">
-          <caret line="147" column="47" selection-start-line="147" selection-start-column="47" selection-end-line="147" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/community.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65625" vertical-offset="3766" max-vertical-offset="9814">
-          <caret line="293" column="39" selection-start-line="293" selection-start-column="26" selection-end-line="293" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -1468,7 +1387,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="8.434783" vertical-offset="1958" max-vertical-offset="8750">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1958" max-vertical-offset="8750">
           <caret line="126" column="39" selection-start-line="126" selection-start-column="22" selection-end-line="126" selection-end-column="39" />
           <folding>
             <marker date="1416452678624" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
@@ -1485,7 +1404,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/include/menu.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.0" vertical-offset="602" max-vertical-offset="4452">
+        <state vertical-scroll-proportion="0.0" vertical-offset="602" max-vertical-offset="4452">
           <caret line="66" column="89" selection-start-line="66" selection-start-column="84" selection-end-line="66" selection-end-column="89" />
           <folding />
         </state>
@@ -1493,7 +1412,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/member.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1041665" vertical-offset="8633" max-vertical-offset="9702">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8633" max-vertical-offset="9702">
           <caret line="641" column="45" selection-start-line="641" selection-start-column="35" selection-end-line="641" selection-end-column="45" />
           <folding>
             <marker date="1415636673044" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
@@ -1503,7 +1422,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/member.recharge.sum.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="24.166666" vertical-offset="2980" max-vertical-offset="3892">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2980" max-vertical-offset="3892">
           <caret line="130" column="103" selection-start-line="130" selection-start-column="91" selection-end-line="130" selection-end-column="103" />
           <folding />
         </state>
@@ -1511,7 +1430,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.0" vertical-offset="3819" max-vertical-offset="6916">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3819" max-vertical-offset="6916">
           <caret line="304" column="12" selection-start-line="304" selection-start-column="12" selection-end-line="304" selection-end-column="12" />
           <folding>
             <marker date="1416826516983" expanded="true" signature="13285:13336" placeholder="..." />
@@ -1521,7 +1440,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52204835" vertical-offset="2433" max-vertical-offset="3150">
+        <state vertical-scroll-proportion="-25.086956" vertical-offset="2223" max-vertical-offset="3150">
           <caret line="200" column="0" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
           <folding>
             <marker date="1416826633242" expanded="true" signature="5466:5675" placeholder="select c.nam..map_org_wechat..." />
@@ -1537,6 +1456,33 @@
             <marker date="1416826633242" expanded="true" signature="7646:8007" placeholder="select b.id ..center_MemberRecharge..." />
             <marker date="1416826633242" expanded="true" signature="7851:7883" placeholder="select orgid..map_org_wechat..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/control/community.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.3333335" vertical-offset="3666" max-vertical-offset="9842">
+          <caret line="287" column="37" selection-start-line="287" selection-start-column="28" selection-end-line="287" selection-end-column="37" />
+          <folding>
+            <marker date="1416966528988" expanded="true" signature="553:665" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1416966528988" expanded="true" signature="989:1054" placeholder="select * fro..Center_codes..." />
+            <marker date="1416966528988" expanded="true" signature="3110:3901" placeholder="SELECT * FRO..*..." />
+            <marker date="1416966528988" expanded="true" signature="3127:3869" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1416966528988" expanded="true" signature="3143:3850" placeholder="SELECT TOP :..." />
+            <marker date="1416966528988" expanded="true" signature="8892:10831" placeholder="SELECT * FRO..*..." />
+            <marker date="1416966528988" expanded="true" signature="8909:10799" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1416966528988" expanded="true" signature="8925:10780" placeholder="SELECT TOP :..." />
+            <marker date="1416966528988" expanded="true" signature="13984:14112" placeholder="insert into ..." />
+            <marker date="1416966528988" expanded="true" signature="14537:14649" placeholder="select b.id ..map_org_wechat..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/community.income.detail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23463687" vertical-offset="1918" max-vertical-offset="3920">
+          <caret line="149" column="52" selection-start-line="149" selection-start-column="52" selection-end-line="149" selection-end-column="52" />
+          <folding />
         </state>
       </provider>
     </entry>
