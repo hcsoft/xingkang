@@ -261,22 +261,38 @@ class financeControl extends SystemControl
         $sDrug_Unit = $_GET['sDrug_Unit'];
         $sDrug_Brand = $_GET['sDrug_Brand'];
         $flag = false;
+        $oldgood = null;
         if ($goodid) {
             $sql = " select * from shopnc_goods_common  where goods_commonid = $goodid";
             $stmt = $conn->query($sql);
             $goods = $stmt->fetchAll(PDO::FETCH_OBJ);
             if (count($goods) > 0) {
                 $flag = true;
+                $oldgood = $goods[0];
             }
         }
         try {
             if ($flag) {
+
                 $sql = " update shopnc_goods_common
                     set iDrug_StatClass = $classtype
 
                   where goods_commonid = $goodid";
 //            throw new Exception($sql);
                 $conn->exec($sql);
+                $oldstr = json_encode($oldgood);
+                $oldgood -> iDrug_StatClass = $classtype;
+                $newstr = json_encode($oldgood);
+                $admininfo = $this->getAdminInfo();
+                $adminid = $admininfo['id'];
+                $sql = " insert into log_main
+                    values(newid(),'shopnc_goods_common','update','shopnc_goods_common',$adminid,getdate(),?,?)
+                     ";
+//                throw new Exception($sql);
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(1, $oldstr);
+                $stmt->bindValue(2, $newstr);
+                $stmt->execute();
 
             } else {
                 $sql = " insert into  shopnc_goods_common
@@ -453,9 +469,27 @@ class financeControl extends SystemControl
                       0,
                       0
                     )";
+
+
 //            echo $sql;
 //            throw new Exception($sql);
                 $conn->exec($sql);
+
+                $sql = " select * from shopnc_goods_common  where goods_commonid = $goodid";
+                $stmt = $conn->query($sql);
+                $goods = $stmt->fetchAll(PDO::FETCH_OBJ);
+                if (count($goods) > 0) {
+                    $oldgood = $goods[0];
+                    $oldstr = json_encode($oldgood);
+                    $admininfo = $this->getAdminInfo();
+                    $adminid = $admininfo['id'];
+                    $sql = " insert into log_main
+                    values(newid(),'shopnc_goods_common','insert','shopnc_goods_common',$adminid,getdate(),null,?)";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindValue(1, $oldstr);
+                    $stmt->execute();
+                }
+
             }
             $ret = array('success' => true, 'msg' => '保存成功!');
             echo json_encode($ret);
