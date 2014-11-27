@@ -427,7 +427,8 @@ class Db
         }
 
         $sql = "SELECT " . $fields . " FROM [" . MS_DBPRE . $table . "] WHERE " . $where;
-        $result = self::query($sql, $host)->fetchall(PDO::FETCH_ASSOC);
+//        echo $sql;
+        $result = self::query($sql, $host)->fetchall(PDO::FETCH_ASSOC)[0];
 
         return $result;
     }

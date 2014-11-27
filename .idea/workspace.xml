@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="1,概览增加了时间选择">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/js/jquery.form.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/js/jquery.formautofill.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/js/jquery.formautofill.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/control.php" afterPath="$PROJECT_DIR$/admin/control/control.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/finance.php" afterPath="$PROJECT_DIR$/admin/control/finance.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/finance.saledetailmanager.php" afterPath="$PROJECT_DIR$/admin/templates/default/finance.saledetailmanager.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/storehouse.php" afterPath="$PROJECT_DIR$/admin/control/storehouse.php" />
+    <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/index.php" afterPath="$PROJECT_DIR$/admin/control/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/framework/db/mssql.php" afterPath="$PROJECT_DIR$/core/framework/db/mssql.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -61,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="finance.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="finance.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41556534" vertical-offset="3259" max-vertical-offset="13734">
-              <caret line="253" column="24" selection-start-line="253" selection-start-column="24" selection-end-line="253" selection-end-column="24" />
+            <state vertical-scroll-proportion="-43.347828" vertical-offset="2839" max-vertical-offset="13734">
+              <caret line="274" column="36" selection-start-line="274" selection-start-column="36" selection-end-line="274" selection-end-column="36" />
               <folding>
                 <marker date="1417061912898" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
                 <marker date="1417061912898" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
@@ -83,6 +78,76 @@
                 <marker date="1417061912898" expanded="true" signature="19260:20191" placeholder="SELECT * FRO..*..." />
                 <marker date="1417061912898" expanded="true" signature="19277:20159" placeholder="SELECT * FRO..TOP..." />
                 <marker date="1417061912898" expanded="true" signature="19293:20140" placeholder="SELECT TOP :..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/language/zh_cn/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.869565" vertical-offset="0" max-vertical-offset="280">
+              <caret line="8" column="33" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/control/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.913043" vertical-offset="524" max-vertical-offset="1106">
+              <caret line="57" column="33" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.edit.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/templates/default/admin.edit.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.608696" vertical-offset="0" max-vertical-offset="1498">
+              <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/control/admin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.7916667" vertical-offset="2296" max-vertical-offset="4578">
+              <caret line="177" column="40" selection-start-line="177" selection-start-column="40" selection-end-line="177" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/model/admin.model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.0" vertical-offset="665" max-vertical-offset="2254">
+              <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mssql.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/framework/db/mssql.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7247312" vertical-offset="5683" max-vertical-offset="9128">
+              <caret line="430" column="20" selection-start-line="430" selection-start-column="20" selection-end-line="430" selection-end-column="20" />
+              <folding>
+                <marker date="1417063899545" expanded="true" signature="4126:4295" placeholder="select * fro..TOP..." />
+                <marker date="1417063899545" expanded="true" signature="4142:4221" placeholder="SELECT TOP :..." />
+                <marker date="1417063899545" expanded="true" signature="9998:10111" placeholder="INSERT INTO ..." />
+                <marker date="1417063899545" expanded="true" signature="11129:11213" placeholder="INSERT INTO ..." />
+                <marker date="1417063899545" expanded="true" signature="13730:13775" placeholder="DELETE FROM ..." />
+                <marker date="1417063899545" expanded="true" signature="15917:16039" placeholder="insert INTO ..." />
+                <marker date="1417063899545" expanded="true" signature="17070:17147" placeholder="SELECT COUNT..." />
+                <marker date="1417063899545" expanded="true" signature="17779:17838" placeholder="select name ..Sysobjects..." />
+                <marker date="1417063899545" expanded="true" signature="18724:18875" placeholder="Select a.nam..." />
               </folding>
             </state>
           </provider>
@@ -187,15 +252,12 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/shop/templates/default/layout/buy_layout.php" />
-        <option value="$PROJECT_DIR$/shop/templates/default/layout/home_layout.php" />
         <option value="$PROJECT_DIR$/shop/templates/default/layout/member_layout.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/cms_special.detail.php" />
         <option value="$PROJECT_DIR$/circle/templates/default/layout/circle_layout.php" />
         <option value="$PROJECT_DIR$/circle/templates/default/layout/msg_layout.php" />
         <option value="$PROJECT_DIR$/cms/templates/default/layout/top.php" />
         <option value="$PROJECT_DIR$/microshop/templates/default/layout/top.php" />
-        <option value="$PROJECT_DIR$/core/framework/db/mssql.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/layout/layout.php" />
         <option value="$PROJECT_DIR$/admin/control/healthfile.php" />
         <option value="$PROJECT_DIR$/admin/include/ExcelWriterXML.php" />
@@ -238,6 +300,9 @@
         <option value="$PROJECT_DIR$/admin/templates/default/finance.saledetailmanager.php" />
         <option value="$PROJECT_DIR$/admin/control/storehouse.php" />
         <option value="$PROJECT_DIR$/admin/control/finance.php" />
+        <option value="$PROJECT_DIR$/admin/control/index.php" />
+        <option value="$PROJECT_DIR$/admin/control/admin.php" />
+        <option value="$PROJECT_DIR$/core/framework/db/mssql.php" />
       </list>
     </option>
   </component>
@@ -1141,7 +1206,13 @@
       <option name="project" value="LOCAL" />
       <updated>1416994723602</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="1,增加了销售明细财务分类管理">
+      <created>1417061994264</created>
+      <option name="number" value="00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1417061994264</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -1155,15 +1226,17 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24934725" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24934725" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22062664" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.239375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24934725" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22062664" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1174,9 +1247,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24934725" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1198,7 +1269,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
-    <MESSAGE value="1,修改了门诊收费员报表,增加了字段" />
     <MESSAGE value="1,修改了checkout表字段变更导致的问题" />
     <MESSAGE value="1,增加了商品毛利分析" />
     <MESSAGE value="1,商品毛利分析增加了数量为零的不显示" />
@@ -1223,63 +1293,14 @@
     <MESSAGE value="1,增加了会员回访&#10;2,增加了档案数&#10;3,增加了档案回访&#10;4,增加了业务数" />
     <MESSAGE value="1,修改了名称" />
     <MESSAGE value="1,概览增加了时间选择" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,概览增加了时间选择" />
+    <MESSAGE value="1,增加了销售明细财务分类管理" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,增加了销售明细财务分类管理" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/admin/include/PHPExcel/Cell/DataType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="658" max-vertical-offset="1792">
-          <caret line="47" column="7" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/shopnc.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1120" max-vertical-offset="1316">
-          <caret line="80" column="4" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/config/config.ini.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="840">
-          <caret line="18" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/config/config.ini.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="695">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/framework/db/mssql.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="294" max-vertical-offset="9114">
-          <caret line="247" column="9" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/framework/db/mssqlpdo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="42" max-vertical-offset="336">
-          <caret line="3" column="12" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/framework/db/connectmssql.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="462">
-          <caret line="17" column="32" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/member.consume.sum.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.273743" vertical-offset="938" max-vertical-offset="3738">
@@ -1639,10 +1660,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/framework/function/core.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3489796" vertical-offset="15621" max-vertical-offset="27566">
+          <caret line="1128" column="0" selection-start-line="1128" selection-start-column="0" selection-end-line="1128" selection-end-column="0" />
+          <folding>
+            <marker date="1413696030321" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1413696030321" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1413696030321" expanded="false" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41556534" vertical-offset="3259" max-vertical-offset="13734">
-          <caret line="253" column="24" selection-start-line="253" selection-start-column="24" selection-end-line="253" selection-end-column="24" />
+        <state vertical-scroll-proportion="-43.347828" vertical-offset="2839" max-vertical-offset="13734">
+          <caret line="274" column="36" selection-start-line="274" selection-start-column="36" selection-end-line="274" selection-end-column="36" />
           <folding>
             <marker date="1417061912898" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
             <marker date="1417061912898" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
@@ -1660,6 +1693,64 @@
             <marker date="1417061912898" expanded="true" signature="19260:20191" placeholder="SELECT * FRO..*..." />
             <marker date="1417061912898" expanded="true" signature="19277:20159" placeholder="SELECT * FRO..TOP..." />
             <marker date="1417061912898" expanded="true" signature="19293:20140" placeholder="SELECT TOP :..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/admin.edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.608696" vertical-offset="0" max-vertical-offset="1498">
+          <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/language/zh_cn/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.869565" vertical-offset="0" max-vertical-offset="280">
+          <caret line="8" column="33" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/model/admin.model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.0" vertical-offset="665" max-vertical-offset="2254">
+          <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/control/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.7916667" vertical-offset="2296" max-vertical-offset="4578">
+          <caret line="177" column="40" selection-start-line="177" selection-start-column="40" selection-end-line="177" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/control/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.913043" vertical-offset="524" max-vertical-offset="1106">
+          <caret line="57" column="33" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/framework/db/mssql.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7247312" vertical-offset="5683" max-vertical-offset="9128">
+          <caret line="430" column="20" selection-start-line="430" selection-start-column="20" selection-end-line="430" selection-end-column="20" />
+          <folding>
+            <marker date="1417063899545" expanded="true" signature="4126:4295" placeholder="select * fro..TOP..." />
+            <marker date="1417063899545" expanded="true" signature="4142:4221" placeholder="SELECT TOP :..." />
+            <marker date="1417063899545" expanded="true" signature="9998:10111" placeholder="INSERT INTO ..." />
+            <marker date="1417063899545" expanded="true" signature="11129:11213" placeholder="INSERT INTO ..." />
+            <marker date="1417063899545" expanded="true" signature="13730:13775" placeholder="DELETE FROM ..." />
+            <marker date="1417063899545" expanded="true" signature="15917:16039" placeholder="insert INTO ..." />
+            <marker date="1417063899545" expanded="true" signature="17070:17147" placeholder="SELECT COUNT..." />
+            <marker date="1417063899545" expanded="true" signature="17779:17838" placeholder="select name ..Sysobjects..." />
+            <marker date="1417063899545" expanded="true" signature="18724:18875" placeholder="Select a.nam..." />
           </folding>
         </state>
       </provider>

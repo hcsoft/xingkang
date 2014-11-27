@@ -54,6 +54,7 @@ class indexControl extends SystemControl{
 				showMessage(Language::get('index_modifypw_admin_error'));
 			}
 			//旧密码是否正确
+//            throw new Exception ( $admininfo['admin_password'] .'--'. md5(trim($_POST['old_pw'])));
 			if ($admininfo['admin_password'] != md5(trim($_POST['old_pw']))){
 				showMessage(Language::get('index_modifypw_oldpw_error'));
 			}
