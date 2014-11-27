@@ -252,11 +252,11 @@
             </tr>
             <tr>
                 <td>项目编码：</td>
-                <td><input style="color:blue;" id="iDrug_ID" name="iDrug_ID"></td>
+                <td><input style="color:blue;" id="iDrug_ID" name="iDrug_ID" readonly></td>
             </tr>
             <tr>
                 <td>项目名称：</td>
-                <td><input style="color:blue;" id="itemname" name="itemname"></td>
+                <td><input style="color:blue;" id="itemname" name="itemname" readonly></td>
             </tr>
 
             <tr>

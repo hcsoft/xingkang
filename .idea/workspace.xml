@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/index.php" afterPath="$PROJECT_DIR$/admin/control/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/framework/db/mssql.php" afterPath="$PROJECT_DIR$/core/framework/db/mssql.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/finance.saledetailmanager.php" afterPath="$PROJECT_DIR$/admin/templates/default/finance.saledetailmanager.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -133,10 +132,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mssql.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mssql.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/framework/db/mssql.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7247312" vertical-offset="5683" max-vertical-offset="9128">
+            <state vertical-scroll-proportion="-14.020833" vertical-offset="5347" max-vertical-offset="9128">
               <caret line="430" column="20" selection-start-line="430" selection-start-column="20" selection-end-line="430" selection-end-column="20" />
               <folding>
                 <marker date="1417063899545" expanded="true" signature="4126:4295" placeholder="select * fro..TOP..." />
@@ -192,11 +191,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="finance.saledetailmanager.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="finance.saledetailmanager.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.saledetailmanager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.521739" vertical-offset="5093" max-vertical-offset="6146">
-              <caret line="386" column="44" selection-start-line="386" selection-start-column="44" selection-end-line="386" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.47912526" vertical-offset="3371" max-vertical-offset="6146">
+              <caret line="258" column="85" selection-start-line="258" selection-start-column="85" selection-end-line="258" selection-end-column="85" />
               <folding>
                 <element signature="n#style#0;n#div#2;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#div#3;n#div#0;n#!!top" expanded="true" />
@@ -297,12 +296,12 @@
         <option value="$PROJECT_DIR$/admin/control/dashboard.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/welcome.php" />
         <option value="$PROJECT_DIR$/admin/control/control.php" />
-        <option value="$PROJECT_DIR$/admin/templates/default/finance.saledetailmanager.php" />
         <option value="$PROJECT_DIR$/admin/control/storehouse.php" />
         <option value="$PROJECT_DIR$/admin/control/finance.php" />
         <option value="$PROJECT_DIR$/admin/control/index.php" />
         <option value="$PROJECT_DIR$/admin/control/admin.php" />
         <option value="$PROJECT_DIR$/core/framework/db/mssql.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/finance.saledetailmanager.php" />
       </list>
     </option>
   </component>
@@ -1212,7 +1211,13 @@
       <option name="project" value="LOCAL" />
       <updated>1417061994264</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="1,解决了不能修改密码的问题">
+      <created>1417063918510</created>
+      <option name="number" value="00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1417063918511</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -1269,7 +1274,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
-    <MESSAGE value="1,修改了checkout表字段变更导致的问题" />
     <MESSAGE value="1,增加了商品毛利分析" />
     <MESSAGE value="1,商品毛利分析增加了数量为零的不显示" />
     <MESSAGE value="1,增加了商品明细查询" />
@@ -1294,7 +1298,8 @@
     <MESSAGE value="1,修改了名称" />
     <MESSAGE value="1,概览增加了时间选择" />
     <MESSAGE value="1,增加了销售明细财务分类管理" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,增加了销售明细财务分类管理" />
+    <MESSAGE value="1,解决了不能修改密码的问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,解决了不能修改密码的问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1615,26 +1620,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.saledetailmanager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.521739" vertical-offset="5093" max-vertical-offset="6146">
-          <caret line="386" column="44" selection-start-line="386" selection-start-column="44" selection-end-line="386" selection-end-column="44" />
-          <folding>
-            <element signature="n#style#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#3;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#2;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#3;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#5;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#6;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#7;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#8;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#9;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/storehouse.detail.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.565217" vertical-offset="1890" max-vertical-offset="4228">
@@ -1739,7 +1724,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/framework/db/mssql.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7247312" vertical-offset="5683" max-vertical-offset="9128">
+        <state vertical-scroll-proportion="-14.020833" vertical-offset="5347" max-vertical-offset="9128">
           <caret line="430" column="20" selection-start-line="430" selection-start-column="20" selection-end-line="430" selection-end-column="20" />
           <folding>
             <marker date="1417063899545" expanded="true" signature="4126:4295" placeholder="select * fro..TOP..." />
@@ -1751,6 +1736,26 @@
             <marker date="1417063899545" expanded="true" signature="17070:17147" placeholder="SELECT COUNT..." />
             <marker date="1417063899545" expanded="true" signature="17779:17838" placeholder="select name ..Sysobjects..." />
             <marker date="1417063899545" expanded="true" signature="18724:18875" placeholder="Select a.nam..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.saledetailmanager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47912526" vertical-offset="3371" max-vertical-offset="6146">
+          <caret line="258" column="85" selection-start-line="258" selection-start-column="85" selection-end-line="258" selection-end-column="85" />
+          <folding>
+            <element signature="n#style#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#2;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#3;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#5;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#6;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#7;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#8;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#9;n#table#0;n#form#0;n#div#3;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
