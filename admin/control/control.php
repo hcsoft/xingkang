@@ -111,7 +111,7 @@ class SystemControl{
 			return true;
 		}else{
 			$extlimit = array('ajax','export_step1');
-			if (in_array($op,$extlimit) && (in_array($act,$permission) || strpos(serialize($permission),'"'.$act.'.'))){
+			if ((substr($op,0,4) == 'ajax' or in_array($op,$extlimit)) && (in_array($act,$permission) || strpos(serialize($permission),'"'.$act.'.'))){
 				return true;
 			}
 			//带前缀的都通过

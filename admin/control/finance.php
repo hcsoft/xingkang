@@ -46,7 +46,6 @@ class financeControl extends SystemControl
     }
 
 
-
     public function ajaxOp()
     {
         //spotcheck_spot
@@ -146,19 +145,19 @@ class financeControl extends SystemControl
 
         }
         if ($_GET['search_goods_name'] != '') {
-            $sql = $sql . ' and a.itemname like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+            $sql = $sql . ' and a.itemname like \'%' . trim($_GET['search_goods_name']) . '%\'';
         }
 
         if ($_GET['classtype'] != '') {
-            if($_GET['classtype'] == 'null'){
-                $sql = $sql . ' and good.iDrug_StatClass  is null ' ;
-            }else{
-                $sql = $sql . ' and good.iDrug_StatClass =  ' .  trim($_GET['classtype']) ;
+            if ($_GET['classtype'] == 'null') {
+                $sql = $sql . ' and good.iDrug_StatClass  is null ';
+            } else {
+                $sql = $sql . ' and good.iDrug_StatClass =  ' . trim($_GET['classtype']);
             }
         }
 
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and a.iDrug_ID = ' . intval($_GET['search_commonid']) ;
+            $sql = $sql . ' and a.iDrug_ID = ' . intval($_GET['search_commonid']);
         }
         //处理树的参数
         $checkednode = $_GET['checkednode'];
@@ -206,8 +205,8 @@ class financeControl extends SystemControl
                         a.sClinicKey ,
                         a.ida_id
                         $sql order by  a.dSale_MakeDate desc ";
-        if(isset($_GET['export']) && $_GET['export']=='true'){
-            $this->exportxlsx($exportsql,array('序号','单据编号','制单日期','项目名称','项目类型','规格','单位','产地/厂商','数量','单价','金额','机构','科室','医生','就诊流水','处方流水'),'销售明细');
+        if (isset($_GET['export']) && $_GET['export'] == 'true') {
+            $this->exportxlsx($exportsql, array('序号', '单据编号', '制单日期', '项目名称', '项目类型', '规格', '单位', '产地/厂商', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
         }
         $stmt = $conn->query($tsql);
         $data_list = array();
@@ -220,8 +219,259 @@ class financeControl extends SystemControl
         Tpl::showpage('finance.saledetail');
     }
 
+    public function ajaxGetDetailOp()
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $saleid = $_GET['saleid'];
+        $orgid = $_GET['orgid'];
+        $sql = " select * from Center_ClinicSale  where ssale_id = $saleid and  orgid = $orgid ";
+        $stmt = $conn->query($sql);
+        $sale = $stmt->fetchAll(PDO::FETCH_OBJ)[0];
+        $drugid = $sale->iDrug_ID;
+        $sql = " select * from shopnc_goods_common  where goods_commonid = $drugid";
+        $stmt = $conn->query($sql);
+        $goods = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if ($goods && count($goods) > 0) {
+            $good = $goods[0];
+        }
+        $ret = array('sale' => $sale, 'good' => $good);
+        echo json_encode($ret);
+        exit;
+    }
+
+    public function ajaxSaveStateClassOp()
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $iDrug_ID = $_GET['iDrug_ID'];
+        $goodid = $_GET['goodid'];
+        if ($iDrug_ID != $goodid) {
+            $ret = array('success' => false, 'msg' => '新建的"药品编码"应该与"项目编码"一致!');
+            echo json_encode($ret);
+            exit;
+        }
+
+        $classtype = $_GET['classtype'];
+        if(!$classtype){
+            $ret = array('success' => false, 'msg' => '"财务分类"不能为未分类!');
+            echo json_encode($ret);
+            exit;
+        }
+        $goodname = $_GET['goodname'];
+        $sDrug_Spec = $_GET['sDrug_Spec'];
+        $sDrug_Unit = $_GET['sDrug_Unit'];
+        $sDrug_Brand = $_GET['sDrug_Brand'];
+        $flag = false;
+        if ($goodid) {
+            $sql = " select * from shopnc_goods_common  where goods_commonid = $goodid";
+            $stmt = $conn->query($sql);
+            $goods = $stmt->fetchAll(PDO::FETCH_OBJ);
+            if (count($goods) > 0) {
+                $flag = true;
+            }
+        }
+        try {
+            if ($flag) {
+                $sql = " update shopnc_goods_common
+                    set iDrug_StatClass = $classtype
+
+                  where goods_commonid = $goodid";
+//            throw new Exception($sql);
+                $conn->exec($sql);
+
+            } else {
+                $sql = " insert into  shopnc_goods_common
+                      (goods_commonid,
+                      gc_id,
+                      store_id,
+                      brand_id,
+                      type_id,
+                      goods_state,
+                      goods_verify,
+                      goods_lock,
+                      goods_addtime,
+                      goods_selltime,
+                      goods_price,
+                      goods_marketprice,
+                      goods_costprice,
+                      goods_discount,
+                      transport_id,
+                      goods_commend,
+                      goods_freight,
+                      goods_vat,
+                      areaid_1,
+                      areaid_2,
+                      sDrug_ID,
+                      iDrug_RecType,
+                      sDrug_TradeName,
+                      iDrug_Quotiety,
+                      iCustomer_ID,
+                      fPrice_SRetail,
+                      fPrice_PRetail,
+                      fPrice_Retail,
+                      fPrice_LeastRetail,
+                      fPrice_LLimit,
+                      fPrice_OBuy,
+                      fDrug_ULimit,
+                      fDrug_LLimit,
+                      fDrug_OStock,
+                      fDrug_SStock,
+                      fDrug_LeastOStock,
+                      fDrug_LeastSStock,
+                      iDrug_Pack,
+                      iDrug_SmallPack,
+                      fDrug_Weight,
+                      iDrug_AlarmDays,
+                      iDrug_Type,
+                      iDrug_Purpose,
+                      iDrug_Tax,
+                      iDrug_MediCare,
+                      iDrug_SubMedicare,
+                      iDrug_IsImport,
+                      iDrug_IsRecipe,
+                      iDrug_State,
+                      iDrug_UseFulLife,
+                      fDrug_NoTaxAvgPrice,
+                      fDrug_NoTaxStockMoney,
+                      iDrug_UseFulLifeFormat,
+                      iDrug_OutpatientClass,
+                      iDrug_InpatientClass,
+                      iDrug_UpdateStock,
+                      iDrug_ExcuteType,
+                      fDrug_AdjustNum,
+                      fDrug_LeastAdjustNum,
+                      iDrug_BuildPerson,
+                      iDrug_IsChineseMedicine,
+                      iDrug_ReceiptType,
+                      iML_ID,
+                      iDrug_IsMeterial,
+                      iDrug_IsNCCM,
+                      fDrug_Dosage,
+                      iDrug_StatClass,
+                      iDrug_IsGrain,
+                      iDrug_XNHClass,
+                      NccmPrice,
+                      CZZGPrice,
+                      CZJMPrice,
+                      iDrug_XnhSpecial,
+                      Downloaded,
+                      LeastNccmPrice,
+                      LeastCZZGPrice,
+                      LeastCZJMPrice,
+                      iML_NccmId,
+                      iDrug_NCCMLevel,
+                      iDrug_CanNotSale,
+                      iDrug_IsMediCare,
+                      iDrug_IsBed,
+                      iDrug_IsAnesthesia,
+                      iDrug_CaseClass,
+                      iDrug_IsHealth
+                      )
+                    values(
+                      $goodid,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      $goodid,
+                      0,
+                      '$goodname',
+                      0,
+                      1018,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      $classtype,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    )";
+//            echo $sql;
+//            throw new Exception($sql);
+                $conn->exec($sql);
+            }
+            $ret = array('success' => true, 'msg' => '保存成功!');
+            echo json_encode($ret);
+        } catch (Exception $e) {
+            throw $e;
+            $ret = array('success' => false, 'msg' => $e->getMessage());
+            echo json_encode($ret);
+        }
+
+
+        exit;
+    }
+
     public function saledetailmanagerOp()
     {
+
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //处理数据
         $page = new Page();
@@ -251,19 +501,19 @@ class financeControl extends SystemControl
 
         }
         if ($_GET['search_goods_name'] != '') {
-            $sql = $sql . ' and a.itemname like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+            $sql = $sql . ' and a.itemname like \'%' . trim($_GET['search_goods_name']) . '%\'';
         }
 
         if ($_GET['classtype'] != '') {
-            if($_GET['classtype'] == 'null'){
-                $sql = $sql . ' and good.iDrug_StatClass  is null ' ;
-            }else{
-                $sql = $sql . ' and good.iDrug_StatClass =  ' .  trim($_GET['classtype']) ;
+            if ($_GET['classtype'] == 'null') {
+                $sql = $sql . ' and good.iDrug_StatClass  is null ';
+            } else {
+                $sql = $sql . ' and good.iDrug_StatClass =  ' . trim($_GET['classtype']);
             }
         }
 
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and a.iDrug_ID = ' . intval($_GET['search_commonid']) ;
+            $sql = $sql . ' and a.iDrug_ID = ' . intval($_GET['search_commonid']);
         }
         //处理树的参数
         $checkednode = $_GET['checkednode'];
@@ -312,8 +562,8 @@ class financeControl extends SystemControl
                         a.sClinicKey ,
                         a.ida_id
                         $sql order by  a.dSale_MakeDate desc ";
-        if(isset($_GET['export']) && $_GET['export']=='true'){
-            $this->exportxlsx($exportsql,array('序号','单据编号','制单日期','项目名称','项目类型','规格','单位','产地/厂商','数量','单价','金额','机构','科室','医生','就诊流水','处方流水'),'销售明细');
+        if (isset($_GET['export']) && $_GET['export'] == 'true') {
+            $this->exportxlsx($exportsql, array('序号', '单据编号', '制单日期', '项目名称', '项目类型', '规格', '单位', '产地/厂商', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
         }
         $stmt = $conn->query($tsql);
         $data_list = array();
@@ -340,9 +590,9 @@ class financeControl extends SystemControl
             'year' => ' year(a.dSale_GatherDate) as "year" ',
             'month' => ' left(convert(varchar,dSale_GatherDate,112),6) as  "month" ',
             'day' => ' convert(varchar,dSale_GatherDate,112) as "day" ',
-            'OrgID' => ' org.name as "OrgID" ' ,
-            'dSale_MakeDate' =>' replace( CONVERT( CHAR(10), a.dSale_MakeDate, 102), \'.\', \'-\') as "dSale_MakeDate" ',
-            'dSale_GatherDate' =>' replace( CONVERT( CHAR(10), a.dSale_GatherDate , 102), \'.\', \'-\') as "dSale_GatherDate" ',
+            'OrgID' => ' org.name as "OrgID" ',
+            'dSale_MakeDate' => ' replace( CONVERT( CHAR(10), a.dSale_MakeDate, 102), \'.\', \'-\') as "dSale_MakeDate" ',
+            'dSale_GatherDate' => ' replace( CONVERT( CHAR(10), a.dSale_GatherDate , 102), \'.\', \'-\') as "dSale_GatherDate" ',
         );
         $config = array('sumcol' => array(
             'OrgID' => array(name => 'OrgID', 'text' => '机构'),
@@ -351,16 +601,16 @@ class financeControl extends SystemControl
             'classname' => array(name => 'classname', 'text' => '财务分类'),
 //            'execSection' => array(name => 'execSection', 'text' => '执行科室'),
             'Doctor' => array(name => 'Doctor', 'text' => '医生'),
-            'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
-            'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
-            'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
+            'year' => array('text' => '年', name => 'year', uncheck => 'month,day'),
+            'month' => array('text' => '月', name => 'month', uncheck => 'year,day'),
+            'day' => array('text' => '日', name => 'day', uncheck => 'year,month'),
         ));
         Tpl::output('config', $config);
 
         //处理汇总字段
         $sumtype = $_GET['sumtype'];
         if ($sumtype == null) {
-            $sumtype = array(0 => "OrgID",1=>"classname");
+            $sumtype = array(0 => "OrgID", 1 => "classname");
             $_GET['sumtype'] = $sumtype;
         }
         $checked = $_GET['checked'];
@@ -389,10 +639,10 @@ class financeControl extends SystemControl
             $sql = $sql . ' and a.dSale_GatherDate < dateadd(day,1,\'' . $_GET['gather_end_time'] . '\')';
         }
         if ($_GET['search_goods_name'] != '') {
-            $sql = $sql . ' and good.goods_name like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+            $sql = $sql . ' and good.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
         }
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']) ;
+            $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']);
         }
 
         //处理树的参数
@@ -411,7 +661,7 @@ class financeControl extends SystemControl
         $groupbycol = array();
         foreach ($sumtype as $i => $v) {
 //            var_dump($colconfig['sumcol'][$v]);
-            if(isset($colconfig['sqlwher'])){
+            if (isset($colconfig['sqlwher'])) {
                 $sql = $sql . $colconfig['sqlwher'];
             }
             if (isset($colconfig['sumcol'][$v])) {
@@ -463,8 +713,8 @@ class financeControl extends SystemControl
                     sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
                     case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
                         $sql ";
-        if(isset($_GET['export']) && $_GET['export']=='true'){
-            $this->exportxlsx(array(0=>$tsql,1=>$totalsql),$displaytext,'收入统计');
+        if (isset($_GET['export']) && $_GET['export'] == 'true') {
+            $this->exportxlsx(array(0 => $tsql, 1 => $totalsql), $displaytext, '收入统计');
         }
 
 //        echo $tsql;
@@ -514,9 +764,9 @@ class financeControl extends SystemControl
             'year' => ' year(a.dSale_GatherDate) as "year" ',
             'month' => ' left(convert(varchar,dSale_GatherDate,112),6) as  "month" ',
             'day' => ' convert(varchar,dSale_GatherDate,112) as "day" ',
-            'OrgID' => ' org.name as "OrgID" ' ,
-            'dSale_MakeDate' =>' replace( CONVERT( CHAR(10), a.dSale_MakeDate, 102), \'.\', \'-\') as "dSale_MakeDate" ',
-            'dSale_GatherDate' =>' replace( CONVERT( CHAR(10), a.dSale_GatherDate , 102), \'.\', \'-\') as "dSale_GatherDate" ',
+            'OrgID' => ' org.name as "OrgID" ',
+            'dSale_MakeDate' => ' replace( CONVERT( CHAR(10), a.dSale_MakeDate, 102), \'.\', \'-\') as "dSale_MakeDate" ',
+            'dSale_GatherDate' => ' replace( CONVERT( CHAR(10), a.dSale_GatherDate , 102), \'.\', \'-\') as "dSale_GatherDate" ',
             'sDrug_Spec' => ' goods.sDrug_Spec as "sDrug_Spec" ',
             'sDrug_Unit' => ' goods.sDrug_Unit as "sDrug_Unit" ',
             'sDrug_Brand' => ' goods.sDrug_Brand as "sDrug_Brand" ',
@@ -525,9 +775,9 @@ class financeControl extends SystemControl
         );
         $config = array('sumcol' => array(
             'OrgID' => array(name => 'OrgID', 'text' => '机构'),
-            'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
-            'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
-            'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
+            'year' => array('text' => '年', name => 'year', uncheck => 'month,day'),
+            'month' => array('text' => '月', name => 'month', uncheck => 'year,day'),
+            'day' => array('text' => '日', name => 'day', uncheck => 'year,month'),
         ));
         Tpl::output('config', $config);
 
@@ -569,10 +819,10 @@ class financeControl extends SystemControl
         }
 
         if ($_GET['search_goods_name'] != '') {
-            $sql = $sql . ' and goods.goods_name like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+            $sql = $sql . ' and goods.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
         }
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and goods.goods_commonid = ' . intval($_GET['search_commonid']) ;
+            $sql = $sql . ' and goods.goods_commonid = ' . intval($_GET['search_commonid']);
         }
 
         $search_type = $_GET['search_type'];
@@ -586,7 +836,7 @@ class financeControl extends SystemControl
         $groupbycol = array();
         foreach ($sumtype as $i => $v) {
 //            var_dump($colconfig['sumcol'][$v]);
-            if(isset($colconfig['sqlwher'])){
+            if (isset($colconfig['sqlwher'])) {
                 $sql = $sql . $colconfig['sqlwher'];
             }
             if (isset($colconfig['sumcol'][$v])) {
@@ -627,15 +877,15 @@ class financeControl extends SystemControl
         array_push($displaytext, '毛利');
         array_push($displaytext, '毛利率');
 //        var_dump($totalcol);
-        if(count($totalcol)>0)
+        if (count($totalcol) > 0)
             $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
 //        var_dump($totalcol);
-        if(count($totalcol)>0)
-            $totalcolstr = join(',', $totalcol).',';
-        if(count($sumcol)>0)
-            $sumcolstr = join(',', $sumcol).',';
-        if(count($groupbycol)>0)
-            $groupbycolstr = join(',', $groupbycol).',';
+        if (count($totalcol) > 0)
+            $totalcolstr = join(',', $totalcol) . ',';
+        if (count($sumcol) > 0)
+            $sumcolstr = join(',', $sumcol) . ',';
+        if (count($groupbycol) > 0)
+            $groupbycolstr = join(',', $groupbycol) . ',';
 //        echo $sumcolstr;
         $tsql = " select
                     $sumcolstr
@@ -658,7 +908,7 @@ class financeControl extends SystemControl
                     goods.sDrug_Unit ,
                     goods.sDrug_Brand  ";
 //        echo $tsql;
-        if(count($totalcol)>0){
+        if (count($totalcol) > 0) {
             $totalsql = " select $totalcolstr
                     '' as iDrug_ID,
                     '' as sDrug_TradeName,
@@ -672,7 +922,7 @@ class financeControl extends SystemControl
                     sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
                     case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
                         $sql ";
-        }else{
+        } else {
             $totalsql = " select '总计：' as   iDrug_ID,
                      ''   as sDrug_TradeName,
                     '' as sDrug_Spec,
@@ -686,8 +936,8 @@ class financeControl extends SystemControl
                     case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
                         $sql ";
         }
-        if(isset($_GET['export']) && $_GET['export']=='true'){
-            $this->exportxlsx(array(0=>$tsql,1=>$totalsql),$displaytext,'收入统计');
+        if (isset($_GET['export']) && $_GET['export'] == 'true') {
+            $this->exportxlsx(array(0 => $tsql, 1 => $totalsql), $displaytext, '收入统计');
         }
 
 //        echo $totalsql;

@@ -128,10 +128,11 @@ class storehouseControl extends SystemControl
         $exportsql = "SELECT
                         a.iBuy_TicketID,
                         a.iBuy_ID,
+                        custom.sCustomer_Name,
                         a.dBuy_Date,
                         b.iDrug_RecType,
                         storetype.name as 'iBuy_Type',
-                        d.name OrgId,
+                        c.name OrgId,
                         a.iDrug_ID,
                         good.sdrug_chemname,
                         good.spec_name,
@@ -145,6 +146,7 @@ class storehouseControl extends SystemControl
         $exporttotalsql = "SELECT
                         '总计：' as iBuy_TicketID,
                         null as iBuy_ID,
+                        null as sCustomer_Name,
                         null as dBuy_Date,
                         null as iDrug_RecType,
                         null as iBuy_Type,
@@ -160,7 +162,7 @@ class storehouseControl extends SystemControl
                         sum(fBuy_RetailMoney)-sum(fBuy_TaxMoney) as diffmoney
                         $sql   ";
         if(isset($_GET['export']) && $_GET['export']=='true'){
-            $this->exportxlsx(array(0=>$exportsql,1=>$exporttotalsql),array('总票据','明细号','发生日期','商品类型','单据类型','机构','商品编码','商品名称','规格','单位','产地厂牌','数量','进价金额','零价金额','进销差'),'仓库单据明细');
+            $this->exportxlsx(array(0=>$exportsql,1=>$exporttotalsql),array('总票据','明细号','供货商','发生日期','商品类型','单据类型','机构','商品编码','商品名称','规格','单位','产地厂牌','数量','进价金额','零价金额','进销差'),'仓库单据明细');
         }
         $stmt = $conn->query($tsql);
         $data_list = array();
