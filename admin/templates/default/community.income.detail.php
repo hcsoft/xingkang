@@ -150,7 +150,7 @@
                             <?php echo $v->sSickName ?>
                         </td>
                         <td class=" align-right">
-                            <?php echo number_format($v->fCO_InComeMoney,2); ?>
+                            <?php echo number_format($v->fCO_IncomeMoney,2); ?>
                         </td>
                         <td class=" align-right">
                             <?php echo number_format($v->fCO_Medicare,2);?>
