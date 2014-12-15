@@ -212,8 +212,38 @@ class communityControl extends SystemControl
         $stmt = $conn->query($countsql);
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
-        $orderbys = array(array('txt'=>'结算日期','col'=> ' a.dCO_Date ' , 'ord' =>'desc'));
-        $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dCO_Date desc) rownum,
+        $orderbys = array(
+            array('txt'=>'类型','col'=> ' a.iCO_Type '),
+            array('txt'=>'结算日期','col'=> ' a.dCO_Date '),
+            array('txt'=>'制单日期','col'=> ' a.dCO_MakeDate '),
+            array('txt'=>'收费员','col'=> ' a.iCO_MakePerson '),
+            array('txt'=>'病人姓名','col'=> ' log.sSickName '),
+            array('txt'=>'处方金额','col'=> ' a.fCO_IncomeMoney '),
+            array('txt'=>'统筹支付','col'=> ' a.fCO_Medicare '),
+            array('txt'=>'医保卡支付','col'=> ' a.fCO_Card '),
+            array('txt'=>'现金支付','col'=> ' a.fCO_Cash '),
+            array('txt'=>'银行卡付','col'=> ' a.fCO_PosPay '),
+            array('txt'=>'预存下账','col'=> ' a.fRecharge '),
+            array('txt'=>'赠送下账','col'=> ' a.fConsume '),
+            array('txt'=>'积分下账金额','col'=> ' a.fScaleToMoney '));
+        $orderbysql = ' a.dCO_Date ';
+        $ordersql = 'desc';
+        if(!isset($_GET['orderby'])){
+            $_GET['orderby'] = '结算日期';
+        }
+        if(!isset($_GET['order'])){
+            $ordersql = 'desc';
+        }else{
+            $ordersql = $_GET['order'];
+        }
+        foreach($orderbys as $orderby){
+            if($orderby['txt']==$_GET['orderby']){
+                $orderbysql = $orderby['col'];
+                break;
+            }
+        }
+
+        $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  $orderbysql $ordersql) rownum,
                         ico.name as 'iCO_Type',
                         sMakePerson 'iCO_MakePerson',
                         a.dCO_Date,
@@ -256,7 +286,8 @@ class communityControl extends SystemControl
                         a.fAddScale,
                         org.name as 'OrgID',
                         log.sSickName
-                        $sql order by  a.dCO_Date desc)zzzz where rownum>$startnum )zzzzz order by rownum";
+                        $sql order by   $orderbysql $ordersql )zzzz where rownum>$startnum )zzzzz order by rownum";
+//        echo $tsql;
 //        $exportsql = "SELECT  row_number() over( order by  a.dCO_Date desc) rownum,
 //                        ico.name as 'iCO_Type',
 //                        a.dCO_Date,
@@ -297,7 +328,7 @@ class communityControl extends SystemControl
                         a.fRecharge '预存下账',
                         a.fConsume '赠送下账',
                         a.fScaleToMoney '积分下账金额'
-                        $sql order by  a.dCO_Date desc ";
+                        $sql order by  $orderbysql $ordersql ";
 //        echo $_GET['export']=='true';
 //        echo $_GET['export'];
         $sumcols = array( array('txt'=>'处方金额汇总','col'=>'fCO_InComeMoney','decimal'=>2,'unit'=>'元'),
@@ -324,6 +355,7 @@ class communityControl extends SystemControl
             array_push($data_list, $row);
         }
         Tpl::output('data_list', $data_list);
+        Tpl::output('orderbys',$orderbys);
         Tpl::output('page', $page->show());
         Tpl::showpage('community.income.detail');
     }

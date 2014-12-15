@@ -90,6 +90,22 @@
                 <td><a href="javascript:void(0);" id="ncexport" class="btn-export "
                        title="导出"></a>
                 </td>
+                <td>
+                    排序字段：
+                    <select name="orderby">
+                        <?php  foreach ($output['orderbys'] as $k => $v) {   ?>
+                        <option value="<?php echo $v['txt']?>"  <?php if ( $v['txt']== $_GET['orderby']){ ?>selected<?php } ?> ><?php echo $v['txt']?></option>
+                        <?php }?>
+                    </select>
+                </td>
+                <td>
+                    顺序：
+                    <select name="order">
+                        <option value="desc" <?php if ( 'desc'== $_GET['order']){ ?>selected<?php } ?> >倒序</option>
+                        <option value="asc"  <?php if ( 'asc'== $_GET['order']){ ?>selected<?php } ?> >正序</option>
+                    </select>
+                </td>
+
             </tr>
             </tbody>
         </table>
