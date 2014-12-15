@@ -94,6 +94,8 @@ class Page{
 	 * 在页码链接a内部的样式 <a>(样式名)页码(样式名)</a>
 	 */
 	private $right_inside_a_html = '';
+
+    private $sumarray = null;
 	
 	/**
 	 * 构造函数
@@ -297,6 +299,7 @@ class Page{
 		switch ($this->style) {
 			case '1':
 				$html_page .= '<ul>';
+                $html_page.= $this->getSumstr();
 				if ($this->getNowPage() == 1){
 					$html_page .= '<li>'.$this->left_inside_a_html.$this->pre_page.$this->right_inside_a_html.'</li>';
 				}else {
@@ -311,6 +314,7 @@ class Page{
 				break;
 			case '2':
 				$html_page .= '<ul>';
+                $html_page.= $this->getSumstr();
 				if ($this->getNowPage() == 1){
 					$html_page .= '<li>'.$this->left_inside_a_html.$this->pre_home.$this->right_inside_a_html.'</li>';
 					$html_page .= '<li>'.$this->left_inside_a_html.$this->pre_page.$this->right_inside_a_html.'</li>';
@@ -330,6 +334,7 @@ class Page{
 				break;
 			case '3':
 				$html_page .= '<ul>';
+                $html_page.= $this->getSumstr();
 				if ($this->getNowPage() == 1){
 					$html_page .= '<li>'.$this->left_inside_a_html.$this->pre_page.$this->right_inside_a_html.'</li>';
 				}else {
@@ -346,6 +351,7 @@ class Page{
 				break;
 			case '4':
 				$html_page .= '<ul>';
+                $html_page.= $this->getSumstr();
 				if ($this->getNowPage() == 1){
 					$html_page .= '<li>'.$this->left_inside_a_html.$this->pre_page.$this->right_inside_a_html.'</li>';
 				}else {
@@ -360,6 +366,7 @@ class Page{
 				break;
 			case '5':
 				$html_page .= '<ul>';
+                $html_page.= $this->getSumstr();
 				if ($this->getNowPage() == 1){
 					$html_page .= '<li>'.$this->left_inside_a_html.$this->pre_home.$this->right_inside_a_html.'</li>';
 					$html_page .= '<li>'.$this->left_inside_a_html.$this->pre_page.$this->right_inside_a_html.'</li>';
@@ -445,6 +452,10 @@ class Page{
 		if ($end < $this->getTotalPage()){
 			$result .= $this->left_ellipsis_html.'<span>...</span>'.$this->right_ellipsis_html;
 		}
+        //增加最后一页的显示
+        if ($this->getNowPage()+5 < $this->getTotalPage()) {
+            $result .= $this->setPageHtml($this->getTotalPage(), $this->getTotalPage());
+        }
 		return $result;
 	}
 	
@@ -518,5 +529,37 @@ class Page{
         unset($param['op']);
         $param[$this->page_name] = $page;
         return urlShop($act, $op, $param);
+    }
+
+    public function getSumarray(){
+        return $this->sumarray;
+    }
+    public function setSumarray($array){
+        return $this->sumarray = $array;
+    }
+
+    private function getSumstr(){
+        if($this->sumarray){
+            $ret = '<li><span>';
+            $decmial = 0;
+            foreach($this->sumarray as $item){
+                $ret.= '<b>'.$item['txt'] . '：</b><font color = "#0D93BF">' . number_format($item['num'], $item['decimal']?$item['decimal']:$decmial) .$item['unit'].'</font>&nbsp;&nbsp;';
+            }
+            $ret .= '</span></li>';
+            return $ret;
+        }else{
+            return '';
+        }
+    }
+    public function getSumsql( $array ){
+        $sumcolsqls = array();
+        foreach( $array as $col){
+            if($col['sql']){
+                array_push($sumcolsqls,$col['sql']);
+            }else{
+                array_push($sumcolsqls,'sum(' .$col['col'].') as '.$col['col']);
+            }
+        }
+        return implode(',',$sumcolsqls);
     }
 }

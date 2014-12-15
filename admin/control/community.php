@@ -81,6 +81,7 @@ class communityControl extends SystemControl
         $stmt = $conn->query($countsql);
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
+
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.ClinicDate desc) rownum,
                         a.sSickName,
                         a.sSex,
@@ -162,6 +163,7 @@ class communityControl extends SystemControl
         //处理数据
         $page = new Page();
         $page->setEachNum(10);
+//        $page->setStyle(5);
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
@@ -297,6 +299,21 @@ class communityControl extends SystemControl
                         $sql order by  a.dCO_Date desc ";
 //        echo $_GET['export']=='true';
 //        echo $_GET['export'];
+        $sumcols = array( array('txt'=>'处方金额汇总','col'=>'fCO_InComeMoney','decimal'=>2,'unit'=>'元'),
+                    array('txt'=>'现金支付汇总','col'=>'fCO_Card','decimal'=>2,'unit'=>'元'),
+                    array('txt'=>'总记录数','col'=>'rownum',sql=>'count(*) rownum','decimal'=>0,'unit'=>'条'));
+        $sumcolsstr = $page->getSumsql($sumcols);
+
+        $sumsql = " select $sumcolsstr  $sql  ";
+
+//        echo json_encode( $sumsql);
+        $stmt = $conn->query($sumsql);
+        $sumrow = $stmt->fetch(PDO::FETCH_OBJ);
+        foreach( $sumcols as &$col){
+            $col['num'] = $sumrow ->$col['col'];
+        }
+        $page->setSumarray($sumcols);
+//        echo json_encode( $sumcols);
         if(isset($_GET['export']) && $_GET['export']=='true'){
             $this->exportxlsx($exportsql,array('序号','类型','结算日期','制单日期','收费员','病人姓名','处方金额','统筹支付','医保卡支付','现金支付','银行卡付','预存下账','赠送下账','积分下账金额'),'收入明细');
         }
