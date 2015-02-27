@@ -556,9 +556,6 @@ class memberControl extends SystemControl {
 			);
 			$_GET ['sumtype'] = $sumtype;
 		}
-		$starttime;
-		$endtime;
-		$orgids;
 		$checked = $_GET ['checked'];
 		$page = new Page ();
 		$page->setEachNum ( 10 );
@@ -683,5 +680,21 @@ class memberControl extends SystemControl {
 		Tpl::output ( 'displaycol', $displaycol );
 		Tpl::output ( 'displaytext', $displaytext );
 		Tpl::showpage ( 'member.recharge.sum' );
+	}
+
+	public function psresetOp()
+	{
+		//spotcheck_spot
+		try {
+			$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+			$cardid = $_REQUEST['cardid'];
+			$sql = " update shopnc_member set  member_passwd = '@@@@@@' where member_id = ? ";
+			$stmt = $conn->prepare($sql);
+			$stmt->execute(array($cardid));
+			echo json_encode(array('success' => true, 'msg' => '重置成功!'));
+		} catch (Exception $e) {
+			echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+		}
+		exit;
 	}
 }

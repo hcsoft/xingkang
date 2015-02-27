@@ -115,6 +115,7 @@
                         <td>
                             <p class="name"><!--会员名:<strong><?php echo $v['member_name']; ?></strong>-->
                                 卡号: <?php echo $v['member_id']; ?></p>
+
                             <p class="name"><!--会员名:<strong><?php echo $v['member_name']; ?></strong>-->
                                 姓名: <?php echo $v['member_truename']; ?></p>
 
@@ -132,9 +133,19 @@
                             <p class="smallfont">健康档案:&nbsp;<?php echo $v['HealthCardID']; ?></p>
                         </td>
 
-                        <td><p class="name">卡类型: <?php if ($v['CardType']==0) {echo '普通卡';} elseif ($v['CardType']==1) {echo '储值卡';} ?></p>
+                        <td><p class="name">卡类型: <?php if ($v['CardType'] == 0) {
+                                    echo '普通卡';
+                                } elseif ($v['CardType'] == 1) {
+                                    echo '储值卡';
+                                } ?></p>
 
-                            <p class="smallfont">卡级别: <?php if ($v['CardGrade']==0) {echo '健康卡';} elseif ($v['CardGrade']==1) {echo '健康金卡';}elseif ($v['CardGrade']==2) {echo '健康钻卡';}  ?></p>
+                            <p class="smallfont">卡级别: <?php if ($v['CardGrade'] == 0) {
+                                    echo '健康卡';
+                                } elseif ($v['CardGrade'] == 1) {
+                                    echo '健康金卡';
+                                } elseif ($v['CardGrade'] == 2) {
+                                    echo '健康钻卡';
+                                } ?></p>
 
                         </td>
                         <td><p class="name">办卡渠道: <?php echo $v['GetWay']; ?></p>
@@ -142,7 +153,7 @@
                             <p class="smallfont">推荐人:&nbsp;<?php echo $v['Referrer']; ?></p>
 
                         </td>
-                        <td><p class="name">末次消费日期: <?php echo substr($v['LastPayDate'],0,10); ?></p>
+                        <td><p class="name">末次消费日期: <?php echo substr($v['LastPayDate'], 0, 10); ?></p>
 
                             <p class="smallfont">末次消费地点: <?php echo $v['LastPayOrgName']; ?></p>
 
@@ -156,10 +167,13 @@
                             <p>消费积分: <strong class="red"><?php echo $v['member_points']; ?></strong></p>
                         </td>
                         <td class="align-center"><?php echo $v['member_state'] == 1 ? $lang['member_edit_allow'] : $lang['member_edit_deny']; ?></td>
-                        <td class="align-center"><a
+                        <td class="align-center">
+                            <a href="javascript:void(0)" onclick="showpsreset('<?php echo $v['member_id'] ?>',this)">密码重置</a>
+                            <!--<a
                                 href="index.php?act=member&op=member_edit&member_id=<?php echo $v['member_id']; ?>"><?php echo $lang['nc_edit'] ?></a>
                             | <a
                                 href="index.php?act=notice&op=notice&member_name=<?php echo ltrim(base64_encode($v['member_name']), '='); ?>"><?php echo $lang['member_index_to_message']; ?></a>
+                                -->
                         </td>
                     </tr>
                 <?php } ?>
@@ -181,11 +195,65 @@
         </table>
     </form>
 </div>
+<div id="psresetdialog" title="密码重置">
+    <span id="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
+    <span>
+        <form>
+            <input type="hidden" id="cardid" name="cardid">
+        </form>
+        密码将被重置为000000，是否确认重置？
+    </span>
+</div>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"
+        charset="utf-8"></script>
+<link rel="stylesheet" type="text/css"
+      href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
 <script>
     $(function () {
         $('#ncsubmit').click(function () {
             $('input[name="op"]').val('member');
             $('#formSearch').submit();
         });
+        $("#psresetdialog").dialog({
+            resizable: false,
+//            width:350,
+//            height:250,
+//            modal: true,
+            autoOpen: false,
+            buttons: {
+                "取消": function () {
+                    $(this).dialog("close");
+                },
+                "确定重置": function () {
+                    console.log($("#psresetdialog form").serialize());
+                    $.ajax({
+                        url: "index.php?act=member&op=psreset",
+                        data: $("#psresetdialog form").serialize(), dataType: 'json', success: function (data) {
+                            console.log(data);
+                            if (data.success) {
+                                success(data.msg);
+                            } else {
+                                error(data.msg);
+                            }
+                        }
+                    });
+                }
+            }
+        });
     });
+    function showpsreset(id, elem) {
+        $("#errormsg").html('');
+        $("#cardid").val(id);
+        $("#psresetdialog").dialog("option", "position", {my: "right top", at: "left bottom", of: $(elem)});
+        $("#psresetdialog").dialog("open");
+    }
+    function error(msg) {
+        $("#errormsg").css("color", "red");
+        $("#errormsg").html(msg);
+    }
+    function success(msg) {
+        $("#errormsg").css("color", "green");
+        $("#errormsg").html(msg);
+    }
 </script>
