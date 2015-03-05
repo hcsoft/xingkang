@@ -268,6 +268,36 @@ class dashboardControl extends SystemControl{
         return $consumelist;
     }
 
+    //查询会员分布情况
+    private function membernumchartOp($type){
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $datesql = '';
+//        if($type=='2'){
+//            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',time()). '\' and checkout.RechargeDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+//        }else if($type=='3'){
+//            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-1',time()). '\' and checkout.RechargeDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+//        }else if($type=='4'){
+//            $datesql = ' and checkout.RechargeDate>= \''.date('Y-1-1',time()). '\' and checkout.RechargeDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+//        }else if($type=='5'){
+//            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.RechargeDate< \''.date('Y-m-d',time()).'\'';
+//        }else if($type=='6'){
+//            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 month')). '\' and checkout.RechargeDate< \''.date('Y-m-1',time()).'\'';
+//        }else if($type=='7'){
+//            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and checkout.RechargeDate< \''.date('Y-1-1',time()).'\'';
+//        }
+        $sql = "select  b.id , b.name , count(1) as num
+                    from  shopnc_member member left join  Organization b  on member.createOrgID = b.id
+                    where member.createOrgID in (select orgid from map_org_wechat)   $datesql
+              group by b.id , b.name   order by count(1) desc   ";
+        $stmt = $conn->query($sql);
+        $membernumlist = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $row->details= array();
+            array_push($membernumlist, $row);
+        }
+        return $membernumlist;
+    }
+
     private function spotchartOp($type){
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询回访情况
@@ -456,7 +486,7 @@ class dashboardControl extends SystemControl{
         $statistics['saledata'] = $this->salechartOp('1');
         //查询充值情况
         $statistics['memberdata'] = $this->memberchartOp('1');
-        //查询充值情况
+        //查询消费情况
         $statistics['consumedata'] = $this->consumechartOp('1');
         //查询回访情况
         $statistics['spotdata'] = $this->spotchartOp('1');
@@ -466,6 +496,8 @@ class dashboardControl extends SystemControl{
         $statistics['healthspotdata'] = $this->healthfilespotchartOp('1');
         //查询业务开展数量情况
         $statistics['healthbusinessdata'] = $this->healthbusinesschartOp('1');
+        //查询会员分布情况
+        $statistics['membernumber'] = $this->membernumchartOp('1');
         echo json_encode($statistics);
         exit;
     }

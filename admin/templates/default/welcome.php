@@ -214,36 +214,28 @@
             </dd>
 
         </dl>
+
         <dl class="member">
-            <div class="rightpanel" text="member">
-                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id1" name="member_id" value="1" checked><label for="member_id1">全部</label>
-                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id2" name="member_id" value="2"><label for="member_id2">今天</label>
-                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id3" name="member_id" value="3"><label for="member_id3">本月</label>
-                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id4" name="member_id" value="4"><label for="member_id4">本年</label>
-                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id5" name="member_id" value="5"><label for="member_id5">昨天</label>
-                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id6" name="member_id" value="6"><label for="member_id6">上月</label>
-                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id7" name="member_id" value="7"><label for="member_id7">上年</label>
-            </div>
             <dt>
-            <div id="membertabs-1" class="showdiv">
+            <div id="membernumbertabs-1" class="showdiv">
 
             </div>
-            <div id="membertabs-2" class="showdiv">
+            <div id="membernumbertabs-2" class="showdiv">
 
             </div>
-            <div id="membertabs-3" class="showdiv">
-
+            <div id="membernumbertabs-3" class="showdiv">
+                <h1 style="text-align: center">会员分布情况</h1>
             </div>
             </dt>
             <dd>
                 <ul>
-                    <li class="w33pre none"><a href="#membertabs-1">饼图</a></li>
-                    <li class="w33pre none"><a href="#membertabs-2">柱状图</a></li>
-                    <li class="w34pre none"><a href="#membertabs-3">列表</a></li>
+                    <li class="w33pre none"><a href="#membernumbertabs-1">饼图</a></li>
+                    <li class="w33pre none"><a href="#membernumbertabs-2">柱状图</a></li>
+                    <li class="w34pre none"><a href="#membernumbertabs-3">列表</a></li>
                 </ul>
             </dd>
-
         </dl>
+
         <dl class="member">
             <div class="rightpanel" text="healthfile">
                 <input type="radio" class="selectradio" onclick="updatehealthfile(this)" id="healthfile_id1" name="healthfile_id" value="1" checked><label for="healthfile_id1">全部</label>
@@ -274,32 +266,33 @@
             </dd>
 
         </dl>
+
         <dl class="member">
-            <div class="rightpanel" text="consume">
-                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id1" name="consume_id" value="1" checked><label for="consume_id1">全部</label>
-                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id2" name="consume_id" value="2"><label for="consume_id2">今天</label>
-                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id3" name="consume_id" value="3"><label for="consume_id3">本月</label>
-                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id4" name="consume_id" value="4"><label for="consume_id4">本年</label>
-                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id5" name="consume_id" value="5"><label for="consume_id5">昨天</label>
-                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id6" name="consume_id" value="6"><label for="consume_id6">上月</label>
-                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id7" name="consume_id" value="7"><label for="consume_id7">上年</label>
+            <div class="rightpanel" text="member">
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id1" name="member_id" value="1" checked><label for="member_id1">全部</label>
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id2" name="member_id" value="2"><label for="member_id2">今天</label>
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id3" name="member_id" value="3"><label for="member_id3">本月</label>
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id4" name="member_id" value="4"><label for="member_id4">本年</label>
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id5" name="member_id" value="5"><label for="member_id5">昨天</label>
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id6" name="member_id" value="6"><label for="member_id6">上月</label>
+                <input type="radio" class="selectradio" onclick="updatemember(this)" id="member_id7" name="member_id" value="7"><label for="member_id7">上年</label>
             </div>
             <dt>
-            <div id="consumetabs-1" class="showdiv">
+            <div id="membertabs-1" class="showdiv">
 
             </div>
-            <div id="consumetabs-2" class="showdiv">
+            <div id="membertabs-2" class="showdiv">
 
             </div>
-            <div id="consumetabs-3" class="showdiv">
+            <div id="membertabs-3" class="showdiv">
 
             </div>
             </dt>
             <dd>
                 <ul>
-                    <li class="w33pre none"><a href="#consumetabs-1">饼图</a></li>
-                    <li class="w33pre none"><a href="#consumetabs-2">柱状图</a></li>
-                    <li class="w34pre none"><a href="#consumetabs-3">列表</a></li>
+                    <li class="w33pre none"><a href="#membertabs-1">饼图</a></li>
+                    <li class="w33pre none"><a href="#membertabs-2">柱状图</a></li>
+                    <li class="w34pre none"><a href="#membertabs-3">列表</a></li>
                 </ul>
             </dd>
 
@@ -337,35 +330,36 @@
         </dl>
 
         <dl class="member">
-            <div class="rightpanel" text="spot">
-                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id1" name="spot_id" value="1" checked><label for="spot_id1">全部</label>
-                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id2" name="spot_id" value="2"><label for="spot_id2">今天</label>
-                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id3" name="spot_id" value="3"><label for="spot_id3">本月</label>
-                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id4" name="spot_id" value="4"><label for="spot_id4">本年</label>
-                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id5" name="spot_id" value="5"><label for="spot_id5">昨天</label>
-                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id6" name="spot_id" value="6"><label for="spot_id6">上月</label>
-                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id7" name="spot_id" value="7"><label for="spot_id7">上年</label>
+            <div class="rightpanel" text="consume">
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id1" name="consume_id" value="1" checked><label for="consume_id1">全部</label>
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id2" name="consume_id" value="2"><label for="consume_id2">今天</label>
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id3" name="consume_id" value="3"><label for="consume_id3">本月</label>
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id4" name="consume_id" value="4"><label for="consume_id4">本年</label>
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id5" name="consume_id" value="5"><label for="consume_id5">昨天</label>
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id6" name="consume_id" value="6"><label for="consume_id6">上月</label>
+                <input type="radio" class="selectradio" onclick="updateconsume(this)" id="consume_id7" name="consume_id" value="7"><label for="consume_id7">上年</label>
             </div>
             <dt>
-            <div id="spottabs-1" class="showdiv">
+            <div id="consumetabs-1" class="showdiv">
 
             </div>
-            <div id="spottabs-2" class="showdiv">
+            <div id="consumetabs-2" class="showdiv">
 
             </div>
-            <div id="spottabs-3" class="showdiv">
+            <div id="consumetabs-3" class="showdiv">
 
             </div>
             </dt>
             <dd>
                 <ul>
-                    <li class="w33pre none"><a href="#spottabs-1">饼图</a></li>
-                    <li class="w33pre none"><a href="#spottabs-2">柱状图</a></li>
-                    <li class="w34pre none"><a href="#spottabs-3">列表</a></li>
+                    <li class="w33pre none"><a href="#consumetabs-1">饼图</a></li>
+                    <li class="w33pre none"><a href="#consumetabs-2">柱状图</a></li>
+                    <li class="w34pre none"><a href="#consumetabs-3">列表</a></li>
                 </ul>
             </dd>
 
         </dl>
+
 
         <dl class="member">
             <div class="rightpanel" text="healthbusiness">
@@ -397,6 +391,40 @@
             </dd>
 
         </dl>
+
+
+        <dl class="member">
+            <div class="rightpanel" text="spot">
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id1" name="spot_id" value="1" checked><label for="spot_id1">全部</label>
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id2" name="spot_id" value="2"><label for="spot_id2">今天</label>
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id3" name="spot_id" value="3"><label for="spot_id3">本月</label>
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id4" name="spot_id" value="4"><label for="spot_id4">本年</label>
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id5" name="spot_id" value="5"><label for="spot_id5">昨天</label>
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id6" name="spot_id" value="6"><label for="spot_id6">上月</label>
+                <input type="radio" class="selectradio" onclick="updatespot(this)" id="spot_id7" name="spot_id" value="7"><label for="spot_id7">上年</label>
+            </div>
+            <dt>
+            <div id="spottabs-1" class="showdiv">
+
+            </div>
+            <div id="spottabs-2" class="showdiv">
+
+            </div>
+            <div id="spottabs-3" class="showdiv">
+
+            </div>
+            </dt>
+            <dd>
+                <ul>
+                    <li class="w33pre none"><a href="#spottabs-1">饼图</a></li>
+                    <li class="w33pre none"><a href="#spottabs-2">柱状图</a></li>
+                    <li class="w34pre none"><a href="#spottabs-3">列表</a></li>
+                </ul>
+            </dd>
+
+        </dl>
+
+
 
 
 
@@ -489,6 +517,9 @@
 
             var healthbusinessdata = getData(data['healthbusinessdata'], 'name', 'num', ['机构编码', '机构名称'], '总业务数为{point.y}次');
             initchart(healthbusinessdata, '业务开展情况', '业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0);
+
+            var membernumber = getData(data['membernumber'], 'name', 'num', ['机构编码', '机构名称'], '总会员数为{point.y}');
+            initchart(healthbusinessdata, '会员分布情况', '数量', '社区', 'membernumbertabs', gethealthbusiness,{ pointFormat: '总会员数为{point.y}',useHTML: true},0);
 
             $(".member").tabs();
             $(".detailtr").tooltip({content:gettext,track :true,tooltipClass:'mytooltip'});
