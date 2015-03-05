@@ -519,7 +519,7 @@
             initchart(healthbusinessdata, '业务开展情况', '业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0);
 
             var membernumber = getData(data['membernumber'], 'name', 'num', ['机构编码', '机构名称'], '总会员数为{point.y}');
-            initchart(healthbusinessdata, '会员分布情况', '数量', '社区', 'membernumbertabs', gethealthbusiness,{ pointFormat: '总会员数为{point.y}',useHTML: true},0);
+            initchart(membernumber, '会员分布情况', '数量', '社区', 'membernumbertabs', gethealthbusiness,{ pointFormat: '总会员数为{point.y}',useHTML: true},0);
 
             $(".member").tabs();
             $(".detailtr").tooltip({content:gettext,track :true,tooltipClass:'mytooltip'});
