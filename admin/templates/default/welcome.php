@@ -645,8 +645,9 @@
         var type = $(obj).val();
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
             console.log(data);
-            var salechartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总销售金额为￥{point.y}元');
-            updatechart(salechartcfg, '销售情况', '销售金额', '社区', 'saletabs', getmoney,{ pointFormat: '总销售金额为￥{point.y}元',useHTML: true},0);
+            var salechartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总金额为￥{point.y}元');
+            updatechart(salechartcfg, '收入汇总', '金额', '社区', 'saletabs', getmoney,{ pointFormat: '总金额为￥{point.y}元',useHTML: true},0);
+
         });
     }
     function updatemember(obj){
