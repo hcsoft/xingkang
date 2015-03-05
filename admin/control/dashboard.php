@@ -255,10 +255,34 @@ class dashboardControl extends SystemControl{
         }else if($type=='7'){
             $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and checkout.RechargeDate< \''.date('Y-1-1',time()).'\'';
         }
-        $sql = "select  b.id , b.name , sum(-RechargeMoney) as num
+
+        $outdatesql = '';
+        if($type=='2'){
+            $outdatesql = ' and out.dco_date>= \''.date('Y-m-d',time()). '\' and out.dco_date< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='3'){
+            $outdatesql = ' and out.dco_date>= \''.date('Y-m-1',time()). '\' and out.dco_date< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='4'){
+            $outdatesql = ' and out.dco_date>= \''.date('Y-1-1',time()). '\' and out.dco_date< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='5'){
+            $outdatesql = ' and out.dco_date>= \''.date('Y-m-d',strtotime('-1 day')). '\' and out.dco_date< \''.date('Y-m-d',time()).'\'';
+        }else if($type=='6'){
+            $outdatesql = ' and out.dco_date>= \''.date('Y-m-d',strtotime('-1 month')). '\' and out.dco_date< \''.date('Y-m-1',time()).'\'';
+        }else if($type=='7'){
+            $outdatesql = ' and out.dco_date>= \''.date('Y-m-d',strtotime('-1 year')). '\' and out.dco_date< \''.date('Y-1-1',time()).'\'';
+        }
+        $sql = "  select id , name ,sum(num) as num
+                  from (
+                    select  b.id , b.name , -RechargeMoney as num
                     from  center_MemberRecharge checkout left join  Organization b  on checkout.OrgID = b.id
                     where checkout.OrgID in (select orgid from map_org_wechat) and checkout.[type]=2 $datesql
-              group by b.id , b.name having sum(-RechargeMoney) >0 order by sum(-RechargeMoney) desc   ";
+                  union all
+                    select b.id , b.name , fCO_FactMoney as num
+                    from center_checkout out left join  Organization b  on out.OrgID = b.id
+                    where out.orgid in(select orgid from map_org_wechat) and isnull(smemberid , '') <> '' $outdatesql
+                    ) datatable
+                group by id ,name
+                order by sum(num) desc
+               ";
         $stmt = $conn->query($sql);
         $consumelist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
