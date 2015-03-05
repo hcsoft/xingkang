@@ -467,8 +467,8 @@
             var orgchartcfg = getData(data['orgdata'], 'name', 'num', ['机构编码', '机构名称'], '共?家机构');
             initchart(orgchartcfg, '社区建设', '社区数量', '行政区划', 'orgtabs', '共?家机构',{ formatter: showhtml,useHTML: true},2);
 
-            var salechartcfg = getData(data['saledata'], 'name', 'num', ['机构编码', '机构名称'], '总销售金额为￥{point.y}元');
-            initchart(salechartcfg, '销售情况', '销售金额', '社区', 'saletabs', getmoney,{ pointFormat: '总销售金额为￥{point.y}元',useHTML: true},0);
+            var salechartcfg = getData(data['saledata'], 'name', 'num', ['机构编码', '机构名称'], '总金额为￥{point.y}元');
+            initchart(salechartcfg, '收入汇总', '金额', '社区', 'saletabs', getmoney,{ pointFormat: '总金额为￥{point.y}元',useHTML: true},0);
 
             var memberchartcfg = getData(data['memberdata'], 'name', 'num', ['机构编码', '机构名称'], '总充值金额为￥{point.y}元');
             initchart(memberchartcfg, '会员充值情况', '充值金额', '社区', 'membertabs', getincome,{ pointFormat: '总充值金额为￥{point.y}元',useHTML: true},0);
