@@ -272,7 +272,8 @@ class dashboardControl extends SystemControl{
         }
         $sql = "  select id , name ,sum(num) as num
                   from (
-                    select  b.id , b.name , -RechargeMoney as num
+                    select  b.id ,
+                    b.name , -RechargeMoney as num
                     from  center_MemberRecharge checkout left join  Organization b  on checkout.OrgID = b.id
                     where checkout.OrgID in (select orgid from map_org_wechat) and checkout.[type]=2 $datesql
                   union all
@@ -281,6 +282,7 @@ class dashboardControl extends SystemControl{
                     where out.orgid in(select orgid from map_org_wechat) and isnull(smemberid , '') <> '' $outdatesql
                     ) datatable
                 group by id ,name
+                having sum(num)>0
                 order by sum(num) desc
                ";
         $stmt = $conn->query($sql);
