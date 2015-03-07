@@ -684,14 +684,35 @@ class memberControl extends SystemControl {
 
 	public function psresetOp()
 	{
-		//spotcheck_spot
 		try {
 			$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 			$cardid = $_REQUEST['cardid'];
 			$sql = " update shopnc_member set  member_passwd = '@@@@@@' where member_id = ? ";
 			$stmt = $conn->prepare($sql);
 			$stmt->execute(array($cardid));
+
 			echo json_encode(array('success' => true, 'msg' => '重置成功!'));
+		} catch (Exception $e) {
+			echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+		}
+		exit;
+	}
+
+	public function membermoneydetailOp(){
+		try {
+			$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+			$cardid = $_REQUEST['cardid1'];
+			$datestart = date('2000-1-1',time());
+			$dateend = date('2030-12-31',time());
+			$sql = " SET NOCOUNT ON; exec pFMemberAccount '$cardid', '$datestart','$dateend' ;SET NOCOUNT off;";
+			$stmt = $conn->prepare($sql);
+
+			$stmt->execute(array($cardid));
+			$data_list = array ();
+			while ( $row = $stmt->fetchObject () ) {
+				array_push ( $data_list, $row );
+			}
+			echo json_encode(array('success' => true, 'msg' => '查询成功!' ,'data'=>$data_list ,'sql'=>$sql));
 		} catch (Exception $e) {
 			echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
 		}

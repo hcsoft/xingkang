@@ -95,7 +95,6 @@
                 <th class="align-center">办卡渠道</th>
                 <th class="align-center">消费情况</th>
                 <th class="align-center">账户余额</th>
-                <th class="align-center"><?php echo $lang['member_index_login']; ?></th>
                 <th class="align-center"><?php echo $lang['nc_handle']; ?></th>
             </tr>
             <tbody>
@@ -165,8 +164,9 @@
                             </p>
 
                             <p>消费积分: <strong class="red"><?php echo $v['member_points']; ?></strong></p>
+                            <a href="javascript:void(0)"
+                               onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">充值消费明细</a>
                         </td>
-                        <td class="align-center"><?php echo $v['member_state'] == 1 ? $lang['member_edit_allow'] : $lang['member_edit_deny']; ?></td>
                         <td class="align-center">
                             <a href="javascript:void(0)" onclick="showpsreset('<?php echo $v['member_id'] ?>',this)">密码重置</a>
                             <!--<a
@@ -196,7 +196,7 @@
     </form>
 </div>
 <div id="psresetdialog" title="密码重置">
-    <span id="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
+    <span class="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
     <span>
         <form>
             <input type="hidden" id="cardid" name="cardid">
@@ -204,6 +204,58 @@
         密码将被重置为000000，是否确认重置？
     </span>
 </div>
+<style>
+    #detaildialog table {
+        width: 100%;
+    }
+    #detaildialog table tbody tr td{
+        text-align: right;
+    }
+    /*前3列居中*/
+    #detaildialog table tbody tr td:first-child,#detaildialog table tbody tr td:first-child + td,#detaildialog table tbody tr td:first-child + td+td{
+        text-align: center;
+    }
+
+
+    #detaildialog table th {
+        white-space: pre;
+        background-color: lightblue;
+        border: solid 1px #808080;
+        font-weight: bold;
+        padding: 5px;
+        text-align: center;
+    }
+</style>
+<div id="detaildialog" title="充值消费明细">
+    <span class="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
+    <span>
+        <form>
+            <input type="hidden" id="cardid1" name="cardid1">
+        </form>
+        <table>
+            <thead>
+            <tr>
+                <th>数据类型</th>
+                <th>业务日期</th>
+                <th>经办人</th>
+                <th>预存增减</th>
+                <th>储值余额</th>
+                <th>赠送金额增减</th>
+                <th>赠送余额</th>
+                <th>积分消费金额</th>
+                <th>兑换积分</th>
+                <th>积分增减</th>
+                <th>积分余额</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <span class="datamsg">无数据!</span>
+    </span>
+</div>
+
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"
         charset="utf-8"></script>
@@ -232,28 +284,91 @@
                         data: $("#psresetdialog form").serialize(), dataType: 'json', success: function (data) {
                             console.log(data);
                             if (data.success) {
-                                success(data.msg);
+                                success('#psresetdialog', data.msg);
                             } else {
-                                error(data.msg);
+                                error('#psresetdialog', data.msg);
                             }
                         }
                     });
                 }
             }
         });
+
+        $("#detaildialog").dialog({
+            resizable: false,
+            maxHeight: 200,
+            width: 900,
+//            height:250,
+//            modal: true,
+            autoOpen: false,
+            buttons: {
+                "关闭": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
     });
     function showpsreset(id, elem) {
-        $("#errormsg").html('');
-        $("#cardid").val(id);
+        $("#psresetdialog .errormsg").html('');
+        $("#psresetdialog #cardid").val(id);
         $("#psresetdialog").dialog("option", "position", {my: "right top", at: "left bottom", of: $(elem)});
         $("#psresetdialog").dialog("open");
     }
-    function error(msg) {
-        $("#errormsg").css("color", "red");
-        $("#errormsg").html(msg);
+
+    function showdetail(objstr, elem) {
+        var obj = eval('(' + unescape(objstr) + ')');
+        $("#detaildialog .errormsg").html('');
+        $("#cardid1").val(obj.member_id);
+        $("#detaildialog .datamsg").html('正在查询....');
+        $.ajax({
+            url: "index.php?act=member&op=membermoneydetail",
+            data: $("#detaildialog form").serialize(), dataType: 'json', success: function (data) {
+                console.log(data);
+                if (data.data && data.data.length > 0) {
+                    $("#detaildialog .datamsg").html('');
+                    $("#detaildialog table tbody").html('');
+                    for(var i = 0; i <data.data.length;i++){
+                        var row = data.data[i];
+                        var rowstr = '<tr>';
+                        rowstr+='<td>'+row.DataType+'</td>';
+                        rowstr+='<td>'+row.dPayDate+'</td>';
+                        rowstr+='<td>'+row.MakePerson+'</td>';
+                        rowstr+='<td>'+numtostr(row.InitRecharge)+'</td>';
+                        rowstr+='<td>'+numtostr(row.InitConsume)+'</td>';
+//                        rowstr+='<td>'+numtostr(row.InitScale)+'</td>';
+                        rowstr+='<td>'+numtostr(row.fRecharge)+'</td>';
+                        rowstr+='<td>'+numtostr(row.fConsume)+'</td>';
+                        rowstr+='<td>'+numtostr(row.fScaleToMoney)+'</td>';
+                        rowstr+='<td>'+numtostr(row.fScale)+'</td>';
+                        rowstr+='<td>'+numtostr(row.fAddScale)+'</td>';
+                        rowstr+='<td>'+numtostr(row.fCO_IncomeMoney)+'</td>';
+                        rowstr+='</tr>';
+                        $("#detaildialog table tbody").append(rowstr)
+                    }
+                } else {
+                    $("#detaildialog .datamsg").html('无数据!');
+                }
+                $("#detaildialog").dialog("option", "title", '充值消费明细  ' + obj.member_truename);
+                $("#detaildialog").dialog("open");
+            }
+        });
+
     }
-    function success(msg) {
-        $("#errormsg").css("color", "green");
-        $("#errormsg").html(msg);
+    function numtostr(numstr){
+        var num = parseFloat(numstr);
+        if(num>0){
+            return ""+num.toFixed(2);
+        }else{
+            return "";
+        }
+
+    }
+    function error(selector, msg) {
+        $(selector + " .errormsg").css("color", "red");
+        $(selector + " .errormsg").html(msg);
+    }
+    function success(selector, msg) {
+        $(selector + " .errormsg").css("color", "green");
+        $(selector + " .errormsg").html(msg);
     }
 </script>

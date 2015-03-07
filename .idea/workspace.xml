@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/dashboard.php" afterPath="$PROJECT_DIR$/admin/control/dashboard.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/member.index.php" afterPath="$PROJECT_DIR$/admin/templates/default/member.index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/member.php" afterPath="$PROJECT_DIR$/admin/control/member.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -28,56 +29,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7610242" vertical-offset="3469" max-vertical-offset="7546">
-              <caret line="286" column="25" selection-start-line="286" selection-start-column="25" selection-end-line="286" selection-end-column="25" />
+            <state vertical-scroll-proportion="-7.7391305" vertical-offset="3644" max-vertical-offset="7574">
+              <caret line="273" column="24" selection-start-line="273" selection-start-column="24" selection-end-line="273" selection-end-column="24" />
               <folding>
-                <marker date="1425543264275" expanded="true" signature="5446:5678" placeholder="select c.id ..map_org_wechat..." />
-                <marker date="1425543264275" expanded="true" signature="5842:5965" placeholder="select id,na..Organization..." />
-                <marker date="1425543264275" expanded="true" signature="5932:5964" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543264275" expanded="true" signature="7569:7884" placeholder="select b.id ..Center_CheckOut..." />
-                <marker date="1425543264275" expanded="true" signature="7770:7802" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543264275" expanded="true" signature="9457:9824" placeholder="select b.id ..center_MemberRecharge..." />
-                <marker date="1425543264275" expanded="true" signature="9661:9693" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543264275" expanded="true" signature="12416:13110" placeholder="select id , ..id..." />
-                <marker date="1425543264275" expanded="true" signature="12416:13166" placeholder="select id , ..id..." />
-                <marker date="1425543264275" expanded="true" signature="12474:13082" placeholder="select id , ..id..." />
-                <marker date="1425543264275" expanded="true" signature="12474:13062" placeholder="select id , ..id..." />
-                <marker date="1425543264275" expanded="true" signature="12495:13050" placeholder="select b.id ..center_MemberRecharge..." />
-                <marker date="1425543264275" expanded="true" signature="12695:12727" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543264275" expanded="true" signature="12787:13050" placeholder="select b.id ..center_MemberRecharge..." />
-                <marker date="1425543264275" expanded="true" signature="12808:13050" placeholder="select b.id ..center_checkout..." />
-                <marker date="1425543264275" expanded="true" signature="12983:13015" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543264275" expanded="true" signature="13166:13181" placeholder="select b.id ..center_checkout..." />
-                <marker date="1425543264275" expanded="true" signature="14750:15048" placeholder="select b.id ..shopnc_member..." />
-                <marker date="1425543264275" expanded="true" signature="14942:14974" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543264275" expanded="true" signature="16560:16894" placeholder="select b.id ..spotcheck_main..." />
-                <marker date="1425543264275" expanded="true" signature="16747:16779" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543264275" expanded="true" signature="18328:18698" placeholder="select b.id ..healthfile..." />
-                <marker date="1425543264275" expanded="true" signature="18575:18607" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543264275" expanded="true" signature="20227:20561" placeholder="select b.id ..spotcheck_main..." />
-                <marker date="1425543264275" expanded="true" signature="20414:20446" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543264275" expanded="true" signature="22020:25785" placeholder="select id , ..id..." />
-                <marker date="1425543264275" expanded="true" signature="22089:25683" placeholder="select c.id ..MedicalExam..." />
-                <marker date="1425543264275" expanded="true" signature="22275:22307" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425543592298" expanded="true" signature="5446:5678" placeholder="select c.id ..map_org_wechat..." />
+                <marker date="1425543592298" expanded="true" signature="5842:5965" placeholder="select id,na..Organization..." />
+                <marker date="1425543592298" expanded="true" signature="5932:5964" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425543592298" expanded="true" signature="7569:7884" placeholder="select b.id ..Center_CheckOut..." />
+                <marker date="1425543592298" expanded="true" signature="7770:7802" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425543592298" expanded="true" signature="9457:9824" placeholder="select b.id ..center_MemberRecharge..." />
+                <marker date="1425543592298" expanded="true" signature="9661:9693" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425543592298" expanded="true" signature="12416:13220" placeholder="select id , ..id..." />
+                <marker date="1425543592298" expanded="true" signature="12495:13070" placeholder="select b.id ..center_MemberRecharge..." />
+                <marker date="1425543592298" expanded="true" signature="12715:12747" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425543592298" expanded="true" signature="14804:15102" placeholder="select b.id ..shopnc_member..." />
+                <marker date="1425543592298" expanded="true" signature="14996:15028" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425543592298" expanded="true" signature="16614:16948" placeholder="select b.id ..spotcheck_main..." />
+                <marker date="1425543592298" expanded="true" signature="16801:16833" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425543592298" expanded="true" signature="18382:18752" placeholder="select b.id ..healthfile..." />
+                <marker date="1425543592298" expanded="true" signature="18629:18661" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425543592298" expanded="true" signature="20281:20615" placeholder="select b.id ..spotcheck_main..." />
+                <marker date="1425543592298" expanded="true" signature="20468:20500" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425543592298" expanded="true" signature="22074:25839" placeholder="select id , ..id..." />
+                <marker date="1425543592298" expanded="true" signature="22143:25737" placeholder="select c.id ..MedicalExam..." />
+                <marker date="1425543592298" expanded="true" signature="22329:22361" placeholder="select orgid..map_org_wechat..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="welcome.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
+      <file leaf-file-name="member.index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/templates/default/member.index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.913043" vertical-offset="6707" max-vertical-offset="11508">
-              <caret line="497" column="53" selection-start-line="497" selection-start-column="45" selection-end-line="497" selection-end-column="53" />
+            <state vertical-scroll-proportion="-3.5810812" vertical-offset="4733" max-vertical-offset="5320">
+              <caret line="357" column="37" selection-start-line="357" selection-start-column="37" selection-end-line="357" selection-end-column="37" />
               <folding>
-                <element signature="n#style#0;n#h1#0;n#div#2;n#dl#2;n#div#2;n#div#0;n#!!top" expanded="true" />
-                <marker date="1425534368093" expanded="true" signature="27137:27171" placeholder="..." />
-                <marker date="1425534368093" expanded="true" signature="27239:27290" placeholder="..." />
-                <marker date="1425534368093" expanded="true" signature="32114:32148" placeholder="..." />
-                <marker date="1425534368093" expanded="true" signature="32216:32267" placeholder="..." />
+                <element signature="n#style#0;n#span#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#2;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,9 +77,22 @@
       <file leaf-file-name="mssqlpdo.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/framework/db/mssqlpdo.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.0434783" vertical-offset="0" max-vertical-offset="266">
-              <caret line="10" column="28" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="28" />
+            <state vertical-scroll-proportion="-3.652174" vertical-offset="0" max-vertical-offset="266">
+              <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="member.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin/control/member.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.76" vertical-offset="9653" max-vertical-offset="10178">
+              <caret line="718" column="13" selection-start-line="718" selection-start-column="13" selection-end-line="718" selection-end-column="13" />
+              <folding>
+                <marker date="1425739610099" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1425739610099" expanded="true" signature="22115:22185" placeholder="update shopn..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -108,10 +112,12 @@
       <list>
         <option value="$PROJECT_DIR$/data/config/config.ini.php" />
         <option value="$PROJECT_DIR$/admin/control/login.php" />
-        <option value="$PROJECT_DIR$/admin/control/member.php" />
-        <option value="$PROJECT_DIR$/admin/templates/default/member.index.php" />
-        <option value="$PROJECT_DIR$/admin/templates/default/welcome.php" />
         <option value="$PROJECT_DIR$/admin/control/dashboard.php" />
+        <option value="$PROJECT_DIR$/admin/framework/libraries/process.class.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/welcome.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/member.index.php" />
+        <option value="$PROJECT_DIR$/admin/control/member.php" />
+        <option value="$PROJECT_DIR$/core/framework/db/mssqlpdo.php" />
       </list>
     </option>
   </component>
@@ -193,6 +199,45 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Default">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="xingkang">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Tests" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Changed Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="xingkang">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT=".idea">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -267,45 +312,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Default">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="xingkang">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Tests" />
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Changed Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="xingkang">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT=".idea">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -365,15 +371,15 @@
       <BehatRunner />
       <method />
     </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-options />
       <gulpfile />
       <tasks />
       <pass-parent-envs>true</pass-parent-envs>
       <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <list size="0" />
@@ -391,12 +397,6 @@
       <workItem from="1409364463869" duration="11000" />
       <workItem from="1409407958927" duration="9000" />
       <workItem from="1409840606175" duration="1113000" />
-    </task>
-    <task id="LOCAL-00060" summary="1,修改了年月日,改成只能单独选中">
-      <created>1415326463211</created>
-      <option name="number" value="00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1415326463212</updated>
     </task>
     <task id="LOCAL-00061" summary="1,修改了门诊收费员报表,增加了字段">
       <created>1415344166314</created>
@@ -686,7 +686,13 @@
       <option name="project" value="LOCAL" />
       <updated>1425004549583</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="1,防止出现的负值导致图表异常">
+      <created>1425543637670</created>
+      <option name="number" value="00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1425543637698</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -701,6 +707,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24934725" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -713,13 +720,12 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24934725" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -743,7 +749,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
-    <MESSAGE value="1,修改了仓库增加了商品名称和商品编号查询&#10;2,仓库增加了导出" />
     <MESSAGE value="1,修改了消费汇总无会员数据的问题,改成左关联" />
     <MESSAGE value="1,仓库管理增加了机构选择" />
     <MESSAGE value="1,仓库明细增加了产地厂牌&#10;2,销售明细增加了财务分类的查询条件" />
@@ -768,7 +773,8 @@
     <MESSAGE value="1,结算单明细无处方金额的问题" />
     <MESSAGE value="1,结算单明细增加了汇总" />
     <MESSAGE value="1,会员增加了密码重置功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,会员增加了密码重置功能" />
+    <MESSAGE value="1,防止出现的负值导致图表异常" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,防止出现的负值导致图表异常" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1052,14 +1058,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.9130435" vertical-offset="0" max-vertical-offset="420">
           <caret line="13" column="42" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/framework/libraries/process.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.608696" vertical-offset="984" max-vertical-offset="3094">
-          <caret line="91" column="34" selection-start-line="91" selection-start-column="27" selection-end-line="91" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -1074,14 +1072,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.29535866" vertical-offset="252" max-vertical-offset="840">
           <caret line="28" column="50" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64453125" vertical-offset="300" max-vertical-offset="1064">
-          <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -1097,88 +1087,94 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2072" max-vertical-offset="3822">
           <caret line="166" column="5" selection-start-line="149" selection-start-column="4" selection-end-line="166" selection-end-column="5" />
-          <folding>
-            <marker date="1410470208421" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..*..." />
-            <marker date="1410470208421" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1410470208421" expanded="true" signature="-1:-1" placeholder="SELECT TOP :..." />
-            <marker date="1410470208421" expanded="true" signature="-1:-1" placeholder="select * fro..spotcheck_spot..." />
-            <marker date="1410470208421" expanded="true" signature="-1:-1" placeholder="insert into ..." />
-            <marker date="1410470208421" expanded="true" signature="-1:-1" placeholder="select * fro..spotcheck_spot..." />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/member.php">
+    <entry file="file://$PROJECT_DIR$/admin/control/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="9345" max-vertical-offset="9884">
-          <caret line="686" column="24" selection-start-line="686" selection-start-column="24" selection-end-line="686" selection-end-column="24" />
+        <state vertical-scroll-proportion="-7.130435" vertical-offset="214" max-vertical-offset="1064">
+          <caret line="27" column="36" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/member.index.php">
+    <entry file="file://$PROJECT_DIR$/admin/framework/libraries/process.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.0" vertical-offset="2994" max-vertical-offset="3710">
-          <caret line="250" column="25" selection-start-line="250" selection-start-column="25" selection-end-line="250" selection-end-column="25" />
+        <state vertical-scroll-proportion="-5.304348" vertical-offset="774" max-vertical-offset="3108">
+          <caret line="64" column="6" selection-start-line="64" selection-start-column="6" selection-end-line="64" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.913043" vertical-offset="6707" max-vertical-offset="11508">
-          <caret line="497" column="53" selection-start-line="497" selection-start-column="45" selection-end-line="497" selection-end-column="53" />
+        <state vertical-scroll-proportion="0.28515625" vertical-offset="7372" max-vertical-offset="11508">
+          <caret line="537" column="14" selection-start-line="537" selection-start-column="14" selection-end-line="537" selection-end-column="14" />
           <folding>
-            <element signature="n#style#0;n#h1#0;n#div#2;n#dl#2;n#div#2;n#div#0;n#!!top" expanded="true" />
-            <marker date="1425534368093" expanded="true" signature="27137:27171" placeholder="..." />
-            <marker date="1425534368093" expanded="true" signature="27239:27290" placeholder="..." />
-            <marker date="1425534368093" expanded="true" signature="32114:32148" placeholder="..." />
-            <marker date="1425534368093" expanded="true" signature="32216:32267" placeholder="..." />
+            <marker date="1425738195595" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1425738195595" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1425738195595" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1425738195595" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.7391305" vertical-offset="3644" max-vertical-offset="7574">
+          <caret line="273" column="24" selection-start-line="273" selection-start-column="24" selection-end-line="273" selection-end-column="24" />
+          <folding>
+            <marker date="1425543592298" expanded="true" signature="5446:5678" placeholder="select c.id ..map_org_wechat..." />
+            <marker date="1425543592298" expanded="true" signature="5842:5965" placeholder="select id,na..Organization..." />
+            <marker date="1425543592298" expanded="true" signature="5932:5964" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425543592298" expanded="true" signature="7569:7884" placeholder="select b.id ..Center_CheckOut..." />
+            <marker date="1425543592298" expanded="true" signature="7770:7802" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425543592298" expanded="true" signature="9457:9824" placeholder="select b.id ..center_MemberRecharge..." />
+            <marker date="1425543592298" expanded="true" signature="9661:9693" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425543592298" expanded="true" signature="12416:13220" placeholder="select id , ..id..." />
+            <marker date="1425543592298" expanded="true" signature="12495:13070" placeholder="select b.id ..center_MemberRecharge..." />
+            <marker date="1425543592298" expanded="true" signature="12715:12747" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425543592298" expanded="true" signature="14804:15102" placeholder="select b.id ..shopnc_member..." />
+            <marker date="1425543592298" expanded="true" signature="14996:15028" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425543592298" expanded="true" signature="16614:16948" placeholder="select b.id ..spotcheck_main..." />
+            <marker date="1425543592298" expanded="true" signature="16801:16833" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425543592298" expanded="true" signature="18382:18752" placeholder="select b.id ..healthfile..." />
+            <marker date="1425543592298" expanded="true" signature="18629:18661" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425543592298" expanded="true" signature="20281:20615" placeholder="select b.id ..spotcheck_main..." />
+            <marker date="1425543592298" expanded="true" signature="20468:20500" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425543592298" expanded="true" signature="22074:25839" placeholder="select id , ..id..." />
+            <marker date="1425543592298" expanded="true" signature="22143:25737" placeholder="select c.id ..MedicalExam..." />
+            <marker date="1425543592298" expanded="true" signature="22329:22361" placeholder="select orgid..map_org_wechat..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/framework/db/mssqlpdo.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0434783" vertical-offset="0" max-vertical-offset="266">
-          <caret line="10" column="28" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="28" />
+        <state vertical-scroll-proportion="-3.652174" vertical-offset="0" max-vertical-offset="266">
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/member.index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7610242" vertical-offset="3469" max-vertical-offset="7546">
-          <caret line="286" column="25" selection-start-line="286" selection-start-column="25" selection-end-line="286" selection-end-column="25" />
+        <state vertical-scroll-proportion="-3.5810812" vertical-offset="4733" max-vertical-offset="5320">
+          <caret line="357" column="37" selection-start-line="357" selection-start-column="37" selection-end-line="357" selection-end-column="37" />
           <folding>
-            <marker date="1425543264275" expanded="true" signature="5446:5678" placeholder="select c.id ..map_org_wechat..." />
-            <marker date="1425543264275" expanded="true" signature="5842:5965" placeholder="select id,na..Organization..." />
-            <marker date="1425543264275" expanded="true" signature="5932:5964" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543264275" expanded="true" signature="7569:7884" placeholder="select b.id ..Center_CheckOut..." />
-            <marker date="1425543264275" expanded="true" signature="7770:7802" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543264275" expanded="true" signature="9457:9824" placeholder="select b.id ..center_MemberRecharge..." />
-            <marker date="1425543264275" expanded="true" signature="9661:9693" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543264275" expanded="true" signature="12416:13110" placeholder="select id , ..id..." />
-            <marker date="1425543264275" expanded="true" signature="12416:13166" placeholder="select id , ..id..." />
-            <marker date="1425543264275" expanded="true" signature="12474:13082" placeholder="select id , ..id..." />
-            <marker date="1425543264275" expanded="true" signature="12474:13062" placeholder="select id , ..id..." />
-            <marker date="1425543264275" expanded="true" signature="12495:13050" placeholder="select b.id ..center_MemberRecharge..." />
-            <marker date="1425543264275" expanded="true" signature="12695:12727" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543264275" expanded="true" signature="12787:13050" placeholder="select b.id ..center_MemberRecharge..." />
-            <marker date="1425543264275" expanded="true" signature="12808:13050" placeholder="select b.id ..center_checkout..." />
-            <marker date="1425543264275" expanded="true" signature="12983:13015" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543264275" expanded="true" signature="13166:13181" placeholder="select b.id ..center_checkout..." />
-            <marker date="1425543264275" expanded="true" signature="14750:15048" placeholder="select b.id ..shopnc_member..." />
-            <marker date="1425543264275" expanded="true" signature="14942:14974" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543264275" expanded="true" signature="16560:16894" placeholder="select b.id ..spotcheck_main..." />
-            <marker date="1425543264275" expanded="true" signature="16747:16779" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543264275" expanded="true" signature="18328:18698" placeholder="select b.id ..healthfile..." />
-            <marker date="1425543264275" expanded="true" signature="18575:18607" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543264275" expanded="true" signature="20227:20561" placeholder="select b.id ..spotcheck_main..." />
-            <marker date="1425543264275" expanded="true" signature="20414:20446" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543264275" expanded="true" signature="22020:25785" placeholder="select id , ..id..." />
-            <marker date="1425543264275" expanded="true" signature="22089:25683" placeholder="select c.id ..MedicalExam..." />
-            <marker date="1425543264275" expanded="true" signature="22275:22307" placeholder="select orgid..map_org_wechat..." />
+            <element signature="n#style#0;n#span#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/control/member.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76" vertical-offset="9653" max-vertical-offset="10178">
+          <caret line="718" column="13" selection-start-line="718" selection-start-column="13" selection-end-line="718" selection-end-column="13" />
+          <folding>
+            <marker date="1425739610099" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1425739610099" expanded="true" signature="22115:22185" placeholder="update shopn..." />
           </folding>
         </state>
       </provider>
