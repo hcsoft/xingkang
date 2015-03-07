@@ -60,6 +60,21 @@
                         <a href="index.php?act=member&op=member"
                            class="btns "><span><?php echo $lang['nc_cancel_search'] ?></span></a>
                     <?php } ?></td>
+                <td>
+                    排序字段：
+                    <select name="orderby">
+                        <?php  foreach ($output['orderbys'] as $k => $v) {   ?>
+                            <option value="<?php echo $v['txt']?>"  <?php if ( $v['txt']== $_GET['orderby']){ ?>selected<?php } ?> ><?php echo $v['txt']?></option>
+                        <?php }?>
+                    </select>
+                </td>
+                <td>
+                    顺序：
+                    <select name="order">
+                        <option value="desc" <?php if ( 'desc'== $_GET['order']){ ?>selected<?php } ?> >倒序</option>
+                        <option value="asc"  <?php if ( 'asc'== $_GET['order']){ ?>selected<?php } ?> >正序</option>
+                    </select>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -215,7 +230,10 @@
     #detaildialog table tbody tr td:first-child,#detaildialog table tbody tr td:first-child + td,#detaildialog table tbody tr td:first-child + td+td{
         text-align: center;
     }
-
+    #detaildialog table td  {
+        border: solid 1px #808080;
+        padding:5px;
+    }
 
     #detaildialog table th {
         white-space: pre;
@@ -330,18 +348,18 @@
                     for(var i = 0; i <data.data.length;i++){
                         var row = data.data[i];
                         var rowstr = '<tr>';
-                        rowstr+='<td>'+row.DataType+'</td>';
-                        rowstr+='<td>'+row.dPayDate+'</td>';
-                        rowstr+='<td>'+row.MakePerson+'</td>';
-                        rowstr+='<td>'+numtostr(row.InitRecharge)+'</td>';
-                        rowstr+='<td>'+numtostr(row.InitConsume)+'</td>';
+                        rowstr+='<td>'+textstr(row.datatypename)+'</td>';
+                        rowstr+='<td>'+textstr(row.dPayDate)+'</td>';
+                        rowstr+='<td>'+textstr(row.MakePerson)+'</td>';
+                        rowstr+='<td>'+numtostr(row.fRecharge )+'</td>';
+                        rowstr+='<td>'+numtostr(row.InitRecharge )+'</td>';
 //                        rowstr+='<td>'+numtostr(row.InitScale)+'</td>';
-                        rowstr+='<td>'+numtostr(row.fRecharge)+'</td>';
-                        rowstr+='<td>'+numtostr(row.fConsume)+'</td>';
-                        rowstr+='<td>'+numtostr(row.fScaleToMoney)+'</td>';
-                        rowstr+='<td>'+numtostr(row.fScale)+'</td>';
+                        rowstr+='<td>'+numtostr(row.fConsume )+'</td>';
+                        rowstr+='<td>'+numtostr(row.InitConsume )+'</td>';
+                        rowstr+='<td>'+numtostr(row.fScaleToMoney )+'</td>';
+                        rowstr+='<td>'+numtostr(row.fScale )+'</td>';
                         rowstr+='<td>'+numtostr(row.fAddScale)+'</td>';
-                        rowstr+='<td>'+numtostr(row.fCO_IncomeMoney)+'</td>';
+                        rowstr+='<td>'+numtostr(row.InitScale )+'</td>';
                         rowstr+='</tr>';
                         $("#detaildialog table tbody").append(rowstr)
                     }
@@ -361,7 +379,13 @@
         }else{
             return "";
         }
-
+    }
+    function textstr(tstr) {
+        if (tstr) {
+            return tstr;
+        } else {
+            return '';
+        }
     }
     function error(selector, msg) {
         $(selector + " .errormsg").css("color", "red");

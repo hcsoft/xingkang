@@ -31,6 +31,21 @@ class memberControl extends SystemControl {
 	 */
 	public function memberOp() {
 		$lang = Language::getLangContent ();
+		$orderbys = array(
+			array('txt'=>'类型','col'=> ' a.iCO_Type '),
+			array('txt'=>'结算日期','col'=> ' a.dCO_Date '),
+			array('txt'=>'制单日期','col'=> ' a.dCO_MakeDate '),
+			array('txt'=>'收费员','col'=> ' a.iCO_MakePerson '),
+			array('txt'=>'病人姓名','col'=> ' log.sSickName '),
+			array('txt'=>'处方金额','col'=> ' a.fCO_IncomeMoney '),
+			array('txt'=>'统筹支付','col'=> ' a.fCO_Medicare '),
+			array('txt'=>'医保卡支付','col'=> ' a.fCO_Card '),
+			array('txt'=>'现金支付','col'=> ' a.fCO_Cash '),
+			array('txt'=>'银行卡付','col'=> ' a.fCO_PosPay '),
+			array('txt'=>'预存下账','col'=> ' a.fRecharge '),
+			array('txt'=>'赠送下账','col'=> ' a.fConsume '),
+			array('txt'=>'积分下账金额','col'=> ' a.fScaleToMoney '));
+		Tpl::output('orderbys',$orderbys);
 		$model_member = Model ( 'member' );
 		/**
 		 * 检索条件
