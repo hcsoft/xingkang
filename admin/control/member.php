@@ -40,11 +40,13 @@ class memberControl extends SystemControl {
 		/**
 		 * 检索条件
 		 */
+		$sql = ' from shopnc_member where 1=1 ';
 		if ($_GET['orgids']) {
 			$condition ['CreateOrgID'] = array (
 				'in',
 				 $_GET['orgids']
 			);
+			$sql .='CreateOrgID in ( '.implode(',', $_GET['orgids']) .')';
 		}
 		if(!isset($_GET['orderby'])){
 			$_GET['orderby'] = '预存余额';
@@ -122,7 +124,8 @@ class memberControl extends SystemControl {
 				$member_list [$k] ['member_login_time'] = $v ['member_login_time'] ? date ( 'Y-m-d H:i:s', $v ['member_login_time'] ) : '';
 			}
 		}
-		
+
+
 		Tpl::output ( 'member_id', trim ( $_GET ['member_id'] ) );
 		Tpl::output ( 'search_sort', trim ( $_GET ['search_sort'] ) );
 		Tpl::output ( 'search_field_name', trim ( $_GET ['search_field_name'] ) );
