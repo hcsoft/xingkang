@@ -34,6 +34,21 @@
                 <td>会员卡号</td>
                 <td><input type="text" value="<?php echo $output['member_id']; ?>" name="member_id"
                            class="txt"></td>
+                <td>卡类型</td>
+                <td><select name="cardtype">
+                        <option value="">全部</option>
+                        <option value="0" <?php if ('0'== $_GET['cardtype']){ ?>selected<?php } ?>>普通卡</option>
+                        <option value="1" <?php if ('1'== $_GET['cardtype']){ ?>selected<?php } ?>>储值卡</option>
+                    </select>
+                </td>
+                <td>卡级别</td>
+                <td><select name="cardgrade">
+                        <option value="">全部</option>
+                        <option value="0"  <?php if ('0'== $_GET['cardgrade']){ ?>selected<?php } ?>>健康卡</option>
+                        <option value="1"  <?php if ('1'== $_GET['cardgrade']){ ?>selected<?php } ?>>健康金卡</option>
+                        <option value="2" <?php if ('2'== $_GET['cardgrade']){ ?>selected<?php } ?>>健康钻卡</option>
+                    </select>
+                </td>
 
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
@@ -44,16 +59,17 @@
                 <td>
                     排序字段：
                     <select name="orderby">
-                        <?php  foreach ($output['orderbys'] as $k => $v) {   ?>
-                            <option value="<?php echo $v['txt']?>"  <?php if ( $v['txt']== $_GET['orderby']){ ?>selected<?php } ?> ><?php echo $v['txt']?></option>
-                        <?php }?>
+                        <?php foreach ($output['orderbys'] as $k => $v) { ?>
+                            <option value="<?php echo $v['txt'] ?>"
+                                    <?php if ($v['txt'] == $_GET['orderby']){ ?>selected<?php } ?> ><?php echo $v['txt'] ?></option>
+                        <?php } ?>
                     </select>
                 </td>
                 <td>
                     顺序：
                     <select name="order">
-                        <option value="desc" <?php if ( 'desc'== $_GET['order']){ ?>selected<?php } ?> >倒序</option>
-                        <option value="asc"  <?php if ( 'asc'== $_GET['order']){ ?>selected<?php } ?> >正序</option>
+                        <option value="desc" <?php if ('desc' == $_GET['order']){ ?>selected<?php } ?> >倒序</option>
+                        <option value="asc" <?php if ('asc' == $_GET['order']){ ?>selected<?php } ?> >正序</option>
                     </select>
                 </td>
             </tr>
@@ -65,10 +81,14 @@
             charset="utf-8"></script>
     <link rel="stylesheet" type="text/css"
           href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
-    <link href="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css"/>
-    <link href="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/js/jquery.ztree.all-3.5.min.js"></script>
-    <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.min.js"></script>
+    <link href="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.css" rel="stylesheet"
+          type="text/css"/>
+    <script type="text/javascript"
+            src="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/js/jquery.ztree.all-3.5.min.js"></script>
+    <script type="text/javascript"
+            src="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.min.js"></script>
     <script>
         $(function () {
             //生成机构下拉
@@ -226,16 +246,19 @@
     #detaildialog table {
         width: 100%;
     }
-    #detaildialog table tbody tr td{
+
+    #detaildialog table tbody tr td {
         text-align: right;
     }
+
     /*前3列居中*/
-    #detaildialog table tbody tr td:first-child,#detaildialog table tbody tr td:first-child + td,#detaildialog table tbody tr td:first-child + td+td{
+    #detaildialog table tbody tr td:first-child, #detaildialog table tbody tr td:first-child + td, #detaildialog table tbody tr td:first-child + td + td {
         text-align: center;
     }
-    #detaildialog table td  {
+
+    #detaildialog table td {
         border: solid 1px #808080;
-        padding:5px;
+        padding: 5px;
     }
 
     #detaildialog table th {
@@ -348,22 +371,22 @@
                 if (data.data && data.data.length > 0) {
                     $("#detaildialog .datamsg").html('');
                     $("#detaildialog table tbody").html('');
-                    for(var i = 0; i <data.data.length;i++){
+                    for (var i = 0; i < data.data.length; i++) {
                         var row = data.data[i];
                         var rowstr = '<tr>';
-                        rowstr+='<td>'+textstr(row.datatypename)+'</td>';
-                        rowstr+='<td>'+textstr(row.dPayDate)+'</td>';
-                        rowstr+='<td>'+textstr(row.MakePerson)+'</td>';
-                        rowstr+='<td>'+numtostr(row.fRecharge )+'</td>';
-                        rowstr+='<td>'+numtostr(row.InitRecharge )+'</td>';
+                        rowstr += '<td>' + textstr(row.datatypename) + '</td>';
+                        rowstr += '<td>' + textstr(row.dPayDate) + '</td>';
+                        rowstr += '<td>' + textstr(row.MakePerson) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fRecharge) + '</td>';
+                        rowstr += '<td>' + numtostr(row.InitRecharge) + '</td>';
 //                        rowstr+='<td>'+numtostr(row.InitScale)+'</td>';
-                        rowstr+='<td>'+numtostr(row.fConsume )+'</td>';
-                        rowstr+='<td>'+numtostr(row.InitConsume )+'</td>';
-                        rowstr+='<td>'+numtostr(row.fScaleToMoney )+'</td>';
-                        rowstr+='<td>'+numtostr(row.fScale )+'</td>';
-                        rowstr+='<td>'+numtostr(row.fAddScale)+'</td>';
-                        rowstr+='<td>'+numtostr(row.InitScale )+'</td>';
-                        rowstr+='</tr>';
+                        rowstr += '<td>' + numtostr(row.fConsume) + '</td>';
+                        rowstr += '<td>' + numtostr(row.InitConsume) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fScaleToMoney) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fScale) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fAddScale) + '</td>';
+                        rowstr += '<td>' + numtostr(row.InitScale) + '</td>';
+                        rowstr += '</tr>';
                         $("#detaildialog table tbody").append(rowstr)
                     }
                 } else {
@@ -375,11 +398,11 @@
         });
 
     }
-    function numtostr(numstr){
+    function numtostr(numstr) {
         var num = parseFloat(numstr);
-        if(num>0){
-            return ""+num.toFixed(2);
-        }else{
+        if (num > 0) {
+            return "" + num.toFixed(2);
+        } else {
             return "";
         }
     }

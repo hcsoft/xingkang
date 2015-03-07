@@ -40,17 +40,26 @@ class memberControl extends SystemControl {
 		/**
 		 * 检索条件
 		 */
-		$sql = ' from shopnc_member where 1=1 ';
 		if ($_GET['orgids']) {
 			$condition ['CreateOrgID'] = array (
 				'in',
 				 $_GET['orgids']
 			);
-			$sql .='CreateOrgID in ( '.implode(',', $_GET['orgids']) .')';
 		}
+
+		if (isset($_GET['cardtype']) and $_GET['cardtype'] != '') {
+			$condition ['cardtype'] = $_GET['cardtype'];
+		}
+
+		if (isset($_GET['cardgrade']) and $_GET['cardgrade'] != '') {
+			$condition ['cardgrade'] = $_GET['cardgrade'];
+		}
+
 		if(!isset($_GET['orderby'])){
 			$_GET['orderby'] = '预存余额';
 		}
+
+
 
 		if(!isset($_GET['order'])){
 			$ordersql = 'desc';
