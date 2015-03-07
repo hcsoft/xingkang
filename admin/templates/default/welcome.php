@@ -493,33 +493,33 @@
             console.log(data);
             //初始化图表
             var orgchartcfg = getData(data['orgdata'], 'name', 'num', ['机构编码', '机构名称'], '共?家机构');
-            initchart(orgchartcfg, '社区建设', '社区数量', '行政区划', 'orgtabs', '共?家机构',{ formatter: showhtml,useHTML: true},2);
+            initchart(orgchartcfg, '社区建设', '社区数量', '行政区划', 'orgtabs', '共?家机构',{ formatter: showhtml,useHTML: true},2,0);
 
             var salechartcfg = getData(data['saledata'], 'name', 'num', ['机构编码', '机构名称'], '总金额为￥{point.y}元');
-            initchart(salechartcfg, '收入汇总', '金额', '社区', 'saletabs', getmoney,{ pointFormat: '总金额为￥{point.y}元',useHTML: true},0);
+            initchart(salechartcfg, '收入汇总', '金额', '社区', 'saletabs', getmoney,{ pointFormat: '总金额为￥{point.y}元',useHTML: true},0,2);
 
             var memberchartcfg = getData(data['memberdata'], 'name', 'num', ['机构编码', '机构名称'], '总充值金额为￥{point.y}元');
-            initchart(memberchartcfg, '会员充值情况', '充值金额', '社区', 'membertabs', getincome,{ pointFormat: '总充值金额为￥{point.y}元',useHTML: true},0);
+            initchart(memberchartcfg, '会员充值情况', '充值金额', '社区', 'membertabs', getincome,{ pointFormat: '总充值金额为￥{point.y}元',useHTML: true},0,2);
 
             var consumechartcfg = getData(data['consumedata'], 'name', 'num', ['机构编码', '机构名称'], '总消费金额为￥{point.y}元');
-            initchart(consumechartcfg, '会员消费情况', '消费金额', '社区', 'consumetabs', getconsume,{ pointFormat: '总消费金额为￥{point.y}元',useHTML: true},0);
+            initchart(consumechartcfg, '会员消费情况', '消费金额', '社区', 'consumetabs', getconsume,{ pointFormat: '总消费金额为￥{point.y}元',useHTML: true},0,2);
 //            var salechartcfg = getData(data['saledata'], 'name', 'num');
 //            initchart(salechartcfg,'消费情况','消费金额','社区','saletabs');
             //初始化标签
             var healthfilechartcfg = getData(data['healthdata'], 'name', 'num', ['机构编码', '机构名称'], '总档案数为{point.y}份');
-            initchart(healthfilechartcfg, '健康档案', '档案数量', '社区', 'healthtabs', gethealthfile,{ pointFormat: '总档案数为{point.y}份',useHTML: true},0);
+            initchart(healthfilechartcfg, '健康档案', '档案数量', '社区', 'healthtabs', gethealthfile,{ pointFormat: '总档案数为{point.y}份',useHTML: true},0,0);
 
             var spotchartcfg = getData(data['spotdata'], 'name', 'num', ['机构编码', '机构名称'], '总回访数为{point.y}次');
-            initchart(spotchartcfg, '会员回访情况', '回访数', '社区', 'spottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0);
+            initchart(spotchartcfg, '会员回访情况', '回访数', '社区', 'spottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0,0);
 
             var healthspotchartcfg = getData(data['healthspotdata'], 'name', 'num', ['机构编码', '机构名称'], '总回访数为{point.y}次');
-            initchart(healthspotchartcfg, '档案回访情况', '回访数', '社区', 'healthspottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0);
+            initchart(healthspotchartcfg, '档案回访情况', '回访数', '社区', 'healthspottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0,0);
 
             var healthbusinessdata = getData(data['healthbusinessdata'], 'name', 'num', ['机构编码', '机构名称'], '总业务数为{point.y}次');
-            initchart(healthbusinessdata, '业务开展情况', '业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0);
+            initchart(healthbusinessdata, '业务开展情况', '业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0,0);
 
             var membernumber = getData(data['membernumber'], 'name', 'num', ['机构编码', '机构名称'], '总会员数为{point.y}');
-            initchart(membernumber, '会员分布情况', '数量', '社区', 'membernumbertabs', gethealthbusiness,{ pointFormat: '总会员数为{point.y}',useHTML: true},0);
+            initchart(membernumber, '会员分布情况', '数量', '社区', 'membernumbertabs', gethealthbusiness,{ pointFormat: '总会员数为{point.y}',useHTML: true},0,0);
 
             $(".member").tabs();
             $(".detailtr").tooltip({content:gettext,track :true,tooltipClass:'mytooltip'});
@@ -529,7 +529,7 @@
     function test() {
         return 'aaaa';
     }
-    function initchart(orgchartcfg, titletext, numtext, ytext, tabname, counttext,tooltip,colorindex) {
+    function initchart(orgchartcfg, titletext, numtext, ytext, tabname, counttext,tooltip,colorindex ,dot) {
         console.log(orgchartcfg);
         console.log(counttext);
         var colors = [];
@@ -633,7 +633,7 @@
             '<td>' + orgchartcfg.piedata[i].y + '</td></tr>';
             sum +=orgchartcfg.piedata[i].y;
         }
-        html+= '<tr><td class="head" style="font-weight: bold;font-size: 16px;" >合计:</td><td>' + sum + '</td></tr>';
+        html+= '<tr><td class="head" style="font-weight: bold;font-size: 16px;" >合计:</td><td>' + sum.toFixed(dot) + '</td></tr>';
         html = '<span style="text-align: center;font-size:18px;margin-top: 30px;">' + titletext + '</span><table class="listtable"><tr><th>' + ytext + '</th><th>' + numtext + '</th></tr>' + html + '</table>';
 //        $( document ).tooltip();
 
