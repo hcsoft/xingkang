@@ -32,24 +32,37 @@ class memberControl extends SystemControl {
 	public function memberOp() {
 		$lang = Language::getLangContent ();
 		$orderbys = array(
-			array('txt'=>'类型','col'=> ' a.iCO_Type '),
-			array('txt'=>'结算日期','col'=> ' a.dCO_Date '),
-			array('txt'=>'制单日期','col'=> ' a.dCO_MakeDate '),
-			array('txt'=>'收费员','col'=> ' a.iCO_MakePerson '),
-			array('txt'=>'病人姓名','col'=> ' log.sSickName '),
-			array('txt'=>'处方金额','col'=> ' a.fCO_IncomeMoney '),
-			array('txt'=>'统筹支付','col'=> ' a.fCO_Medicare '),
-			array('txt'=>'医保卡支付','col'=> ' a.fCO_Card '),
-			array('txt'=>'现金支付','col'=> ' a.fCO_Cash '),
-			array('txt'=>'银行卡付','col'=> ' a.fCO_PosPay '),
-			array('txt'=>'预存下账','col'=> ' a.fRecharge '),
-			array('txt'=>'赠送下账','col'=> ' a.fConsume '),
-			array('txt'=>'积分下账金额','col'=> ' a.fScaleToMoney '));
+			array('txt'=>'预存余额','col'=> ' available_predeposit '),
+			array('txt'=>'赠送余额','col'=> ' fConsumeBalance '),
+			array('txt'=>'消费积分','col'=> ' member_points '));
 		Tpl::output('orderbys',$orderbys);
 		$model_member = Model ( 'member' );
 		/**
 		 * 检索条件
 		 */
+		if ($_GET['orgids']) {
+			$condition ['CreateOrgID'] = array (
+				'in',
+				 $_GET['orgids']
+			);
+		}
+		if(!isset($_GET['orderby'])){
+			$_GET['orderby'] = '预存余额';
+		}
+
+		if(!isset($_GET['order'])){
+			$ordersql = 'desc';
+		}else{
+			$ordersql = $_GET['order'];
+		}
+		if($_GET['orderby']){
+			foreach($orderbys as $orderby){
+				if($orderby['txt']==$_GET['orderby']){
+					$order = $orderby['col'] .' ' . $ordersql;
+					break;
+				}
+			}
+		}
 		if ($_GET ['search_field_value'] != '') {
 			switch ($_GET ['search_field_name']) {
 				case 'member_name' :
@@ -95,7 +108,7 @@ class memberControl extends SystemControl {
 		/**
 		 * 排序
 		 */
-		$order = trim ( $_GET ['search_sort'] );
+//		$order = trim ( $_GET ['search_sort'] );
 		if (empty ( $order )) {
 			$order = 'member_id desc';
 		}

@@ -126,7 +126,7 @@ class Db
         $sql = str_replace('FROM_UNIXTIME(','(',$sql);
         $sql = str_replace('HOUR(','datepart(hour,',$sql);
         $sql = str_replace('!(','not(',$sql);
-
+//        echo $sql;
         $query = self::$link[$host]->query($sql);
         if (C('debug')) addUpTime('queryEndTime');
         if ($query === false) {
