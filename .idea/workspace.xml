@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/dashboard.php" afterPath="$PROJECT_DIR$/admin/control/dashboard.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/welcome.php" afterPath="$PROJECT_DIR$/admin/templates/default/welcome.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -28,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5204678" vertical-offset="3723" max-vertical-offset="7616">
-              <caret line="285" column="0" selection-start-line="285" selection-start-column="0" selection-end-line="285" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.59183675" vertical-offset="3975" max-vertical-offset="7616">
+              <caret line="286" column="17" selection-start-line="286" selection-start-column="17" selection-end-line="286" selection-end-column="17" />
               <folding>
                 <marker date="1425832999128" expanded="true" signature="5446:5678" placeholder="select c.id ..map_org_wechat..." />
                 <marker date="1425832999128" expanded="true" signature="5842:5965" placeholder="select id,na..Organization..." />
@@ -55,6 +55,21 @@
                 <marker date="1425832999128" expanded="true" signature="22086:25851" placeholder="select id , ..id..." />
                 <marker date="1425832999128" expanded="true" signature="22155:25749" placeholder="select c.id ..MedicalExam..." />
                 <marker date="1425832999128" expanded="true" signature="22341:22373" placeholder="select orgid..map_org_wechat..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="welcome.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.83302414" vertical-offset="10681" max-vertical-offset="11564">
+              <caret line="795" column="20" selection-start-line="795" selection-start-column="20" selection-end-line="795" selection-end-column="20" />
+              <folding>
+                <marker date="1425833073822" expanded="true" signature="27258:27292" placeholder="..." />
+                <marker date="1425833073822" expanded="true" signature="27373:27424" placeholder="..." />
+                <marker date="1425833073822" expanded="true" signature="32308:32342" placeholder="..." />
+                <marker date="1425833073822" expanded="true" signature="32423:32474" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -115,9 +130,9 @@
         <option value="$PROJECT_DIR$/core/framework/db/mssql.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/member.index.php" />
         <option value="$PROJECT_DIR$/admin/control/finance.php" />
-        <option value="$PROJECT_DIR$/admin/templates/default/welcome.php" />
         <option value="$PROJECT_DIR$/admin/control/member.php" />
         <option value="$PROJECT_DIR$/admin/control/dashboard.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/welcome.php" />
       </list>
     </option>
   </component>
@@ -397,12 +412,6 @@
       <workItem from="1409364463869" duration="11000" />
       <workItem from="1409407958927" duration="9000" />
       <workItem from="1409840606175" duration="1113000" />
-    </task>
-    <task id="LOCAL-00079" summary="1,仓库管理增加了机构选择">
-      <created>1415638207307</created>
-      <option name="number" value="00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1415638207308</updated>
     </task>
     <task id="LOCAL-00080" summary="1,仓库管理增加了机构选择">
       <created>1415638906336</created>
@@ -692,7 +701,13 @@
       <option name="project" value="LOCAL" />
       <updated>1425832719723</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="1,消费汇总增加了member_recharge表">
+      <created>1425833011232</created>
+      <option name="number" value="00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1425833011232</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -1115,19 +1130,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.4489796" vertical-offset="9799" max-vertical-offset="11508">
-          <caret line="712" column="49" selection-start-line="712" selection-start-column="49" selection-end-line="712" selection-end-column="49" />
-          <folding>
-            <marker date="1425828425796" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1425828425796" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1425828425796" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1425828425796" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/community.income.sum.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-17.130434" vertical-offset="558" max-vertical-offset="4144">
@@ -1205,8 +1207,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5204678" vertical-offset="3723" max-vertical-offset="7616">
-          <caret line="285" column="0" selection-start-line="285" selection-start-column="0" selection-end-line="285" selection-end-column="0" />
+        <state vertical-scroll-proportion="-0.59183675" vertical-offset="3975" max-vertical-offset="7616">
+          <caret line="286" column="17" selection-start-line="286" selection-start-column="17" selection-end-line="286" selection-end-column="17" />
           <folding>
             <marker date="1425832999128" expanded="true" signature="5446:5678" placeholder="select c.id ..map_org_wechat..." />
             <marker date="1425832999128" expanded="true" signature="5842:5965" placeholder="select id,na..Organization..." />
@@ -1229,6 +1231,19 @@
             <marker date="1425832999128" expanded="true" signature="22086:25851" placeholder="select id , ..id..." />
             <marker date="1425832999128" expanded="true" signature="22155:25749" placeholder="select c.id ..MedicalExam..." />
             <marker date="1425832999128" expanded="true" signature="22341:22373" placeholder="select orgid..map_org_wechat..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.83302414" vertical-offset="10681" max-vertical-offset="11564">
+          <caret line="795" column="20" selection-start-line="795" selection-start-column="20" selection-end-line="795" selection-end-column="20" />
+          <folding>
+            <marker date="1425833073822" expanded="true" signature="27258:27292" placeholder="..." />
+            <marker date="1425833073822" expanded="true" signature="27373:27424" placeholder="..." />
+            <marker date="1425833073822" expanded="true" signature="32308:32342" placeholder="..." />
+            <marker date="1425833073822" expanded="true" signature="32423:32474" placeholder="..." />
           </folding>
         </state>
       </provider>

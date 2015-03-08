@@ -792,6 +792,10 @@
                     }
                     html += '</table>';
                 };
+                num = parseFloat(data[i][numname]);
+                if (num<0){
+                    num = 0 ;
+                }
                 ret.piedata.push({
                     name: data[i][catname],
                     counttext: counttext,
