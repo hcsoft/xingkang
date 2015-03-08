@@ -396,13 +396,9 @@ class memberControl extends SystemControl {
 		$page = new Page ();
 		$page->setEachNum ( 10 );
 		$page->setNowPage ( $_REQUEST ["curpage"] );
-		$sql = 'from Center_CheckOut a  left join  Center_MemberInfo member on a.sMemberID = member.sMemberID
-		    , Center_codes ico, Center_codes gather,Center_codes state,
+		$sql = 'from Center_CheckOut a  ,
              Organization org
-          where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
-           and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
-           and  a.iCO_State = state.code and state.type=\'iCO_State\'
-           and a.sMemberID is  not null  and a.sMemberID <> \'\'
+          where  a.sMemberID is  not null  and a.sMemberID <> \'\'
            and a.orgid = org.id ';
 		
 		if ($_GET ['query_start_time']) {
