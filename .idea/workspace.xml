@@ -41,11 +41,11 @@
       <file leaf-file-name="member.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/control/member.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20289855" vertical-offset="5292" max-vertical-offset="10766">
-              <caret line="388" column="63" selection-start-line="388" selection-start-column="63" selection-end-line="388" selection-end-column="63" />
+            <state vertical-scroll-proportion="0.71014494" vertical-offset="5964" max-vertical-offset="10766">
+              <caret line="461" column="20" selection-start-line="461" selection-start-column="20" selection-end-line="461" selection-end-column="20" />
               <folding>
-                <marker date="1425829647827" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1425829647827" expanded="true" signature="23024:23094" placeholder="update shopn..." />
+                <marker date="1425829796419" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1425829796419" expanded="true" signature="23028:23098" placeholder="update shopn..." />
               </folding>
             </state>
           </provider>
@@ -354,12 +354,6 @@
       <workItem from="1409407958927" duration="9000" />
       <workItem from="1409840606175" duration="1113000" />
     </task>
-    <task id="LOCAL-00070" summary="1,增加了商品明细查询">
-      <created>1415418707170</created>
-      <option name="number" value="00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1415418707170</updated>
-    </task>
     <task id="LOCAL-00071" summary="1,增加了商品明细查询">
       <created>1415419009383</created>
       <option name="number" value="00071" />
@@ -648,7 +642,13 @@
       <option name="project" value="LOCAL" />
       <updated>1425828449581</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="1,消费汇总数据过大问题">
+      <created>1425829674554</created>
+      <option name="number" value="00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1425829674554</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -705,7 +705,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
-    <MESSAGE value="1,销售明细判断了商品名称" />
     <MESSAGE value="1,销售明细 列表增加了商品编码" />
     <MESSAGE value="1,销售明细修改了商品名称和商品编码的查询,由关联表字段查询改成原始表的字段查询" />
     <MESSAGE value="1,显示商品的部分增加了商品编码" />
@@ -730,7 +729,8 @@
     <MESSAGE value="1,门诊收入统计增加条件ico_type=2" />
     <MESSAGE value="1,解决控制台时间错误的问题" />
     <MESSAGE value="1,解决小数点问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,解决小数点问题" />
+    <MESSAGE value="1,消费汇总数据过大问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,消费汇总数据过大问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1168,11 +1168,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/member.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20289855" vertical-offset="5292" max-vertical-offset="10766">
-          <caret line="388" column="63" selection-start-line="388" selection-start-column="63" selection-end-line="388" selection-end-column="63" />
+        <state vertical-scroll-proportion="0.71014494" vertical-offset="5964" max-vertical-offset="10766">
+          <caret line="461" column="20" selection-start-line="461" selection-start-column="20" selection-end-line="461" selection-end-column="20" />
           <folding>
-            <marker date="1425829647827" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1425829647827" expanded="true" signature="23024:23094" placeholder="update shopn..." />
+            <marker date="1425829796419" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1425829796419" expanded="true" signature="23028:23098" placeholder="update shopn..." />
           </folding>
         </state>
       </provider>

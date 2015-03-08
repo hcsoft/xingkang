@@ -454,11 +454,11 @@ class memberControl extends SystemControl {
 		$tsql = " select $sumcolstr ,sum(fCO_GetMoney) getmoney
                         $sql group by $groupbycolstr order by $groupbycolstr ";
 
-		 echo $tsql;
+//		 echo $tsql;
 		// 处理合计
 		$totalsql = " select $totalcolstr ,  sum(fCO_GetMoney) getmoney
                         $sql ";
-		echo $totalsql;
+//		echo $totalsql;
 		if (isset ( $_GET ['export'] ) && $_GET ['export'] == 'true') {
 			$this->exportxlsx ( array (
 					0 => $tsql,
