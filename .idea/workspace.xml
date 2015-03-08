@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/member.php" afterPath="$PROJECT_DIR$/admin/control/member.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xingkang.iws" />
@@ -354,12 +353,6 @@
       <workItem from="1409407958927" duration="9000" />
       <workItem from="1409840606175" duration="1113000" />
     </task>
-    <task id="LOCAL-00071" summary="1,增加了商品明细查询">
-      <created>1415419009383</created>
-      <option name="number" value="00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1415419009383</updated>
-    </task>
     <task id="LOCAL-00072" summary="1,商品明细查询 完善了导出,增加了项目类型">
       <created>1415419965363</created>
       <option name="number" value="00072" />
@@ -648,7 +641,13 @@
       <option name="project" value="LOCAL" />
       <updated>1425829674554</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="1,消费汇总数据过大问题">
+      <created>1425829803836</created>
+      <option name="number" value="00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1425829803837</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
