@@ -287,11 +287,14 @@ class dashboardControl extends SystemControl{
                 order by sum(num) desc
                ";
         $stmt = $conn->query($sql);
+
         $consumelist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             $row->details= array();
             array_push($consumelist, $row);
         }
+        array_push($consumelist, $sql);
+
         return $consumelist;
     }
 

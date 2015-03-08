@@ -513,11 +513,11 @@ class memberControl extends SystemControl {
                         ) zzz
                          group by $sumcolstr2 order by $sumcolstr2";
 
-//		 echo $tsql;
+		 echo $tsql;
 		// 处理合计
 		$totalsql = " select $totalcolstr ,  sum(getmoney) getmoney
                         from (
-						select $sumcolstr ,sum(fCO_GetMoney) getmoney
+						select $sumcolstr ,sum(fCO_FactMoney) getmoney
 							$sql group by $groupbycolstr
 					  union all
 					  select $sumcolstr1 ,sum(-RechargeMoney) getmoney
