@@ -204,7 +204,7 @@ class dashboardControl extends SystemControl{
             $row->details= array();
             array_push($salelist, $row);
         }
-        array_push($salelist,$sql);
+//        array_push($salelist,$sql);
         return $salelist;
     }
 
