@@ -381,12 +381,12 @@ class memberControl extends SystemControl {
 		$page->setEachNum ( 10 );
 		$page->setNowPage ( $_REQUEST ["curpage"] );
 		$sql = 'from Center_CheckOut a  left join  Center_MemberInfo member on a.sMemberID = member.sMemberID
-		    , Center_codes ico, Center_codes gather,Center_codes state,Center_codes tag,
+		    , Center_codes ico, Center_codes gather,Center_codes state,
              Organization org
           where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
            and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
            and  a.iCO_State = state.code and state.type=\'iCO_State\'
-           and  a.iCO_Tag = tag.code and tag.type=\'iCO_Tag\'
+           and a.sMemberID is  not null  and a.sMemberID <> \'\'
            and a.orgid = org.id ';
 		
 		if ($_GET ['query_start_time']) {
@@ -453,10 +453,12 @@ class memberControl extends SystemControl {
 		// echo $sumcolstr;
 		$tsql = " select $sumcolstr ,sum(fCO_GetMoney) getmoney
                         $sql group by $groupbycolstr order by $groupbycolstr ";
-		// echo $tsql;
+
+		 echo $tsql;
 		// 处理合计
 		$totalsql = " select $totalcolstr ,  sum(fCO_GetMoney) getmoney
                         $sql ";
+		echo $totalsql;
 		if (isset ( $_GET ['export'] ) && $_GET ['export'] == 'true') {
 			$this->exportxlsx ( array (
 					0 => $tsql,
