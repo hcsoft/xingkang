@@ -507,7 +507,7 @@ class memberControl extends SystemControl {
 				 from (
 					select $sumcolstr ,sum(fCO_GetMoney) getmoney
                         $sql group by $groupbycolstr
-                  union
+                  union all
                   select $sumcolstr1 ,sum(-RechargeMoney) getmoney
                         $msql group by $groupbycolstr1
                         ) zzz
@@ -519,7 +519,7 @@ class memberControl extends SystemControl {
                         from (
 						select $sumcolstr ,sum(fCO_GetMoney) getmoney
 							$sql group by $groupbycolstr
-					  union
+					  union all
 					  select $sumcolstr1 ,sum(-RechargeMoney) getmoney
 							$msql group by $groupbycolstr1
                         ) zzz ";

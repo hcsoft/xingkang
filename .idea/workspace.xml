@@ -53,23 +53,23 @@
       <file leaf-file-name="member.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/control/member.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.67536235" vertical-offset="5134" max-vertical-offset="11676">
-              <caret line="400" column="17" selection-start-line="400" selection-start-column="17" selection-end-line="400" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.57391304" vertical-offset="6898" max-vertical-offset="11676">
+              <caret line="521" column="31" selection-start-line="521" selection-start-column="31" selection-end-line="521" selection-end-column="31" />
               <folding>
-                <marker date="1425831702699" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1425831702699" expanded="true" signature="15684:15738" placeholder="select :_sum..." />
-                <marker date="1425831702699" expanded="true" signature="15684:16052" placeholder="select :_sum..sumcolstr..." />
-                <marker date="1425831702699" expanded="true" signature="15684:16053" placeholder="select :_sum..sumcolstr..." />
-                <marker date="1425831702699" expanded="true" signature="15684:16073" placeholder="select :_sum..sumcolstr..." />
-                <marker date="1425831702699" expanded="true" signature="15684:16074" placeholder="select :_sum..sumcolstr..." />
-                <marker date="1425831702699" expanded="true" signature="15744:15866" placeholder="select :_sum..." />
-                <marker date="1425831702699" expanded="true" signature="15744:15988" placeholder="select :_sum..." />
-                <marker date="1425831702699" expanded="true" signature="15885:15988" placeholder="select :_sum..." />
-                <marker date="1425831702699" expanded="true" signature="16132:16429" placeholder="select :_tot..sumcolstr..." />
-                <marker date="1425831702699" expanded="true" signature="16132:16433" placeholder="select :_tot..sumcolstr..." />
-                <marker date="1425831702699" expanded="true" signature="16215:16388" placeholder="select :_sum..." />
-                <marker date="1425831702699" expanded="true" signature="16215:16403" placeholder="select :_sum..." />
-                <marker date="1425831702699" expanded="true" signature="25457:25527" placeholder="update shopn..." />
+                <marker date="1425831812989" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1425831812989" expanded="true" signature="15684:15738" placeholder="select :_sum..." />
+                <marker date="1425831812989" expanded="true" signature="15684:16056" placeholder="select :_sum..sumcolstr..." />
+                <marker date="1425831812989" expanded="true" signature="15684:16057" placeholder="select :_sum..sumcolstr..." />
+                <marker date="1425831812989" expanded="true" signature="15684:16077" placeholder="select :_sum..sumcolstr..." />
+                <marker date="1425831812989" expanded="true" signature="15684:16078" placeholder="select :_sum..sumcolstr..." />
+                <marker date="1425831812989" expanded="true" signature="15744:15866" placeholder="select :_sum..." />
+                <marker date="1425831812989" expanded="true" signature="15744:15992" placeholder="select :_sum..." />
+                <marker date="1425831812989" expanded="true" signature="15889:15992" placeholder="select :_sum..." />
+                <marker date="1425831812989" expanded="true" signature="16136:16437" placeholder="select :_tot..sumcolstr..." />
+                <marker date="1425831812989" expanded="true" signature="16136:16441" placeholder="select :_tot..sumcolstr..." />
+                <marker date="1425831812989" expanded="true" signature="16219:16396" placeholder="select :_sum..." />
+                <marker date="1425831812989" expanded="true" signature="16219:16411" placeholder="select :_sum..." />
+                <marker date="1425831812989" expanded="true" signature="25465:25535" placeholder="update shopn..." />
               </folding>
             </state>
           </provider>
@@ -378,12 +378,6 @@
       <workItem from="1409407958927" duration="9000" />
       <workItem from="1409840606175" duration="1113000" />
     </task>
-    <task id="LOCAL-00074" summary="1,修改了库存管理">
-      <created>1415438767334</created>
-      <option name="number" value="00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1415438767334</updated>
-    </task>
     <task id="LOCAL-00075" summary="1,修改了库存管理">
       <created>1415439364143</created>
       <option name="number" value="00075" />
@@ -672,7 +666,13 @@
       <option name="project" value="LOCAL" />
       <updated>1425831361683</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="1,消费汇总增加了member_recharge表">
+      <created>1425831710046</created>
+      <option name="number" value="00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1425831710046</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -1172,23 +1172,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/member.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67536235" vertical-offset="5134" max-vertical-offset="11676">
-          <caret line="400" column="17" selection-start-line="400" selection-start-column="17" selection-end-line="400" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.57391304" vertical-offset="6898" max-vertical-offset="11676">
+          <caret line="521" column="31" selection-start-line="521" selection-start-column="31" selection-end-line="521" selection-end-column="31" />
           <folding>
-            <marker date="1425831702699" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1425831702699" expanded="true" signature="15684:15738" placeholder="select :_sum..." />
-            <marker date="1425831702699" expanded="true" signature="15684:16052" placeholder="select :_sum..sumcolstr..." />
-            <marker date="1425831702699" expanded="true" signature="15684:16053" placeholder="select :_sum..sumcolstr..." />
-            <marker date="1425831702699" expanded="true" signature="15684:16073" placeholder="select :_sum..sumcolstr..." />
-            <marker date="1425831702699" expanded="true" signature="15684:16074" placeholder="select :_sum..sumcolstr..." />
-            <marker date="1425831702699" expanded="true" signature="15744:15866" placeholder="select :_sum..." />
-            <marker date="1425831702699" expanded="true" signature="15744:15988" placeholder="select :_sum..." />
-            <marker date="1425831702699" expanded="true" signature="15885:15988" placeholder="select :_sum..." />
-            <marker date="1425831702699" expanded="true" signature="16132:16429" placeholder="select :_tot..sumcolstr..." />
-            <marker date="1425831702699" expanded="true" signature="16132:16433" placeholder="select :_tot..sumcolstr..." />
-            <marker date="1425831702699" expanded="true" signature="16215:16388" placeholder="select :_sum..." />
-            <marker date="1425831702699" expanded="true" signature="16215:16403" placeholder="select :_sum..." />
-            <marker date="1425831702699" expanded="true" signature="25457:25527" placeholder="update shopn..." />
+            <marker date="1425831812989" expanded="true" signature="538:650" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1425831812989" expanded="true" signature="15684:15738" placeholder="select :_sum..." />
+            <marker date="1425831812989" expanded="true" signature="15684:16056" placeholder="select :_sum..sumcolstr..." />
+            <marker date="1425831812989" expanded="true" signature="15684:16057" placeholder="select :_sum..sumcolstr..." />
+            <marker date="1425831812989" expanded="true" signature="15684:16077" placeholder="select :_sum..sumcolstr..." />
+            <marker date="1425831812989" expanded="true" signature="15684:16078" placeholder="select :_sum..sumcolstr..." />
+            <marker date="1425831812989" expanded="true" signature="15744:15866" placeholder="select :_sum..." />
+            <marker date="1425831812989" expanded="true" signature="15744:15992" placeholder="select :_sum..." />
+            <marker date="1425831812989" expanded="true" signature="15889:15992" placeholder="select :_sum..." />
+            <marker date="1425831812989" expanded="true" signature="16136:16437" placeholder="select :_tot..sumcolstr..." />
+            <marker date="1425831812989" expanded="true" signature="16136:16441" placeholder="select :_tot..sumcolstr..." />
+            <marker date="1425831812989" expanded="true" signature="16219:16396" placeholder="select :_sum..." />
+            <marker date="1425831812989" expanded="true" signature="16219:16411" placeholder="select :_sum..." />
+            <marker date="1425831812989" expanded="true" signature="25465:25535" placeholder="update shopn..." />
           </folding>
         </state>
       </provider>
