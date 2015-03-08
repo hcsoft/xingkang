@@ -283,7 +283,6 @@ class dashboardControl extends SystemControl{
                     where out.orgid in(select orgid from map_org_wechat) and isnull(smemberid , '') <> '' $outdatesql
                     ) datatable
                 group by id ,name
-                having sum(num)>0
                 order by sum(num) desc
                ";
         $stmt = $conn->query($sql);
