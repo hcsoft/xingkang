@@ -398,7 +398,7 @@ class memberControl extends SystemControl {
 		$page->setNowPage ( $_REQUEST ["curpage"] );
 		$sql = 'from Center_CheckOut a  ,
              Organization org
-          where  a.sMemberID is  not null  and a.sMemberID <> \'\'
+          where isnull(smemberid , \'\') <> \'\'
            and a.orgid = org.id ';
 		
 		if ($_GET ['query_start_time']) {
