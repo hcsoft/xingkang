@@ -329,6 +329,22 @@ class memberControl extends SystemControl {
 				'day' => ' convert(varchar,dCO_Date,112) as "day" ',
 				'OrgID' => ' org.name as "OrgID" ' 
 		);
+		$sqlarray1 = array (
+			'membername' => 'member.sName as "membername"',
+			'memberid' => ' member.sMemberID as "memberid" ',
+			'year' => ' year(a.RechargeDate) as "year" ',
+			'month' => ' left(convert(varchar,RechargeDate,112),6) as  "month" ',
+			'day' => ' convert(varchar,RechargeDate,112) as "day" ',
+			'OrgID' => ' org.name as "OrgID" '
+		);
+		$sqlarray2 = array (
+			'membername' => '  "membername"',
+			'memberid' => ' "memberid" ',
+			'year' => '   "year" ',
+			'month' => '    "month" ',
+			'day' => '   "day" ',
+			'OrgID' => '   "OrgID" '
+		);
 		$config = array (
 				'sumcol' => array (
 						'OrgID' => array (
@@ -401,6 +417,24 @@ class memberControl extends SystemControl {
 		if ($_GET ['orgids']) {
 			$sql = $sql . ' and a.OrgID in ( ' . implode ( ',', $_GET ['orgids'] ) . ')';
 		}
+
+		$msql = 'from center_MemberRecharge a  ,
+             Organization org
+          where [type]=2
+           and a.orgid = org.id ';
+
+		if ($_GET ['query_start_time']) {
+			$msql = $msql . ' and a.RechargeDate >=\'' . $_GET ['query_start_time'] . '\'';
+		}
+
+		if ($_GET ['query_end_time']) {
+			$msql = $msql . ' and a.RechargeDate < dateadd(day,1,\'' . $_GET ['query_end_time'] . '\')';
+		}
+
+		// 处理树的参数
+		if ($_GET ['orgids']) {
+			$msql = $msql . ' and a.OrgID in ( ' . implode ( ',', $_GET ['orgids'] ) . ')';
+		}
 		
 		$search_type = $_GET ['search_type'];
 		// echo $search_type;
@@ -409,8 +443,12 @@ class memberControl extends SystemControl {
 		$displaycol = array ();
 		$displaytext = array ();
 		$sumcol = array ();
+		$sumcol1 = array ();
+		$sumcol2 = array();
 		$totalcol = array ();
+		$totalcol1 = array ();
 		$groupbycol = array ();
+		$groupbycol1 = array ();
 		foreach ( $sumtype as $i => $v ) {
 			// var_dump($colconfig['sumcol'][$v]);
 			if (isset ( $colconfig ['sqlwher'] )) {
@@ -422,24 +460,38 @@ class memberControl extends SystemControl {
 					foreach ( $colconfig ['sumcol'] [$v] ['cols'] as $item ) {
 						// echo $item['name'] . '<br>';
 						array_push ( $sumcol, $sqlarray [$item ['name']] );
+						array_push ( $sumcol1, $sqlarray1 [$item ['name']] );
+						array_push ( $sumcol2, $sqlarray2 [$item ['name']] );
 						array_push ( $displaycol, $item ['name'] );
 						array_push ( $displaytext, $item ['text'] );
 						$itemsplit = explode ( ' as ', $sqlarray [$item ['name']] );
+						$itemsplit1 = explode ( ' as ', $sqlarray [$item ['name']] );
 						array_push ( $totalcol, ' null as ' . $itemsplit [1] );
+						array_push ( $totalcol1, ' null as ' . $itemsplit1 [1] );
 						$str = strtolower ( str_replace ( ' ', '', trim ( $itemsplit [0] ) ) );
 						if (substr ( $str, 0, 4 ) != 'sum(' && substr ( $str, 0, 6 ) != 'count(')
 							array_push ( $groupbycol, $itemsplit [0] );
+						$str1 = strtolower ( str_replace ( ' ', '', trim ( $itemsplit1 [0] ) ) );
+						if (substr ( $str1, 0, 4 ) != 'sum(' && substr ( $str1, 0, 6 ) != 'count(')
+							array_push ( $groupbycol1, $itemsplit1 [0] );
 					}
 				} else {
 					$item = $colconfig ['sumcol'] [$v];
 					array_push ( $sumcol, $sqlarray [$item ['name']] );
+					array_push ( $sumcol1, $sqlarray1 [$item ['name']] );
+					array_push ( $sumcol2, $sqlarray2 [$item ['name']] );
 					array_push ( $displaycol, $item ['name'] );
 					array_push ( $displaytext, $item ['text'] );
 					$itemsplit = explode ( ' as ', $sqlarray [$item ['name']] );
+					$itemsplit1 = explode ( ' as ', $sqlarray1 [$item ['name']] );
 					array_push ( $totalcol, ' null as ' . $itemsplit [1] );
+					array_push ( $totalcol1, ' null as ' . $itemsplit1 [1] );
 					$str = strtolower ( str_replace ( ' ', '', trim ( $itemsplit [0] ) ) );
 					if (substr ( $str, 0, 4 ) != 'sum(' && substr ( $str, 0, 6 ) != 'count(')
 						array_push ( $groupbycol, $itemsplit [0] );
+					$str1 = strtolower ( str_replace ( ' ', '', trim ( $itemsplit1 [0] ) ) );
+					if (substr ( $str1, 0, 4 ) != 'sum(' && substr ( $str1, 0, 6 ) != 'count(')
+						array_push ( $groupbycol1, $itemsplit1 [0] );
 				}
 			}
 		}
@@ -448,16 +500,33 @@ class memberControl extends SystemControl {
 		$totalcol [0] = '\'总计：\' as ' . explode ( ' as ', $totalcol [0] )[1];
 		// var_dump($totalcol);
 		$totalcolstr = join ( ',', $totalcol );
+		$totalcolstr1 = join ( ',', $totalcol1 );
 		$sumcolstr = join ( ',', $sumcol );
+		$sumcolstr1 = join ( ',', $sumcol1 );
+		$sumcolstr2 = join ( ',', $sumcol2 );
 		$groupbycolstr = join ( ',', $groupbycol );
+		$groupbycolstr1 = join ( ',', $groupbycol1 );
 		// echo $sumcolstr;
-		$tsql = " select $sumcolstr ,sum(fCO_GetMoney) getmoney
-                        $sql group by $groupbycolstr order by $groupbycolstr ";
+		$tsql = " select $sumcolstr2 ,sum(getmoney) getmoney
+				 from (
+					select $sumcolstr ,sum(fCO_GetMoney) getmoney
+                        $sql group by $groupbycolstr
+                  union
+                  select $sumcolstr1 ,sum(-RechargeMoney) getmoney
+                        $msql group by $groupbycolstr1
+                        ) zzz
+                         group by $sumcolstr2 order by $sumcolstr2";
 
 //		 echo $tsql;
 		// 处理合计
-		$totalsql = " select $totalcolstr ,  sum(fCO_GetMoney) getmoney
-                        $sql ";
+		$totalsql = " select $totalcolstr ,  sum(getmoney) getmoney
+                        from (
+						select $sumcolstr ,sum(fCO_GetMoney) getmoney
+							$sql group by $groupbycolstr
+					  union
+					  select $sumcolstr1 ,sum(-RechargeMoney) getmoney
+							$msql group by $groupbycolstr1
+                        ) zzz ";
 //		echo $totalsql;
 		if (isset ( $_GET ['export'] ) && $_GET ['export'] == 'true') {
 			$this->exportxlsx ( array (
