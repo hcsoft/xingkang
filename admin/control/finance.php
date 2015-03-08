@@ -655,7 +655,7 @@ class financeControl extends SystemControl
                 left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
                 left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID
                 , Organization org
-                where   a.orgid = org.id and a.iCO_Type  = 2 ';
+                where   a.orgid = org.id  ';
 
         if ($_GET['query_start_time']) {
             $sql = $sql . ' and a.dSale_MakeDate >=\'' . $_GET['query_start_time'] . '\'';
@@ -751,7 +751,7 @@ class financeControl extends SystemControl
             $this->exportxlsx(array(0 => $tsql, 1 => $totalsql), $displaytext, '收入统计');
         }
 
-//        echo $tsql;
+        echo $tsql;
         $stmt = $conn->query($tsql);
         $data_list = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {

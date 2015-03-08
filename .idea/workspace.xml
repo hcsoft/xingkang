@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
+    <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="1,门诊收入统计增加条件ico_type=2">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/dashboard.php" afterPath="$PROJECT_DIR$/admin/control/dashboard.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/finance.php" afterPath="$PROJECT_DIR$/admin/control/finance.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -31,30 +32,30 @@
       <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.73913" vertical-offset="2409" max-vertical-offset="7574">
-              <caret line="193" column="46" selection-start-line="193" selection-start-column="38" selection-end-line="193" selection-end-column="46" />
+            <state vertical-scroll-proportion="34.565216" vertical-offset="6885" max-vertical-offset="7588">
+              <caret line="435" column="56" selection-start-line="435" selection-start-column="56" selection-end-line="435" selection-end-column="56" />
               <folding>
-                <marker date="1425543592298" expanded="true" signature="5446:5678" placeholder="select c.id ..map_org_wechat..." />
-                <marker date="1425543592298" expanded="true" signature="5842:5965" placeholder="select id,na..Organization..." />
-                <marker date="1425543592298" expanded="true" signature="5932:5964" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543592298" expanded="true" signature="7569:7884" placeholder="select b.id ..Center_CheckOut..." />
-                <marker date="1425543592298" expanded="true" signature="7770:7802" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543592298" expanded="true" signature="9457:9824" placeholder="select b.id ..center_MemberRecharge..." />
-                <marker date="1425543592298" expanded="true" signature="9661:9693" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543592298" expanded="true" signature="12416:13220" placeholder="select id , ..id..." />
-                <marker date="1425543592298" expanded="true" signature="12495:13070" placeholder="select b.id ..center_MemberRecharge..." />
-                <marker date="1425543592298" expanded="true" signature="12715:12747" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543592298" expanded="true" signature="14804:15102" placeholder="select b.id ..shopnc_member..." />
-                <marker date="1425543592298" expanded="true" signature="14996:15028" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543592298" expanded="true" signature="16614:16948" placeholder="select b.id ..spotcheck_main..." />
-                <marker date="1425543592298" expanded="true" signature="16801:16833" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543592298" expanded="true" signature="18382:18752" placeholder="select b.id ..healthfile..." />
-                <marker date="1425543592298" expanded="true" signature="18629:18661" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543592298" expanded="true" signature="20281:20615" placeholder="select b.id ..spotcheck_main..." />
-                <marker date="1425543592298" expanded="true" signature="20468:20500" placeholder="select orgid..map_org_wechat..." />
-                <marker date="1425543592298" expanded="true" signature="22074:25839" placeholder="select id , ..id..." />
-                <marker date="1425543592298" expanded="true" signature="22143:25737" placeholder="select c.id ..MedicalExam..." />
-                <marker date="1425543592298" expanded="true" signature="22329:22361" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425827597776" expanded="true" signature="5446:5678" placeholder="select c.id ..map_org_wechat..." />
+                <marker date="1425827597776" expanded="true" signature="5842:5965" placeholder="select id,na..Organization..." />
+                <marker date="1425827597776" expanded="true" signature="5932:5964" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425827597776" expanded="true" signature="7569:7884" placeholder="select b.id ..Center_CheckOut..." />
+                <marker date="1425827597776" expanded="true" signature="7770:7802" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425827597776" expanded="true" signature="9456:9823" placeholder="select b.id ..center_MemberRecharge..." />
+                <marker date="1425827597776" expanded="true" signature="9660:9692" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425827597776" expanded="true" signature="12416:13220" placeholder="select id , ..id..." />
+                <marker date="1425827597776" expanded="true" signature="12495:13070" placeholder="select b.id ..center_MemberRecharge..." />
+                <marker date="1425827597776" expanded="true" signature="12715:12747" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425827597776" expanded="true" signature="14804:15102" placeholder="select b.id ..shopnc_member..." />
+                <marker date="1425827597776" expanded="true" signature="14996:15028" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425827597776" expanded="true" signature="16614:16948" placeholder="select b.id ..spotcheck_main..." />
+                <marker date="1425827597776" expanded="true" signature="16801:16833" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425827597776" expanded="true" signature="18382:18752" placeholder="select b.id ..healthfile..." />
+                <marker date="1425827597776" expanded="true" signature="18629:18661" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425827597776" expanded="true" signature="20281:20615" placeholder="select b.id ..spotcheck_main..." />
+                <marker date="1425827597776" expanded="true" signature="20468:20500" placeholder="select orgid..map_org_wechat..." />
+                <marker date="1425827597776" expanded="true" signature="22074:25839" placeholder="select id , ..id..." />
+                <marker date="1425827597776" expanded="true" signature="22143:25737" placeholder="select c.id ..MedicalExam..." />
+                <marker date="1425827597776" expanded="true" signature="22329:22361" placeholder="select orgid..map_org_wechat..." />
               </folding>
             </state>
           </provider>
@@ -64,27 +65,27 @@
         <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.5362731" vertical-offset="8821" max-vertical-offset="14210">
-              <caret line="657" column="59" selection-start-line="657" selection-start-column="59" selection-end-line="657" selection-end-column="59" />
+              <caret line="657" column="41" selection-start-line="657" selection-start-column="41" selection-end-line="657" selection-end-column="41" />
               <folding>
-                <marker date="1425826308696" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1425826308696" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
-                <marker date="1425826308696" expanded="true" signature="1530:1586" placeholder="select iClas..Center_Class..." />
-                <marker date="1425826308696" expanded="true" signature="2438:2566" placeholder="insert into ..." />
-                <marker date="1425826308696" expanded="true" signature="2991:3103" placeholder="select b.id ..map_org_wechat..." />
-                <marker date="1425826308696" expanded="true" signature="6690:7588" placeholder="SELECT * FRO..*..." />
-                <marker date="1425826308696" expanded="true" signature="6707:7556" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1425826308696" expanded="true" signature="6723:7537" placeholder="SELECT TOP :..." />
-                <marker date="1425826308696" expanded="true" signature="9203:9274" placeholder="select * fro..Center_ClinicSale..." />
-                <marker date="1425826308696" expanded="true" signature="9424:9482" placeholder="select * fro..shopnc_goods_common..." />
-                <marker date="1425826308696" expanded="true" signature="10619:10677" placeholder="select * fro..shopnc_goods_common..." />
-                <marker date="1425826308696" expanded="true" signature="10975:11097" placeholder="update shopn..." />
-                <marker date="1425826308696" expanded="true" signature="11461:11593" placeholder="insert into ..." />
-                <marker date="1425826308696" expanded="true" signature="11882:17331" placeholder="insert into ..." />
-                <marker date="1425826308696" expanded="true" signature="17463:17521" placeholder="select * fro..shopnc_goods_common..." />
-                <marker date="1425826308696" expanded="true" signature="17903:18038" placeholder="insert into ..." />
-                <marker date="1425826308696" expanded="true" signature="20739:21670" placeholder="SELECT * FRO..*..." />
-                <marker date="1425826308696" expanded="true" signature="20756:21638" placeholder="SELECT * FRO..TOP..." />
-                <marker date="1425826308696" expanded="true" signature="20772:21619" placeholder="SELECT TOP :..." />
+                <marker date="1425827645475" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1425827645475" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
+                <marker date="1425827645475" expanded="true" signature="1530:1586" placeholder="select iClas..Center_Class..." />
+                <marker date="1425827645475" expanded="true" signature="2438:2566" placeholder="insert into ..." />
+                <marker date="1425827645475" expanded="true" signature="2991:3103" placeholder="select b.id ..map_org_wechat..." />
+                <marker date="1425827645475" expanded="true" signature="6690:7588" placeholder="SELECT * FRO..*..." />
+                <marker date="1425827645475" expanded="true" signature="6707:7556" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1425827645475" expanded="true" signature="6723:7537" placeholder="SELECT TOP :..." />
+                <marker date="1425827645475" expanded="true" signature="9203:9274" placeholder="select * fro..Center_ClinicSale..." />
+                <marker date="1425827645475" expanded="true" signature="9424:9482" placeholder="select * fro..shopnc_goods_common..." />
+                <marker date="1425827645475" expanded="true" signature="10619:10677" placeholder="select * fro..shopnc_goods_common..." />
+                <marker date="1425827645475" expanded="true" signature="10975:11097" placeholder="update shopn..." />
+                <marker date="1425827645475" expanded="true" signature="11461:11593" placeholder="insert into ..." />
+                <marker date="1425827645475" expanded="true" signature="11882:17331" placeholder="insert into ..." />
+                <marker date="1425827645475" expanded="true" signature="17463:17521" placeholder="select * fro..shopnc_goods_common..." />
+                <marker date="1425827645475" expanded="true" signature="17903:18038" placeholder="insert into ..." />
+                <marker date="1425827645475" expanded="true" signature="20739:21670" placeholder="SELECT * FRO..*..." />
+                <marker date="1425827645475" expanded="true" signature="20756:21638" placeholder="SELECT * FRO..TOP..." />
+                <marker date="1425827645475" expanded="true" signature="20772:21619" placeholder="SELECT TOP :..." />
               </folding>
             </state>
           </provider>
@@ -103,8 +104,8 @@
       <file leaf-file-name="community.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/control/community.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.2173915" vertical-offset="2512" max-vertical-offset="10542">
-              <caret line="188" column="42" selection-start-line="188" selection-start-column="34" selection-end-line="188" selection-end-column="42" />
+            <state vertical-scroll-proportion="-10.913043" vertical-offset="8289" max-vertical-offset="10542">
+              <caret line="610" column="29" selection-start-line="610" selection-start-column="29" selection-end-line="610" selection-end-column="29" />
               <folding>
                 <marker date="1418616569858" expanded="true" signature="553:665" placeholder="select b.id ..map_org_wechat..." />
                 <marker date="1418616569858" expanded="true" signature="989:1054" placeholder="select * fro..Center_codes..." />
@@ -186,13 +187,13 @@
       <list>
         <option value="$PROJECT_DIR$/data/config/config.ini.php" />
         <option value="$PROJECT_DIR$/admin/control/login.php" />
-        <option value="$PROJECT_DIR$/admin/control/dashboard.php" />
         <option value="$PROJECT_DIR$/admin/framework/libraries/process.class.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/welcome.php" />
         <option value="$PROJECT_DIR$/core/framework/db/mssqlpdo.php" />
         <option value="$PROJECT_DIR$/core/framework/db/mssql.php" />
         <option value="$PROJECT_DIR$/admin/control/member.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/member.index.php" />
+        <option value="$PROJECT_DIR$/admin/control/dashboard.php" />
         <option value="$PROJECT_DIR$/admin/control/finance.php" />
       </list>
     </option>
@@ -473,12 +474,6 @@
       <workItem from="1409364463869" duration="11000" />
       <workItem from="1409407958927" duration="9000" />
       <workItem from="1409840606175" duration="1113000" />
-    </task>
-    <task active="true" id="LOCAL-00066">
-      <created>1415349342562</created>
-      <option name="number" value="00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1415349347746</updated>
     </task>
     <task id="LOCAL-00067" summary="1,增加了商品毛利分析">
       <created>1415354825925</created>
@@ -768,7 +763,13 @@
       <option name="project" value="LOCAL" />
       <updated>1425747152505</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="1,门诊收入统计增加条件ico_type=2">
+      <created>1425826348635</created>
+      <option name="number" value="00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1425826348676</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -780,6 +781,7 @@
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -803,7 +805,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24934725" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -825,7 +826,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
-    <MESSAGE value="1,仓库明细增加了产地厂牌&#10;2,销售明细增加了财务分类的查询条件" />
     <MESSAGE value="1,仓库明细增加了供货商&#10;2,销售明细增加了财务分类的查询条件" />
     <MESSAGE value="1,销售明细增加了财务分类增加了未分类" />
     <MESSAGE value="1,销售明细判断了商品名称" />
@@ -850,7 +850,8 @@
     <MESSAGE value="1,防止出现的负值导致图表异常" />
     <MESSAGE value="1,完善会员充值列表" />
     <MESSAGE value="1,增加了卡级别" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,增加了卡级别" />
+    <MESSAGE value="1,门诊收入统计增加条件ico_type=2" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,门诊收入统计增加条件ico_type=2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1207,30 +1208,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.73913" vertical-offset="2409" max-vertical-offset="7574">
-          <caret line="193" column="46" selection-start-line="193" selection-start-column="38" selection-end-line="193" selection-end-column="46" />
+        <state vertical-scroll-proportion="34.565216" vertical-offset="6885" max-vertical-offset="7588">
+          <caret line="435" column="56" selection-start-line="435" selection-start-column="56" selection-end-line="435" selection-end-column="56" />
           <folding>
-            <marker date="1425543592298" expanded="true" signature="5446:5678" placeholder="select c.id ..map_org_wechat..." />
-            <marker date="1425543592298" expanded="true" signature="5842:5965" placeholder="select id,na..Organization..." />
-            <marker date="1425543592298" expanded="true" signature="5932:5964" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543592298" expanded="true" signature="7569:7884" placeholder="select b.id ..Center_CheckOut..." />
-            <marker date="1425543592298" expanded="true" signature="7770:7802" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543592298" expanded="true" signature="9457:9824" placeholder="select b.id ..center_MemberRecharge..." />
-            <marker date="1425543592298" expanded="true" signature="9661:9693" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543592298" expanded="true" signature="12416:13220" placeholder="select id , ..id..." />
-            <marker date="1425543592298" expanded="true" signature="12495:13070" placeholder="select b.id ..center_MemberRecharge..." />
-            <marker date="1425543592298" expanded="true" signature="12715:12747" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543592298" expanded="true" signature="14804:15102" placeholder="select b.id ..shopnc_member..." />
-            <marker date="1425543592298" expanded="true" signature="14996:15028" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543592298" expanded="true" signature="16614:16948" placeholder="select b.id ..spotcheck_main..." />
-            <marker date="1425543592298" expanded="true" signature="16801:16833" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543592298" expanded="true" signature="18382:18752" placeholder="select b.id ..healthfile..." />
-            <marker date="1425543592298" expanded="true" signature="18629:18661" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543592298" expanded="true" signature="20281:20615" placeholder="select b.id ..spotcheck_main..." />
-            <marker date="1425543592298" expanded="true" signature="20468:20500" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1425543592298" expanded="true" signature="22074:25839" placeholder="select id , ..id..." />
-            <marker date="1425543592298" expanded="true" signature="22143:25737" placeholder="select c.id ..MedicalExam..." />
-            <marker date="1425543592298" expanded="true" signature="22329:22361" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425827597776" expanded="true" signature="5446:5678" placeholder="select c.id ..map_org_wechat..." />
+            <marker date="1425827597776" expanded="true" signature="5842:5965" placeholder="select id,na..Organization..." />
+            <marker date="1425827597776" expanded="true" signature="5932:5964" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425827597776" expanded="true" signature="7569:7884" placeholder="select b.id ..Center_CheckOut..." />
+            <marker date="1425827597776" expanded="true" signature="7770:7802" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425827597776" expanded="true" signature="9456:9823" placeholder="select b.id ..center_MemberRecharge..." />
+            <marker date="1425827597776" expanded="true" signature="9660:9692" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425827597776" expanded="true" signature="12416:13220" placeholder="select id , ..id..." />
+            <marker date="1425827597776" expanded="true" signature="12495:13070" placeholder="select b.id ..center_MemberRecharge..." />
+            <marker date="1425827597776" expanded="true" signature="12715:12747" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425827597776" expanded="true" signature="14804:15102" placeholder="select b.id ..shopnc_member..." />
+            <marker date="1425827597776" expanded="true" signature="14996:15028" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425827597776" expanded="true" signature="16614:16948" placeholder="select b.id ..spotcheck_main..." />
+            <marker date="1425827597776" expanded="true" signature="16801:16833" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425827597776" expanded="true" signature="18382:18752" placeholder="select b.id ..healthfile..." />
+            <marker date="1425827597776" expanded="true" signature="18629:18661" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425827597776" expanded="true" signature="20281:20615" placeholder="select b.id ..spotcheck_main..." />
+            <marker date="1425827597776" expanded="true" signature="20468:20500" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1425827597776" expanded="true" signature="22074:25839" placeholder="select id , ..id..." />
+            <marker date="1425827597776" expanded="true" signature="22143:25737" placeholder="select c.id ..MedicalExam..." />
+            <marker date="1425827597776" expanded="true" signature="22329:22361" placeholder="select orgid..map_org_wechat..." />
           </folding>
         </state>
       </provider>
@@ -1245,8 +1246,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/community.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.2173915" vertical-offset="2512" max-vertical-offset="10542">
-          <caret line="188" column="42" selection-start-line="188" selection-start-column="34" selection-end-line="188" selection-end-column="42" />
+        <state vertical-scroll-proportion="-10.913043" vertical-offset="8289" max-vertical-offset="10542">
+          <caret line="610" column="29" selection-start-line="610" selection-start-column="29" selection-end-line="610" selection-end-column="29" />
           <folding>
             <marker date="1418616569858" expanded="true" signature="553:665" placeholder="select b.id ..map_org_wechat..." />
             <marker date="1418616569858" expanded="true" signature="989:1054" placeholder="select * fro..Center_codes..." />
@@ -1265,27 +1266,27 @@
     <entry file="file://$PROJECT_DIR$/admin/control/finance.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5362731" vertical-offset="8821" max-vertical-offset="14210">
-          <caret line="657" column="59" selection-start-line="657" selection-start-column="59" selection-end-line="657" selection-end-column="59" />
+          <caret line="657" column="41" selection-start-line="657" selection-start-column="41" selection-end-line="657" selection-end-column="41" />
           <folding>
-            <marker date="1425826308696" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1425826308696" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
-            <marker date="1425826308696" expanded="true" signature="1530:1586" placeholder="select iClas..Center_Class..." />
-            <marker date="1425826308696" expanded="true" signature="2438:2566" placeholder="insert into ..." />
-            <marker date="1425826308696" expanded="true" signature="2991:3103" placeholder="select b.id ..map_org_wechat..." />
-            <marker date="1425826308696" expanded="true" signature="6690:7588" placeholder="SELECT * FRO..*..." />
-            <marker date="1425826308696" expanded="true" signature="6707:7556" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1425826308696" expanded="true" signature="6723:7537" placeholder="SELECT TOP :..." />
-            <marker date="1425826308696" expanded="true" signature="9203:9274" placeholder="select * fro..Center_ClinicSale..." />
-            <marker date="1425826308696" expanded="true" signature="9424:9482" placeholder="select * fro..shopnc_goods_common..." />
-            <marker date="1425826308696" expanded="true" signature="10619:10677" placeholder="select * fro..shopnc_goods_common..." />
-            <marker date="1425826308696" expanded="true" signature="10975:11097" placeholder="update shopn..." />
-            <marker date="1425826308696" expanded="true" signature="11461:11593" placeholder="insert into ..." />
-            <marker date="1425826308696" expanded="true" signature="11882:17331" placeholder="insert into ..." />
-            <marker date="1425826308696" expanded="true" signature="17463:17521" placeholder="select * fro..shopnc_goods_common..." />
-            <marker date="1425826308696" expanded="true" signature="17903:18038" placeholder="insert into ..." />
-            <marker date="1425826308696" expanded="true" signature="20739:21670" placeholder="SELECT * FRO..*..." />
-            <marker date="1425826308696" expanded="true" signature="20756:21638" placeholder="SELECT * FRO..TOP..." />
-            <marker date="1425826308696" expanded="true" signature="20772:21619" placeholder="SELECT TOP :..." />
+            <marker date="1425827645475" expanded="true" signature="551:663" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1425827645475" expanded="true" signature="987:1052" placeholder="select * fro..Center_codes..." />
+            <marker date="1425827645475" expanded="true" signature="1530:1586" placeholder="select iClas..Center_Class..." />
+            <marker date="1425827645475" expanded="true" signature="2438:2566" placeholder="insert into ..." />
+            <marker date="1425827645475" expanded="true" signature="2991:3103" placeholder="select b.id ..map_org_wechat..." />
+            <marker date="1425827645475" expanded="true" signature="6690:7588" placeholder="SELECT * FRO..*..." />
+            <marker date="1425827645475" expanded="true" signature="6707:7556" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1425827645475" expanded="true" signature="6723:7537" placeholder="SELECT TOP :..." />
+            <marker date="1425827645475" expanded="true" signature="9203:9274" placeholder="select * fro..Center_ClinicSale..." />
+            <marker date="1425827645475" expanded="true" signature="9424:9482" placeholder="select * fro..shopnc_goods_common..." />
+            <marker date="1425827645475" expanded="true" signature="10619:10677" placeholder="select * fro..shopnc_goods_common..." />
+            <marker date="1425827645475" expanded="true" signature="10975:11097" placeholder="update shopn..." />
+            <marker date="1425827645475" expanded="true" signature="11461:11593" placeholder="insert into ..." />
+            <marker date="1425827645475" expanded="true" signature="11882:17331" placeholder="insert into ..." />
+            <marker date="1425827645475" expanded="true" signature="17463:17521" placeholder="select * fro..shopnc_goods_common..." />
+            <marker date="1425827645475" expanded="true" signature="17903:18038" placeholder="insert into ..." />
+            <marker date="1425827645475" expanded="true" signature="20739:21670" placeholder="SELECT * FRO..*..." />
+            <marker date="1425827645475" expanded="true" signature="20756:21638" placeholder="SELECT * FRO..TOP..." />
+            <marker date="1425827645475" expanded="true" signature="20772:21619" placeholder="SELECT TOP :..." />
           </folding>
         </state>
       </provider>

@@ -189,15 +189,14 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and checkout.dCO_Date>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.dCO_Date< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and checkout.dCO_Date>= \''.date('Y-m-d',strtotime('-1 month')). '\' and checkout.dCO_Date< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and checkout.dCO_Date>= \''.date('Y-m-1',strtotime('-1 month')). '\' and checkout.dCO_Date< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
-            $datesql = ' and checkout.dCO_Date>= \''.date('Y-m-d',strtotime('-1 year')). '\' and checkout.dCO_Date< \''.date('Y-1-1',time()).'\'';
+            $datesql = ' and checkout.dCO_Date>= \''.date('Y-1-1',strtotime('-1 year')). '\' and checkout.dCO_Date< \''.date('Y-1-1',time()).'\'';
         }
         $sql = "select  b.id , b.name , sum(fCO_IncomeMoney) as num
                     from  Center_CheckOut checkout left join  Organization b   on checkout.OrgID = b.id
                     where checkout.OrgID in (select orgid from map_org_wechat) $datesql
               group by b.id , b.name order by sum(fCO_IncomeMoney) desc   ";
-//        throw new Exception($sql);
 
         $stmt = $conn->query($sql);
         $salelist = array();
@@ -205,6 +204,7 @@ class dashboardControl extends SystemControl{
             $row->details= array();
             array_push($salelist, $row);
         }
+        array_push($salelist,$sql);
         return $salelist;
     }
 
@@ -221,9 +221,9 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.RechargeDate< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 month')). '\' and checkout.RechargeDate< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-1',strtotime('-1 month')). '\' and checkout.RechargeDate< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
-            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and checkout.RechargeDate< \''.date('Y-1-1',time()).'\'';
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-1-1',strtotime('-1 year')). '\' and checkout.RechargeDate< \''.date('Y-1-1',time()).'\'';
         }
         $sql = "select  b.id , b.name , sum(RechargeMoney) as num
                     from  center_MemberRecharge checkout left join  Organization b  on checkout.OrgID = b.id
@@ -235,6 +235,7 @@ class dashboardControl extends SystemControl{
             $row->details= array();
             array_push($memberlist, $row);
         }
+
         return $memberlist;
     }
 
@@ -251,9 +252,9 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.RechargeDate< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 month')). '\' and checkout.RechargeDate< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-1',strtotime('-1 month')). '\' and checkout.RechargeDate< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
-            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and checkout.RechargeDate< \''.date('Y-1-1',time()).'\'';
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-1-1',strtotime('-1 year')). '\' and checkout.RechargeDate< \''.date('Y-1-1',time()).'\'';
         }
 
         $outdatesql = '';
@@ -266,9 +267,9 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $outdatesql = ' and out.dco_date>= \''.date('Y-m-d',strtotime('-1 day')). '\' and out.dco_date< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $outdatesql = ' and out.dco_date>= \''.date('Y-m-d',strtotime('-1 month')). '\' and out.dco_date< \''.date('Y-m-1',time()).'\'';
+            $outdatesql = ' and out.dco_date>= \''.date('Y-m-1',strtotime('-1 month')). '\' and out.dco_date< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
-            $outdatesql = ' and out.dco_date>= \''.date('Y-m-d',strtotime('-1 year')). '\' and out.dco_date< \''.date('Y-1-1',time()).'\'';
+            $outdatesql = ' and out.dco_date>= \''.date('Y-1-1',strtotime('-1 year')). '\' and out.dco_date< \''.date('Y-1-1',time()).'\'';
         }
         $sql = "  select id , name ,sum(num) as num
                   from (
@@ -337,9 +338,9 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.checkdate< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 month')). '\' and checkout.checkdate< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-1',strtotime('-1 month')). '\' and checkout.checkdate< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
-            $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and checkout.checkdate< \''.date('Y-1-1',time()).'\'';
+            $datesql = ' and checkout.checkdate>= \''.date('Y-1-1',strtotime('-1 year')). '\' and checkout.checkdate< \''.date('Y-1-1',time()).'\'';
         }
         $sql = "select  b.id , b.name , count(1) as num
                     from  spotcheck_main checkout left join  Organization b  on checkout.OrgID = b.id
@@ -368,9 +369,9 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and hf.InputDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and hf.InputDate< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and hf.InputDate>= \''.date('Y-m-d',strtotime('-1 month')). '\' and hf.InputDate< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and hf.InputDate>= \''.date('Y-m-1',strtotime('-1 month')). '\' and hf.InputDate< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
-            $datesql = ' and hf.InputDate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and hf.InputDate< \''.date('Y-1-1',time()).'\'';
+            $datesql = ' and hf.InputDate>= \''.date('Y-1-1',strtotime('-1 year')). '\' and hf.InputDate< \''.date('Y-1-1',time()).'\'';
         }
         $sql = "select  b.id , b.name , count(1) as num
                     from  healthfile hf , sam_taxempcode checkout left join  Organization b  on checkout.org_id = b.id
@@ -399,9 +400,9 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.checkdate< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 month')). '\' and checkout.checkdate< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-1',strtotime('-1 month')). '\' and checkout.checkdate< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
-            $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and checkout.checkdate< \''.date('Y-1-1',time()).'\'';
+            $datesql = ' and checkout.checkdate>= \''.date('Y-1-1',strtotime('-1 year')). '\' and checkout.checkdate< \''.date('Y-1-1',time()).'\'';
         }
         $sql = "select  b.id , b.name , count(1) as num
                     from  spotcheck_main checkout left join  Organization b  on checkout.OrgID = b.id
@@ -430,9 +431,9 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and a.InputDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and a.InputDate< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and a.InputDate>= \''.date('Y-m-d',strtotime('-1 month')). '\' and a.InputDate< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and a.InputDate>= \''.date('Y-m-1',strtotime('-1 month')). '\' and a.InputDate< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
-            $datesql = ' and a.InputDate>= \''.date('Y-m-d',strtotime('-1 year')). '\' and a.InputDate< \''.date('Y-1-1',time()).'\'';
+            $datesql = ' and a.InputDate>= \''.date('Y-1-1',strtotime('-1 year')). '\' and a.InputDate< \''.date('Y-1-1',time()).'\'';
         }
         $sql = "select id , name ,sum(num) num
                 from(
