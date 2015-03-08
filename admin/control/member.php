@@ -735,7 +735,7 @@ class memberControl extends SystemControl {
 		
 		
 		$tsql = "SET NOCOUNT ON; Exec pFMemberPayStat '$param1','$orgids','$starttime','$endtime','','$startnum','$endnum';SET NOCOUNT off; ";
-		// echo $tsql;
+		 echo $tsql;
 		$stmt = $conn->prepare ( $tsql );
 		$stmt->execute ();
 		$data_list = array ();

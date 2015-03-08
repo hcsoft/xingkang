@@ -132,7 +132,7 @@
                             <p>日常下账:&nbsp;<strong class="red"><?php echo number_format($v->fRechargeBuy, 2); ?></strong>&nbsp;元</p>
                             <p>赠送金额:&nbsp;<strong class="red"><?php echo number_format($v->GiveMoney, 2); ?></strong>&nbsp;元</p>
                             <p>赠送下账:&nbsp;<strong class="red"><?php echo number_format($v->GiveSaleMoney, 2); ?></strong>&nbsp;元</p>
-                            <p>积分增减:&nbsp;<strong class="red"><?php echo number_format($v->ScaleBalance, 0); ?></strong>&nbsp;</p>
+                            <!--<p>积分增减:&nbsp;<strong class="red"><?php echo number_format($v->ScaleBalance, 0); ?></strong>&nbsp;</p>-->
                         </td>
                         <td  class=" align-center">
                             <p>预存下账:&nbsp;<strong class="red"><?php echo number_format($v->fRecharge,2); ?></strong>&nbsp;元</p>
