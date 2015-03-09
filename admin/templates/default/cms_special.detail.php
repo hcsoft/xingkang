@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET;?>">
-<title><?php echo $output['special_detail']['special_title']; ?></title>
+<title>111<?php echo $output['special_detail']['special_title']; ?></title>
 <meta name="keywords" content="<?php echo $output['special_detail']['special_title']; ?>" />
 <meta name="description" content="<?php echo $output['special_detail']['special_title']; ?>" />
 <meta name="author" content="hcsoft">
