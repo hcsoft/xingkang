@@ -339,7 +339,7 @@ class memberControl extends SystemControl {
 		);
 		$sqlarray2 = array (
 			'membername' => '  "membername"',
-			'memberid' => ' "memberid" ',
+			'memberid' => ' "MemberID" ',
 			'year' => '   "year" ',
 			'month' => '    "month" ',
 			'day' => '   "day" ',
@@ -396,7 +396,7 @@ class memberControl extends SystemControl {
 		$page = new Page ();
 		$page->setEachNum ( 10 );
 		$page->setNowPage ( $_REQUEST ["curpage"] );
-		$sql = 'from Center_CheckOut a  ,
+		$sql = 'from Center_CheckOut a  left join  Center_MemberInfo member on a.sMemberID = member.sMemberID ,
              Organization org
           where isnull(smemberid , \'\') <> \'\'
            and a.orgid = org.id ';
@@ -414,7 +414,7 @@ class memberControl extends SystemControl {
 			$sql = $sql . ' and a.OrgID in ( ' . implode ( ',', $_GET ['orgids'] ) . ')';
 		}
 
-		$msql = 'from center_MemberRecharge a  ,
+		$msql = 'from center_MemberRecharge a left join  Center_MemberInfo member on a.MemberID = member.sMemberID ,
              Organization org
           where [type]=2
            and a.orgid = org.id ';
