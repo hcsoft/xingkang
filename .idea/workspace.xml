@@ -1,8 +1,510 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/cms_special.detail.php" afterPath="$PROJECT_DIR$/admin/templates/default/cms_special.detail.php" />
+    <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="1,修改了登录图片">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/BYekan.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/FontAwesome.otf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/avatars/Javi-Jimenez.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/avatars/John-Smith.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/avatars/Lee-Munroe.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/avatars/Matt-Cheuvront.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/avatars/Nicolai-Larson.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/avatars/Osvaldus-Valutis.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/avatars/Sergey-Azovskiy.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/avatars/Stephanie-Walter.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/WeatherIcons-Regular.otf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/YekanWeb-Bold.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/YekanWeb-Regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/avatars/adam-jansen.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/sound/alert.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/angle-down.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/app-45616.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/app.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/attach-blue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/attach-green.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/attach-red.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/attach-yellow.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/avatars/bing.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/swf/copy_csv_xls.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/swf/copy_csv_xls_pdf.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/avatars/divyia.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/favicon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/fontawesome-webfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/fontawesome-webfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/fontawesome-webfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/glyphicons-halflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/glyphicons-halflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/jquery.minicolors.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/logo-inverted.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/logo-rtl.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/logo-solo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/skins.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/sort_asc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/sort_asc_disabled.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/sort_both.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/sort_desc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/sort_desc_disabled.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/temp1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/img/tree-icons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/typicons.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/typicons.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/typicons.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/weathericons-regular-webfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/weathericons-regular-webfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/weathericons-regular-webfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/.csscomb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/.csslintrc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/400-500.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/400-500.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/4095-rtl.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/4095-rtl.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/4095-rtl.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/4095.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/4095.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/4095.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/4095.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/Blue.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/Blue.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/chartjs/Chart.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/chartjs/Chart.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/other-less/LessHat.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datatable/ZeroClipboard.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/accordions.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/accordions.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/alerts-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/alerts.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/alerts.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/alerts.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/alerts.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/analytics.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/animate.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/animate.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/animations.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/animations.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/animations.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/azure.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/azure.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/azure.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/azure.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/background-variant.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/badges-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/badges.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-rtl.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-rtl.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-rtl.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/beyond.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/beyond.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/beyond.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/black.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/black.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/black.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/black.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/blue.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/blue.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/body.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/body.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/bootbox/bootbox.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/bootbox/bootbox.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/bootbox/bootbox.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datetime/bootstrap-datepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/bootstrap-rtl.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/bootstrap-rtl.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/bootstrap-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/bootstrap-rtl.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/tagsinput/bootstrap-tagsinput.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/tagsinput/bootstrap-tagsinput.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/tagsinput/bootstrap-tagsinput.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datetime/bootstrap-timepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datetime/bootstrap-timepicker.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datetime/bootstrap-timepicker.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/editors/wysiwyg/bootstrap-wysiwyg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/bootstrap.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/validation/bootstrapValidator.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/validation/bootstrapValidator.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/validation/bootstrapValidator.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/border-radius.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/breadcrumbs.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/breadcrumbs.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/breadcrumbs.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/button-groups-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/button-groups.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/buttons.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/buttons.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/buttons.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/buttons.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/carousel-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/carousel.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/center-block.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/chartjs/chartjs-init.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/charts.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/charts.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/checkbox-radiobox.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/checkbox-radiobox.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/clearfix.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/close-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/close.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/code.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/colorpicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/colorpicker.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/colors.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/colors.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/comment.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/comment.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/component-animations.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/darkblue.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/darkblue.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/darkblue.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/darkblue.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/darkred.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/darkred.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/darkred.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/darkred.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/dashboard.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/dashboard.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/dataTables.bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datatable/dataTables.bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datatable/dataTables.bootstrap.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datatable/dataTables.bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datatable/dataTables.tableTools.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datatable/dataTables.tableTools.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datatable/dataTables.tableTools.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/databoxes.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/databoxes.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datatable/datatables-init.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/datepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/datepicker.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/daterangepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datetime/daterangepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/daterangepicker.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/deepblue.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/deepblue.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/deepblue.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/deepblue.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/demo.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/demo.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/demo.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/demo.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/doless.cmd" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/dropdowns-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/dropdowns.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/dropdowns.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/dropdowns.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/easypiechart/easypiechart-init.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/editors.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/editors.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/flot-init.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/font-awesome.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/font-awesome.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/fontawesome-webfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/fonts.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/fonts.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/fonts.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/forms-inputs.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/forms-inputs.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/forms-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/forms.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/forms.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/fuelux/spinner/fuelux.spinner.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/fullcalendar.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/fullcalendar/fullcalendar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/fullcalendar.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/fullcalendar/fullcalendar.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/fullcalendar/fullcalendar.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/glyphicons-halflings-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/glyphicons.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/mixins/gradients-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/gradients.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/gray.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/gray.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/gray.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/gray.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/green.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/green.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/green.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/green.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/mixins/grid-framework-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/grid-framework.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/grid-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/mixins/grid-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/grid.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/grid.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/helpers.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/helpers.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/hide-text.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/image.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/input-groups-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/input-groups.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/invoice.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/invoice.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/slider/jQRangeSlider/jQAllRangeSliders-withRuler-min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/jquery-2.0.3.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/jquery-ui-1.10.4.custom.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/jquery-ui-1.10.4.custom.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/textarea/jquery.autosize.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/textarea/jquery.autosize.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datatable/jquery.dataTables.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datatable/jquery.dataTables.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datatable/jquery.dataTables.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/easypiechart/jquery.easypiechart.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/easypiechart/jquery.easypiechart.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/easypiechart/jquery.easypiechart.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.axislabels.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.categories.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.categories.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.crosshair.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.crosshair.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.fillbetween.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.fillbetween.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.orderBars.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.pie.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.pie.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.resize.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.resize.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.selection.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.selection.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.stack.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.stack.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.time.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.time.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.tooltip.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.tooltip.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/flot/jquery.flot.tooltip.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/editors/wysiwyg/jquery.hotkeys.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/knob/jquery.knob.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/colorpicker/jquery.minicolors.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/colorpicker/jquery.minicolors.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/slider/jQRangeSlider/jquery.mousewheel.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/nestable/jquery.nestable.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/slider/jquery.nouislider.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/slimscroll/jquery.slimscroll.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/slimscroll/jquery.slimscroll.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/slimscroll/jquery.slimscroll.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/sparkline/jquery.sparkline.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/jumbotron.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/labels-badges.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/labels-badges.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/labels.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/labels.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/other-less/lesshat.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/other-less/lesshat.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/list-group-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/list-group.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/list-group.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/loading.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/loading.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/loading.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/loading.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/lockscreen.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/lockscreen.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/login.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/login.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/mail.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/mail.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/main-container.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/main-container.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/media-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/media.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/merged-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/mixins-rtl.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/mixins-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/mixins-rtl.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/modals-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/modals.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/modals.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/modals.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datetime/moment.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/datetime/moment.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/morris/morris-init.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/morris/morris.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/nav-divider.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/nav-vertical-align.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/navbar-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/navbar.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/navbar.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/navbar.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/navs-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/navs.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/nestable-lists.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/nestable-lists.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/normalize-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/normalize.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/notifications.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/notifications.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/opacity.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/orange.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/orange.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/orange.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/orange.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/orders.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/orders.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/page-content.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/page-content.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/page-content.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/page-header-body.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/page-header-body.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/pager-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/pager.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/pagination-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/mixins/pagination-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/pagination.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/pagination.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/pagination.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/pagination.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/panels-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/panels.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/panels.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/pink.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/pink.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/pink.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/pink.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/popovers-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/popovers.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/popovers.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/popovers.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/editors/wysiwyg/prettify.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/pricing.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/pricing.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/print.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/profile.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/profile.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/progress-bar.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/progress-bars-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/progress-bars.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/progressbars.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/progressbars.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/purple.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/purple.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/purple.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/purple.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/morris/raphael-2.0.2.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/register.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/register.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/reset-filter.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/resize.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/responsive-embed-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/responsive-embed.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/responsive-utilities.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/responsive-visibility.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/scaffolding.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/search-help-bar.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/search-help-bar.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/select2.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/select2/select2.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/select2.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/select2/select2.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/sidebar.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/sidebar.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/size.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/skins-mixins.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/skins-mixins.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/skins-mixins.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/skins-mixins.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/skins.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/skins.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/sliders.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/sliders.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/spaces.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/spaces.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/spaces.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/sparkline/sparkline-init.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/spinners.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/spinners.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/editors/summernote/summernote.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/editors/summernote/summernote.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/switches.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/switches.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/tab-focus.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/table-row.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/tables-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/tables.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/tables.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/tables.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/tabs.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/tabs.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/tagsinput.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/tagsinput.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/tasks.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/tasks.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/teal.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/teal.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/teal.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/skins/teal.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/text-emphasis.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/text-overflow.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/theme.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/thumbnails.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/tickets.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/tickets.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/timeline.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/timeline.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/timepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/timepicker.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/toastr/toastr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/toastr/toastr.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/toastr/toastr.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/tooltip.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/tooltips.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/tooltips.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/fuelux/treeview/tree-custom.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/fuelux/treeview/tree-custom.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/fuelux/treeview/tree-custom.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/fuelux/treeview/treeview-init.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/treeview.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/treeview.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/type-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/type.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/typicons.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/typicons.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/typicons.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/typography.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/typography.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/utilities-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/utilities.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/validator.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/validator.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-rtl-less/variables-rtl.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/variables.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/variables.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/variables.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/variables.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/variables.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/mixins/vendor-prefixes.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/weather-icons.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/weather-icons.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/fonts/weathericons-regular-webfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/wells.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/wells.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/bootstrap-less/wells.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/widget.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/widget.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/fuelux/wizard/wizard-custom.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/fuelux/wizard/wizard-custom.min.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/fuelux/wizard/wizard-custom.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/wizards.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/wizards.less" />
+      <change type="DELETED" beforePath="D:\workspace\xingkang\admin\templates\default\welcome-old.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/framework/db/mssqlpdo.php" afterPath="$PROJECT_DIR$/core/framework/db/mssqlpdo.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/welcome.php" afterPath="$PROJECT_DIR$/admin/templates/default/welcome.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\workspace\xingkang\admin\templates\default\welcome.php" afterPath="$PROJECT_DIR$/admin/templates/default/welcome-bat.php" />
     </list>
     <ignored path="xingkang.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,144 +529,79 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="global.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/global.php">
+      <file leaf-file-name="welcome.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="224" max-vertical-offset="1582">
-              <caret line="26" column="38" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.4650838" vertical-offset="7101" max-vertical-offset="13818">
+              <caret line="531" column="86" selection-start-line="531" selection-start-column="86" selection-end-line="531" selection-end-column="86" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.ini.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/config/config.ini.php">
+      <file leaf-file-name="doless.cmd" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/resource/bootstrap/css/doless.cmd">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="322" max-vertical-offset="840">
-              <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shopnc.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/shopnc.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="286" max-vertical-offset="1176">
-              <caret line="72" column="1" selection-start-line="72" selection-start-column="1" selection-end-line="72" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/framework/core/base.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2126" max-vertical-offset="2842">
-              <caret line="177" column="47" selection-start-line="176" selection-start-column="38" selection-end-line="176" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/language/zh_cn/login.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.652174" vertical-offset="0" max-vertical-offset="420">
-              <caret line="6" column="27" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="280">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="196">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index_layout.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/layout/index_layout.php">
+      <file leaf-file-name="beyond.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/resource/bootstrap/css/beyond.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.73913" vertical-offset="0" max-vertical-offset="4060">
-              <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="98">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2800">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.php">
+      <file leaf-file-name="databoxes.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/databoxes.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="280">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1270" max-vertical-offset="13496">
+              <caret line="104" column="18" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/login.php">
+      <file leaf-file-name="variables.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/variables.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.695652" vertical-offset="0" max-vertical-offset="616">
-              <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="868">
+              <caret line="1" column="37" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cms_special.detail.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/cms_special.detail.php">
+      <file leaf-file-name="skins.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/resource/bootstrap/js/skins.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.652174" vertical-offset="0" max-vertical-offset="546">
-              <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="546" max-vertical-offset="1246">
+              <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
               <folding>
-                <marker date="1425911972505" expanded="true" signature="2391:2408" placeholder="{...}" />
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setting.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/data/cache/setting.php">
+      <file leaf-file-name="welcome-bat.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome-bat.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.026819924" vertical-offset="0" max-vertical-offset="522">
-              <caret line="1" column="3976" selection-start-line="1" selection-start-column="3976" selection-end-line="1" selection-end-column="3976" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="domain.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/control/domain.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="266" max-vertical-offset="2296">
-              <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shop/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="140" max-vertical-offset="420">
-              <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="11060">
+              <caret line="0" column="68" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="68" />
+              <folding>
+                <marker date="1425911520277" expanded="true" signature="26168:26202" placeholder="..." />
+                <marker date="1425911520277" expanded="true" signature="26270:26321" placeholder="..." />
+                <marker date="1425911520277" expanded="true" signature="31150:31184" placeholder="..." />
+                <marker date="1425911520277" expanded="true" signature="31252:31303" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -182,13 +619,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/data/config/config.ini.php" />
         <option value="$PROJECT_DIR$/shop/index.php" />
         <option value="$PROJECT_DIR$/core/framework/core/base.php" />
         <option value="$PROJECT_DIR$/admin/language/zh_cn/login.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/login.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/cms_special.detail.php" />
         <option value="$PROJECT_DIR$/data/cache/setting.php" />
+        <option value="$PROJECT_DIR$/data/config/config.ini.php" />
+        <option value="$PROJECT_DIR$/core/framework/db/mssqlpdo.php" />
+        <option value="$PROJECT_DIR$/data/resource/bootstrap/js/skins.js" />
+        <option value="$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/variables.less" />
+        <option value="$PROJECT_DIR$/admin/templates/default/welcome.php" />
       </list>
     </option>
   </component>
@@ -270,58 +711,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xingkang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Default">
           <PATH>
@@ -361,6 +750,212 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bootstrap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bootstrap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bootstrap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bootstrap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="beyond-less" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="area" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xingkang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -393,11 +988,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workspace\xingkang\data\resource\bootstrap\css" />
+      <recent name="D:\workspace\xingkang\data\resource" />
+      <recent name="D:\workspace\xingkang\admin\templates\default" />
       <recent name="D:\workspace\xingkang\admin\templates\default\images\sky" />
       <recent name="D:\workspace\xingkang\data\resource\js" />
-      <recent name="D:\workspace\xingkang\admin\templates\default" />
-      <recent name="D:\workspace\xingkang\data\resource\js\hightchart" />
-      <recent name="D:\workspace\xingkang\admin\control" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\workspace\xingkang\data\resource\js\ztree\js" />
@@ -756,7 +1351,6 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23629242" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -775,11 +1369,13 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23629242" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28720626" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -830,146 +1426,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/resource/js/jquery-ui.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23551401" vertical-offset="0" max-vertical-offset="535">
-          <caret line="12" column="49" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/member.recharge.sum.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2980" max-vertical-offset="3892">
-          <caret line="130" column="103" selection-start-line="130" selection-start-column="91" selection-end-line="130" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/include/menu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="588" max-vertical-offset="4466">
-          <caret line="223" column="52" selection-start-line="223" selection-start-column="52" selection-end-line="223" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.saledetail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.89944136" vertical-offset="2394" max-vertical-offset="4270">
-          <caret line="217" column="24" selection-start-line="217" selection-start-column="24" selection-end-line="217" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/control.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3769559" vertical-offset="1317" max-vertical-offset="5068">
-          <caret line="113" column="31" selection-start-line="113" selection-start-column="31" selection-end-line="113" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/include/limit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.3456614" vertical-offset="1747" max-vertical-offset="2450">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/resource/js/jquery.form.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="17836">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/resource/js/jquery.formautofill.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1218">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/healthplatform.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3822">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/healthplatform.index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47765362" vertical-offset="2906" max-vertical-offset="4774">
-          <caret line="232" column="0" selection-start-line="232" selection-start-column="0" selection-end-line="232" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/storehouse.detail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3715084" vertical-offset="1890" max-vertical-offset="4228">
-          <caret line="154" column="57" selection-start-line="154" selection-start-column="43" selection-end-line="154" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/framework/function/core.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3489796" vertical-offset="15621" max-vertical-offset="27566">
-          <caret line="1128" column="0" selection-start-line="1128" selection-start-column="0" selection-end-line="1128" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/language/zh_cn/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16138329" vertical-offset="0" max-vertical-offset="694">
-          <caret line="8" column="33" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/model/admin.model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22486034" vertical-offset="665" max-vertical-offset="2254">
-          <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/framework/db/mssql.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.95732576" vertical-offset="5347" max-vertical-offset="9128">
-          <caret line="430" column="20" selection-start-line="430" selection-start-column="20" selection-end-line="430" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/finance.saledetailmanager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33659217" vertical-offset="3371" max-vertical-offset="6146">
-          <caret line="258" column="85" selection-start-line="258" selection-start-column="85" selection-end-line="258" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.6743517" vertical-offset="446" max-vertical-offset="4578">
-          <caret line="214" column="31" selection-start-line="214" selection-start-column="21" selection-end-line="214" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/admin.edit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="336" max-vertical-offset="1498">
-          <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4351585" vertical-offset="412" max-vertical-offset="1106">
-          <caret line="51" column="65" selection-start-line="51" selection-start-column="63" selection-end-line="51" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/storehouse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.832148" vertical-offset="504" max-vertical-offset="6846">
-          <caret line="128" column="40" selection-start-line="128" selection-start-column="40" selection-end-line="128" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/healthfile.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26396647" vertical-offset="2163" max-vertical-offset="3514">
@@ -1033,24 +1489,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1764" max-vertical-offset="6762">
-          <caret line="164" column="37" selection-start-line="164" selection-start-column="37" selection-end-line="164" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/community.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2605" max-vertical-offset="10542">
           <caret line="204" column="17" selection-start-line="204" selection-start-column="14" selection-end-line="204" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6159" max-vertical-offset="11060">
-          <caret line="463" column="71" selection-start-line="463" selection-start-column="71" selection-end-line="463" selection-end-column="71" />
         </state>
       </provider>
     </entry>
@@ -1093,7 +1535,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="140" max-vertical-offset="420">
           <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1101,7 +1542,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="266" max-vertical-offset="2296">
           <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1109,15 +1549,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="224" max-vertical-offset="1582">
           <caret line="26" column="38" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/config/config.ini.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="322" max-vertical-offset="840">
-          <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1125,7 +1556,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="286" max-vertical-offset="1176">
           <caret line="72" column="1" selection-start-line="72" selection-start-column="1" selection-end-line="72" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1133,7 +1563,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2126" max-vertical-offset="2842">
           <caret line="177" column="47" selection-start-line="176" selection-start-column="38" selection-end-line="176" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1141,7 +1570,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="739">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1149,7 +1577,83 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="280">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/layout/index_layout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="224" max-vertical-offset="4060">
+          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/language/zh_cn/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="84" max-vertical-offset="420">
+          <caret line="6" column="27" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="154" max-vertical-offset="616">
+          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/cms_special.detail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="84" max-vertical-offset="546">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/cache/seo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="726">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/cache/groupbuy.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="739">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/cache/nav.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="726">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/cache/setting.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="98">
+          <caret line="1" column="3167" selection-start-line="1" selection-start-column="3167" selection-end-line="1" selection-end-column="3167" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/cache/store_class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="726">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/cache/store_grade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="726">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/cache/circle_level.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="726">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1157,48 +1661,138 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="739">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/layout/index_layout.php">
+    <entry file="file://$PROJECT_DIR$/data/cache/fields/_pk.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.73913" vertical-offset="0" max-vertical-offset="4060">
-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="726">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/language/zh_cn/login.php">
+    <entry file="file://$PROJECT_DIR$/data/cache/index/article.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.652174" vertical-offset="0" max-vertical-offset="420">
-          <caret line="6" column="27" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="27" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="726">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/login.php">
+    <entry file="file://$PROJECT_DIR$/data/cache/index/category.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.695652" vertical-offset="0" max-vertical-offset="616">
-          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="726">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/cms_special.detail.php">
+    <entry file="file://$PROJECT_DIR$/data/area/area.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.652174" vertical-offset="0" max-vertical-offset="546">
-          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="726">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/config/config.ini.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="124" max-vertical-offset="840">
+          <caret line="28" column="50" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/framework/db/mssqlpdo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="182" max-vertical-offset="266">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.4347825" vertical-offset="2325" max-vertical-offset="6762">
+          <caret line="175" column="5" selection-start-line="175" selection-start-column="5" selection-end-line="175" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/resource/js/highcharts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3430">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/resource/bootstrap/js/knob/jquery.knob.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1894452" vertical-offset="0" max-vertical-offset="11130">
+          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/resource/bootstrap/js/skins.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="726">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/resource/bootstrap/js/skins.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="546" max-vertical-offset="1246">
+          <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
           <folding>
-            <marker date="1425911972505" expanded="true" signature="2391:2408" placeholder="{...}" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/cache/setting.php">
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome-bat.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.026819924" vertical-offset="0" max-vertical-offset="522">
-          <caret line="1" column="3976" selection-start-line="1" selection-start-column="3976" selection-end-line="1" selection-end-column="3976" />
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="11060">
+          <caret line="0" column="68" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="68" />
+          <folding>
+            <marker date="1425911520277" expanded="true" signature="26168:26202" placeholder="..." />
+            <marker date="1425911520277" expanded="true" signature="26270:26321" placeholder="..." />
+            <marker date="1425911520277" expanded="true" signature="31150:31184" placeholder="..." />
+            <marker date="1425911520277" expanded="true" signature="31252:31303" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/variables.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="868">
+          <caret line="1" column="37" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/resource/bootstrap/css/beyond-less/databoxes.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1270" max-vertical-offset="13496">
+          <caret line="104" column="18" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/resource/bootstrap/css/beyond.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2800">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/resource/bootstrap/css/doless.cmd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="739">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4650838" vertical-offset="7101" max-vertical-offset="13818">
+          <caret line="531" column="86" selection-start-line="531" selection-start-column="86" selection-end-line="531" selection-end-column="86" />
           <folding />
         </state>
       </provider>
