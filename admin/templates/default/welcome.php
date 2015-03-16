@@ -74,8 +74,8 @@ Purchase: http://wrapbootstrap.com
                         <div class="databox-right">
                             <span class="databox-title themesecondary">档案</span>
                             <div class="databox-text darkgray">
-                                新增数<span class="databox-number themesecondary " style="display: inline-block"> 24</span>
-                                总数<span class="databox-number themesecondary" style="display: inline-block"> 365979</span>
+                                新增数<span id="file_new" class="databox-number themesecondary " style="display: inline-block"> 24</span>
+                                总数<span id="file_count" class="databox-number themesecondary" style="display: inline-block"> 365979</span>
                             </div>
                             <div class="databox-stat themesecondary radius-bordered">
                                 <i class="stat-icon icon-lg fa fa-tasks"></i>
@@ -96,9 +96,9 @@ Purchase: http://wrapbootstrap.com
                         <div class="databox-right">
                             <span class="databox-title themethirdcolor">孕产妇</span>
                             <div class="databox-text darkgray">
-                                新建册<span class="databox-number themethirdcolor " style="display: inline-block"> 8</span>
-                                新结案<span class="databox-number themethirdcolor " style="display: inline-block"> 8</span>
-                                未总数<span class="databox-number themethirdcolor " style="display: inline-block"> 3461</span>
+                                新建册<span id="pregnant_new" class="databox-number themethirdcolor " style="display: inline-block"> 8</span>
+                                新结案<span id="pregnant_close" class="databox-number themethirdcolor " style="display: inline-block"> 8</span>
+                                未结案<span id="pregnant_count" class="databox-number themethirdcolor " style="display: inline-block"> 3461</span>
                             </div>
                             <div class="databox-stat themethirdcolor radius-bordered">
                                 <i class="stat-icon  icon-lg fa fa-envelope-o"></i>
@@ -119,9 +119,9 @@ Purchase: http://wrapbootstrap.com
                         <div class="databox-right">
                             <span class="databox-title themeprimary">慢病</span>
                             <div class="databox-text darkgray">
-                                高血压<span class="databox-number themeprimary " style="display: inline-block">36309</span>
-                                糖尿病<span class="databox-number themeprimary " style="display: inline-block">4134</span>
-<!--                                重性精神病<span class="databox-number themeprimary " style="display: inline-block">1207</span>-->
+                                高血压<span id="chronic_hyp" class="databox-number themeprimary " style="display: inline-block">36309</span>
+                                糖尿病<span id="chronic_diab" class="databox-number themeprimary " style="display: inline-block">4134</span>
+<!--                                重性精神病<span id="chronic_holergasia" class="databox-number themeprimary " style="display: inline-block">1207</span>-->
                             </div>
 
                             <div class="databox-state bg-themeprimary">
@@ -143,7 +143,7 @@ Purchase: http://wrapbootstrap.com
                         <div class="databox-right">
                             <span class="databox-title palegreen">传染病</span>
                             <div class="databox-text darkgray">
-                                传染病报告<span class="databox-number palegreen " style="display: inline-block">7</span>
+                                传染病报告<span id="infectious_new" class="databox-number palegreen " style="display: inline-block">7</span>
                             </div>
                             <div class="databox-state bg-themeprimary">
                                 <i class="fa fa-check"></i>
@@ -674,200 +674,264 @@ Purchase: http://wrapbootstrap.com
 
 <script>
     // If you want to draw your charts with Theme colors you must run initiating charts after that current skin is loaded
-    $(window).bind("load", function () {
+    $(function () {
+        $.getJSON("index.php?act=dashboard&op=newchart", function (data) {
+            console.log(data);
+            //1,新增档案数 /档案总数;
+            $("#file_new").html(data["file_new"]);
+            $("#file_count").html(data["file_count"]);
+            //2,孕妇新增建册 /新增结案/未结案总数
+            $("#pregnant_count").html(data["pregnant_count"]);
+            $("#pregnant_new").html(data["pregnant_new"]);
+            $("#pregnant_close").html(data["pregnant_close"]);
+            //3,高血压/糖尿病/重性精神病 总数
+            $("#chronic_hyp").html(data["chronic_hyp"]);
+            $("#chronic_diab").html(data["chronic_diab"]);
+            $("#chronic_holergasia").html(data["chronic_holergasia"]);
+            //4,传染病报告数
+            $("#infectious_new").html(data["infectious_new"]);
+            /*Sets Themed Colors Based on Themes*/
+            themeprimary = getThemeColorFromCss('themeprimary');
+            themesecondary = getThemeColorFromCss('themesecondary');
+            themethirdcolor = getThemeColorFromCss('themethirdcolor');
+            themefourthcolor = getThemeColorFromCss('themefourthcolor');
+            themefifthcolor = getThemeColorFromCss('themefifthcolor');
 
-        /*Sets Themed Colors Based on Themes*/
-        themeprimary = getThemeColorFromCss('themeprimary');
-        themesecondary = getThemeColorFromCss('themesecondary');
-        themethirdcolor = getThemeColorFromCss('themethirdcolor');
-        themefourthcolor = getThemeColorFromCss('themefourthcolor');
-        themefifthcolor = getThemeColorFromCss('themefifthcolor');
+            //Sets The Hidden Chart Width
+            $('#dashboard-bandwidth-chart')
+                .data('width', $('.box-tabbs')
+                    .width() - 20);
 
-        //Sets The Hidden Chart Width
-        $('#dashboard-bandwidth-chart')
-            .data('width', $('.box-tabbs')
-                .width() - 20);
+            //-------------------------Visitor Sources Pie Chart----------------------------------------//
+            var data = [
+                {
+                    data: [[1, 21]],
+                    color: '#fb6e52'
+                },
+                {
+                    data: [[1, 12]],
+                    color: '#e75b8d'
+                },
+                {
+                    data: [[1, 11]],
+                    color: '#a0d468'
+                },
+                {
+                    data: [[1, 10]],
+                    color: '#ffce55'
+                },
+                {
+                    data: [[1, 46]],
+                    color: '#5db2ff'
+                }
+            ];
+            var placeholder = $("#dashboard-pie-chart-sources");
+            placeholder.unbind();
 
-        //-------------------------Visitor Sources Pie Chart----------------------------------------//
-        var data = [
-            {
-                data: [[1, 21]],
-                color: '#fb6e52'
-            },
-            {
-                data: [[1, 12]],
-                color: '#e75b8d'
-            },
-            {
-                data: [[1, 11]],
-                color: '#a0d468'
-            },
-            {
-                data: [[1, 10]],
-                color: '#ffce55'
-            },
-            {
-                data: [[1, 46]],
-                color: '#5db2ff'
-            }
-        ];
-        var placeholder = $("#dashboard-pie-chart-sources");
-        placeholder.unbind();
-
-        $.plot(placeholder, data, {
-            series: {
-                pie: {
-                    innerRadius: 0.45,
-                    show: true,
-                    stroke: {
-                        width: 4
+            $.plot(placeholder, data, {
+                series: {
+                    pie: {
+                        innerRadius: 0.45,
+                        show: true,
+                        stroke: {
+                            width: 4
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        //------------------------------Visit Chart------------------------------------------------//
-        var data2 = [{
-            color: themesecondary,
-            label: "Direct Visits",
-            data: [[3, 2], [4, 5], [5, 4], [6, 11], [7, 12], [8, 11], [9, 8], [10, 14], [11, 12], [12, 16], [13, 9],
-                [14, 10], [15, 14], [16, 15], [17, 9]],
+            //------------------------------Visit Chart------------------------------------------------//
+            var data2 = [{
+                color: themesecondary,
+                label: "Direct Visits",
+                data: [[3, 2], [4, 5], [5, 4], [6, 11], [7, 12], [8, 11], [9, 8], [10, 14], [11, 12], [12, 16], [13, 9],
+                    [14, 10], [15, 14], [16, 15], [17, 9]],
 
-            lines: {
-                show: true,
-                fill: true,
-                lineWidth: .1,
-                fillColor: {
-                    colors: [{
-                        opacity: 0
-                    }, {
-                        opacity: 0.4
-                    }]
-                }
-            },
-            points: {
-                show: false
-            },
-            shadowSize: 0
-        },
-            {
-                color: themeprimary,
-                label: "Referral Visits",
-                data: [[3, 10], [4, 13], [5, 12], [6, 16], [7, 19], [8, 19], [9, 24], [10, 19], [11, 18], [12, 21], [13, 17],
-                    [14, 14], [15, 12], [16, 14], [17, 15]],
-                bars: {
-                    order: 1,
-                    show: true,
-                    borderWidth: 0,
-                    barWidth: 0.4,
-                    lineWidth: .5,
-                    fillColor: {
-                        colors: [{
-                            opacity: 0.4
-                        }, {
-                            opacity: 1
-                        }]
-                    }
-                }
-            },
-            {
-                color: themethirdcolor,
-                label: "Search Engines",
-                data: [[3, 14], [4, 11], [5, 10], [6, 9], [7, 5], [8, 8], [9, 5], [10, 6], [11, 4], [12, 7], [13, 4],
-                    [14, 3], [15, 4], [16, 6], [17, 4]],
                 lines: {
                     show: true,
-                    fill: false,
+                    fill: true,
+                    lineWidth: .1,
                     fillColor: {
                         colors: [{
-                            opacity: 0.3
-                        }, {
                             opacity: 0
+                        }, {
+                            opacity: 0.4
                         }]
                     }
                 },
                 points: {
-                    show: true
-                }
-            }
-        ];
-        var options = {
-            legend: {
-                show: false
-            },
-            xaxis: {
-                tickDecimals: 0,
-                color: '#f3f3f3'
-            },
-            yaxis: {
-                min: 0,
-                color: '#f3f3f3',
-                tickFormatter: function (val, axis) {
-                    return "";
+                    show: false
                 },
+                shadowSize: 0
             },
-            grid: {
-                hoverable: true,
-                clickable: false,
-                borderWidth: 0,
-                aboveData: false,
-                color: '#fbfbfb'
-
-            },
-            tooltip: true,
-            tooltipOpts: {
-                defaultTheme: false,
-                content: " <b>%x May</b> , <b>%s</b> : <span>%y</span>",
-            }
-        };
-        var placeholder = $("#dashboard-chart-visits");
-        var plot = $.plot(placeholder, data2, options);
-
-        //------------------------------Real-Time Chart-------------------------------------------//
-        var realTimedata = [],
-            realTimedata2 = [],
-            totalPoints = 300;
-
-        var getSeriesObj = function () {
-            return [
                 {
-                    data: getRandomData(),
+                    color: themeprimary,
+                    label: "Referral Visits",
+                    data: [[3, 10], [4, 13], [5, 12], [6, 16], [7, 19], [8, 19], [9, 24], [10, 19], [11, 18], [12, 21], [13, 17],
+                        [14, 14], [15, 12], [16, 14], [17, 15]],
+                    bars: {
+                        order: 1,
+                        show: true,
+                        borderWidth: 0,
+                        barWidth: 0.4,
+                        lineWidth: .5,
+                        fillColor: {
+                            colors: [{
+                                opacity: 0.4
+                            }, {
+                                opacity: 1
+                            }]
+                        }
+                    }
+                },
+                {
+                    color: themethirdcolor,
+                    label: "Search Engines",
+                    data: [[3, 14], [4, 11], [5, 10], [6, 9], [7, 5], [8, 8], [9, 5], [10, 6], [11, 4], [12, 7], [13, 4],
+                        [14, 3], [15, 4], [16, 6], [17, 4]],
                     lines: {
                         show: true,
-                        lineWidth: 1,
-                        fill: true,
+                        fill: false,
                         fillColor: {
-                            colors: [
-                                {
-                                    opacity: 0
-                                }, {
-                                    opacity: 1
-                                }
-                            ]
-                        },
-                        steps: false
+                            colors: [{
+                                opacity: 0.3
+                            }, {
+                                opacity: 0
+                            }]
+                        }
                     },
-                    shadowSize: 0
-                }, {
-                    data: getRandomData2(),
-                    lines: {
-                        lineWidth: 0,
-                        fill: true,
-                        fillColor: {
-                            colors: [
-                                {
-                                    opacity: .5
-                                }, {
-                                    opacity: 1
-                                }
-                            ]
-                        },
-                        steps: false
-                    },
-                    shadowSize: 0
+                    points: {
+                        show: true
+                    }
                 }
             ];
-        };
+            var options = {
+                legend: {
+                    show: false
+                },
+                xaxis: {
+                    tickDecimals: 0,
+                    color: '#f3f3f3'
+                },
+                yaxis: {
+                    min: 0,
+                    color: '#f3f3f3',
+                    tickFormatter: function (val, axis) {
+                        return "";
+                    },
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: false,
+                    borderWidth: 0,
+                    aboveData: false,
+                    color: '#fbfbfb'
+
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    defaultTheme: false,
+                    content: " <b>%x May</b> , <b>%s</b> : <span>%y</span>",
+                }
+            };
+            var placeholder = $("#dashboard-chart-visits");
+            var plot = $.plot(placeholder, data2, options);
+
+            //------------------------------Real-Time Chart-------------------------------------------//
+            var realTimedata = [],
+                realTimedata2 = [],
+                totalPoints = 300;
+
+            var getSeriesObj = function () {
+                return [
+                    {
+                        data: getRandomData(),
+                        lines: {
+                            show: true,
+                            lineWidth: 1,
+                            fill: true,
+                            fillColor: {
+                                colors: [
+                                    {
+                                        opacity: 0
+                                    }, {
+                                        opacity: 1
+                                    }
+                                ]
+                            },
+                            steps: false
+                        },
+                        shadowSize: 0
+                    }, {
+                        data: getRandomData2(),
+                        lines: {
+                            lineWidth: 0,
+                            fill: true,
+                            fillColor: {
+                                colors: [
+                                    {
+                                        opacity: .5
+                                    }, {
+                                        opacity: 1
+                                    }
+                                ]
+                            },
+                            steps: false
+                        },
+                        shadowSize: 0
+                    }
+                ];
+            };
+
+
+            // Set up the control widget
+
+            realtimeplot = $.plot("#dashboard-chart-realtime", getSeriesObj(), {
+                yaxis: {
+                    color: '#f3f3f3',
+                    min: 0,
+                    max: 100,
+                    tickFormatter: function (val, axis) {
+                        return "";
+                    }
+                },
+                xaxis: {
+                    color: '#f3f3f3',
+                    min: 0,
+                    max: 100,
+                    tickFormatter: function (val, axis) {
+                        return "";
+                    }
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: false,
+                    borderWidth: 0,
+                    aboveData: false
+                },
+                colors: ['#eee', themeprimary],
+            });
+
+
+            update();
+
+
+            //-------------------------Initiates Easy Pie Chart instances in page--------------------//
+            InitiateEasyPieChart.init();
+
+            //-------------------------Initiates Sparkline Chart instances in page------------------//
+            InitiateSparklineCharts.init();
+        });
+
+        var updateInterval = 500;
+        var realtimeplot;
+        function update() {
+
+            realtimeplot.setData(getSeriesObj());
+
+            realtimeplot.draw();
+            setTimeout(update, updateInterval);
+        }
 
         function getRandomData() {
             if (realTimedata.length > 0)
@@ -926,50 +990,6 @@ Purchase: http://wrapbootstrap.com
             return res;
         }
 
-        // Set up the control widget
-        var updateInterval = 500;
-        var plot = $.plot("#dashboard-chart-realtime", getSeriesObj(), {
-            yaxis: {
-                color: '#f3f3f3',
-                min: 0,
-                max: 100,
-                tickFormatter: function (val, axis) {
-                    return "";
-                }
-            },
-            xaxis: {
-                color: '#f3f3f3',
-                min: 0,
-                max: 100,
-                tickFormatter: function (val, axis) {
-                    return "";
-                }
-            },
-            grid: {
-                hoverable: true,
-                clickable: false,
-                borderWidth: 0,
-                aboveData: false
-            },
-            colors: ['#eee', themeprimary],
-        });
-
-        function update() {
-
-            plot.setData(getSeriesObj());
-
-            plot.draw();
-            setTimeout(update, updateInterval);
-        }
-
-        update();
-
-
-        //-------------------------Initiates Easy Pie Chart instances in page--------------------//
-        InitiateEasyPieChart.init();
-
-        //-------------------------Initiates Sparkline Chart instances in page------------------//
-        InitiateSparklineCharts.init();
     });
 
 </script>
