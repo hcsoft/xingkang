@@ -668,6 +668,7 @@ Purchase: http://wrapbootstrap.com
 <!--Flot Charts Needed Scripts-->
 <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.js"></script>
 <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.resize.js"></script>
+<script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.time.js"></script>
 <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.pie.js"></script>
 <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.tooltip.js"></script>
 <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.orderBars.js"></script>
@@ -698,7 +699,7 @@ Purchase: http://wrapbootstrap.com
             var busi_counts = data['busi_counts']
             var busi_realTimedata = [],
                 totalPoints = 300;
-            var updateInterval = 500;
+            var updateInterval = 1000;
             var timenum = 5;
 
             function getBusiRealTimeData(data) {
@@ -712,7 +713,7 @@ Purchase: http://wrapbootstrap.com
                 }
                 var res = [];
                 for (var i = 0; i < busi_counts.length; ++i) {
-                  res.push([i, busi_counts[i].num]);
+                  res.push([new Date(busi_counts[i].begintime), busi_counts[i].num]);
                 }
                 console.log(res);
                 return res;
@@ -747,17 +748,14 @@ Purchase: http://wrapbootstrap.com
                     color: '#f3f3f3',
                     min: 0,
                     // max: 9,
-                    tickFormatter: function (val, axis) {
-                        return "";
-                    }
+
                 },
                 xaxis: {
+                    mode: "time",
+                    timeformat: "%H:%M",
                     color: '#f3f3f3',
-                    min: 0,
-                    max: 100,
-                    tickFormatter: function (val, axis) {
-                        return "";
-                    }
+                    // min: 0,
+                    // max: 100
                 },
                 grid: {
                     hoverable: true,
