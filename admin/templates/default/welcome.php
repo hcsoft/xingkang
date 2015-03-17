@@ -673,13 +673,12 @@ Purchase: http://wrapbootstrap.com
 <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.tooltip.js"></script>
 <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.orderBars.js"></script>
 <script src="<?php echo RESOURCE_SITE_URL; ?>/js/moment.js"></script>
-<script src="<?php echo RESOURCE_SITE_URL; ?>/js/moment-timezone.js"></script>
+<script src="<?php echo RESOURCE_SITE_URL; ?>/js/moment-timezone-with-data.js"></script>
 
 <script>
     // If you want to draw your charts with Theme colors you must run initiating charts after that current skin is loaded
     $(function () {
       //初始化
-      moment.tz.add('Asia/Chongqing|PST PDT|80 70|0101|1Lzm0 1zb0 Op0');
       $('#dashboard-bandwidth-chart')
           .data('width', $('.box-tabbs')
               .width() - 20);
@@ -702,7 +701,10 @@ Purchase: http://wrapbootstrap.com
             var busi_counts = data['busi_counts'];
             var updateInterval = 1000;
             function getBusiRealTimeData(data) {
+
                 if(data){
+                  console.log(data.begintime);
+                  console.log(moment.tz(data.begintime, "Africa/Abidjan"));
                   if(busi_counts[busi_counts.length-1].begintime == data.begintime){
                       busi_counts[busi_counts.length-1] = data;
                   }else{
@@ -712,9 +714,10 @@ Purchase: http://wrapbootstrap.com
                 }
                 var res = [];
                 for (var i = 0; i < busi_counts.length; ++i) {
-                  res.push([moment.tz(busi_counts[i].begintime, "Asia/Chongqing"), busi_counts[i].num]);
+                  res.push([moment.tz(busi_counts[i].begintime, "Africa/Abidjan"), busi_counts[i].num]);
                   // res.push([i, busi_counts[i].num]);
                 }
+
                 return res;
             }
 
@@ -766,6 +769,7 @@ Purchase: http://wrapbootstrap.com
             });
             function update() {
                 $.getJSON("index.php?act=dashboard&op=busidata", function (data) {
+
                   realtimeplot.setData(getSeriesObj(data));
                   realtimeplot.setupGrid();
                   realtimeplot.draw();

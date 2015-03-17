@@ -622,7 +622,7 @@ class dashboardControl extends SystemControl
     }
     private function businessCountNew($type ,$flag)
     {
-        return $this->businessCounttest($type,$flag);
+        // return $this->businessCounttest($type,$flag);
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询业务开展数量情况
         $times =$this->getBusiTime($type,$flag);
@@ -730,7 +730,7 @@ class dashboardControl extends SystemControl
         $ret["infectious_new"] = 0;
 //        5,公卫开展业务数
         $ret['busi_counts'] = array();
-        for($i=-20;$i<1;$i++){
+        for($i=-100;$i<1;$i++){
           array_push($ret['busi_counts'],$this->businessCountNew($i,false));
         }
 //        6, 当天各个医疗机构的收入柱状图
