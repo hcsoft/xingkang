@@ -701,7 +701,6 @@ Purchase: http://wrapbootstrap.com
             //5,公卫开展业务数
             var busi_counts = data['busi_counts'];
             var updateInterval = 1000;
-            var timenum = 5;
             function getBusiRealTimeData(data) {
                 if(data){
                   if(busi_counts[busi_counts.length-1].begintime == data.begintime){
