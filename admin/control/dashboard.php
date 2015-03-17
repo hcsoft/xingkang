@@ -572,7 +572,7 @@ class dashboardControl extends SystemControl
 
     private function getBusiTime($type,$flag){
       //查询业务开展数量情况
-      $flag = 3;
+      $flag = 2;
       if($flag == 1){
         $timenum = 1; //必须能被60整除
         $timetype = 'hour';
@@ -616,7 +616,7 @@ class dashboardControl extends SystemControl
         date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
         $strend = date_format($begindatetime, $timefmtnew);
       }else{
-        $timenum = 1; //必须能被60整除
+        $timenum = 10; //必须能被60整除
         $timetype = 'sec';
         $timefmt = 'Y-m-d H:i:s';
         $timefmtnew = 'Y-m-d H:0:0';
