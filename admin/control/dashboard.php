@@ -495,7 +495,7 @@ class dashboardControl extends SystemControl
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询业务开展数量情况
-        $timenum = 10; //必须能被60整除
+        $timenum = 1; //必须能被60整除
         $timetype = 'min';
         $timefmt = 'Y-m-d H:i:0';
         $timestr = strval($type * $timenum) .' '.$timetype;
