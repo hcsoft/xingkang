@@ -496,8 +496,9 @@ class dashboardControl extends SystemControl
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询业务开展数量情况
         $timenum = 10; //必须能被60整除
-        $timetype = 'Y-m-d H:i:0';
-        $timestr = $type * $timenum + " min ";
+        $timetype = 'min';
+        $timefmt = 'Y-m-d H:i:0';
+        $timestr = strval($type * $timenum) .' '.$timetype;
 
         $now = getdate();
         $seconds = $now['minutes'];
@@ -506,16 +507,13 @@ class dashboardControl extends SystemControl
         } else {
             $begitime = $seconds - $seconds % $timenum;
         }
-        $endtime = $begitime + $timenum;
 
         $begindatetime = new DateTime();
-        date_time_set($begindatetime, 0, 0, $begitime);
+        date_time_set($begindatetime, $now['hours'], $begitime, 0 );
         date_add($begindatetime, date_interval_create_from_date_string($timestr));
-        $enddatetime = new DateTime();
-        date_time_set($enddatetime, 0, 0, $endtime);
-        date_add($enddatetime, date_interval_create_from_date_string($timestr));
-        $strbegin = date_format($begindatetime, $timetype);
-        $strend = date_format($enddatetime, $timetype);
+        $strbegin = date_format($begindatetime, $timefmt);
+        date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
+        $strend = date_format($begindatetime, $timefmt);
         $datesql = ' and a.InputDate>= \'' . $strbegin . '\' and a.InputDate< \'' . $strend . '\'';
         $sql = "select  sum(num) num
                 from(
@@ -565,8 +563,9 @@ class dashboardControl extends SystemControl
                 ) uniontable   ";
         $stmt = $conn->query($sql);
         $ret = array();
-        $ret['begintime'] = $begitime;
+        $ret['begintime'] = $strbegin;
         $ret['num'] = $stmt->fetch(PDO::FETCH_NUM)[0];
+        $ret['ttt'] =$timestr;
 //        $ret['sql'] = $sql;
         return $ret;
     }
@@ -619,7 +618,7 @@ class dashboardControl extends SystemControl
 //        5,公卫开展业务数
         $ret['busi_counts'] = array();
         for($i=-100;$i<1;$i++){
-          array_push($ret['busi_counts'],$this->businessCount(i));
+          array_push($ret['busi_counts'],$this->businessCount($i));
         }
 //        6, 当天各个医疗机构的收入柱状图
         $stmt = $conn->query(" select  b.id , b.name , sum(fCO_IncomeMoney) as num
