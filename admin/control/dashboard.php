@@ -617,17 +617,10 @@ class dashboardControl extends SystemControl
         $ret["infectious_count"] = 0;
         $ret["infectious_new"] = 0;
 //        5,公卫开展业务数
-        $ret['busi_counts'] = array(
-            $this->businessCount(-9),
-            $this->businessCount(-8),
-            $this->businessCount(-7),
-            $this->businessCount(-6),
-            $this->businessCount(-5),
-            $this->businessCount(-4),
-            $this->businessCount(-3),
-            $this->businessCount(-2),
-            $this->businessCount(-1),
-            $this->businessCount(0));
+        $ret['busi_counts'] = array()
+        for($i=-100;$i<1;$i++){
+          array_push($this->businessCount(i));
+        }
 //        6, 当天各个医疗机构的收入柱状图
         $stmt = $conn->query(" select  b.id , b.name , sum(fCO_IncomeMoney) as num
                     from  Center_CheckOut checkout left join  Organization b   on checkout.OrgID = b.id

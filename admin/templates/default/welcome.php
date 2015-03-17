@@ -754,7 +754,7 @@ Purchase: http://wrapbootstrap.com
                 xaxis: {
                     color: '#f3f3f3',
                     min: 0,
-                    max: 9,
+                    max: 100,
                     tickFormatter: function (val, axis) {
                         return "";
                     }
