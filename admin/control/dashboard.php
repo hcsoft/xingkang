@@ -571,14 +571,28 @@ class dashboardControl extends SystemControl
     }
     private function businessCounttest($type){
       $ret = array();
+      //查询业务开展数量情况
+      $timenum = 1; //必须能被60整除
+      $timetype = 'min';
+      $timefmt = 'Y-m-d H:i:0';
+      $timestr = strval($type * $timenum) .' '.$timetype;
+
       $now = getdate();
-      $seconds = $now['seconds'];
+      $seconds = $now['minutes'];
       if ($seconds < $timenum) {
           $begitime = 0;
       } else {
-          $begitime = $seconds - $seconds % 5;
+          $begitime = $seconds - $seconds % $timenum;
       }
-      $ret['begintime'] = $begitime;
+
+      $begindatetime = new DateTime();
+      date_time_set($begindatetime, $now['hours'], $begitime, 0 );
+      date_add($begindatetime, date_interval_create_from_date_string($timestr));
+      $strbegin = date_format($begindatetime, $timefmt);
+      date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
+      $strend = date_format($begindatetime, $timefmt);
+
+      $ret['begintime'] = $strbegin;
       $ret['num'] = rand();
       return $ret;
     }
@@ -617,7 +631,7 @@ class dashboardControl extends SystemControl
         $ret["infectious_new"] = 0;
 //        5,公卫开展业务数
         $ret['busi_counts'] = array();
-        for($i=-100;$i<1;$i++){
+        for($i=-99;$i<1;$i++){
           array_push($ret['busi_counts'],$this->businessCount($i));
         }
 //        6, 当天各个医疗机构的收入柱状图

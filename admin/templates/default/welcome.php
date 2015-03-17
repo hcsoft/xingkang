@@ -679,6 +679,7 @@ Purchase: http://wrapbootstrap.com
     // If you want to draw your charts with Theme colors you must run initiating charts after that current skin is loaded
     $(function () {
       //初始化
+      moment.tz.add('Asia/Chongqing|PST PDT|80 70|0101|1Lzm0 1zb0 Op0');
       $('#dashboard-bandwidth-chart')
           .data('width', $('.box-tabbs')
               .width() - 20);
@@ -698,12 +699,9 @@ Purchase: http://wrapbootstrap.com
             //4,传染病报告数
             $("#infectious_new").html(data["infectious_new"]);
             //5,公卫开展业务数
-            var busi_counts = data['busi_counts']
-            var busi_realTimedata = [],
-                totalPoints = 300;
+            var busi_counts = data['busi_counts'];
             var updateInterval = 1000;
             var timenum = 5;
-
             function getBusiRealTimeData(data) {
                 if(data){
                   if(busi_counts[busi_counts.length-1].begintime == data.begintime){
@@ -716,6 +714,7 @@ Purchase: http://wrapbootstrap.com
                 var res = [];
                 for (var i = 0; i < busi_counts.length; ++i) {
                   res.push([moment.tz(busi_counts[i].begintime, "Asia/Chongqing"), busi_counts[i].num]);
+                  // res.push([i, busi_counts[i].num]);
                 }
                 console.log(res);
                 return res;
@@ -770,6 +769,7 @@ Purchase: http://wrapbootstrap.com
             function update() {
                 $.getJSON("index.php?act=dashboard&op=busidata", function (data) {
                   realtimeplot.setData(getSeriesObj(data));
+                  realtimeplot.setupGrid();
                   realtimeplot.draw();
                   setTimeout(update, updateInterval);
                 });
@@ -782,8 +782,6 @@ Purchase: http://wrapbootstrap.com
             themethirdcolor = getThemeColorFromCss('themethirdcolor');
             themefourthcolor = getThemeColorFromCss('themefourthcolor');
             themefifthcolor = getThemeColorFromCss('themefifthcolor');
-
-
 
             //-------------------------Visitor Sources Pie Chart----------------------------------------//
             var data = [
