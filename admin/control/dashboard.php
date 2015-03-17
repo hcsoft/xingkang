@@ -617,7 +617,7 @@ class dashboardControl extends SystemControl
         $ret["infectious_count"] = 0;
         $ret["infectious_new"] = 0;
 //        5,公卫开展业务数
-        $ret['busi_counts'] = array()
+        $ret['busi_counts'] = array();
         for($i=-100;$i<1;$i++){
           array_push($ret['busi_counts'],$this->businessCount(i));
         }
