@@ -590,8 +590,8 @@ class dashboardControl extends SystemControl
 
         $begindatetime = new DateTime();
         date_time_set($begindatetime, $now['hours'], $now['minutes'], $begitime );
-        date_add($begindatetime, date_interval_create_from_date_string($timefmtnew));
-        $strbegin = date_format($begindatetime, $timefmt);
+        date_add($begindatetime, date_interval_create_from_date_string($timefmt));
+        $strbegin = date_format($begindatetime, $timefmtnew);
         date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
         $strend = date_format($begindatetime, $timefmt);
         $datesql = ' and a.InputDate>= \'' . $strbegin . '\' and a.InputDate< \'' . $strend . '\'';
