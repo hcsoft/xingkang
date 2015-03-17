@@ -74,8 +74,8 @@ Purchase: http://wrapbootstrap.com
                         <div class="databox-right">
                             <span class="databox-title themesecondary">档案</span>
                             <div class="databox-text darkgray">
-                                新增数<span id="file_new" class="databox-number themesecondary " style="display: inline-block"> 24</span>
-                                总数<span id="file_count" class="databox-number themesecondary" style="display: inline-block"> 365979</span>
+                                新增数<span id="file_new" class="databox-number themesecondary " style="display: inline-block"> 0</span>
+                                总数<span id="file_count" class="databox-number themesecondary" style="display: inline-block"> 0</span>
                             </div>
                             <div class="databox-stat themesecondary radius-bordered">
                                 <i class="stat-icon icon-lg fa fa-tasks"></i>
@@ -96,9 +96,9 @@ Purchase: http://wrapbootstrap.com
                         <div class="databox-right">
                             <span class="databox-title themethirdcolor">孕产妇</span>
                             <div class="databox-text darkgray">
-                                新建册<span id="pregnant_new" class="databox-number themethirdcolor " style="display: inline-block"> 8</span>
-                                新结案<span id="pregnant_close" class="databox-number themethirdcolor " style="display: inline-block"> 8</span>
-                                未结案<span id="pregnant_count" class="databox-number themethirdcolor " style="display: inline-block"> 3461</span>
+                                新建册<span id="pregnant_new" class="databox-number themethirdcolor " style="display: inline-block"> 0</span>
+                                新结案<span id="pregnant_close" class="databox-number themethirdcolor " style="display: inline-block"> 0</span>
+                                未结案<span id="pregnant_count" class="databox-number themethirdcolor " style="display: inline-block"> 0</span>
                             </div>
                             <div class="databox-stat themethirdcolor radius-bordered">
                                 <i class="stat-icon  icon-lg fa fa-envelope-o"></i>
@@ -119,8 +119,8 @@ Purchase: http://wrapbootstrap.com
                         <div class="databox-right">
                             <span class="databox-title themeprimary">慢病</span>
                             <div class="databox-text darkgray">
-                                高血压<span id="chronic_hyp" class="databox-number themeprimary " style="display: inline-block">36309</span>
-                                糖尿病<span id="chronic_diab" class="databox-number themeprimary " style="display: inline-block">4134</span>
+                                高血压<span id="chronic_hyp" class="databox-number themeprimary " style="display: inline-block">0</span>
+                                糖尿病<span id="chronic_diab" class="databox-number themeprimary " style="display: inline-block">0</span>
 <!--                                重性精神病<span id="chronic_holergasia" class="databox-number themeprimary " style="display: inline-block">1207</span>-->
                             </div>
 
@@ -143,7 +143,7 @@ Purchase: http://wrapbootstrap.com
                         <div class="databox-right">
                             <span class="databox-title palegreen">传染病</span>
                             <div class="databox-text darkgray">
-                                传染病报告<span id="infectious_new" class="databox-number palegreen " style="display: inline-block">7</span>
+                                传染病报告<span id="infectious_new" class="databox-number palegreen " style="display: inline-block">0</span>
                             </div>
                             <div class="databox-state bg-themeprimary">
                                 <i class="fa fa-check"></i>

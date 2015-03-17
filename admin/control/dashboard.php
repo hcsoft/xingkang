@@ -572,7 +572,8 @@ class dashboardControl extends SystemControl
 
     private function getBusiTime($type,$flag){
       //查询业务开展数量情况
-      if($flag){
+      $flag = 3;
+      if($flag == 1){
         $timenum = 1; //必须能被60整除
         $timetype = 'hour';
         $timefmt = 'Y-m-d H:i:s';
@@ -589,6 +590,27 @@ class dashboardControl extends SystemControl
 
         $begindatetime = new DateTime();
         date_time_set($begindatetime,  $begitime, 0,0 );
+        date_add($begindatetime, date_interval_create_from_date_string($timestr));
+        $strbegin = date_format($begindatetime, $timefmtnew);
+        date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
+        $strend = date_format($begindatetime, $timefmtnew);
+      }else if($flag == 2){
+        $timenum = 1; //必须能被60整除
+        $timetype = 'minute';
+        $timefmt = 'Y-m-d H:i:s';
+        $timefmtnew = 'Y-m-d H:i:0';
+        $timestr = strval($type * $timenum) .' '.$timetype;
+
+        $now = getdate();
+        $seconds = $now['minutes'];
+        if ($seconds < $timenum) {
+            $begitime = 0;
+        } else {
+            $begitime = $seconds - $seconds % $timenum;
+        }
+
+        $begindatetime = new DateTime();
+        date_time_set($begindatetime, $now['hours'] , $seconds,0 );
         date_add($begindatetime, date_interval_create_from_date_string($timestr));
         $strbegin = date_format($begindatetime, $timefmtnew);
         date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
@@ -610,7 +632,7 @@ class dashboardControl extends SystemControl
 
         $begindatetime = new DateTime();
         date_time_set($begindatetime, $now['hours'], $now['minutes'], $begitime );
-        date_add($begindatetime, date_interval_create_from_date_string($timefmt));
+        date_add($begindatetime, date_interval_create_from_date_string($timestr));
         $strbegin = date_format($begindatetime, $timefmtnew);
         date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
         $strend = date_format($begindatetime, $timefmt);
