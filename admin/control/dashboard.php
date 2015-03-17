@@ -798,7 +798,7 @@ class dashboardControl extends SystemControl
                 ) uniontable
                  group by  year(inputdate), month(inputdate),day(inputdate)
                      order by  year(inputdate), month(inputdate),day(inputdate)   ");
-        $ret['busi_14day'] = array();
+        $ret['childbusi_14day'] = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             array_push($ret['childbusi_14day'], $row);
         }
