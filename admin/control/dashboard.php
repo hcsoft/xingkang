@@ -495,12 +495,12 @@ class dashboardControl extends SystemControl
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询业务开展数量情况
-        $timenum = 5; //必须能被60整除
-        $timetype = 'Y-m-d H:i:s';
-        $timestr = $type * $timenum + " second ";
+        $timenum = 10; //必须能被60整除
+        $timetype = 'Y-m-d H:i:0';
+        $timestr = $type * $timenum + " min ";
 
         $now = getdate();
-        $seconds = $now['seconds'];
+        $seconds = $now['minutes'];
         if ($seconds < $timenum) {
             $begitime = 0;
         } else {
