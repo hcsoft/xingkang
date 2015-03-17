@@ -672,6 +672,8 @@ Purchase: http://wrapbootstrap.com
 <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.pie.js"></script>
 <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.tooltip.js"></script>
 <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.orderBars.js"></script>
+<script src="<?php echo RESOURCE_SITE_URL; ?>/js/moment.js"></script>
+<script src="<?php echo RESOURCE_SITE_URL; ?>/js/moment-timezone.js"></script>
 
 <script>
     // If you want to draw your charts with Theme colors you must run initiating charts after that current skin is loaded
@@ -713,7 +715,7 @@ Purchase: http://wrapbootstrap.com
                 }
                 var res = [];
                 for (var i = 0; i < busi_counts.length; ++i) {
-                  res.push([new Date(busi_counts[i].begintime), busi_counts[i].num]);
+                  res.push([moment.tz(busi_counts[i].begintime, "Asia/Chongqing"), busi_counts[i].num]);
                 }
                 console.log(res);
                 return res;
