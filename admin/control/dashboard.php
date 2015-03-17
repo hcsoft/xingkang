@@ -570,14 +570,34 @@ class dashboardControl extends SystemControl
         return $ret;
     }
 
-    private function businessCountNew($type)
-    {
-        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
-        //查询业务开展数量情况
+    private function getBusiTime($type,$flag){
+      //查询业务开展数量情况
+      if($flag){
+        $timenum = 1; //必须能被60整除
+        $timetype = 'hour';
+        $timefmt = 'Y-m-d H:i:s';
+        $timefmtnew = 'Y-m-d H:0:0';
+        $timestr = strval($type * $timenum) .' '.$timetype;
+
+        $now = getdate();
+        $seconds = $now['hours'];
+        if ($seconds < $timenum) {
+            $begitime = 0;
+        } else {
+            $begitime = $seconds - $seconds % $timenum;
+        }
+
+        $begindatetime = new DateTime();
+        date_time_set($begindatetime,  $begitime, 0,0 );
+        date_add($begindatetime, date_interval_create_from_date_string($timestr));
+        $strbegin = date_format($begindatetime, $timefmtnew);
+        date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
+        $strend = date_format($begindatetime, $timefmtnew);
+      }else{
         $timenum = 1; //必须能被60整除
         $timetype = 'sec';
         $timefmt = 'Y-m-d H:i:s';
-        $timefmtnew = 'Y-m-d 0:0:0';
+        $timefmtnew = 'Y-m-d H:0:0';
         $timestr = strval($type * $timenum) .' '.$timetype;
 
         $now = getdate();
@@ -594,6 +614,21 @@ class dashboardControl extends SystemControl
         $strbegin = date_format($begindatetime, $timefmtnew);
         date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
         $strend = date_format($begindatetime, $timefmt);
+      }
+      $ret = array();
+      $ret['beginstr']= $strbegin;
+      $ret['endstr']= $strend;
+      return $ret;
+    }
+    private function businessCountNew($type ,$flag)
+    {
+        return $this->businessCounttest($type,$flag);
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        //查询业务开展数量情况
+        $times =$this->getBusiTime($type,$flag);
+        $strbegin = $times['beginstr'];
+        $strend = $times['endstr'];
+
         $datesql = ' and a.InputDate>= \'' . $strbegin . '\' and a.InputDate< \'' . $strend . '\'';
         $sql = "select  sum(num) num
                 from(
@@ -649,29 +684,12 @@ class dashboardControl extends SystemControl
 //        $ret['sql'] = $sql;
         return $ret;
     }
-    private function businessCounttest($type){
+    private function businessCounttest($type,$flag){
       $ret = array();
       //查询业务开展数量情况
-      $timenum = 5; //必须能被60整除
-      $timetype = 'sec';
-      $timefmt = 'Y-m-d H:i:s';
-      $timefmtnew = 'Y-m-d 0:0:0';
-      $timestr = strval($type * $timenum) .' '.$timetype;
-
-      $now = getdate();
-      $seconds = $now['seconds'];
-      if ($seconds < $timenum) {
-          $begitime = 0;
-      } else {
-          $begitime = $seconds - $seconds % $timenum;
-      }
-
-      $begindatetime = new DateTime();
-      date_time_set($begindatetime, $now['hours'], $now['minutes'], $begitime );
-      date_add($begindatetime, date_interval_create_from_date_string($timefmt));
-      $strbegin = date_format($begindatetime, $timefmtnew);
-      date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
-      $strend = date_format($begindatetime, $timefmt);
+      $times =$this->getBusiTime($type,$flag);
+      $strbegin = $times['beginstr'];
+      $strend = $times['endstr'];
 
       $ret['begintime'] = $strend;
       $ret['num'] = rand();
@@ -679,7 +697,7 @@ class dashboardControl extends SystemControl
     }
 
     public function busidataOp(){
-       echo json_encode($this->businessCountNew(0));
+       echo json_encode($this->businessCountNew(0,false));
        exit;
     }
 
@@ -712,8 +730,8 @@ class dashboardControl extends SystemControl
         $ret["infectious_new"] = 0;
 //        5,公卫开展业务数
         $ret['busi_counts'] = array();
-        for($i=-10;$i<1;$i++){
-          array_push($ret['busi_counts'],$this->businessCountNew($i));
+        for($i=-20;$i<1;$i++){
+          array_push($ret['busi_counts'],$this->businessCountNew($i,false));
         }
 //        6, 当天各个医疗机构的收入柱状图
         $stmt = $conn->query(" select  b.id , b.name , sum(fCO_IncomeMoney) as num
