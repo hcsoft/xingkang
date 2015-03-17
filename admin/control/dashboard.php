@@ -619,7 +619,7 @@ class dashboardControl extends SystemControl
         $timenum = 1; //必须能被60整除
         $timetype = 'sec';
         $timefmt = 'Y-m-d H:i:s';
-        $timefmtnew = 'Y-m-d H:i:0';
+        $timefmtnew = 'Y-m-d H:0:0';
         $timestr = strval($type * $timenum) .' '.$timetype;
 
         $now = getdate();
