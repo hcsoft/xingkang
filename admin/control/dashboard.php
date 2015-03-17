@@ -569,6 +569,86 @@ class dashboardControl extends SystemControl
 //        $ret['sql'] = $sql;
         return $ret;
     }
+
+    private function businessCountNew($type)
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        //查询业务开展数量情况
+        $timenum = 5; //必须能被60整除
+        $timetype = 'sec';
+        $timefmt = 'Y-m-d H:i:s';
+        $timefmtnew = 'Y-m-d 0:0:0';
+        $timestr = strval($type * $timenum) .' '.$timetype;
+
+        $now = getdate();
+        $seconds = $now['seconds'];
+        if ($seconds < $timenum) {
+            $begitime = 0;
+        } else {
+            $begitime = $seconds - $seconds % $timenum;
+        }
+
+        $begindatetime = new DateTime();
+        date_time_set($begindatetime, $now['hours'], $now['minutes'], $begitime );
+        date_add($begindatetime, date_interval_create_from_date_string($timefmtnew));
+        $strbegin = date_format($begindatetime, $timefmt);
+        date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
+        $strend = date_format($begindatetime, $timefmt);
+        $datesql = ' and a.InputDate>= \'' . $strbegin . '\' and a.InputDate< \'' . $strend . '\'';
+        $sql = "select  sum(num) num
+                from(
+                select count(1) num from MedicalExam  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from HealthFileMaternal  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from FirstVistBeforeBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from VisitBeforeBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from VisitAfterBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from HealthFileChildren  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from ChildrenMediExam  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from ChildrenMediExam3_6  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from HypertensionVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from DiabetesVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from FuriousVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                ) uniontable   ";
+        $stmt = $conn->query($sql);
+        $ret = array();
+        $ret['begintime'] = $strend;
+        $ret['num'] = $stmt->fetch(PDO::FETCH_NUM)[0];
+        $ret['ttt'] =$timestr;
+//        $ret['sql'] = $sql;
+        return $ret;
+    }
     private function businessCounttest($type){
       $ret = array();
       //查询业务开展数量情况
@@ -598,7 +678,7 @@ class dashboardControl extends SystemControl
     }
 
     public function busidataOp(){
-       echo json_encode($this->businessCount(0));
+       echo json_encode($this->businessCountNew(0));
        exit;
     }
 
@@ -632,7 +712,7 @@ class dashboardControl extends SystemControl
 //        5,公卫开展业务数
         $ret['busi_counts'] = array();
         for($i=-99;$i<1;$i++){
-          array_push($ret['busi_counts'],$this->businessCount($i));
+          array_push($ret['busi_counts'],$this->businessCountNew($i));
         }
 //        6, 当天各个医疗机构的收入柱状图
         $stmt = $conn->query(" select  b.id , b.name , sum(fCO_IncomeMoney) as num

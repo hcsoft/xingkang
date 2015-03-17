@@ -716,7 +716,6 @@ Purchase: http://wrapbootstrap.com
                   res.push([moment.tz(busi_counts[i].begintime, "Asia/Chongqing"), busi_counts[i].num]);
                   // res.push([i, busi_counts[i].num]);
                 }
-                console.log(res);
                 return res;
             }
 
