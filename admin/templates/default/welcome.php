@@ -707,7 +707,7 @@ Purchase: http://wrapbootstrap.com
                   if(busi_counts[busi_counts.length-1].begintime == data.begintime){
                       busi_counts[busi_counts.length-1] = data;
                   }else{
-                    busi_counts.splice(0,1);
+                    // busi_counts.splice(0,1);
                     busi_counts.push(data);
                   }
                 }
