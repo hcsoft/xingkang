@@ -676,14 +676,13 @@ Purchase: http://wrapbootstrap.com
 <script src="<?php echo RESOURCE_SITE_URL; ?>/js/moment-timezone-with-data.js"></script>
 
 <script>
-    // If you want to draw your charts with Theme colors you must run initiating charts after that current skin is loaded
     $(function () {
       //初始化
       $('#dashboard-bandwidth-chart')
           .data('width', $('.box-tabbs')
               .width() - 20);
         $.getJSON("index.php?act=dashboard&op=newchart", function (data) {
-            console.log(data);
+            // console.log(data);
             //1,新增档案数 /档案总数;
             $("#file_new").html(data["file_new"]);
             $("#file_count").html(data["file_count"]);
@@ -699,12 +698,9 @@ Purchase: http://wrapbootstrap.com
             $("#infectious_new").html(data["infectious_new"]);
             //5,公卫开展业务数
             var busi_counts = data['busi_counts'];
-            var updateInterval = 1000;
+            var updateInterval = 60000;
             function getBusiRealTimeData(data) {
-
                 if(data){
-                  console.log(data.begintime);
-                  console.log(moment.tz(data.begintime, "Africa/Abidjan"));
                   if(busi_counts[busi_counts.length-1].begintime == data.begintime){
                       busi_counts[busi_counts.length-1] = data;
                   }else{
@@ -715,12 +711,9 @@ Purchase: http://wrapbootstrap.com
                 var res = [];
                 for (var i = 0; i < busi_counts.length; ++i) {
                   res.push([moment.tz(busi_counts[i].begintime, "Africa/Abidjan"), busi_counts[i].num]);
-                  // res.push([i, busi_counts[i].num]);
                 }
-
                 return res;
             }
-
             var getSeriesObj = function (cudata) {
                 return [
                     {
@@ -749,6 +742,10 @@ Purchase: http://wrapbootstrap.com
                 yaxis: {
                     color: '#f3f3f3',
                     min: 0,
+                    minTickSize:1,
+                    tickFormatter:function(val, axis) {
+                        return val.toFixed(0);
+                    }
                     // max: 9,
 
                 },
