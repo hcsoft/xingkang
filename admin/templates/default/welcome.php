@@ -675,6 +675,10 @@ Purchase: http://wrapbootstrap.com
 <script>
     // If you want to draw your charts with Theme colors you must run initiating charts after that current skin is loaded
     $(function () {
+      //初始化
+      $('#dashboard-bandwidth-chart')
+          .data('width', $('.box-tabbs')
+              .width() - 20);
         $.getJSON("index.php?act=dashboard&op=newchart", function (data) {
             console.log(data);
             //1,新增档案数 /档案总数;
@@ -690,6 +694,88 @@ Purchase: http://wrapbootstrap.com
             $("#chronic_holergasia").html(data["chronic_holergasia"]);
             //4,传染病报告数
             $("#infectious_new").html(data["infectious_new"]);
+            //5,公卫开展业务数
+            var busi_counts = data['busi_counts']
+            var busi_realTimedata = [],
+                totalPoints = 300;
+            var updateInterval = 500;
+            var timenum = 5;
+
+            function getBusiRealTimeData(data) {
+                if(data){
+                  if(busi_counts[busi_counts.length-1].begintime == data.begintime){
+                      busi_counts[busi_counts.length-1] = data;
+                  }else{
+                    busi_counts.splice(0,1);
+                    busi_counts.push(data);
+                  }
+                }
+                var res = [];
+                for (var i = 0; i < busi_counts.length; ++i) {
+                  res.push([i, busi_counts[i].num]);
+                }
+                console.log(res);
+                return res;
+            }
+
+            var getSeriesObj = function (cudata) {
+                return [
+                    {
+                        data: getBusiRealTimeData(cudata),
+                        lines: {
+                            show: true,
+                            lineWidth: 1,
+                            fill: true,
+                            fillColor: {
+                                colors: [
+                                    {
+                                        opacity: 0
+                                    }, {
+                                        opacity: 1
+                                    }
+                                ]
+                            },
+                            steps: false
+                        },
+                        shadowSize: 0
+                    }
+                ];
+            };
+
+            var realtimeplot = $.plot("#dashboard-chart-realtime", getSeriesObj(), {
+                yaxis: {
+                    color: '#f3f3f3',
+                    min: 0,
+                    // max: 9,
+                    tickFormatter: function (val, axis) {
+                        return "";
+                    }
+                },
+                xaxis: {
+                    color: '#f3f3f3',
+                    min: 0,
+                    max: 9,
+                    tickFormatter: function (val, axis) {
+                        return "";
+                    }
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: false,
+                    borderWidth: 0,
+                    aboveData: false
+                },
+                colors: [themeprimary],
+            });
+            function update() {
+                $.getJSON("index.php?act=dashboard&op=busidata", function (data) {
+                  realtimeplot.setData(getSeriesObj(data));
+                  realtimeplot.draw();
+                  setTimeout(update, updateInterval);
+                });
+            }
+            update();
+
             /*Sets Themed Colors Based on Themes*/
             themeprimary = getThemeColorFromCss('themeprimary');
             themesecondary = getThemeColorFromCss('themesecondary');
@@ -697,10 +783,7 @@ Purchase: http://wrapbootstrap.com
             themefourthcolor = getThemeColorFromCss('themefourthcolor');
             themefifthcolor = getThemeColorFromCss('themefifthcolor');
 
-            //Sets The Hidden Chart Width
-            $('#dashboard-bandwidth-chart')
-                .data('width', $('.box-tabbs')
-                    .width() - 20);
+
 
             //-------------------------Visitor Sources Pie Chart----------------------------------------//
             var data = [
@@ -838,82 +921,7 @@ Purchase: http://wrapbootstrap.com
             var plot = $.plot(placeholder, data2, options);
 
             //------------------------------Real-Time Chart-------------------------------------------//
-            var realTimedata = [],
-                realTimedata2 = [],
-                totalPoints = 300;
 
-            var getSeriesObj = function () {
-                return [
-                    {
-                        data: getRandomData(),
-                        lines: {
-                            show: true,
-                            lineWidth: 1,
-                            fill: true,
-                            fillColor: {
-                                colors: [
-                                    {
-                                        opacity: 0
-                                    }, {
-                                        opacity: 1
-                                    }
-                                ]
-                            },
-                            steps: false
-                        },
-                        shadowSize: 0
-                    }, {
-                        data: getRandomData2(),
-                        lines: {
-                            lineWidth: 0,
-                            fill: true,
-                            fillColor: {
-                                colors: [
-                                    {
-                                        opacity: .5
-                                    }, {
-                                        opacity: 1
-                                    }
-                                ]
-                            },
-                            steps: false
-                        },
-                        shadowSize: 0
-                    }
-                ];
-            };
-
-
-            // Set up the control widget
-
-            realtimeplot = $.plot("#dashboard-chart-realtime", getSeriesObj(), {
-                yaxis: {
-                    color: '#f3f3f3',
-                    min: 0,
-                    max: 100,
-                    tickFormatter: function (val, axis) {
-                        return "";
-                    }
-                },
-                xaxis: {
-                    color: '#f3f3f3',
-                    min: 0,
-                    max: 100,
-                    tickFormatter: function (val, axis) {
-                        return "";
-                    }
-                },
-                grid: {
-                    hoverable: true,
-                    clickable: false,
-                    borderWidth: 0,
-                    aboveData: false
-                },
-                colors: ['#eee', themeprimary],
-            });
-
-
-            update();
 
 
             //-------------------------Initiates Easy Pie Chart instances in page--------------------//
@@ -923,72 +931,7 @@ Purchase: http://wrapbootstrap.com
             InitiateSparklineCharts.init();
         });
 
-        var updateInterval = 500;
-        var realtimeplot;
-        function update() {
 
-            realtimeplot.setData(getSeriesObj());
-
-            realtimeplot.draw();
-            setTimeout(update, updateInterval);
-        }
-
-        function getRandomData() {
-            if (realTimedata.length > 0)
-                realTimedata = realTimedata.slice(1);
-
-            // Do a random walk
-
-            while (realTimedata.length < totalPoints) {
-
-                var prev = realTimedata.length > 0 ? realTimedata[realTimedata.length - 1] : 50,
-                    y = prev + Math.random() * 10 - 5;
-
-                if (y < 0) {
-                    y = 0;
-                } else if (y > 100) {
-                    y = 100;
-                }
-                realTimedata.push(y);
-            }
-
-            // Zip the generated y values with the x values
-
-            var res = [];
-            for (var i = 0; i < realTimedata.length; ++i) {
-                res.push([i, realTimedata[i]]);
-            }
-
-            return res;
-        }
-
-        function getRandomData2() {
-            if (realTimedata2.length > 0)
-                realTimedata2 = realTimedata2.slice(1);
-
-            // Do a random walk
-
-            while (realTimedata2.length < totalPoints) {
-
-                var prev = realTimedata2.length > 0 ? realTimedata[realTimedata2.length] : 50,
-                    y = prev - 25;
-
-                if (y < 0) {
-                    y = 0;
-                } else if (y > 100) {
-                    y = 100;
-                }
-                realTimedata2.push(y);
-            }
-
-
-            var res = [];
-            for (var i = 0; i < realTimedata2.length; ++i) {
-                res.push([i, realTimedata2[i]]);
-            }
-
-            return res;
-        }
 
     });
 

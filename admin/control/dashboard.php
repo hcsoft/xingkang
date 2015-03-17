@@ -564,8 +564,29 @@ class dashboardControl extends SystemControl
                 $datesql
                 ) uniontable   ";
         $stmt = $conn->query($sql);
+        $ret = array();
+        $ret['begintime'] = $begitime;
+        $ret['num'] = $stmt->fetch(PDO::FETCH_NUM)[0];
 //        $ret['sql'] = $sql;
-        return $stmt->fetch(PDO::FETCH_NUM)[0];
+        return $ret;
+    }
+    private function businessCounttest($type){
+      $ret = array();
+      $now = getdate();
+      $seconds = $now['seconds'];
+      if ($seconds < $timenum) {
+          $begitime = 0;
+      } else {
+          $begitime = $seconds - $seconds % 5;
+      }
+      $ret['begintime'] = $begitime;
+      $ret['num'] = rand();
+      return $ret;
+    }
+
+    public function busidataOp(){
+       echo json_encode($this->businessCount(0));
+       exit;
     }
 
 
