@@ -42,6 +42,12 @@ Purchase: http://wrapbootstrap.com
         body:before {
             background-color: #EEF9FE;
         }
+        .progress {
+             line-height: inherit;
+             color: inherit;
+             padding: inherit;
+             margin: inherit;
+        }
     </style>
 </head>
 <!-- /Head -->
@@ -254,29 +260,19 @@ Purchase: http://wrapbootstrap.com
                                 <i class="stat-icon fa fa-caret-down icon-xlg"></i>
                             </div>
                             <div class="horizontal-space space-lg"></div>
-                            <div class="databox-sparkline no-margin">
-                                                <span data-sparkline="compositebar" data-height="82px" data-width="100%"
-                                                      data-barcolor="#b0dc81"
-                                                      data-barwidth="10px" data-barspacing="5px"
-                                                      data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"
-                                                      data-linewidth="2"
-                                                      data-spotcolor="#fafafa" data-minspotcolor="#fafafa"
-                                                      data-maxspotcolor="#fff"
-                                                      data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"
-                                                      data-composite="7, 6, 5, 7, 9, 10, 8, 7, 6, 6, 4, 7, 8">
-                                                    8,4,1,2,4,6,2,4,4,8,10,7,10
-                                                </span>
+                            <div class="databox-sparkline no-margin" id="pregnantbusi_14day">
+
                             </div>
                         </div>
                         <div class="databox-bottom no-padding">
                             <div class="databox-row">
                                 <div class="databox-cell cell-6 text-align-left">
                                     <span class="databox-text">妇保业务情况</span>
-                                    <span class="databox-number">23,657</span>
+                                    <span class="databox-number" id="pregnantbusi_count">0</span>
                                 </div>
                                 <div class="databox-cell cell-6 text-align-right">
-                                    <span class="databox-text">3月份</span>
-                                    <span class="databox-number font-70">1,257</span>
+                                    <span class="databox-text">本月</span>
+                                    <span class="databox-number font-70" id="pregnantbusi_monthcount">0</span>
                                 </div>
                             </div>
                         </div>
@@ -290,29 +286,19 @@ Purchase: http://wrapbootstrap.com
                                 <i class="stat-icon fa fa-caret-up icon-xlg"></i>
                             </div>
                             <div class="horizontal-space space-lg"></div>
-                            <div class="databox-sparkline no-margin">
-                                                <span data-sparkline="compositebar" data-height="82px" data-width="100%"
-                                                      data-barcolor="#fb7d64"
-                                                      data-barwidth="10px" data-barspacing="5px"
-                                                      data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"
-                                                      data-linewidth="2"
-                                                      data-spotcolor="#fafafa" data-minspotcolor="#fafafa"
-                                                      data-maxspotcolor="#fff"
-                                                      data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"
-                                                      data-composite="7, 6, 5, 7, 9, 10, 8, 6,2,4,1,2,7">
-                                                    10,7,10,8,4,6, 6, 4, 7, 8 ,4,4,8
-                                                </span>
+                            <div class="databox-sparkline no-margin" id="childbusi_14day">
+
                             </div>
                         </div>
                         <div class="databox-bottom no-padding">
                             <div class="databox-row">
                                 <div class="databox-cell cell-6 text-align-left">
                                     <span class="databox-text">儿保业务情况</span>
-                                    <span class="databox-number">76,109</span>
+                                    <span class="databox-number" id="childbusi_count">0</span>
                                 </div>
                                 <div class="databox-cell cell-6 text-align-right">
-                                    <span class="databox-text">3月份</span>
-                                    <span class="databox-number font-70">7,540</span>
+                                    <span class="databox-text">本月</span>
+                                    <span class="databox-number font-70" id="childbusi_monthcount">0</span>
                                 </div>
                             </div>
                         </div>
@@ -327,29 +313,18 @@ Purchase: http://wrapbootstrap.com
                                 <i class="stat-icon fa fa-caret-up icon-xlg"></i>
                             </div>
                             <div class="horizontal-space space-lg"></div>
-                            <div class="databox-sparkline no-margin">
-                                                <span data-sparkline="compositebar" data-height="82px" data-width="100%"
-                                                      data-barcolor="#3bcbef"
-                                                      data-barwidth="10px" data-barspacing="5px"
-                                                      data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"
-                                                      data-linewidth="2"
-                                                      data-spotcolor="#fafafa" data-minspotcolor="#fafafa"
-                                                      data-maxspotcolor="#fff"
-                                                      data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"
-                                                      data-composite="8,4,1,2,4,6,2,4,4,8,10,7,7">
-                                                    7, 6, 5, 7, 9, 10, 8, 7, 6, 6, 4, 7, 8
-                                                </span>
+                            <div class="databox-sparkline no-margin" id="chronicbusi_14day">
                             </div>
                         </div>
                         <div class="databox-bottom no-padding">
                             <div class="databox-row">
                                 <div class="databox-cell cell-6 text-align-left">
                                     <span class="databox-text">慢病业务情况</span>
-                                    <span class="databox-number">541</span>
+                                    <span class="databox-number" id="chronicbusi_count">0</span>
                                 </div>
                                 <div class="databox-cell cell-6 text-align-right">
-                                    <span class="databox-text">3月份</span>
-                                    <span class="databox-number font-70">123</span>
+                                    <span class="databox-text">本月</span>
+                                    <span class="databox-number font-70" id="chronicbusi_monthcount">0</span>
                                 </div>
                             </div>
                         </div>
@@ -365,29 +340,18 @@ Purchase: http://wrapbootstrap.com
                                 <i class="stat-icon fa fa-caret-up icon-xlg"></i>
                             </div>
                             <div class="horizontal-space space-lg"></div>
-                            <div class="databox-sparkline no-margin">
-                                                <span data-sparkline="compositebar" data-height="82px" data-width="100%"
-                                                      data-barcolor="#ddd"
-                                                      data-barwidth="10px" data-barspacing="5px"
-                                                      data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"
-                                                      data-linewidth="2"
-                                                      data-spotcolor="#fafafa" data-minspotcolor="#fafafa"
-                                                      data-maxspotcolor="#fff"
-                                                      data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"
-                                                      data-composite="8,4,1,2,4,6,2,4,4,8,10,7,7">
-                                                    7, 6, 5, 7, 9, 10, 8, 7, 6, 6, 4, 7, 8
-                                                </span>
+                            <div class="databox-sparkline no-margin" id="childbirth_14day">
                             </div>
                         </div>
                         <div class="databox-bottom no-padding">
                             <div class="databox-row">
                                 <div class="databox-cell cell-6 text-align-left">
                                     <span class="databox-text">分娩情况</span>
-                                    <span class="databox-number">2234</span>
+                                    <span class="databox-number" id="childbirth_count">0</span>
                                 </div>
                                 <div class="databox-cell cell-6 text-align-right">
-                                    <span class="databox-text">3月份</span>
-                                    <span class="databox-number font-70">123</span>
+                                    <span class="databox-text">本月</span>
+                                    <span class="databox-number font-70" id="childbirth_monthcount">0</span>
                                 </div>
                             </div>
                         </div>
@@ -409,24 +373,24 @@ Purchase: http://wrapbootstrap.com
                             <span class="databox-number white">卫生监督</span>
                         </div>
                         <div class="databox-cell cell-3 text-align-right padding-10">
-                            <span class="databox-text white">3月13日</span>
+                            <span class="databox-text white" id="today"></span>
                         </div>
                     </div>
                     <div class="databox-row row-4">
                         <div class="databox-cell cell-6 no-padding padding-10 padding-left-20 text-align-left">
-                            <span class="databox-number orange no-margin">534,908</span>
+                            <span class="databox-number orange no-margin">0</span>
                             <span class="databox-text sky no-margin">全部</span>
                         </div>
                         <div class="databox-cell cell-2 no-padding padding-10 text-align-left">
-                            <span class="databox-number orange no-margin">4,129</span>
+                            <span class="databox-number orange no-margin">0</span>
                             <span class="databox-text darkgray no-margin">本周</span>
                         </div>
                         <div class="databox-cell cell-2 no-padding padding-10 text-align-left">
-                            <span class="databox-number orange no-margin">329</span>
+                            <span class="databox-number orange no-margin">0</span>
                             <span class="databox-text darkgray no-margin">昨天</span>
                         </div>
                         <div class="databox-cell cell-2 no-padding padding-10 text-align-left">
-                            <span class="databox-number orange no-margin">104</span>
+                            <span class="databox-number orange no-margin">0</span>
                             <span class="databox-text darkgray no-margin">今天</span>
                         </div>
                     </div>
@@ -438,7 +402,7 @@ Purchase: http://wrapbootstrap.com
                                                   data-maxspotcolor="#ffce55"
                                                   data-highlightspotcolor="#f5f5f5 " data-highlightlinecolor="#f5f5f5"
                                                   data-linewidth="2" data-spotradius="0">
-                                                5,7,6,5,9,4,3,7,2
+
                                             </span>
                         </div>
                     </div>
@@ -476,16 +440,14 @@ Purchase: http://wrapbootstrap.com
                         </div>
                         <div class="databox-cell cell-9 text-align-center">
                             <div class="databox-row row-6 text-left">
-                                <span class="badge badge-palegreen badge-empty margin-left-5">78</span>
+                                <span class="badge badge-palegreen badge-empty margin-left-5"></span>
                                 <span class="databox-inlinetext uppercase darkgray margin-left-5">男性</span>
-                                <span class="badge badge-yellow badge-empty margin-left-5">86</span>
+                                <span class="badge badge-yellow badge-empty margin-left-5"></span>
                                 <span class="databox-inlinetext uppercase darkgray margin-left-5">女性</span>
                             </div>
                             <div class="databox-row row-6">
                                 <div class="progress bg-yellow progress-no-radius">
-                                    <div class="progress-bar progress-bar-palegreen" role="progressbar"
-                                         aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 78%">
-                                    </div>
+                                    <div class="progress-bar progress-bar-palegreen" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 78%;">
                                 </div>
                             </div>
                         </div>
@@ -504,27 +466,27 @@ Purchase: http://wrapbootstrap.com
                             <div class="databox-row row-2 bordered-bottom bordered-ivory padding-10">
                                 <span class="badge badge-blue badge-empty pull-left margin-5"></span>
                                 <span class="databox-text darkgray pull-left no-margin hidden-xs">老年人</span>
-                                <span class="databox-text darkgray pull-right no-margin uppercase">46%</span>
+                                <span class="databox-text darkgray pull-right no-margin uppercase" id="oldman_rate">0%</span>
                             </div>
                             <div class="databox-row row-2 bordered-bottom bordered-ivory padding-10">
                                 <span class="badge badge-orange badge-empty pull-left margin-5"></span>
                                 <span class="databox-text darkgray pull-left no-margin hidden-xs">孕产妇</span>
-                                <span class="databox-text darkgray pull-right no-margin uppercase">21%</span>
+                                <span class="databox-text darkgray pull-right no-margin uppercase" id="pregnant_rate">0%</span>
                             </div>
                             <div class="databox-row row-2 bordered-bottom bordered-ivory padding-10">
                                 <span class="badge badge-pink badge-empty pull-left margin-5"></span>
                                 <span class="databox-text darkgray pull-left no-margin hidden-xs">儿童</span>
-                                <span class="databox-text darkgray pull-right no-margin uppercase">12%</span>
+                                <span class="databox-text darkgray pull-right no-margin uppercase" id="child_rate">0%</span>
                             </div>
                             <div class="databox-row row-2 bordered-bottom bordered-ivory padding-10">
                                 <span class="badge badge-palegreen badge-empty pull-left margin-5"></span>
                                 <span class="databox-text darkgray pull-left no-margin hidden-xs">慢病</span>
-                                <span class="databox-text darkgray pull-right no-margin uppercase">11%</span>
+                                <span class="databox-text darkgray pull-right no-margin uppercase" id="chronic_rate">0%</span>
                             </div>
                             <div class="databox-row row-2 padding-10">
                                 <span class="badge badge-yellow badge-empty pull-left margin-5"></span>
                                 <span class="databox-text darkgray pull-left no-margin hidden-xs">其他</span>
-                                <span class="databox-text darkgray pull-right no-margin uppercase">10%</span>
+                                <span class="databox-text darkgray pull-right no-margin uppercase" id="other_rate">100%</span>
                             </div>
                         </div>
                     </div>
@@ -824,28 +786,147 @@ Purchase: http://wrapbootstrap.com
                 },
                 colors: [themesecondary]
             });
+            //9. 妇保业务
+            var pregnantbusi_count = data['pregnantbusi_count'];
+            var pregnantbusi_monthcount = data['pregnantbusi_monthcount'];
+            var pregnantbusi_14day = data['pregnantbusi_14day'];
+            $("#pregnantbusi_count").val(pregnantbusi_count);
+            $("#pregnantbusi_monthcount").val(pregnantbusi_monthcount);
+            var pregnantbusi_14day_str = '';
+            for(var i = 0;i<pregnantbusi_14day.length;i++){
+                pregnantbusi_14day_str +=','+pregnantbusi_14day[i]['num'];
+            }
+            pregnantbusi_14day_str = pregnantbusi_14day_str.substring(1);
+            $("#pregnantbusi_14day").html(
+                '<span data-sparkline="compositebar" data-height="82px" data-width="100%" '+
+                'data-barcolor="#b0dc81"'+
+                'data-barwidth="10px" data-barspacing="5px"'+
+                'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"'+
+                'data-linewidth="2"'+
+                'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"'+
+                'data-maxspotcolor="#fff"'+
+                'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"'+
+                'data-composite="'+pregnantbusi_14day_str+'">'+
+                pregnantbusi_14day_str+
+                '</span>'
+            );
 
+            //10. 儿保业务
+            var childbusi_count = data['childbusi_count'];
+            var childbusi_monthcount = data['childbusi_monthcount'];
+            var childbusi_14day = data['childbusi_14day'];
+            $("#childbusi_count").val(childbusi_count);
+            $("#childbusi_monthcount").val(childbusi_monthcount);
+            var childbusi_14day_str = '';
+            for(var i = 0;i<childbusi_14day.length;i++){
+                childbusi_14day_str +=','+childbusi_14day[i]['num'];
+            }
+            childbusi_14day_str = childbusi_14day_str.substring(1);
+            $("#childbusi_14day").html(
+                '<span data-sparkline="compositebar" data-height="82px" data-width="100%" '+
+                'data-barcolor="#b0dc81"'+
+                'data-barwidth="10px" data-barspacing="5px"'+
+                'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"'+
+                'data-linewidth="2"'+
+                'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"'+
+                'data-maxspotcolor="#fff"'+
+                'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"'+
+                'data-composite="'+childbusi_14day_str+'">'+
+                childbusi_14day_str+
+                '</span>'
+            );
 
-            //-------------------------Visitor Sources Pie Chart----------------------------------------//
+            //11. 慢病业务
+            var chronicbusi_count = data['chronicbusi_count'];
+            var chronicbusi_monthcount = data['chronicbusi_monthcount'];
+            var chronicbusi_14day = data['chronicbusi_14day'];
+            $("#chronicbusi_count").val(chronicbusi_count);
+            $("#chronicbusi_monthcount").val(chronicbusi_monthcount);
+            var chronicbusi_14day_str = '';
+            for(var i = 0;i<chronicbusi_14day.length;i++){
+                chronicbusi_14day_str +=','+chronicbusi_14day[i]['num'];
+            }
+            chronicbusi_14day_str = chronicbusi_14day_str.substring(1);
+            $("#chronicbusi_14day").html(
+                '<span data-sparkline="compositebar" data-height="82px" data-width="100%" '+
+                'data-barcolor="#b0dc81"'+
+                'data-barwidth="10px" data-barspacing="5px"'+
+                'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"'+
+                'data-linewidth="2"'+
+                'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"'+
+                'data-maxspotcolor="#fff"'+
+                'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"'+
+                'data-composite="'+chronicbusi_14day_str+'">'+
+                chronicbusi_14day_str+
+                '</span>'
+            );
+
+            //12. 分娩情况
+            var childbirth_count = data['childbirth_count'];
+            var childbirth_monthcount = data['childbirth_monthcount'];
+            var childbirth_14day = data['childbirth_14day'];
+            $("#childbirth_count").val(childbirth_count);
+            $("#childbirth_monthcount").val(childbirth_monthcount);
+            var childbirth_14day_str = '';
+            for(var i = 0;i<childbirth_14day.length;i++){
+                childbirth_14day_str +=','+childbirth_14day[i]['num'];
+            }
+            childbirth_14day_str = childbirth_14day_str.substring(1);
+            $("#childbirth_14day").html(
+                '<span data-sparkline="compositebar" data-height="82px" data-width="100%" '+
+                'data-barcolor="#b0dc81"'+
+                'data-barwidth="10px" data-barspacing="5px"'+
+                'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"'+
+                'data-linewidth="2"'+
+                'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"'+
+                'data-maxspotcolor="#fff"'+
+                'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"'+
+                'data-composite="'+childbirth_14day_str+'">'+
+                childbirth_14day_str+
+                '</span>'
+            );
+            //13,卫生监督
+            var today = new Date();
+            $("#today").html(today.getMonth()+"月"+today.getDate()+"日");
+            //14,档案分布
+            var file_male_count = parseInt(data['file_male_count']);
+            var file_fmale_count = parseInt(data['file_fmale_count']);
+            var file_old_count = parseInt(data['file_old_count']);
+            var file_pregnant_count = parseInt(data['file_pregnant_count']);
+            var file_child_count = parseInt(data['file_child_count']);
+            var file_chronic_count = parseInt(data['file_chronic_count']);
+            var file_other_count =parseInt( data['file_other_count']);
+            var all = file_male_count+file_fmale_count;
+            var oldman_rate = (file_old_count*100)/all;
+            $("#oldman_rate").html(oldman_rate+"%");
+            var pregnant_rate = (file_pregnant_count*100)/all;
+            $("#pregnant_rate").html(pregnant_rate+"%");
+            var child_rate = (file_child_count*100)/all;
+            $("#child_rate").html(child_rate+"%");
+            var chronic_rate = (file_chronic_count*100)/all;
+            $("#chronic_rate").html(chronic_rate+"%");
+            var other_rate = (file_other_count*100)/all;
+            $("#other_rate").html(other_rate+"%");
+
             var data = [
                 {
-                    data: [[1, 21]],
+                    data: [[1, pregnant_rate]],
                     color: '#fb6e52'
                 },
                 {
-                    data: [[1, 12]],
+                    data: [[1, child_rate]],
                     color: '#e75b8d'
                 },
                 {
-                    data: [[1, 11]],
+                    data: [[1, chronic_rate]],
                     color: '#a0d468'
                 },
                 {
-                    data: [[1, 10]],
+                    data: [[1, other_rate]],
                     color: '#ffce55'
                 },
                 {
-                    data: [[1, 46]],
+                    data: [[1, oldman_rate]],
                     color: '#5db2ff'
                 }
             ];
@@ -863,14 +944,6 @@ Purchase: http://wrapbootstrap.com
                     }
                 }
             });
-
-            //------------------------------Visit Chart------------------------------------------------//
-
-
-            //------------------------------Real-Time Chart-------------------------------------------//
-
-
-
             //-------------------------Initiates Easy Pie Chart instances in page--------------------//
             InitiateEasyPieChart.init();
 
