@@ -773,9 +773,9 @@ Purchase: http://wrapbootstrap.com
 
             var income_30days = data['income_30days'];
             var income_30days_data = [];
-            for (var i =0 ;i<income_30days_data.length;i++){
-                income_30days_data.push([new Date(income_30days_data[i]['syear']+'-'+income_30days_data[i]['smonth']+'-'+income_30days_data[i]['sday']),
-                    parseFloat(income_30days_data[i].num)]);
+            for (var i =0 ;i<income_30days.length;i++){
+                income_30days_data.push([new Date(income_30days[i]['syear']+'-'+income_30days_data[i]['smonth']+'-'+income_30days_data[i]['sday']),
+                    parseFloat(income_30days[i].num)]);
             }
 //            income_30days_data = [[new Date('2015-01-01'),100],[new Date('2015-01-02'),300],[new Date('2015-01-03'),200],[new Date('2015-01-04'),400]]
             var income_30days_chart = $.plot("#dashboard-income-30days-chart",
