@@ -724,7 +724,7 @@ Purchase: http://wrapbootstrap.com
             var preperson_counts = data['preperson_counts'];
             var preperson_data = [];
             for (var i =0 ;i<preperson_counts.length;i++){
-                preperson_data.push({name:preperson_counts[i].name,y:parseFloat(preperson_counts[i].num).toFixed(0)});
+                preperson_data.push({name:preperson_counts[i].name,y:parseFloat(preperson_counts[i].num)});
             }
 //            preperson_data=[{name:"保健院",y:100},{name:"测试",y:200}];
             $('#dashboard-bandwidth-chart').highcharts({
@@ -775,7 +775,7 @@ Purchase: http://wrapbootstrap.com
             var income_30days_data = [];
             for (var i =0 ;i<income_30days_data.length;i++){
                 income_30days_data.push([new Date(income_30days_data[i]['syear']+'-'+income_30days_data[i]['smonth']+'-'+income_30days_data[i]['sday']),
-                    income_30days_data[i].num]);
+                    parseFloat(income_30days_data[i].num)]);
             }
 //            income_30days_data = [[new Date('2015-01-01'),100],[new Date('2015-01-02'),300],[new Date('2015-01-03'),200],[new Date('2015-01-04'),400]]
             var income_30days_chart = $.plot("#dashboard-income-30days-chart",
