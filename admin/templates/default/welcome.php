@@ -217,131 +217,20 @@ Purchase: http://wrapbootstrap.com
                                     </div>
 
                                     <div id="bandwidth" class="tab-pane padding-10 animated fadeInUp">
-                                        <div class="databox-sparkline bg-themeprimary">
-                                                            <span id="dashboard-bandwidth-chart"
-                                                                  data-sparkline="compositeline" data-height="250px"
-                                                                  data-width="100%" data-linecolor="#fff"
-                                                                  data-secondlinecolor="#eee"
-                                                                  data-fillcolor="rgba(255,255,255,.1)"
-                                                                  data-secondfillcolor="rgba(255,255,255,.25)"
-                                                                  data-spotradius="0"
-                                                                  data-spotcolor="#fafafa" data-minspotcolor="#fafafa"
-                                                                  data-maxspotcolor="#ffce55"
-                                                                  data-highlightspotcolor="#fff"
-                                                                  data-highlightlinecolor="#fff"
-                                                                  data-linewidth="2" data-secondlinewidth="2"
-                                                                  data-composite="500, 400, 100, 450, 300, 200, 100, 200">
-                                                                300,300,400,300,200,300,300,200
-                                                            </span>
+                                        <div class="row">
+                                            <div class="col-lg-12 chart-container">
+                                                <div id="dashboard-bandwidth-chart" class="chart chart-lg no-margin"
+                                                     style="width:100%"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div id="sales" class="tab-pane animated fadeInUp no-padding-bottom"
-                                         style="padding:20px 20px 0 20px;">
+
+                                    <div id="sales" class="tab-pane padding-10 animated fadeInUp">
                                         <div class="row">
-                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                                <div
-                                                    class="databox databox-xlg databox-vertical databox-inverted databox-shadowed">
-                                                    <div class="databox-top">
-                                                        <div class="databox-sparkline">
-                                                                            <span data-sparkline="line"
-                                                                                  data-height="125px" data-width="100%"
-                                                                                  data-fillcolor="false"
-                                                                                  data-linecolor="themesecondary"
-                                                                                  data-spotcolor="#fafafa"
-                                                                                  data-minspotcolor="#fafafa"
-                                                                                  data-maxspotcolor="#ffce55"
-                                                                                  data-highlightspotcolor="#ffce55"
-                                                                                  data-highlightlinecolor="#ffce55"
-                                                                                  data-linewidth="1.5"
-                                                                                  data-spotradius="2">
-                                                                                1,2,4,3,5,6,8,7,11,14,11,12
-                                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="databox-bottom no-padding text-align-center">
-                                                        <span class="databox-number lightcarbon no-margin">224</span>
-                                                        <span class="databox-text lightcarbon no-margin">万元 / 月</span>
-
-                                                    </div>
-                                                </div>
-
+                                            <div class="col-lg-12 chart-container">
+                                                <div id="dashboard-income-30days-chart" class="chart chart-lg no-margin"
+                                                     style="width:100%"></div>
                                             </div>
-                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                                <div
-                                                    class="databox databox-xlg databox-vertical databox-inverted databox-shadowed">
-                                                    <div class="databox-top">
-                                                        <div class="databox-sparkline">
-                                                                            <span data-sparkline="line"
-                                                                                  data-height="125px" data-width="100%"
-                                                                                  data-fillcolor="false"
-                                                                                  data-linecolor="themefourthcolor"
-                                                                                  data-spotcolor="#fafafa"
-                                                                                  data-minspotcolor="#fafafa"
-                                                                                  data-maxspotcolor="#8cc474"
-                                                                                  data-highlightspotcolor="#8cc474"
-                                                                                  data-highlightlinecolor="#8cc474"
-                                                                                  data-linewidth="1.5"
-                                                                                  data-spotradius="2">
-                                                                                100,208,450,298,450,776,234,680,1100,1400,1000,1200
-                                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="databox-bottom no-padding text-align-center">
-                                                        <span class="databox-number lightcarbon no-margin">￥:7063</span>
-                                                        <span class="databox-text lightcarbon no-margin">收入 / 人</span>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                                <div
-                                                    class="databox databox-xlg databox-vertical databox-inverted databox-shadowed">
-                                                    <div class="databox-top">
-                                                        <div class="databox-piechart">
-                                                            <div data-toggle="easypiechart"
-                                                                 class="easyPieChart block-center"
-                                                                 data-barcolor="themeprimary" data-linecap="butt"
-                                                                 data-percent="80" data-animate="500"
-                                                                 data-linewidth="8" data-size="125"
-                                                                 data-trackcolor="#eee">
-                                                                <span class="font-200"><i
-                                                                        class="fa fa-gift themeprimary"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="databox-bottom no-padding text-align-center">
-                                                        <span class="databox-number lightcarbon no-margin">9</span>
-                                                        <span
-                                                            class="databox-text lightcarbon no-margin">(本月)新增人次</span>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                                <div
-                                                    class="databox databox-xlg databox-vertical databox-inverted  databox-shadowed">
-                                                    <div class="databox-top">
-                                                        <div class="databox-piechart">
-                                                            <div data-toggle="easypiechart"
-                                                                 class="easyPieChart block-center"
-                                                                 data-barcolor="themethirdcolor" data-linecap="butt"
-                                                                 data-percent="40" data-animate="500"
-                                                                 data-linewidth="8" data-size="125"
-                                                                 data-trackcolor="#eee">
-                                                                <span class="white font-200"><i
-                                                                        class="fa fa-tags themethirdcolor"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="databox-bottom no-padding text-align-center">
-                                                        <span class="databox-number lightcarbon no-margin">11</span>
-                                                        <span class="databox-text lightcarbon no-margin">新增收入 万元 / 月</span>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -674,7 +563,8 @@ Purchase: http://wrapbootstrap.com
 <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.orderBars.js"></script>
 <script src="<?php echo RESOURCE_SITE_URL; ?>/js/moment.js"></script>
 <script src="<?php echo RESOURCE_SITE_URL; ?>/js/moment-timezone-with-data.js"></script>
-
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/hightchart/highcharts.js"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/hightchart/highcharts-3d.js"></script>
 <script>
     $(function () {
       //初始化
@@ -785,112 +675,156 @@ Purchase: http://wrapbootstrap.com
             var income_counts = data['income_counts'];
             var income_data = [];
             for (var i =0 ;i<income_counts.length;i++){
-                income_data.push([income_counts[i].name,income_counts[i].num]);
+                income_data.push([{name:income_counts[i].name,y:income_counts[i].num}]);
             }
+//            income_data = [{name:"保健院",y:100},{name:"测试",y:200}];
+            $('#dashboard-chart-visits').highcharts({
+                chart: {
+                    type: 'column',
+                    style : "width:100%;height:100%;",
+                    reflow:false
+                },
+                title: {
+                    text: '机构门诊收入'
+                },
+                xAxis: {
+                    type: 'category'
+                },
+                yAxis: {
+                    title: {
+                        text: '收入金额'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y}元'
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span><b>{point.y}</b>元<br/>'
+                },
+
+                series: [{
+                    name: '收入',
+                    colorByPoint: true,
+                    data: income_data
+                }]
+            });
+            //7, 当天各个医疗机构的门诊住院人次柱状图
+
             var preperson_counts = data['preperson_counts'];
             var preperson_data = [];
             for (var i =0 ;i<preperson_counts.length;i++){
-                preperson_data.push([preperson_counts[i].name,preperson_counts[i].num]);
+                preperson_data.push([{name:preperson_counts[i].name,num:preperson_counts[i].num}]);
             }
+//            preperson_data=[{name:"保健院",y:100},{name:"测试",y:200}];
+            $('#dashboard-bandwidth-chart').highcharts({
+                chart: {
+                    type: 'column',
+                    style : "width:100%;height:100%;",
+                    reflow:false
+                },
+                title: {
+                    text: '机构门诊人次'
+                },
+                xAxis: {
+                    type: 'category'
+                },
+                yAxis: {
+                    title: {
+                        text: '人次'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y}人次'
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span><b>{point.y}</b>人次<br/>'
+                },
+
+                series: [{
+                    name: '人次',
+                    colorByPoint: true,
+                    data: income_data
+                }]
+            });
+
+            //8,门诊和住院收入的当月折线30天
+
             var income_30days = data['income_30days'];
             var income_30days_data = [];
             for (var i =0 ;i<income_30days_data.length;i++){
-                income_30days_data.push([income_30days_data[i]['syear']+'-'+income_30days_data[i]['smonth']+'-'+income_30days_data[i]['sday']+'',
+                income_30days_data.push([new Date(income_30days_data[i]['syear']+'-'+income_30days_data[i]['smonth']+'-'+income_30days_data[i]['sday']),
                     income_30days_data[i].num]);
             }
-
-            var income_chart = [{
-                color: themesecondary,
-                label: "机构收入情况",
-                data: income_data,
-
+//            income_30days_data = [[new Date('2015-01-01'),100],[new Date('2015-01-02'),300],[new Date('2015-01-03'),200],[new Date('2015-01-04'),400]]
+            var income_30days_chart = $.plot("#dashboard-income-30days-chart",
+                [{
+                data: income_30days_data,
                 lines: {
                     show: true,
+                    lineWidth: 1,
                     fill: true,
-                    lineWidth: .1,
                     fillColor: {
-                        colors: [{
-                            opacity: 0
-                        }, {
-                            opacity: 0.4
-                        }]
-                    }
-                },
-                points: {
-                    show: false
-                },
-                shadowSize: 0
-            },
-                {
-                    color: themeprimary,
-                    label: "门诊住院人次图",
-                    data: preperson_data,
-                    bars: {
-                        order: 1,
-                        show: true,
-                        borderWidth: 0,
-                        barWidth: 0.4,
-                        lineWidth: .5,
-                        fillColor: {
-                            colors: [{
-                                opacity: 0.4
+                        colors: [
+                            {
+                                opacity: 0
                             }, {
                                 opacity: 1
-                            }]
-                        }
-                    }
-                },
-                {
-                    color: themethirdcolor,
-                    label: "当月收入图",
-                    data: income_30days_data,
-                    lines: {
-                        show: true,
-                        fill: false,
-                        fillColor: {
-                            colors: [{
-                                opacity: 0.3
-                            }, {
-                                opacity: 0
-                            }]
-                        }
+                            }
+                        ]
                     },
-                    points: {
-                        show: true
+                    steps: false
+                },
+                shadowSize: 0
+            }], {
+                yaxis: {
+                    color: '#f3f3f3',
+                    min: 0,
+                    minTickSize:1,
+                    tickFormatter:function(val, axis) {
+                        return val.toFixed(0);
                     }
-                }
-            ];
-            var options = {
-                legend: {
-                    show: false
+                    // max: 9,
+
                 },
                 xaxis: {
-                    tickDecimals: 0,
-                    color: '#f3f3f3'
-                },
-                yaxis: {
-                    min: 0,
+                    mode: "time",
+                    timeformat: "%m-%d",
                     color: '#f3f3f3',
-                    tickFormatter: function (val, axis) {
-                        return "";
-                    },
+                    labelWidth:100
+                    // min: 0,
+                    // max: 100
                 },
                 grid: {
                     hoverable: true,
                     clickable: false,
                     borderWidth: 0,
-                    aboveData: false,
-                    color: '#fbfbfb'
-
+                    aboveData: false
                 },
-                tooltip: true,
-                tooltipOpts: {
-                    defaultTheme: false,
-                    content: " <b>%x May</b> , <b>%s</b> : <span>%y</span>",
-                }
-            };
-            var placeholder = $("#dashboard-chart-visits");
-            var plot = $.plot(placeholder, income_chart, options);
+                colors: [themesecondary]
+            });
+
 
             //-------------------------Visitor Sources Pie Chart----------------------------------------//
             var data = [
@@ -931,101 +865,7 @@ Purchase: http://wrapbootstrap.com
             });
 
             //------------------------------Visit Chart------------------------------------------------//
-            var data2 = [{
-                color: themesecondary,
-                label: "Direct Visits",
-                data: [[3, 2], [4, 5], [5, 4], [6, 11], [7, 12], [8, 11], [9, 8], [10, 14], [11, 12], [12, 16], [13, 9],
-                    [14, 10], [15, 14], [16, 15], [17, 9]],
 
-                lines: {
-                    show: true,
-                    fill: true,
-                    lineWidth: .1,
-                    fillColor: {
-                        colors: [{
-                            opacity: 0
-                        }, {
-                            opacity: 0.4
-                        }]
-                    }
-                },
-                points: {
-                    show: false
-                },
-                shadowSize: 0
-            },
-                {
-                    color: themeprimary,
-                    label: "Referral Visits",
-                    data: [[3, 10], [4, 13], [5, 12], [6, 16], [7, 19], [8, 19], [9, 24], [10, 19], [11, 18], [12, 21], [13, 17],
-                        [14, 14], [15, 12], [16, 14], [17, 15]],
-                    bars: {
-                        order: 1,
-                        show: true,
-                        borderWidth: 0,
-                        barWidth: 0.4,
-                        lineWidth: .5,
-                        fillColor: {
-                            colors: [{
-                                opacity: 0.4
-                            }, {
-                                opacity: 1
-                            }]
-                        }
-                    }
-                },
-                {
-                    color: themethirdcolor,
-                    label: "Search Engines",
-                    data: [[3, 14], [4, 11], [5, 10], [6, 9], [7, 5], [8, 8], [9, 5], [10, 6], [11, 4], [12, 7], [13, 4],
-                        [14, 3], [15, 4], [16, 6], [17, 4]],
-                    lines: {
-                        show: true,
-                        fill: false,
-                        fillColor: {
-                            colors: [{
-                                opacity: 0.3
-                            }, {
-                                opacity: 0
-                            }]
-                        }
-                    },
-                    points: {
-                        show: true
-                    }
-                }
-            ];
-            var options = {
-                legend: {
-                    show: false
-                },
-                xaxis: {
-                    tickDecimals: 0,
-                    color: '#f3f3f3'
-                },
-                yaxis: {
-                    min: 0,
-                    color: '#f3f3f3',
-                    tickFormatter: function (val, axis) {
-                        return "";
-                    },
-                },
-                grid: {
-                    hoverable: true,
-                    clickable: false,
-                    borderWidth: 0,
-                    aboveData: false,
-                    color: '#fbfbfb'
-
-                },
-                tooltip: true,
-                tooltipOpts: {
-                    defaultTheme: false,
-                    content: " <b>%x May</b> , <b>%s</b> : <span>%y</span>",
-                }
-            };
-            var placeholder = $("#dashboard-chart-visits");
-            var plot = $.plot(placeholder, data2, options);
 
             //------------------------------Real-Time Chart-------------------------------------------//
 
