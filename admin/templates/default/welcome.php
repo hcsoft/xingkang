@@ -727,7 +727,7 @@ Purchase: http://wrapbootstrap.com
                 series: [{
                     name: '人次',
                     colorByPoint: true,
-                    data: income_data
+                    data: preperson_data
                 }]
             });
 

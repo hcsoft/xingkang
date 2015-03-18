@@ -796,19 +796,19 @@ class dashboardControl extends SystemControl
             "select  sum(num) num
                 from(
                 select count(1) num from HealthFileMaternal  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from FirstVistBeforeBorn  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname  and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from VisitBeforeBorn  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from VisitAfterBorn  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 ) uniontable   "
         );
@@ -819,19 +819,19 @@ class dashboardControl extends SystemControl
             "select  sum(num) num
                 from(
                 select count(1) num from HealthFileMaternal  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from FirstVistBeforeBorn  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname  and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from VisitBeforeBorn  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from VisitAfterBorn  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 ) uniontable   "
         );
@@ -840,22 +840,22 @@ class dashboardControl extends SystemControl
         $stmt = $conn->query( "select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  sum(num) num
                 from(
                 select a.inputdate ,count(1) num from HealthFileMaternal  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 group by a.inputdate
                 union all
                 select a.inputdate ,count(1) num from FirstVistBeforeBorn  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname  and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 group by a.inputdate
                 union all
                 select a.inputdate ,count(1) num from VisitBeforeBorn  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 group by a.inputdate
                 union all
                 select a.inputdate ,count(1) num from VisitAfterBorn  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 group by a.inputdate
                 ) uniontable
@@ -872,15 +872,15 @@ class dashboardControl extends SystemControl
             "select  sum(num) num
                 from(
                 select count(1) num from HealthFileChildren  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from ChildrenMediExam  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from ChildrenMediExam3_6  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 ) uniontable   "
         );
@@ -891,15 +891,15 @@ class dashboardControl extends SystemControl
             "select  sum(num) num
                 from(
                 select count(1) num from HealthFileChildren  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from ChildrenMediExam  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from ChildrenMediExam3_6  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 ) uniontable   "
         );
@@ -909,17 +909,17 @@ class dashboardControl extends SystemControl
         $stmt = $conn->query( "select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  sum(num) num
                 from(
                 select a.inputdate,count(1) num from HealthFileChildren  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 group by a.inputdate
                 union all
                 select a.inputdate, count(1) num from ChildrenMediExam  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 group by a.inputdate
                 union all
                 select a.inputdate, count(1) num from ChildrenMediExam3_6  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 group by a.inputdate
                 ) uniontable
@@ -936,15 +936,15 @@ class dashboardControl extends SystemControl
             "select  sum(num) num
                 from(
                 select count(1) num from HypertensionVisit  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from DiabetesVisit  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from FuriousVisit  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 ) uniontable   "
         );
@@ -955,15 +955,15 @@ class dashboardControl extends SystemControl
             "select  sum(num) num
                 from(
                 select count(1) num from HypertensionVisit  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from DiabetesVisit  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 union all
                 select count(1) num from FuriousVisit  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 ) uniontable   "
         );
@@ -973,17 +973,17 @@ class dashboardControl extends SystemControl
         $stmt = $conn->query( "select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  sum(num) num
                 from(
                 select a.inputdate,count(1) num from HypertensionVisit  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 group by a.inputdate
                 union all
                 select a.inputdate, count(1) num from DiabetesVisit  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 group by a.inputdate
                 union all
                 select a.inputdate, count(1) num from FuriousVisit  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 group by a.inputdate
                 ) uniontable
@@ -997,13 +997,13 @@ class dashboardControl extends SystemControl
         $datesql = ' ';
         $stmt = $conn->query(
             "   select count(1) num from ChildBirthRecord  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)   "
+                where a.InputPersonID = b.loginname      "
         );
         $ret["childbirth_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
         //分娩业务当月数
         $datesql = ' and a.InputDate>= \'' . date('Y-m-1', time()) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
         $stmt = $conn->query(   "select count(1) num from ChildBirthRecord  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql  "
         );
         $ret["childbirth_monthcount"] = $stmt->fetch(PDO::FETCH_NUM)[0];
@@ -1011,7 +1011,7 @@ class dashboardControl extends SystemControl
         $datesql = ' and a.InputDate>= \'' . date('Y-m-1',strtotime('-14 day')) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
         $stmt = $conn->query( "select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  count(1) num
                 from ChildBirthRecord  a  , sam_taxempcode b
-                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                where a.InputPersonID = b.loginname
                 $datesql
                 group by  year(inputdate), month(inputdate),day(inputdate)
                      order by  year(inputdate), month(inputdate),day(inputdate)   ");
