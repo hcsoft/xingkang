@@ -1023,10 +1023,12 @@ class dashboardControl extends SystemControl
         $ret['health_14day'] = array();
 //        14,档案分布
         //男女比例
-        $stmt = $conn->query("select b.sex, count(*) from healthfile  a, personalinfo b  where status=0 and a.fileno = b.fileno group by b.sex order by sex");
+        $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and b.sex='男' and a.fileno = b.fileno");
         $result = $stmt->fetch(PDO::FETCH_NUM);
         $ret["file_male_count"] = $result[0];
-        $ret["file_fmale_count"] = $result[1];
+        $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0  and a.fileno = b.fileno");
+        $result = $stmt->fetch(PDO::FETCH_NUM);
+        $ret["all"] = $result[0];
         //老年人比例
         $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and a.fileno = b.fileno
                     and b.birthday <=convert(datetime,convert(nvarchar,(YEAR(getdate())-64))+'-01-01')
