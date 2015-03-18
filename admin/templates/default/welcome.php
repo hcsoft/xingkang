@@ -447,7 +447,7 @@ Purchase: http://wrapbootstrap.com
                             </div>
                             <div class="databox-row row-6">
                                 <div class="progress bg-yellow progress-no-radius">
-                                    <div class="progress-bar progress-bar-palegreen" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 78%;">
+                                    <div class="progress-bar progress-bar-palegreen" id="male_fmale_rate" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" >
                                 </div>
                             </div>
                         </div>
@@ -790,8 +790,8 @@ Purchase: http://wrapbootstrap.com
             var pregnantbusi_count = data['pregnantbusi_count'];
             var pregnantbusi_monthcount = data['pregnantbusi_monthcount'];
             var pregnantbusi_14day = data['pregnantbusi_14day'];
-            $("#pregnantbusi_count").val(pregnantbusi_count);
-            $("#pregnantbusi_monthcount").val(pregnantbusi_monthcount);
+            $("#pregnantbusi_count").html(pregnantbusi_count);
+            $("#pregnantbusi_monthcount").html(pregnantbusi_monthcount);
             var pregnantbusi_14day_str = '';
             for(var i = 0;i<pregnantbusi_14day.length;i++){
                 pregnantbusi_14day_str +=','+pregnantbusi_14day[i]['num'];
@@ -815,8 +815,8 @@ Purchase: http://wrapbootstrap.com
             var childbusi_count = data['childbusi_count'];
             var childbusi_monthcount = data['childbusi_monthcount'];
             var childbusi_14day = data['childbusi_14day'];
-            $("#childbusi_count").val(childbusi_count);
-            $("#childbusi_monthcount").val(childbusi_monthcount);
+            $("#childbusi_count").html(childbusi_count);
+            $("#childbusi_monthcount").html(childbusi_monthcount);
             var childbusi_14day_str = '';
             for(var i = 0;i<childbusi_14day.length;i++){
                 childbusi_14day_str +=','+childbusi_14day[i]['num'];
@@ -824,7 +824,7 @@ Purchase: http://wrapbootstrap.com
             childbusi_14day_str = childbusi_14day_str.substring(1);
             $("#childbusi_14day").html(
                 '<span data-sparkline="compositebar" data-height="82px" data-width="100%" '+
-                'data-barcolor="#b0dc81"'+
+                'data-barcolor="#fb7d64"'+
                 'data-barwidth="10px" data-barspacing="5px"'+
                 'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"'+
                 'data-linewidth="2"'+
@@ -840,8 +840,8 @@ Purchase: http://wrapbootstrap.com
             var chronicbusi_count = data['chronicbusi_count'];
             var chronicbusi_monthcount = data['chronicbusi_monthcount'];
             var chronicbusi_14day = data['chronicbusi_14day'];
-            $("#chronicbusi_count").val(chronicbusi_count);
-            $("#chronicbusi_monthcount").val(chronicbusi_monthcount);
+            $("#chronicbusi_count").html(chronicbusi_count);
+            $("#chronicbusi_monthcount").html(chronicbusi_monthcount);
             var chronicbusi_14day_str = '';
             for(var i = 0;i<chronicbusi_14day.length;i++){
                 chronicbusi_14day_str +=','+chronicbusi_14day[i]['num'];
@@ -849,7 +849,7 @@ Purchase: http://wrapbootstrap.com
             chronicbusi_14day_str = chronicbusi_14day_str.substring(1);
             $("#chronicbusi_14day").html(
                 '<span data-sparkline="compositebar" data-height="82px" data-width="100%" '+
-                'data-barcolor="#b0dc81"'+
+                'data-barcolor="#3bcbef"'+
                 'data-barwidth="10px" data-barspacing="5px"'+
                 'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"'+
                 'data-linewidth="2"'+
@@ -865,8 +865,8 @@ Purchase: http://wrapbootstrap.com
             var childbirth_count = data['childbirth_count'];
             var childbirth_monthcount = data['childbirth_monthcount'];
             var childbirth_14day = data['childbirth_14day'];
-            $("#childbirth_count").val(childbirth_count);
-            $("#childbirth_monthcount").val(childbirth_monthcount);
+            $("#childbirth_count").html(childbirth_count);
+            $("#childbirth_monthcount").html(childbirth_monthcount);
             var childbirth_14day_str = '';
             for(var i = 0;i<childbirth_14day.length;i++){
                 childbirth_14day_str +=','+childbirth_14day[i]['num'];
@@ -890,13 +890,15 @@ Purchase: http://wrapbootstrap.com
             $("#today").html(today.getMonth()+"月"+today.getDate()+"日");
             //14,档案分布
             var file_male_count = parseInt(data['file_male_count']);
-            var file_fmale_count = parseInt(data['file_fmale_count']);
+            var all = parseInt(data['all']);
+            var male_fmale_rate = (file_male_count *100 )/all;
+            $("#male_fmale_rate").css(width,male_fmale_rate+"%");
             var file_old_count = parseInt(data['file_old_count']);
             var file_pregnant_count = parseInt(data['file_pregnant_count']);
             var file_child_count = parseInt(data['file_child_count']);
             var file_chronic_count = parseInt(data['file_chronic_count']);
             var file_other_count =parseInt( data['file_other_count']);
-            var all = file_male_count+file_fmale_count;
+
             var oldman_rate = (file_old_count*100)/all;
             $("#oldman_rate").html(oldman_rate+"%");
             var pregnant_rate = (file_pregnant_count*100)/all;
