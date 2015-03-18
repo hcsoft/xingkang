@@ -435,7 +435,7 @@ Purchase: http://wrapbootstrap.com
                 <div class="databox-top">
                     <div class="databox-row row-12">
                         <div class="databox-cell cell-3 text-center">
-                            <div class="databox-number number-xxlg sonic-silver">164</div>
+                            <div class="databox-number number-xxlg sonic-silver" id="allcount">0</div>
                             <div class="databox-text storm-cloud">档案</div>
                         </div>
                         <div class="databox-cell cell-9 text-align-center">
@@ -891,8 +891,9 @@ Purchase: http://wrapbootstrap.com
             //14,档案分布
             var file_male_count = parseInt(data['file_male_count']);
             var all = parseInt(data['all']);
+            $("#allcount").html(all);
             var male_fmale_rate = (file_male_count *100 )/all;
-            $("#male_fmale_rate").css(width,male_fmale_rate+"%");
+            $("#male_fmale_rate").css("width",male_fmale_rate+"%");
             var file_old_count = parseInt(data['file_old_count']);
             var file_pregnant_count = parseInt(data['file_pregnant_count']);
             var file_child_count = parseInt(data['file_child_count']);
