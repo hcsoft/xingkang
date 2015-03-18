@@ -724,7 +724,7 @@ Purchase: http://wrapbootstrap.com
             var preperson_counts = data['preperson_counts'];
             var preperson_data = [];
             for (var i =0 ;i<preperson_counts.length;i++){
-                preperson_data.push({name:preperson_counts[i].name,num:parseFloat(preperson_counts[i].num).toFixed(0)});
+                preperson_data.push({name:preperson_counts[i].name,y:parseFloat(preperson_counts[i].num).toFixed(0)});
             }
 //            preperson_data=[{name:"保健院",y:100},{name:"测试",y:200}];
             $('#dashboard-bandwidth-chart').highcharts({
