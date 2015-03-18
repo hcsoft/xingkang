@@ -675,7 +675,7 @@ Purchase: http://wrapbootstrap.com
             var income_counts = data['income_counts'];
             var income_data = [];
             for (var i =0 ;i<income_counts.length;i++){
-                income_data.push({name:income_counts[i].name,y:parseFloat(income_counts[i].num).toFixed(0)});
+                income_data.push({name:income_counts[i].name,y:parseFloat(income_counts[i].num)});
             }
 //            income_data = [{name:"保健院",y:100},{name:"测试",y:200}];
             $('#dashboard-chart-visits').highcharts({
