@@ -644,7 +644,7 @@ class dashboardControl extends SystemControl
     }
     private function businessCountNew($type ,$flag)
     {
-        // return $this->businessCounttest($type,$flag);
+        //return $this->businessCounttest($type,$flag);
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询业务开展数量情况
         $times =$this->getBusiTime($type,$flag);

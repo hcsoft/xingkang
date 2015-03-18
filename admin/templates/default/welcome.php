@@ -678,7 +678,14 @@ Purchase: http://wrapbootstrap.com
 <script>
     $(function () {
       //初始化
-      $('#dashboard-bandwidth-chart')
+        /*Sets Themed Colors Based on Themes*/
+        themeprimary = getThemeColorFromCss('themeprimary');
+        themesecondary = getThemeColorFromCss('themesecondary');
+        themethirdcolor = getThemeColorFromCss('themethirdcolor');
+        themefourthcolor = getThemeColorFromCss('themefourthcolor');
+        themefifthcolor = getThemeColorFromCss('themefifthcolor');
+
+        $('#dashboard-bandwidth-chart')
           .data('width', $('.box-tabbs')
               .width() - 20);
         $.getJSON("index.php?act=dashboard&op=newchart", function (data) {
@@ -752,7 +759,7 @@ Purchase: http://wrapbootstrap.com
                 xaxis: {
                     mode: "time",
                     timeformat: "%H:%M",
-                    color: '#f3f3f3',
+                    color: '#f3f3f3'
                     // min: 0,
                     // max: 100
                 },
@@ -762,7 +769,7 @@ Purchase: http://wrapbootstrap.com
                     borderWidth: 0,
                     aboveData: false
                 },
-                colors: [themeprimary],
+                colors: [themeprimary]
             });
             function update() {
                 $.getJSON("index.php?act=dashboard&op=busidata", function (data) {
@@ -774,13 +781,116 @@ Purchase: http://wrapbootstrap.com
                 });
             }
             update();
+            // 6, 当天各个医疗机构的收入柱状图
+            var income_counts = data['income_counts'];
+            var income_data = [];
+            for (var i =0 ;i<income_counts.length;i++){
+                income_data.push([income_counts[i].name,income_counts[i].num]);
+            }
+            var preperson_counts = data['preperson_counts'];
+            var preperson_data = [];
+            for (var i =0 ;i<preperson_counts.length;i++){
+                preperson_data.push([preperson_counts[i].name,preperson_counts[i].num]);
+            }
+            var income_30days = data['income_30days'];
+            var income_30days_data = [];
+            for (var i =0 ;i<income_30days_data.length;i++){
+                income_30days_data.push([income_30days_data[i]['syear']+'-'+income_30days_data[i]['smonth']+'-'+income_30days_data[i]['sday']+'',
+                    income_30days_data[i].num]);
+            }
 
-            /*Sets Themed Colors Based on Themes*/
-            themeprimary = getThemeColorFromCss('themeprimary');
-            themesecondary = getThemeColorFromCss('themesecondary');
-            themethirdcolor = getThemeColorFromCss('themethirdcolor');
-            themefourthcolor = getThemeColorFromCss('themefourthcolor');
-            themefifthcolor = getThemeColorFromCss('themefifthcolor');
+            var income_chart = [{
+                color: themesecondary,
+                label: "机构收入情况",
+                data: income_data,
+
+                lines: {
+                    show: true,
+                    fill: true,
+                    lineWidth: .1,
+                    fillColor: {
+                        colors: [{
+                            opacity: 0
+                        }, {
+                            opacity: 0.4
+                        }]
+                    }
+                },
+                points: {
+                    show: false
+                },
+                shadowSize: 0
+            },
+                {
+                    color: themeprimary,
+                    label: "门诊住院人次图",
+                    data: preperson_data,
+                    bars: {
+                        order: 1,
+                        show: true,
+                        borderWidth: 0,
+                        barWidth: 0.4,
+                        lineWidth: .5,
+                        fillColor: {
+                            colors: [{
+                                opacity: 0.4
+                            }, {
+                                opacity: 1
+                            }]
+                        }
+                    }
+                },
+                {
+                    color: themethirdcolor,
+                    label: "当月收入图",
+                    data: income_30days_data,
+                    lines: {
+                        show: true,
+                        fill: false,
+                        fillColor: {
+                            colors: [{
+                                opacity: 0.3
+                            }, {
+                                opacity: 0
+                            }]
+                        }
+                    },
+                    points: {
+                        show: true
+                    }
+                }
+            ];
+            var options = {
+                legend: {
+                    show: false
+                },
+                xaxis: {
+                    tickDecimals: 0,
+                    color: '#f3f3f3'
+                },
+                yaxis: {
+                    min: 0,
+                    color: '#f3f3f3',
+                    tickFormatter: function (val, axis) {
+                        return "";
+                    },
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: false,
+                    borderWidth: 0,
+                    aboveData: false,
+                    color: '#fbfbfb'
+
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    defaultTheme: false,
+                    content: " <b>%x May</b> , <b>%s</b> : <span>%y</span>",
+                }
+            };
+            var placeholder = $("#dashboard-chart-visits");
+            var plot = $.plot(placeholder, income_chart, options);
 
             //-------------------------Visitor Sources Pie Chart----------------------------------------//
             var data = [
