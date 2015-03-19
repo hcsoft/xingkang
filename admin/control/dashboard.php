@@ -727,46 +727,61 @@ class dashboardControl extends SystemControl
     public function newchartOp()
     {
         $ret = array();
+        $type= $_GET['charttype'];
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 //        1,新增档案数 /档案总数
-        $stmt = $conn->query("select count(*) from healthfile where status=0");
-        $ret["file_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        $stmt = $conn->query("select count(*) from healthfile where inputdate>=convert(date,getdate()) and inputdate<dateadd(day,1,convert(date,getdate())) and status=0");
-        $ret["file_new"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+//        $ret['type']=$type;
+        if($type=='1'){
+            $stmt = $conn->query("select count(*) from healthfile where status=0");
+            $ret["file_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $stmt = $conn->query("select count(*) from healthfile where inputdate>=convert(date,getdate()) and inputdate<dateadd(day,1,convert(date,getdate())) and status=0");
+            $ret["file_new"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+        }
 //        2,孕妇新增建册 /新增结案/未结案总数
-        $stmt = $conn->query("select count(*) from HealthFileMaternal where IsClosed=0");
-        $ret["pregnant_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        $stmt = $conn->query("select count(*) from HealthFileMaternal where IsClosed=0 and inputdate>=convert(date,getdate()) and inputdate<dateadd(day,1,convert(date,getdate()))");
-        $ret["pregnant_new"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        $stmt = $conn->query("select count(*) from HealthFileMaternal where IsClosed=1 and inputdate>=convert(date,getdate()) and inputdate<dateadd(day,1,convert(date,getdate()))");
-        $ret["pregnant_close"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+        if($type=='2') {
+            $stmt = $conn->query("select count(*) from HealthFileMaternal where IsClosed=0");
+            $ret["pregnant_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $stmt = $conn->query("select count(*) from HealthFileMaternal where IsClosed=0 and inputdate>=convert(date,getdate()) and inputdate<dateadd(day,1,convert(date,getdate()))");
+            $ret["pregnant_new"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $stmt = $conn->query("select count(*) from HealthFileMaternal where IsClosed=1 and inputdate>=convert(date,getdate()) and inputdate<dateadd(day,1,convert(date,getdate()))");
+            $ret["pregnant_close"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+        }
 //        3,高血压/糖尿病/重性精神病 总数
-        $stmt = $conn->query("select count(*) from healthfile a,  personalinfo b ,diseasehistory c  where a.fileno = b.fileno and a.status = 0 and b.id = c.personalinfoid and c.diseaseid = 2");
-        $ret["chronic_hyp"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        $stmt = $conn->query("select count(*) from healthfile a,  personalinfo b ,diseasehistory c  where a.fileno = b.fileno and a.status = 0 and b.id = c.personalinfoid and c.diseaseid = 3");
-        $ret["chronic_diab"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        $stmt = $conn->query("select count(*) from healthfile a,  personalinfo b ,diseasehistory c  where a.fileno = b.fileno and a.status = 0 and b.id = c.personalinfoid and c.diseaseid = 8");
-        $ret["chronic_holergasia"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+        if($type=='3') {
+            $stmt = $conn->query("select count(*) from healthfile a,  personalinfo b ,diseasehistory c  where a.fileno = b.fileno and a.status = 0 and b.id = c.personalinfoid and c.diseaseid = 2");
+            $ret["chronic_hyp"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $stmt = $conn->query("select count(*) from healthfile a,  personalinfo b ,diseasehistory c  where a.fileno = b.fileno and a.status = 0 and b.id = c.personalinfoid and c.diseaseid = 3");
+            $ret["chronic_diab"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $stmt = $conn->query("select count(*) from healthfile a,  personalinfo b ,diseasehistory c  where a.fileno = b.fileno and a.status = 0 and b.id = c.personalinfoid and c.diseaseid = 8");
+            $ret["chronic_holergasia"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+        }
 //        4,传染病报告数
-        $ret["infectious_count"] = 0;
-        $ret["infectious_new"] = 0;
+        if($type=='4') {
+            $ret["infectious_count"] = 0;
+            $ret["infectious_new"] = 0;
+        }
 //        5,公卫开展业务数
-        $ret['busi_counts'] = array();
-        for($i=-100;$i<1;$i++){
-          array_push($ret['busi_counts'],$this->businessCountNew($i,false));
+        if($type=='5') {
+            $ret['busi_counts'] = array();
+            for ($i = -100; $i < 1; $i++) {
+                array_push($ret['busi_counts'], $this->businessCountNew($i, false));
+            }
         }
 //        6, 当天各个医疗机构的收入柱状图
-        $stmt = $conn->query(" select  b.id , b.name , sum(fCO_IncomeMoney) as num
+        if($type=='6') {
+            $stmt = $conn->query(" select  b.id , b.name , sum(fCO_IncomeMoney) as num
                     from  Center_CheckOut checkout left join  Organization b   on checkout.OrgID = b.id
                     where checkout.OrgID in (select orgid from map_org_wechat) and
                     dCO_Date>=convert(date,getdate()) and dCO_Date<dateadd(day,1,convert(date,getdate()))
               group by b.id , b.name order by  b.id desc   ");
-        $ret['income_counts'] = array();
-        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            array_push($ret['income_counts'], $row);
+            $ret['income_counts'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['income_counts'], $row);
+            }
         }
 //        7, 当天各个医疗机构的门诊住院人次柱状图
-        $stmt = $conn->query("  select id,name, sum(num) num
+        if($type=='7') {
+            $stmt = $conn->query("  select id,name, sum(num) num
                                 from (
                                 select org.id ,org.name , count(1) as num from Center_ClinicLog a  , Organization org  where  a.orgid = org.id
                                 group by org.id ,org.name
@@ -774,26 +789,30 @@ class dashboardControl extends SystemControl
                                 select org.id ,org.name , count(1) as num  from Center_InpatientLog a  , Organization org  where  a.orgid = org.id
                                 group by org.id ,org.name
                                 ) sumtable group by id ,name order by id");
-        $ret['preperson_counts'] = array();
-        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            array_push($ret['preperson_counts'], $row);
+            $ret['preperson_counts'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['preperson_counts'], $row);
+            }
         }
 //        8,门诊和住院收入的当月折线30天
-        $stmt = $conn->query(" select  year(dCO_Date) syear, month(dCO_Date) smonth,day(dCO_Date) sday, sum(fCO_IncomeMoney) as num
+        if($type=='8') {
+            $stmt = $conn->query(" select  year(dCO_Date) syear, month(dCO_Date) smonth,day(dCO_Date) sday, sum(fCO_IncomeMoney) as num
                     from  Center_CheckOut checkout left join  Organization b   on checkout.OrgID = b.id
                     where checkout.OrgID in (select orgid from map_org_wechat) and
                     dCO_Date>=dateadd(day,-30,convert(date,getdate())) and dCO_Date<dateadd(day,1,convert(date,getdate()))
                     group by  year(dCO_Date), month(dCO_Date),day(dCO_Date)
                      order by  year(dCO_Date), month(dCO_Date),day(dCO_Date)    ");
-        $ret['income_30days'] = array();
-        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            array_push($ret['income_30days'], $row);
+            $ret['income_30days'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['income_30days'], $row);
+            }
         }
 //        9. 妇保业务
-        //妇保业务总数
-        $datesql = ' ';
-        $stmt = $conn->query(
-            "select  sum(num) num
+        if($type=='9') {
+            //妇保业务总数
+            $datesql = ' ';
+            $stmt = $conn->query(
+                "select  sum(num) num
                 from(
                 select count(1) num from HealthFileMaternal  a  , sam_taxempcode b
                 where a.InputPersonID = b.loginname
@@ -811,12 +830,12 @@ class dashboardControl extends SystemControl
                 where a.InputPersonID = b.loginname
                 $datesql
                 ) uniontable   "
-        );
-        $ret["pregnantbusi_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        //妇保业务当月数
-        $datesql = ' and a.InputDate>= \'' . date('Y-m-1', time()) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
-        $stmt = $conn->query(
-            "select  sum(num) num
+            );
+            $ret["pregnantbusi_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //妇保业务当月数
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', time()) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query(
+                "select  sum(num) num
                 from(
                 select count(1) num from HealthFileMaternal  a  , sam_taxempcode b
                 where a.InputPersonID = b.loginname
@@ -834,10 +853,10 @@ class dashboardControl extends SystemControl
                 where a.InputPersonID = b.loginname
                 $datesql
                 ) uniontable   "
-        );
-        $ret["pregnantbusi_monthcount"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        $datesql = ' and a.InputDate>= \'' . date('Y-m-d',strtotime('-14 day')) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
-        $stmt = $conn->query( "select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  sum(num) num
+            );
+            $ret["pregnantbusi_monthcount"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-d', strtotime('-14 day')) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query("select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  sum(num) num
                 from(
                 select a.inputdate ,count(1) num from HealthFileMaternal  a  , sam_taxempcode b
                 where a.InputPersonID = b.loginname
@@ -861,15 +880,17 @@ class dashboardControl extends SystemControl
                 ) uniontable
                  group by  year(inputdate), month(inputdate),day(inputdate)
                      order by  year(inputdate), month(inputdate),day(inputdate)   ");
-        $ret['pregnantbusi_14day'] = array();
-        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            array_push($ret['pregnantbusi_14day'], $row);
+            $ret['pregnantbusi_14day'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['pregnantbusi_14day'], $row);
+            }
         }
 //        10,儿保业务
-        //儿保业务总数
-        $datesql = ' ';
-        $stmt = $conn->query(
-            "select  sum(num) num
+        if($type=='10') {
+            //儿保业务总数
+            $datesql = ' ';
+            $stmt = $conn->query(
+                "select  sum(num) num
                 from(
                 select count(1) num from HealthFileChildren  a  , sam_taxempcode b
                 where a.InputPersonID = b.loginname
@@ -883,12 +904,12 @@ class dashboardControl extends SystemControl
                 where a.InputPersonID = b.loginname
                 $datesql
                 ) uniontable   "
-        );
-        $ret["childbusi_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        //儿保业务当月数
-        $datesql = ' and a.InputDate>= \'' . date('Y-m-1', time()) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
-        $stmt = $conn->query(
-            "select  sum(num) num
+            );
+            $ret["childbusi_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //儿保业务当月数
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', time()) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query(
+                "select  sum(num) num
                 from(
                 select count(1) num from HealthFileChildren  a  , sam_taxempcode b
                 where a.InputPersonID = b.loginname
@@ -902,11 +923,11 @@ class dashboardControl extends SystemControl
                 where a.InputPersonID = b.loginname
                 $datesql
                 ) uniontable   "
-        );
-        $ret["childbusi_monthcount"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        //儿保14天数据
-        $datesql = ' and a.InputDate>= \'' . date('Y-m-1',strtotime('-14 day')) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
-        $stmt = $conn->query( "select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  sum(num) num
+            );
+            $ret["childbusi_monthcount"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //儿保14天数据
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', strtotime('-14 day')) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query("select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  sum(num) num
                 from(
                 select a.inputdate,count(1) num from HealthFileChildren  a  , sam_taxempcode b
                 where a.InputPersonID = b.loginname
@@ -925,15 +946,17 @@ class dashboardControl extends SystemControl
                 ) uniontable
                  group by  year(inputdate), month(inputdate),day(inputdate)
                      order by  year(inputdate), month(inputdate),day(inputdate)   ");
-        $ret['childbusi_14day'] = array();
-        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            array_push($ret['childbusi_14day'], $row);
+            $ret['childbusi_14day'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['childbusi_14day'], $row);
+            }
         }
 //        11,慢病业务
-        //慢病业务总数
-        $datesql = ' ';
-        $stmt = $conn->query(
-            "select  sum(num) num
+        if($type=='11') {
+            //慢病业务总数
+            $datesql = ' ';
+            $stmt = $conn->query(
+                "select  sum(num) num
                 from(
                 select count(1) num from HypertensionVisit  a  , sam_taxempcode b
                 where a.InputPersonID = b.loginname
@@ -947,12 +970,12 @@ class dashboardControl extends SystemControl
                 where a.InputPersonID = b.loginname
                 $datesql
                 ) uniontable   "
-        );
-        $ret["chronicbusi_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        //慢病业务当月数
-        $datesql = ' and a.InputDate>= \'' . date('Y-m-1', time()) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
-        $stmt = $conn->query(
-            "select  sum(num) num
+            );
+            $ret["chronicbusi_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //慢病业务当月数
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', time()) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query(
+                "select  sum(num) num
                 from(
                 select count(1) num from HypertensionVisit  a  , sam_taxempcode b
                 where a.InputPersonID = b.loginname
@@ -966,11 +989,11 @@ class dashboardControl extends SystemControl
                 where a.InputPersonID = b.loginname
                 $datesql
                 ) uniontable   "
-        );
-        $ret["chronicbusi_monthcount"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        //慢病14天数据
-        $datesql = ' and a.InputDate>= \'' . date('Y-m-1',strtotime('-14 day')) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
-        $stmt = $conn->query( "select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  sum(num) num
+            );
+            $ret["chronicbusi_monthcount"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //慢病14天数据
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', strtotime('-14 day')) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query("select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  sum(num) num
                 from(
                 select a.inputdate,count(1) num from HypertensionVisit  a  , sam_taxempcode b
                 where a.InputPersonID = b.loginname
@@ -989,67 +1012,74 @@ class dashboardControl extends SystemControl
                 ) uniontable
                  group by  year(inputdate), month(inputdate),day(inputdate)
                      order by  year(inputdate), month(inputdate),day(inputdate)   ");
-        $ret['chronicbusi_14day'] = array();
-        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            array_push($ret['chronicbusi_14day'], $row);
+            $ret['chronicbusi_14day'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['chronicbusi_14day'], $row);
+            }
         }
 //        12,分娩业务
-        $datesql = ' ';
-        $stmt = $conn->query(
-            "   select count(1) num from ChildBirthRecord  a  , sam_taxempcode b
+        if($type=='12') {
+            $datesql = ' ';
+            $stmt = $conn->query(
+                "   select count(1) num from ChildBirthRecord  a  , sam_taxempcode b
                 where a.InputPersonID = b.loginname      "
-        );
-        $ret["childbirth_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        //分娩业务当月数
-        $datesql = ' and a.InputDate>= \'' . date('Y-m-1', time()) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
-        $stmt = $conn->query(   "select count(1) num from ChildBirthRecord  a  , sam_taxempcode b
+            );
+            $ret["childbirth_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //分娩业务当月数
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', time()) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query("select count(1) num from ChildBirthRecord  a  , sam_taxempcode b
                 where a.InputPersonID = b.loginname
                 $datesql  "
-        );
-        $ret["childbirth_monthcount"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        //分娩14天数据
-        $datesql = ' and a.InputDate>= \'' . date('Y-m-1',strtotime('-14 day')) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
-        $stmt = $conn->query( "select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  count(1) num
+            );
+            $ret["childbirth_monthcount"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //分娩14天数据
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', strtotime('-14 day')) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query("select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  count(1) num
                 from ChildBirthRecord  a  , sam_taxempcode b
                 where a.InputPersonID = b.loginname
                 $datesql
                 group by  year(inputdate), month(inputdate),day(inputdate)
                      order by  year(inputdate), month(inputdate),day(inputdate)   ");
-        $ret['childbirth_14day'] = array();
-        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            array_push($ret['childbirth_14day'], $row);
+            $ret['childbirth_14day'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['childbirth_14day'], $row);
+            }
         }
 //        13,卫生监督
-        $ret['health_14day'] = array();
+        if($type=='13') {
+            $ret['health_14day'] = array();
+        }
 //        14,档案分布
-        //男女比例
-        $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and b.sex='男' and a.fileno = b.fileno");
-        $result = $stmt->fetch(PDO::FETCH_NUM);
-        $ret["file_male_count"] = $result[0];
-        $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0  and a.fileno = b.fileno");
-        $result = $stmt->fetch(PDO::FETCH_NUM);
-        $ret["all"] = $result[0];
-        //老年人比例
-        $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and a.fileno = b.fileno
+        if($type=='14') {
+            //男女比例
+            $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and b.sex='男' and a.fileno = b.fileno");
+            $result = $stmt->fetch(PDO::FETCH_NUM);
+            $ret["file_male_count"] = $result[0];
+            $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0  and a.fileno = b.fileno");
+            $result = $stmt->fetch(PDO::FETCH_NUM);
+            $ret["all"] = $result[0];
+            //老年人比例
+            $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and a.fileno = b.fileno
                     and b.birthday <=convert(datetime,convert(nvarchar,(YEAR(getdate())-64))+'-01-01')
                     ");
-        $ret["file_old_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        //孕产妇比例
-        $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 AND a.fileno =b.fileno and
+            $ret["file_old_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //孕产妇比例
+            $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 AND a.fileno =b.fileno and
                       a.fileno in (select fileno from HealthFileMaternal where IsClosed = 0 )
                     ");
-        $ret["file_pregnant_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        //儿童比例
-        $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and a.fileno = b.fileno
+            $ret["file_pregnant_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //儿童比例
+            $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and a.fileno = b.fileno
                     and b.birthday >=convert(datetime,convert(nvarchar,(YEAR(getdate())-7))+'-01-01')
                     ");
-        $ret["file_child_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        //慢病比例
-        $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and a.fileno = b.fileno
+            $ret["file_child_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //慢病比例
+            $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and a.fileno = b.fileno
                     and b.id in( select  personalinfoid from diseasehistory  where  diseaseid in(2,3,8) )
                     ");
-        $ret["file_chronic_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
-        $ret["file_other_count"] = $ret["file_count"] - $ret["file_old_count"] -  $ret["file_pregnant_count"] - $ret["file_child_count"] - $ret["file_chronic_count"];
+            $ret["file_chronic_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $ret["file_other_count"] = $ret["all"] - $ret["file_old_count"] - $ret["file_pregnant_count"] - $ret["file_child_count"] - $ret["file_chronic_count"];
+        }
         echo json_encode($ret);
         exit;
     }
