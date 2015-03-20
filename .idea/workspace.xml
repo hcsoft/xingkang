@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/js/flipcount.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/js/flipcounter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/resource/js/modernizr.custom.21954.js" />
+    <list default="true" id="d10d4e88-594a-46f4-985b-e00bbd13cdf1" name="Default" comment="1,分开取数&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/control/dashboard.php" afterPath="$PROJECT_DIR$/admin/control/dashboard.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/easypiechart/easypiechart-init.js" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/easypiechart/easypiechart-init.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/sparkline/sparkline-init.js" afterPath="$PROJECT_DIR$/data/resource/bootstrap/js/charts/sparkline/sparkline-init.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/resource/js/flipcount.css" afterPath="$PROJECT_DIR$/data/resource/js/flipcount.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/welcome.php" afterPath="$PROJECT_DIR$/admin/templates/default/welcome.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -33,84 +29,85 @@
     <favorites_list name="xingkang" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.54909366">
+    <splitter split-orientation="horizontal" split-proportion="0.55438066">
       <split-first>
         <leaf>
           <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-75.478264" vertical-offset="9758" max-vertical-offset="15288">
-                  <caret line="821" column="48" selection-start-line="821" selection-start-column="48" selection-end-line="821" selection-end-column="48" />
+                <state vertical-scroll-proportion="-75.478264" vertical-offset="9898" max-vertical-offset="15428">
+                  <caret line="831" column="48" selection-start-line="831" selection-start-column="48" selection-end-line="831" selection-end-column="48" />
                   <folding>
-                    <marker date="1426752036377" expanded="true" signature="5807:6039" placeholder="select c.id ..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="6203:6330" placeholder="select id,na..Organization..." />
-                    <marker date="1426752036377" expanded="true" signature="6297:6329" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="8023:8338" placeholder="select b.id ..Center_CheckOut..." />
-                    <marker date="1426752036377" expanded="true" signature="8224:8256" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="10000:10367" placeholder="select b.id ..center_MemberRecharge..." />
-                    <marker date="1426752036377" expanded="true" signature="10204:10236" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="11998:12368" placeholder="select b.id ..center_MemberRecharge..." />
-                    <marker date="1426752036377" expanded="true" signature="12203:12235" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="13963:14297" placeholder="select b.id ..spotcheck_main..." />
-                    <marker date="1426752036377" expanded="true" signature="14150:14182" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="15820:16190" placeholder="select b.id ..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="16067:16099" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="17808:18142" placeholder="select b.id ..spotcheck_main..." />
-                    <marker date="1426752036377" expanded="true" signature="17995:18027" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="19689:23433" placeholder="select id , ..id..." />
-                    <marker date="1426752036377" expanded="true" signature="19758:23331" placeholder="select c.id ..MedicalExam..." />
-                    <marker date="1426752036377" expanded="true" signature="19923:19955" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="25688:28334" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="25747:28297" placeholder="select count..MedicalExam..." />
-                    <marker date="1426752036377" expanded="true" signature="25877:25909" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="31744:34390" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="31803:34353" placeholder="select count..MedicalExam..." />
-                    <marker date="1426752036377" expanded="true" signature="31933:31965" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="35343:35389" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="35493:35631" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="35799:35855" placeholder="select count..HealthFileMaternal..." />
-                    <marker date="1426752036377" expanded="true" signature="35963:36111" placeholder="select count..HealthFileMaternal..." />
-                    <marker date="1426752036377" expanded="true" signature="36217:36365" placeholder="select count..HealthFileMaternal..." />
-                    <marker date="1426752036377" expanded="true" signature="36537:36697" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="36802:36962" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="37068:37228" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="37781:38182" placeholder="select b.id ..Center_CheckOut..." />
-                    <marker date="1426752036377" expanded="true" signature="37982:38014" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="38466:39054" placeholder="select id,na..id..." />
-                    <marker date="1426752036377" expanded="true" signature="38566:38734" placeholder="select org.i..Center_ClinicLog..." />
-                    <marker date="1426752036377" expanded="true" signature="38809:38981" placeholder="select org.i..Center_InpatientLog..." />
-                    <marker date="1426752036377" expanded="true" signature="39336:39899" placeholder="select year(..." />
-                    <marker date="1426752036377" expanded="true" signature="40234:41017" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="40293:40980" placeholder="select count..HealthFileMaternal..." />
-                    <marker date="1426752036377" expanded="true" signature="41327:42110" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="41386:42073" placeholder="select count..HealthFileMaternal..." />
-                    <marker date="1426752036377" expanded="true" signature="42400:43608" placeholder="select year(..." />
-                    <marker date="1426752036377" expanded="true" signature="43953:44555" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="44012:44518" placeholder="select count..HealthFileChildren..." />
-                    <marker date="1426752036377" expanded="true" signature="44862:45464" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="44921:45427" placeholder="select count..HealthFileChildren..." />
-                    <marker date="1426752036377" expanded="true" signature="45773:46749" placeholder="select year(..." />
-                    <marker date="1426752036377" expanded="true" signature="47088:47679" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="47147:47642" placeholder="select count..HypertensionVisit..." />
-                    <marker date="1426752036377" expanded="true" signature="47988:48579" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="48047:48542" placeholder="select count..HypertensionVisit..." />
-                    <marker date="1426752036377" expanded="true" signature="48890:49855" placeholder="select year(..." />
-                    <marker date="1426752036377" expanded="true" signature="50177:50299" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="50180:50296" placeholder="select count..ChildBirthRecord..." />
-                    <marker date="1426752036377" expanded="true" signature="50180:50299" placeholder="select count..ChildBirthRecord..." />
-                    <marker date="1426752036377" expanded="true" signature="50590:50723" placeholder="select count..ChildBirthRecord..." />
-                    <marker date="1426752036377" expanded="true" signature="50590:50731" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="50631:50723" placeholder="select count..HealthFileChildren..." />
-                    <marker date="1426752036377" expanded="true" signature="51040:51422" placeholder="select year(..." />
-                    <marker date="1426752036377" expanded="true" signature="51047:51422" placeholder="select year(..." />
-                    <marker date="1426752036377" expanded="true" signature="51814:51919" placeholder="select b.sex..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="52059:52151" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="52299:52493" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="52642:52830" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="52772:52828" placeholder="select filen..HealthFileMaternal..." />
-                    <marker date="1426752036377" expanded="true" signature="52983:53176" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="53326:53523" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="53451:53521" placeholder="select perso..diseasehistory..." />
+                    <marker date="1426872128877" expanded="true" signature="5807:6039" placeholder="select c.id ..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="6203:6330" placeholder="select id,na..Organization..." />
+                    <marker date="1426872128877" expanded="true" signature="6297:6329" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="8023:8338" placeholder="select b.id ..Center_CheckOut..." />
+                    <marker date="1426872128877" expanded="true" signature="8224:8256" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="10000:10367" placeholder="select b.id ..center_MemberRecharge..." />
+                    <marker date="1426872128877" expanded="true" signature="10204:10236" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="11998:12368" placeholder="select b.id ..center_MemberRecharge..." />
+                    <marker date="1426872128877" expanded="true" signature="12203:12235" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="13963:14297" placeholder="select b.id ..spotcheck_main..." />
+                    <marker date="1426872128877" expanded="true" signature="14150:14182" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="15820:16190" placeholder="select b.id ..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="16067:16099" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="17808:18142" placeholder="select b.id ..spotcheck_main..." />
+                    <marker date="1426872128877" expanded="true" signature="17995:18027" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="19689:23433" placeholder="select id , ..id..." />
+                    <marker date="1426872128877" expanded="true" signature="19758:23331" placeholder="select c.id ..MedicalExam..." />
+                    <marker date="1426872128877" expanded="true" signature="19923:19955" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="25688:28334" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="25747:28297" placeholder="select count..MedicalExam..." />
+                    <marker date="1426872128877" expanded="true" signature="25877:25909" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="31744:34390" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="31803:34353" placeholder="select count..MedicalExam..." />
+                    <marker date="1426872128877" expanded="true" signature="31933:31965" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="35198:35257" placeholder="select * fro..cache_values..." />
+                    <marker date="1426872128877" expanded="true" signature="35773:35819" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="35923:36061" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="36229:36285" placeholder="select count..HealthFileMaternal..." />
+                    <marker date="1426872128877" expanded="true" signature="36393:36541" placeholder="select count..HealthFileMaternal..." />
+                    <marker date="1426872128877" expanded="true" signature="36647:36795" placeholder="select count..HealthFileMaternal..." />
+                    <marker date="1426872128877" expanded="true" signature="36967:37127" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="37232:37392" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="37498:37658" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="38211:38612" placeholder="select b.id ..Center_CheckOut..." />
+                    <marker date="1426872128877" expanded="true" signature="38412:38444" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="38896:39484" placeholder="select id,na..id..." />
+                    <marker date="1426872128877" expanded="true" signature="38996:39164" placeholder="select org.i..Center_ClinicLog..." />
+                    <marker date="1426872128877" expanded="true" signature="39239:39411" placeholder="select org.i..Center_InpatientLog..." />
+                    <marker date="1426872128877" expanded="true" signature="39766:40329" placeholder="select year(..." />
+                    <marker date="1426872128877" expanded="true" signature="40664:41447" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="40723:41410" placeholder="select count..HealthFileMaternal..." />
+                    <marker date="1426872128877" expanded="true" signature="41757:42540" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="41816:42503" placeholder="select count..HealthFileMaternal..." />
+                    <marker date="1426872128877" expanded="true" signature="42830:44038" placeholder="select year(..." />
+                    <marker date="1426872128877" expanded="true" signature="44383:44985" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="44442:44948" placeholder="select count..HealthFileChildren..." />
+                    <marker date="1426872128877" expanded="true" signature="45292:45894" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="45351:45857" placeholder="select count..HealthFileChildren..." />
+                    <marker date="1426872128877" expanded="true" signature="46203:47179" placeholder="select year(..." />
+                    <marker date="1426872128877" expanded="true" signature="47518:48109" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="47577:48072" placeholder="select count..HypertensionVisit..." />
+                    <marker date="1426872128877" expanded="true" signature="48418:49009" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="48477:48972" placeholder="select count..HypertensionVisit..." />
+                    <marker date="1426872128877" expanded="true" signature="49320:50285" placeholder="select year(..." />
+                    <marker date="1426872128877" expanded="true" signature="50607:50729" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="50610:50726" placeholder="select count..ChildBirthRecord..." />
+                    <marker date="1426872128877" expanded="true" signature="50610:50729" placeholder="select count..ChildBirthRecord..." />
+                    <marker date="1426872128877" expanded="true" signature="51020:51153" placeholder="select count..ChildBirthRecord..." />
+                    <marker date="1426872128877" expanded="true" signature="51020:51161" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="51061:51153" placeholder="select count..HealthFileChildren..." />
+                    <marker date="1426872128877" expanded="true" signature="51470:51852" placeholder="select year(..." />
+                    <marker date="1426872128877" expanded="true" signature="51477:51852" placeholder="select year(..." />
+                    <marker date="1426872128877" expanded="true" signature="52244:52349" placeholder="select b.sex..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="52489:52581" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="52729:52923" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="53072:53260" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="53202:53258" placeholder="select filen..HealthFileMaternal..." />
+                    <marker date="1426872128877" expanded="true" signature="53413:53606" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="53756:53953" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="53881:53951" placeholder="select perso..diseasehistory..." />
                   </folding>
                 </state>
               </provider>
@@ -119,8 +116,8 @@
           <file leaf-file-name="welcome.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.50377357" vertical-offset="7867" max-vertical-offset="14924">
-                  <caret line="581" column="32" selection-start-line="581" selection-start-column="32" selection-end-line="582" selection-end-column="32" />
+                <state vertical-scroll-proportion="0.52607363" vertical-offset="9289" max-vertical-offset="20048">
+                  <caret line="688" column="0" selection-start-line="688" selection-start-column="0" selection-end-line="688" selection-end-column="0" />
                   <folding>
                     <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -135,10 +132,14 @@
                     <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <marker date="1426756235981" expanded="true" signature="41342:41356" placeholder="..." />
-                    <marker date="1426756235981" expanded="true" signature="41440:41459" placeholder="..." />
-                    <marker date="1426756235981" expanded="true" signature="43507:43521" placeholder="..." />
-                    <marker date="1426756235981" expanded="true" signature="43605:43624" placeholder="..." />
+                    <marker date="1426872635241" expanded="true" signature="40459:40473" placeholder="..." />
+                    <marker date="1426872635241" expanded="true" signature="40553:40572" placeholder="..." />
+                    <marker date="1426872635241" expanded="true" signature="42281:42295" placeholder="..." />
+                    <marker date="1426872635241" expanded="true" signature="42375:42394" placeholder="..." />
+                    <marker date="1426872635241" expanded="true" signature="58870:58884" placeholder="..." />
+                    <marker date="1426872635241" expanded="true" signature="58968:58987" placeholder="..." />
+                    <marker date="1426872635241" expanded="true" signature="61035:61049" placeholder="..." />
+                    <marker date="1426872635241" expanded="true" signature="61133:61152" placeholder="..." />
                   </folding>
                 </state>
               </provider>
@@ -147,8 +148,18 @@
           <file leaf-file-name="flipcount.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/data/resource/js/flipcount.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="1464" max-vertical-offset="2030">
-                  <caret line="139" column="1" selection-start-line="139" selection-start-column="1" selection-end-line="139" selection-end-column="1" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="2243" max-vertical-offset="3738">
+                  <caret line="37" column="26" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="flipcounter.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/data/resource/js/flipcounter.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="4060">
+                  <caret line="45" column="6" selection-start-line="45" selection-start-column="2" selection-end-line="45" selection-end-column="6" />
                   <folding />
                 </state>
               </provider>
@@ -178,110 +189,93 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
+          <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-4.3913045" vertical-offset="11561" max-vertical-offset="15288">
-                  <caret line="833" column="14" selection-start-line="833" selection-start-column="14" selection-end-line="833" selection-end-column="14" />
+                <state vertical-scroll-proportion="0.45661452" vertical-offset="9927" max-vertical-offset="15428">
+                  <caret line="732" column="0" selection-start-line="732" selection-start-column="0" selection-end-line="732" selection-end-column="0" />
                   <folding>
-                    <marker date="1426752036377" expanded="true" signature="5807:6039" placeholder="select c.id ..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="6203:6330" placeholder="select id,na..Organization..." />
-                    <marker date="1426752036377" expanded="true" signature="6297:6329" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="8023:8338" placeholder="select b.id ..Center_CheckOut..." />
-                    <marker date="1426752036377" expanded="true" signature="8224:8256" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="10000:10367" placeholder="select b.id ..center_MemberRecharge..." />
-                    <marker date="1426752036377" expanded="true" signature="10204:10236" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="11998:12368" placeholder="select b.id ..center_MemberRecharge..." />
-                    <marker date="1426752036377" expanded="true" signature="12203:12235" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="13963:14297" placeholder="select b.id ..spotcheck_main..." />
-                    <marker date="1426752036377" expanded="true" signature="14150:14182" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="15820:16190" placeholder="select b.id ..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="16067:16099" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="17808:18142" placeholder="select b.id ..spotcheck_main..." />
-                    <marker date="1426752036377" expanded="true" signature="17995:18027" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="19689:23433" placeholder="select id , ..id..." />
-                    <marker date="1426752036377" expanded="true" signature="19758:23331" placeholder="select c.id ..MedicalExam..." />
-                    <marker date="1426752036377" expanded="true" signature="19923:19955" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="25688:28334" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="25747:28297" placeholder="select count..MedicalExam..." />
-                    <marker date="1426752036377" expanded="true" signature="25877:25909" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="31744:34390" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="31803:34353" placeholder="select count..MedicalExam..." />
-                    <marker date="1426752036377" expanded="true" signature="31933:31965" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="35343:35389" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="35493:35631" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="35799:35855" placeholder="select count..HealthFileMaternal..." />
-                    <marker date="1426752036377" expanded="true" signature="35963:36111" placeholder="select count..HealthFileMaternal..." />
-                    <marker date="1426752036377" expanded="true" signature="36217:36365" placeholder="select count..HealthFileMaternal..." />
-                    <marker date="1426752036377" expanded="true" signature="36537:36697" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="36802:36962" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="37068:37228" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="37781:38182" placeholder="select b.id ..Center_CheckOut..." />
-                    <marker date="1426752036377" expanded="true" signature="37982:38014" placeholder="select orgid..map_org_wechat..." />
-                    <marker date="1426752036377" expanded="true" signature="38466:39054" placeholder="select id,na..id..." />
-                    <marker date="1426752036377" expanded="true" signature="38566:38734" placeholder="select org.i..Center_ClinicLog..." />
-                    <marker date="1426752036377" expanded="true" signature="38809:38981" placeholder="select org.i..Center_InpatientLog..." />
-                    <marker date="1426752036377" expanded="true" signature="39336:39899" placeholder="select year(..." />
-                    <marker date="1426752036377" expanded="true" signature="40234:41017" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="40293:40980" placeholder="select count..HealthFileMaternal..." />
-                    <marker date="1426752036377" expanded="true" signature="41327:42110" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="41386:42073" placeholder="select count..HealthFileMaternal..." />
-                    <marker date="1426752036377" expanded="true" signature="42400:43608" placeholder="select year(..." />
-                    <marker date="1426752036377" expanded="true" signature="43953:44555" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="44012:44518" placeholder="select count..HealthFileChildren..." />
-                    <marker date="1426752036377" expanded="true" signature="44862:45464" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="44921:45427" placeholder="select count..HealthFileChildren..." />
-                    <marker date="1426752036377" expanded="true" signature="45773:46749" placeholder="select year(..." />
-                    <marker date="1426752036377" expanded="true" signature="47088:47679" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="47147:47642" placeholder="select count..HypertensionVisit..." />
-                    <marker date="1426752036377" expanded="true" signature="47988:48579" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="48047:48542" placeholder="select count..HypertensionVisit..." />
-                    <marker date="1426752036377" expanded="true" signature="48890:49855" placeholder="select year(..." />
-                    <marker date="1426752036377" expanded="true" signature="50177:50299" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="50180:50296" placeholder="select count..ChildBirthRecord..." />
-                    <marker date="1426752036377" expanded="true" signature="50180:50299" placeholder="select count..ChildBirthRecord..." />
-                    <marker date="1426752036377" expanded="true" signature="50590:50723" placeholder="select count..ChildBirthRecord..." />
-                    <marker date="1426752036377" expanded="true" signature="50590:50731" placeholder="select sum(n..count..." />
-                    <marker date="1426752036377" expanded="true" signature="50631:50723" placeholder="select count..HealthFileChildren..." />
-                    <marker date="1426752036377" expanded="true" signature="51040:51422" placeholder="select year(..." />
-                    <marker date="1426752036377" expanded="true" signature="51047:51422" placeholder="select year(..." />
-                    <marker date="1426752036377" expanded="true" signature="51814:51919" placeholder="select b.sex..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="52059:52151" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="52299:52493" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="52642:52830" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="52772:52828" placeholder="select filen..HealthFileMaternal..." />
-                    <marker date="1426752036377" expanded="true" signature="52983:53176" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="53326:53523" placeholder="select count..healthfile..." />
-                    <marker date="1426752036377" expanded="true" signature="53451:53521" placeholder="select perso..diseasehistory..." />
+                    <marker date="1426872128877" expanded="true" signature="5807:6039" placeholder="select c.id ..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="6203:6330" placeholder="select id,na..Organization..." />
+                    <marker date="1426872128877" expanded="true" signature="6297:6329" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="8023:8338" placeholder="select b.id ..Center_CheckOut..." />
+                    <marker date="1426872128877" expanded="true" signature="8224:8256" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="10000:10367" placeholder="select b.id ..center_MemberRecharge..." />
+                    <marker date="1426872128877" expanded="true" signature="10204:10236" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="11998:12368" placeholder="select b.id ..center_MemberRecharge..." />
+                    <marker date="1426872128877" expanded="true" signature="12203:12235" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="13963:14297" placeholder="select b.id ..spotcheck_main..." />
+                    <marker date="1426872128877" expanded="true" signature="14150:14182" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="15820:16190" placeholder="select b.id ..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="16067:16099" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="17808:18142" placeholder="select b.id ..spotcheck_main..." />
+                    <marker date="1426872128877" expanded="true" signature="17995:18027" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="19689:23433" placeholder="select id , ..id..." />
+                    <marker date="1426872128877" expanded="true" signature="19758:23331" placeholder="select c.id ..MedicalExam..." />
+                    <marker date="1426872128877" expanded="true" signature="19923:19955" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="25688:28334" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="25747:28297" placeholder="select count..MedicalExam..." />
+                    <marker date="1426872128877" expanded="true" signature="25877:25909" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="31744:34390" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="31803:34353" placeholder="select count..MedicalExam..." />
+                    <marker date="1426872128877" expanded="true" signature="31933:31965" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="35198:35257" placeholder="select * fro..cache_values..." />
+                    <marker date="1426872128877" expanded="true" signature="35773:35819" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="35923:36061" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="36229:36285" placeholder="select count..HealthFileMaternal..." />
+                    <marker date="1426872128877" expanded="true" signature="36393:36541" placeholder="select count..HealthFileMaternal..." />
+                    <marker date="1426872128877" expanded="true" signature="36647:36795" placeholder="select count..HealthFileMaternal..." />
+                    <marker date="1426872128877" expanded="true" signature="36967:37127" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="37232:37392" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="37498:37658" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="38211:38612" placeholder="select b.id ..Center_CheckOut..." />
+                    <marker date="1426872128877" expanded="true" signature="38412:38444" placeholder="select orgid..map_org_wechat..." />
+                    <marker date="1426872128877" expanded="true" signature="38896:39484" placeholder="select id,na..id..." />
+                    <marker date="1426872128877" expanded="true" signature="38996:39164" placeholder="select org.i..Center_ClinicLog..." />
+                    <marker date="1426872128877" expanded="true" signature="39239:39411" placeholder="select org.i..Center_InpatientLog..." />
+                    <marker date="1426872128877" expanded="true" signature="39766:40329" placeholder="select year(..." />
+                    <marker date="1426872128877" expanded="true" signature="40664:41447" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="40723:41410" placeholder="select count..HealthFileMaternal..." />
+                    <marker date="1426872128877" expanded="true" signature="41757:42540" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="41816:42503" placeholder="select count..HealthFileMaternal..." />
+                    <marker date="1426872128877" expanded="true" signature="42830:44038" placeholder="select year(..." />
+                    <marker date="1426872128877" expanded="true" signature="44383:44985" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="44442:44948" placeholder="select count..HealthFileChildren..." />
+                    <marker date="1426872128877" expanded="true" signature="45292:45894" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="45351:45857" placeholder="select count..HealthFileChildren..." />
+                    <marker date="1426872128877" expanded="true" signature="46203:47179" placeholder="select year(..." />
+                    <marker date="1426872128877" expanded="true" signature="47518:48109" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="47577:48072" placeholder="select count..HypertensionVisit..." />
+                    <marker date="1426872128877" expanded="true" signature="48418:49009" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="48477:48972" placeholder="select count..HypertensionVisit..." />
+                    <marker date="1426872128877" expanded="true" signature="49320:50285" placeholder="select year(..." />
+                    <marker date="1426872128877" expanded="true" signature="50607:50729" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="50610:50726" placeholder="select count..ChildBirthRecord..." />
+                    <marker date="1426872128877" expanded="true" signature="50610:50729" placeholder="select count..ChildBirthRecord..." />
+                    <marker date="1426872128877" expanded="true" signature="51020:51153" placeholder="select count..ChildBirthRecord..." />
+                    <marker date="1426872128877" expanded="true" signature="51020:51161" placeholder="select sum(n..count..." />
+                    <marker date="1426872128877" expanded="true" signature="51061:51153" placeholder="select count..HealthFileChildren..." />
+                    <marker date="1426872128877" expanded="true" signature="51470:51852" placeholder="select year(..." />
+                    <marker date="1426872128877" expanded="true" signature="51477:51852" placeholder="select year(..." />
+                    <marker date="1426872128877" expanded="true" signature="52244:52349" placeholder="select b.sex..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="52489:52581" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="52729:52923" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="53072:53260" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="53202:53258" placeholder="select filen..HealthFileMaternal..." />
+                    <marker date="1426872128877" expanded="true" signature="53413:53606" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="53756:53953" placeholder="select count..healthfile..." />
+                    <marker date="1426872128877" expanded="true" signature="53881:53951" placeholder="select perso..diseasehistory..." />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="welcome.php" pinned="false" current-in-tab="true">
+          <file leaf-file-name="welcome.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.33333334" vertical-offset="1022" max-vertical-offset="14924">
-                  <caret line="85" column="110" selection-start-line="85" selection-start-column="110" selection-end-line="85" selection-end-column="110" />
-                  <folding>
-                    <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#2;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <marker date="1426756235981" expanded="true" signature="41342:41356" placeholder="..." />
-                    <marker date="1426756235981" expanded="true" signature="41440:41459" placeholder="..." />
-                    <marker date="1426756235981" expanded="true" signature="43507:43521" placeholder="..." />
-                    <marker date="1426756235981" expanded="true" signature="43605:43624" placeholder="..." />
-                  </folding>
+                <state vertical-scroll-proportion="-69.391304" vertical-offset="1638" max-vertical-offset="20048">
+                  <caret line="231" column="42" selection-start-line="231" selection-start-column="42" selection-end-line="231" selection-end-column="42" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -324,8 +318,8 @@
         <option value="$PROJECT_DIR$/admin/templates/default/welcome-bat.php" />
         <option value="$PROJECT_DIR$/data/resource/bootstrap/js/charts/sparkline/sparkline-init.js" />
         <option value="$PROJECT_DIR$/data/resource/bootstrap/js/charts/easypiechart/easypiechart-init.js" />
-        <option value="$PROJECT_DIR$/admin/control/dashboard.php" />
         <option value="$PROJECT_DIR$/data/resource/js/flipcount.css" />
+        <option value="$PROJECT_DIR$/admin/control/dashboard.php" />
         <option value="$PROJECT_DIR$/admin/templates/default/welcome.php" />
       </list>
     </option>
@@ -657,12 +651,6 @@
       <workItem from="1409407958927" duration="9000" />
       <workItem from="1409840606175" duration="1113000" />
     </task>
-    <task id="LOCAL-00083" summary="1,仓库明细增加了供货商&#10;2,销售明细增加了财务分类的查询条件">
-      <created>1416449410461</created>
-      <option name="number" value="00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1416449410461</updated>
-    </task>
     <task id="LOCAL-00084" summary="1,销售明细增加了财务分类增加了未分类">
       <created>1416449751739</created>
       <option name="number" value="00084" />
@@ -951,7 +939,13 @@
       <option name="project" value="LOCAL" />
       <updated>1426690409319</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="1,分开取数&#10;">
+      <created>1426756268020</created>
+      <option name="number" value="00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1426756268042</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <option name="createChangelist" value="false" />
     <option name="createBranch" value="false" />
     <servers />
@@ -966,7 +960,6 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22584857" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -985,6 +978,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22584857" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1009,7 +1003,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
-    <MESSAGE value="1,增加了会员充值和消费" />
     <MESSAGE value="1,结算单明细增加了病人姓名" />
     <MESSAGE value="1,增加了会员回访&#10;2,增加了档案数&#10;3,增加了档案回访&#10;4,增加了业务数" />
     <MESSAGE value="1,概览增加了时间选择" />
@@ -1034,7 +1027,8 @@
     <MESSAGE value="1,取档案总数的错误&#10;" />
     <MESSAGE value="1,档案总数&#10;" />
     <MESSAGE value="1,取档案数&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,取档案数&#10;" />
+    <MESSAGE value="1,分开取数&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="1,分开取数&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1376,102 +1370,103 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/resource/js/flipcounter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4060">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="4060">
+          <caret line="45" column="6" selection-start-line="45" selection-start-column="2" selection-end-line="45" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/resource/js/flipcount.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2243" max-vertical-offset="3738">
+          <caret line="37" column="26" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/control/dashboard.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-75.478264" vertical-offset="9758" max-vertical-offset="15288">
-          <caret line="821" column="48" selection-start-line="821" selection-start-column="48" selection-end-line="821" selection-end-column="48" />
+        <state vertical-scroll-proportion="-75.478264" vertical-offset="9898" max-vertical-offset="15428">
+          <caret line="831" column="48" selection-start-line="831" selection-start-column="48" selection-end-line="831" selection-end-column="48" />
           <folding>
-            <marker date="1426752036377" expanded="true" signature="5807:6039" placeholder="select c.id ..map_org_wechat..." />
-            <marker date="1426752036377" expanded="true" signature="6203:6330" placeholder="select id,na..Organization..." />
-            <marker date="1426752036377" expanded="true" signature="6297:6329" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1426752036377" expanded="true" signature="8023:8338" placeholder="select b.id ..Center_CheckOut..." />
-            <marker date="1426752036377" expanded="true" signature="8224:8256" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1426752036377" expanded="true" signature="10000:10367" placeholder="select b.id ..center_MemberRecharge..." />
-            <marker date="1426752036377" expanded="true" signature="10204:10236" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1426752036377" expanded="true" signature="11998:12368" placeholder="select b.id ..center_MemberRecharge..." />
-            <marker date="1426752036377" expanded="true" signature="12203:12235" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1426752036377" expanded="true" signature="13963:14297" placeholder="select b.id ..spotcheck_main..." />
-            <marker date="1426752036377" expanded="true" signature="14150:14182" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1426752036377" expanded="true" signature="15820:16190" placeholder="select b.id ..healthfile..." />
-            <marker date="1426752036377" expanded="true" signature="16067:16099" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1426752036377" expanded="true" signature="17808:18142" placeholder="select b.id ..spotcheck_main..." />
-            <marker date="1426752036377" expanded="true" signature="17995:18027" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1426752036377" expanded="true" signature="19689:23433" placeholder="select id , ..id..." />
-            <marker date="1426752036377" expanded="true" signature="19758:23331" placeholder="select c.id ..MedicalExam..." />
-            <marker date="1426752036377" expanded="true" signature="19923:19955" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1426752036377" expanded="true" signature="25688:28334" placeholder="select sum(n..count..." />
-            <marker date="1426752036377" expanded="true" signature="25747:28297" placeholder="select count..MedicalExam..." />
-            <marker date="1426752036377" expanded="true" signature="25877:25909" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1426752036377" expanded="true" signature="31744:34390" placeholder="select sum(n..count..." />
-            <marker date="1426752036377" expanded="true" signature="31803:34353" placeholder="select count..MedicalExam..." />
-            <marker date="1426752036377" expanded="true" signature="31933:31965" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1426752036377" expanded="true" signature="35343:35389" placeholder="select count..healthfile..." />
-            <marker date="1426752036377" expanded="true" signature="35493:35631" placeholder="select count..healthfile..." />
-            <marker date="1426752036377" expanded="true" signature="35799:35855" placeholder="select count..HealthFileMaternal..." />
-            <marker date="1426752036377" expanded="true" signature="35963:36111" placeholder="select count..HealthFileMaternal..." />
-            <marker date="1426752036377" expanded="true" signature="36217:36365" placeholder="select count..HealthFileMaternal..." />
-            <marker date="1426752036377" expanded="true" signature="36537:36697" placeholder="select count..healthfile..." />
-            <marker date="1426752036377" expanded="true" signature="36802:36962" placeholder="select count..healthfile..." />
-            <marker date="1426752036377" expanded="true" signature="37068:37228" placeholder="select count..healthfile..." />
-            <marker date="1426752036377" expanded="true" signature="37781:38182" placeholder="select b.id ..Center_CheckOut..." />
-            <marker date="1426752036377" expanded="true" signature="37982:38014" placeholder="select orgid..map_org_wechat..." />
-            <marker date="1426752036377" expanded="true" signature="38466:39054" placeholder="select id,na..id..." />
-            <marker date="1426752036377" expanded="true" signature="38566:38734" placeholder="select org.i..Center_ClinicLog..." />
-            <marker date="1426752036377" expanded="true" signature="38809:38981" placeholder="select org.i..Center_InpatientLog..." />
-            <marker date="1426752036377" expanded="true" signature="39336:39899" placeholder="select year(..." />
-            <marker date="1426752036377" expanded="true" signature="40234:41017" placeholder="select sum(n..count..." />
-            <marker date="1426752036377" expanded="true" signature="40293:40980" placeholder="select count..HealthFileMaternal..." />
-            <marker date="1426752036377" expanded="true" signature="41327:42110" placeholder="select sum(n..count..." />
-            <marker date="1426752036377" expanded="true" signature="41386:42073" placeholder="select count..HealthFileMaternal..." />
-            <marker date="1426752036377" expanded="true" signature="42400:43608" placeholder="select year(..." />
-            <marker date="1426752036377" expanded="true" signature="43953:44555" placeholder="select sum(n..count..." />
-            <marker date="1426752036377" expanded="true" signature="44012:44518" placeholder="select count..HealthFileChildren..." />
-            <marker date="1426752036377" expanded="true" signature="44862:45464" placeholder="select sum(n..count..." />
-            <marker date="1426752036377" expanded="true" signature="44921:45427" placeholder="select count..HealthFileChildren..." />
-            <marker date="1426752036377" expanded="true" signature="45773:46749" placeholder="select year(..." />
-            <marker date="1426752036377" expanded="true" signature="47088:47679" placeholder="select sum(n..count..." />
-            <marker date="1426752036377" expanded="true" signature="47147:47642" placeholder="select count..HypertensionVisit..." />
-            <marker date="1426752036377" expanded="true" signature="47988:48579" placeholder="select sum(n..count..." />
-            <marker date="1426752036377" expanded="true" signature="48047:48542" placeholder="select count..HypertensionVisit..." />
-            <marker date="1426752036377" expanded="true" signature="48890:49855" placeholder="select year(..." />
-            <marker date="1426752036377" expanded="true" signature="50177:50299" placeholder="select sum(n..count..." />
-            <marker date="1426752036377" expanded="true" signature="50180:50296" placeholder="select count..ChildBirthRecord..." />
-            <marker date="1426752036377" expanded="true" signature="50180:50299" placeholder="select count..ChildBirthRecord..." />
-            <marker date="1426752036377" expanded="true" signature="50590:50723" placeholder="select count..ChildBirthRecord..." />
-            <marker date="1426752036377" expanded="true" signature="50590:50731" placeholder="select sum(n..count..." />
-            <marker date="1426752036377" expanded="true" signature="50631:50723" placeholder="select count..HealthFileChildren..." />
-            <marker date="1426752036377" expanded="true" signature="51040:51422" placeholder="select year(..." />
-            <marker date="1426752036377" expanded="true" signature="51047:51422" placeholder="select year(..." />
-            <marker date="1426752036377" expanded="true" signature="51814:51919" placeholder="select b.sex..healthfile..." />
-            <marker date="1426752036377" expanded="true" signature="52059:52151" placeholder="select count..healthfile..." />
-            <marker date="1426752036377" expanded="true" signature="52299:52493" placeholder="select count..healthfile..." />
-            <marker date="1426752036377" expanded="true" signature="52642:52830" placeholder="select count..healthfile..." />
-            <marker date="1426752036377" expanded="true" signature="52772:52828" placeholder="select filen..HealthFileMaternal..." />
-            <marker date="1426752036377" expanded="true" signature="52983:53176" placeholder="select count..healthfile..." />
-            <marker date="1426752036377" expanded="true" signature="53326:53523" placeholder="select count..healthfile..." />
-            <marker date="1426752036377" expanded="true" signature="53451:53521" placeholder="select perso..diseasehistory..." />
+            <marker date="1426872128877" expanded="true" signature="5807:6039" placeholder="select c.id ..map_org_wechat..." />
+            <marker date="1426872128877" expanded="true" signature="6203:6330" placeholder="select id,na..Organization..." />
+            <marker date="1426872128877" expanded="true" signature="6297:6329" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1426872128877" expanded="true" signature="8023:8338" placeholder="select b.id ..Center_CheckOut..." />
+            <marker date="1426872128877" expanded="true" signature="8224:8256" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1426872128877" expanded="true" signature="10000:10367" placeholder="select b.id ..center_MemberRecharge..." />
+            <marker date="1426872128877" expanded="true" signature="10204:10236" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1426872128877" expanded="true" signature="11998:12368" placeholder="select b.id ..center_MemberRecharge..." />
+            <marker date="1426872128877" expanded="true" signature="12203:12235" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1426872128877" expanded="true" signature="13963:14297" placeholder="select b.id ..spotcheck_main..." />
+            <marker date="1426872128877" expanded="true" signature="14150:14182" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1426872128877" expanded="true" signature="15820:16190" placeholder="select b.id ..healthfile..." />
+            <marker date="1426872128877" expanded="true" signature="16067:16099" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1426872128877" expanded="true" signature="17808:18142" placeholder="select b.id ..spotcheck_main..." />
+            <marker date="1426872128877" expanded="true" signature="17995:18027" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1426872128877" expanded="true" signature="19689:23433" placeholder="select id , ..id..." />
+            <marker date="1426872128877" expanded="true" signature="19758:23331" placeholder="select c.id ..MedicalExam..." />
+            <marker date="1426872128877" expanded="true" signature="19923:19955" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1426872128877" expanded="true" signature="25688:28334" placeholder="select sum(n..count..." />
+            <marker date="1426872128877" expanded="true" signature="25747:28297" placeholder="select count..MedicalExam..." />
+            <marker date="1426872128877" expanded="true" signature="25877:25909" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1426872128877" expanded="true" signature="31744:34390" placeholder="select sum(n..count..." />
+            <marker date="1426872128877" expanded="true" signature="31803:34353" placeholder="select count..MedicalExam..." />
+            <marker date="1426872128877" expanded="true" signature="31933:31965" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1426872128877" expanded="true" signature="35198:35257" placeholder="select * fro..cache_values..." />
+            <marker date="1426872128877" expanded="true" signature="35773:35819" placeholder="select count..healthfile..." />
+            <marker date="1426872128877" expanded="true" signature="35923:36061" placeholder="select count..healthfile..." />
+            <marker date="1426872128877" expanded="true" signature="36229:36285" placeholder="select count..HealthFileMaternal..." />
+            <marker date="1426872128877" expanded="true" signature="36393:36541" placeholder="select count..HealthFileMaternal..." />
+            <marker date="1426872128877" expanded="true" signature="36647:36795" placeholder="select count..HealthFileMaternal..." />
+            <marker date="1426872128877" expanded="true" signature="36967:37127" placeholder="select count..healthfile..." />
+            <marker date="1426872128877" expanded="true" signature="37232:37392" placeholder="select count..healthfile..." />
+            <marker date="1426872128877" expanded="true" signature="37498:37658" placeholder="select count..healthfile..." />
+            <marker date="1426872128877" expanded="true" signature="38211:38612" placeholder="select b.id ..Center_CheckOut..." />
+            <marker date="1426872128877" expanded="true" signature="38412:38444" placeholder="select orgid..map_org_wechat..." />
+            <marker date="1426872128877" expanded="true" signature="38896:39484" placeholder="select id,na..id..." />
+            <marker date="1426872128877" expanded="true" signature="38996:39164" placeholder="select org.i..Center_ClinicLog..." />
+            <marker date="1426872128877" expanded="true" signature="39239:39411" placeholder="select org.i..Center_InpatientLog..." />
+            <marker date="1426872128877" expanded="true" signature="39766:40329" placeholder="select year(..." />
+            <marker date="1426872128877" expanded="true" signature="40664:41447" placeholder="select sum(n..count..." />
+            <marker date="1426872128877" expanded="true" signature="40723:41410" placeholder="select count..HealthFileMaternal..." />
+            <marker date="1426872128877" expanded="true" signature="41757:42540" placeholder="select sum(n..count..." />
+            <marker date="1426872128877" expanded="true" signature="41816:42503" placeholder="select count..HealthFileMaternal..." />
+            <marker date="1426872128877" expanded="true" signature="42830:44038" placeholder="select year(..." />
+            <marker date="1426872128877" expanded="true" signature="44383:44985" placeholder="select sum(n..count..." />
+            <marker date="1426872128877" expanded="true" signature="44442:44948" placeholder="select count..HealthFileChildren..." />
+            <marker date="1426872128877" expanded="true" signature="45292:45894" placeholder="select sum(n..count..." />
+            <marker date="1426872128877" expanded="true" signature="45351:45857" placeholder="select count..HealthFileChildren..." />
+            <marker date="1426872128877" expanded="true" signature="46203:47179" placeholder="select year(..." />
+            <marker date="1426872128877" expanded="true" signature="47518:48109" placeholder="select sum(n..count..." />
+            <marker date="1426872128877" expanded="true" signature="47577:48072" placeholder="select count..HypertensionVisit..." />
+            <marker date="1426872128877" expanded="true" signature="48418:49009" placeholder="select sum(n..count..." />
+            <marker date="1426872128877" expanded="true" signature="48477:48972" placeholder="select count..HypertensionVisit..." />
+            <marker date="1426872128877" expanded="true" signature="49320:50285" placeholder="select year(..." />
+            <marker date="1426872128877" expanded="true" signature="50607:50729" placeholder="select sum(n..count..." />
+            <marker date="1426872128877" expanded="true" signature="50610:50726" placeholder="select count..ChildBirthRecord..." />
+            <marker date="1426872128877" expanded="true" signature="50610:50729" placeholder="select count..ChildBirthRecord..." />
+            <marker date="1426872128877" expanded="true" signature="51020:51153" placeholder="select count..ChildBirthRecord..." />
+            <marker date="1426872128877" expanded="true" signature="51020:51161" placeholder="select sum(n..count..." />
+            <marker date="1426872128877" expanded="true" signature="51061:51153" placeholder="select count..HealthFileChildren..." />
+            <marker date="1426872128877" expanded="true" signature="51470:51852" placeholder="select year(..." />
+            <marker date="1426872128877" expanded="true" signature="51477:51852" placeholder="select year(..." />
+            <marker date="1426872128877" expanded="true" signature="52244:52349" placeholder="select b.sex..healthfile..." />
+            <marker date="1426872128877" expanded="true" signature="52489:52581" placeholder="select count..healthfile..." />
+            <marker date="1426872128877" expanded="true" signature="52729:52923" placeholder="select count..healthfile..." />
+            <marker date="1426872128877" expanded="true" signature="53072:53260" placeholder="select count..healthfile..." />
+            <marker date="1426872128877" expanded="true" signature="53202:53258" placeholder="select filen..HealthFileMaternal..." />
+            <marker date="1426872128877" expanded="true" signature="53413:53606" placeholder="select count..healthfile..." />
+            <marker date="1426872128877" expanded="true" signature="53756:53953" placeholder="select count..healthfile..." />
+            <marker date="1426872128877" expanded="true" signature="53881:53951" placeholder="select perso..diseasehistory..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/resource/js/flipcount.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1464" max-vertical-offset="2030">
-          <caret line="139" column="1" selection-start-line="139" selection-start-column="1" selection-end-line="139" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/default/welcome.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50377357" vertical-offset="7867" max-vertical-offset="14924">
-          <caret line="581" column="32" selection-start-line="581" selection-start-column="32" selection-end-line="582" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.52607363" vertical-offset="9289" max-vertical-offset="20048">
+          <caret line="688" column="0" selection-start-line="688" selection-start-column="0" selection-end-line="688" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1486,10 +1481,14 @@
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1426756235981" expanded="true" signature="41342:41356" placeholder="..." />
-            <marker date="1426756235981" expanded="true" signature="41440:41459" placeholder="..." />
-            <marker date="1426756235981" expanded="true" signature="43507:43521" placeholder="..." />
-            <marker date="1426756235981" expanded="true" signature="43605:43624" placeholder="..." />
+            <marker date="1426872635241" expanded="true" signature="40459:40473" placeholder="..." />
+            <marker date="1426872635241" expanded="true" signature="40553:40572" placeholder="..." />
+            <marker date="1426872635241" expanded="true" signature="42281:42295" placeholder="..." />
+            <marker date="1426872635241" expanded="true" signature="42375:42394" placeholder="..." />
+            <marker date="1426872635241" expanded="true" signature="58870:58884" placeholder="..." />
+            <marker date="1426872635241" expanded="true" signature="58968:58987" placeholder="..." />
+            <marker date="1426872635241" expanded="true" signature="61035:61049" placeholder="..." />
+            <marker date="1426872635241" expanded="true" signature="61133:61152" placeholder="..." />
           </folding>
         </state>
       </provider>

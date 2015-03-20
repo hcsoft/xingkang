@@ -723,7 +723,17 @@ class dashboardControl extends SystemControl
        exit;
     }
 
+    public function cacheChartOp(){
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $stmt = $conn->query('select * from cache_values where [key] like \'dashboard_%\' ');
+        $ret = array();
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $ret[substr($row[0],strlen('dashboard_'))]= json_decode($row[1]);
+        }
 
+        echo json_encode($ret);
+        exit();
+    }
     public function newchartOp()
     {
         $ret = array();
