@@ -81,7 +81,7 @@ Purchase: http://wrapbootstrap.com
                             </div>
                         </div>
                         <div class="databox-right">
-                            <span class="databox-title themesecondary">档案 <button onclick="changecounter()">测试</button></span>
+                            <span class="databox-title themesecondary">档案</span>
 
                             <div class="databox-text darkgray">
                                 新增数<span id="file_new" class="databox-number themesecondary flip-counter small       "
@@ -185,14 +185,14 @@ Purchase: http://wrapbootstrap.com
                     <div class="dashboard-box">
                         <div class="box-header">
                             <div class="deadline">
-                                今年剩余天数: 243
+                                今年剩余天数: <span id="year_last_day"></span>
                             </div>
                         </div>
-                        <div class="box-progress">
-                            <div class="progress-handle">20 天</div>
+                        <div class="box-progress" id="year_days">
+                            <div class="progress-handle" >0 天</div>
                             <div class="progress progress-xs progress-no-radius bg-whitesmoke">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 20%">
+                                     aria-valuemax="100" style="width: 0%">
                                 </div>
                             </div>
                         </div>
@@ -570,7 +570,14 @@ Purchase: http://wrapbootstrap.com
         function changecounter() {
             window.myCounter.add(123456)
         }
-
+        var dayofyear = moment().dayOfYear();
+        var year_rate = dayofyear*100/365;
+        $("#year_last_day").html(365-dayofyear);
+        $("#year_days > div:first-child").html(dayofyear+"天");
+        $("#year_days > div:first-child").css("left",year_rate+'%');
+        $("#year_days > div:first-child").css("margin-left",'-30px');
+        $("#year_days > div:first-child+div >div").attr("aria-valuenow",year_rate)
+        $("#year_days > div:first-child+div >div").css("width",year_rate+'%');
         $(function () {
             //初始化
             /*Sets Themed Colors Based on Themes*/
@@ -611,12 +618,12 @@ Purchase: http://wrapbootstrap.com
                 $("#infectious_pie_rate").data("percent", 0);
                 InitiateEasyPieChart.update("#infectious_pie_rate");
                 //5,公卫开展业务数
-                var busi_counts = data['busi_counts'][0]['num'];
+                var busi_counts = data['busi_counts'];
                 var updateInterval = 60000;
 
                 function getBusiRealTimeData(data) {
                     if (data) {
-                        if (busi_counts[busi_counts.length - 1].begintime == data.begintime) {
+                        if (busi_counts[busi_counts.length - 1]['time'] == data['time']) {
                             busi_counts[busi_counts.length - 1] = data;
                         } else {
                             // busi_counts.splice(0,1);
@@ -625,8 +632,9 @@ Purchase: http://wrapbootstrap.com
                     }
                     var res = [];
                     for (var i = 0; i < busi_counts.length; ++i) {
-                        res.push([moment.tz(busi_counts[i].begintime, "Africa/Abidjan"), busi_counts[i].num]);
+                        res.push([moment.tz(busi_counts[i]['time'], "Africa/Abidjan"), busi_counts[i]['num']]);
                     }
+                    console.log(res);
                     return res;
                 }
 
@@ -680,9 +688,6 @@ Purchase: http://wrapbootstrap.com
                     },
                     colors: [themeprimary]
                 });
-                realtimeplot.setData(getSeriesObj(data));
-                realtimeplot.setupGrid();
-                realtimeplot.draw();
 
                 function update() {
                     $.getJSON("index.php?act=dashboard&op=busidata", function (data) {
