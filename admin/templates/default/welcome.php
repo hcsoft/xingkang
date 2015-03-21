@@ -595,7 +595,7 @@ Purchase: http://wrapbootstrap.com
                 //1,新增档案数 /档案总数;
                 $("#file_new").html(data["file_new"][0]["num"]);
                 $("#file_count").html(data["file_count"][0]["num"]);
-                var file_pie_rate = parseInt(data["file_new"][0]["num"]) * 100 / parseInt(data["file_count"]["num"]);
+                var file_pie_rate = parseInt(data["file_new"][0]["num"]) * 100 / parseInt(data["file_count"][0]["num"]);
                 $("#file_pie_rate").data("percent", file_pie_rate);
                 InitiateEasyPieChart.update("#file_pie_rate");
                 //2,孕妇新增建册 /新增结案/未结案总数
@@ -610,7 +610,7 @@ Purchase: http://wrapbootstrap.com
                 $("#chronic_diab").html(data["chronic_diab"][0]['num']);
                 $("#chronic_holergasia").html(data["chronic_holergasia"][0]['num']);
                 var chronic_all = parseInt(data["chronic_hyp"][0]['num']) + parseInt(data["chronic_diab"][0]['num']);
-                var chronic_pie_rate = parseInt(data["chronic_hyp"]) * 100 / chronic_all;
+                var chronic_pie_rate = parseInt(data["chronic_hyp"][0]['num']) * 100 / chronic_all;
                 $("#chronic_pie_rate").data("percent", chronic_pie_rate);
                 InitiateEasyPieChart.update("#chronic_pie_rate");
                 //4,传染病报告数
