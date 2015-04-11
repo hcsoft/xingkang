@@ -286,13 +286,13 @@
                         <td class=" align-center">
                             <?php echo $v->iDrug_ID ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-left" style="white-space: inherit;">
                             <?php echo $v->ItemName ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-right">
                             <?php echo number_format($v->fPrice_Before, 2) ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-right">
                             <?php echo number_format($v->fPrice_After, 2) ?>
                         </td>
                         <td class=" align-center">
