@@ -311,7 +311,8 @@ class SystemControl{
         die  ;
     }
 
-    public final function exportxlsx($sqls = ' select \'测试成功\' ', $titles = array('测试导出'), $sheetname ='导出'){
+    public final function exportxlsx($sqls = ' select \'测试成功\' ', $titles = array('测试导出'), $sheetname ='导出'
+			,$codevalues = array()){
         require(BASE_PATH.'/include/PHPExcel.php');
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->getProperties()->setCreator("hcsoft");
@@ -329,22 +330,40 @@ class SystemControl{
                     $stmt = $conn->query($sql);
                     while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
                         foreach($row as $i=>$v){
-                            $sheet->setCellValue(chr($i+65).strval($rowindex),strval($v));
+							$metadata = $stmt->getColumnMeta($i);
+							$map = $codevalues[$metadata['name']];
+							$cellstr = strval($v);
+							if(isset($map)){
+								$cellstr = strval($map[$v]);
+							}
+							$sheet->setCellValue(chr($i+65).strval($rowindex),$cellstr);
                         }
                         $rowindex = $rowindex+1;
                     }
                 }
             }else{
+//				echo $sqls;
                 $stmt = $conn->query($sqls);
                 while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
                     foreach($row as $i=>$v){
-                        $sheet->setCellValue(chr($i+65).strval($rowindex),strval($v));
+						$metadata = $stmt->getColumnMeta($i);
+						$map = $codevalues[$metadata['name']];
+						$cellstr = strval($v);
+						if(isset($map)){
+							$cellstr = strval($map[$v]);
+						}
+//						$cellstr=json_encode($metadata);
+						$sheet->setCellValue(chr($i+65).strval($rowindex),$cellstr);
                     }
                     $rowindex = $rowindex+1;
                 }
             }
         }catch (Exception $e){
-            $sheet->writeString(2,1,'导出异常!请与系统管理员联系!异常信息:'+$e->getMessage());
+			throw $e;
+//			Log::record($tsql,'SQL');
+//			$sheet->setCellValue(2,1,'导出异常!请与系统管理员联系!异常信息:'+$e->getMessage());
+//
+//			$sheet->setCellValue(2,1,'导出异常!请与系统管理员联系!异常信息:'+$e->getMessage());
         }
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="'.$sheetname.'.xlsx"');
@@ -353,4 +372,10 @@ class SystemControl{
         $objWriter->save('php://output');
         exit;
     }
+
+	public function notEmpty($value){
+		return (isset($value) &&  $value !='');
+	}
+
+
 }

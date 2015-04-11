@@ -103,6 +103,7 @@ $arr = array(
 					array('args'=>'type,type,goods',						'text'=>$lang['nc_type_manage']),
 					array('args'=>'spec,spec,goods',						'text'=>$lang['nc_spec_manage']),
 					array('args'=>'list,goods_album,goods',					'text'=>$lang['nc_album_manage']),
+					array('args'=>'changeprice,goods,goods',						'text'=>'商品调价审核'),
 				)
 			),
 			3 => array(

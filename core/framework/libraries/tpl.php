@@ -187,29 +187,29 @@ class Tpl{
     public static function showTrace(){
     	$trace = array();
     	//当前页面
-		$trace[Language::get('nc_debug_current_page')] =  $_SERVER['REQUEST_URI'].'<br>';
-    	//请求时间
-        $trace[Language::get('nc_debug_request_time')] =  date('Y-m-d H:i:s',$_SERVER['REQUEST_TIME']).'<br>';
-        //系统运行时间
-        $query_time = number_format((microtime(true)-StartTime),3).'s';
-        $trace[Language::get('nc_debug_execution_time')] = $query_time.'<br>';
-		//内存
-		$trace[Language::get('nc_debug_memory_consumption')] = number_format(memory_get_usage()/1024/1024,2).'MB'.'<br>';
-		//请求方法
-        $trace[Language::get('nc_debug_request_method')] = $_SERVER['REQUEST_METHOD'].'<br>';
-        //通信协议
-        $trace[Language::get('nc_debug_communication_protocol')] = $_SERVER['SERVER_PROTOCOL'].'<br>';
-        //用户代理
-        $trace[Language::get('nc_debug_user_agent')] = $_SERVER['HTTP_USER_AGENT'].'<br>';
-        //会话ID
-        $trace[Language::get('nc_debug_session_id')] = session_id().'<br>';
+//		$trace[Language::get('nc_debug_current_page')] =  $_SERVER['REQUEST_URI'].'<br>';
+//    	//请求时间
+//        $trace[Language::get('nc_debug_request_time')] =  date('Y-m-d H:i:s',$_SERVER['REQUEST_TIME']).'<br>';
+//        //系统运行时间
+//        $query_time = number_format((microtime(true)-StartTime),3).'s';
+//        $trace[Language::get('nc_debug_execution_time')] = $query_time.'<br>';
+//		//内存
+//		$trace[Language::get('nc_debug_memory_consumption')] = number_format(memory_get_usage()/1024/1024,2).'MB'.'<br>';
+//		//请求方法
+//        $trace[Language::get('nc_debug_request_method')] = $_SERVER['REQUEST_METHOD'].'<br>';
+//        //通信协议
+//        $trace[Language::get('nc_debug_communication_protocol')] = $_SERVER['SERVER_PROTOCOL'].'<br>';
+//        //用户代理
+//        $trace[Language::get('nc_debug_user_agent')] = $_SERVER['HTTP_USER_AGENT'].'<br>';
+//        //会话ID
+//        $trace[Language::get('nc_debug_session_id')] = session_id().'<br>';
         //执行日志
         $log    =   Log::read();
         $trace[Language::get('nc_debug_logging')]  = count($log)?count($log).Language::get('nc_debug_logging_1').'<br/>'.implode('<br/>',$log):Language::get('nc_debug_logging_2');
         $trace[Language::get('nc_debug_logging')] = $trace[Language::get('nc_debug_logging')].'<br>';
         //文件加载
-		$files =  get_included_files();
-		$trace[Language::get('nc_debug_load_files')] = count($files).str_replace("\n",'<br/>',substr(substr(print_r($files,true),7),0,-2)).'<br>';
+//		$files =  get_included_files();
+//		$trace[Language::get('nc_debug_load_files')] = count($files).str_replace("\n",'<br/>',substr(substr(print_r($files,true),7),0,-2)).'<br>';
         return $trace;
     }
 }

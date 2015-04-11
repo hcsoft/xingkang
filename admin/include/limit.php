@@ -32,6 +32,7 @@ $_limit =  array(
 		array('name'=>$lang['nc_type_manage'], 'op'=>null, 'act'=>'type'),
 		array('name'=>$lang['nc_spec_manage'], 'op'=>null, 'act'=>'spec'),
 		array('name'=>$lang['nc_album_manage'], 'op'=>null, 'act'=>'goods_album'),
+		array('name'=>'商品调价审核', 'op'=>'changeprice', 'act'=>'goods')
 		)),
 	array('name'=>$lang['nc_store'], 'child'=>array(
 		array('name'=>$lang['nc_store_manage'], 'op'=>null, 'act'=>'store'),

@@ -20,7 +20,7 @@ class Log{
         $now = @date('Y-m-d H:i:s',time());
         switch ($level) {
             case self::SQL:
-               self::$log[] = "[{$now}] {$level}: {$message}\r\n";
+               self::$log[] = "[{$now}] {$level}: <br>{$message}\r\n";
                break;
             case self::ERR:
                 $log_file = BASE_DATA_PATH.'/log/'.date('Ymd',TIMESTAMP).'.log';
