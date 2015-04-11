@@ -709,7 +709,7 @@
         text-align: center;
     }
 
-    table.table > tbody > td {
+    table.table > tbody >tr > td {
         white-space: nowrap;
     }
 
