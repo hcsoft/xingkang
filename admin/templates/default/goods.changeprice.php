@@ -88,7 +88,10 @@
                             <td><a href="javascript:void(0);" id="ncexport" class="btn-export "
                                    title="导出"></a>
                             </td>
-                            <td><a href="javascript:void(0);" onclick="search_more()">更多查询条件</a>
+                            <td><a href="javascript:void(0);" onclick="search_more()">更多查询条件</a></td>
+                            <td>
+                                <button type="button" onclick="allcheck()">审核全部</button>
+                            </td>
                         </tr>
                     </table>
                 </td>
@@ -185,16 +188,20 @@
                             </td>
                             <th><label for="fPrice_Before_begin">调前价</label></th>
                             <td>
-                                <input number="true" class="txt" type="text" value="<?php echo $_GET['fPrice_Before_begin']; ?>"
+                                <input number="true" class="txt" type="text"
+                                       value="<?php echo $_GET['fPrice_Before_begin']; ?>"
                                        id="fPrice_Before_begin" name="fPrice_Before_begin">至
-                                <input number="true" class="txt" type="text" value="<?php echo $_GET['fPrice_Before_end']; ?>"
+                                <input number="true" class="txt" type="text"
+                                       value="<?php echo $_GET['fPrice_Before_end']; ?>"
                                        id="fPrice_Before_end" name="fPrice_Before_end">
                             </td>
                             <th><label for="ItemType">调后价</label></th>
                             <td>
-                                <input number="true" class="txt" type="text" value="<?php echo $_GET['fPrice_After_begin']; ?>"
+                                <input number="true" class="txt" type="text"
+                                       value="<?php echo $_GET['fPrice_After_begin']; ?>"
                                        id="fPrice_After_begin" name="fPrice_After_begin">至
-                                <input number="true" class="txt" type="text" value="<?php echo $_GET['fPrice_After_end']; ?>"
+                                <input number="true" class="txt" type="text"
+                                       value="<?php echo $_GET['fPrice_After_end']; ?>"
                                        id="fPrice_After_end" name="fPrice_After_end">
                             </td>
 
@@ -253,12 +260,16 @@
         </tr>
         </tbody>
     </table>
-    <form method="post" id="form_member">
-        <input type="hidden" name="form_submit" value="ok"/>
+    <form id="tableform">
         <table class="table tb-type2 nobdb">
             <thead>
             <tr class="thead">
-                <th>&nbsp;</th>
+                <th>
+                    <button type="button"
+                            onclick="checkSelect()">
+                        审核选中
+                    </button>
+                </th>
                 <th>商品编码</th>
                 <th>商品名称</th>
                 <th>调前价</th>
@@ -280,8 +291,17 @@
             <?php if (!empty($output['ret_list']) && is_array($output['ret_list'])) { ?>
                 <?php foreach ($output['ret_list'] as $k => $v) { ?>
                     <tr class="hover member">
-                        <td class=" align-center">
-                            <?php echo $k + 1 ?>
+                        <td class=" align-left" style="vertical-align: middle;">
+                            <label>
+                                <?php if (empty($v->sPrice_CheckPerson)) { ?>
+                                    <input type="checkbox" name="Iids[]" value="<?php echo $v->iID ?>" >
+                                <?php } else { ?>
+                                    <input type="checkbox" name="Iids[]" value="<?php echo $v->iID ?>"  disabled>
+                                <?php  } ?>
+
+                                <?php echo $k + 1 ?>
+                            </label>
+
                         </td>
                         <td class=" align-center">
                             <?php echo $v->iDrug_ID ?>
@@ -484,6 +504,25 @@
         </table>
     </form>
 </div>
+
+<div id="multicheckdialog" title="批量审核">
+    <span class="errormsg" style="color:red;width:100%;display:block;text-align: center;"></span>
+
+    <form>
+        <input type="hidden" id='iID' name="iID">
+        <table class="tb-type1">
+            <tr>
+                <td>审核人：</td>
+                <td><input style="color:blue;" id="check_sPrice_CheckPerson" required name="check_sPrice_CheckPerson"></td>
+            </tr>
+            <tr>
+                <td>审核日期：</td>
+                <td><input style="color:blue;" value="" type="text" class="txt date" required id="check_dPrice_CheckDate"
+                           name="check_dPrice_CheckDate"></td>
+            </tr>
+        </table>
+    </form>
+</div>
 <style>
     #detaildialog table {
         width: 100%;
@@ -552,7 +591,7 @@
         }
         //查询按钮
         $('#ncsubmit').click(function () {
-
+            $('input[name="op"]').val('changeprice');
             if ($('#formSearch').valid()) {
                 $("#export").val('false');
                 $('#formSearch').submit();
@@ -560,6 +599,7 @@
         });
         //导出
         $('#ncexport').click(function () {
+            $('input[name="op"]').val('changeprice');
             if ($('#formSearch').valid()) {
                 $("#export").val('true');
                 $('#formSearch').submit();
@@ -571,15 +611,17 @@
             autoOpen: false,
             modal: true,
             close: function () {
+                $('input[name="op"]').val('changeprice');
                 $("#formSearch").submit();
             },
             buttons: {
                 "关闭": function () {
+
                     $(this).dialog("close");
 
                 },
                 "审核": function () {
-                    console.log($("#checkdialog form").valid());
+//                    console.log($("#checkdialog form").valid());
                     if ($("#checkdialog form").valid()) {
                         $.ajax({
                             url: "index.php?act=goods&op=checkChangePrice",
@@ -601,6 +643,7 @@
             autoOpen: false,
             modal: true,
             close: function () {
+                $('input[name="op"]').val('changeprice');
                 $("#formSearch").submit();
             },
             buttons: {
@@ -608,15 +651,40 @@
                     $(this).dialog("close");
                 },
                 "确认删除": function () {
-                    console.log($("#deletedialog form").valid());
-                    if ($("#deletedialog form").valid()) {
+                    $.ajax({
+                        url: "index.php?act=goods&op=deleteChangePrice",
+                        data: $("#deletedialog form").serialize(), dataType: 'json', success: function (data) {
+                            if (data.success) {
+                                success("#deletedialog", data.msg);
+                            } else {
+                                error("#deletedialog", data.msg);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        $("#multicheckdialog").dialog({
+            resizable: false,
+            autoOpen: false,
+            modal: true,
+            close: function () {
+                $('input[name="op"]').val('changeprice');
+                $("#formSearch").submit();
+            },
+            buttons: {
+                "关闭": function () {
+                    $(this).dialog("close");
+                },
+                "批量审核": function () {
+                    if ($("#multicheckdialog form").valid()) {
                         $.ajax({
-                            url: "index.php?act=goods&op=deleteChangePrice",
-                            data: $("#deletedialog form").serialize(), dataType: 'json', success: function (data) {
+                            url: "index.php?act=goods&op=multicheckChangePrice",
+                            data: $("#multicheckdialog").data("data"), dataType: 'json', success: function (data) {
                                 if (data.success) {
-                                    success("#deletedialog", data.msg);
+                                    success("#multicheckdialog", data.msg);
                                 } else {
-                                    error("#deletedialog", data.msg);
+                                    error("#multicheckdialog", data.msg);
                                 }
                             }
                         });
@@ -628,6 +696,35 @@
     var map_iPrice_Type = <?php echo json_encode($output['map_iPrice_Type']);?>;
     var org_map = <?php echo json_encode($output['org_map']);?>;
     var map_iPrice_State = <?php echo json_encode($output['map_iPrice_State']);?>;
+
+    function checkSelect() {
+        var data = {};
+        data.check_dPrice_CheckDate = '<?php echo date('Y-m-d', time()) ?>';
+        data.check_sPrice_CheckPerson = '<?php echo $output['adminname'];?>';
+        var checkdata = $("#tableform").serializeArray();
+        var array = $.map(data, function(value, index) {
+            return {"name":index,"value":value};
+        });
+        checkdata = checkdata.concat(array);
+        $("#multicheckdialog").data("data",checkdata);
+        $("#multicheckdialog form").autofill(data);
+        $("#multicheckdialog").dialog("open");
+    }
+
+    function allcheck() {
+        $('input[name="op"]').val('multicheckChangePrice');
+        var data = {};
+        data.check_dPrice_CheckDate = '<?php echo date('Y-m-d', time()) ?>';
+        data.check_sPrice_CheckPerson = '<?php echo $output['adminname'];?>';
+        var checkdata = $("#formSearch").serializeArray();
+        var array = $.map(data, function(value, index) {
+            return {"name":index,"value":value};
+        });
+        checkdata = checkdata.concat(array);
+        $("#multicheckdialog").data("data",checkdata);
+        $("#multicheckdialog form").autofill(data);
+        $("#multicheckdialog").dialog("open");
+    }
 
     function showCheckDialog(elem, data, abc) {
         $("#checkdialog .errormsg").html('');
@@ -665,6 +762,7 @@
         data.dPrice_CheckDate = '<?php echo date('Y-m-d', time()) ?>';
         data.sPrice_CheckPerson = '<?php echo $output['adminname'];?>';
         data.OrgID = org_map[data.OrgID];
+
         $("#deletedialog form").autofill(data);
         $("#deletedialog").dialog("open");
         $('#deletedialog input.date').datepicker({dateFormat: 'yy-mm-dd'});
@@ -709,7 +807,7 @@
         text-align: center;
     }
 
-    table.table > tbody >tr > td {
+    table.table > tbody > tr > td {
         white-space: nowrap;
     }
 
@@ -730,17 +828,26 @@
         display: block;
     }
 
-    #checkdialog input.readonly:read-only {
+    .ui-dialog input.readonly:read-only {
         background-color: #eee;
         border: none;
         padding: 5px;
     }
 
-    #checkdialog input.date {
-        width: 120px;
+    .ui-dialog input[type="text"].date {
+        width: 80px;
         /*padding: 0;*/
         margin: 0;
         border-radius: inherit;
+    }
+    .ui-dialog input[type="text"].date:hover {
+        width: 80px;
+        /*padding: 0;*/
+        margin: 0;
+        border-radius: inherit;
+    }
+    .ui-dialog input{
+        padding:2px 4px;
     }
 
 </style>

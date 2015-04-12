@@ -342,6 +342,148 @@ class goodsControl extends SystemControl
         exit;
     }
 
+    public function multicheckChangePriceOp()
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $ret = array('success' => true, 'msg' => '审核成功!');
+        $iIDs = $_GET['Iids'];
+        $sPrice_CheckPerson = $_GET['check_sPrice_CheckPerson'];
+        $dPrice_CheckDate = $_GET['check_dPrice_CheckDate'];
+        if ($this->notEmpty($iIDs)) {
+            $updatesql = 'update Center_OrgPrice set dPrice_CheckDate = ? , sPrice_CheckPerson = ?  where  iID  in( ' .join($iIDs,',').') ';
+//            Log::record($updatesql,"SQL");
+            $stmt = $conn->prepare($updatesql);
+            $stmt->bindValue(1, $dPrice_CheckDate);
+            $stmt->bindValue(2, $sPrice_CheckPerson);
+            $rows = $stmt->execute();
+            if ($rows > 0) {
+                $ret['success'] = true;
+                $ret['msg'] = "审核成功!";
+            } else {
+                $ret['success'] = false;
+                $ret['msg'] = "审核失败,$iIDs 未更新!";
+            }
+        } else {
+            $sql = ' from Center_OrgPrice a where (a.sPrice_CheckPerson is null or a.sPrice_CheckPerson = \'\')  ';
+            //处理查询字段
+            //机构选择
+            if ($this->notEmpty($_GET['orgids'])) {
+                $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+            }
+            //调价日期 起
+            if ($this->notEmpty($_GET['dPrice_Date_begin'])) {
+                $sql = $sql . ' and a.dPrice_Date >=  \'' . $_GET['dPrice_Date_begin'] . '\' ';
+            }
+            //调价日期 止
+            if ($this->notEmpty($_GET['dPrice_Date_end'])) {
+                $sql = $sql . ' and a.dPrice_Date < dateadd(day,1,\'' . $_GET['dPrice_Date_end'] . '\') ';
+            }
+            //执行开始日期 起
+            if ($this->notEmpty($_GET['dPrice_BeginDate_begin'])) {
+                $sql = $sql . ' and a.dPrice_BeginDate >=  \'' . $_GET['dPrice_BeginDate_begin'] . '\' ';
+            }
+            //执行开始日期 止
+            if ($this->notEmpty($_GET['dPrice_BeginDate_end'])) {
+                $sql = $sql . ' and a.dPrice_BeginDate < dateadd(day,1,\'' . $_GET['dPrice_BeginDate_end'] . '\') ';
+            }
+            //执行结束日期 起
+            if ($this->notEmpty($_GET['dPrice_EndDate_begin'])) {
+                $sql = $sql . ' and a.dPrice_EndDate >=  \'' . $_GET['dPrice_EndDate_begin'] . '\' ';
+            }
+            //执行结束日期 止
+            if ($this->notEmpty($_GET['dPrice_EndDate_end'])) {
+                $sql = $sql . ' and a.dPrice_EndDate < dateadd(day,1,\'' . $_GET['dPrice_EndDate_end'] . '\') ';
+            }
+            //调价人
+            if ($this->notEmpty($_GET['sPrice_Person'])) {
+                $sql = $sql . ' and a.sPrice_Person =  \'' . $_GET['sPrice_Person'] . '\' ';
+            }
+            //状态
+            if ($this->notEmpty($_GET['iPrice_State'])) {
+                $sql = $sql . ' and a.iPrice_State =  ' . intval($_GET['iPrice_State']) . ' ';
+            }
+            //状态码值表
+            $map_iPrice_State = array('' => '全部', '0' => '新增', '1' => '提交', '2' => '审核');
+            Tpl::output('map_iPrice_State', $map_iPrice_State);
+            //审核日期 起
+            if ($this->notEmpty($_GET['dPrice_CheckDate_begin'])) {
+                $sql = $sql . ' and a.dPrice_CheckDate >=  \'' . $_GET['dPrice_CheckDate_begin'] . '\' ';
+            }
+            //审核日期 止
+            if ($this->notEmpty($_GET['dPrice_CheckDate_end'])) {
+                $sql = $sql . ' and a.dPrice_CheckDate < dateadd(day,1,\'' . $_GET['dPrice_CheckDate_end'] . '\') ';
+            }
+            //审核人
+            if ($this->notEmpty($_GET['sPrice_CheckPerson'])) {
+                $sql = $sql . ' and a.sPrice_CheckPerson =  \'' . $_GET['sPrice_CheckPerson'] . '\' ';
+            }
+            //项目主键
+            if ($this->notEmpty($_GET['iDrug_ID'])) {
+                $sql = $sql . ' and a.iDrug_ID =  ' . $_GET['iDrug_ID'] . ' ';
+            }
+            //项目名称
+            if ($this->notEmpty($_GET['ItemName'])) {
+                $sql = $sql . ' and a.ItemName like \'%' . $_GET['ItemName'] . '%\' ';
+            }
+            //单位
+            if ($this->notEmpty($_GET['Unit'])) {
+                $sql = $sql . ' and a.Unit = \'' . $_GET['Unit'] . '\' ';
+            }
+            //项目类型
+            if ($this->notEmpty($_GET['ItemType'])) {
+                $sql = $sql . ' and a.ItemType = \'' . ($_GET['ItemType']) . '\' ';
+            }
+            //单价类型
+            if ($this->notEmpty($_GET['iPrice_Type'])) {
+                $sql = $sql . ' and a.iPrice_Type = ' . intval($_GET['iPrice_Type']) . ' ';
+            }
+            //单价类型码值表
+            $map_iPrice_Type = array('' => '全部', '0' => '零售价', '1' => '特价', '2' => '二件价');
+            Tpl::output('map_iPrice_Type', $map_iPrice_Type);
+            //调前价 起
+            if ($this->notEmpty($_GET['fPrice_Before_begin'])) {
+                $sql = $sql . ' and a.fPrice_Before >=  ' . floatval($_GET['fPrice_Before_begin']) . ' ';
+            }
+            //调前价 止
+            if ($this->notEmpty($_GET['fPrice_Before_end'])) {
+                $sql = $sql . ' and a.fPrice_Before <=  ' . floatval($_GET['fPrice_Before_end']) . ' ';
+            }
+            //调后价 起
+            if ($this->notEmpty($_GET['fPrice_After_begin'])) {
+                $sql = $sql . ' and a.fPrice_After =  ' . intval($_GET['fPrice_After_begin']) . ' ';
+            }
+            //调后价 止
+            if ($this->notEmpty($_GET['fPrice_After_end'])) {
+                $sql = $sql . ' and a.fPrice_After <=  ' . intval($_GET['fPrice_After_end']) . ' ';
+            }
+            //特殊说明
+            if ($this->notEmpty($_GET['sPrice_Remark'])) {
+                $sql = $sql . ' and a.sPrice_Remark =  ' . intval($_GET['sPrice_Remark']) . ' ';
+            }
+            //是否下载说明
+            if ($this->notEmpty($_GET['Downloaded'])) {
+                $sql = $sql . ' and a.Downloaded =  ' . intval($_GET['Downloaded']) . ' ';
+            }
+
+            $updatesql = 'update Center_OrgPrice set dPrice_CheckDate = ? , sPrice_CheckPerson = ?  '. $sql.' ';
+            $stmt = $conn->prepare($updatesql);
+            $stmt->bindValue(1, $dPrice_CheckDate);
+            $stmt->bindValue(2, $sPrice_CheckPerson);
+            $rows = $stmt->execute();
+            if ($rows > 0) {
+                $ret['success'] = true;
+                $ret['msg'] = "审核成功!";
+            } else {
+                $ret['success'] = false;
+                $ret['msg'] = "审核失败,无数据更新!";
+            }
+        }
+
+
+        echo json_encode($ret);
+        exit;
+    }
+
     public function deleteChangePriceOp()
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
