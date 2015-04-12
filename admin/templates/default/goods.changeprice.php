@@ -90,7 +90,7 @@
                             </td>
                             <td><a href="javascript:void(0);" onclick="search_more()">更多查询条件</a></td>
                             <td>
-                                <button type="button" onclick="allcheck()">审核全部</button>
+                                <button type="button" onclick="allcheck()" title="审核满足查询条件的全部记录">审核全部</button>
                             </td>
                         </tr>
                     </table>
