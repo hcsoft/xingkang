@@ -751,7 +751,7 @@ class financeControl extends SystemControl
             $this->exportxlsx(array(0 => $tsql, 1 => $totalsql), $displaytext, '收入统计');
         }
 
-        echo $tsql;
+//        echo $tsql;
         $stmt = $conn->query($tsql);
         $data_list = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
