@@ -400,7 +400,7 @@
     }
     function numtostr(numstr) {
         var num = parseFloat(numstr);
-        if (num > 0) {
+        if (num) {
             return "" + num.toFixed(2);
         } else {
             return "";
