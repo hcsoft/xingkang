@@ -816,8 +816,23 @@ class memberControl extends SystemControl {
 
 			$stmt->execute(array($cardid));
 			$data_list = array ();
+			$initrecharge = 0;
+			$initconsume = 0 ;
+			$initscale = 0;
 			while ( $row = $stmt->fetchObject () ) {
 				array_push ( $data_list, $row );
+				if($row->DateType==1){
+					$initrecharge = floatval( $row->InitRecharge);
+					$initconsume =floatval( $row->InitConsume );
+					$initscale = floatval($row->InitScale);
+				}else if($row->DateType < 7 ){
+					$initrecharge = $initrecharge +floatval( $row->fRecharge);
+					$initconsume = $initconsume +floatval( $row->fConsume);
+					$initscale = $initscale + floatval($row->fScale) +floatval( $row->fAddScale);
+					$row->InitRecharge = $initrecharge;
+					$row->InitConsume = $initconsume;
+					$row->InitScale = $initscale;
+				}
 			}
 			echo json_encode(array('success' => true, 'msg' => '查询成功!' ,'data'=>$data_list ,'sql'=>$sql));
 		} catch (Exception $e) {
