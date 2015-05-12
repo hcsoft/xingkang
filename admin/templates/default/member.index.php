@@ -195,7 +195,7 @@
                             <p class="smallfont">末次消费地点: <?php echo $v['LastPayOrgName']; ?></p>
 
                         </td>
-                        <td class=""><p>预存余额:&nbsp;<strong
+                        <td class=""><p>储值余额:&nbsp;<strong
                                     class="red"><?php echo $v['available_predeposit']; ?></strong>&nbsp;元</p>
                             <!--<p><?php echo $lang['member_index_frozen']; ?>:&nbsp;<strong class="red"><?php echo $v['freeze_predeposit']; ?></strong>&nbsp;元</p>-->
                             <p>赠送余额: <strong class="red"><?php echo number_format($v['fConsumeBalance'], 2); ?></strong>&nbsp;元
