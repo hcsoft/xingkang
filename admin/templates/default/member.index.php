@@ -342,7 +342,7 @@
         $("#detaildialog").dialog({
             resizable: false,
             maxHeight: 200,
-            width: 900,
+            width: 1100,
 //            height:250,
 //            modal: true,
             autoOpen: false,
