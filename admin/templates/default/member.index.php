@@ -377,6 +377,7 @@
                         rowstr += '<td>' + textstr(row.datatypename) + '</td>';
                         rowstr += '<td>' + textstr(row.dPayDate) + '</td>';
                         rowstr += '<td>' + textstr(row.MakePerson) + '</td>';
+                        rowstr += '<td>' + textstr(row.orgname) + '</td>';
                         rowstr += '<td>' + numtostr(row.fRecharge) + '</td>';
                         rowstr += '<td>' + numtostr(row.InitRecharge) + '</td>';
 //                        rowstr+='<td>'+numtostr(row.InitScale)+'</td>';
