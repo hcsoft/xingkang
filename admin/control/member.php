@@ -952,7 +952,7 @@ class memberControl extends SystemControl {
 				 )zz ) calc_points ';
 		$condition ['exp'] = array(
 			'exp',
-			'( available_predeposit  <> (select sum(num) from (
+			'available_predeposit  <> (select sum(num) from (
 				Select -fRecharge  num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
 				union all
 				Select RechargeMoney num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
@@ -964,7 +964,7 @@ class memberControl extends SystemControl {
 				Select fAddScale -fScale   num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
 				union all
 				Select ScaleBalance num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
-			 )zz ) )'
+			 )zz ) '
 
 		);
 
