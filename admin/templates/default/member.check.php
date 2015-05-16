@@ -3,10 +3,8 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3><?php echo $lang['member_index_manage'] ?></h3>
+            <h3>会员储值积分对账</h3>
             <ul class="tab-base">
-                <li><a href="JavaScript:void(0);" class="current"><span><?php echo $lang['nc_manage'] ?></span></a></li>
-                <li><a href="index.php?act=member&op=member_add"><span><?php echo $lang['nc_new'] ?></span></a></li>
             </ul>
         </div>
     </div>
