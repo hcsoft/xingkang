@@ -130,7 +130,8 @@ $arr = array(
 					array('args'=>'tracelist,snstrace,member',				'text'=>$lang['nc_snstrace']),
 					array('args'=>'member_tag,sns_member,member',			'text'=>$lang['nc_member_tag']),
                     array('args'=>'consumesum,member,member',			'text'=>'消费汇总'),
-                    array('args'=>'rechargesum,member,member',			'text'=>'充值下账汇总')
+                    array('args'=>'rechargesum,member,member',			'text'=>'充值下账汇总'),
+                    array('args'=>'check,member,member',			'text'=>'会员储值积分对账')
 				)
 			),
 			5 => array(

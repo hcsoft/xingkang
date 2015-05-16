@@ -127,92 +127,31 @@
             <thead>
             <tr class="thead">
                 <th>&nbsp;</th>
-                <th class="align-center" colspan="2"><?php echo $lang['member_index_name'] ?></th>
-                <th class="align-center">基本信息</th>
-                <th class="align-center">卡情况</th>
-                <th class="align-center">办卡渠道</th>
-                <th class="align-center">消费情况</th>
-                <th class="align-center">账户余额</th>
-                <th class="align-center"><?php echo $lang['nc_handle']; ?></th>
+                <th class="align-center">卡号</th>
+                <th class="align-center">姓名</th>
+                <th class="align-center">储值余额</th>
+                <th class="align-center">计算储值余额</th>
+                <th class="align-center">赠送余额</th>
+                <th class="align-center">计算赠送余额</th>
+                <th class="align-center">积分余额</th>
+                <th class="align-center">计算积分余额</th>
+                <th class="align-center">操作</th>
             </tr>
             <tbody>
             <?php if (!empty($output['member_list']) && is_array($output['member_list'])) { ?>
                 <?php foreach ($output['member_list'] as $k => $v) { ?>
                     <tr class="hover member">
                         <td class="w24"></td>
-                        <td class="w48 picture">
-                            <div class="size-44x44"><span class="thumb size-44x44"><i></i><img
-                                        src="<?php if ($v['member_avatar'] != '') {
-                                            echo UPLOAD_SITE_URL . DS . ATTACH_AVATAR . DS . $v['member_avatar'];
-                                        } else {
-                                            echo UPLOAD_SITE_URL . '/' . ATTACH_COMMON . DS . C('default_user_portrait');
-                                        } ?>?<?php echo microtime(); ?>"
-                                        onload="javascript:DrawImage(this,44,44);"/></span></div>
-                        </td>
-                        <td>
-                            <p class="name"><!--会员名:<strong><?php echo $v['member_name']; ?></strong>-->
-                                卡号: <?php echo $v['member_id']; ?></p>
-
-                            <p class="name"><!--会员名:<strong><?php echo $v['member_name']; ?></strong>-->
-                                姓名: <?php echo $v['member_truename']; ?></p>
-
-                            <p class="smallfont">电话:&nbsp;<?php echo $v['Mobile']; ?></p>
-
-                            <p class="smallfont">地址:&nbsp;<?php echo $v['sAddress']; ?></p>
-
-                            <div class="im">
-                            </div>
-                        </td>
-                        <td><p class="name">身份证: <?php echo $v['sIDCard']; ?></p>
-
-                            <p class="smallfont">医保卡:&nbsp;<?php echo $v['MediCardID']; ?></p>
-
-                            <p class="smallfont">健康档案:&nbsp;<?php echo $v['HealthCardID']; ?></p>
-                        </td>
-
-                        <td><p class="name">卡类型: <?php if ($v['CardType'] == 0) {
-                                    echo '普通卡';
-                                } elseif ($v['CardType'] == 1) {
-                                    echo '储值卡';
-                                } ?></p>
-
-                            <p class="smallfont">卡级别: <?php if ($v['CardGrade'] == 0) {
-                                    echo '健康卡';
-                                } elseif ($v['CardGrade'] == 1) {
-                                    echo '健康金卡';
-                                } elseif ($v['CardGrade'] == 2) {
-                                    echo '健康钻卡';
-                                } ?></p>
-
-                        </td>
-                        <td><p class="name">办卡渠道: <?php echo $v['GetWay']; ?></p>
-
-                            <p class="smallfont">推荐人:&nbsp;<?php echo $v['Referrer']; ?></p>
-
-                        </td>
-                        <td><p class="name">末次消费日期: <?php echo substr($v['LastPayDate'], 0, 10); ?></p>
-
-                            <p class="smallfont">末次消费地点: <?php echo $v['LastPayOrgName']; ?></p>
-
-                        </td>
-                        <td class=""><p>储值余额:&nbsp;<strong
-                                    class="red"><?php echo $v['available_predeposit']; ?></strong>&nbsp;元</p>
-                            <!--<p><?php echo $lang['member_index_frozen']; ?>:&nbsp;<strong class="red"><?php echo $v['freeze_predeposit']; ?></strong>&nbsp;元</p>-->
-                            <p>赠送余额: <strong class="red"><?php echo number_format($v['fConsumeBalance'], 2); ?></strong>&nbsp;元
-                            </p>
-
-                            <p>消费积分: <strong class="red"><?php echo $v['member_points']; ?></strong></p>
-                            <a href="javascript:void(0)"
-                               onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">充值消费明细</a>
-                        </td>
-                        <td class="align-center">
-                            <a href="javascript:void(0)" onclick="showpsreset('<?php echo $v['member_id'] ?>',this)">密码重置</a>
-                            <!--<a
-                                href="index.php?act=member&op=member_edit&member_id=<?php echo $v['member_id']; ?>"><?php echo $lang['nc_edit'] ?></a>
-                            | <a
-                                href="index.php?act=notice&op=notice&member_name=<?php echo ltrim(base64_encode($v['member_name']), '='); ?>"><?php echo $lang['member_index_to_message']; ?></a>
-                                -->
-                        </td>
+                        <td class="w108"> <?php echo $v['member_id']; ?></td>
+                        <td class="w108 "><?php echo $v['member_truename']; ?></td>
+                        <td class="w108 align-right"><?php echo number_format($v['available_predeposit'], 2); ?></td>
+                        <td class="w108 align-right"><?php echo number_format($v['calc_predeposit'], 2); ?></td>
+                        <td class="w108 align-right"><?php echo number_format($v['fConsumeBalance'], 2); ?></td>
+                        <td class="w108 align-right"><?php echo number_format($v['calc_consume'], 2); ?></td>
+                        <td class="w108 align-right"><?php echo number_format($v['member_points'], 2); ?></td>
+                        <td class="w108 align-right"><?php echo number_format($v['calc_points'], 2); ?></td>
+                        <td class="w108 align-center"><a href="javascript:void(0)"
+                                           onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">充值消费明细</a></td>
                     </tr>
                 <?php } ?>
             <?php } else { ?>
@@ -311,7 +250,7 @@
 <script>
     $(function () {
         $('#ncsubmit').click(function () {
-            $('input[name="op"]').val('member');
+            $('input[name="op"]').val('check');
             $('#formSearch').submit();
         });
         $("#psresetdialog").dialog({

@@ -840,4 +840,151 @@ class memberControl extends SystemControl {
 		}
 		exit;
 	}
+
+	public function checkOp(){
+		$lang = Language::getLangContent ();
+		$orderbys = array(
+			array('txt'=>'预存余额','col'=> ' available_predeposit '),
+			array('txt'=>'赠送余额','col'=> ' fConsumeBalance '),
+			array('txt'=>'消费积分','col'=> ' member_points '));
+		Tpl::output('orderbys',$orderbys);
+		$model_member = Model ( 'member' );
+		/**
+		 * 检索条件
+		 */
+		if ($_GET['orgids']) {
+			$condition ['CreateOrgID'] = array (
+				'in',
+				$_GET['orgids']
+			);
+		}
+
+		if (isset($_GET['cardtype']) and $_GET['cardtype'] != '') {
+			$condition ['cardtype'] = $_GET['cardtype'];
+		}
+
+		if (isset($_GET['cardgrade']) and $_GET['cardgrade'] != '') {
+			$condition ['cardgrade'] = $_GET['cardgrade'];
+		}
+
+		if(!isset($_GET['orderby'])){
+			$_GET['orderby'] = '预存余额';
+		}
+
+
+		if(!isset($_GET['order'])){
+			$ordersql = 'desc';
+		}else{
+			$ordersql = $_GET['order'];
+		}
+		if($_GET['orderby']){
+			foreach($orderbys as $orderby){
+				if($orderby['txt']==$_GET['orderby']){
+					$order = $orderby['col'] .' ' . $ordersql;
+					break;
+				}
+			}
+		}
+		if ($_GET ['search_field_value'] != '') {
+			switch ($_GET ['search_field_name']) {
+				case 'member_name' :
+					$condition ['member_name'] = array (
+						'like',
+						'%' . trim ( $_GET ['search_field_value'] ) . '%'
+					);
+					break;
+				case 'member_email' :
+					$condition ['member_email'] = array (
+						'like',
+						'%' . trim ( $_GET ['search_field_value'] ) . '%'
+					);
+					break;
+				case 'member_truename' :
+					$condition ['member_truename'] = array (
+						'like',
+						'%' . trim ( $_GET ['search_field_value'] ) . '%'
+					);
+					break;
+			}
+		}
+		if ($_GET ['member_id'] != '') {
+			$condition ['member_id'] = array (
+				'like',
+				'%' . trim ( $_GET ['member_id'] ) . '%'
+			);
+		}
+		switch ($_GET ['search_state']) {
+			case 'no_informallow' :
+				$condition ['inform_allow'] = '2';
+				break;
+			case 'no_isbuy' :
+				$condition ['is_buy'] = '0';
+				break;
+			case 'no_isallowtalk' :
+				$condition ['is_allowtalk'] = '0';
+				break;
+			case 'no_memberstate' :
+				$condition ['member_state'] = '0';
+				break;
+		}
+		/**
+		 * 排序
+		 */
+//		$order = trim ( $_GET ['search_sort'] );
+		if (empty ( $order )) {
+			$order = 'member_id desc';
+		}
+		$cols = '*';
+		$cols .= ',(select sum(num) from (
+					Select -fRecharge  num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+					union all
+					Select RechargeMoney num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+				 )zz ) calc_predeposit ';
+		$cols .= ',(select sum(num) from (
+						Select -fConsume  num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+						union all
+						Select GiveMoney num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+					 )zz ) calc_consume ';
+		$cols .= ',(select sum(num) from (
+					Select fAddScale -fScale   num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+					union all
+					Select ScaleBalance num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+				 )zz ) calc_points ';
+		$condition ['exp'] = array(
+			'exp',
+			'( available_predeposit  <> (select sum(num) from (
+				Select -fRecharge  num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+				union all
+				Select RechargeMoney num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+			 )zz ) or fConsumeBalance <> (select sum(num) from (
+				Select -fConsume  num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+				union all
+				Select GiveMoney num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+			 )zz ) or member_points <> (select sum(num) from (
+				Select fAddScale -fScale   num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+				union all
+				Select ScaleBalance num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+			 )zz ) )'
+
+		);
+
+		$member_list = $model_member->getMemberList ( $condition, $cols, 10, $order );
+		/**
+		 * 整理会员信息
+		 */
+		if (is_array ( $member_list )) {
+			foreach ( $member_list as $k => $v ) {
+				$member_list [$k] ['member_time'] = $v ['member_time'] ? date ( 'Y-m-d H:i:s', $v ['member_time'] ) : '';
+				$member_list [$k] ['member_login_time'] = $v ['member_login_time'] ? date ( 'Y-m-d H:i:s', $v ['member_login_time'] ) : '';
+			}
+		}
+
+		Tpl::output ( 'member_id', trim ( $_GET ['member_id'] ) );
+		Tpl::output ( 'search_sort', trim ( $_GET ['search_sort'] ) );
+		Tpl::output ( 'search_field_name', trim ( $_GET ['search_field_name'] ) );
+		Tpl::output ( 'search_field_value', trim ( $_GET ['search_field_value'] ) );
+		Tpl::output ( 'member_list', $member_list );
+		Tpl::output ( 'page', $model_member->showpage () );
+		Tpl::showpage ( 'member.check' );
+	}
 }

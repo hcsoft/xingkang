@@ -52,6 +52,7 @@ $_limit =  array(
 		array('name'=>$lang['nc_member_predepositmanage'], 'op'=>null, 'act'=>'predeposit'),
         array('name'=>'消费汇总', 'op'=>'consumesum', 'act'=>'member'),
         array('name'=>'充值下账汇总', 'op'=>'rechargesum', 'act'=>'member'),
+        array('name'=>'会员储值积分对账', 'op'=>'check', 'act'=>'member'),
 		)),
 	array('name'=>$lang['nc_trade'], 'child'=>array(
 		array('name'=>$lang['nc_order_manage'], 'op'=>null, 'act'=>'order'),
