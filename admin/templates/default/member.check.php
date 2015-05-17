@@ -30,7 +30,7 @@
                     </select></td>
                 </td>
                 <td>会员卡号</td>
-                <td><input type="text" value="<?php echo $output['member_id']; ?>" name="member_id"
+                <td><input type="text" value="<?php echo $_GET['member_id']; ?>" name="member_id"
                            class="txt"></td>
                 <td>卡类型</td>
                 <td><select name="cardtype">
@@ -136,18 +136,18 @@
                 <th class="align-center">操作</th>
             </tr>
             <tbody>
-            <?php if (!empty($output['member_list']) && is_array($output['member_list'])) { ?>
-                <?php foreach ($output['member_list'] as $k => $v) { ?>
+            <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
+                <?php foreach ($output['data_list'] as $k => $v) { ?>
                     <tr class="hover member">
                         <td class="w24"></td>
-                        <td class="w108"> <?php echo $v['member_id']; ?></td>
-                        <td class="w108 "><?php echo $v['member_truename']; ?></td>
-                        <td class="w108 align-right"><?php echo number_format($v['available_predeposit'], 2); ?></td>
-                        <td class="w108 align-right"><?php echo number_format($v['calc_predeposit'], 2); ?></td>
-                        <td class="w108 align-right"><?php echo number_format($v['fConsumeBalance'], 2); ?></td>
-                        <td class="w108 align-right"><?php echo number_format($v['calc_consume'], 2); ?></td>
-                        <td class="w108 align-right"><?php echo number_format($v['member_points'], 2); ?></td>
-                        <td class="w108 align-right"><?php echo number_format($v['calc_points'], 2); ?></td>
+                        <td class="w108"> <?php echo $v->member_id; ?></td>
+                        <td class="w108 "><?php echo $v->member_truename; ?></td>
+                        <td class="w108 align-right"><?php echo number_format($v->available_predeposit, 2); ?></td>
+                        <td class="w108 align-right"><?php echo number_format($v->calc_predeposit, 2); ?></td>
+                        <td class="w108 align-right"><?php echo number_format($v->fConsumeBalance, 2); ?></td>
+                        <td class="w108 align-right"><?php echo number_format($v->calc_consume, 2); ?></td>
+                        <td class="w108 align-right"><?php echo number_format($v->member_points, 2); ?></td>
+                        <td class="w108 align-right"><?php echo number_format($v->calc_points, 2); ?></td>
                         <td class="w108 align-center"><a href="javascript:void(0)"
                                            onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">充值消费明细</a></td>
                     </tr>

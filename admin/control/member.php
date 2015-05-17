@@ -841,7 +841,171 @@ class memberControl extends SystemControl {
 		exit;
 	}
 
-	public function checkOp(){
+	public function checkOp()
+	{
+		$orderbys = array(
+			array('txt'=>'预存余额','col'=> ' available_predeposit '),
+			array('txt'=>'赠送余额','col'=> ' fConsumeBalance '),
+			array('txt'=>'消费积分','col'=> ' member_points '));
+		Tpl::output('orderbys',$orderbys);
+		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+		//处理数据
+		$page = new Page();
+		$page->setEachNum(10);
+		$page->setNowPage($_REQUEST["curpage"]);
+		$startnum = $page->getEachNum() * ($page->getNowPage() - 1);
+		$endnum = $page->getEachNum() * ($page->getNowPage());
+		$sql = '  from shopnc_member where 1= 1 ';
+
+		if ($_GET['orgids']) {
+			$sql = $sql . ' and CreateOrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+		}
+
+		if (isset($_GET['cardtype']) and $_GET['cardtype'] != '') {
+			$condition ['cardtype'] = $_GET['cardtype'];
+			$sql = $sql . ' and cardtype  =  \''.$_GET['cardtype'].'\'';
+		}
+
+		if (isset($_GET['cardgrade']) and $_GET['cardgrade'] != '') {
+			$sql = $sql . ' and cardgrade  =  \''.$_GET['cardgrade'].'\'';
+		}
+
+		if(!isset($_GET['orderby'])){
+			$_GET['orderby'] = '预存余额';
+		}
+
+
+		if(!isset($_GET['order'])){
+			$ordersql = 'desc';
+		}else{
+			$ordersql = $_GET['order'];
+		}
+		if($_GET['orderby']){
+			foreach($orderbys as $orderby){
+				if($orderby['txt']==$_GET['orderby']){
+					$order = $orderby['col'] .' ' . $ordersql;
+					break;
+				}
+			}
+		}
+		if ($_GET ['search_field_value'] != '') {
+			switch ($_GET ['search_field_name']) {
+				case 'member_name' :
+					$sql = $sql . ' and member_name  like  \'%'.$_GET['search_field_value'].'%\'';
+					break;
+				case 'member_email' :
+					$sql = $sql . ' and member_email  like  \'%'.$_GET['search_field_value'].'%\'';
+					break;
+				case 'member_truename' :
+					$sql = $sql . ' and member_truename  like  \'%'.$_GET['search_field_value'].'%\'';
+					break;
+			}
+		}
+		if ($_GET ['member_id'] != '') {
+			$sql = $sql . ' and member_id  like  \'%'.$_GET['member_id'].'%\'';
+		}
+		switch ($_GET ['search_state']) {
+			case 'no_informallow' :
+				$sql = $sql . ' and inform_allow  =  \'2\' ';
+
+				break;
+			case 'no_isbuy' :
+				$sql = $sql . ' and is_buy  =  \'0\' ';
+				break;
+			case 'no_isallowtalk' :
+				$sql = $sql . ' and is_allowtalk  =  \'0\' ';
+				break;
+			case 'no_memberstate' :
+				$sql = $sql . ' and member_state  =  \'0\' ';
+				break;
+		}
+		/**
+		 * 排序
+		 */
+//		$order = trim ( $_GET ['search_sort'] );
+
+
+
+		$countsql = " select count(*)  $sql ";
+
+		$stmt = $conn->query($countsql);
+		$total = $stmt->fetch(PDO::FETCH_NUM);
+		$page->setTotalNum($total[0]);
+
+		$orderbysql = ' member_id ';
+		$ordersql = 'desc';
+		if(!isset($_GET['orderby'])){
+			$_GET['orderby'] = '结算日期';
+		}
+		if(!isset($_GET['order'])){
+			$ordersql = 'desc';
+		}else{
+			$ordersql = $_GET['order'];
+		}
+		foreach($orderbys as $orderby){
+			if($orderby['txt']==$_GET['orderby']){
+				$orderbysql = $orderby['col'];
+				break;
+			}
+		}
+
+		$tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  $orderbysql $ordersql) rownum,
+                        *,(select sum(num) from (
+								Select -fRecharge  num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+								union all
+								Select RechargeMoney num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+							 )zz ) calc_predeposit ,
+				 		(select sum(num) from (
+								Select -fConsume  num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+								union all
+								Select GiveMoney num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+							 )zz ) calc_consume,
+						(select sum(num) from (
+								Select fAddScale -fScale   num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+								union all
+								Select ScaleBalance num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+							 )zz ) calc_points
+                        $sql order by   $orderbysql $ordersql )zzzz where rownum>$startnum )zzzzz order by rownum";
+
+		$exportsql = "SELECT  row_number() over( order by  a.dCO_Date desc) as '序号',
+                        member_id as '卡号',
+                        member_truename '姓名',
+                        available_predeposit '储值余额',
+                        (select sum(num) from (
+								Select -fRecharge  num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+								union all
+								Select RechargeMoney num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+							 )zz )  '计算储值余额',
+                        fConsumeBalance '赠送余额',
+                        (select sum(num) from (
+								Select -fConsume  num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+								union all
+								Select GiveMoney num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+							 )zz ) '计算赠送余额',
+                        member_points '积分余额',
+                        (select sum(num) from (
+								Select fAddScale -fScale   num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+								union all
+								Select ScaleBalance num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+							 )zz ) '计算积分余额'
+                        $sql order by  $orderbysql $ordersql ";
+
+		if(isset($_GET['export']) && $_GET['export']=='true'){
+			$this->exportxlsx($exportsql,array('序号','卡号','姓名','储值余额','计算储值余额','赠送余额','计算赠送余额','积分余额','计算积分余额'),'会员积分核对');
+		}
+		$stmt = $conn->query($tsql);
+		$data_list = array();
+		while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+			array_push($data_list, $row);
+		}
+		Tpl::output('data_list', $data_list);
+		Tpl::output('orderbys',$orderbys);
+		Tpl::output('page', $page->show());
+//		Tpl::showpage('community.income.detail');
+		Tpl::showpage ( 'member.check' );
+	}
+
+	public function checkoldOp(){
 		$lang = Language::getLangContent ();
 		$orderbys = array(
 			array('txt'=>'预存余额','col'=> ' available_predeposit '),
@@ -983,6 +1147,7 @@ class memberControl extends SystemControl {
 		Tpl::output ( 'search_sort', trim ( $_GET ['search_sort'] ) );
 		Tpl::output ( 'search_field_name', trim ( $_GET ['search_field_name'] ) );
 		Tpl::output ( 'search_field_value', trim ( $_GET ['search_field_value'] ) );
+
 		Tpl::output ( 'member_list', $member_list );
 		Tpl::output ( 'page', $model_member->showpage () );
 		Tpl::showpage ( 'member.check' );
