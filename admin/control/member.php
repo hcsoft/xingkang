@@ -920,6 +920,9 @@ class memberControl extends SystemControl {
 				$sql = $sql . ' and member_state  =  \'0\' ';
 				break;
 		}
+		if (!$_GET ['flag1'] && !$_GET ['flag2'] && !$_GET ['flag3']){
+			$_GET ['flag1'] = '1';
+		}
 
 		if ($_GET ['flag1'] && $_GET ['flag1'] == '1'){
 			$flag1 = 1;
