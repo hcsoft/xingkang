@@ -863,11 +863,7 @@ class memberControl extends SystemControl {
 				Select -fConsume  num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
 				union all
 				Select GiveMoney num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
-			 )zz ) or member_points <> (select sum(num) from (
-				Select fAddScale -fScale   num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
-				union all
-				Select ScaleBalance num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
-			 )zz )  ';
+			 )zz ) ';
 
 		if ($_GET['orgids']) {
 			$sql = $sql . ' and CreateOrgID in ( ' . implode(',', $_GET['orgids']) . ')';
