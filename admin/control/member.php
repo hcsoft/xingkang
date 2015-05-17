@@ -855,7 +855,19 @@ class memberControl extends SystemControl {
 		$page->setNowPage($_REQUEST["curpage"]);
 		$startnum = $page->getEachNum() * ($page->getNowPage() - 1);
 		$endnum = $page->getEachNum() * ($page->getNowPage());
-		$sql = '  from shopnc_member where 1= 1 ';
+		$sql = '  from shopnc_member where available_predeposit  <> (select sum(num) from (
+				Select -fRecharge  num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+				union all
+				Select RechargeMoney num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+			 )zz ) or fConsumeBalance <> (select sum(num) from (
+				Select -fConsume  num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+				union all
+				Select GiveMoney num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+			 )zz ) or member_points <> (select sum(num) from (
+				Select fAddScale -fScale   num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+				union all
+				Select ScaleBalance num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+			 )zz )  ';
 
 		if ($_GET['orgids']) {
 			$sql = $sql . ' and CreateOrgID in ( ' . implode(',', $_GET['orgids']) . ')';
