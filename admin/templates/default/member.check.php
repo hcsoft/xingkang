@@ -215,15 +215,15 @@
             </tr>
 
             <tr>
-                <td>新储值余额：</td>
+                <td style="color:red">新储值余额：</td>
                 <td><input style="color:blue;" id="new_available_predeposit" name="new_available_predeposit"></td>
             </tr>
             <tr>
-                <td>新赠送余额：</td>
+                <td style="color:red">新赠送余额：</td>
                 <td><input style="color:blue;" id="new_fConsumeBalance" name="new_fConsumeBalance"></td>
             </tr>
             <tr>
-                <td>新积分余额：</td>
+                <td style="color:red">新积分余额：</td>
                 <td><input style="color:blue;" id="new_member_points" name="new_member_points"></td>
             </tr>
 

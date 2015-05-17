@@ -847,6 +847,7 @@ class memberControl extends SystemControl {
 	public function checkOp()
 	{
 		$orderbys = array(
+			array('txt'=>'会员编号','col'=> ' member_id '),
 			array('txt'=>'预存余额','col'=> ' available_predeposit '),
 			array('txt'=>'赠送余额','col'=> ' fConsumeBalance '),
 			array('txt'=>'消费积分','col'=> ' member_points '));
@@ -873,9 +874,7 @@ class memberControl extends SystemControl {
 			$sql = $sql . ' and cardgrade  =  \''.$_GET['cardgrade'].'\'';
 		}
 
-		if(!isset($_GET['orderby'])){
-			$_GET['orderby'] = '预存余额';
-		}
+
 
 
 		if(!isset($_GET['order'])){
@@ -949,8 +948,9 @@ class memberControl extends SystemControl {
 		 */
 		$orderbysql = ' member_id ';
 		$ordersql = 'desc';
+
 		if(!isset($_GET['orderby'])){
-			$_GET['orderby'] = '结算日期';
+			$_GET['orderby'] = '会员编号';
 		}
 		if(!isset($_GET['order'])){
 			$ordersql = 'desc';
