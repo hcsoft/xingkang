@@ -962,7 +962,7 @@ class memberControl extends SystemControl {
 		$paramsql = $sql . ' order by ' .$orderbysql .$ordersql;
 		$paramsql = str_replace('\'','\'\'',$paramsql);
 		$tsql = "SET NOCOUNT ON; Exec p_query_member_check '$paramsql','$startnum','$endnum',$flag1,$flag2,$flag3;SET NOCOUNT off; ";
-		echo $tsql;
+//		echo $tsql;
 		$stmt = $conn->query($tsql);
 		//第一次获得总页数
 		$total = $stmt->fetch(PDO::FETCH_NUM);

@@ -163,7 +163,7 @@
             <?php } ?>
             </tbody>
             <tfoot class="tfoot">
-            <?php if (!empty($output['member_list']) && is_array($output['member_list'])) { ?>
+            <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
                 <tr>
                     <td colspan="16">
                         <div class="pagination"> <?php echo $output['page']; ?> </div>
