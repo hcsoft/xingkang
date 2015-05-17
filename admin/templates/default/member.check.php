@@ -11,7 +11,7 @@
     <div class="fixed-empty"></div>
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" value="member" name="act">
-        <input type="hidden" value="member" name="op">
+        <input type="hidden" value="check" name="op">
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
@@ -128,7 +128,7 @@
         <table class="table tb-type2 nobdb">
             <thead>
             <tr class="thead">
-                <th>&nbsp;</th>
+                <th class="align-center">序号</th>
                 <th class="align-center">卡号</th>
                 <th class="align-center">姓名</th>
                 <th class="align-center">储值余额</th>
@@ -143,17 +143,19 @@
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
                 <?php foreach ($output['data_list'] as $k => $v) { ?>
                     <tr class="hover member">
-                        <td class="w24"></td>
-                        <td class="w108"> <?php echo $v->member_id; ?></td>
-                        <td class="w108 "><?php echo $v->member_truename; ?></td>
-                        <td class="w108 align-right"><?php echo number_format($v->available_predeposit, 2); ?></td>
-                        <td class="w108 align-right"><?php echo number_format($v->calc_predeposit, 2); ?></td>
-                        <td class="w108 align-right"><?php echo number_format($v->fConsumeBalance, 2); ?></td>
-                        <td class="w108 align-right"><?php echo number_format($v->calc_consume, 2); ?></td>
-                        <td class="w108 align-right"><?php echo number_format($v->member_points, 2); ?></td>
-                        <td class="w108 align-right"><?php echo number_format($v->calc_points, 2); ?></td>
+                        <td class="w24"> <?php echo $v->rownum; ?></td>
+                        <td class="w48"> <?php echo $v->member_id; ?></td>
+                        <td class="w48 "><?php echo $v->member_truename; ?></td>
+                        <td class="w48 align-right"><?php echo number_format($v->available_predeposit, 2); ?></td>
+                        <td class="w48 align-right"><?php echo number_format($v->calc_predeposit, 2); ?></td>
+                        <td class="w48 align-right"><?php echo number_format($v->fConsumeBalance, 2); ?></td>
+                        <td class="w48 align-right"><?php echo number_format($v->calc_consume, 2); ?></td>
+                        <td class="w48 align-right"><?php echo number_format($v->member_points, 2); ?></td>
+                        <td class="w48 align-right"><?php echo number_format($v->calc_points, 2); ?></td>
                         <td class="w108 align-center"><a href="javascript:void(0)"
-                                           onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">充值消费明细</a></td>
+                                           onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">充值消费明细</a>
+                            <a href="javascript:void(0)"
+                               onclick="modify('<?php echo htmlentities(json_encode($v)) ?>',this)">修改余额</a></td>
                     </tr>
                 <?php } ?>
             <?php } else { ?>
@@ -174,14 +176,59 @@
         </table>
     </form>
 </div>
-<div id="psresetdialog" title="密码重置">
-    <span class="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
-    <span>
-        <form>
-            <input type="hidden" id="cardid" name="cardid">
-        </form>
-        密码将被重置为000000，是否确认重置？
-    </span>
+<div id="editdialog" title="修改余额">
+    <span class="errormsg" style="color:red;width:100%;display:block;text-align: center;"></span>
+
+    <form>
+        <table>
+            <tr>
+                <td>卡号：</td>
+                <td><input style="color:blue;" id="member_id" name="member_id" readonly></td>
+            </tr>
+            <tr>
+                <td>姓名：</td>
+                <td><input style="color:blue;" id="member_truename" name="member_truename" readonly></td>
+            </tr>
+            <tr>
+                <td>储值余额：</td>
+                <td><input style="color:blue;" id="available_predeposit" name="available_predeposit" readonly></td>
+            </tr>
+            <tr>
+                <td>计算储值余额：</td>
+                <td><input style="color:blue;" id="calc_predeposit" name="calc_predeposit" readonly></td>
+            </tr>
+            <tr>
+                <td>赠送余额：</td>
+                <td><input style="color:blue;" id="fConsumeBalance" name="fConsumeBalance" readonly></td>
+            </tr>
+            <tr>
+                <td>计算赠送余额：</td>
+                <td><input style="color:blue;" id="calc_consume" name="calc_consume" readonly></td>
+            </tr>
+            <tr>
+                <td>积分余额：</td>
+                <td><input style="color:blue;" id="member_points" name="member_points" readonly></td>
+            </tr>
+            <tr>
+                <td>计算积分余额：</td>
+                <td><input style="color:blue;" id="calc_points" name="calc_points" readonly></td>
+            </tr>
+
+            <tr>
+                <td>新储值余额：</td>
+                <td><input style="color:blue;" id="new_available_predeposit" name="new_available_predeposit"></td>
+            </tr>
+            <tr>
+                <td>新赠送余额：</td>
+                <td><input style="color:blue;" id="new_fConsumeBalance" name="new_fConsumeBalance"></td>
+            </tr>
+            <tr>
+                <td>新积分余额：</td>
+                <td><input style="color:blue;" id="new_member_points" name="new_member_points"></td>
+            </tr>
+
+        </table>
+    </form>
 </div>
 <style>
     #detaildialog table {
@@ -247,6 +294,7 @@
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"
         charset="utf-8"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery.formautofill.js"></script>
 <link rel="stylesheet" type="text/css"
       href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
 <script>
@@ -254,32 +302,6 @@
         $('#ncsubmit').click(function () {
             $('input[name="op"]').val('check');
             $('#formSearch').submit();
-        });
-        $("#psresetdialog").dialog({
-            resizable: false,
-//            width:350,
-//            height:250,
-//            modal: true,
-            autoOpen: false,
-            buttons: {
-                "取消": function () {
-                    $(this).dialog("close");
-                },
-                "确定重置": function () {
-                    console.log($("#psresetdialog form").serialize());
-                    $.ajax({
-                        url: "index.php?act=member&op=psreset",
-                        data: $("#psresetdialog form").serialize(), dataType: 'json', success: function (data) {
-                            console.log(data);
-                            if (data.success) {
-                                success('#psresetdialog', data.msg);
-                            } else {
-                                error('#psresetdialog', data.msg);
-                            }
-                        }
-                    });
-                }
-            }
         });
 
         $("#detaildialog").dialog({
@@ -295,13 +317,32 @@
                 }
             }
         });
+        $("#editdialog").dialog({
+            resizable: false,
+            autoOpen: false,
+            close: function () {
+                $("#formSearch").submit();
+            },
+            buttons: {
+                "关闭": function () {
+                    $(this).dialog("close");
+                },
+                "保存": function () {
+                    console.log($("#editdialog form").serialize());
+                    $.ajax({
+                        url: "index.php?act=member&op=modifymoney",
+                        data: $("#editdialog form").serialize(), dataType: 'json', success: function (data) {
+                            if (data.success) {
+                                success("#editdialog",data.msg);
+                            } else {
+                                error("#editdialog",data.msg);
+                            }
+                        }
+                    });
+                }
+            }
+        });
     });
-    function showpsreset(id, elem) {
-        $("#psresetdialog .errormsg").html('');
-        $("#psresetdialog #cardid").val(id);
-        $("#psresetdialog").dialog("option", "position", {my: "right top", at: "left bottom", of: $(elem)});
-        $("#psresetdialog").dialog("open");
-    }
 
     function showdetail(objstr, elem) {
         var obj = eval('(' + unescape(objstr) + ')');
@@ -342,6 +383,12 @@
                 $("#detaildialog").dialog("open");
             }
         });
+
+    }
+    function modify(objstr, elem) {
+        var obj = eval('(' + unescape(objstr) + ')');
+        $("#editdialog form").autofill(obj);
+        $("#editdialog").dialog("open");
 
     }
     function numtostr(numstr) {
