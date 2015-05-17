@@ -841,7 +841,145 @@ class memberControl extends SystemControl {
 		exit;
 	}
 
+
 	public function checkOp()
+	{
+		$orderbys = array(
+			array('txt'=>'预存余额','col'=> ' available_predeposit '),
+			array('txt'=>'赠送余额','col'=> ' fConsumeBalance '),
+			array('txt'=>'消费积分','col'=> ' member_points '));
+		Tpl::output('orderbys',$orderbys);
+		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+		//处理数据
+		$page = new Page();
+		$page->setEachNum(10);
+		$page->setNowPage($_REQUEST["curpage"]);
+		$startnum = $page->getEachNum() * ($page->getNowPage() - 1);
+		$endnum = $page->getEachNum() * ($page->getNowPage());
+		$sql = '';
+
+		if ($_GET['orgids']) {
+			$sql = $sql . ' and CreateOrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+		}
+
+		if (isset($_GET['cardtype']) and $_GET['cardtype'] != '') {
+			$condition ['cardtype'] = $_GET['cardtype'];
+			$sql = $sql . ' and cardtype  =  \''.$_GET['cardtype'].'\'';
+		}
+
+		if (isset($_GET['cardgrade']) and $_GET['cardgrade'] != '') {
+			$sql = $sql . ' and cardgrade  =  \''.$_GET['cardgrade'].'\'';
+		}
+
+		if(!isset($_GET['orderby'])){
+			$_GET['orderby'] = '预存余额';
+		}
+
+
+		if(!isset($_GET['order'])){
+			$ordersql = 'desc';
+		}else{
+			$ordersql = $_GET['order'];
+		}
+		if($_GET['orderby']){
+			foreach($orderbys as $orderby){
+				if($orderby['txt']==$_GET['orderby']){
+					$order = $orderby['col'] .' ' . $ordersql;
+					break;
+				}
+			}
+		}
+		if ($_GET ['search_field_value'] != '') {
+			switch ($_GET ['search_field_name']) {
+				case 'member_name' :
+					$sql = $sql . ' and member_name  like  \'%'.$_GET['search_field_value'].'%\'';
+					break;
+				case 'member_email' :
+					$sql = $sql . ' and member_email  like  \'%'.$_GET['search_field_value'].'%\'';
+					break;
+				case 'member_truename' :
+					$sql = $sql . ' and member_truename  like  \'%'.$_GET['search_field_value'].'%\'';
+					break;
+			}
+		}
+		if ($_GET ['member_id'] != '') {
+			$sql = $sql . ' and member_id  like  \'%'.$_GET['member_id'].'%\'';
+		}
+		switch ($_GET ['search_state']) {
+			case 'no_informallow' :
+				$sql = $sql . ' and inform_allow  =  \'2\' ';
+
+				break;
+			case 'no_isbuy' :
+				$sql = $sql . ' and is_buy  =  \'0\' ';
+				break;
+			case 'no_isallowtalk' :
+				$sql = $sql . ' and is_allowtalk  =  \'0\' ';
+				break;
+			case 'no_memberstate' :
+				$sql = $sql . ' and member_state  =  \'0\' ';
+				break;
+		}
+
+		if ($_GET ['flag1'] && $_GET ['flag1'] == '1'){
+			$flag1 = 1;
+		}else{
+			$flag1 = 0 ;
+		}
+
+		if ($_GET ['flag2'] && $_GET ['flag2'] == '1'){
+			$flag2 = 1;
+		}else{
+			$flag2 = 0 ;
+		}
+
+		if ($_GET ['flag3'] && $_GET ['flag3'] == '1'){
+			$flag3 = 1;
+		}else{
+			$flag3 = 0 ;
+		}
+
+		/**
+		 * 排序
+		 */
+		$orderbysql = ' member_id ';
+		$ordersql = 'desc';
+		if(!isset($_GET['orderby'])){
+			$_GET['orderby'] = '结算日期';
+		}
+		if(!isset($_GET['order'])){
+			$ordersql = 'desc';
+		}else{
+			$ordersql = $_GET['order'];
+		}
+		foreach($orderbys as $orderby){
+			if($orderby['txt']==$_GET['orderby']){
+				$orderbysql = $orderby['col'];
+				break;
+			}
+		}
+
+		$paramsql = $sql . ' order by ' .$orderbysql .$ordersql;
+		$paramsql = str_replace('\'','\'\'',$paramsql);
+		$tsql = "SET NOCOUNT ON; Exec p_query_member_check '$paramsql','$startnum','$endnum',$flag1,$flag2,$flag3;SET NOCOUNT off; ";
+		echo $tsql;
+		$stmt = $conn->query($tsql);
+		//第一次获得总页数
+		$total = $stmt->fetch(PDO::FETCH_NUM);
+		$page->setTotalNum($total[0]);
+		//第二次获得数据
+		$stmt->nextRowset();
+		$data_list = array();
+		while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+			array_push($data_list, $row);
+		}
+		Tpl::output('data_list', $data_list);
+		Tpl::output('orderbys',$orderbys);
+		Tpl::output('page', $page->show());
+		Tpl::showpage ( 'member.check' );
+	}
+
+	public function checkold2Op()
 	{
 		$orderbys = array(
 			array('txt'=>'预存余额','col'=> ' available_predeposit '),
@@ -863,7 +1001,11 @@ class memberControl extends SystemControl {
 				Select -fConsume  num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
 				union all
 				Select GiveMoney num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
-			 )zz ) ';
+			 )zz ) or member_points <> (select sum(num) from (
+				Select fAddScale -fScale   num  from center_CheckOut  where iCO_State <> 99 and sMemberID = member_id
+				union all
+				Select ScaleBalance num from center_MemberRecharge where [State] <> 99  and MemberID = member_id
+			 )zz )  ';
 
 		if ($_GET['orgids']) {
 			$sql = $sql . ' and CreateOrgID in ( ' . implode(',', $_GET['orgids']) . ')';

@@ -47,7 +47,11 @@
                         <option value="2" <?php if ('2'== $_GET['cardgrade']){ ?>selected<?php } ?>>健康钻卡</option>
                     </select>
                 </td>
-
+                <td>
+                    <label><input type="checkbox" id="flag1" name="flag1" value="1" <?php if ('1'== $_GET['flag1']){ ?>checked<?php } ?> >储值余额</label>
+                    <label><input type="checkbox" id="flag2" name="flag2" value="1"<?php if ('1'== $_GET['flag2']){ ?>checked<?php } ?>>赠送余额</label>
+                    <label><input type="checkbox" id="flag3" name="flag3" value="1"<?php if ('1'== $_GET['flag3']){ ?>checked<?php } ?>>积分余额</label>
+                </td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
                     <?php if ($output['search_field_value'] != '' or $output['search_sort'] != '') { ?>
