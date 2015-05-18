@@ -848,6 +848,7 @@ class memberControl extends SystemControl {
 	{
 		$orderbys = array(
 			array('txt'=>'会员编号','col'=> ' member_id '),
+			array('txt'=>'机构编码','col'=> ' orgid '),
 			array('txt'=>'预存余额','col'=> ' available_predeposit '),
 			array('txt'=>'赠送余额','col'=> ' fConsumeBalance '),
 			array('txt'=>'消费积分','col'=> ' member_points '));
