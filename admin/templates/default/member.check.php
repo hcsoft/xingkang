@@ -149,7 +149,7 @@
                         <td class="w48"> <?php echo $v->member_id; ?></td>
                         <td class="w48 "><?php echo $v->member_truename; ?></td>
                         <td class="w48 "><?php echo $v->orgid; ?></td>
-                        <td class="w48 "><?php echo $v->orgname; ?></td>
+                        <td class="w108 "><?php echo $v->orgname; ?></td>
                         <td class="w48 align-right"><?php echo number_format($v->available_predeposit, 2); ?></td>
                         <td class="w48 align-right"><?php echo number_format($v->calc_predeposit, 2); ?></td>
                         <td class="w48 align-right"><?php echo number_format($v->fConsumeBalance, 2); ?></td>
