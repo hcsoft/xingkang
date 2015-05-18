@@ -131,6 +131,8 @@
                 <th class="align-center">序号</th>
                 <th class="align-center">卡号</th>
                 <th class="align-center">姓名</th>
+                <th class="align-center">机构编码</th>
+                <th class="align-center">机构名称</th>
                 <th class="align-center">储值余额</th>
                 <th class="align-center">计算储值余额</th>
                 <th class="align-center">赠送余额</th>
@@ -146,6 +148,8 @@
                         <td class="w24"> <?php echo $v->rownum; ?></td>
                         <td class="w48"> <?php echo $v->member_id; ?></td>
                         <td class="w48 "><?php echo $v->member_truename; ?></td>
+                        <td class="w48 "><?php echo $v->orgid; ?></td>
+                        <td class="w48 "><?php echo $v->orgname; ?></td>
                         <td class="w48 align-right"><?php echo number_format($v->available_predeposit, 2); ?></td>
                         <td class="w48 align-right"><?php echo number_format($v->calc_predeposit, 2); ?></td>
                         <td class="w48 align-right"><?php echo number_format($v->fConsumeBalance, 2); ?></td>
