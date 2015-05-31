@@ -187,7 +187,7 @@
                                 <?php echo $v->sDrug_Brand ?>
                             </td>
                             <td class=" align-left">
-                                <?php echo $v->iCustomer_ID ?>
+                                <?php echo $v->sCustomer_ID ?>
                             </td>
                             <td class=" align-left">
                                 <?php echo $v->sCustomer_Name ?>

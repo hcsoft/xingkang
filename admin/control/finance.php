@@ -161,7 +161,7 @@ class financeControl extends SystemControl
         }
 
         if (intval($_GET['sCustomer_ID']) > 0) {
-            $sql = $sql . ' and EXISTS (  select 1  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_ID =    ' . $_GET['sCustomer_ID'] . ' )';
+            $sql = $sql . ' and EXISTS (  select 1  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_ID =   ' . $_GET['sCustomer_ID'] . ' )';
         }
         //处理树的参数
         $checkednode = $_GET['checkednode'];
