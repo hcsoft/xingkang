@@ -205,7 +205,7 @@ class financeControl extends SystemControl
                         good.sDrug_Spec ,
                         good.sDrug_Unit ,
                         good.sDrug_Brand ,
-                        (select top 1 buy.iCustomer_ID  from  Center_Buy buy   where  a.iDrug_ID = buy.iDrug_ID and buy.iCustomer_ID =  $iCustomer_ID ) iCustomer_ID,
+                        (select top 1 cus.sCustomer_ID  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID) sCustomer_ID,
                         (select top 1 cus.sCustomer_Name  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and buy.iCustomer_ID =  $iCustomer_ID) sCustomer_Name,
                         a.fSale_Num ,
                         a.fSale_TaxPrice ,
