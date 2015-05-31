@@ -192,7 +192,7 @@ class financeControl extends SystemControl
                         $sql order by  a.dSale_MakeDate desc)zzzz where rownum>$startnum )zzzzz order by rownum";
 //        echo $tsql;
         if (intval($_GET['iCustomer_ID']) > 0) {
-            $iCustomer_ID =  intval($_GET['iCustomer_ID'])
+            $iCustomer_ID =  intval($_GET['iCustomer_ID']);
             $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
                         a.iDrug_ID,
                         a.sSale_id ,
