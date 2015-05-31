@@ -348,9 +348,7 @@ class dashboardControl extends SystemControl{
                     from  spotcheck_main checkout left join  Organization b  on checkout.OrgID = b.id
                     where checkout.OrgID in (select orgid from map_org_wechat) and checktype like '5%' $datesql
               group by b.id , b.name having count(1)  >0 order by count(1)  desc   ";
-        Log::record($sql . " [ RunTime:" . addUpTime('queryStartTime', 'queryEndTime', 6) . "s ]", Log::SQL);
         $stmt = $conn->query($sql);
-        return array(sql=>$sql);
         $spotlist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             $row->details= array();
