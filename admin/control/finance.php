@@ -160,11 +160,15 @@ class financeControl extends SystemControl
             $sql = $sql . ' and a.iDrug_ID = ' . intval($_GET['search_commonid']);
         }
 
+        $customsql = 'from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID ' ;
+
         if (intval($_GET['sCustomer_ID']) > 0) {
             $sql = $sql . ' and EXISTS (  select 1  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_ID =   ' . $_GET['sCustomer_ID'] . ' )';
+            $customsql = $customsql . ' and  cus.sCustomer_ID =   ' . $_GET['sCustomer_ID'];
         }
         if (intval($_GET['sCustomer_Name']) > 0) {
-            $sql = $sql . ' and EXISTS (  select 1  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_Name  like \'%' . $_GET['sCustomer_ID'] . '%\' )';
+            $sql = $sql . ' and EXISTS (  select 1  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_Name  like \'%' . $_GET['sCustomer_Name'] . '%\' )';
+            $customsql = $customsql . ' and  cus.sCustomer_Name like   \'%' . $_GET['sCustomer_Name'].'%\'';
         }
         //处理树的参数
         $checkednode = $_GET['checkednode'];
@@ -176,6 +180,7 @@ class financeControl extends SystemControl
         $stmt = $conn->query($countsql);
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
+
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
                         a.iDrug_ID,
                         a.sSale_id ,
@@ -185,8 +190,8 @@ class financeControl extends SystemControl
                         good.sDrug_Spec ,
                         good.sDrug_Unit ,
                         good.sDrug_Brand ,
-                        (select top 1 cus.sCustomer_ID    from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID) sCustomer_ID,
-                        (select top 1 cus.sCustomer_Name  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID) sCustomer_Name,
+                        (select top 1 cus.sCustomer_ID   $customsql ) sCustomer_ID,
+                        (select top 1 cus.sCustomer_Name  $customsql) sCustomer_Name,
                         a.fSale_Num ,
                         a.fSale_TaxPrice ,
                         a.fSale_TaxFactMoney ,
@@ -196,31 +201,6 @@ class financeControl extends SystemControl
                         a.sClinicKey ,
                         a.ida_id
                         $sql order by  a.dSale_MakeDate desc)zzzz where rownum>$startnum )zzzzz order by rownum";
-//        echo $tsql;
-        if (intval($_GET['sCustomer_ID']) > 0) {
-            $sCustomer_ID =  intval($_GET['sCustomer_ID']);
-            $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
-                        a.iDrug_ID,
-                        a.sSale_id ,
-                        a.dSale_MakeDate,
-                        isnull(good.sDrug_TradeName,a.itemname) as sDrug_TradeName ,
-                        a.ItemType ,
-                        good.sDrug_Spec ,
-                        good.sDrug_Unit ,
-                        good.sDrug_Brand ,
-                        (select top 1 cus.sCustomer_ID    from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_ID =  $sCustomer_ID) sCustomer_ID,
-                        (select top 1 cus.sCustomer_Name  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_ID =  $sCustomer_ID) sCustomer_Name,
-                        a.fSale_Num ,
-                        a.fSale_TaxPrice ,
-                        a.fSale_TaxFactMoney ,
-                        org.name,
-                        a.StatSection,
-                        a.DoctorName,
-                        a.sClinicKey ,
-                        a.ida_id
-                        $sql order by  a.dSale_MakeDate desc)zzzz where rownum>$startnum )zzzzz order by rownum";
-
-        }
 
         $exportsql = "SELECT  row_number() over( order by  a.dSale_MakeDate desc) rownum,
                         a.sSale_id ,
@@ -230,8 +210,8 @@ class financeControl extends SystemControl
                         good.sDrug_Spec ,
                         good.sDrug_Unit ,
                         good.sDrug_Brand ,
-                        (select top 1 cus.sCustomer_ID  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID) sCustomer_ID,
-                        (select top 1 cus.sCustomer_Name  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID) sCustomer_Name,
+                        (select top 1 cus.sCustomer_ID   $customsql ) sCustomer_ID,
+                        (select top 1 cus.sCustomer_Name  $customsql) sCustomer_Name,
                         a.fSale_Num ,
                         a.fSale_TaxPrice ,
                         a.fSale_TaxFactMoney ,
