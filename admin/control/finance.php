@@ -166,7 +166,7 @@ class financeControl extends SystemControl
             $sql = $sql . ' and EXISTS (  select 1  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_ID =   ' . $_GET['sCustomer_ID'] . ' )';
             $customsql = $customsql . ' and  cus.sCustomer_ID =   ' . $_GET['sCustomer_ID'];
         }
-        if (intval($_GET['sCustomer_Name']) > 0) {
+        if ($_GET['sCustomer_Name'] !='' ) {
             $sql = $sql . ' and EXISTS (  select 1  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_Name  like \'%' . $_GET['sCustomer_Name'] . '%\' )';
             $customsql = $customsql . ' and  cus.sCustomer_Name like   \'%' . $_GET['sCustomer_Name'].'%\'';
         }
