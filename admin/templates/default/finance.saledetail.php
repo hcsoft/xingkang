@@ -90,9 +90,9 @@
                 <th><label for="search_commonid">商品编码</label></th>
                 <td><input type="text" value="<?php echo $_GET['search_commonid'] ?>" name="search_commonid"
                            id="search_commonid" class="txt"/></td>
-                <th><label for="iCustomer_ID">供应商编码</label></th>
-                <td><input type="text" value="<?php echo $_GET['iCustomer_ID'] ?>" name="iCustomer_ID"
-                           id="iCustomer_ID" class="txt"/></td>
+                <th><label for="sCustomer_ID">供应商编码</label></th>
+                <td><input type="text" value="<?php echo $_GET['sCustomer_ID'] ?>" name="sCustomer_ID"
+                           id="sCustomer_ID" class="txt"/></td>
                 <th><label>选择机构</label></th>
                 <td colspan="3"><select name="orgids[]" id="orgids" class="orgSelect" multiple>
                         <?php

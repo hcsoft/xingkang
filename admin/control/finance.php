@@ -160,8 +160,8 @@ class financeControl extends SystemControl
             $sql = $sql . ' and a.iDrug_ID = ' . intval($_GET['search_commonid']);
         }
 
-        if (intval($_GET['iCustomer_ID']) > 0) {
-            $sql = $sql . ' and EXISTS ( select 1  from  Center_Buy buy   where  a.iDrug_ID = buy.iDrug_ID and buy.iCustomer_ID =  ' . $_GET['iCustomer_ID'] . ' )';
+        if (intval($_GET['sCustomer_ID']) > 0) {
+            $sql = $sql . ' and EXISTS (  select 1  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_ID =    ' . $_GET['sCustomer_ID'] . ' )';
         }
         //处理树的参数
         $checkednode = $_GET['checkednode'];
@@ -182,7 +182,7 @@ class financeControl extends SystemControl
                         good.sDrug_Spec ,
                         good.sDrug_Unit ,
                         good.sDrug_Brand ,
-                        (select top 1 buy.iCustomer_ID  from  Center_Buy buy   where  a.iDrug_ID = buy.iDrug_ID) iCustomer_ID,
+                        (select top 1 cus.sCustomer_ID  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID) sCustomer_ID,
                         (select top 1 cus.sCustomer_Name  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID) sCustomer_Name,
                         a.fSale_Num ,
                         a.fSale_TaxPrice ,
@@ -227,8 +227,8 @@ class financeControl extends SystemControl
                         good.sDrug_Spec ,
                         good.sDrug_Unit ,
                         good.sDrug_Brand ,
-                        cus.iCustomer_ID ,
-                        cus.sCustomer_Name,
+                        (select top 1 cus.sCustomer_ID  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID) sCustomer_ID,
+                        (select top 1 cus.sCustomer_Name  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID) sCustomer_Name,
                         a.fSale_Num ,
                         a.fSale_TaxPrice ,
                         a.fSale_TaxFactMoney ,
