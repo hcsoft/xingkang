@@ -93,6 +93,9 @@
                 <th><label for="sCustomer_ID">供应商编码</label></th>
                 <td><input type="text" value="<?php echo $_GET['sCustomer_ID'] ?>" name="sCustomer_ID"
                            id="sCustomer_ID" class="txt"/></td>
+                <th><label for="sCustomer_ID">供应商名称</label></th>
+                <td><input type="text" value="<?php echo $_GET['sCustomer_Name'] ?>" name="sCustomer_Name"
+                           id="sCustomer_Name" class="txt"/></td>
                 <th><label>选择机构</label></th>
                 <td colspan="3"><select name="orgids[]" id="orgids" class="orgSelect" multiple>
                         <?php

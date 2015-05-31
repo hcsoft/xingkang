@@ -163,6 +163,9 @@ class financeControl extends SystemControl
         if (intval($_GET['sCustomer_ID']) > 0) {
             $sql = $sql . ' and EXISTS (  select 1  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_ID =   ' . $_GET['sCustomer_ID'] . ' )';
         }
+        if (intval($_GET['sCustomer_Name']) > 0) {
+            $sql = $sql . ' and EXISTS (  select 1  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_Name  like \'%' . $_GET['sCustomer_ID'] . '%\' )';
+        }
         //处理树的参数
         $checkednode = $_GET['checkednode'];
         if ($checkednode && isset($checkednode) && count($checkednode) > 0) {
@@ -182,7 +185,7 @@ class financeControl extends SystemControl
                         good.sDrug_Spec ,
                         good.sDrug_Unit ,
                         good.sDrug_Brand ,
-                        (select top 1 cus.sCustomer_ID  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID) sCustomer_ID,
+                        (select top 1 cus.sCustomer_ID    from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID) sCustomer_ID,
                         (select top 1 cus.sCustomer_Name  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID) sCustomer_Name,
                         a.fSale_Num ,
                         a.fSale_TaxPrice ,
@@ -205,8 +208,8 @@ class financeControl extends SystemControl
                         good.sDrug_Spec ,
                         good.sDrug_Unit ,
                         good.sDrug_Brand ,
-                        (select top 1 cus.sCustomer_ID  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and buy.iCustomer_ID =  $sCustomer_ID) sCustomer_ID,
-                        (select top 1 cus.sCustomer_Name  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and buy.iCustomer_ID =  $sCustomer_ID) sCustomer_Name,
+                        (select top 1 cus.sCustomer_ID    from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_ID =  $sCustomer_ID) sCustomer_ID,
+                        (select top 1 cus.sCustomer_Name  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and cus.sCustomer_ID =  $sCustomer_ID) sCustomer_Name,
                         a.fSale_Num ,
                         a.fSale_TaxPrice ,
                         a.fSale_TaxFactMoney ,
