@@ -161,6 +161,9 @@ class financeControl extends SystemControl
         if (intval($_GET['search_commonid']) > 0) {
             $sql = $sql . ' and a.iDrug_ID = ' . intval($_GET['search_commonid']);
         }
+        if (intval($_GET['iCustomer_ID']) > 0) {
+            $sql = $sql . ' and buy.iCustomer_ID = ' . intval($_GET['iCustomer_ID']);
+        }
         //处理树的参数
         $checkednode = $_GET['checkednode'];
         if ($checkednode && isset($checkednode) && count($checkednode) > 0) {
