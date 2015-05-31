@@ -138,34 +138,34 @@
                             ?>
                             <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else if(substr($item,-3) == 'day')  echo substr($v->$item,0,10); else echo $v->$item;?></th>
                         <?php  }?>
-                        <td class=" align-center">
+                        <td class=" align-right">
                             <?php echo number_format($v->fRechargeInit,2); ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-right">
                             <?php echo number_format($v->fRechargeAdd,2); ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-right">
                             <?php echo number_format($v->fRechargeBuy,2); ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-right">
                             <?php echo number_format($v->GiveMoney,2); ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-right">
                             <?php echo number_format($v->GiveSaleMoney,2); ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-right">
                             <?php echo number_format($v->fRecharge,2); ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-right">
                             <?php echo number_format($v->fConsume,2); ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-right">
                             <?php echo number_format($v->fScaleToMoney,2); ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-right">
                             <?php echo number_format($v->fScale,2); ?>
                         </td>
-                        <td class=" align-center">
+                        <td class=" align-right">
                             <?php echo number_format($v->fAddScale,2); ?>
                         </td>
 
