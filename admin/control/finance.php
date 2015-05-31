@@ -213,6 +213,7 @@ class financeControl extends SystemControl
                         a.sClinicKey ,
                         a.ida_id
                         $sql order by  a.dSale_MakeDate desc)zzzz where rownum>$startnum )zzzzz order by rownum";
+            $sql = $sql . ' and exsits ( select top 1 buy.iCustomer_ID  from  Center_Buy buy   where  a.iDrug_ID = buy.iDrug_ID and buy.iCustomer_ID =  '.$_GET['iCustomer_ID'] .' )';
         }
 
         $exportsql = "SELECT  row_number() over( order by  a.dSale_MakeDate desc) rownum,
