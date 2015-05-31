@@ -159,9 +159,7 @@ class financeControl extends SystemControl
         if (intval($_GET['search_commonid']) > 0) {
             $sql = $sql . ' and a.iDrug_ID = ' . intval($_GET['search_commonid']);
         }
-        if (intval($_GET['iCustomer_ID']) > 0) {
-            $sql = $sql . ' and buy.iCustomer_ID = ' . intval($_GET['iCustomer_ID']);
-        }
+
         //处理树的参数
         $checkednode = $_GET['checkednode'];
         if ($checkednode && isset($checkednode) && count($checkednode) > 0) {
@@ -193,6 +191,30 @@ class financeControl extends SystemControl
                         a.ida_id
                         $sql order by  a.dSale_MakeDate desc)zzzz where rownum>$startnum )zzzzz order by rownum";
 //        echo $tsql;
+        if (intval($_GET['iCustomer_ID']) > 0) {
+            $iCustomer_ID =  intval($_GET['iCustomer_ID'])
+            $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
+                        a.iDrug_ID,
+                        a.sSale_id ,
+                        a.dSale_MakeDate,
+                        isnull(good.sDrug_TradeName,a.itemname) as sDrug_TradeName ,
+                        a.ItemType ,
+                        good.sDrug_Spec ,
+                        good.sDrug_Unit ,
+                        good.sDrug_Brand ,
+                        (select top 1 buy.iCustomer_ID  from  Center_Buy buy   where  a.iDrug_ID = buy.iDrug_ID and buy.iCustomer_ID =  $iCustomer_ID ) iCustomer_ID,
+                        (select top 1 cus.sCustomer_Name  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and buy.iCustomer_ID =  $iCustomer_ID) sCustomer_Name,
+                        a.fSale_Num ,
+                        a.fSale_TaxPrice ,
+                        a.fSale_TaxFactMoney ,
+                        org.name,
+                        a.StatSection,
+                        a.DoctorName,
+                        a.sClinicKey ,
+                        a.ida_id
+                        $sql order by  a.dSale_MakeDate desc)zzzz where rownum>$startnum )zzzzz order by rownum";
+        }
+
         $exportsql = "SELECT  row_number() over( order by  a.dSale_MakeDate desc) rownum,
                         a.sSale_id ,
                         a.dSale_MakeDate,
