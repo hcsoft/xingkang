@@ -126,6 +126,8 @@ class financeControl extends SystemControl
         $sql = ' from Center_ClinicSale a
                 left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
                 left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID
+                left join Center_Buy buy  on a.iDrug_ID = buy.iDrug_ID
+                left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID
                 , Organization org
                 where   a.orgid = org.id  ';
         if ($_GET['itemtype']) {
@@ -178,6 +180,8 @@ class financeControl extends SystemControl
                         good.sDrug_Spec ,
                         good.sDrug_Unit ,
                         good.sDrug_Brand ,
+                        cus.iCustomer_ID ,
+                        cus.sCustomer_Name,
                         a.fSale_Num ,
                         a.fSale_TaxPrice ,
                         a.fSale_TaxFactMoney ,
@@ -196,6 +200,8 @@ class financeControl extends SystemControl
                         good.sDrug_Spec ,
                         good.sDrug_Unit ,
                         good.sDrug_Brand ,
+                        cus.iCustomer_ID ,
+                        cus.sCustomer_Name,
                         a.fSale_Num ,
                         a.fSale_TaxPrice ,
                         a.fSale_TaxFactMoney ,
@@ -206,7 +212,7 @@ class financeControl extends SystemControl
                         a.ida_id
                         $sql order by  a.dSale_MakeDate desc ";
         if (isset($_GET['export']) && $_GET['export'] == 'true') {
-            $this->exportxlsx($exportsql, array('序号', '单据编号', '制单日期', '项目名称', '项目类型', '规格', '单位', '产地/厂商', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
+            $this->exportxlsx($exportsql, array('序号', '单据编号', '制单日期', '项目名称', '项目类型', '规格', '单位', '产地/厂商','供应商编码','供应商名称', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
         }
         $stmt = $conn->query($tsql);
         $data_list = array();

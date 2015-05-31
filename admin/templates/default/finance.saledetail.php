@@ -141,6 +141,8 @@
                     <th class="align-center">规格</th>
                     <th class="align-center">单位</th>
                     <th class="align-center">产地/厂商</th>
+                    <th class="align-center">供应商编码</th>
+                    <th class="align-center">供应商</th>
                     <th class="align-center">数量</th>
                     <th class="align-center">单价</th>
                     <th class="align-center">金额</th>
@@ -180,6 +182,12 @@
                             </td>
                             <td class=" align-left">
                                 <?php echo $v->sDrug_Brand ?>
+                            </td>
+                            <td class=" align-left">
+                                <?php echo $v->iCustomer_ID ?>
+                            </td>
+                            <td class=" align-left">
+                                <?php echo $v->sCustomer_Name ?>
                             </td>
                             <td class=" align-right" nowrap>
                                 <?php echo number_format($v->fSale_Num, 0) ?>
