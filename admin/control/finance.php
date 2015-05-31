@@ -194,8 +194,8 @@ class financeControl extends SystemControl
                         a.ida_id
                         $sql order by  a.dSale_MakeDate desc)zzzz where rownum>$startnum )zzzzz order by rownum";
 //        echo $tsql;
-        if (intval($_GET['iCustomer_ID']) > 0) {
-            $iCustomer_ID =  intval($_GET['iCustomer_ID']);
+        if (intval($_GET['sCustomer_ID']) > 0) {
+            $sCustomer_ID =  intval($_GET['sCustomer_ID']);
             $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
                         a.iDrug_ID,
                         a.sSale_id ,
@@ -205,8 +205,8 @@ class financeControl extends SystemControl
                         good.sDrug_Spec ,
                         good.sDrug_Unit ,
                         good.sDrug_Brand ,
-                        (select top 1 cus.sCustomer_ID  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID) sCustomer_ID,
-                        (select top 1 cus.sCustomer_Name  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and buy.iCustomer_ID =  $iCustomer_ID) sCustomer_Name,
+                        (select top 1 cus.sCustomer_ID  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and buy.iCustomer_ID =  $sCustomer_ID) sCustomer_ID,
+                        (select top 1 cus.sCustomer_Name  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID and buy.iCustomer_ID =  $sCustomer_ID) sCustomer_Name,
                         a.fSale_Num ,
                         a.fSale_TaxPrice ,
                         a.fSale_TaxFactMoney ,
