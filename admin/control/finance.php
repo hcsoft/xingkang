@@ -126,8 +126,6 @@ class financeControl extends SystemControl
         $sql = ' from Center_ClinicSale a
                 left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
                 left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID
-                left join Center_Buy buy  on a.iDrug_ID = buy.iDrug_ID
-                left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID
                 , Organization org
                 where   a.orgid = org.id  ';
         if ($_GET['itemtype']) {
@@ -183,8 +181,8 @@ class financeControl extends SystemControl
                         good.sDrug_Spec ,
                         good.sDrug_Unit ,
                         good.sDrug_Brand ,
-                        cus.iCustomer_ID ,
-                        cus.sCustomer_Name,
+                        (select top 1 buy.iDrug_ID  from  Center_Buy buy   where  a.iDrug_ID = buy.iDrug_ID)
+                        (select top 1 cus.sCustomer_Name  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID)
                         a.fSale_Num ,
                         a.fSale_TaxPrice ,
                         a.fSale_TaxFactMoney ,
