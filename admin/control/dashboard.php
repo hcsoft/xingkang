@@ -189,7 +189,7 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and checkout.dCO_Date>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.dCO_Date< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and checkout.dCO_Date>= \''.date('Y-m-1',strtotime('-1 month')). '\' and checkout.dCO_Date< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and checkout.dCO_Date>= \''.date('Y-m-1' ,strtotime(date('Y-m-01')) - 86400 ). '\' and checkout.dCO_Date< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
             $datesql = ' and checkout.dCO_Date>= \''.date('Y-1-1',strtotime('-1 year')). '\' and checkout.dCO_Date< \''.date('Y-1-1',time()).'\'';
         }
@@ -221,7 +221,7 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.RechargeDate< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-1',strtotime('-1 month')). '\' and checkout.RechargeDate< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-1' ,strtotime(date('Y-m-01')) - 86400 ). '\' and checkout.RechargeDate< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
             $datesql = ' and checkout.RechargeDate>= \''.date('Y-1-1',strtotime('-1 year')). '\' and checkout.RechargeDate< \''.date('Y-1-1',time()).'\'';
         }
@@ -252,7 +252,7 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.RechargeDate< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-1',strtotime('-1 month')). '\' and checkout.RechargeDate< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and checkout.RechargeDate>= \''.date('Y-m-1' ,strtotime(date('Y-m-01')) - 86400 ). '\' and checkout.RechargeDate< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
             $datesql = ' and checkout.RechargeDate>= \''.date('Y-1-1',strtotime('-1 year')). '\' and checkout.RechargeDate< \''.date('Y-1-1',time()).'\'';
         }
@@ -267,7 +267,7 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $outdatesql = ' and out.dco_date>= \''.date('Y-m-d',strtotime('-1 day')). '\' and out.dco_date< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $outdatesql = ' and out.dco_date>= \''.date('Y-m-1',strtotime('-1 month')). '\' and out.dco_date< \''.date('Y-m-1',time()).'\'';
+            $outdatesql = ' and out.dco_date>= \''.date('Y-m-1' ,strtotime(date('Y-m-01')) - 86400 ). '\' and out.dco_date< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
             $outdatesql = ' and out.dco_date>= \''.date('Y-1-1',strtotime('-1 year')). '\' and out.dco_date< \''.date('Y-1-1',time()).'\'';
         }
@@ -340,7 +340,7 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.checkdate< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and checkout.checkdate>= \''.date('Y-m-1',strtotime('-1 month')). '\' and checkout.checkdate< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-1' ,strtotime(date('Y-m-01')) - 86400 ). '\' and checkout.checkdate< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
             $datesql = ' and checkout.checkdate>= \''.date('Y-1-1',strtotime('-1 year')). '\' and checkout.checkdate< \''.date('Y-1-1',time()).'\'';
         }
@@ -348,12 +348,14 @@ class dashboardControl extends SystemControl{
                     from  spotcheck_main checkout left join  Organization b  on checkout.OrgID = b.id
                     where checkout.OrgID in (select orgid from map_org_wechat) and checktype like '5%' $datesql
               group by b.id , b.name having count(1)  >0 order by count(1)  desc   ";
-
+        Log::record($sql . " [ RunTime:" . addUpTime('queryStartTime', 'queryEndTime', 6) . "s ]", Log::SQL);
         $stmt = $conn->query($sql);
+        return array(sql=>$sql);
         $spotlist = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             $row->details= array();
             array_push($spotlist, $row);
+            $row->sql = $sql;
         }
         return $spotlist;
     }
@@ -371,7 +373,7 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and hf.InputDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and hf.InputDate< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and hf.InputDate>= \''.date('Y-m-1',strtotime('-1 month')). '\' and hf.InputDate< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and hf.InputDate>= \''.date('Y-m-1' ,strtotime(date('Y-m-01')) - 86400 ). '\' and hf.InputDate< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
             $datesql = ' and hf.InputDate>= \''.date('Y-1-1',strtotime('-1 year')). '\' and hf.InputDate< \''.date('Y-1-1',time()).'\'';
         }
@@ -402,7 +404,7 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and checkout.checkdate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and checkout.checkdate< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and checkout.checkdate>= \''.date('Y-m-1',strtotime('-1 month')). '\' and checkout.checkdate< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and checkout.checkdate>= \''.date('Y-m-1' ,strtotime(date('Y-m-01')) - 86400 ). '\' and checkout.checkdate< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
             $datesql = ' and checkout.checkdate>= \''.date('Y-1-1',strtotime('-1 year')). '\' and checkout.checkdate< \''.date('Y-1-1',time()).'\'';
         }
@@ -433,7 +435,7 @@ class dashboardControl extends SystemControl{
         }else if($type=='5'){
             $datesql = ' and a.InputDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and a.InputDate< \''.date('Y-m-d',time()).'\'';
         }else if($type=='6'){
-            $datesql = ' and a.InputDate>= \''.date('Y-m-1',strtotime('-1 month')). '\' and a.InputDate< \''.date('Y-m-1',time()).'\'';
+            $datesql = ' and a.InputDate>= \''.date('Y-m-1' ,strtotime(date('Y-m-01')) - 86400 ). '\' and a.InputDate< \''.date('Y-m-1',time()).'\'';
         }else if($type=='7'){
             $datesql = ' and a.InputDate>= \''.date('Y-1-1',strtotime('-1 year')). '\' and a.InputDate< \''.date('Y-1-1',time()).'\'';
         }
