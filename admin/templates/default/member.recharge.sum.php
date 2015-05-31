@@ -110,10 +110,9 @@
             <thead>
             <tr class="thead">
                 <th class="align-center" rowspan="2">序号</th>
-                <?php foreach ($output['displaytext'] as $k => $v) {
-                    ?>
-                    <th class="align-center" <?php if ($k>0) {?> colspan="5" <?php } else { ?> rowspan="2" <?php }  ?> ><?php echo $v?></th>
-                <?php  }?>
+                <th class="align-center" rowspan="2">普卡消费金额</th>
+                <th class="align-center" colspan="5">充值下账信息</th>
+                <th class="align-center" colspan="5">诊疗购买信息</th>
             </tr>
             <tr>
                 <th class="align-center">期初预存</th>
@@ -138,6 +137,9 @@
                             ?>
                             <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else if(substr($item,-3) == 'day')  echo substr($v->$item,0,10); else echo $v->$item;?></th>
                         <?php  }?>
+                        <td class=" align-right">
+                            <?php echo number_format($v->pkmoney,2); ?>
+                        </td>
                         <td class=" align-right">
                             <?php echo number_format($v->fRechargeInit,2); ?>
                         </td>
