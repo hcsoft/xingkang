@@ -193,7 +193,7 @@ class financeControl extends SystemControl
 //        echo $tsql;
         if (intval($_GET['iCustomer_ID']) > 0) {
             $iCustomer_ID =  intval($_GET['iCustomer_ID']);
-            $sql = $sql . ' and exsits ( select 1  from  Center_Buy buy   where  a.iDrug_ID = buy.iDrug_ID and buy.iCustomer_ID =  '.$_GET['iCustomer_ID'] .' )';
+            $sql = $sql . ' and EXISTS ( select 1  from  Center_Buy buy   where  a.iDrug_ID = buy.iDrug_ID and buy.iCustomer_ID =  '.$_GET['iCustomer_ID'] .' )';
             $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
                         a.iDrug_ID,
                         a.sSale_id ,
