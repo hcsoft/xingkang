@@ -730,8 +730,8 @@ class memberControl extends SystemControl {
 			}
 		}
 		$param1 = implode('', $sumtypeparam);
-		array_push ( $displaytext, '充值下账信息' );
-		array_push ( $displaytext, '诊疗购买信息' );
+//		array_push ( $displaytext, '充值下账信息' );
+//		array_push ( $displaytext, '诊疗购买信息' );
 		
 		
 		$tsql = "SET NOCOUNT ON; Exec pFMemberPayStat '$param1','$orgids','$starttime','$endtime','','$startnum','$endnum';SET NOCOUNT off; ";

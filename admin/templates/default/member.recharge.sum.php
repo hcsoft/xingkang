@@ -110,7 +110,10 @@
             <thead>
             <tr class="thead">
                 <th class="align-center" rowspan="2">序号</th>
-                <th class="align-center" rowspan="2">机构</th>
+                <?php foreach ($output['displaytext'] as $k => $v) {
+                    ?>
+                    <th class="align-center"  rowspan="2"  ><?php echo $v?></th>
+                <?php  }?>
                 <th class="align-center" rowspan="2">普卡消费金额</th>
                 <th class="align-center" colspan="5">充值下账信息</th>
                 <th class="align-center" colspan="5">诊疗购买信息</th>
