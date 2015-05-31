@@ -109,11 +109,23 @@
         <table class="table tb-type2 nobdb datatable">
             <thead>
             <tr class="thead">
-                <th class="align-center">序号</th>
+                <th class="align-center" rowspan="2">序号</th>
                 <?php foreach ($output['displaytext'] as $k => $v) {
                     ?>
-                    <th class="align-center"><?php echo $v?></th>
+                    <th class="align-center" <?php if ($k>0) {?> colspan="5" <?php } else { ?> rowspan="2" <?php }  ?> ><?php echo $v?></th>
                 <?php  }?>
+            </tr>
+            <tr>
+                <th class="align-center">期初预存</th>
+                <th class="align-center">日常充值</th>
+                <th class="align-center">日常下账</th>
+                <th class="align-center">赠送金额</th>
+                <th class="align-center">赠送下账</th>
+                <th class="align-center">预存下账</th>
+                <th class="align-center">赠送下账</th>
+                <th class="align-center">积分下账</th>
+                <th class="align-center">扣减积分</th>
+                <th class="align-center">赠送积分</th>
             </tr>
             <tbody>
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
@@ -126,21 +138,37 @@
                             ?>
                             <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else if(substr($item,-3) == 'day')  echo substr($v->$item,0,10); else echo $v->$item;?></th>
                         <?php  }?>
-                        <td  class=" align-center">
-                            <p>期初预存:&nbsp;<strong class="red"><?php echo number_format($v->fRechargeInit,2); ?></strong>&nbsp;元</p>
-                            <p>日常充值:&nbsp;<strong class="red"><?php echo number_format($v->fRechargeAdd, 2); ?></strong>&nbsp;元</p>
-                            <p>日常下账:&nbsp;<strong class="red"><?php echo number_format($v->fRechargeBuy, 2); ?></strong>&nbsp;元</p>
-                            <p>赠送金额:&nbsp;<strong class="red"><?php echo number_format($v->GiveMoney, 2); ?></strong>&nbsp;元</p>
-                            <p>赠送下账:&nbsp;<strong class="red"><?php echo number_format($v->GiveSaleMoney, 2); ?></strong>&nbsp;元</p>
-                            <!--<p>积分增减:&nbsp;<strong class="red"><?php echo number_format($v->ScaleBalance, 0); ?></strong>&nbsp;</p>-->
+                        <td class=" align-center">
+                            <?php echo number_format($v->fRechargeInit,2); ?>
                         </td>
-                        <td  class=" align-center">
-                            <p>预存下账:&nbsp;<strong class="red"><?php echo number_format($v->fRecharge,2); ?></strong>&nbsp;元</p>
-                            <p>赠送下账:&nbsp;<strong class="red"><?php echo number_format($v->fConsume, 2); ?></strong>&nbsp;元</p>
-                            <p>积分下账:&nbsp;<strong class="red"><?php echo number_format($v->fScaleToMoney, 0); ?></strong>&nbsp;</p>
-                            <p>扣减积分:&nbsp;<strong class="red"><?php echo number_format($v->fScale, 0); ?></strong>&nbsp;</p>
-                            <p>赠送积分:&nbsp;<strong class="red"><?php echo number_format($v->fAddScale, 0); ?></strong>&nbsp;</p>
+                        <td class=" align-center">
+                            <?php echo number_format($v->fRechargeAdd,2); ?>
                         </td>
+                        <td class=" align-center">
+                            <?php echo number_format($v->fRechargeBuy,2); ?>
+                        </td>
+                        <td class=" align-center">
+                            <?php echo number_format($v->GiveMoney,2); ?>
+                        </td>
+                        <td class=" align-center">
+                            <?php echo number_format($v->GiveSaleMoney,2); ?>
+                        </td>
+                        <td class=" align-center">
+                            <?php echo number_format($v->fRecharge,2); ?>
+                        </td>
+                        <td class=" align-center">
+                            <?php echo number_format($v->fConsume,2); ?>
+                        </td>
+                        <td class=" align-center">
+                            <?php echo number_format($v->fScaleToMoney,2); ?>
+                        </td>
+                        <td class=" align-center">
+                            <?php echo number_format($v->fScale,2); ?>
+                        </td>
+                        <td class=" align-center">
+                            <?php echo number_format($v->fAddScale,2); ?>
+                        </td>
+
                     </tr>
                 <?php } ?>
             <?php } else { ?>
