@@ -64,6 +64,7 @@ $arr = array(
 				'text' => $lang['nc_normal_handle'],
 				'list' => array(
 					array('args'=>'welcome,dashboard,dashboard',			'text'=>'系统总览'),
+					array('args'=>'chartPage,dashboard,dashboard',			'text'=>'图表'),
 //					array('args'=>'aboutus,dashboard,dashboard',			'text'=>$lang['nc_aboutus']),
 //					array('args'=>'base,setting,dashboard',	'text'=>$lang['nc_web_set']),
 //					array('args'=>'member,member,dashboard',				'text'=>$lang['nc_member_manage']),

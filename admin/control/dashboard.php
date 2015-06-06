@@ -44,6 +44,10 @@ class dashboardControl extends SystemControl{
 		Tpl::output('admin_info',$admin_info);
 		Tpl::showpage('welcome');
 	}
+
+    public function chartPageOp(){
+         Tpl::showpage('chartPage');
+    }
 	
 	/**
 	 * 关于我们
@@ -534,5 +538,9 @@ class dashboardControl extends SystemControl{
     public function chartdetailOp(){
         $func = $_GET['opt'].'chartOp';
         echo json_encode($this->$func($_GET['type']));
+    }
+
+    public function timelineOp(){
+        Tpl::showpage('timeline');
     }
 }

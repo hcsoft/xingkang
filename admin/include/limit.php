@@ -9,6 +9,9 @@
  */
 defined('InShopNC') or exit('Access Invalid!');
 $_limit =  array(
+	array('name'=>'图表', 'child'=>array(
+		array('name'=>'图表', 'op'=>'chartPage', 'act'=>'dashboard')
+	)),
 	array('name'=>$lang['nc_config'], 'child'=>array(
 		array('name'=>$lang['nc_web_set'], 'op'=>null, 'act'=>'setting'),
 		array('name'=>$lang['nc_web_account_syn'], 'op'=>null, 'act'=>'account'),
@@ -25,7 +28,6 @@ $_limit =  array(
 		)),
 	array('name'=>$lang['nc_goods'], 'child'=>array(
 		array('name'=>$lang['nc_goods_manage'], 'op'=>null, 'act'=>'goods'),
-        array('name'=>$lang['nc_goods_manage'], 'op'=>null, 'act'=>'goods'),
         array('name'=>'库存管理', 'op'=>'stock', 'act'=>'goods'),
 		array('name'=>$lang['nc_class_manage'], 'op'=>null, 'act'=>'goods_class'),
 		array('name'=>$lang['nc_brand_manage'], 'op'=>null, 'act'=>'brand'),
