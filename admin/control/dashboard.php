@@ -541,6 +541,6 @@ class dashboardControl extends SystemControl{
     }
 
     public function timelineOp(){
-        Tpl::showpage('timeline');
+        Tpl::showpage('timeline-new');
     }
 }
