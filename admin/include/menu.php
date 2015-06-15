@@ -76,7 +76,9 @@ $arr = array(
 			1=>array(
 				'nav' => 'chart',
 				'text' => '图表',
+				'list' => array(
 				array('args'=>'chartPage,dashboard,dashboard',			'text'=>'图表'),
+				)
 			),
 			2 => array(
 				'nav' => 'setting',
