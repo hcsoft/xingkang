@@ -703,7 +703,7 @@ class goodsControl extends SystemControl
                             convert(date,dPrice_EndDate) 'dPrice_EndDate',
                             sPrice_Person ,
                             [iPrice_State] ,
-                            convert(date,dPrice_CheckDate) 'dPrice_CheckDate' ,
+                            convert(date,dPrice_CheckDate) 'date1' ,
                             sPrice_CheckPerson ,
                             [OrgID] ,
                             [Unit] ,
