@@ -18,45 +18,41 @@ $arr = array(
 			0 => array(
 				'args' 	=> 'dashboard',
 				'text' 	=> $lang['nc_console']),
-			1=>array(
-				'args' => 'chart',
-				'text' => '图表'
-			),
-			2 => array(
+			1 => array(
 				'args' 	=> 'setting',
 				'text' 	=> $lang['nc_config']),
 
-        3 => array(
+        2 => array(
             'args' 	=> 'goods',
             'text' 	=> $lang['nc_goods']),
-        4 => array(
+        3 => array(
             'args' 	=> 'store',
             'text' 	=> $lang['nc_store']),
-        5 => array(
+        4 => array(
             'args'	=> 'member',
             'text'	=> $lang['nc_member']),
-        6 => array(
+        5 => array(
             'args' 	=> 'trade',
             'text'	=> $lang['nc_trade']),
-        7 => array(
+        6 => array(
             'args'	=> 'website',
             'text' 	=> $lang['nc_website']),
-        8 => array(
+        7 => array(
             'args'	=> 'operation',
             'text'	=> $lang['nc_operation']),
-        9 => array(
+        8 => array(
             'args'	=> 'stat',
             'text'	=> $lang['nc_stat']),
-        10 => array(
+            9 => array(
                 'args'	=> 'healthplatform',
                 'text'	=> $lang['nc_healthplatform']),
-        11 => array(
+            10 => array(
                 'args'	=> 'storehouse',
                 'text'	=> '仓库'),
-        12 => array(
+            11 => array(
                 'args'	=> 'community',
                 'text'	=> '社区'),
-        13 => array(
+            12 => array(
                 'args' => 'finance',
                 'text' => '财务'
             )
@@ -68,7 +64,7 @@ $arr = array(
 				'text' => $lang['nc_normal_handle'],
 				'list' => array(
 					array('args'=>'welcome,dashboard,dashboard',			'text'=>'系统总览'),
-
+					array('args'=>'chartPage,dashboard,dashboard',			'text'=>'图表'),
 //					array('args'=>'aboutus,dashboard,dashboard',			'text'=>$lang['nc_aboutus']),
 //					array('args'=>'base,setting,dashboard',	'text'=>$lang['nc_web_set']),
 //					array('args'=>'member,member,dashboard',				'text'=>$lang['nc_member_manage']),
@@ -77,14 +73,7 @@ $arr = array(
 //					array('args'=>'index,order,dashboard',			        'text'=>$lang['nc_order_manage']),
 				)
 			),
-			1=>array(
-				'nav' => 'chart',
-				'text' => '图表',
-				'list' => array(
-				array('args'=>'chartPage,dashboard,dashboard',			'text'=>'图表'),
-				)
-			),
-			2 => array(
+			1 => array(
 				'nav' => 'setting',
 				'text' => $lang['nc_config'],
 				'list' => array(
@@ -104,7 +93,7 @@ $arr = array(
 				)
 			),
 
-			3 => array(
+			2 => array(
 				'nav' => 'goods',
 				'text' => $lang['nc_goods'],
 				'list' => array(
@@ -118,7 +107,7 @@ $arr = array(
 					array('args'=>'changeprice,goods,goods',						'text'=>'商品调价审核'),
 				)
 			),
-			4 => array(
+			3 => array(
 				'nav' => 'store',
 				'text' => $lang['nc_store'],
 				'list' => array(
@@ -129,7 +118,7 @@ $arr = array(
 					array('args'=>'stracelist,sns_strace,store',			'text'=>$lang['nc_s_snstrace']),
 				)
 			),
-			5 => array(
+			4 => array(
 				'nav' => 'member',
 				'text' => $lang['nc_member'],
 				'list' => array(
@@ -146,7 +135,7 @@ $arr = array(
                     array('args'=>'check,member,member',			'text'=>'会员储值积分对账')
 				)
 			),
-			6 => array(
+			5 => array(
 				'nav' => 'trade',
 				'text' => $lang['nc_trade'],
 				'list' => array(
@@ -159,7 +148,7 @@ $arr = array(
 					array('args'=>'complain_new_list,complain,trade',		'text'=>$lang['nc_complain_config']),					
 				)
 			),
-			7 => array(
+			6 => array(
 				'nav' => 'website',
 				'text' => $lang['nc_website'],
 				'list' => array(
@@ -172,7 +161,7 @@ $arr = array(
 					array('args'=>'rec_list,rec_position,website',			'text'=>$lang['nc_admin_res_position']),
 				)
 			),
-			8 => array(
+			7 => array(
 				'nav' => 'operation',
 				'text' => $lang['nc_operation'],
 				'list' => array(
@@ -188,7 +177,7 @@ $arr = array(
 					array('args'=>'pointprod,pointprod,operation',				'text'=>$lang['nc_pointprod']),
 				)
 			),
-			9 => array(
+			8 => array(
 				'nav' => 'stat',
 				'text' => $lang['nc_stat'],
 				'list' => array(
@@ -199,7 +188,7 @@ $arr = array(
 					array('args'=>'refund,stat_aftersale,stat',	'text'=>$lang['nc_stataftersale']),
 				)
 			),
-            10 => array(
+            9 => array(
                 'nav' => 'healthplatform',
                 'text' => '业务督导',
                 'list' => array(
@@ -208,7 +197,7 @@ $arr = array(
                     array('args'=>'test,healthplatform,healthplatform',			'text'=>'测试')
                 )
             ),
-            11 => array(
+            10 => array(
                 'nav' => 'storehouse',
                 'text' => '仓库',
                 'list' => array(
@@ -216,7 +205,7 @@ $arr = array(
                     array('args'=>'sum,storehouse,storehouse',			'text'=>'仓库单据汇总')
                 )
             ),
-            12 => array(
+            11 => array(
                 'nav' => 'community',
                 'text' => '社区',
                 'list' => array(
@@ -230,7 +219,7 @@ $arr = array(
                     array('args'=>'sum,healthfile,community',	'text'=>'健康档案汇总'),
                 )
             ),
-            13 => array(
+            12 => array(
                 'nav' => 'finance',
                 'text' => '财务',
                 'list' => array(
