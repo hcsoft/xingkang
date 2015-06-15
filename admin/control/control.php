@@ -217,7 +217,7 @@ class SystemControl{
 			foreach ($v['list'] as $xk=>$xv) {
 				$tmp = explode(',',$xv['args']);
 				//以下几项不需要验证
-				$except = array('index','dashboard','login','common');
+				$except = array('index','login','common');
 //                $except = array();
 				if (in_array($tmp[1],$except)) continue;
 				if (!in_array($tmp[1],$this->permission) && !in_array($tmp[1].'.'.$tmp[0],$this->permission)){
