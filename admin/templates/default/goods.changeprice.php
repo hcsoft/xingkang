@@ -122,7 +122,7 @@
                                     foreach ($output['map_iPrice_State'] as $k => $v) {
                                         ?>
                                         <option value="<?php echo $k; ?>"
-                                                <?php if ($k == $_GET['iPrice_State']){ ?>selected<?php } ?>><?php echo $v; ?></option>
+                                                <?php if ($k === $_GET['iPrice_State']){ ?>selected<?php } ?>><?php echo $v; ?></option>
                                     <?php } ?>
                                 </select>
                             </td>
