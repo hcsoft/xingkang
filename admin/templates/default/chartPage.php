@@ -164,6 +164,9 @@
     </div>
     <div class="fixed-empty"></div>
     <div class="info-panel">
+        <?php
+        $charthtmls = array();
+        $charthtmls[0] = '
         <dl class="member">
             <dt>
             <div id="orgtabs-1" class="showdiv">
@@ -183,7 +186,8 @@
                     <li class="w34pre none"><a href="#orgtabs-3">列表</a></li>
                 </ul>
             </dd>
-        </dl>
+        </dl>';
+        $charthtmls[1] = '
         <dl class="member">
             <div class="rightpanel" text="sale">
                 <input type="radio" class="selectradio" onclick="updatesale(this,2)" id="sale_id1" name="sale_id" value="1" checked><label for="sale_id1">全部</label>
@@ -213,8 +217,8 @@
                 </ul>
             </dd>
 
-        </dl>
-
+        </dl>';
+$charthtmls[2] = '
         <dl class="member">
             <dt>
             <div id="membernumbertabs-1" class="showdiv">
@@ -234,8 +238,8 @@
                     <li class="w34pre none"><a href="#membernumbertabs-3">列表</a></li>
                 </ul>
             </dd>
-        </dl>
-
+        </dl>';
+$charthtmls[5] = '
         <dl class="member">
             <div class="rightpanel" text="healthfile">
                 <input type="radio" class="selectradio" onclick="updatehealthfile(this,0)" id="healthfile_id1" name="healthfile_id" value="1" checked><label for="healthfile_id1">全部</label>
@@ -265,8 +269,8 @@
                 </ul>
             </dd>
 
-        </dl>
-
+        </dl>';
+$charthtmls[4] = '
         <dl class="member">
             <div class="rightpanel" text="member">
                 <input type="radio" class="selectradio" onclick="updatemember(this,0)" id="member_id1" name="member_id" value="1" checked><label for="member_id1">全部</label>
@@ -296,8 +300,8 @@
                 </ul>
             </dd>
 
-        </dl>
-
+        </dl>';
+$charthtmls[7] = '
         <dl class="member">
             <div class="rightpanel" text="healthfilespot">
                 <input type="radio" class="selectradio" onclick="updatehealthspot(this,0)" id="healthspot_id1" name="healthspot_id" value="1" checked><label for="healthspot_id1">全部</label>
@@ -327,8 +331,8 @@
                 </ul>
             </dd>
 
-        </dl>
-
+        </dl>';
+$charthtmls[6] = '
         <dl class="member">
             <div class="rightpanel" text="consume">
                 <input type="radio" class="selectradio" onclick="updateconsume(this,2)" id="consume_id1" name="consume_id" value="1" checked><label for="consume_id1">全部</label>
@@ -358,8 +362,8 @@
                 </ul>
             </dd>
 
-        </dl>
-
+        </dl>';
+$charthtmls[9] = '
 
         <dl class="member">
             <div class="rightpanel" text="healthbusiness">
@@ -390,9 +394,9 @@
                 </ul>
             </dd>
 
-        </dl>
+        </dl>';
 
-
+$charthtmls[8] = '
         <dl class="member">
             <div class="rightpanel" text="spot">
                 <input type="radio" class="selectradio" onclick="updatespot(this,0)" id="spot_id1" name="spot_id" value="1" checked><label for="spot_id1">全部</label>
@@ -422,9 +426,9 @@
                 </ul>
             </dd>
 
-        </dl>
+        </dl>';
 
-
+$charthtmls[3] = '
         <dl class="member">
             <div class="rightpanel" text="prescription">
                 <input type="radio" class="selectradio" onclick="updateprescriptiondata(this,0)" id="prescription_id1" name="prescription_id" value="1" checked><label for="prescription_id1">全部</label>
@@ -453,7 +457,11 @@
                     <li class="w34pre none"><a href="#prescriptiontabs-3">列表</a></li>
                 </ul>
             </dd>
-        </dl>
+        </dl>';
+        for($i = 0 ; $i<count($charthtmls);$i++){
+            echo $charthtmls[$i];
+        }
+?>
 
 
 
