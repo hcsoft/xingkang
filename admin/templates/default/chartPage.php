@@ -714,7 +714,7 @@ $charthtmls[3] = '
         var type = $(obj).val();
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
             var healthfilechartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总档案数为{point.y}份');
-            updatechart(healthfilechartcfg, '健康档案', '档案数量', '社区', 'healthtabs', gethealthfile,{ pointFormat: '总档案数为{point.y}份',useHTML: true},0,dot);
+            initchart(healthfilechartcfg, '健康档案', '档案数量', '社区', 'healthtabs', gethealthfile,{ pointFormat: '总档案数为{point.y}份',useHTML: true},0,dot);
         });
     }
     function updatespot(obj,dot){
