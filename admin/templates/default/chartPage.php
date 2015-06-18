@@ -687,7 +687,7 @@ $charthtmls[3] = '
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
             console.log(data);
             var salechartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总金额为￥{point.y}元');
-            updatechart(salechartcfg, '收入汇总', '金额', '社区', 'saletabs', getmoney,{ pointFormat: '总金额为￥{point.y}元',useHTML: true},0,dot);
+            initchart(salechartcfg, '收入汇总', '金额', '社区', 'saletabs', getmoney,{ pointFormat: '总金额为￥{point.y}元',useHTML: true},0,dot);
 
         });
     }
@@ -697,7 +697,7 @@ $charthtmls[3] = '
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
             console.log(data);
             var memberchartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总充值金额为￥{point.y}元');
-            updatechart(memberchartcfg, '会员充值情况', '充值金额', '社区', 'membertabs', getincome,{ pointFormat: '总充值金额为￥{point.y}元',useHTML: true},0,dot);
+            initchart(memberchartcfg, '会员充值情况', '充值金额', '社区', 'membertabs', getincome,{ pointFormat: '总充值金额为￥{point.y}元',useHTML: true},0,dot);
         });
     }
 
@@ -707,7 +707,7 @@ $charthtmls[3] = '
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
             console.log(data);
             var consumechartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总消费金额为￥{point.y}元');
-            updatechart(consumechartcfg, '会员消费情况', '消费金额', '社区', 'consumetabs', getconsume,{ pointFormat: '总消费金额为￥{point.y}元',useHTML: true},0,dot);
+            initchart(consumechartcfg, '会员消费情况', '消费金额', '社区', 'consumetabs', getconsume,{ pointFormat: '总消费金额为￥{point.y}元',useHTML: true},0,dot);
         });
     }
     function updatehealthfile(obj,dot){
@@ -725,7 +725,7 @@ $charthtmls[3] = '
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
             console.log(data);
             var spotchartcfg = getData(data,  'name', 'num', ['机构编码', '机构名称'], '总回访数为{point.y}次');
-            updatechart(spotchartcfg, '会员回访情况', '回访数', '社区', 'spottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0,dot);
+            initchart(spotchartcfg, '会员回访情况', '回访数', '社区', 'spottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0,dot);
         });
     }
 
@@ -735,7 +735,7 @@ $charthtmls[3] = '
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
             console.log(data);
             var healthspotchartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总回访数为{point.y}次');
-            updatechart(healthspotchartcfg, '档案回访情况', '回访数', '社区', 'healthspottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0,dot);
+            initchart(healthspotchartcfg, '档案回访情况', '回访数', '社区', 'healthspottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0,dot);
         });
     }
 
@@ -745,7 +745,7 @@ $charthtmls[3] = '
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
             console.log(data);
             var healthbusinessdata = getData(data, 'name', 'num', ['机构编码', '机构名称'], '公卫总业务数为{point.y}次');
-            updatechart(healthbusinessdata, '公卫业务开展情况', '业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0,dot);
+            initchart(healthbusinessdata, '公卫业务开展情况', '业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0,dot);
         });
     }
 
@@ -756,7 +756,6 @@ $charthtmls[3] = '
             console.log(data);
             var prescriptiondata = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总门诊人次为{point.y}次');
             initchart(prescriptiondata, '门诊人次', '数量', '社区', 'prescriptiontabs', getprescription,{ pointFormat: '总门诊人次为{point.y}次',useHTML: true},0,0);
-
         });
     }
 
