@@ -571,17 +571,14 @@ $charthtmls[3] = '
         return 'aaaa';
     }
     function initchart(orgchartcfg, titletext, numtext, ytext, tabname, counttext,tooltip,colorindex ,dot) {
-        console.log(orgchartcfg);
-        console.log(counttext);
         var colors = [];
         if(colorindex>=0 && colorarray[colorindex]){
             colors = colorarray[colorindex]
         }else{
             colors = colorarray[2];
         }
-        console.log(colorindex);
-        console.log(colors);
         //初始化饼图
+        resetDiv("#"+tabname + '-1');
         charts[titletext+'_1'] = new Highcharts.Chart({
             chart: {
                 renderTo: tabname + '-1',
@@ -616,6 +613,7 @@ $charthtmls[3] = '
             }]
         });
         //初始化柱状图
+        resetDiv("#"+tabname + '-2');
         charts[titletext+'_2'] = new Highcharts.Chart({
             chart: {
                 renderTo: tabname + '-2',
@@ -661,9 +659,7 @@ $charthtmls[3] = '
         var html = '';
         var sum = 0;
         for (var i = 0; i < orgchartcfg.piedata.length; i++) {
-            console.log(orgchartcfg.piedata[i]);
             var txt = '';
-            console.log(typeof(counttext));
             if(typeof(counttext) =='function'){
                 txt = counttext(orgchartcfg.piedata[i]);
             }else{
@@ -681,11 +677,16 @@ $charthtmls[3] = '
         $("#" + tabname + "-3").html(html);
     }
 
+    function resetDiv(selector){
+        $(selector).html('');
+        $(selector).removeClass();
+        $(selector).removeClass();
+    }
+
     function updatesale(obj,dot){
         var opt = $(obj).parent().attr("text");
         var type = $(obj).val();
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
-            console.log(data);
             var salechartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总金额为￥{point.y}元');
             initchart(salechartcfg, '收入汇总', '金额', '社区', 'saletabs', getmoney,{ pointFormat: '总金额为￥{point.y}元',useHTML: true},0,dot);
 
@@ -695,7 +696,6 @@ $charthtmls[3] = '
         var opt = $(obj).parent().attr("text");
         var type = $(obj).val();
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
-            console.log(data);
             var memberchartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总充值金额为￥{point.y}元');
             initchart(memberchartcfg, '会员充值情况', '充值金额', '社区', 'membertabs', getincome,{ pointFormat: '总充值金额为￥{point.y}元',useHTML: true},0,dot);
         });
@@ -705,7 +705,6 @@ $charthtmls[3] = '
         var opt = $(obj).parent().attr("text");
         var type = $(obj).val();
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
-            console.log(data);
             var consumechartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总消费金额为￥{point.y}元');
             initchart(consumechartcfg, '会员消费情况', '消费金额', '社区', 'consumetabs', getconsume,{ pointFormat: '总消费金额为￥{point.y}元',useHTML: true},0,dot);
         });
@@ -714,7 +713,6 @@ $charthtmls[3] = '
         var opt = $(obj).parent().attr("text");
         var type = $(obj).val();
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
-            console.log(data);
             var healthfilechartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总档案数为{point.y}份');
             updatechart(healthfilechartcfg, '健康档案', '档案数量', '社区', 'healthtabs', gethealthfile,{ pointFormat: '总档案数为{point.y}份',useHTML: true},0,dot);
         });
@@ -723,7 +721,6 @@ $charthtmls[3] = '
         var opt = $(obj).parent().attr("text");
         var type = $(obj).val();
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
-            console.log(data);
             var spotchartcfg = getData(data,  'name', 'num', ['机构编码', '机构名称'], '总回访数为{point.y}次');
             initchart(spotchartcfg, '会员回访情况', '回访数', '社区', 'spottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0,dot);
         });
@@ -733,7 +730,6 @@ $charthtmls[3] = '
         var opt = $(obj).parent().attr("text");
         var type = $(obj).val();
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
-            console.log(data);
             var healthspotchartcfg = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总回访数为{point.y}次');
             initchart(healthspotchartcfg, '档案回访情况', '回访数', '社区', 'healthspottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0,dot);
         });
@@ -743,7 +739,6 @@ $charthtmls[3] = '
         var opt = $(obj).parent().attr("text");
         var type = $(obj).val();
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
-            console.log(data);
             var healthbusinessdata = getData(data, 'name', 'num', ['机构编码', '机构名称'], '公卫总业务数为{point.y}次');
             initchart(healthbusinessdata, '公卫业务开展情况', '业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0,dot);
         });
@@ -753,7 +748,6 @@ $charthtmls[3] = '
         var opt = $(obj).parent().attr("text");
         var type = $(obj).val();
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
-            console.log(data);
             var prescriptiondata = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总门诊人次为{point.y}次');
             initchart(prescriptiondata, '门诊人次', '数量', '社区', 'prescriptiontabs', getprescription,{ pointFormat: '总门诊人次为{point.y}次',useHTML: true},0,0);
         });
