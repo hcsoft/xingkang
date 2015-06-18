@@ -10,7 +10,7 @@
 defined('InShopNC') or exit('Access Invalid!');
 $_limit =  array(
 	array('name'=>'图表', 'child'=>array(
-		array('name'=>'图表', 'op'=>'chartPage', 'act'=>'dashboard')
+		array('name'=>'图表', 'op'=>'chartpage', 'act'=>'dashboard')
 	)),
 	array('name'=>$lang['nc_config'], 'child'=>array(
 		array('name'=>$lang['nc_web_set'], 'op'=>null, 'act'=>'setting'),

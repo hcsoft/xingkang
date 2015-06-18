@@ -107,6 +107,7 @@ class SystemControl{
 		//以下几项不需要验证
 		$tmp = array('index','login','common','cms_base');
 		if (in_array($act,$tmp)) return true;
+
 		if (in_array($act,$permission) || in_array("$act.$op",$permission)){
 			return true;
 		}else{
@@ -121,6 +122,8 @@ class SystemControl{
 				}
 			}
 		}
+		Log::record( json_encode($permission), Log::ERR);
+		showMessage(json_encode($op),'','html','succ',0);
 		showMessage(Language::get('nc_assign_right'),'','html','succ',0);
 	}
 

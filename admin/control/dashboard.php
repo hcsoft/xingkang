@@ -45,7 +45,7 @@ class dashboardControl extends SystemControl{
 		Tpl::showpage('welcome');
 	}
 
-    public function chartPageOp(){
+    public function chartpageOp(){
          Tpl::showpage('chartPage');
     }
 	

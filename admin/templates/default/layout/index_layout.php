@@ -35,14 +35,15 @@ $(document).ready(function(){
 	pagestyle();
 	$(window).resize(pagestyle);
 	//turn location
-	if($.cookie('now_location_act') != null){
+	var currentuser = '<?php echo $output['admin_info']['id']?>';
+	if($.cookie('now_location_act') != null && $.cookie('now_location_user') ==currentuser){
 		openItem($.cookie('now_location_op')+','+$.cookie('now_location_act')+','+$.cookie('now_location_nav'));
 	}else{
 		$('#mainMenu>ul').first().css('display','block');
 		//第一次进入后台时，默认定到欢迎界面
 		$('#item_welcome').addClass('selected');
         eval( $("#nav >ul >li:first-child > a").attr("onclick"));
-		$('#workspace').attr('src','index.php?act=dashboard&op=welcome');
+//		$('#workspace').attr('src','index.php?act=dashboard&op=welcome');
 	}
 	$('#iframe_refresh').click(function(){
 		var fr = document.frames ? document.frames("workspace") : document.getElementById("workspace").contentWindow;;
@@ -66,7 +67,7 @@ function addBookmark(url, label) {
 function openItem(args){
     closeBg();
 	//cookie
-	
+	var currentuser = '<?php echo $output['admin_info']['id']?>';
 	if($.cookie('<?php echo COOKIE_PRE?>sys_key') === null){
 		location.href = 'index.php?act=login&op=login';
 		return false;
@@ -98,6 +99,7 @@ function openItem(args){
 		op  = spl[0];
 		act = spl[1];
 		nav = spl[2];
+
 		first_obj = $('#sort_'+nav+'>li>dl>dd>ol>li').first().children('a');
 		$(first_obj).addClass('selected');		
 		//crumbs
@@ -105,13 +107,18 @@ function openItem(args){
 	}else{
 		//左侧菜单事件
 		//location
-		$.cookie('now_location_nav',nav);
-		$.cookie('now_location_act',act);
-		$.cookie('now_location_op',op);
+//		$.cookie('now_location_nav',nav);
+//		$.cookie('now_location_act',act);
+//		$.cookie('now_location_op',op);
+//		$.cookie('now_location_user',currentuser);
 		$("a[name='item_"+op+act+"']").addClass('selected');
 		//crumbs
 		$('#crumbs').html('<span>'+$('#nav_'+nav+' > span').html()+'</span><span class="arrow">&nbsp;</span><span>'+$('#item_'+op+act).html()+'</span>');
 	}
+	$.cookie('now_location_nav',nav);
+	$.cookie('now_location_act',act);
+	$.cookie('now_location_op',op);
+	$.cookie('now_location_user',currentuser);
 	src = 'index.php?act='+act+'&op='+op;
 	$('#workspace').attr('src',src);
 
