@@ -515,8 +515,8 @@
             var healthspotchartcfg = getData(data['healthspotdata'], 'name', 'num', ['机构编码', '机构名称'], '总回访数为{point.y}次');
             initchart(healthspotchartcfg, '档案回访情况', '回访数', '社区', 'healthspottabs', getspot,{ pointFormat: '总回访数为{point.y}次',useHTML: true},0,0);
 
-            var healthbusinessdata = getData(data['healthbusinessdata'], 'name', 'num', ['机构编码', '机构名称'], '总业务数为{point.y}次');
-            initchart(healthbusinessdata, '业务开展情况', '业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0,0);
+            var healthbusinessdata = getData(data['healthbusinessdata'], 'name', 'num', ['机构编码', '机构名称'], '公卫总业务数为{point.y}次');
+            initchart(healthbusinessdata, '公卫业务开展情况', '公卫业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0,0);
 
             var membernumber = getData(data['membernumber'], 'name', 'num', ['机构编码', '机构名称'], '总会员数为{point.y}');
             initchart(membernumber, '会员分布情况', '数量', '社区', 'membernumbertabs', gethealthbusiness,{ pointFormat: '总会员数为{point.y}',useHTML: true},0,0);
@@ -703,8 +703,8 @@
         var type = $(obj).val();
         $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
             console.log(data);
-            var healthbusinessdata = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总业务数为{point.y}次');
-            updatechart(healthbusinessdata, '业务开展情况', '业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0,dot);
+            var healthbusinessdata = getData(data, 'name', 'num', ['机构编码', '机构名称'], '公卫总业务数为{point.y}次');
+            updatechart(healthbusinessdata, '公卫业务开展情况', '业务数量', '社区', 'healthbusinesstabs', gethealthbusiness,{ pointFormat: '总业务为{point.y}次',useHTML: true},0,dot);
         });
     }
 
