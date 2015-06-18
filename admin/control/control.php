@@ -122,8 +122,8 @@ class SystemControl{
 				}
 			}
 		}
-		Log::record( json_encode($permission), Log::ERR);
-		showMessage(json_encode($op),'','html','succ',0);
+//		Log::record( json_encode($permission), Log::ERR);
+//		showMessage(json_encode($op),'','html','succ',0);
 		showMessage(Language::get('nc_assign_right'),'','html','succ',0);
 	}
 
