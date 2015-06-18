@@ -510,6 +510,39 @@ class dashboardControl extends SystemControl{
         return $healthbusinesslist;
     }
 
+    private function prescriptionchartOp($type){
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        //查询健康档案情况
+        $datesql = '';
+        if($type=='2'){
+            $datesql = ' and a.ClinicDate>= \''.date('Y-m-d',time()). '\' and a.ClinicDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='3'){
+            $datesql = ' and a.ClinicDate>= \''.date('Y-m-1',time()). '\' and a.ClinicDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='4'){
+            $datesql = ' and a.ClinicDate>= \''.date('Y-1-1',time()). '\' and a.ClinicDate< \''.date('Y-m-d',strtotime('+1 day')).'\'';
+        }else if($type=='5'){
+            $datesql = ' and a.ClinicDate>= \''.date('Y-m-d',strtotime('-1 day')). '\' and a.ClinicDate< \''.date('Y-m-d',time()).'\'';
+        }else if($type=='6'){
+            $datesql = ' and a.ClinicDate>= \''.date('Y-m-1' ,strtotime(date('Y-m-01')) - 86400 ). '\' and a.ClinicDate< \''.date('Y-m-1',time()).'\'';
+        }else if($type=='7'){
+            $datesql = ' and a.ClinicDate>= \''.date('Y-1-1',strtotime('-1 year')). '\' and a.ClinicDate< \''.date('Y-1-1',time()).'\'';
+        }
+        $sql = "select  b.id , b.name , count(1) as num
+                    from  Center_ClinicLog a   left join  Organization b  on a.orgid = b.id
+                    where  a.orgid in (select orgid from map_org_wechat) $datesql
+              group by b.id , b.name having count(1)  >0 order by count(1)  desc  ";
+        $stmt = $conn->query($sql);
+        $healthfilelist = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $row->details= array();
+            array_push($healthfilelist, $row);
+        }
+
+        return $healthfilelist;
+    }
+
+
+
     public function chartOp(){
         $statistics = array();
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
@@ -531,6 +564,8 @@ class dashboardControl extends SystemControl{
         $statistics['healthbusinessdata'] = $this->healthbusinesschartOp('1');
         //查询会员分布情况
         $statistics['membernumber'] = $this->membernumchartOp('1');
+        //查询门诊人次
+        $statistics['prescriptiondata'] = $this->prescriptionchartOp('1');
         echo json_encode($statistics);
         exit;
     }

@@ -425,6 +425,36 @@
         </dl>
 
 
+        <dl class="member">
+            <div class="rightpanel" text="prescription">
+                <input type="radio" class="selectradio" onclick="updateprescriptiondata(this,0)" id="prescription_id1" name="prescription_id" value="1" checked><label for="prescription_id1">全部</label>
+                <input type="radio" class="selectradio" onclick="updateprescriptiondata(this,0)" id="prescription_id2" name="prescription_id" value="2"><label for="prescription_id2">今天</label>
+                <input type="radio" class="selectradio" onclick="updateprescriptiondata(this,0)" id="prescription_id3" name="prescription_id" value="3"><label for="prescription_id3">本月</label>
+                <input type="radio" class="selectradio" onclick="updateprescriptiondata(this,0)" id="prescription_id4" name="prescription_id" value="4"><label for="prescription_id4">本年</label>
+                <input type="radio" class="selectradio" onclick="updateprescriptiondata(this,0)" id="prescription_id5" name="prescription_id" value="5"><label for="prescription_id5">昨天</label>
+                <input type="radio" class="selectradio" onclick="updateprescriptiondata(this,0)" id="prescription_id6" name="prescription_id" value="6"><label for="prescription_id6">上月</label>
+                <input type="radio" class="selectradio" onclick="updateprescriptiondata(this,0)" id="prescription_id7" name="prescription_id" value="7"><label for="prescription_id7">上年</label>
+            </div>
+            <dt>
+            <div id="prescriptiontabs-1" class="showdiv">
+
+            </div>
+            <div id="prescriptiontabs-2" class="showdiv">
+
+            </div>
+            <div id="prescriptiontabs-3" class="showdiv">
+                <h1 style="text-align: center">门诊人次</h1>
+            </div>
+            </dt>
+            <dd>
+                <ul>
+                    <li class="w33pre none"><a href="#prescriptiontabs-1">饼图</a></li>
+                    <li class="w33pre none"><a href="#prescriptiontabs-2">柱状图</a></li>
+                    <li class="w34pre none"><a href="#prescriptiontabs-3">列表</a></li>
+                </ul>
+            </dd>
+        </dl>
+
 
 
 
@@ -520,6 +550,9 @@
 
             var membernumber = getData(data['membernumber'], 'name', 'num', ['机构编码', '机构名称'], '总会员数为{point.y}');
             initchart(membernumber, '会员分布情况', '数量', '社区', 'membernumbertabs', gethealthbusiness,{ pointFormat: '总会员数为{point.y}',useHTML: true},0,0);
+
+            var prescriptiondata = getData(data['prescriptiondata'], 'name', 'num', ['机构编码', '机构名称'], '总门诊人次为{point.y}次');
+            initchart(prescriptiondata, '门诊人次', '数量', '社区', 'prescriptiontabs', getprescription,{ pointFormat: '总门诊人次为{point.y}次',useHTML: true},0,0);
 
             $(".member").tabs();
             $(".detailtr").tooltip({content:gettext,track :true,tooltipClass:'mytooltip'});
@@ -708,6 +741,17 @@
         });
     }
 
+    function updateprescriptiondata(obj,dot){
+        var opt = $(obj).parent().attr("text");
+        var type = $(obj).val();
+        $.getJSON("index.php?act=dashboard&op=chartdetail",{'opt':opt,'type':type}, function (data) {
+            console.log(data);
+            var prescriptiondata = getData(data, 'name', 'num', ['机构编码', '机构名称'], '总门诊人次为{point.y}次');
+            initchart(prescriptiondata, '门诊人次', '数量', '社区', 'prescriptiontabs', getprescription,{ pointFormat: '总门诊人次为{point.y}次',useHTML: true},0,0);
+
+        });
+    }
+
     function updatechart(data, titletext, numtext, ytext, tabname, counttext,tooltip,colorindex,dot) {
         //更新饼图
         charts[titletext+'_1'].series[0].setData(data.piedata);
@@ -761,7 +805,9 @@
     function gethealthbusiness(data){
         return '总业务数为'+data.y+"次";
     }
-
+    function getprescription(data){
+        return '总门诊人次为'+data.y+"次";
+    }
     function gettext(obj){
         var counttext = $(this).attr("counttext").replace(/\?/, $(this).attr("count"));
         return '<b>' + $(this).children(":first-child").text()+ '</b>&nbsp;&nbsp;' + counttext +unescape($(this).attr("text"));
