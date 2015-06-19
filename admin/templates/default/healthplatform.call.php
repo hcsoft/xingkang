@@ -144,6 +144,7 @@
                 <th>姓名</th>
                 <th>性别</th>
                 <th>出生日期</th>
+                <th>手机</th>
                 <th>联系电话</th>
                 <th>地址</th>
                 <th>身份证</th>
@@ -167,6 +168,8 @@
                                 echo '女';
                             } ?></td>
                         <td class="nowrap"><?php echo substr($v['member_birthday'], 0, 10); ?></td>
+                        <td class="nowrap"><span
+                                style="display: inline-block;color:blue;"><?php echo $v['Mobile']; ?></span></td>
                         <td class="nowrap"><span
                                 style="display: inline-block;color:blue;"><?php echo $v['sLinkPhone']; ?></span></td>
                         <td class="nowrap"><?php echo $v['sAddress']; ?></td>
