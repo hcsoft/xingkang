@@ -168,7 +168,7 @@
                             } ?></td>
                         <td class="nowrap"><?php echo substr($v['member_birthday'], 0, 10); ?></td>
                         <td class="nowrap"><span
-                                style="display: inline-block;color:blue;"><?php echo $v['Mobile']; ?></span></td>
+                                style="display: inline-block;color:blue;"><?php echo $v['sLinkPhone']; ?></span></td>
                         <td class="nowrap"><?php echo $v['sAddress']; ?></td>
                         <td class="nowrap"><?php echo $v['sIDCard']; ?></td>
                         <td class="nowrap"><?php echo substr($v['LastPayDate'], 0, 10); ?></td>
@@ -240,8 +240,8 @@
         <form>
             <input type="hidden" id="callid" name="callid">
 
-            <p>回访时间：<input style="color:blue;" id="spotdate" name="spotdate" readonly
-                           value="<?php echo date('Y-m-d', time()) ?>"></p>
+            <p>回访时间：<input style="color:blue;" id="spotdate" name="spotdate"
+                           value="<?php echo date('Y-m-d', time()) ?>" ></p>
 
             <p>回访结果：<input id="spotresult_pass" name="spotresult" type="radio" value="真档" checked>
                 <label for="spotresult_pass" style="cursor:pointer">真档</label>
