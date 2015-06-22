@@ -147,6 +147,8 @@ class healthplatformControl extends SystemControl
     }
 
 
+
+
     public function ajaxOp()
     {
         //spotcheck_spot
@@ -165,6 +167,7 @@ class healthplatformControl extends SystemControl
         }
         exit;
     }
+
 
     public function statisticalOp()
     {
@@ -263,5 +266,162 @@ class healthplatformControl extends SystemControl
         Tpl::output('test', var_dump($test->tableInfo('sam_taxempcode')));
         Tpl::showpage('healthplatform.test');
     }
+
+
+    public function calldetailajaxOp(){
+
+        exit();
+    }
+
+
+    public function savecallajaxOp()
+    {
+        //spotcheck_spot
+        try {
+            $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+            $id = $_REQUEST['callid'];
+            $admin_info = $this->getAdminInfo();
+            $opt = $admin_info['id'];
+            $spotdate = $_REQUEST['spotdate'];
+            $result = $_REQUEST['spotresult'] == null ?"":$_REQUEST['spotresult'];
+            $reason = $_REQUEST['reason'] == null ?"":$_REQUEST['reason'];
+            $sql = " insert into call_main (id,memberid,spotdate,status,result,inputdate,spotopt) values(newid(),'$id','$spotdate','$result','$reason',getdate(),'$opt')";
+            $conn->exec($sql);
+            echo json_encode(array('success' => true, 'msg' => '保存成功!'));
+        } catch (Exception $e) {
+            echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+        }
+        exit;
+    }
+
+
+    public function callOp()
+    {
+        $lang = Language::getLangContent ();
+        $orderbys = array(
+            array('txt'=>'卡号','col'=> ' member_id '),
+            array('txt'=>'预存余额','col'=> ' available_predeposit '),
+            array('txt'=>'赠送余额','col'=> ' fConsumeBalance '),
+            array('txt'=>'消费积分','col'=> ' member_points '));
+        Tpl::output('orderbys',$orderbys);
+        $model_member = Model ( 'member' );
+        /**
+         * 检索条件
+         */
+        if ($_GET['orgids']) {
+            $condition ['CreateOrgID'] = array (
+                'in',
+                $_GET['orgids']
+            );
+        }
+
+        if (isset($_GET['cardtype']) and $_GET['cardtype'] != '') {
+            $condition ['cardtype'] = $_GET['cardtype'];
+        }
+
+        if (isset($_GET['cardgrade']) and $_GET['cardgrade'] != '') {
+            $condition ['cardgrade'] = $_GET['cardgrade'];
+        }
+
+        if(!isset($_GET['orderby'])){
+            $_GET['orderby'] = '卡号';
+        }
+
+
+        if(!isset($_GET['order'])){
+            $ordersql = 'asc';
+        }else{
+            $ordersql = $_GET['order'];
+        }
+        if($_GET['orderby']){
+            foreach($orderbys as $orderby){
+                if($orderby['txt']==$_GET['orderby']){
+                    $order = $orderby['col'] .' ' . $ordersql;
+                    break;
+                }
+            }
+        }
+        if ($_GET ['search_field_value'] != '') {
+            switch ($_GET ['search_field_name']) {
+                case 'member_name' :
+                    $condition ['member_name'] = array (
+                        'like',
+                        '%' . trim ( $_GET ['search_field_value'] ) . '%'
+                    );
+                    break;
+                case 'member_email' :
+                    $condition ['member_email'] = array (
+                        'like',
+                        '%' . trim ( $_GET ['search_field_value'] ) . '%'
+                    );
+                    break;
+                case 'member_truename' :
+                    $condition ['member_truename'] = array (
+                        'like',
+                        '%' . trim ( $_GET ['search_field_value'] ) . '%'
+                    );
+                    break;
+            }
+        }
+        if ($_GET ['member_id'] != '') {
+            $condition ['member_id'] = array (
+                'like',
+                '%' . trim ( $_GET ['member_id'] ) . '%'
+            );
+        }
+        switch ($_GET ['search_state']) {
+            case 'no_informallow' :
+                $condition ['inform_allow'] = '2';
+                break;
+            case 'no_isbuy' :
+                $condition ['is_buy'] = '0';
+                break;
+            case 'no_isallowtalk' :
+                $condition ['is_allowtalk'] = '0';
+                break;
+            case 'no_memberstate' :
+                $condition ['member_state'] = '0';
+                break;
+        }
+        if ($_GET ['status'] != '') {
+            $status = $_GET ['status'];
+            if($status == '1'){
+                $condition['status']= array('exp',"EXISTS ( select 1 from call_main where memberid = member_id and status = '待核实') ");
+            }else  if($status == '2'){
+                $condition['status']= array('exp',"EXISTS ( select 1 from call_main where memberid = member_id and status = '真档') ");
+            }else  if($status == '3'){
+                $condition['status']= array('exp',"EXISTS ( select 1 from call_main where memberid = member_id and status = '假档') ");
+            }else  if($status == '4'){
+                $condition['status']= array('exp',"EXISTS ( select 1 from call_main where memberid = member_id and status = '未接电话') ");
+            }
+        }
+        /**
+         * 排序
+         */
+//		$order = trim ( $_GET ['search_sort'] );
+        if (empty ( $order )) {
+            $order = 'member_id desc';
+        }
+        $member_list = $model_member->getMemberList ( $condition, '*', 10, $order );
+        /**
+         * 整理会员信息
+         */
+        if (is_array ( $member_list )) {
+            foreach ( $member_list as $k => $v ) {
+                $member_list [$k] ['member_time'] = $v ['member_time'] ? date ( 'Y-m-d H:i:s', $v ['member_time'] ) : '';
+                $member_list [$k] ['member_login_time'] = $v ['member_login_time'] ? date ( 'Y-m-d H:i:s', $v ['member_login_time'] ) : '';
+            }
+        }
+
+
+        Tpl::output ( 'member_id', trim ( $_GET ['member_id'] ) );
+        Tpl::output ( 'search_sort', trim ( $_GET ['search_sort'] ) );
+        Tpl::output ( 'search_field_name', trim ( $_GET ['search_field_name'] ) );
+        Tpl::output ( 'search_field_value', trim ( $_GET ['search_field_value'] ) );
+        Tpl::output ( 'member_list', $member_list );
+        Tpl::output ( 'page', $model_member->showpage () );
+        Tpl::showpage('healthplatform.call');
+    }
+
 
 }

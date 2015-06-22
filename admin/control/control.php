@@ -107,11 +107,12 @@ class SystemControl{
 		//以下几项不需要验证
 		$tmp = array('index','dashboard','login','common','cms_base');
 		if (in_array($act,$tmp)) return true;
+
 		if (in_array($act,$permission) || in_array("$act.$op",$permission)){
 			return true;
 		}else{
 			$extlimit = array('ajax','export_step1');
-			if ((substr($op,0,4) == 'ajax' or in_array($op,$extlimit)) && (in_array($act,$permission) || strpos(serialize($permission),'"'.$act.'.'))){
+			if ((substr($op,-4) == 'ajax' or in_array($op,$extlimit)) && (in_array($act,$permission) || strpos(serialize($permission),'"'.$act.'.'))){
 				return true;
 			}
 			//带前缀的都通过
@@ -121,6 +122,8 @@ class SystemControl{
 				}
 			}
 		}
+//		Log::record( json_encode($permission), Log::ERR);
+//		showMessage(json_encode($op),'','html','succ',0);
 		showMessage(Language::get('nc_assign_right'),'','html','succ',0);
 	}
 
@@ -217,7 +220,7 @@ class SystemControl{
 			foreach ($v['list'] as $xk=>$xv) {
 				$tmp = explode(',',$xv['args']);
 				//以下几项不需要验证
-				$except = array('index','dashboard','login','common');
+				$except = array('index','login','common');
 //                $except = array();
 				if (in_array($tmp[1],$except)) continue;
 				if (!in_array($tmp[1],$this->permission) && !in_array($tmp[1].'.'.$tmp[0],$this->permission)){

@@ -23,6 +23,7 @@ html{ -webkit-text-size-adjust: none;}
 
 /* 宽度\高度\尺寸
 ------------------------------------------------------------------- */
+.nowrap { white-space: nowrap; }
 .w12 { width: 12px; }
 .w24 { width: 24px; }
 .w36 { width: 36px; }

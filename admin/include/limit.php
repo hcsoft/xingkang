@@ -9,6 +9,9 @@
  */
 defined('InShopNC') or exit('Access Invalid!');
 $_limit =  array(
+	array('name'=>'图表', 'child'=>array(
+		array('name'=>'图表', 'op'=>'chartpage', 'act'=>'dashboard')
+	)),
 	array('name'=>$lang['nc_config'], 'child'=>array(
 		array('name'=>$lang['nc_web_set'], 'op'=>null, 'act'=>'setting'),
 		array('name'=>$lang['nc_web_account_syn'], 'op'=>null, 'act'=>'account'),
@@ -25,7 +28,6 @@ $_limit =  array(
 		)),
 	array('name'=>$lang['nc_goods'], 'child'=>array(
 		array('name'=>$lang['nc_goods_manage'], 'op'=>null, 'act'=>'goods'),
-        array('name'=>$lang['nc_goods_manage'], 'op'=>null, 'act'=>'goods'),
         array('name'=>'库存管理', 'op'=>'stock', 'act'=>'goods'),
 		array('name'=>$lang['nc_class_manage'], 'op'=>null, 'act'=>'goods_class'),
 		array('name'=>$lang['nc_brand_manage'], 'op'=>null, 'act'=>'brand'),
@@ -92,6 +94,7 @@ $_limit =  array(
 		array('name'=>$lang['nc_stataftersale'], 	'op'=>null, 'act'=>'stat_aftersale'),
 		)),
     array('name'=>'业务督导', 'child'=>array(
+        array('name'=>'呼叫中心', 'op'=>'call', 'act'=>'healthplatform'),
         array('name'=>'回访抽查', 'op'=>'index', 'act'=>'healthplatform'),
         array('name'=>'统计', 'op'=>'statistical', 'act'=>'healthplatform'),
         array('name'=>'测试', 'op'=>'test', 'act'=>'healthplatform'),

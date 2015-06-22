@@ -64,6 +64,7 @@ $arr = array(
 				'text' => $lang['nc_normal_handle'],
 				'list' => array(
 					array('args'=>'welcome,dashboard,dashboard',			'text'=>'系统总览'),
+					array('args'=>'chartpage,dashboard,dashboard',			'text'=>'图表'),
 //					array('args'=>'aboutus,dashboard,dashboard',			'text'=>$lang['nc_aboutus']),
 //					array('args'=>'base,setting,dashboard',	'text'=>$lang['nc_web_set']),
 //					array('args'=>'member,member,dashboard',				'text'=>$lang['nc_member_manage']),
@@ -191,6 +192,7 @@ $arr = array(
                 'nav' => 'healthplatform',
                 'text' => '业务督导',
                 'list' => array(
+                    array('args'=>'call,healthplatform,healthplatform',			'text'=>'呼叫中心'),
                     array('args'=>'index,healthplatform,healthplatform',			'text'=>'回访抽查'),
                     array('args'=>'statistical,healthplatform,healthplatform',			'text'=>'统计'),
                     array('args'=>'test,healthplatform,healthplatform',			'text'=>'测试')

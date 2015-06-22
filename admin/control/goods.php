@@ -513,7 +513,7 @@ class goodsControl extends SystemControl
             } else {
                 $sPrice_CheckPerson = $_GET['sPrice_CheckPerson'];
                 $dPrice_CheckDate = $_GET['dPrice_CheckDate'];
-                $updatesql = 'update Center_OrgPrice set dPrice_CheckDate = ? , sPrice_CheckPerson = ?  where  iID = ? ';
+                $updatesql = 'update Center_OrgPrice set iPrice_State = 2,dPrice_CheckDate = ? , sPrice_CheckPerson = ?  where  iID = ? ';
                 $stmt = $conn->prepare($updatesql);
                 $stmt->bindValue(1, $dPrice_CheckDate);
                 $stmt->bindValue(2, $sPrice_CheckPerson);
@@ -660,7 +660,7 @@ class goodsControl extends SystemControl
                 $sql = $sql . ' and a.Downloaded =  ' . intval($_GET['Downloaded']) . ' ';
             }
 
-            $updatesql = 'update Center_OrgPrice set dPrice_CheckDate = ? , sPrice_CheckPerson = ?  '. $sql.' ';
+            $updatesql = 'update Center_OrgPrice set iPrice_State = 2, dPrice_CheckDate = ? , sPrice_CheckPerson = ?  '. $sql.' ';
             $stmt = $conn->prepare($updatesql);
             $stmt->bindValue(1, $dPrice_CheckDate);
             $stmt->bindValue(2, $sPrice_CheckPerson);
@@ -898,7 +898,7 @@ class goodsControl extends SystemControl
                             convert(date,dPrice_EndDate) 'dPrice_EndDate',
                             sPrice_Person ,
                             [iPrice_State] ,
-                            convert(date,dPrice_CheckDate) 'dPrice_EndDate' ,
+                            convert(date,dPrice_CheckDate) 'date1' ,
                             sPrice_CheckPerson ,
                             [OrgID] ,
                             [Unit] ,

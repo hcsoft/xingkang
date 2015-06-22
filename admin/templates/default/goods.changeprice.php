@@ -331,7 +331,7 @@
                             <?php echo $output['map_iPrice_State'][$v->iPrice_State] ?>
                         </td>
                         <td class=" align-center">
-                            <?php if (empty($v->dPrice_CheckDate)) {
+                            <?php if (!empty($v->dPrice_CheckDate)) {
                                 echo substr($v->dPrice_CheckDate, 0, 10);
                             } else {
                                 echo '';

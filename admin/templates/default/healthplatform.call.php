@@ -3,17 +3,27 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3><?php echo $lang['member_index_manage'] ?></h3>
+            <h3>呼叫中心</h3>
             <ul class="tab-base">
-                <li><a href="JavaScript:void(0);" class="current"><span><?php echo $lang['nc_manage'] ?></span></a></li>
-                <li><a href="index.php?act=member&op=member_add"><span><?php echo $lang['nc_new'] ?></span></a></li>
+                <li><a href="index.php?act=healthplatform&op=call&status=99"
+                       class="<?php if (!$_GET['status'] || $_GET['status'] == '99') echo 'current'; ?>"><span>全部</span></a>
+                </li>
+                <li><a href="index.php?act=healthplatform&op=call&status=1"
+                       class="<?php if ($_GET['status'] == '1') echo 'current'; ?>"><span>待核实</span></a></li>
+                <li><a href="index.php?act=healthplatform&op=call&status=2"
+                       class="<?php if ($_GET['status'] == '2') echo 'current'; ?>"><span>真档</span></a></li>
+                <li><a href="index.php?act=healthplatform&op=call&status=3"
+                       class="<?php if ($_GET['status'] == '3') echo 'current'; ?>"><span>假档</span></a></li>
+                <li><a href="index.php?act=healthplatform&op=call&status=4"
+                       class="<?php if ($_GET['status'] == '4') echo 'current'; ?>"><span>未接电话</span></a></li>
             </ul>
         </div>
     </div>
     <div class="fixed-empty"></div>
     <form method="get" name="formSearch" id="formSearch">
-        <input type="hidden" value="member" name="act">
-        <input type="hidden" value="member" name="op">
+        <input type="hidden" value="healthplatform" name="act">
+        <input type="hidden" value="call" name="op">
+        <input type="hidden" value="<?php echo $_GET['status']?>" name="status">
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
@@ -37,16 +47,16 @@
                 <td>卡类型</td>
                 <td><select name="cardtype">
                         <option value="">全部</option>
-                        <option value="0" <?php if ('0'== $_GET['cardtype']){ ?>selected<?php } ?>>普通卡</option>
-                        <option value="1" <?php if ('1'== $_GET['cardtype']){ ?>selected<?php } ?>>储值卡</option>
+                        <option value="0" <?php if ('0' == $_GET['cardtype']){ ?>selected<?php } ?>>普通卡</option>
+                        <option value="1" <?php if ('1' == $_GET['cardtype']){ ?>selected<?php } ?>>储值卡</option>
                     </select>
                 </td>
                 <td>卡级别</td>
                 <td><select name="cardgrade">
                         <option value="">全部</option>
-                        <option value="0"  <?php if ('0'== $_GET['cardgrade']){ ?>selected<?php } ?>>健康卡</option>
-                        <option value="1"  <?php if ('1'== $_GET['cardgrade']){ ?>selected<?php } ?>>健康金卡</option>
-                        <option value="2" <?php if ('2'== $_GET['cardgrade']){ ?>selected<?php } ?>>健康钻卡</option>
+                        <option value="0" <?php if ('0' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康卡</option>
+                        <option value="1" <?php if ('1' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康金卡</option>
+                        <option value="2" <?php if ('2' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康钻卡</option>
                     </select>
                 </td>
 
@@ -56,22 +66,25 @@
                         <a href="index.php?act=member&op=member"
                            class="btns "><span><?php echo $lang['nc_cancel_search'] ?></span></a>
                     <?php } ?></td>
-                <td>
-                    排序字段：
-                    <select name="orderby">
-                        <?php foreach ($output['orderbys'] as $k => $v) { ?>
-                            <option value="<?php echo $v['txt'] ?>"
-                                    <?php if ($v['txt'] == $_GET['orderby']){ ?>selected<?php } ?> ><?php echo $v['txt'] ?></option>
-                        <?php } ?>
-                    </select>
-                </td>
-                <td>
-                    顺序：
-                    <select name="order">
-                        <option value="desc" <?php if ('desc' == $_GET['order']){ ?>selected<?php } ?> >倒序</option>
-                        <option value="asc" <?php if ('asc' == $_GET['order']){ ?>selected<?php } ?> >正序</option>
-                    </select>
-                </td>
+                <!--                <td>-->
+                <!--                    排序字段：-->
+                <!--                    <select name="orderby">-->
+                <!--                        --><?php //foreach ($output['orderbys'] as $k => $v) { ?>
+                <!--                            <option value="--><?php //echo $v['txt'] ?><!--"-->
+                <!--                                    --><?php //if ($v['txt'] == $_GET['orderby']){ ?><!--selected-->
+                <?php //} ?><!-- >--><?php //echo $v['txt'] ?><!--</option>-->
+                <!--                        --><?php //} ?>
+                <!--                    </select>-->
+                <!--                </td>-->
+                <!--                <td>-->
+                <!--                    顺序：-->
+                <!--                    <select name="order">-->
+                <!--                        <option value="desc" -->
+                <?php //if ('desc' == $_GET['order']){ ?><!--selected--><?php //} ?><!-- >倒序</option>-->
+                <!--                        <option value="asc" -->
+                <?php //if ('asc' == $_GET['order']){ ?><!--selected--><?php //} ?><!-- >正序</option>-->
+                <!--                    </select>-->
+                <!--                </td>-->
             </tr>
             </tbody>
         </table>
@@ -127,92 +140,48 @@
             <thead>
             <tr class="thead">
                 <th>&nbsp;</th>
-                <th class="align-center" colspan="2"><?php echo $lang['member_index_name'] ?></th>
-                <th class="align-center">基本信息</th>
-                <th class="align-center">卡情况</th>
-                <th class="align-center">办卡渠道</th>
-                <th class="align-center">消费情况</th>
-                <th class="align-center">账户余额</th>
-                <th class="align-center"><?php echo $lang['nc_handle']; ?></th>
+                <th>卡号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>出生日期</th>
+                <th>手机</th>
+                <th>联系电话</th>
+                <th>地址</th>
+                <th>身份证</th>
+                <th>末次消费日期</th>
+                <th>末次消费地点</th>
+                <th>储值余额</th>
+                <th>赠送余额</th>
+                <th>消费积分</th>
+                <th>操作</th>
             </tr>
             <tbody>
             <?php if (!empty($output['member_list']) && is_array($output['member_list'])) { ?>
                 <?php foreach ($output['member_list'] as $k => $v) { ?>
                     <tr class="hover member">
                         <td class="w24"></td>
-                        <td class="w48 picture">
-                            <div class="size-44x44"><span class="thumb size-44x44"><i></i><img
-                                        src="<?php if ($v['member_avatar'] != '') {
-                                            echo UPLOAD_SITE_URL . DS . ATTACH_AVATAR . DS . $v['member_avatar'];
-                                        } else {
-                                            echo UPLOAD_SITE_URL . '/' . ATTACH_COMMON . DS . C('default_user_portrait');
-                                        } ?>?<?php echo microtime(); ?>"
-                                        onload="javascript:DrawImage(this,44,44);"/></span></div>
-                        </td>
-                        <td>
-                            <p class="name"><!--会员名:<strong><?php echo $v['member_name']; ?></strong>-->
-                                卡号: <?php echo $v['member_id']; ?></p>
-
-                            <p class="name"><!--会员名:<strong><?php echo $v['member_name']; ?></strong>-->
-                                姓名: <?php echo $v['member_truename']; ?></p>
-
-                            <p class="smallfont">电话:&nbsp;<?php echo $v['Mobile']; ?></p>
-
-                            <p class="smallfont">地址:&nbsp;<?php echo $v['sAddress']; ?></p>
-
-                            <div class="im">
-                            </div>
-                        </td>
-                        <td><p class="name">身份证: <?php echo $v['sIDCard']; ?></p>
-
-                            <p class="smallfont">医保卡:&nbsp;<?php echo $v['MediCardID']; ?></p>
-
-                            <p class="smallfont">健康档案:&nbsp;<?php echo $v['HealthCardID']; ?></p>
-                        </td>
-
-                        <td><p class="name">卡类型: <?php if ($v['CardType'] == 0) {
-                                    echo '普通卡';
-                                } elseif ($v['CardType'] == 1) {
-                                    echo '储值卡';
-                                } ?></p>
-
-                            <p class="smallfont">卡级别: <?php if ($v['CardGrade'] == 0) {
-                                    echo '健康卡';
-                                } elseif ($v['CardGrade'] == 1) {
-                                    echo '健康金卡';
-                                } elseif ($v['CardGrade'] == 2) {
-                                    echo '健康钻卡';
-                                } ?></p>
-
-                        </td>
-                        <td><p class="name">办卡渠道: <?php echo $v['GetWay']; ?></p>
-
-                            <p class="smallfont">推荐人:&nbsp;<?php echo $v['Referrer']; ?></p>
-
-                        </td>
-                        <td><p class="name">末次消费日期: <?php echo substr($v['LastPayDate'], 0, 10); ?></p>
-
-                            <p class="smallfont">末次消费地点: <?php echo $v['LastPayOrgName']; ?></p>
-
-                        </td>
-                        <td class=""><p>储值余额:&nbsp;<strong
-                                    class="red"><?php echo $v['available_predeposit']; ?></strong>&nbsp;元</p>
-                            <!--<p><?php echo $lang['member_index_frozen']; ?>:&nbsp;<strong class="red"><?php echo $v['freeze_predeposit']; ?></strong>&nbsp;元</p>-->
-                            <p>赠送余额: <strong class="red"><?php echo number_format($v['fConsumeBalance'], 2); ?></strong>&nbsp;元
-                            </p>
-
-                            <p>消费积分: <strong class="red"><?php echo $v['member_points']; ?></strong></p>
-
-                        </td>
+                        <td class="nowrap"><?php echo $v['member_id']; ?></td>
+                        <td class="nowrap"><?php echo $v['member_truename']; ?></td>
+                        <td class=""><?php if ($v['member_sex'] == 1) {
+                                echo '男';
+                            } elseif ($v['member_sex'] == 2) {
+                                echo '女';
+                            } ?></td>
+                        <td class="nowrap"><?php echo substr($v['member_birthday'], 0, 10); ?></td>
+                        <td class="nowrap"><span
+                                style="display: inline-block;color:blue;"><?php echo $v['Mobile']; ?></span></td>
+                        <td class="nowrap"><span
+                                style="display: inline-block;color:blue;"><?php echo $v['sLinkPhone']; ?></span></td>
+                        <td class="nowrap"><?php echo $v['sAddress']; ?></td>
+                        <td class="nowrap"><?php echo $v['sIDCard']; ?></td>
+                        <td class="nowrap"><?php echo substr($v['LastPayDate'], 0, 10); ?></td>
+                        <td class=""><?php echo $v['LastPayOrgName']; ?></td>
+                        <td class="nowrap"><?php echo $v['available_predeposit']; ?></td>
+                        <td class="nowrap"><?php echo number_format($v['fConsumeBalance'], 2); ?></td>
+                        <td class="nowrap"><?php echo $v['member_points']; ?></td>
                         <td class="align-center">
                             <a href="javascript:void(0)"
-                               onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">充值消费明细</a>
-                            <a href="javascript:void(0)" onclick="showpsreset('<?php echo $v['member_id'] ?>',this)">密码重置</a>
-                            <!--<a
-                                href="index.php?act=member&op=member_edit&member_id=<?php echo $v['member_id']; ?>"><?php echo $lang['nc_edit'] ?></a>
-                            | <a
-                                href="index.php?act=notice&op=notice&member_name=<?php echo ltrim(base64_encode($v['member_name']), '='); ?>"><?php echo $lang['member_index_to_message']; ?></a>
-                                -->
+                               onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">回访</a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -234,15 +203,7 @@
         </table>
     </form>
 </div>
-<div id="psresetdialog" title="密码重置">
-    <span class="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
-    <span>
-        <form>
-            <input type="hidden" id="cardid" name="cardid">
-        </form>
-        密码将被重置为000000，是否确认重置？
-    </span>
-</div>
+
 <style>
     #detaildialog table {
         width: 100%;
@@ -270,37 +231,33 @@
         padding: 5px;
         text-align: center;
     }
+
+    .yellow {
+        background-color: yellow !important;
+    }
 </style>
-<div id="detaildialog" title="充值消费明细">
+
+<div id="detaildialog" title="回访">
     <span class="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
     <span>
         <form>
-            <input type="hidden" id="cardid1" name="cardid1">
+            <input type="hidden" id="callid" name="callid">
+
+            <p>回访时间：<input style="color:blue;" id="spotdate" name="spotdate"
+                           value="<?php echo date('Y-m-d', time()) ?>" ></p>
+
+            <p>回访结果：<input id="spotresult_pass" name="spotresult" type="radio" value="真档" checked>
+                <label for="spotresult_pass" style="cursor:pointer">真档</label>
+                <input id="spotresult_false" name="spotresult" type="radio" value="假档">
+                <label for="spotresult_false" style="cursor:pointer">假档</label>
+                <input id="spotresult_unknown" name="spotresult" type="radio" value="待核实">
+                <label for="spotresult_unknown" style="cursor:pointer">待核实</label>
+                <input id="spotresult_noanswer" name="spotresult" type="radio" value="未接电话">
+                <label for="spotresult_noanswer" style="cursor:pointer">未接电话</label></p>
+
+            <p style="vertical-align: top;">回访原因：<textarea style="color:blue;" id="reason" name="reason" value=""
+                                                           rows="5"></textarea></p>
         </form>
-        <table>
-            <thead>
-            <tr>
-
-                <th>数据类型</th>
-                <th>id</th>
-                <th>业务日期</th>
-                <th>经办人</th>
-                <th>服务社区</th>
-                <th>储值增减</th>
-                <th>储值余额</th>
-                <th>赠送金额增减</th>
-                <th>赠送余额</th>
-                <th>积分消费金额</th>
-                <th>兑换积分</th>
-                <th>积分增减</th>
-                <th>积分余额</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
-        <span class="datamsg">无数据!</span>
     </span>
 </div>
 
@@ -312,29 +269,35 @@
 <script>
     $(function () {
         $('#ncsubmit').click(function () {
-            $('input[name="op"]').val('member');
+            $('input[name="op"]').val('call');
             $('#formSearch').submit();
         });
-        $("#psresetdialog").dialog({
+
+        $("#detaildialog").dialog({
             resizable: false,
-//            width:350,
-//            height:250,
-//            modal: true,
+            maxHeight: 200,
+            width: 400,
+            modal: true,
             autoOpen: false,
+            close: function () {
+                var elem = $(this).dialog("option", "elem");
+                $(elem).parent().parent().removeClass('yellow');
+            },
             buttons: {
-                "取消": function () {
+                "关闭": function () {
+
                     $(this).dialog("close");
                 },
-                "确定重置": function () {
-                    console.log($("#psresetdialog form").serialize());
+                "保存": function () {
+                    console.log($("#detaildialog form").serialize());
                     $.ajax({
-                        url: "index.php?act=member&op=psreset",
-                        data: $("#psresetdialog form").serialize(), dataType: 'json', success: function (data) {
+                        url: "index.php?act=healthplatform&op=savecallajax",
+                        data: $("#detaildialog form").serialize(), dataType: 'json', success: function (data) {
                             console.log(data);
                             if (data.success) {
-                                success('#psresetdialog', data.msg);
+                                success('#detaildialog', data.msg);
                             } else {
-                                error('#psresetdialog', data.msg);
+                                error('#detaildialog', data.msg);
                             }
                         }
                     });
@@ -342,41 +305,29 @@
             }
         });
 
-        $("#detaildialog").dialog({
-            resizable: false,
-            maxHeight: 200,
-            width: 1100,
-//            height:250,
-//            modal: true,
-            autoOpen: false,
-            buttons: {
-                "关闭": function () {
-                    $(this).dialog("close");
-                }
-            }
-        });
     });
     function showpsreset(id, elem) {
         $("#psresetdialog .errormsg").html('');
         $("#psresetdialog #cardid").val(id);
-        $("#psresetdialog").dialog("option", "position", {my: "right top", at: "left bottom", of: $(elem)});
+//        $("#psresetdialog").dialog("option", "position", {my: "right top", at: "left bottom", of: $(elem)});
         $("#psresetdialog").dialog("open");
     }
 
     function showdetail(objstr, elem) {
         var obj = eval('(' + unescape(objstr) + ')');
         $("#detaildialog .errormsg").html('');
-        $("#cardid1").val(obj.member_id);
+        $("#callid").val(obj.member_id);
         $("#detaildialog .datamsg").html('正在查询....');
+        $(elem).parent().parent().addClass('yellow');
         $.ajax({
-            url: "index.php?act=member&op=membermoneydetail",
-            data: $("#detaildialog form").serialize(), dataType: 'json', success: function (data) {
-                console.log(data);
-                if (data.data && data.data.length > 0) {
+            url: "index.php?act=healthplatform&op=calldetailajax",
+            data: $("#detaildialog form").serialize(), dataType: 'json', success: function (ret) {
+                console.log(ret);
+                if (ret && ret.data && ret.data.length > 0) {
                     $("#detaildialog .datamsg").html('');
                     $("#detaildialog table tbody").html('');
-                    for (var i = 0; i < data.data.length; i++) {
-                        var row = data.data[i];
+                    for (var i = 0; i < ret.data.length; i++) {
+                        var row = ret.data[i];
                         var rowstr = '<tr>';
                         rowstr += '<td>' + textstr(row.datatypename) + '</td>';
                         rowstr += '<td>' + textstr(row.id) + '</td>';
@@ -398,7 +349,8 @@
                 } else {
                     $("#detaildialog .datamsg").html('无数据!');
                 }
-                $("#detaildialog").dialog("option", "title", '充值消费明细  ' + obj.member_truename);
+                $("#detaildialog").dialog("option", "title", '回访  ' + obj.member_truename);
+                $("#detaildialog").dialog("option", "elem", elem);
                 $("#detaildialog").dialog("open");
             }
         });
