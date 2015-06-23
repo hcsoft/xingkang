@@ -428,6 +428,68 @@ class communityControl extends SystemControl
         Tpl::output('treedata', $treedata_list);
     }
 
+	/**
+	 * 门诊收入分析
+	 */
+	 
+	public function clinicstatisticOp(){
+		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+//		$config = array('sumcol' => array('OrgID' => array(name => 'OrgID', 'text' => '机构', map => $this->types),
+//            'Section' => array(name => 'Section', 'text' => '科室'),
+//            'Doctor' => array(name => 'Doctor', 'text' => '医生'),
+//        ));
+//        
+//        Tpl::output('config', $config);
+        $OrgId = '-1';
+		if ($_GET['orgids']) {
+            $OrgId = '\'' . implode(',', $_GET['orgids']) . '\'';;
+        }
+        
+        
+        
+        $startTime = '-1';
+		if ($_GET['query_start_time']) {
+            $startTime = '\'' . $_GET['query_start_time'] . '\'';
+        }
+        
+		$endTime = '-1';
+        if ($_GET['query_end_time']) {
+            $endTime = '\'' . $_GET['query_end_time'] . '\'';
+        }
+        $searchType = '';
+        if ($_GET['statisticOrgID']) {
+            $searchType = '1';
+        }else{
+        	$searchType = '0';
+        }
+        if ($_GET['statisticSection']) {
+            $searchType = $searchType . '1';
+        }else{
+        	$searchType = $searchType . '0';
+        }
+        if ($_GET['statisticDoctor']) {
+            $searchType = $searchType . '1';
+        }else{
+        	$searchType = $searchType . '0';
+        }
+        $searchType = '\'' . $searchType . '\'';
+        Log::record($searchType,"SQL");
+		$sql = "exec pXClinicStatistic $OrgId,$startTime,$endTime,$searchType;";
+		
+		$stmt = $conn->prepare($sql);
+
+		$stmt->execute();
+ 		$clinicAccount = array();
+		while ( $row = $stmt->fetchObject () ) {
+			array_push ( $clinicAccount, $row );
+		}
+//		foreach ($clinicAccount as $k => $v){
+//			Log::record($v->OrgID,"SQL");
+//		}
+		Tpl::output('data_list', $clinicAccount);
+		Tpl::showpage('community.clinic.statistic');
+	}
+
     public function prescriptionsumOp()
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
