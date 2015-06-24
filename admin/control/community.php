@@ -457,11 +457,6 @@ class communityControl extends SystemControl
             $endTime = '\'' . $_GET['query_end_time'] . '\'';
         }
         $searchType = '';
-        if ($_GET['statisticOrgID']) {
-            $searchType = '1';
-        }else{
-        	$searchType = '0';
-        }
         if ($_GET['statisticSection']) {
             $searchType = $searchType . '1';
         }else{

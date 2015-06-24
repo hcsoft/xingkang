@@ -76,8 +76,6 @@
                            name="query_end_time"/></td>
                 <th><label>汇总类型</label></th>
                 <td colspan="1" id="sumtypetr">
-                	<input type='checkbox' name='statisticOrgID'  id='sumtype_statisticOrgID' <?php if ($_GET['statisticOrgID']) {?> checked <?php } ?>>
-                    <label for='sumtype_statisticOrgID'>机构</label>
                     <input type='checkbox' name='statisticSection'  id='sumtype_statisticSection' <?php if ($_GET['statisticSection']) {?> checked <?php } ?>>
                     <label for='sumtype_statisticSection'>科室</label>
                     <input type='checkbox' name='statisticDoctor'  id='sumtype_statisticDoctor' <?php if ($_GET['statisticDoctor']) {?> checked <?php } ?>>
@@ -107,8 +105,14 @@
             <thead>
             	<tr>
             		<th rowspan="2">分机机构</th>
-            		<th rowspan="2">科室</th>
-            		<th rowspan="2">医生</th>
+            		<?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
+            		<?php if (property_exists($output['data_list'][0],sStatSection)){ ?>
+            			<th rowspan="2">科室</th>
+            		<?php }} ?>
+            		<?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
+            		<?php if (property_exists($output['data_list'][0],sDoctor)){ ?>
+            			<th rowspan="2">医生</th>
+            		<?php }} ?>
             		<th colspan="3">中医</th>
             		<th colspan="3">西医</th>
             		<th colspan="3">药房</th>
@@ -166,8 +170,13 @@
                 <?php foreach ($output['data_list'] as $k => $v) { ?>
                 	<tr class="hover member">
 	               		<td><?php echo $v->Name ?></td>
-	               		<td><?php echo $v->sStatSection ?></td>
-	               		<td><?php echo $v->sDoctor ?></td>
+	            		<?php if (property_exists($v,sStatSection)){ ?>
+	            			<td><?php echo $v->sStatSection ?></td>
+	            		<?php } ?>
+	            		<?php if (property_exists($v,sDoctor)){ ?>
+	            			<td><?php echo $v->sDoctor ?></td>
+	            		<?php } ?>
+	               		
 	                    <td><?php echo number_format($v->ZY_fCO_IncomeMoney,2) ?></td>
 	                    <td><?php echo number_format($v->ZYRenCi,0) ?></td>
 	                    <td><?php 
