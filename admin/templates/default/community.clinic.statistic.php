@@ -104,14 +104,14 @@
         <table class="table tb-type2 nobdb datatable">
             <thead>
             	<tr>
-            		<th rowspan="2">分机机构</th>
+            		<th rowspan="2" style="min-width:150px;">分机机构</th>
             		<?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
             		<?php if (property_exists($output['data_list'][0],sStatSection)){ ?>
-            			<th rowspan="2">科室</th>
+            			<th rowspan="2" style="min-width:100px;">科室</th>
             		<?php }} ?>
             		<?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
             		<?php if (property_exists($output['data_list'][0],sDoctor)){ ?>
-            			<th rowspan="2">医生</th>
+            			<th rowspan="2" style="min-width:100px;">医生</th>
             		<?php }} ?>
             		<th colspan="3">中医</th>
             		<th colspan="3">西医</th>
@@ -127,42 +127,42 @@
             		<th colspan="3">验光配镜</th>
             	</tr>
             	<tr>
-            		<th>收入</th>
-            		<th>人次</th>
-            		<th>客单价</th>
-            		<th>收入</th>
-            		<th>人次</th>
-            		<th>客单价</th>
-            		<th>收入</th>
-            		<th>人次</th>
-            		<th>客单价</th>
-            		<th>收入</th>
-            		<th>人次</th>
-            		<th>客单价</th>
-            		<th>收入</th>
-            		<th>人次</th>
-            		<th>客单价</th>
-            		<th>收入</th>
-            		<th>人次</th>
-            		<th>客单价</th>
-            		<th>收入</th>
-            		<th>人次</th>
-            		<th>客单价</th>
-            		<th>收入</th>
-            		<th>人次</th>
-            		<th>客单价</th>
-            		<th>收入</th>
-            		<th>人次</th>
-            		<th>客单价</th>
-            		<th>收入</th>
-            		<th>人次</th>
-            		<th>客单价</th>
-            		<th>收入</th>
-            		<th>人次</th>
-            		<th>客单价</th>
-            		<th>收入</th>
-            		<th>人次</th>
-            		<th>客单价</th>
+            		<th style="min-width:80px;">收入</th>
+            		<th style="min-width:80px;">人次</th>
+            		<th style="min-width:80px;">客单价</th>
+            		<th style="min-width:80px;">收入</th>
+            		<th style="min-width:80px;">人次</th>
+            		<th style="min-width:80px;">客单价</th>
+            		<th style="min-width:80px;">收入</th>
+            		<th style="min-width:80px;">人次</th>
+            		<th style="min-width:80px;">客单价</th>
+            		<th style="min-width:80px;">收入</th>
+            		<th style="min-width:80px;">人次</th>
+            		<th style="min-width:80px;">客单价</th>
+            		<th style="min-width:80px;">收入</th>
+            		<th style="min-width:80px;">人次</th>
+            		<th style="min-width:80px;">客单价</th>
+            		<th style="min-width:80px;">收入</th>
+            		<th style="min-width:80px;">人次</th>
+            		<th style="min-width:80px;">客单价</th>
+            		<th style="min-width:80px;">收入</th>
+            		<th style="min-width:80px;">人次</th>
+            		<th style="min-width:80px;">客单价</th>
+            		<th style="min-width:80px;">收入</th>
+            		<th style="min-width:80px;">人次</th>
+            		<th style="min-width:80px;">客单价</th>
+            		<th style="min-width:80px;">收入</th>
+            		<th style="min-width:80px;">人次</th>
+            		<th style="min-width:80px;">客单价</th>
+            		<th style="min-width:80px;">收入</th>
+            		<th style="min-width:80px;">人次</th>
+            		<th style="min-width:80px;">客单价</th>
+            		<th style="min-width:80px;">收入</th>
+            		<th style="min-width:80px;">人次</th>
+            		<th style="min-width:80px;">客单价</th>
+            		<th style="min-width:80px;">收入</th>
+            		<th style="min-width:80px;">人次</th>
+            		<th style="min-width:80px;">客单价</th>
             	</tr>
             </thead>
             <tbody>
@@ -181,7 +181,7 @@
 	                    <td><?php echo number_format($v->ZYRenCi,0) ?></td>
 	                    <td><?php 
 	                    	if ($v->ZYRenCi != null and number_format($v->ZYRenCi,0) != 0) 
-	                    		echo number_format($v->ZY_fCO_IncomeMoney,2)/number_format($v->ZYRenCi,0);
+	                    		echo number_format($v->ZY_fCO_IncomeMoney/$v->ZYRenCi,2);
 	                    	else
 	                    		echo number_format(0,2);
 	                    ?></td>
