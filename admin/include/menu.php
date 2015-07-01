@@ -214,6 +214,7 @@ $arr = array(
                     array('args'=>'incomesum,community,community',			'text'=>'门诊收费员报表'),
                     array('args'=>'prescriptiondetail,community,community',			'text'=>'就诊明细查询'),
                     array('args'=>'prescriptionsum,community,community',			'text'=>'就诊情况汇总'),
+                    array('args'=>'clinicstatistic,community,community',			'text'=>'门诊收入分析'),
                     array('args'=>'consumesum,member,community',			'text'=>'消费汇总'),
                     array('args'=>'rechargesum,member,community',			'text'=>'充值下账汇总'),
                     array('args'=>'query,healthfile,community',	'text'=>'健康档案查询'),

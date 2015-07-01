@@ -108,6 +108,7 @@ $_limit =  array(
         array('name'=>'收入汇总查询', 'op'=>'incomesum', 'act'=>'community'),
         array('name'=>'就诊明细查询', 'op'=>'prescriptiondetail', 'act'=>'community'),
         array('name'=>'就诊情况汇总', 'op'=>'prescriptionsum', 'act'=>'community'),
+        array('name'=>'门诊收入分析', 'op'=>'clinicstatistic', 'act'=>'community'),
         array('name'=>'消费汇总', 'op'=>'consumesum', 'act'=>'member'),
         array('name'=>'充值下账汇总', 'op'=>'rechargesum', 'act'=>'member'),
         array('name'=>'健康档案查询', 'op'=>'query', 'act'=>'healthfile'),

@@ -44,90 +44,284 @@ class goodsControl extends SystemControl
         Tpl::output('list_setting', $list_setting);
         Tpl::showpage('goods.setting');
     }
+    
+    /**
+     * 获得财务分类修改界面信息
+     */
+    public function financeAjaxGetDetailOp()
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $goodscommonid = $_GET['goodscommonid'];
+        $sql = " select * from shopnc_goods_common  where goods_commonid = $goodscommonid";
+        $stmt = $conn->query($sql);
+        $goods = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if ($goods && count($goods) > 0) {
+            $good = $goods[0];
+        }
+//        $ret = array('sale' => $sale, 'good' => $good);
+		$good->goods_price = number_format($good->goods_price, 2);
+        echo json_encode($good);
+        exit;
+    }
+    
+    /**
+     * 台账
+     */
+    public function machineAccountOp(){
+    	try {
+			$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+			$iDrug_Id = $_REQUEST['machineAccountDrugId'];
+			$orgid = $_REQUEST['orgid'];
+//			$cardid = $_REQUEST['cardid1'];
+			$datestart = $_REQUEST['query_start_time'];
+			$dateend = $_REQUEST['query_end_time'];
+			$sql = "SET NOCOUNT ON; exec pLStockAccount $iDrug_Id,$datestart,$dateend,$orgid;SET NOCOUNT off; ";
+			$stmt = $conn->prepare($sql);
+
+			$stmt->execute();
+ 			$stockAccount = array();
+			while ( $row = $stmt->fetchObject () ) {
+				array_push ( $stockAccount, $row );
+			}
+			echo json_encode(array('success' => true, 'msg' => '查询成功!' ,'data'=>$stockAccount ,'sql'=>$sql));
+		} catch (Exception $e) {
+			echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+		}
+		exit;
+    }
+    
+    
+    /**
+     * 库存
+     */
+    public function stockAccountOp(){
+    	try {
+			$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+			$iDrug_Id = $_REQUEST['stockAccountDrugId'];
+			$orgid = $_REQUEST['orgid'];
+//			$cardid = $_REQUEST['cardid1'];
+//			$datestart = $_REQUEST['query_start_time'];
+//			$dateend = $_REQUEST['query_end_time'];
+			$sql = 'select * from Center_DrugStock stock  left join shopnc_goods_common good   on good.goods_commonid = stock.iDrug_ID
+			            left join Organization org on stock.orgid = org.id
+			         where good.idrug_rectype in (0,1,3) ';
+			$sql = $sql . ' and good.goods_commonid = ' . intval($iDrug_Id);
+			$sql = $sql . ' and stock.orgid =\'' . $orgid . '\'';
+			$stmt = $conn->query($sql);
+
+ 			$stockAccount = array();
+			while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+				array_push ( $stockAccount, $row );
+			}
+			$result = array();
+			if(!empty($stockAccount)){
+				foreach($stockAccount as $v){
+					$v->fDS_OStock = number_format($v->fDS_OStock,0);
+					$v->fDS_SStock = number_format($v->fDS_SStock,0);
+					$v->fDS_RetailPrice = number_format($v->fDS_RetailPrice,3);
+					$v->fDS_BuyPrice = number_format($v->fDS_BuyPrice,3);
+					$v->fDS_LeastOStock = number_format($v->fDS_LeastOStock,3);
+					$v->fDS_LeastSStock = number_format($v->fDS_LeastSStock,3);
+					$v->fDS_LeastRetailPrice = number_format($v->fDS_LeastRetailPrice,3);
+					$v->fDS_LeastBuyPrice = number_format($v->fDS_LeastBuyPrice,3);
+					$v->fDS_Price0 = number_format($v->fDS_RetailPrice * $v->fDS_OStock + $v->fDS_LeastRetailPrice * $v->fDS_LeastOStock,3);
+					$v->fDS_Price1 = number_format($v->fDS_BuyPrice * $v->fDS_OStock + $v->fDS_LeastBuyPrice * $v->fDS_LeastOStock,3);
+					$v->fDS_Price2 = number_format($v->fDS_RetailPrice * $v->fDS_OStock - $v->fDS_BuyPrice * $v->fDS_OStock +
+                                $v->fDS_LeastRetailPrice *$v->fDS_LeastOStock - $v->fDS_LeastBuyPrice * $v->fDS_LeastOStock
+                                ,3);
+					
+					array_push($result,$v);
+				}
+			}
+			echo json_encode(array('success' => true, 'msg' => '查询成功!' ,'data'=>$result ,'sql'=>$sql));
+		} catch (Exception $e) {
+			echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+		}
+		exit;
+    }
+    
+    /**
+     * 调价记录
+     */
+    public function goodsChangePriceOp(){
+    	try {
+			$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+			$iDrug_Id = $_REQUEST['changePriceDrugId'];
+			$orgid = $_REQUEST['changePriceOrgid'];
+//			$cardid = $_REQUEST['cardid1'];
+//			$datestart = $_REQUEST['query_start_time'];
+//			$dateend = $_REQUEST['query_end_time'];
+			$sql = 'select * from Center_OrgPrice a where a.iDrug_ID=' . intval($iDrug_Id) . ' And a.OrgID=\'' . $orgid . '\'';
+			$stmt = $conn->query($sql);
+
+ 			$changePrice = array();
+			while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+				array_push ( $changePrice, $row );
+			}
+			$result = array();
+			if(!empty($changePrice)){
+				foreach($changePrice as $v){
+					$v->fPrice_Before = number_format($v->fPrice_Before, 2);
+					$v->fPrice_After = number_format($v->fPrice_After, 2);
+					$v->dPrice_Date = substr($v->dPrice_Date, 0, 10);
+					$v->dPrice_BeginDate = substr($v->dPrice_BeginDate, 0, 10) ;
+					$v->dPrice_EndDate = substr($v->dPrice_EndDate, 0, 10);
+					array_push($result,$v);
+				}
+			}
+			echo json_encode(array('success' => true, 'msg' => '查询成功!' ,'data'=>$result ,'sql'=>$sql));
+		} catch (Exception $e) {
+			echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+		}
+		exit;
+    }
+    
+    /**
+     * 保存财务分类设置信息
+     */
+    public function goodsAjaxSaveStateClassOp()
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $classtype = $_GET['classtype'];
+        if(!$classtype){
+            $ret = array('success' => false, 'msg' => '"财务分类"不能为未分类!');
+            echo json_encode($ret);
+            exit;
+        }
+        $goodid = $_GET['goods_commonid'];
+        $flag = false;
+        $oldgood = null;
+        if ($goodid) {
+            $sql = " select * from shopnc_goods_common  where goods_commonid = $goodid";
+            $stmt = $conn->query($sql);
+            $goods = $stmt->fetchAll(PDO::FETCH_OBJ);
+            if (count($goods) > 0) {
+                $flag = true;
+                $oldgood = $goods[0];
+            }
+        }
+        try{
+        	if ($flag) {
+
+                $sql = " update shopnc_goods_common
+                    set iDrug_StatClass = $classtype
+
+                  where goods_commonid = $goodid";
+//            throw new Exception($sql);
+                $conn->exec($sql);
+                $oldstr = json_encode($oldgood);
+                $oldgood -> iDrug_StatClass = $classtype;
+                $newstr = json_encode($oldgood);
+                $admininfo = $this->getAdminInfo();
+                $adminid = $admininfo['id'];
+                $sql = " insert into log_main
+                    values(newid(),'shopnc_goods_common','update','shopnc_goods_common',$adminid,getdate(),?,?)
+                     ";
+//                throw new Exception($sql);
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(1, $oldstr);
+                $stmt->bindValue(2, $newstr);
+                $stmt->execute();
+				$ret = array('success' => true, 'msg' => '保存成功!');
+            	echo json_encode($ret);
+            }
+        }catch (Exception $e) {
+            throw $e;
+            $ret = array('success' => false, 'msg' => $e->getMessage());
+            echo json_encode($ret);
+        }
+        exit;
+    }
 
     /**
      * 商品管理
      */
     public function goodsOp()
     {
-        $model_goods = Model('goods');
-
-        /**
-         * 查询条件
-         */
+    	
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        //处理数据
+        $page = new Page();
+        $page->setEachNum(10);
+        echo $_REQUEST["curpage"];
+        $page->setNowPage($_REQUEST["curpage"]);
+        $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
+        $endnum = $page->getEachNum() * ($page->getNowPage());
+        $sql = ' from shopnc_goods_common good Where good.iDrug_RecType = 0';
         $where = array();
         if ($_GET['search_goods_name'] != '') {
-            $where['goods_name'] = array('like', '%' . trim($_GET['search_goods_name']) . '%');
+            $sql = $sql . ' And good.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
         }
         if (intval($_GET['search_commonid']) > 0) {
-            $where['goods_commonid'] = intval($_GET['search_commonid']);
+        	$sql = $sql . ' And good.goods_commonid = ' . $_GET['search_commonid'];
         }
-        if ($_GET['search_store_name'] != '') {
-            $where['store_name'] = array('like', '%' . trim($_GET['search_store_name']) . '%');
+        if (intval($_GET['classtype']) > 0 ) {
+        	$sql = $sql . ' And good.iDrug_StatClass = ' . $_GET['classtype'];
         }
-        if (intval($_GET['search_brand_id']) > 0) {
-            $where['brand_id'] = intval($_GET['search_brand_id']);
-        }
-        if (intval($_GET['cate_id']) > 0) {
-            $where['gc_id'] = intval($_GET['cate_id']);
-        }
-        if (in_array($_GET['search_state'], array('0', '1', '10'))) {
-            $where['goods_state'] = $_GET['search_state'];
-        }
-        if (in_array($_GET['search_verify'], array('0', '1', '10'))) {
-            $where['goods_verify'] = $_GET['search_verify'];
-        }
+        
+        $customsql = 'from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  good.goods_commonid = buy.iDrug_ID ' ;
 
-
-        switch ($_GET['type']) {
-            // 禁售
-            case 'lockup':
-                $goods_list = $model_goods->getGoodsCommonLockUpList($where);
-                break;
-            // 等待审核
-            case 'waitverify':
-                $goods_list = $model_goods->getGoodsCommonWaitVerifyList($where, '*', 10, 'goods_verify desc, goods_commonid desc');
-                break;
-            // 全部商品
-            default:
-                $goods_list = $model_goods->getGoodsCommonList($where);
-                break;
+        if ($_GET['sCustomer_Name'] !='' ) {
+            $sql = $sql . ' and EXISTS (  select 1  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  good.goods_commonid = buy.iDrug_ID and cus.sCustomer_Name  like \'%' . $_GET['sCustomer_Name'] . '%\' )';
+            $customsql = $customsql . ' and  cus.sCustomer_Name like   \'%' . $_GET['sCustomer_Name'].'%\'';
         }
-
+        $countsql = " select count(*)  $sql ";
+        $stmt = $conn->query($countsql);
+        $total = $stmt->fetch(PDO::FETCH_NUM);
+        $page->setTotalNum($total[0]);
+     
+     	$tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.goods_commonid asc) rownum,
+                        good.goods_commonid,
+                        good.goods_name ,
+                        good.sDrug_Spec,
+                        good.sDrug_Content ,
+                        good.sDrug_PackSpec ,
+                        good.sDrug_Unit ,
+                        good.sDrug_LeastUnit ,
+                        good.brand_name ,
+                        (select top 1 cus.sCustomer_Name  $customsql) sCustomer_Name,
+                        good.gc_name ,
+                        good.goods_price ,
+                        good.iDrug_StatClass,
+						good.store_id,
+                        goods_image
+                        $sql order by  good.goods_commonid asc)zzzz where rownum>$startnum )zzzzz order by rownum";
+     	Log::record($tsql,'SQL');
+//     	echo $tsql;
+     	$stmt = $conn->query($tsql);
+        $goods_list = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($goods_list, $row);
+        }
         Tpl::output('goods_list', $goods_list);
-        Tpl::output('page', $model_goods->showpage(2));
-
-        $storage_array = $model_goods->calculateStorage($goods_list);
-        Tpl::output('storage_array', $storage_array);
-
-        $goods_class = Model('goods_class')->getTreeClassList(1);
-        // 品牌
-        $condition = array();
-        $condition['brand_apply'] = '1';
-        $brand_list = Model('brand')->getBrandList($condition);
-
-        Tpl::output('search', $_GET);
-        Tpl::output('goods_class', $goods_class);
-        Tpl::output('brand_list', $brand_list);
-
-        Tpl::output('state', array('1' => '出售中', '0' => '仓库中', '10' => '违规下架'));
-
-        Tpl::output('verify', array('1' => '通过', '0' => '未通过', '10' => '等待审核'));
-
-        switch ($_GET['type']) {
-            // 禁售
-            case 'lockup':
-                Tpl::showpage('goods.close');
-                break;
-            // 等待审核
-            case 'waitverify':
-                Tpl::showpage('goods.verify');
-                break;
-            // 全部商品
-            default:
-                Tpl::showpage('goods.index');
-                break;
+     
+     	Tpl::output('search', $_GET);
+        
+        /**
+         * 财务分类
+         */
+//        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class ';
+        $classstmt = $conn->query($classsql);
+        $classtypes = array();
+        while ($row = $classstmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($classtypes, $row);
         }
+        Tpl::output('classtypes', $classtypes); 
+        
+        $treesql = 'select  b.id , b.name,b.districtnumber,b.parentid pId from map_org_wechat a, Organization b where a.orgid = b.id ';
+        $treestmt = $conn->query($treesql);
+        $treedata_list = array();
+        while ($row = $treestmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($treedata_list, $row);
+        }
+        Tpl::output('treelist', $treedata_list);
+        if (!isset($_GET['orgid'])) {
+            $_GET['orgid'] = $treedata_list[0]->id;
+        }
+        
+        Tpl::output('page', $page->show());  
+        Tpl::showpage('goods.index');
     }
 
     /**
@@ -263,6 +457,7 @@ class goodsControl extends SystemControl
 
 
         $countsql = " select count(*)  $sql ";
+        
 //        echo $countsql;
         $stmt = $conn->query($countsql);
 //        echo $countsql;
@@ -786,20 +981,25 @@ class goodsControl extends SystemControl
      */
     public function get_goods_list_ajaxOp()
     {
-        $commonid = $_GET['commonid'];
+        $commonid = $_REQUEST['commonid'];
+
         if ($commonid <= 0) {
-            echo 'false';
+        	echo '1';
+//            echo 'false';
             exit();
         }
         $model_goods = Model('goods');
+
         $goodscommon_list = $model_goods->getGoodeCommonInfo(array('goods_commonid' => $commonid), 'spec_name');
         if (empty($goodscommon_list)) {
-            echo 'false';
+        	echo '2';
+//            echo 'false';
             exit();
         }
         $goods_list = $model_goods->getGoodsList(array('goods_commonid' => $commonid), 'goods_id,goods_spec,store_id,goods_price,goods_serial,goods_storage,goods_image');
         if (empty($goods_list)) {
-            echo 'false';
+        	echo '3';
+//            echo 'false';
             exit();
         }
 
