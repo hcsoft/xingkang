@@ -167,12 +167,12 @@ class communityControl extends SystemControl
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
-        $sql = 'from Center_CheckOut a  left join Center_ClinicLog log on a.sLogKey = log.ClinicKey  and a.orgid = log.orgid, Center_codes ico, Center_codes gather,Center_codes state,Center_codes tag,
+        $sql = 'from Center_CheckOut a  left join Center_ClinicLog log on a.sLogKey = log.ClinicKey  and a.orgid = log.orgid, Center_codes ico, Center_codes gather,
+            Center_codes state,
              Organization org
           where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
            and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
            and  a.iCO_State = state.code and state.type=\'iCO_State\'
-           and  a.iCO_Tag = tag.code and tag.type=\'iCO_Tag\'
            and a.orgid = org.id  ';
 //        if (!isset($_GET['search_type'])) {
 //            $_GET['search_type'] = '1';
@@ -258,7 +258,6 @@ class communityControl extends SystemControl
                         state.name as 'iCO_State',
                         a.sCO_CapitalMoney,
                         a.sCO_Remark,
-                        tag.name as 'iCO_Tag',
                         a.fCO_Card,
                         a.fCO_Cash,
                         a.fCO_StartMoney,
@@ -645,8 +644,6 @@ class communityControl extends SystemControl
             'doctor' => array(name => 'doctor', 'text' => '医生'),
             'MakePerson' => array(name => 'MakePerson', 'text' => '收费员'),
             'iCO_GatherType' => array(name => 'iCO_GatherType', 'text' => '医保类型'),
-            'iCO_GatherType' => array(name => 'iCO_GatherType', 'text' => '医保类型'),
-            'iCO_GatherType' => array(name => 'iCO_GatherType', 'text' => '医保类型'),
             'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
             'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
             'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
@@ -663,12 +660,11 @@ class communityControl extends SystemControl
         $page = new Page();
         $page->setEachNum(10);
         $page->setNowPage($_REQUEST["curpage"]);
-        $sql = 'from Center_CheckOut a  , Center_codes ico, Center_codes gather,Center_codes state,Center_codes tag,
+        $sql = 'from Center_CheckOut a  , Center_codes ico, Center_codes gather,Center_codes state,
             Organization org
           where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
            and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
            and  a.iCO_State = state.code and state.type=\'iCO_State\'
-           and  a.iCO_Tag = tag.code and tag.type=\'iCO_Tag\'
            and a.orgid = org.id ';
 
         if ($_GET['query_start_time']) {
