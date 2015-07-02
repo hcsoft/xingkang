@@ -323,6 +323,20 @@ class healthplatformControl extends SystemControl
             $condition ['cardgrade'] = $_GET['cardgrade'];
         }
 
+
+        if (isset($_GET['idnumber']) and $_GET['idnumber'] != '') {
+            $condition ['sIDCard'] = $_GET['idnumber'];
+        }
+        if (isset($_GET['tel']) and $_GET['tel'] != '') {
+            $condition ['sLinkPhone'] = $_GET['tel'];
+        }
+        if (isset($_GET['name']) and $_GET['name'] != '') {
+            $condition ['member_truename'] = array('like','%'.$_GET['name'].'%');
+        }
+        if (isset($_GET['birthday']) and $_GET['birthday'] != '') {
+            $condition ['member_birthday'] = $_GET['birthday'];
+        }
+
         if(!isset($_GET['orderby'])){
             $_GET['orderby'] = '卡号';
         }
