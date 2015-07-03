@@ -88,23 +88,12 @@
             </tbody>
         </table>
     </form>
-    <table class="table tb-type2 " id="prompt">
-        <tbody>
-        <tr class="space odd">
-            <th colspan="12">
-                <div class="title">
-                    <h5><?php echo $lang['nc_prompts']; ?></h5>
-                    <span class="arrow"></span></div>
-            </th>
-        </tr>
-        </tbody>
-    </table>
     <form method="post" id="form_member" style='position: relative;'>
         <input type="hidden" name="form_submit" value="ok"/>
         <table class="table tb-type2 nobdb datatable">
             <thead>
             	<tr>
-            		<th rowspan="2" style="min-width:150px;">分机机构</th>
+            		<th rowspan="2" style="min-width:150px;">分支机构</th>
             		<?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
             		<?php if (property_exists($output['data_list'][0],sStatSection)){ ?>
             			<th rowspan="2" style="min-width:100px;">科室</th>

@@ -51,8 +51,6 @@
         <input type="hidden" value="community" name="act">
         <input type="hidden" value="prescriptionsum" name="op">
         <input type="hidden" id ='export' name="export" value="false">
-        <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
-        <input type="hidden" name="checked" id="checked" value="<?php echo $_GET['checked']?>"/>
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
@@ -77,12 +75,16 @@
                            name="query_end_time"/></td>
                 <th><label>汇总类型</label></th>
                 <td colspan="1" id="sumtypetr">
-                    <?php foreach ($output['config']['sumcol'] as $k => $v) { ?>
-                        <input type='checkbox' name='sumtype[]'  id='sumtype_<?php echo $v['name']; ?>' <?php if(in_array( $v['name'],$_GET['sumtype'])) echo 'checked'; ?>
-                               value='<?php echo $v['name']; ?>' onclick="sumuncheck('sumtype_','<?php echo $v['uncheck']; ?>')">
-
-                        <label for='sumtype_<?php echo $v['name']; ?>'><?php echo $v['text']; ?></label>
-                    <?php } ?>
+                    <input type='checkbox' name='statisticSection'  id='sumtype_statisticSection' <?php if ($_GET['statisticSection']) {?> checked <?php } ?>>
+                    <label for='sumtype_statisticSection'>科室</label>
+                    <input type='checkbox' name='statisticDoctor'  id='sumtype_statisticDoctor' <?php if ($_GET['statisticDoctor']) {?> checked <?php } ?>>
+                    <label for='sumtype_statisticDoctor'>医生</label>
+                    <input type='checkbox' name='statisticYear'  id='sumtype_statisticYear' <?php if ($_GET['statisticYear']) {?> checked <?php } ?>>
+                    <label for='sumtype_statisticYear'>年</label>
+                    <input type='checkbox' name='statisticMonth'  id='sumtype_statisticMonth' <?php if ($_GET['statisticMonth']) {?> checked <?php } ?>>
+                    <label for='sumtype_statisticMonth'>月</label>
+                    <input type='checkbox' name='statisticDay'  id='sumtype_statisticDay' <?php if ($_GET['statisticDay']) {?> checked <?php } ?>>
+                    <label for='sumtype_statisticDay'>日</label>
                 </td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
@@ -111,10 +113,24 @@
             <thead>
             <tr class="thead">
                 <th class="align-center">序号</th>
-                <?php foreach ($output['displaytext'] as $k => $v) {
-                    ?>
-                    <th class="align-center"><?php echo $v?></th>
-                <?php  }?>
+                <th style="min-width:150px;">分支机构</th>
+                <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
+            	<?php if (property_exists($output['data_list'][0],sStatSection)){ ?>
+            		<th style="min-width:100px;">科室</th>
+            	<?php } ?>
+            	<?php if (property_exists($output['data_list'][0],sDoctor)){ ?>
+            		<th style="min-width:100px;">医生</th>
+            	<?php } ?>
+            	<?php if (property_exists($output['data_list'][0],sYear)){ ?>
+            		<th style="min-width:100px;">年</th>
+            	<?php } ?>
+            	<?php if (property_exists($output['data_list'][0],sMonth)){ ?>
+            		<th style="min-width:100px;">月</th>
+            	<?php } ?>
+            	<?php if (property_exists($output['data_list'][0],sDate)){ ?>
+            		<th style="min-width:100px;">日</th>
+            	<?php }} ?>
+            	<th rowspan="2" style="min-width:80px;">人次</th>
             </tr>
             <tbody>
             <?php if (!empty($output['data_list']) && is_array($output['data_list'])) { ?>
@@ -123,12 +139,24 @@
                         <td class=" align-center">
                             <?php echo $k+1?>
                         </td>
-                        <?php foreach ($output['displaycol'] as $key => $item) {
-                            ?>
-                            <th class="align-left"><?php if(substr($item,-5) == 'count')  echo number_format($v->$item,0); else  echo $v->$item;?></th>
-                        <?php  }?>
+                        <td><?php echo $v->Name ?></td>
+                        <?php if (property_exists($v,sStatSection)){ ?>
+	            			<td><?php echo $v->sStatSection ?></td>
+	            		<?php } ?>
+	            		<?php if (property_exists($v,sDoctor)){ ?>
+	            			<td><?php echo $v->sDoctor ?></td>
+	            		<?php } ?>
+	               		<?php if (property_exists($v,sYear)){ ?>
+	            			<td><?php echo $v->sYear ?></td>
+	            		<?php } ?>
+	            		<?php if (property_exists($v,sMonth)){ ?>
+	            			<td><?php echo $v->sMonth ?></td>
+	            		<?php } ?>
+	            		<?php if (property_exists($v,sDate)){ ?>
+	            			<td><?php echo $v->sDate ?></td>
+	            		<?php } ?>
                         <td class=" align-right">
-                            <?php echo number_format($v->cliniccount, 0)?>
+                            <?php echo number_format($v->RenCi, 0)?>
                         </td>
                     </tr>
                 <?php } ?>
@@ -180,34 +208,10 @@
         $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
         $('#ncsubmit').click(function () {
             $("#export").val('false');
-            var sumtypes =$(":checkbox[name='sumtype[]'][checked]");
-            if(sumtypes.length<=0){
-                $("#sumtype_good").attr("checked", true);
-                sumtypes =$(":checkbox[name='sumtype[]'][checked]");
-            }
-            var search_type_select = $('input[name="search_type_select"]:checked').val();
-            $("#search_type").val($('input[name="search_type_select"]:checked').val());
-            checked[search_type_select] = [];
-            for(var i =0 ;i < sumtypes.length;i++){
-                checked[search_type_select].push( $(sumtypes[i]).val());
-            }
-            $("#checked").val(makechecked(checked));
             $('#formSearch').submit();
         });
         $('#ncexport').click(function () {
             $("#export").val('true');
-            var sumtypes =$(":checkbox[name='sumtype[]'][checked]");
-            if(sumtypes.length<=0){
-                $("#sumtype_good").attr("checked", true);
-                sumtypes =$(":checkbox[name='sumtype[]'][checked]");
-            }
-            var search_type_select = $('input[name="search_type_select"]:checked').val();
-            $("#search_type").val($('input[name="search_type_select"]:checked').val());
-            checked[search_type_select] = [];
-            for(var i =0 ;i < sumtypes.length;i++){
-                checked[search_type_select].push( $(sumtypes[i]).val());
-            }
-            $("#checked").val(makechecked(checked));
             $('#formSearch').submit();
         });
     });
