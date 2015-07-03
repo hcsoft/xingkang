@@ -434,19 +434,11 @@ class communityControl extends SystemControl
 	 
 	public function clinicstatisticOp(){
 		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
-//		$config = array('sumcol' => array('OrgID' => array(name => 'OrgID', 'text' => '机构', map => $this->types),
-//            'Section' => array(name => 'Section', 'text' => '科室'),
-//            'Doctor' => array(name => 'Doctor', 'text' => '医生'),
-//        ));
-//        
-//        Tpl::output('config', $config);
+
         $OrgId = '-1';
 		if ($_GET['orgids']) {
             $OrgId = '\'' . implode(',', $_GET['orgids']) . '\'';;
         }
-        
-        
-        
         $startTime = '-1';
 		if ($_GET['query_start_time']) {
             $startTime = '\'' . $_GET['query_start_time'] . '\'';
@@ -478,9 +470,6 @@ class communityControl extends SystemControl
 		while ( $row = $stmt->fetchObject () ) {
 			array_push ( $clinicAccount, $row );
 		}
-//		foreach ($clinicAccount as $k => $v){
-//			Log::record($v->OrgID,"SQL");
-//		}
 		Tpl::output('data_list', $clinicAccount);
 		Tpl::showpage('community.clinic.statistic');
 	}
@@ -491,133 +480,198 @@ class communityControl extends SystemControl
         if (!isset($_GET['search_type'])) {
             $_GET['search_type'] = '0';
         }
-        $sqlarray = array('Section' => 'a.Section as "Section"',
-            'Doctor' => ' a.Doctor as "Doctor" ',
-            'year' => ' year(a.ClinicDate) as "year" ',
-            'month' => ' left(convert(varchar,ClinicDate,112),6) as  "month" ',
-            'day' => ' convert(varchar,ClinicDate,112) as "day" ',
-            'OrgID' => ' org.name as "OrgID" '
-        );
-        $config = array('sumcol' => array('OrgID' => array(name => 'OrgID', 'text' => '机构', map => $this->types),
-            'Section' => array(name => 'Section', 'text' => '科室'),
-            'Doctor' => array(name => 'Doctor', 'text' => '医生'),
-            'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
-            'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
-            'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
-        ));
-        Tpl::output('config', $config);
-
-        //处理汇总字段
-        $sumtype = $_GET['sumtype'];
-        if ($sumtype == null) {
-            $sumtype = array(0 => "OrgID");
-            $_GET['sumtype'] = $sumtype;
-        }
-        $checked = $_GET['checked'];
-        $page = new Page();
-        $page->setEachNum(10);
-        $page->setNowPage($_REQUEST["curpage"]);
-        $sql = 'from Center_ClinicLog a  , Organization org  where  a.orgid = org.id ';
-
-        if ($_GET['query_start_time']) {
-            $sql = $sql . ' and a.ClinicDate >=\'' . $_GET['query_start_time'] . '\'';
-        }
-
-        if ($_GET['query_end_time']) {
-            $sql = $sql . ' and a.ClinicDate < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
-        }
-
-        //处理树的参数
-        if ($_GET['orgids']) {
-            $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
-        }
-
-        $search_type = $_GET['search_type'];
-//        echo $search_type;
-        $colconfig = $config;
-//        var_dump($config[intval($search_type)]);
-        $displaycol = array();
+        $OrgId = '-1';
         $displaytext = array();
-        $sumcol = array();
-        $totalcol = array();
-        $groupbycol = array();
-        foreach ($sumtype as $i => $v) {
-//            var_dump($colconfig['sumcol'][$v]);
-            if(isset($colconfig['sqlwher'])){
-                $sql = $sql . $colconfig['sqlwher'];
-            }
-            if (isset($colconfig['sumcol'][$v])) {
-                if (isset($colconfig['sumcol'][$v]['cols'])) {
-                    foreach ($colconfig['sumcol'][$v]['cols'] as $item) {
-//                        echo $item['name'] . '<br>';
-                        array_push($sumcol, $sqlarray[$item['name']]);
-                        array_push($displaycol, $item['name']);
-                        array_push($displaytext, $item['text']);
-                        $itemsplit = explode(' as ', $sqlarray[$item['name']]);
-                        array_push($totalcol, ' null as ' . $itemsplit[1]);
-                        $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
-                        if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
-                            array_push($groupbycol, $itemsplit[0]);
-                    }
-                } else {
-                    $item = $colconfig['sumcol'][$v];
-                    array_push($sumcol, $sqlarray[$item['name']]);
-                    array_push($displaycol, $item['name']);
-                    array_push($displaytext, $item['text']);
-                    $itemsplit = explode(' as ', $sqlarray[$item['name']]);
-                    array_push($totalcol, ' null as ' . $itemsplit[1]);
-                    $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
-                    if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
-                        array_push($groupbycol, $itemsplit[0]);
-                }
-            }
+        array_push($displaytext, '序号');
+        array_push($displaytext, '分支机构');
+		if ($_GET['orgids']) {
+            $OrgId = '\'' . implode(',', $_GET['orgids']) . '\'';;
         }
+        $startTime = '-1';
+		if ($_GET['query_start_time']) {
+            $startTime = '\'' . $_GET['query_start_time'] . '\'';
+        }
+        
+		$endTime = '-1';
+        if ($_GET['query_end_time']) {
+            $endTime = '\'' . $_GET['query_end_time'] . '\'';
+        }
+        $searchType = '';
+        if ($_GET['statisticSection']) {
+        	array_push($displaytext, '科室');
+            $searchType = $searchType . '1';
+        }else{
+        	$searchType = $searchType . '0';
+        }
+        if ($_GET['statisticDoctor']) {
+        	array_push($displaytext, '医生');
+            $searchType = $searchType . '1';
+        }else{
+        	$searchType = $searchType . '0';
+        }
+        if ($_GET['statisticYear']) {
+        	array_push($displaytext, '年');
+            $searchType = $searchType . '1';
+        }else{
+        	$searchType = $searchType . '0';
+        }
+        if ($_GET['statisticMonth']) {
+        	array_push($displaytext, '月');
+            $searchType = $searchType . '1';
+        }else{
+        	$searchType = $searchType . '0';
+        }
+        if ($_GET['statisticDay']) {
+        	array_push($displaytext, '日');
+            $searchType = $searchType . '1';
+        }else{
+        	$searchType = $searchType . '0';
+        }
+        $searchType = '\'' . $searchType . '\'';
         array_push($displaytext, '人次');
-//        var_dump($totalcol);
-        $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
-//        var_dump($totalcol);
-        $totalcolstr = join(',', $totalcol);
-        $sumcolstr = join(',', $sumcol);
-        $groupbycolstr = join(',', $groupbycol);
-//        echo $sumcolstr;
-        $tsql = " select $sumcolstr , count(1) cliniccount
-                        $sql group by $groupbycolstr order by $groupbycolstr ";
-        $totalsql = " select $totalcolstr , count(1) cliniccount
-                        $sql ";
+        
+		$sql = "exec pXPrescriptionSum $OrgId,$startTime,$endTime,$searchType;";
+		
+		$stmt = $conn->prepare($sql);
+
+		$stmt->execute();
+ 		$prescriptionsum = array();
+		while ( $row = $stmt->fetchObject () ) {
+			array_push ( $prescriptionsum, $row );
+		}
+		Tpl::output('data_list', $prescriptionsum);
+        
         if(isset($_GET['export']) && $_GET['export']=='true'){
-            $this->exportxlsx(array(0=>$tsql,1=>$totalsql),$displaytext,'处方汇总');
+            $this->exportxlsxwithoutsql($displaytext,'处方汇总',$prescriptionsum);
         }
-
-//        echo $tsql;
-        $stmt = $conn->query($tsql);
-        $data_list = array();
-        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            array_push($data_list, $row);
-        }
-        //处理合计
-
-//        echo $totalsql;
-        $totalstmt = $conn->query($totalsql);
-        while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
-            array_push($data_list, $row);
-        }
-        Tpl::output('data_list', $data_list);
-        //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
-        Tpl::output('page', $page->show());
-
-
-        //处理需要显示的列
-        $col = array();
-        foreach ($sumtype as $i => $v) {
-            if (isset($sumtypestr[$v])) {
-                foreach ($sumtypestr[$v] as $key => $item) {
-                    $col[$key] = $item;
-                }
-            }
-        }
-//        var_dump($col);
-        Tpl::output('displaycol', $displaycol);
-        Tpl::output('displaytext', $displaytext);
+        
+//        $sqlarray = array('Section' => 'a.Section as "Section"',
+//            'Doctor' => ' a.Doctor as "Doctor" ',
+//            'year' => ' year(a.ClinicDate) as "year" ',
+//            'month' => ' left(convert(varchar,ClinicDate,112),6) as  "month" ',
+//            'day' => ' convert(varchar,ClinicDate,112) as "day" ',
+//            'OrgID' => ' org.name as "OrgID" '
+//        );
+//        $config = array('sumcol' => array('OrgID' => array(name => 'OrgID', 'text' => '机构', map => $this->types),
+//            'Section' => array(name => 'Section', 'text' => '科室'),
+//            'Doctor' => array(name => 'Doctor', 'text' => '医生'),
+//            'year' => array('text' => '年', name=>'year',uncheck=>'month,day' ),
+//            'month' => array('text' => '月', name=>'month',uncheck=>'year,day'),
+//            'day' => array('text' => '日', name=>'day',uncheck=>'year,month'),
+//        ));
+//        Tpl::output('config', $config);
+//
+//        //处理汇总字段
+//        $sumtype = $_GET['sumtype'];
+//        if ($sumtype == null) {
+//            $sumtype = array(0 => "OrgID");
+//            $_GET['sumtype'] = $sumtype;
+//        }
+//        $checked = $_GET['checked'];
+//        $page = new Page();
+//        $page->setEachNum(10);
+//        $page->setNowPage($_REQUEST["curpage"]);
+//        $sql = 'from Center_ClinicLog a  , Organization org  where  a.orgid = org.id ';
+//
+//        if ($_GET['query_start_time']) {
+//            $sql = $sql . ' and a.ClinicDate >=\'' . $_GET['query_start_time'] . '\'';
+//        }
+//
+//        if ($_GET['query_end_time']) {
+//            $sql = $sql . ' and a.ClinicDate < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
+//        }
+//
+//        //处理树的参数
+//        if ($_GET['orgids']) {
+//            $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+//        }
+//
+//        $search_type = $_GET['search_type'];
+////        echo $search_type;
+//        $colconfig = $config;
+////        var_dump($config[intval($search_type)]);
+//        $displaycol = array();
+//        $displaytext = array();
+//        $sumcol = array();
+//        $totalcol = array();
+//        $groupbycol = array();
+//        foreach ($sumtype as $i => $v) {
+////            var_dump($colconfig['sumcol'][$v]);
+//            if(isset($colconfig['sqlwher'])){
+//                $sql = $sql . $colconfig['sqlwher'];
+//            }
+//            if (isset($colconfig['sumcol'][$v])) {
+//                if (isset($colconfig['sumcol'][$v]['cols'])) {
+//                    foreach ($colconfig['sumcol'][$v]['cols'] as $item) {
+////                        echo $item['name'] . '<br>';
+//                        array_push($sumcol, $sqlarray[$item['name']]);
+//                        array_push($displaycol, $item['name']);
+//                        array_push($displaytext, $item['text']);
+//                        $itemsplit = explode(' as ', $sqlarray[$item['name']]);
+//                        array_push($totalcol, ' null as ' . $itemsplit[1]);
+//                        $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+//                        if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+//                            array_push($groupbycol, $itemsplit[0]);
+//                    }
+//                } else {
+//                    $item = $colconfig['sumcol'][$v];
+//                    array_push($sumcol, $sqlarray[$item['name']]);
+//                    array_push($displaycol, $item['name']);
+//                    array_push($displaytext, $item['text']);
+//                    $itemsplit = explode(' as ', $sqlarray[$item['name']]);
+//                    array_push($totalcol, ' null as ' . $itemsplit[1]);
+//                    $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+//                    if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+//                        array_push($groupbycol, $itemsplit[0]);
+//                }
+//            }
+//        }
+//        array_push($displaytext, '人次');
+////        var_dump($totalcol);
+//        $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
+////        var_dump($totalcol);
+//        $totalcolstr = join(',', $totalcol);
+//        $sumcolstr = join(',', $sumcol);
+//        $groupbycolstr = join(',', $groupbycol);
+////        echo $sumcolstr;
+//        $tsql = " select $sumcolstr , count(1) cliniccount
+//                        $sql group by $groupbycolstr order by $groupbycolstr ";
+//        $totalsql = " select $totalcolstr , count(1) cliniccount
+//                        $sql ";
+//        if(isset($_GET['export']) && $_GET['export']=='true'){
+//            $this->exportxlsx(array(0=>$tsql,1=>$totalsql),$displaytext,'处方汇总');
+//        }
+//
+////        echo $tsql;
+//        $stmt = $conn->query($tsql);
+//        $data_list = array();
+//        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+//            array_push($data_list, $row);
+//        }
+//        //处理合计
+//
+////        echo $totalsql;
+//        $totalstmt = $conn->query($totalsql);
+//        while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
+//            array_push($data_list, $row);
+//        }
+//        Tpl::output('data_list', $data_list);
+//        //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
+//        Tpl::output('page', $page->show());
+//
+//
+//        //处理需要显示的列
+//        $col = array();
+//        foreach ($sumtype as $i => $v) {
+//            if (isset($sumtypestr[$v])) {
+//                foreach ($sumtypestr[$v] as $key => $item) {
+//                    $col[$key] = $item;
+//                }
+//            }
+//        }
+////        var_dump($col);
+//        Tpl::output('displaycol', $displaycol);
+//        Tpl::output('displaytext', $displaytext);
         Tpl::showpage('community.prescription.sum');
     }
 
