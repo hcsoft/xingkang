@@ -55,6 +55,19 @@ class memberControl extends SystemControl {
 			$condition ['cardgrade'] = $_GET['cardgrade'];
 		}
 
+		if (isset($_GET['idnumber']) and $_GET['idnumber'] != '') {
+			$condition ['sIDCard'] = $_GET['idnumber'];
+		}
+		if (isset($_GET['tel']) and $_GET['tel'] != '') {
+			$condition ['sLinkPhone'] = $_GET['tel'];
+		}
+		if (isset($_GET['name']) and $_GET['name'] != '') {
+			$condition ['member_truename'] = array('like','%'.$_GET['name'].'%');
+		}
+		if (isset($_GET['birthday']) and $_GET['birthday'] != '') {
+			$condition ['member_birthday'] = $_GET['birthday'];
+		}
+
 		if(!isset($_GET['orderby'])){
 			$_GET['orderby'] = '预存余额';
 		}
@@ -74,28 +87,28 @@ class memberControl extends SystemControl {
 				}
 			}
 		}
-		if ($_GET ['search_field_value'] != '') {
-			switch ($_GET ['search_field_name']) {
-				case 'member_name' :
-					$condition ['member_name'] = array (
-							'like',
-							'%' . trim ( $_GET ['search_field_value'] ) . '%' 
-					);
-					break;
-				case 'member_email' :
-					$condition ['member_email'] = array (
-							'like',
-							'%' . trim ( $_GET ['search_field_value'] ) . '%' 
-					);
-					break;
-				case 'member_truename' :
-					$condition ['member_truename'] = array (
-							'like',
-							'%' . trim ( $_GET ['search_field_value'] ) . '%' 
-					);
-					break;
-			}
-		}
+//		if ($_GET ['search_field_value'] != '') {
+//			switch ($_GET ['search_field_name']) {
+//				case 'member_name' :
+//					$condition ['member_name'] = array (
+//							'like',
+//							'%' . trim ( $_GET ['search_field_value'] ) . '%'
+//					);
+//					break;
+//				case 'member_email' :
+//					$condition ['member_email'] = array (
+//							'like',
+//							'%' . trim ( $_GET ['search_field_value'] ) . '%'
+//					);
+//					break;
+//				case 'member_truename' :
+//					$condition ['member_truename'] = array (
+//							'like',
+//							'%' . trim ( $_GET ['search_field_value'] ) . '%'
+//					);
+//					break;
+//			}
+//		}
 		if ($_GET ['member_id'] != '') {
 			$condition ['member_id'] = array (
 					'like',

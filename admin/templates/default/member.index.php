@@ -37,16 +37,16 @@
                 <td>卡类型</td>
                 <td><select name="cardtype">
                         <option value="">全部</option>
-                        <option value="0" <?php if ('0'== $_GET['cardtype']){ ?>selected<?php } ?>>普通卡</option>
-                        <option value="1" <?php if ('1'== $_GET['cardtype']){ ?>selected<?php } ?>>储值卡</option>
+                        <option value="0" <?php if ('0' == $_GET['cardtype']){ ?>selected<?php } ?>>普通卡</option>
+                        <option value="1" <?php if ('1' == $_GET['cardtype']){ ?>selected<?php } ?>>储值卡</option>
                     </select>
                 </td>
                 <td>卡级别</td>
                 <td><select name="cardgrade">
                         <option value="">全部</option>
-                        <option value="0"  <?php if ('0'== $_GET['cardgrade']){ ?>selected<?php } ?>>健康卡</option>
-                        <option value="1"  <?php if ('1'== $_GET['cardgrade']){ ?>selected<?php } ?>>健康金卡</option>
-                        <option value="2" <?php if ('2'== $_GET['cardgrade']){ ?>selected<?php } ?>>健康钻卡</option>
+                        <option value="0" <?php if ('0' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康卡</option>
+                        <option value="1" <?php if ('1' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康金卡</option>
+                        <option value="2" <?php if ('2' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康钻卡</option>
                     </select>
                 </td>
 
@@ -73,12 +73,42 @@
                     </select>
                 </td>
             </tr>
+            <tr>
+                <td colspan="12">
+                    <table>
+                        <tr>
+                            <td >
+                                身份证号码:
+                                <input type="text" value="<?php echo $_GET['idnumber']; ?>" name="idnumber"
+                                       class="txt">
+                            </td>
+                            <td>
+                                会员姓名:
+                                <input type="text" value="<?php echo $_GET['name']; ?>" name="name"
+                                       class="txt">
+                            </td>
+                            <td>
+                                电话:
+                                <input type="text" value="<?php echo $_GET['tel']; ?>" name="tel"
+                                       class="txt">
+                            </td>
+                            <td>
+                                生日:
+                                <input type="text" value="<?php echo $_GET['birthday']; ?>" name="birthday"
+                                       class="txt">
+                            </td>
+
+                        </tr>
+                    </table>
+                </td>
+            </tr>
             </tbody>
         </table>
     </form>
     <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
     <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"
             charset="utf-8"></script>
+    <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery.validation.min.js"></script>
     <link rel="stylesheet" type="text/css"
           href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
     <link href="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet"
@@ -156,14 +186,16 @@
                             <p class="name"><!--会员名:<strong><?php echo $v['member_name']; ?></strong>-->
                                 姓名: <?php echo $v['member_truename']; ?></p>
 
-                            <p class="smallfont">电话:&nbsp;<?php echo $v['Mobile']; ?></p>
+                            <p class="smallfont">电话:&nbsp;<?php echo $v['sLinkPhone']; ?></p>
 
                             <p class="smallfont">地址:&nbsp;<?php echo $v['sAddress']; ?></p>
 
                             <div class="im">
                             </div>
                         </td>
-                        <td><p class="name">身份证: <?php echo $v['sIDCard']; ?></p>
+                        <td>
+                            <p class="name">身份证: <?php echo $v['sIDCard']; ?></p>
+                            <p class="name">生日: <?php echo substr($v['member_birthday'],0,10); ?></p>
 
                             <p class="smallfont">医保卡:&nbsp;<?php echo $v['MediCardID']; ?></p>
 

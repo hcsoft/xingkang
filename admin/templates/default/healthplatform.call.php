@@ -62,29 +62,36 @@
 
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
-                    <?php if ($output['search_field_value'] != '' or $output['search_sort'] != '') { ?>
-                        <a href="index.php?act=member&op=member"
-                           class="btns "><span><?php echo $lang['nc_cancel_search'] ?></span></a>
-                    <?php } ?></td>
-                <!--                <td>-->
-                <!--                    排序字段：-->
-                <!--                    <select name="orderby">-->
-                <!--                        --><?php //foreach ($output['orderbys'] as $k => $v) { ?>
-                <!--                            <option value="--><?php //echo $v['txt'] ?><!--"-->
-                <!--                                    --><?php //if ($v['txt'] == $_GET['orderby']){ ?><!--selected-->
-                <?php //} ?><!-- >--><?php //echo $v['txt'] ?><!--</option>-->
-                <!--                        --><?php //} ?>
-                <!--                    </select>-->
-                <!--                </td>-->
-                <!--                <td>-->
-                <!--                    顺序：-->
-                <!--                    <select name="order">-->
-                <!--                        <option value="desc" -->
-                <?php //if ('desc' == $_GET['order']){ ?><!--selected--><?php //} ?><!-- >倒序</option>-->
-                <!--                        <option value="asc" -->
-                <?php //if ('asc' == $_GET['order']){ ?><!--selected--><?php //} ?><!-- >正序</option>-->
-                <!--                    </select>-->
-                <!--                </td>-->
+
+            </tr>
+            <tr>
+                <td colspan="12">
+                    <table>
+                        <tr>
+                            <td >
+                                身份证号码:
+                                <input type="text" value="<?php echo $_GET['idnumber']; ?>" name="idnumber"
+                                       class="txt">
+                            </td>
+                            <td>
+                                会员姓名:
+                                <input type="text" value="<?php echo $_GET['name']; ?>" name="name"
+                                       class="txt">
+                            </td>
+                            <td>
+                                电话:
+                                <input type="text" value="<?php echo $_GET['tel']; ?>" name="tel"
+                                       class="txt">
+                            </td>
+                            <td>
+                                生日:
+                                <input type="text" value="<?php echo $_GET['birthday']; ?>" name="birthday"
+                                       class="txt">
+                            </td>
+
+                        </tr>
+                    </table>
+                </td>
             </tr>
             </tbody>
         </table>
