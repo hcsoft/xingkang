@@ -104,15 +104,15 @@
             		<?php }} ?>
             		<th colspan="3">中医</th>
             		<th colspan="3">西医</th>
-            		<th colspan="3">药房</th>
-            		<th colspan="3">推拿</th>
+            		<th colspan="3">药房零售</th>
+            		<th colspan="3">理疗</th>
             		<th colspan="3">计免</th>
             		<th colspan="3">检验</th>
             		<th colspan="3">成人体检</th>
             		<th colspan="3">儿童体检</th>
             		<th colspan="3">妇科</th>
             		<th colspan="3">口腔</th>
-            		<th colspan="3">慢病处方</th>
+            		<th colspan="3">健康咨询</th>
             		<th colspan="3">验光配镜</th>
             	</tr>
             	<tr>
