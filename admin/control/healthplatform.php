@@ -634,7 +634,7 @@ class healthplatformControl extends SystemControl
                 break;
         }
 
-        $field = 'member.*,call_main.changestr,call_main.status [call_status] ,call_main.result,call_main.remark ';
+        $field = 'member.*,call_main.changestr,call_main.status [call_status] ,call_main.result,call_main.remark,call_main.spotdate,call_main.inputdate ';
 
         $condition['status'] = array('exp', " call_main.memberid = member.member_id  ");
 

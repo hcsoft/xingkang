@@ -152,11 +152,8 @@
                 <th>联系电话</th>
                 <th>地址</th>
                 <th>身份证</th>
-                <th>末次消费日期</th>
-                <th>末次消费地点</th>
-                <th>储值余额</th>
-                <th>赠送余额</th>
-                <th>消费积分</th>
+                <th>回访日期</th>
+                <th>录入日期</th>
                 <th>修改内容</th>
                 <th>回访结果</th>
                 <th>回访原因</th>
@@ -182,11 +179,8 @@
                                 style="display: inline-block;color:blue;"><?php echo $v['sLinkPhone']; ?></span></td>
                         <td class="nowrap"><?php echo $v['sAddress']; ?></td>
                         <td class="nowrap"><?php echo $v['sIDCard']; ?></td>
-                        <td class="nowrap"><?php echo substr($v['LastPayDate'], 0, 10); ?></td>
-                        <td class=""><?php echo $v['LastPayOrgName']; ?></td>
-                        <td class="nowrap"><?php echo $v['available_predeposit']; ?></td>
-                        <td class="nowrap"><?php echo number_format($v['fConsumeBalance'], 2); ?></td>
-                        <td class="nowrap"><?php echo $v['member_points']; ?></td>
+                        <td class="nowrap"><?php echo substr($v['spotdate'], 0, 10); ?></td>
+                        <td class="nowrap"><?php echo substr($v['inputdate'], 0, 10); ?></td>
                         <td class="align-left">
                             <?php echo $v['changestr']; ?>
                         </td>
