@@ -788,12 +788,13 @@ class healthplatformControl extends SystemControl
         }
 
         $haspay = $_REQUEST['haspay'];
+        $order = ' member_id desc ';
         if (!empty($haspay)) {
             if ($haspay == '1') {
                 $condition['haspay'] = array('exp', " not   exists (select 1 from Center_CheckOut where sMemberID = member_id  )  ");
             } else if ($haspay == '2') {
                 $condition['haspay'] = array('exp', "  exists (select 1 from Center_CheckOut where sMemberID = member_id  )  ");
-
+                $order = '(select max(dCO_Date) from Center_CheckOut where sMemberID = member_id ) desc';
             }
         }
 
@@ -806,7 +807,7 @@ class healthplatformControl extends SystemControl
         if (empty ($order)) {
             $order = 'member_id desc';
         }
-        $member_list = $model_member->getMemberList($condition, $field, 10, ' member_id desc ');
+        $member_list = $model_member->getMemberList($condition, $field, 10, $order);
         /**
          * 整理会员信息
          */
