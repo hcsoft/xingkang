@@ -238,7 +238,7 @@ class goods_classModel extends Model{
 		$param['where'] = $condition_str;
 		$param['order'] = $condition['order'] ? $condition['order'] : 'gc_parent_id asc,gc_sort asc,gc_id asc';
 		$result = Db::select($param);
-
+		
 		return $result;
 	}
 
@@ -272,7 +272,7 @@ class goods_classModel extends Model{
 		if ($condition['in_type_id'] != '') {
 			$condition_str .= " and type_id in (".$condition['in_type_id'].")";
 		}
-
+		
 		return $condition_str;
 	}
     
@@ -389,11 +389,13 @@ class goods_classModel extends Model{
 			$show_deep = intval($show_deep);
 			if ($show_deep == 1){//只显示第一级时用循环给分类加上深度deep号码
 				foreach ($class_list as $val) {
-					if($val['gc_parent_id'] == 0) {
+					Log::record($val['gc_name'] . '===' . $val['gc_parent_id'], 'SQL');
+					if($val['gc_parent_id'] == '1') {
 						$val['deep'] = 1;
 						$goods_class[] = $val;
+						
 					} else {
-						break;//父类编号不为0时退出循环
+						continue;//父类编号不为0时退出循环
 					}
 				}
 			} else {//显示第二和三级时用递归

@@ -73,8 +73,8 @@ class goodsControl extends SystemControl
 			$iDrug_Id = $_REQUEST['machineAccountDrugId'];
 			$orgid = $_REQUEST['orgid'];
 //			$cardid = $_REQUEST['cardid1'];
-			$datestart = $_REQUEST['query_start_time'];
-			$dateend = $_REQUEST['query_end_time'];
+			$datestart = '\'' . $_REQUEST['query_start_time'] . '\'';
+			$dateend = '\'' . $_REQUEST['query_end_time'] . '\'';
 			$sql = "SET NOCOUNT ON; exec pLStockAccount $iDrug_Id,$datestart,$dateend,$orgid;SET NOCOUNT off; ";
 			$stmt = $conn->prepare($sql);
 
@@ -98,7 +98,7 @@ class goodsControl extends SystemControl
     	try {
 			$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 			$iDrug_Id = $_REQUEST['stockAccountDrugId'];
-			$orgid = $_REQUEST['orgid'];
+			$orgid = $_REQUEST['stockorgid'];
 //			$cardid = $_REQUEST['cardid1'];
 //			$datestart = $_REQUEST['query_start_time'];
 //			$dateend = $_REQUEST['query_end_time'];
@@ -107,33 +107,14 @@ class goodsControl extends SystemControl
 			         where good.idrug_rectype in (0,1,3) ';
 			$sql = $sql . ' and good.goods_commonid = ' . intval($iDrug_Id);
 			$sql = $sql . ' and stock.orgid =\'' . $orgid . '\'';
+			Log::record($sql,'SQL');
 			$stmt = $conn->query($sql);
 
  			$stockAccount = array();
 			while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 				array_push ( $stockAccount, $row );
 			}
-			$result = array();
-			if(!empty($stockAccount)){
-				foreach($stockAccount as $v){
-					$v->fDS_OStock = number_format($v->fDS_OStock,0);
-					$v->fDS_SStock = number_format($v->fDS_SStock,0);
-					$v->fDS_RetailPrice = number_format($v->fDS_RetailPrice,3);
-					$v->fDS_BuyPrice = number_format($v->fDS_BuyPrice,3);
-					$v->fDS_LeastOStock = number_format($v->fDS_LeastOStock,3);
-					$v->fDS_LeastSStock = number_format($v->fDS_LeastSStock,3);
-					$v->fDS_LeastRetailPrice = number_format($v->fDS_LeastRetailPrice,3);
-					$v->fDS_LeastBuyPrice = number_format($v->fDS_LeastBuyPrice,3);
-					$v->fDS_Price0 = number_format($v->fDS_RetailPrice * $v->fDS_OStock + $v->fDS_LeastRetailPrice * $v->fDS_LeastOStock,3);
-					$v->fDS_Price1 = number_format($v->fDS_BuyPrice * $v->fDS_OStock + $v->fDS_LeastBuyPrice * $v->fDS_LeastOStock,3);
-					$v->fDS_Price2 = number_format($v->fDS_RetailPrice * $v->fDS_OStock - $v->fDS_BuyPrice * $v->fDS_OStock +
-                                $v->fDS_LeastRetailPrice *$v->fDS_LeastOStock - $v->fDS_LeastBuyPrice * $v->fDS_LeastOStock
-                                ,3);
-					
-					array_push($result,$v);
-				}
-			}
-			echo json_encode(array('success' => true, 'msg' => '查询成功!' ,'data'=>$result ,'sql'=>$sql));
+			echo json_encode(array('success' => true, 'msg' => '查询成功!' ,'data'=>$stockAccount ,'sql'=>$sql));
 		} catch (Exception $e) {
 			echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
 		}
@@ -158,18 +139,7 @@ class goodsControl extends SystemControl
 			while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 				array_push ( $changePrice, $row );
 			}
-			$result = array();
-			if(!empty($changePrice)){
-				foreach($changePrice as $v){
-					$v->fPrice_Before = number_format($v->fPrice_Before, 2);
-					$v->fPrice_After = number_format($v->fPrice_After, 2);
-					$v->dPrice_Date = substr($v->dPrice_Date, 0, 10);
-					$v->dPrice_BeginDate = substr($v->dPrice_BeginDate, 0, 10) ;
-					$v->dPrice_EndDate = substr($v->dPrice_EndDate, 0, 10);
-					array_push($result,$v);
-				}
-			}
-			echo json_encode(array('success' => true, 'msg' => '查询成功!' ,'data'=>$result ,'sql'=>$sql));
+			echo json_encode(array('success' => true, 'msg' => '查询成功!' ,'data'=>$changePrice ,'sql'=>$sql));
 		} catch (Exception $e) {
 			echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
 		}
@@ -355,6 +325,7 @@ class goodsControl extends SystemControl
      */
     public function goods_delOp()
     {
+//    	Log::record(123,'SQL');
         if (chksubmit()) {
             $commonid_array = $_POST['id'];
             foreach ($commonid_array as $value) {
@@ -362,8 +333,9 @@ class goodsControl extends SystemControl
                     showDialog(L('nc_common_op_fail'), 'reload');
                 }
             }
+//            showDialog(L($commonid_array[0]), 'reload', 'succ');
             Model('goods')->delGoodsAll(array('goods_commonid' => array('in', $commonid_array)));
-            showDialog(L('nc_common_op_succ'), 'reload', 'succ');
+//            showDialog(L('nc_common_op_succ'), 'reload', 'succ');
         }
     }
 

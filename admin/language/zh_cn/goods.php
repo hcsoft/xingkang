@@ -24,6 +24,9 @@ $lang['goods_index_click']				= '浏览';
 $lang['goods_index_ensure_handle']		= '您确定进行该操作吗';
 $lang['goods_index_help1']				= '上架，当商品处于非上架状态时，前台将不能浏览该商品，店主和管理员都可控制商品上架状态';
 $lang['goods_index_help2']				= '违规下架，当商品处于违规下架状态时，前台将不能浏览该商品，只有管理员可控制商品违规下架状态，并且商品不能上架';
+$lang['goods_index_finance_cat_set']    = '财务分类设置';
+$lang['goods_index_finance_cat_search'] = '财务分类';
+$lang['goods_index_provider']           = '供应商';
 /**
  * 商品推荐
  */

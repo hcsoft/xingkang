@@ -166,100 +166,148 @@
 	            			<td><?php echo $v->sDoctor ?></td>
 	            		<?php } ?>
 	               		
-	                    <td><?php echo number_format($v->ZY_fCO_IncomeMoney,2) ?></td>
-	                    <td><?php echo number_format($v->ZYRenCi,0) ?></td>
+	                    <td><?php if ($v->ZY_fCO_IncomeMoney == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->ZY_fCO_IncomeMoney,2);} ?></td>
+	                    <td><?php if ($v->ZYRenCi == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->ZYRenCi,0) ;}?></td>
 	                    <td><?php 
 	                    	if ($v->ZYRenCi != null and number_format($v->ZYRenCi,0) != 0) 
 	                    		echo number_format($v->ZY_fCO_IncomeMoney/$v->ZYRenCi,2);
 	                    	else
-	                    		echo number_format(0,2);
+	                    		echo '';
 	                    ?></td>
-	                    <td><?php echo number_format($v->XY_fCO_IncomeMoney,2) ?></td>
-	                    <td><?php echo number_format($v->XYRenCi,0) ?></td>
+	                    <td><?php if ($v->XY_fCO_IncomeMoney == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->XY_fCO_IncomeMoney,2);} ?></td>
+	                    <td><?php if ($v->XYRenCi == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->XYRenCi,0);} ?></td>
 	                    <td><?php if ($v->XYRenCi != null and number_format($v->XYRenCi,0) != 0) 
 	                    		echo number_format($v->XY_fCO_IncomeMoney/$v->XYRenCi,2);
 	                    	else
-	                    		echo number_format(0,2);
+	                    		echo '';
 	                    ?></td>
-	                    <td><?php echo number_format($v->YF_fCO_IncomeMoney,2) ?></td>
-	                    <td><?php echo number_format($v->YFRenCi,0) ?></td>
+	                    <td><?php if ($v->YF_fCO_IncomeMoney == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->YF_fCO_IncomeMoney,2);} ?></td>
+	                    <td><?php if ($v->YFRenCi == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->YFRenCi,0);} ?></td>
 	                    <td><?php 
 	                    	if ($v->YFRenCi != null and number_format($v->YFRenCi,0) != 0) 
 	                    		echo number_format($v->YF_fCO_IncomeMoney/$v->YFRenCi,2);
 	                    	else
-	                    		echo number_format(0,2);
+	                    		echo '';
 	                    ?></td>
-	                    <td><?php echo number_format($v->TN_fCO_IncomeMoney,2) ?></td>
-	                    <td><?php echo number_format($v->TNRenCi,0) ?></td>
+	                    <td><?php if ($v->TN_fCO_IncomeMoney == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->TN_fCO_IncomeMoney,2);} ?></td>
+	                    <td><?php if ($v->TNRenCi == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->TNRenCi,0);} ?></td>
 	                    <td><?php 
 	                    	if ($v->TNRenCi != null and number_format($v->TNRenCi,0) != 0)
 	                    		echo number_format($v->TN_fCO_IncomeMoney/$v->TNRenCi,2);
 	                    	else
-	                    		echo number_format(0,2);
+	                    		echo '';
 	                    ?></td>
-	                    <td><?php echo number_format($v->JM_fCO_IncomeMoney,2) ?></td>
-	                    <td><?php echo number_format($v->JMRenCi,0) ?></td>
+	                    <td><?php if ($v->JM_fCO_IncomeMoney == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->JM_fCO_IncomeMoney,2);}  ?></td>
+	                    <td><?php if ($v->JMRenCi == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->JMRenCi,0);}  ?></td>
 	                    <td><?php 
 	                    	if ($v->JMRenCi != null and number_format($v->JMRenCi,0) != 0)
 	                    		echo number_format($v->JM_fCO_IncomeMoney/$v->JMRenCi,2);
 	                    	else
-	                    		echo number_format(0,2);
+	                    		echo '';
 	                    ?></td>
-	                    <td><?php echo number_format($v->JY_fCO_IncomeMoney,2) ?></td>
-	                    <td><?php echo number_format($v->JYRenCi,0) ?></td>
+	                    <td><?php if ($v->JY_fCO_IncomeMoney == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->JY_fCO_IncomeMoney,2);} ?></td>
+	                    <td><?php if ($v->JYRenCi == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->JYRenCi,0);} ?></td>
 	                    <td><?php 
 	                    	if ($v->JYRenCi != null and number_format($v->JYRenCi,0) != 0)
 	                    		echo number_format($v->JY_fCO_IncomeMoney/$v->JYRenCi,2);
 	                    	else
-	                    		echo number_format(0,2);
+	                    		echo '';
 	                    ?></td>
-	                    <td><?php echo number_format($v->CRTJ_fCO_IncomeMoney,2) ?></td>
-	                    <td><?php echo number_format($v->CRTJRenCi,0) ?></td>
+	                    <td><?php if ($v->CRTJ_fCO_IncomeMoney == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->CRTJ_fCO_IncomeMoney,2);}  ?></td>
+	                    <td><?php if ($v->CRTJRenCi == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->CRTJRenCi,0);} ?></td>
 	                    <td><?php 
 	                    	if ($v->CRTJRenCi != null and number_format($v->CRTJRenCi,0) != 0)
 	                    		echo number_format($v->CRTJ_fCO_IncomeMoney/$v->CRTJRenCi,2);
 	                    	else
-	                    		echo number_format(0,2);
+	                    		echo '';
 	                    ?></td>
-	                    <td><?php echo number_format($v->ETTJ_fCO_IncomeMoney,2) ?></td>
-	                    <td><?php echo number_format($v->ETTJRenCi,0) ?></td>
+	                    <td><?php if ($v->ETTJ_fCO_IncomeMoney == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->ETTJ_fCO_IncomeMoney,2);} ?></td>
+	                    <td><?php if ($v->ETTJRenCi == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->ETTJRenCi,0);} ?></td>
 	                    <td><?php 
 	                    	if ($v->ETTJRenCi != null and number_format($v->ETTJRenCi,0) != 0)
 	                    		echo number_format($v->ETTJ_fCO_IncomeMoney/$v->ETTJRenCi,2);
 	                    	else
-	                    		echo number_format(0,2);
+	                    		echo '';
 	                    ?></td>
-	                    <td><?php echo number_format($v->FK_fCO_IncomeMoney,2) ?></td>
-	                    <td><?php echo number_format($v->FKRenCi,0) ?></td>
+	                    <td><?php if ($v->FK_fCO_IncomeMoney == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->FK_fCO_IncomeMoney,2);} ?></td>
+	                    <td><?php if ($v->FKRenCi == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->FKRenCi,0);} ?></td>
 	                    <td><?php 
 	                    	if ($v->FKRenCi != null and number_format($v->FKRenCi,0) != 0)
 	                    		echo number_format($v->FK_fCO_IncomeMoney/$v->FKRenCi,2);
 	                    	else
-	                    		echo number_format(0,2);
+	                    		echo '';
 	                    ?></td>
-	                    <td><?php echo number_format($v->KQ_fCO_IncomeMoney,2) ?></td>
-	                    <td><?php echo number_format($v->KQRenCi,0) ?></td>
+	                    <td><?php if ($v->KQ_fCO_IncomeMoney == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->KQ_fCO_IncomeMoney,2);} ?></td>
+	                    <td><?php if ($v->KQRenCi == 0) {
+	                    	echo '';
+	                    }else{ echo number_format($v->KQRenCi,0);} ?></td>
 	                    <td><?php 
 	                    	if ($v->KQRenCi != null and number_format($v->KQRenCi,0) != 0)
 	                    		echo number_format($v->KQ_fCO_IncomeMoney/$v->KQRenCi,2);
 	                    	else
-	                    		echo number_format(0,2);
+	                    		echo '';
 	                    ?></td>
-	                    <td><?php echo number_format($v->MBCF_fCO_IncomeMoney,2) ?></td>
-	                    <td><?php echo number_format($v->MBCFRenCi,0) ?></td>
+	                    <td><?php if ($v->MBCF_fCO_IncomeMoney == 0) {
+	                    	echo '';
+	                    }else{echo number_format($v->MBCF_fCO_IncomeMoney,2);}  ?></td>
+	                    <td><?php if ($v->MBCFRenCi == 0) {
+	                    	echo '';
+	                    }else{echo number_format($v->MBCFRenCi,0);}  ?></td>
 	                    <td><?php 
 	                    	if ($v->MBCFRenCi != null and number_format($v->MBCFRenCi,0) != 0)
 	                    		echo number_format($v->MBCF_fCO_IncomeMoney/$v->MBCFRenCi,2);
 	                    	else
-	                    		echo number_format(0,2);
+	                    		echo '';
 	                    ?></td>
-	                    <td><?php echo number_format($v->YGPJ_fCO_IncomeMoney,2) ?></td>
-	                    <td><?php echo number_format($v->YGPJRenCi,0) ?></td>
+	                    <td><?php if ($v->YGPJ_fCO_IncomeMoney == 0) {
+	                    	echo '';
+	                    }else{echo number_format($v->YGPJ_fCO_IncomeMoney,2);} ?></td>
+	                    <td><?php if ($v->YGPJ_fCO_IncomeMoney == 0) {
+	                    	echo '';
+	                    }else{echo number_format($v->YGPJRenCi,0);}  ?></td>
 	                    <td><?php 
 	                    	if ($v->YGPJRenCi != null and number_format($v->YGPJRenCi,0) != 0)
 	                    		echo number_format($v->YGPJ_fCO_IncomeMoney/$v->YGPJRenCi,2);
 	                    	else
-	                    		echo number_format(0,2);
+	                    		echo '';
 	                    ?></td>
                     </tr>
                 <?php } ?>
