@@ -29,9 +29,7 @@
                         <?php } ?>
                     </select></td>
                 </td>
-                <td>会员卡号</td>
-                <td><input type="text" value="<?php echo $output['member_id']; ?>" name="member_id"
-                           class="txt"></td>
+
                 <td>卡类型</td>
                 <td><select name="cardtype">
                         <option value="">全部</option>
@@ -57,13 +55,22 @@
                         <option value="1" <?php if ('1' == $_GET['sleepunit']){ ?>selected<?php } ?>>年</option>
                     </select>
                 </td>
-
+                <td>消费情况</td>
+                <td><select name="haspay">
+                        <option value=""  >全部</option>
+                        <option value="1" <?php if ('1' == $_GET['haspay']){ ?>selected<?php } ?>>未消费</option>
+                        <option value="2" <?php if ('2' == $_GET['haspay']){ ?>selected<?php } ?>>已消费</option>
+                    </select>
+                </td>
 
             </tr>
             <tr>
                 <td colspan="12">
                     <table>
                         <tr>
+                            <td>会员卡号</td>
+                            <td><input type="text" value="<?php echo $output['member_id']; ?>" name="member_id"
+                                       class="txt"></td>
                             <td>
                                 身份证号码:
                                 <input type="text" value="<?php echo $_GET['idnumber']; ?>" name="idnumber"

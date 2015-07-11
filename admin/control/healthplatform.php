@@ -782,9 +782,19 @@ class healthplatformControl extends SystemControl
             $dateunit = 'month';
         }
         $sleepnum = $_REQUEST['sleepnum'];
-        if(empty($sleepnum) ){
+        if (empty($sleepnum)) {
             $sleepnum = '40';
             $_GET['sleepnum'] = 40;
+        }
+
+        $haspay = $_REQUEST['haspay'];
+        if (!empty($haspay)) {
+            if ($haspay == '1') {
+                $condition['haspay'] = array('exp', " not   exists (select 1 from Center_CheckOut where sMemberID = member_id  )  ");
+            } else if ($haspay == '2') {
+                $condition['haspay'] = array('exp', "  exists (select 1 from Center_CheckOut where sMemberID = member_id  )  ");
+
+            }
         }
 
         $condition['status'] = array('exp', " dCreateDate is  not null and dCreateDate < convert(date, dateadd($dateunit,-$sleepnum,getdate())) and  not exists (select 1 from Center_CheckOut where sMemberID = member_id and  dCO_Date >= convert(date, dateadd($dateunit,-$sleepnum,getdate())) )   ");
