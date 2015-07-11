@@ -310,7 +310,7 @@ class healthplatformControl extends SystemControl
                 $conn->exec($sql);
                 $changelog['newname'] = $newname;
                 $changelog['oldname'] = $_REQUEST["oldname"];
-                $changestr .= ',姓名由"' . $_REQUEST["oldname"] . '"改为"' . $newname . '"';
+                $changestr .= ',姓名由(' . $_REQUEST["oldname"] . ')改为(' . $newname . ')';
             }
             //修改电话
             $newtel = $_REQUEST["newtel"];
@@ -319,7 +319,7 @@ class healthplatformControl extends SystemControl
                 $conn->exec($sql);
                 $changelog['newtel'] = $newtel;
                 $changelog['oldtel'] = $_REQUEST["oldtel"];
-                $changestr .= ',电话由"' . $_REQUEST["oldtel"] . '"改为"' . $newtel . '"';
+                $changestr .= ',电话由(' . $_REQUEST["oldtel"] . ')改为(' . $newtel . ')';
             }
             //修改生日
             $newbirthday = $_REQUEST["newbirthday"];
@@ -328,7 +328,7 @@ class healthplatformControl extends SystemControl
                 $conn->exec($sql);
                 $changelog['newbirthday'] = $newbirthday;
                 $changelog['oldbirthday'] = $_REQUEST["oldbirthday"];
-                $changestr .= ',生日由"' . $_REQUEST["oldbirthday"] . '"改为"' . $newbirthday . '"';
+                $changestr .= ',生日由(' . $_REQUEST["oldbirthday"] . ')改为(' . $newbirthday . ')';
             }
             //修改身份证
             $newidcard = $_REQUEST["newidcard"];
@@ -337,16 +337,19 @@ class healthplatformControl extends SystemControl
                 $conn->exec($sql);
                 $changelog['newidcard'] = $newidcard;
                 $changelog['oldidcard'] = $_REQUEST["oldidcard"];
-                $changestr .= ',身份证由"' . $_REQUEST["oldidcard"] . '"改为"' . $newidcard . '"';
+                $changestr .= ',身份证由(' . $_REQUEST["oldidcard"] . ')改为(' . $newidcard . ')';
             }
             //修改会员卡号
             $newid = $_REQUEST["newid"];
             if (!empty($newid)) {
                 $sql = " update shopnc_member set member_id = '$newid' where member_id = '$id'";
                 $conn->exec($sql);
+                $sql = " update shopnc_call_main set memberid = '$newid' where memberid = '$id'";
+                $conn->exec($sql);
                 $changelog['newid'] = $newid;
                 $changelog['oldid'] = $_REQUEST["oldid"];
-                $changestr .= ',会员卡号由"' . $_REQUEST["oldid"] . '"改为"' . $newid . '"';
+                $changestr .= ',会员卡号由(' . $_REQUEST["oldid"] . ')改为(' . $newid . ')';
+                $id = $newid;
             }
             //生成更新日志
             $changelogstr = json_encode($changelog);
@@ -664,6 +667,154 @@ class healthplatformControl extends SystemControl
         Tpl::output('member_list', $member_list);
         Tpl::output('page', $model_member->showpage());
         Tpl::showpage('healthplatform.calllog');
+    }
+
+    public function sleepOp()
+    {
+        $lang = Language::getLangContent();
+        $orderbys = array(
+            array('txt' => '卡号', 'col' => ' member_id '),
+            array('txt' => '预存余额', 'col' => ' available_predeposit '),
+            array('txt' => '赠送余额', 'col' => ' fConsumeBalance '),
+            array('txt' => '消费积分', 'col' => ' member_points '));
+        Tpl::output('orderbys', $orderbys);
+        $model_member = Model('member');
+        /**
+         * 检索条件
+         */
+        if ($_GET['orgids']) {
+            $condition ['CreateOrgID'] = array(
+                'in',
+                $_GET['orgids']
+            );
+        }
+
+        if (isset($_GET['cardtype']) and $_GET['cardtype'] != '') {
+            $condition ['cardtype'] = $_GET['cardtype'];
+        }
+
+        if (isset($_GET['cardgrade']) and $_GET['cardgrade'] != '') {
+            $condition ['cardgrade'] = $_GET['cardgrade'];
+        }
+
+
+        if (isset($_GET['idnumber']) and $_GET['idnumber'] != '') {
+            $condition ['sIDCard'] = $_GET['idnumber'];
+        }
+        if (isset($_GET['tel']) and $_GET['tel'] != '') {
+            $condition ['sLinkPhone'] = $_GET['tel'];
+        }
+        if (isset($_GET['name']) and $_GET['name'] != '') {
+            $condition ['member_truename'] = array('like', '%' . $_GET['name'] . '%');
+        }
+        if (isset($_GET['birthday']) and $_GET['birthday'] != '') {
+            $condition ['member_birthday'] = $_GET['birthday'];
+        }
+
+        if (!isset($_GET['orderby'])) {
+            $_GET['orderby'] = '卡号';
+        }
+
+
+        if (!isset($_GET['order'])) {
+            $ordersql = 'asc';
+        } else {
+            $ordersql = $_GET['order'];
+        }
+        if ($_GET['orderby']) {
+            foreach ($orderbys as $orderby) {
+                if ($orderby['txt'] == $_GET['orderby']) {
+                    $order = $orderby['col'] . ' ' . $ordersql;
+                    break;
+                }
+            }
+        }
+        if ($_GET ['search_field_value'] != '') {
+            switch ($_GET ['search_field_name']) {
+                case 'member_name' :
+                    $condition ['member_name'] = array(
+                        'like',
+                        '%' . trim($_GET ['search_field_value']) . '%'
+                    );
+                    break;
+                case 'member_email' :
+                    $condition ['member_email'] = array(
+                        'like',
+                        '%' . trim($_GET ['search_field_value']) . '%'
+                    );
+                    break;
+                case 'member_truename' :
+                    $condition ['member_truename'] = array(
+                        'like',
+                        '%' . trim($_GET ['search_field_value']) . '%'
+                    );
+                    break;
+            }
+        }
+        if ($_GET ['member_id'] != '') {
+            $condition ['member_id'] = array(
+                'like',
+                '%' . trim($_GET ['member_id']) . '%'
+            );
+        }
+        switch ($_GET ['search_state']) {
+            case 'no_informallow' :
+                $condition ['inform_allow'] = '2';
+                break;
+            case 'no_isbuy' :
+                $condition ['is_buy'] = '0';
+                break;
+            case 'no_isallowtalk' :
+                $condition ['is_allowtalk'] = '0';
+                break;
+            case 'no_memberstate' :
+                $condition ['member_state'] = '0';
+                break;
+        }
+
+        $field = '*, (select max(dCO_Date) from Center_CheckOut where sMemberID = member_id ) lastdate ';
+        $sleepunit = $_REQUEST['sleepunit'];
+        if ($sleepunit == '1') {
+            $dateunit = 'year';
+        } else if ($sleepunit == '3') {
+            $dateunit = 'day';
+        } else {
+            $dateunit = 'month';
+        }
+        $sleepnum = $_REQUEST['sleepnum'];
+        if(empty($sleepnum) ){
+            $sleepnum = '40';
+            $_GET['sleepnum'] = 40;
+        }
+
+        $condition['status'] = array('exp', " dCreateDate is  not null and dCreateDate < convert(date, dateadd($dateunit,-$sleepnum,getdate())) and  not exists (select 1 from Center_CheckOut where sMemberID = member_id and  dCO_Date >= convert(date, dateadd($dateunit,-$sleepnum,getdate())) )   ");
+
+        /**
+         * 排序
+         */
+//		$order = trim ( $_GET ['search_sort'] );
+        if (empty ($order)) {
+            $order = 'member_id desc';
+        }
+        $member_list = $model_member->getMemberList($condition, $field, 10, ' member_id desc ');
+        /**
+         * 整理会员信息
+         */
+        if (is_array($member_list)) {
+            foreach ($member_list as $k => $v) {
+                $member_list [$k] ['member_time'] = $v ['member_time'] ? date('Y-m-d H:i:s', $v ['member_time']) : '';
+                $member_list [$k] ['member_login_time'] = $v ['member_login_time'] ? date('Y-m-d H:i:s', $v ['member_login_time']) : '';
+            }
+        }
+
+
+        Tpl::output('member_id', trim($_GET ['member_id']));
+        Tpl::output('search_sort', trim($_GET ['search_sort']));
+        Tpl::output('search_field_name', trim($_GET ['search_field_name']));
+        Tpl::output('search_field_value', trim($_GET ['search_field_value']));
+        Tpl::output('member_list', $member_list);
+        Tpl::output('page', $model_member->showpage());
+        Tpl::showpage('healthplatform.sleep');
     }
 
 

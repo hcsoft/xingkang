@@ -195,7 +195,7 @@
                         </td>
                         <td class="align-center">
                             <a href="javascript:void(0)"
-                               onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">回访</a>
+                               onclick="showdetail('<?php echo htmlentities(json_encode($v),ENT_QUOTES ) ?>',this)">回访</a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -260,7 +260,7 @@
     }
 
     p.change > input {
-        width: 100px;
+        width: 150px;
     }
 
     p.change > span, p.change > input {
@@ -326,9 +326,9 @@
 
                 <p class="change">
                     <span>原身份证号：</span>
-                    <input id="oldidcard" name="oldidcard" readonly type="text">
+                    <input id="oldidcard" name="oldidcard"  style="width:150px;" readonly type="text">
                     <span title="留空表示不修改">新身份证号:</span>
-                    <input placeholder="留空表示不修改" title="留空表示不修改" id="newidcard" name="newidcard" type="text">
+                    <input placeholder="留空表示不修改"   style="width:150px;" title="留空表示不修改" id="newidcard" name="newidcard" type="text">
                 </p>
 
                 <p class="change">
@@ -354,14 +354,14 @@
 <script>
     $(function () {
         $('#ncsubmit').click(function () {
-            $('input[name="op"]').val('call');
+            $('input[name="op"]').val('calllog');
             $('#formSearch').submit();
         });
 
         $("#detaildialog").dialog({
             resizable: false,
             maxHeight: 200,
-            width: 500,
+            width: 560,
             modal: true,
             autoOpen: false,
             close: function () {
