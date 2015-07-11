@@ -3,6 +3,18 @@
 <!--[if IE 7]>
 <link rel="stylesheet" href="<?php echo ADMIN_TEMPLATES_URL;?>/css/font/font-awesome/css/font-awesome-ie7.min.css">
 <![endif]-->
+
+<style>
+	#editdialog table td{
+		padding:5px 5px;
+	}
+	#editdialog table td input{
+		width: 210px;
+	}
+	#editdialog {
+        display: none;
+    }
+</style>
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
@@ -10,14 +22,7 @@
             <ul class="tab-base">
                 <li><a href="JavaScript:void(0);"
                        class="current"><span><?php echo $lang['goods_index_all_goods']; ?></span></a></li>
-                <li>
-                    <a href="<?php echo urlAdmin('goods', 'goods', array('type' => 'lockup')); ?>"><span><?php echo $lang['goods_index_lock_goods']; ?></span></a>
-                </li>
-                <li><a href="<?php echo urlAdmin('goods', 'goods', array('type' => 'waitverify')); ?>"><span>等待审核</span></a>
-                </li>
-                <li>
-                    <a href="<?php echo urlAdmin('goods', 'goods_set'); ?>"><span><?php echo $lang['nc_goods_set']; ?></span></a>
-                </li>
+                
             </ul>
         </div>
     </div>
@@ -34,185 +39,484 @@
                 <th><label for="search_commonid">商品编码</label></th>
                 <td><input type="text" value="<?php echo $output['search']['search_commonid'] ?>" name="search_commonid"
                            id="search_commonid" class="txt"/></td>
-                <th><label><?php echo $lang['goods_index_class_name']; ?></label></th>
-                <td id="gcategory" colspan="8"><input type="hidden" id="cate_id" name="cate_id" value=""
-                                                      class="mls_id"/>
-                    <input type="hidden" id="cate_name" name="cate_name" value="" class="mls_names"/>
-                    <select class="querySelect">
-                        <option><?php echo $lang['nc_please_choose']; ?>...</option>
-                        <?php if (!empty($output['goods_class']) && is_array($output['goods_class'])) { ?>
-                            <?php foreach ($output['goods_class'] as $val) { ?>
-                                <option value="<?php echo $val['gc_id']; ?>"
-                                        <?php if ($output['search']['cate_id'] == $val['gc_id']){ ?>selected<?php } ?>><?php echo $val['gc_name']; ?></option>
-                            <?php } ?>
-                        <?php } ?>
-                    </select></td>
-
-            </tr>
-            <tr>
-<!--                <th><label for="search_store_name">--><?php //echo $lang['goods_index_store_name']; ?><!--</label></th>-->
-<!--                <td><input type="text" value="--><?php //echo $output['search']['search_store_name']; ?><!--"-->
-<!--                           name="search_store_name" id="search_store_name" class="txt"></td>-->
-                <th><label><?php echo $lang['goods_index_brand']; ?></label></th>
-                <td><select name="search_brand_id">
-                        <option value=""><?php echo $lang['nc_please_choose']; ?>...</option>
-                        <?php if (!empty($output['brand_list']) && is_array($output['brand_list'])) { ?>
-                            <?php foreach ($output['brand_list'] as $k => $v) { ?>
-                                <option value="<?php echo $v['brand_id']; ?>"
-                                        <?php if ($output['search']['search_brand_id'] == $v['brand_id']){ ?>selected<?php } ?>><?php echo $v['brand_name']; ?></option>
-                            <?php } ?>
-                        <?php } ?>
-                    </select></td>
-                <th><label><?php echo $lang['goods_index_show']; ?></label></th>
-                <td><select name="search_state">
-                        <option value=""><?php echo $lang['nc_please_choose']; ?>...</option>
-                        <?php foreach ($output['state'] as $key => $val) { ?>
-                            <option value="<?php echo $key; ?>"
-                                    <?php if ($output['search']['search_state'] != '' && $output['search']['search_state'] == $key){ ?>selected<?php } ?>><?php echo $val; ?></option>
-                        <?php } ?>
-                    </select></td>
-                <th><label>等待审核</label></th>
-                <td><select name="search_verify">
-                        <option value=""><?php echo $lang['nc_please_choose']; ?>...</option>
-                        <?php foreach ($output['verify'] as $key => $val) { ?>
-                            <option value="<?php echo $key; ?>"
-                                    <?php if ($output['search']['search_verify'] != '' && $output['search']['search_verify'] == $key){ ?>selected<?php } ?>><?php echo $val; ?></option>
-                        <?php } ?>
-                    </select></td>
-                <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
+                <th><label><?php echo $lang['goods_index_finance_cat_search']; ?></label></th>
+                <td colspan="8">
+                    <select name="classtype" id='classtype'>
+                    <option value="">全部</option>
+                    <option value="null" <?php if ('null' == $_GET['classtype']){ ?>selected<?php } ?>>未分类</option>
+                    <?php foreach ($output['classtypes'] as $k => $v) { ?>
+                        <option value="<?php echo $v->iClass_ID; ?>"
+                                <?php if ($v->iClass_ID == $_GET['classtype']){ ?>selected<?php } ?>><?php echo $v->sClass_ID . $v->sClass_Name; ?></option>
+                    <?php } ?>
+                </select></td>
+                <th><label for="sCustomer_ID">供应商名称</label></th>
+                <td><input type="text" value="<?php echo $_GET['sCustomer_Name'] ?>" name="sCustomer_Name"
+                           id="sCustomer_Name" class="txt"/></td>
+                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a></td>
-                <td class="w120">&nbsp;</td>
             </tr>
             </tbody>
         </table>
     </form>
-    <table class="table tb-type2" id="prompt">
-        <tbody>
-        <tr class="space odd">
-            <th colspan="12">
-                <div class="title">
-                    <h5><?php echo $lang['nc_prompts']; ?></h5>
-                    <span class="arrow"></span></div>
-            </th>
-        </tr>
-        <tr>
-            <td>
-                <ul>
-                    <li><?php echo $lang['goods_index_help1']; ?></li>
-                    <li><?php echo $lang['goods_index_help2']; ?></li>
-                </ul>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <form method='post' id="form_goods" action="<?php echo urlAdmin('goods', 'goods_del'); ?>">
-        <input type="hidden" name="form_submit" value="ok"/>
-        <table class="table tb-type2">
-            <thead>
-            <tr class="thead">
-                <th class="w24"></th>
-                <th class="w24"></th>
-                <th class="align-center">商品编码</th>
-                <th colspan="2"><?php echo $lang['goods_index_name']; ?></th>
-                <th class="align-center">规格</th>
-                <th class="align-center">单位</th>
-                <th>厂家场地</th>
-                <th class="align-center">价格</th>
-                <th class="align-center">商品状态</th>
-                <th class="align-center">审核状态</th>
-                <th class="w48 align-center"><?php echo $lang['nc_handle']; ?> </th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php if (!empty($output['goods_list']) && is_array($output['goods_list'])) { ?>
-                <?php foreach ($output['goods_list'] as $k => $v) { ?>
-                    <tr class="hover edit">
-                        <td><input type="checkbox" name="id[]" value="<?php echo $v['goods_commonid']; ?>"
+    
+    <div style='position: relative;display: block;'>
+    	<form method='post' id="form_goods" action="<?php echo urlAdmin('goods', 'goods_del'); ?>">
+        	<input type="hidden" name="form_submit" value="ok"/>
+            <table class="table tb-type2 nobdb datatable">
+                <thead>
+                	 <tr class="thead">
+		                <th class="w24"></th>
+		                <th class="align-center">商品编码</th>
+		                <th colspan="2"><?php echo $lang['goods_index_name']; ?></th>
+		                <th class="align-center">规格</th>
+		                <th class="align-center">单位</th>
+		                <th>供应商</th>
+		                <th>产地</th>
+		                <th class="align-center">价格</th>
+		                <th class="align-center">财务分类</th>
+		                <th class="w48 align-center"><?php echo $lang['nc_handle']; ?> </th>
+		            </tr>
+                </thead>
+                <tbody>
+                	<?php if (!empty($output['goods_list']) && is_array($output['goods_list'])) { ?>
+                    <?php foreach ($output['goods_list'] as $k => $v) { ?>
+                    	<tr class="hover member">
+                        	<td nowrap><input type="checkbox" name="id[]" value="<?php echo $v->goods_commonid; ?>"
                                    class="checkitem"></td>
-                        <td><i class="icon-plus-sign" style="cursor: pointer;" nctype="ajaxGoodsList"
-                               data-comminid="<?php echo $v['goods_commonid']; ?>"
-                               title="点击展开查看此商品全部规格；规格值过多时请横向拖动区域内的滚动条进行浏览。"></i></td>
-                        <td class="w60 align-center"><?php echo $v['goods_commonid']; ?></td>
-                        <td class="w60 picture">
-                            <div class="size-56x56"><span class="thumb size-56x56"><i></i><img
-                                        src="<?php echo thumb($v, 60); ?>" onload="javascript:DrawImage(this,56,56);"/></span>
-                            </div>
-                        </td>
-                        <td class="goods-name w270"><p><span><?php echo $v['goods_name']; ?></span></p>
-                        </td>
-                        <td><p>完整规格: <?php echo $v['sDrug_Spec']; ?></p>
-
-                            <p>含量规格: <?php echo $v['sDrug_Content']; ?></p>
-
-                            <p>包装规格: <?php echo $v['sDrug_PackSpec']; ?></p></td>
-                        <td><p>常规单位: <?php echo $v['sDrug_Unit']; ?></p>
-
-                            <p>最小单位: <?php echo $v['sDrug_LeastUnit']; ?></p></td>
-                        <td><p><?php echo $v['brand_name']; ?></p>
-
-                            <p><?php echo $v['gc_name']; ?></p></p>
-                        </td>
-                        <td class="align-center"><?php echo $lang['currency'] . number_format($v['goods_price'], 2) ?></td>
-<!--                        <td class="align-center">--><?php //echo $output['storage_array'][$v['goods_commonid']]['sum'] ?><!--</td>-->
-                        <td class="align-center"><?php echo $output['state'][$v['goods_state']]; ?></td>
-                        <td class="align-center"><?php echo $output['verify'][$v['goods_verify']]; ?></td>
-                        <td class="align-center"><p><a
-                                    href="<?php echo urlShop('goods', 'index', array('goods_id' => $output['storage_array'][$v['goods_commonid']]['goods_id'])); ?>"
-                                    target="_blank"><?php echo $lang['nc_view']; ?></a></p>
-
-                            <p><a href="javascript:void(0);"
-                                  onclick="goods_lockup(<?php echo $v['goods_commonid']; ?>);">违规下架</a></p></td>
-                    </tr>
-                    <tr style="display:none;">
-                        <td colspan="20">
-                            <div class="ncsc-goods-sku ps-container"></div>
+                            <td class="w60 align-center" nowrap><?php echo $v->goods_commonid; ?></td>
+                            <td class="w60 picture">
+                            	<div class="size-56x56"><span class="thumb size-56x56"><i></i><img
+                                        src="<?php 
+                                        	$imgthumb = array();
+                                        	$imgthumb['store_id'] = $v->store_id;
+                                        	$imgthumb['goods_image'] = $v->goods_image;
+                                        echo thumb($imgthumb, 60); ?>" onload="javascript:DrawImage(this,56,56);"/></span>
+	                            </div>
+	                        </td>
+	                        <td class="goods-name w270"><p><span><?php echo $v->goods_name; ?></span></p>
+	                        </td>
+	                        <td><p>完整规格: <?php echo $v->sDrug_Spec; ?></p>
+	
+	                            <p>含量规格: <?php echo $v->sDrug_Content; ?></p>
+	
+	                            <p>包装规格: <?php echo $v->sDrug_PackSpec; ?></p></td>
+	                        <td><p>常规单位: <?php echo $v->sDrug_Unit; ?></p>
+	
+	                            <p>最小单位: <?php echo $v->sDrug_LeastUnit; ?></p></td>
+	                        <td>
+	                        	<?php echo $v->sCustomer_Name; ?>
+	                        </td>
+	                        <td><p><?php echo $v->brand_name; ?></p>
+	
+	                            <p><?php echo $v->gc_name; ?></p></p>
+	                        </td>
+	                        <td class="align-center"><?php echo $lang['currency'] . number_format($v->goods_price, 2) ?></td>
+	
+	                        <td class="align-center"><?php
+								foreach ($output['classtypes'] as $classtypesV) {
+									//                        		echo $classtypesV->iClass_ID . '====' . $classtypesV->sClass_Name;
+									if (intval($classtypesV->iClass_ID) == intval($v->iDrug_StatClass)) {
+										echo $classtypesV->sClass_ID . '  ' . $classtypesV->sClass_Name;
+										break;
+									}
+								}
+								?><p></p><p><a
+	                                    href="javascript:void(0)"
+	                                    onclick="edit(<?php echo $v->goods_commonid ?>)">修改财务分类</a></p></td>
+	                        
+	                        <td class="align-center"><p><a
+	                                   href="javascript:void(0)"
+	                                   onclick="goods_stock_account('<?php echo $v->goods_commonid; ?>','<?php echo $v->goods_name; ?>');">库存</a></p>
+	                                    
+								<p><a href="javascript:void(0)"
+									 onclick="goods_machine_account('<?php echo $v->goods_commonid; ?>','<?php echo $v->goods_name; ?>');">台账</a></p>
+	                            <p><a href="javascript:void(0);"
+	                                  onclick="goods_change_price('<?php echo $v->goods_commonid; ?>','<?php echo $v->goods_name; ?>');">调价记录</a></p>
+	                                  </td>
+	                        </td>
+                        </tr>
+                        <tr style="display:none;">
+	                        <td colspan="12" style="padding:0px;">
+	                            <div class="ncsc-goods-sku ps-container"></div>
+	                        </td>
+	                    </tr>
+                    <?php } ?>
+                    <?php } else { ?>
+	                    <tr class="no_data">
+	                        <td colspan="11"><?php echo $lang['nc_no_record'] ?></td>
+	                    </tr>
+	                <?php } ?>
+                </tbody>
+                <tfoot class="tfoot">
+                <?php if (!empty($output['goods_list']) && is_array($output['goods_list'])) { ?>
+                    <tr>
+                    	<td><input type="checkbox" class="checkall" id="checkallBottom"></td>
+                        <td colspan="10">
+                        	<label for="checkallBottom"><?php echo $lang['nc_select_all']; ?></label>
+		                    &nbsp;&nbsp; <a
+		                        href="JavaScript:void(0);" class="btn"
+		                        nctype="del_batch"><span><?php echo $lang['nc_del']; ?></span></a>
+                            <div class="pagination"> <?php echo $output['page']; ?> </div>
                         </td>
                     </tr>
                 <?php } ?>
-            <?php } else { ?>
-                <tr class="no_data">
-                    <td colspan="15"><?php echo $lang['nc_no_record']; ?></td>
-                </tr>
-            <?php } ?>
-            </tbody>
-            <tfoot>
-            <tr class="tfoot">
-                <td><input type="checkbox" class="checkall" id="checkallBottom"></td>
-                <td colspan="16"><label for="checkallBottom"><?php echo $lang['nc_select_all']; ?></label>
-                    &nbsp;&nbsp;<a href="JavaScript:void(0);" class="btn" nctype="lockup_batch"><span>违规下架</span></a> <a
-                        href="JavaScript:void(0);" class="btn"
-                        nctype="del_batch"><span><?php echo $lang['nc_del']; ?></span></a>
+                </tfoot>
+            </table>
+    	</form>
+    </div>
+</div>
 
-                    <div class="pagination"> <?php echo $output['page']; ?> </div>
+<div id="editdialog" title="修改财务分类">
+    <span id="errormsg" style="color:red;width:100%;display:block;text-align: center;"></span>
+    <form>
+        <input type="hidden" id='spotid' name="spotid">
+        <input type="hidden" id='spotid' name="spotid">
+        <table>
+            <tr>
+                <td>商品<br/>编号：</td>
+                <td><input style="color:blue;" id="goods_commonid" name="goods_commonid" readonly></td>
+            </tr>
+            <tr>
+                <td>商品<br/>名称：</td>
+                <td><input style="color:blue;" id="goods_name" name="goods_name" readonly></td>
+            </tr>
+            <tr>
+                <td>规格：</td>
+                <td>
+                	<p>完整规格: <input style="color:blue;" id="sDrug_Spec" name="sDrug_Spec" readonly></p>
+                	<p>含量规格: <input style="color:blue;" id="sDrug_Content" name="sDrug_Content" readonly></p>
+                	<p>包装规格: <input style="color:blue;" id="sDrug_PackSpec" name="sDrug_PackSpec" readonly></p>
                 </td>
             </tr>
-            </tfoot>
+            <tr>
+                <td>单位：</td>
+                <td>
+                	<p>常规单位:<input style="color:blue;" id="sDrug_Unit" name="sDrug_Unit" readonly></p>
+					<p>最小单位:<input style="color:blue;" id="sDrug_LeastUnit" name="sDrug_LeastUnit" readonly></p>
+                </td>
+            </tr>
+			<tr>
+                <td>价格：</td>
+                <td>
+                	<input style="color:blue;" id="goods_price" name="goods_price" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>财务<br/>分类：</td>
+                <td><select name="classtype" id="classtype">
+                        <option value="">未分类</option>
+                        <option value="11">011中成药</option>
+                        <option value="12">012保健食品</option>
+                        <option value="13">013化妆品</option>
+                        <option value="14">014食品</option>
+                        <option value="15">015外用</option>
+                        <option value="16">016卫生用品</option>
+                        <option value="17">017西药</option>
+                        <option value="18">018医疗器械</option>
+                        <option value="19">019疫苗</option>
+                        <option value="21">021中药饮片</option>
+                        <option value="22">022注射剂</option>
+                        <option value="23">000其他</option>
+                        <option value="24">024按摩</option>
+                        <option value="25">025针灸</option>
+                        <option value="26">026理疗</option>
+                        <option value="27">027西医诊费</option>
+                        <option value="28">028中医诊费</option>
+                        <option value="29">029体检</option>
+                        <option value="30">030化验</option>
+                        <option value="31">031检查</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>产地/厂商：</td>
+                <td><input style="color:blue;" id="sDrug_Brand" name="sDrug_Brand" readonly></td>
+            </tr>
         </table>
     </form>
 </div>
+
+<style>
+    .goods-sub-dialog table {
+        width: 100%;
+    }
+
+    .goods-sub-dialog table tbody tr td {
+        text-align: right;
+    }
+
+    /*前3列居中*/
+    .goods-sub-dialog table tbody tr td:first-child, #detaildialog table tbody tr td:first-child + td, #detaildialog table tbody tr td:first-child + td + td {
+        text-align: center;
+    }
+
+    .goods-sub-dialog table td {
+        border: solid 1px #808080;
+        padding: 5px;
+    }
+
+    .goods-sub-dialog table th {
+        white-space: pre;
+        background-color: lightblue;
+        border: solid 1px #808080;
+        font-weight: bold;
+        padding: 5px;
+        text-align: center;
+    }
+</style>
+<!-- 台账 -->
+<div id="machineAccountDialog" title="台账" class="goods-sub-dialog">
+    <span class="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
+    <div>
+        <table>
+            <thead>
+            	<tr>
+            		<td colspan="13">
+            			<form>
+					        <input type="hidden" name="machineAccountDrugId" id="machineAccountDrugId">
+					        <input type="hidden" name="machineAccountDrugName" id="machineAccountDrugName">
+	            			<label>选择机构</label>
+	            			<select name="orgid" id="orgid" class="orgSelect">
+		                        <?php
+		                        $orgid = $_GET['orgid'];
+		                        if (!isset($orgids)) {
+		                            $orgids = array();
+		                        }
+		                        foreach ($output['treelist'] as $k => $v) {
+		                            ?>
+		                            <option value="<?php echo $v->id; ?>"
+		                                    <?php if ($v->id == $orgid){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
+		                        <?php } ?>
+		                    </select>
+	            			<label for="query_start_time">台账日期</label>
+	            			<input class="txt date" style="width:80px;" type="text"
+	                           id="query_start_time" name="query_start_time">-
+	                    	<input class="txt date" style="width:80px;" type="text"
+	                           id="query_end_time" name="query_end_time"/>
+	                        <a href="javascript:void(0);" onclick="ajaxGetGoodMachineAccount();" class="btn-search "
+	                      	   title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
+	                     </form>
+            		</td>
+            	</tr>
+            	<tr>
+					<th>单据流水</th>
+		            <th>发生日期</th>
+		            <th>相关单位</th>
+		            <th>单据类型</th>
+		            <th>入库数</th>
+		            <th>业务出库</th>
+		            <th>库房出库</th>
+		            <th>业务结存</th>
+		            <th>库房结存</th>
+		            <th>进价</th>
+		            <th>进价金额 </th>
+		            <th>售价</th>
+		            <th>售价金额</th>
+            	</tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <span class="datamsg">无数据!</span>
+    </div>
+</div>
+
+<!-- 库存 -->
+<div id="stockDialog" title="" class="goods-sub-dialog">
+    <span class="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
+    <div>
+        <table>
+            <thead>
+            	<tr>
+            		<td colspan="19">
+            			<form>
+					        <input type="hidden" name="stockAccountDrugId" id="stockAccountDrugId">
+					        <input type="hidden" name="stockAccountDrugName" id="stockAccountDrugName">
+	            			<label>选择机构</label>
+	            			<select name="stockorgid" id="stockorgid" class="orgSelect">
+		                        <?php
+		                        $orgid = $_GET['orgid'];
+		                        if (!isset($orgids)) {
+		                            $orgids = array();
+		                        }
+		                        foreach ($output['treelist'] as $k => $v) {
+		                            ?>
+		                            <option value="<?php echo $v->id; ?>"
+		                                    <?php if ($v->id == $orgid){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
+		                        <?php } ?>
+		                    </select>
+	                        <a href="javascript:void(0);" onclick="ajaxGetGoodStockAccount();" class="btn-search "
+	                      	   title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
+	                     </form>
+            		</td>
+            	</tr>
+            	<tr>
+	                <th nowrap rowspan="3">商品编码</th>
+	                <th nowrap  rowspan="3"><?php echo $lang['goods_index_name']; ?></th>
+	                <th nowrap  colspan="3">规格</th>
+	
+	                <th nowrap  rowspan="3" >厂家/产地</th>
+	
+	                <th  nowrap colspan="5">常规单位</th>
+	                <th nowrap  colspan="5">最小单位</th>
+	                <th  nowrap rowspan="3">零价金额</th>
+	                <th nowrap  rowspan="3">进价金额</th>
+	                <th nowrap  rowspan="3">进销差</th>
+	            </tr>
+	            <tr>
+	                <th nowrap  rowspan="2">完整</th>
+	                <th nowrap  rowspan="2">含量</th>
+	                <th nowrap  rowspan="2">包装</th>
+	                <th nowrap  rowspan="2">单位</th>
+	                <th nowrap  colspan="2">库存</th>
+	                <th nowrap   rowspan="2">零价</th>
+	                <th  nowrap rowspan="2">进价</th>
+	                <th nowrap  rowspan="2">单位</th>
+	                <th nowrap  colspan="2">库存</th>
+	                <th nowrap   rowspan="2">零价</th>
+	                <th  nowrap rowspan="2">进价</th>
+	            <tr>
+	                <th nowrap>可售</th>
+	                <th nowrap>实际</th>
+	                <th nowrap>可售</th>
+	                <th nowrap>实际</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <span class="datamsg">无数据!</span>
+    </div>
+</div>
+
+<!-- 调价记录 -->
+<div id="changePriceDialog" title="调价记录" class="goods-sub-dialog">
+    <span class="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
+    <div>
+        <table>
+            <thead>
+            	<tr>
+            		<td colspan="13">
+            			<form>
+					        <input type="hidden" name="changePriceDrugId" id="changePriceDrugId">
+					        <input type="hidden" name="changePriceDrugName" id="changePriceDrugName">
+	            			<label>选择机构</label>
+	            			<select name="changePriceOrgid" id="changePriceOrgid" class="orgSelect">
+		                        <?php
+		                        $orgid = $_GET['orgid'];
+		                        if (!isset($orgids)) {
+		                            $orgids = array();
+		                        }
+		                        foreach ($output['treelist'] as $k => $v) {
+		                            ?>
+		                            <option value="<?php echo $v->id; ?>"
+		                                    <?php if ($v->id == $orgid){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
+		                        <?php } ?>
+		                    </select>
+	            			<label for="query_start_time">调价日期</label>
+	            			<input class="txt date" style="width:80px;" type="text"
+	                           id="query_start_time_change_price" name="query_start_time_change_price">-
+	                    	<input class="txt date" style="width:80px;" type="text"
+	                           id="query_end_time_change_price" name="query_end_time_change_price"/>
+	                        <a href="javascript:void(0);" onclick="ajaxGetGoodChangePrice();" class="btn-search "
+	                      	   title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
+	                     </form>
+            		</td>
+            	</tr>
+            	<tr>
+					<th>商品编码</th>
+		            <th>商品名称</th>
+		            <th>调前价</th>
+		            <th>调后价</th>
+		            <th>调价日期</th>
+		            <th>执行开始日期</th>
+		            <th>执行结束日期</th>
+		            <th>调价人</th>
+		            <th>单位</th>
+		            <th>项目类型</th>
+		            <th>价格类型</th>
+            	</tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <span class="datamsg">无数据!</span>
+    </div>
+</div>
+
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"
+        charset="utf-8"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery.formautofill.js"></script>
+
+<link rel="stylesheet" type="text/css"
+      href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/common_select.js" charset="utf-8"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/dialog/dialog.js" id="dialog_js"
         charset="utf-8"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery.mousewheel.js"></script>
+
+       	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
+		
+		<noscript><link rel="stylesheet" type="text/css" href="css/noJS.css" /></noscript>
 <script type="text/javascript">
     var SITEURL = "<?php echo SHOP_SITE_URL; ?>";
     $(function () {
-        gcategoryInit("gcategory");
+//        gcategoryInit("gcategory");
         $('#ncsubmit').click(function () {
-            $('input[name="op"]').val('goods');
+//            $('input[name="op"]').val('goods');
             $('#formSearch').submit();
+            console.log(123);
         });
-
-        // 违规下架批量处理
-        $('a[nctype="lockup_batch"]').click(function () {
-            str = getId();
-            if (str) {
-                goods_lockup(str);
+	
+		//台账窗口初始化
+		$("#machineAccountDialog").dialog({
+            resizable: false,
+            maxHeight: 200,
+            width: 1100,
+            autoOpen: false,
+            modal:true,
+            buttons: {
+                "关闭": function () {
+                    $(this).dialog("close");
+                }
             }
         });
-
+        
+        //库存窗口初始化
+		$("#stockDialog").dialog({
+            resizable: false,
+            maxHeight: 200,
+            width: 1100,
+            autoOpen: false,
+            modal:true,
+            buttons: {
+                "关闭": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+        //调价记录窗口初始化
+		$("#changePriceDialog").dialog({
+            resizable: false,
+            maxHeight: 200,
+            width: 1100,
+            autoOpen: false,
+            modal:true,
+            buttons: {
+                "关闭": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+        
+        
+		//格式化日期
+        $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
+//		$("#query_start_time").datepicker({defaultDate : +7})
         // 批量删除
         $('a[nctype="del_batch"]').click(function () {
             if (confirm('<?php echo $lang['nc_ensure_del'];?>')) {
@@ -220,38 +524,206 @@
             }
         });
 
-        // ajax获取商品列表
-        $('i[nctype="ajaxGoodsList"]').toggle(
-            function () {
-                $(this).removeClass('icon-plus-sign').addClass('icon-minus-sign');
-                var _parenttr = $(this).parents('tr');
-                var _commonid = $(this).attr('data-comminid');
-                var _div = _parenttr.next().find('.ncsc-goods-sku');
-                if (_div.html() == '') {
-                    $.getJSON('index.php?act=goods&op=get_goods_list_ajax', {commonid: _commonid}, function (date) {
-                        if (date != 'false') {
-                            var _ul = $('<ul class="ncsc-goods-sku-list"></ul>');
-                            $.each(date, function (i, o) {
-                                $('<li><div class="goods-thumb" title="商家货号：' + o.goods_serial + '"><a href="' + o.url + '" target="_blank"><image src="' + o.goods_image + '" ></a></div>' + o.goods_spec + '<div class="goods-price">价格：<em title="￥' + o.goods_price + '">￥' + o.goods_price + '</em></div><div class="goods-storage">库存：<em title="' + o.goods_storage + '">' + o.goods_storage + '</em></div><a href="' + o.url + '" target="_blank" class="ncsc-btn-mini">查看商品详情</a></li>').appendTo(_ul);
-                            });
-                            _ul.appendTo(_div);
-                            _parenttr.next().show();
-                            // 计算div的宽度
-                            _div.css('width', document.body.clientWidth - 54);
-                            _div.perfectScrollbar();
+
+        
+        
+        $("#editdialog").dialog({
+            resizable: false,
+            autoOpen: false,
+            close: function () {
+//                $('#formSearch').submit();
+//                console.log($('#formSearch').submit());
+				$('#ncsubmit').trigger('click');
+            },
+            buttons: {
+                "关闭": function () {                	
+                    $(this).dialog("close");
+                },
+                "保存": function () {
+//                    console.log($("#editdialog form").serialize());
+                    $.ajax({
+                        url: "index.php?act=goods&op=goodsAjaxSaveStateClass",
+                        data: $("#editdialog form").serialize(), dataType: 'json', success: function (data) {
+                            if (data.success) {
+                                success(data.msg);
+                                
+                            } else {
+                                error(data.msg);
+                            }
                         }
                     });
-                } else {
-                    _parenttr.next().show()
                 }
-            },
-            function () {
-                $(this).removeClass('icon-minus-sign').addClass('icon-plus-sign');
-                $(this).parents('tr').next().hide();
             }
-        );
+        });
     });
-
+	//台账
+	function ajaxGetGoodMachineAccount(){
+		$("#machineAccountDialog .errormsg").html('');
+		$("#machineAccountDialog .datamsg").html('正在查询....');
+		console.log($("#machineAccountDialog form").serialize());
+        $.ajax({
+            url: "index.php?act=goods&op=machineAccount",
+            data: $("#machineAccountDialog form").serialize(), 
+            dataType: 'json', 
+            success: function (data) {
+                console.log(data);
+                $("#machineAccountDialog table tbody").html('');
+                if (data.data && data.data.length > 0) {
+                    $("#machineAccountDialog .datamsg").html('');
+                    for (var i = 0; i < data.data.length; i++) {
+                        var row = data.data[i];
+                        var rowstr = '<tr>';
+                        console.log(row);
+                        rowstr += '<td>' + numtostr(row.iID) + '</td>';
+                        rowstr += '<td>' + textstr(row.dDate) + '</td>';
+                        rowstr += '<td>' + textstr(row.sCustomer_Name) + '</td>';
+                        rowstr += '<td>' + textstr(row.sPromt) + '</td>';
+                        rowstr += '<td>' + textstr(row.sShowInNum) + '</td>';
+                        rowstr += '<td>' + textstr(row.sShowOutONum) + '</td>';
+                        rowstr += '<td>' + textstr(row.sShowOutNum) + '</td>';
+                        rowstr += '<td>' + textstr(row.sShowSpareONum) + '</td>';
+                        rowstr += '<td>' + textstr(row.sShowSpareNum) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fCostPrice) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fCostMoney) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fPrice) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fMoney) + '</td>';
+                        rowstr += '</tr>';
+                        $("#machineAccountDialog table tbody").append(rowstr)
+                    }
+                } else {
+                    $("#machineAccountDialog .datamsg").html('无数据!');
+                }
+                var sDrugName = $("#machineAccountDrugName").val();
+                $("#machineAccountDialog").dialog("option", "title", '台账（药品名称：' + sDrugName + '）');
+                $("#machineAccountDialog").dialog("open");
+            }
+        });
+	}
+	//库存
+	function ajaxGetGoodStockAccount(){
+		$("#stockDialog .errormsg").html('');
+		$("#stockDialog .datamsg").html('正在查询....');
+		console.log($("#stockDialog form").serialize());
+        $.ajax({
+            url: "index.php?act=goods&op=stockAccount",
+            data: $("#stockDialog form").serialize(), 
+            dataType: 'json', 
+            success: function (data) {
+                console.log(data);
+                $("#stockDialog table tbody").html('');
+                if (data.data && data.data.length > 0) {
+                    $("#stockDialog .datamsg").html('');
+                    for (var i = 0; i < data.data.length; i++) {
+                        var row = data.data[i];
+                        var rowstr = '<tr>';
+                        console.log(row);
+                        rowstr += '<td>' + textstr(row.goods_commonid) + '</td>';
+                        rowstr += '<td>' + textstr(row.goods_name) + '</td>';
+                        rowstr += '<td>' + textstr(row.sDrug_Spec) + '</td>';
+                        rowstr += '<td>' + textstr(row.sDrug_Content) + '</td>';
+                        rowstr += '<td>' + textstr(row.sDrug_PackSpec) + '</td>';
+                        rowstr += '<td><p>' + textstr(row.brand_name) + '</p></p>' + textstr(row.gc_name) + '</p></td>';
+                        rowstr += '<td>' + textstr(row.sDrug_Unit) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fDS_OStock) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fDS_SStock) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fDS_RetailPrice) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fDS_BuyPrice) + '</td>';
+                        rowstr += '<td>' + textstr(row.sDrug_LeastUnit) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fDS_LeastOStock) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fDS_LeastSStock) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fDS_LeastRetailPrice) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fDS_LeastBuyPrice) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fDS_RetailPrice * row.fDS_OStock + row.fDS_LeastRetailPrice * row.fDS_LeastOStock) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fDS_BuyPrice * row.fDS_OStock + row.fDS_LeastBuyPrice * row.fDS_LeastOStock) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fDS_RetailPrice * row.fDS_OStock - row.fDS_BuyPrice * row.fDS_OStock + row.fDS_LeastRetailPrice * row.fDS_LeastOStock - row.fDS_LeastBuyPrice * row.fDS_LeastOStock) + '</td>';
+                        rowstr += '</tr>';
+                        $("#stockDialog table tbody").append(rowstr)
+                    }
+                } else {
+                    $("#stockDialog .datamsg").html('无数据!');
+                }
+                var sDrugName = $("#stockAccountDrugName").val();
+                $("#stockDialog").dialog("option", "title", '库存（药品名称：' + sDrugName + '）');
+                $("#stockDialog").dialog("open");
+            }
+        });
+	}
+	
+	//调价记录
+	function ajaxGetGoodChangePrice(){
+		$("#changePriceDialog .errormsg").html('');
+		$("#changePriceDialog .datamsg").html('正在查询....');
+        $.ajax({
+            url: "index.php?act=goods&op=goodsChangePrice",
+            data: $("#changePriceDialog form").serialize(), 
+            dataType: 'json', 
+            success: function (data) {
+                console.log(data);
+                $("#changePriceDialog table tbody").html('');
+                if (data.data && data.data.length > 0) {
+                    $("#changePriceDialog .datamsg").html('');
+                    for (var i = 0; i < data.data.length; i++) {
+                        var row = data.data[i];
+                        var rowstr = '<tr>';
+                        var iPrice_type = '全部';
+                        if(row.iPrice_Type == 0){
+                        	iPrice_type = '零售价';
+                        }else if(row.iPrice_Type == 1){
+                        	iPrice_type = '特价';
+                        }else if(row.iPrice_Type == 2){
+                        	iPrice_type = '二件价';
+                        }
+                        console.log(row);
+                        rowstr += '<td>' + textstr(row.iDrug_ID) + '</td>';
+                        rowstr += '<td style="text-align:left;">' + textstr(row.ItemName) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fPrice_Before) + '</td>';
+                        rowstr += '<td>' + numtostr(row.fPrice_After) + '</td>';
+                        rowstr += '<td>' + textstr(row.dPrice_Date) + '</td>';
+                        rowstr += '<td>' + textstr(row.dPrice_BeginDate) + '</td>';
+                        rowstr += '<td>' + textstr(row.dPrice_EndDate) + '</td>';
+                        rowstr += '<td>' + textstr(row.sPrice_Person) + '</td>';
+                        rowstr += '<td>' + textstr(row.Unit) + '</td>';
+                        rowstr += '<td>' + textstr(row.ItemType) + '</td>';
+                        rowstr += '<td>' + iPrice_type + '</td>';
+                        rowstr += '</tr>';
+                        $("#changePriceDialog table tbody").append(rowstr)
+                    }
+                } else {
+                    $("#changePriceDialog .datamsg").html('无数据!');
+                }
+                var sDrugName = $("#changePriceDrugName").val();
+                $("#changePriceDialog").dialog("option", "title", '调价记录（药品名称：' + sDrugName + '）');
+                $("#changePriceDialog").dialog("open");
+            }
+        });
+	}
+	function goods_machine_account(goods_commonid,sDrugName){
+        $("#machineAccountDrugId").val(goods_commonid);
+        $("#machineAccountDrugName").val(sDrugName);
+        var curDate = new Date();
+        var year = curDate.getFullYear();
+        var month = (curDate.getMonth() + 1) < 10 ? '0' + (curDate.getMonth() + 1) : curDate.getMonth() + 1;
+        var day = curDate.getDay < 10 ? '0' + curDate.getDay : curDate.getDate();
+        $("#query_start_time").val(year + '-' + month + '-01');
+		$("#query_end_time").val(year + '-' + month + '-' + day);
+        ajaxGetGoodMachineAccount();
+	}
+	function goods_stock_account(goods_commonid,sDrugName){
+        $("#stockAccountDrugId").val(goods_commonid);
+        $("#stockAccountDrugName").val(sDrugName);
+        ajaxGetGoodStockAccount();
+	}
+	function goods_change_price(goods_commonid,sDrugName){
+        $("#changePriceDrugId").val(goods_commonid);
+        $("#changePriceDrugName").val(sDrugName);
+        var curDate = new Date();
+        var year = curDate.getFullYear();
+        var month = (curDate.getMonth() + 1) < 10 ? '0' + (curDate.getMonth() + 1) : curDate.getMonth() + 1;
+        var day = curDate.getDay < 10 ? '0' + curDate.getDay : curDate.getDate();
+        $("#query_start_time_change_price").val(year + '-' + month + '-01');
+		$("#query_end_time_change_price").val(year + '-' + month + '-' + day);
+        ajaxGetGoodChangePrice();
+	}
     // 获得选中ID
     function getId() {
         var str = '';
@@ -267,10 +739,48 @@
         str = str.substr(0, (str.length - 1));
         return str;
     }
-
-    // 商品下架
-    function goods_lockup(ids) {
-        _uri = "<?php echo ADMIN_SITE_URL;?>/index.php?act=goods&op=goods_lockup&id=" + ids;
-        CUR_DIALOG = ajax_form('goods_lockup', '违规下架理由', _uri, 350);
+    
+    
+    function edit(goods_commonid){
+    	$.getJSON("index.php?act=goods&op=financeAjaxGetDetail", {'goodscommonid': goods_commonid}, function (data) {
+			data.classtype = data.iDrug_StatClass;
+			
+			if(data.goods_price != null){
+				data.goods_price = '￥' + data.goods_price;
+			}else{
+				data.goods_price = '';
+			}
+            $("#editdialog form").autofill(data);
+            $("#editdialog").dialog("open");
+        });
+    }
+    
+    function numtostr(numstr) {
+        var num = parseFloat(numstr);
+        if (num) {
+            return "" + num.toFixed(2);
+        } else {
+            return "";
+        }
+    }
+    function textstr(tstr) {
+        if (tstr) {
+            return tstr;
+        } else {
+            return '';
+        }
+    }
+    
+    function showmsg(msg) {
+        $("#editdialog-message").html(msg);
+        $("#editdialog").dialog("open");
+    }
+    function error(msg) {
+        $("#errormsg").css("color", "red");
+        $("#errormsg").html(msg);
+    }
+    function success(msg) {
+        $("#errormsg").css("color", "green");
+        $("#errormsg").html(msg);
     }
 </script> 

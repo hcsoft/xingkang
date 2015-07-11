@@ -375,7 +375,46 @@ class SystemControl{
         $objWriter->save('php://output');
         exit;
     }
-
+	
+	public final function exportxlsxwithoutsql($titles = array('测试导出'), $sheetname ='导出',$exportvalue){
+        require(BASE_PATH.'/include/PHPExcel.php');
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("hcsoft");
+        $sheet = $objPHPExcel->setActiveSheetIndex(0);
+        $sheet->setTitle($sheetname);
+        foreach($titles as $i =>$v){
+            $sheet->setCellValue(chr($i+65).'1',$v);
+        }
+        //查询sql
+        try{
+            $rowindex = 2;
+            $serial = 1;
+            foreach ($exportvalue as $k=>$value){
+            	$cellindex = 1;
+            	$sheet->setCellValue(chr(65).strval($rowindex),strval($serial));
+            	foreach($value as $i=>$v){
+					$cellstr = strval($v);
+					$sheet->setCellValue(chr($cellindex+65).strval($rowindex),$cellstr);
+					$cellindex = $cellindex + 1;
+            	}
+         		$rowindex = $rowindex+1;
+         		$serial = $serial + 1;
+            }
+        }catch (Exception $e){
+			throw $e;
+//			Log::record($tsql,'SQL');
+//			$sheet->setCellValue(2,1,'导出异常!请与系统管理员联系!异常信息:'+$e->getMessage());
+//
+//			$sheet->setCellValue(2,1,'导出异常!请与系统管理员联系!异常信息:'+$e->getMessage());
+        }
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$sheetname.'.xlsx"');
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+        exit;
+    }
+	
 	public function notEmpty($value){
 		return (isset($value) &&  $value !='');
 	}
