@@ -645,7 +645,7 @@ class healthplatformControl extends SystemControl
         if (empty ($order)) {
             $order = 'member_id desc';
         }
-        $member_list = $model_member->getMemberListNew($condition, $field, 10, $order);
+        $member_list = $model_member->getMemberListNew($condition, $field, 10, ' call_main.inputdate desc');
         /**
          * 整理会员信息
          */
