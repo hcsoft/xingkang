@@ -35,8 +35,12 @@ class memberModel extends Model {
      * @param string $order
      */
     public function getMemberList($condition = array(), $field = '*', $page = 0, $order = 'member_id desc') {
-       return $this->where($condition)->page($page)->order($order)->select();
+       return $this->field($field)->where($condition)->page($page)->order($order)->select();
     }
+
+	public function getMemberListNew($condition = array(), $field = '*', $page = 0, $order = 'member_id desc') {
+		return $this->table('member,call_main')->field($field)->where($condition)->page($page)->order($order)->select();
+	}
 
     /**
      * 会员数量

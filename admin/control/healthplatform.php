@@ -9,6 +9,7 @@
  */
 defined('InShopNC') or exit('Access Invalid!');
 require(BASE_DATA_PATH . '/../core/framework/db/mssql.php');
+
 class healthplatformControl extends SystemControl
 {
 
@@ -87,15 +88,15 @@ class healthplatformControl extends SystemControl
 
         if ($_REQUEST['search_result']) {
             $search_result = $_REQUEST['search_result'];
-            if ($search_result && count($search_result)>0) {
-                $sql = $sql . ' and  spot.result = \''.$search_result.'\'';
+            if ($search_result && count($search_result) > 0) {
+                $sql = $sql . ' and  spot.result = \'' . $search_result . '\'';
             }
         }
 
         if ($_REQUEST['search_spottype']) {
             $search_result = $_REQUEST['search_spottype'];
-            if ($search_result && count($search_result)>0) {
-                $sql = $sql . ' and  a.checktype = \''.$search_result.'\'';
+            if ($search_result && count($search_result) > 0) {
+                $sql = $sql . ' and  a.checktype = \'' . $search_result . '\'';
             }
         }
 
@@ -147,8 +148,6 @@ class healthplatformControl extends SystemControl
     }
 
 
-
-
     public function ajaxOp()
     {
         //spotcheck_spot
@@ -157,13 +156,13 @@ class healthplatformControl extends SystemControl
             $id = $_REQUEST['id'];
             $spotid = $_REQUEST['spotid'];
             $spotdate = $_REQUEST['spotdate'];
-            $result = $_REQUEST['spotresult'] == null ?"":$_REQUEST['spotresult'];
-            $reason = $_REQUEST['reason'] == null ?"":$_REQUEST['reason'];
+            $result = $_REQUEST['spotresult'] == null ? "" : $_REQUEST['spotresult'];
+            $reason = $_REQUEST['reason'] == null ? "" : $_REQUEST['reason'];
             $sql = " insert into spotcheck_spot (spotid,spotdate,result,reason,inputdate) values('$spotid','$spotdate','$result','$reason',getdate())";
             $conn->exec($sql);
             echo json_encode(array('success' => true, 'msg' => '保存成功!'));
         } catch (Exception $e) {
-            echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+            echo json_encode(array('success' => false, 'msg' => '异常!' . $e->getMessage()));
         }
         exit;
     }
@@ -214,15 +213,15 @@ class healthplatformControl extends SystemControl
 
         if ($_REQUEST['search_result']) {
             $search_result = $_REQUEST['search_result'];
-            if ($search_result && count($search_result)>0) {
-                $sql = $sql . ' and  spot.result = \''.$search_result.'\'';
+            if ($search_result && count($search_result) > 0) {
+                $sql = $sql . ' and  spot.result = \'' . $search_result . '\'';
             }
         }
 
         if ($_REQUEST['search_spottype']) {
             $search_result = $_REQUEST['search_spottype'];
-            if ($search_result && count($search_result)>0) {
-                $sql = $sql . ' and  a.checktype = \''.$search_result.'\'';
+            if ($search_result && count($search_result) > 0) {
+                $sql = $sql . ' and  a.checktype = \'' . $search_result . '\'';
             }
         }
 
@@ -268,7 +267,8 @@ class healthplatformControl extends SystemControl
     }
 
 
-    public function calldetailajaxOp(){
+    public function calldetailajaxOp()
+    {
 
         exit();
     }
@@ -283,13 +283,84 @@ class healthplatformControl extends SystemControl
             $admin_info = $this->getAdminInfo();
             $opt = $admin_info['id'];
             $spotdate = $_REQUEST['spotdate'];
-            $result = $_REQUEST['spotresult'] == null ?"":$_REQUEST['spotresult'];
-            $reason = $_REQUEST['reason'] == null ?"":$_REQUEST['reason'];
-            $sql = " insert into call_main (id,memberid,spotdate,status,result,inputdate,spotopt) values(newid(),'$id','$spotdate','$result','$reason',getdate(),'$opt')";
+            $result = $_REQUEST['spotresult'] == null ? "" : $_REQUEST['spotresult'];
+            $reason = $_REQUEST['reason'] == null ? "" : $_REQUEST['reason'];
+            $remark = $_REQUEST['remark'] == null ? "" : $_REQUEST['remark'];
+            $status = 0;
+            if ($result == '待核实') {
+                $status = '-2';
+            } else if ($result == '真档') {
+                $status = '1';
+            } else if ($result == '假档') {
+                $status = '-1';
+            } else if ($result == '未接电话') {
+                $status = '-3';
+            }
+
+            $sql = " update shopnc_member set checkstate = '$status' where member_id = '$id'";
             $conn->exec($sql);
+
+            $changelog = array();
+            $changestr = '';
+
+            //修改名字
+            $newname = $_REQUEST['newname'];
+            if (!empty($newname)) {
+                $sql = " update shopnc_member set member_truename = '$newname' where member_id = '$id'";
+                $conn->exec($sql);
+                $changelog['newname'] = $newname;
+                $changelog['oldname'] = $_REQUEST["oldname"];
+                $changestr .= ',姓名由"' . $_REQUEST["oldname"] . '"改为"' . $newname . '"';
+            }
+            //修改电话
+            $newtel = $_REQUEST["newtel"];
+            if (!empty($newtel)) {
+                $sql = " update shopnc_member set sLinkPhone = '$newtel' where member_id = '$id'";
+                $conn->exec($sql);
+                $changelog['newtel'] = $newtel;
+                $changelog['oldtel'] = $_REQUEST["oldtel"];
+                $changestr .= ',电话由"' . $_REQUEST["oldtel"] . '"改为"' . $newtel . '"';
+            }
+            //修改生日
+            $newbirthday = $_REQUEST["newbirthday"];
+            if (!empty($newbirthday)) {
+                $sql = " update shopnc_member set member_birthday = '$newbirthday' where member_id = '$id'";
+                $conn->exec($sql);
+                $changelog['newbirthday'] = $newbirthday;
+                $changelog['oldbirthday'] = $_REQUEST["oldbirthday"];
+                $changestr .= ',生日由"' . $_REQUEST["oldbirthday"] . '"改为"' . $newbirthday . '"';
+            }
+            //修改身份证
+            $newidcard = $_REQUEST["newidcard"];
+            if (!empty($newidcard)) {
+                $sql = " update shopnc_member set sIDCard = '$newidcard' where member_id = '$id'";
+                $conn->exec($sql);
+                $changelog['newidcard'] = $newidcard;
+                $changelog['oldidcard'] = $_REQUEST["oldidcard"];
+                $changestr .= ',身份证由"' . $_REQUEST["oldidcard"] . '"改为"' . $newidcard . '"';
+            }
+            //修改会员卡号
+            $newid = $_REQUEST["newid"];
+            if (!empty($newid)) {
+                $sql = " update shopnc_member set member_id = '$newid' where member_id = '$id'";
+                $conn->exec($sql);
+                $changelog['newid'] = $newid;
+                $changelog['oldid'] = $_REQUEST["oldid"];
+                $changestr .= ',会员卡号由"' . $_REQUEST["oldid"] . '"改为"' . $newid . '"';
+            }
+            //生成更新日志
+            $changelogstr = json_encode($changelog);
+            //生成中文日志
+            if (count($changestr) > 0) {
+                $changestr = substr($changestr, 1);
+            }
+
+            $sql = " insert into shopnc_call_main (id,memberid,spotdate,status,result,inputdate,spotopt,remark,changelog,changestr) values(newid(),'$id','$spotdate','$result','$reason',getdate(),'$opt','$remark','$changelogstr','$changestr')";
+            $conn->exec($sql);
+
             echo json_encode(array('success' => true, 'msg' => '保存成功!'));
         } catch (Exception $e) {
-            echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+            echo json_encode(array('success' => false, 'msg' => '异常!' . $e->getMessage()));
         }
         exit;
     }
@@ -297,19 +368,19 @@ class healthplatformControl extends SystemControl
 
     public function callOp()
     {
-        $lang = Language::getLangContent ();
+        $lang = Language::getLangContent();
         $orderbys = array(
-            array('txt'=>'卡号','col'=> ' member_id '),
-            array('txt'=>'预存余额','col'=> ' available_predeposit '),
-            array('txt'=>'赠送余额','col'=> ' fConsumeBalance '),
-            array('txt'=>'消费积分','col'=> ' member_points '));
-        Tpl::output('orderbys',$orderbys);
-        $model_member = Model ( 'member' );
+            array('txt' => '卡号', 'col' => ' member_id '),
+            array('txt' => '预存余额', 'col' => ' available_predeposit '),
+            array('txt' => '赠送余额', 'col' => ' fConsumeBalance '),
+            array('txt' => '消费积分', 'col' => ' member_points '));
+        Tpl::output('orderbys', $orderbys);
+        $model_member = Model('member');
         /**
          * 检索条件
          */
         if ($_GET['orgids']) {
-            $condition ['CreateOrgID'] = array (
+            $condition ['CreateOrgID'] = array(
                 'in',
                 $_GET['orgids']
             );
@@ -331,26 +402,26 @@ class healthplatformControl extends SystemControl
             $condition ['sLinkPhone'] = $_GET['tel'];
         }
         if (isset($_GET['name']) and $_GET['name'] != '') {
-            $condition ['member_truename'] = array('like','%'.$_GET['name'].'%');
+            $condition ['member_truename'] = array('like', '%' . $_GET['name'] . '%');
         }
         if (isset($_GET['birthday']) and $_GET['birthday'] != '') {
             $condition ['member_birthday'] = $_GET['birthday'];
         }
 
-        if(!isset($_GET['orderby'])){
+        if (!isset($_GET['orderby'])) {
             $_GET['orderby'] = '卡号';
         }
 
 
-        if(!isset($_GET['order'])){
+        if (!isset($_GET['order'])) {
             $ordersql = 'asc';
-        }else{
+        } else {
             $ordersql = $_GET['order'];
         }
-        if($_GET['orderby']){
-            foreach($orderbys as $orderby){
-                if($orderby['txt']==$_GET['orderby']){
-                    $order = $orderby['col'] .' ' . $ordersql;
+        if ($_GET['orderby']) {
+            foreach ($orderbys as $orderby) {
+                if ($orderby['txt'] == $_GET['orderby']) {
+                    $order = $orderby['col'] . ' ' . $ordersql;
                     break;
                 }
             }
@@ -358,29 +429,29 @@ class healthplatformControl extends SystemControl
         if ($_GET ['search_field_value'] != '') {
             switch ($_GET ['search_field_name']) {
                 case 'member_name' :
-                    $condition ['member_name'] = array (
+                    $condition ['member_name'] = array(
                         'like',
-                        '%' . trim ( $_GET ['search_field_value'] ) . '%'
+                        '%' . trim($_GET ['search_field_value']) . '%'
                     );
                     break;
                 case 'member_email' :
-                    $condition ['member_email'] = array (
+                    $condition ['member_email'] = array(
                         'like',
-                        '%' . trim ( $_GET ['search_field_value'] ) . '%'
+                        '%' . trim($_GET ['search_field_value']) . '%'
                     );
                     break;
                 case 'member_truename' :
-                    $condition ['member_truename'] = array (
+                    $condition ['member_truename'] = array(
                         'like',
-                        '%' . trim ( $_GET ['search_field_value'] ) . '%'
+                        '%' . trim($_GET ['search_field_value']) . '%'
                     );
                     break;
             }
         }
         if ($_GET ['member_id'] != '') {
-            $condition ['member_id'] = array (
+            $condition ['member_id'] = array(
                 'like',
-                '%' . trim ( $_GET ['member_id'] ) . '%'
+                '%' . trim($_GET ['member_id']) . '%'
             );
         }
         switch ($_GET ['search_state']) {
@@ -397,44 +468,202 @@ class healthplatformControl extends SystemControl
                 $condition ['member_state'] = '0';
                 break;
         }
+        $field = '*';
         if ($_GET ['status'] != '') {
             $status = $_GET ['status'];
-            if($status == '1'){
-                $condition['status']= array('exp',"EXISTS ( select 1 from call_main where memberid = member_id and status = '待核实') ");
-            }else  if($status == '2'){
-                $condition['status']= array('exp',"EXISTS ( select 1 from call_main where memberid = member_id and status = '真档') ");
-            }else  if($status == '3'){
-                $condition['status']= array('exp',"EXISTS ( select 1 from call_main where memberid = member_id and status = '假档') ");
-            }else  if($status == '4'){
-                $condition['status']= array('exp',"EXISTS ( select 1 from call_main where memberid = member_id and status = '未接电话') ");
+//            if($status == '1'){
+//                $condition['status']= array('exp',"EXISTS ( select 1 from call_main where memberid = member_id and status = '待核实') ");
+//            }else  if($status == '2'){
+//                $condition['status']= array('exp',"EXISTS ( select 1 from call_main where memberid = member_id and status = '真档') ");
+//            }else  if($status == '3'){
+//                $condition['status']= array('exp',"EXISTS ( select 1 from call_main where memberid = member_id and status = '假档') ");
+//            }else  if($status == '4'){
+//                $condition['status']= array('exp',"EXISTS ( select 1 from call_main where memberid = member_id and status = '未接电话') ");
+//            }
+
+            if ($status == '1') {
+                $condition['checkstate'] = '-2';
+            } else if ($status == '2') {
+                $condition['checkstate'] = '1';
+            } else if ($status == '3') {
+                $condition['checkstate'] = '-1';
+            } else if ($status == '4') {
+                $condition['checkstate'] = '-3';
+            } else if ($status == '5') {
+                $field = 'member.*,call_main.changestr,call_main.status [call_status] ,call_main.result ';
+//                $condition['field'] = '\'123\' changestr ';
+                $condition['status'] = array('exp', " call_main.memberid = member.member_id  ");
             }
         }
         /**
          * 排序
          */
 //		$order = trim ( $_GET ['search_sort'] );
-        if (empty ( $order )) {
+        if (empty ($order)) {
             $order = 'member_id desc';
         }
-        $member_list = $model_member->getMemberList ( $condition, '*', 10, $order );
+        if ($status == '5') {
+            $member_list = $model_member->getMemberListNew($condition, $field, 10, $order);
+        } else {
+            $member_list = $model_member->getMemberList($condition, $field, 10, $order);
+        }
         /**
          * 整理会员信息
          */
-        if (is_array ( $member_list )) {
-            foreach ( $member_list as $k => $v ) {
-                $member_list [$k] ['member_time'] = $v ['member_time'] ? date ( 'Y-m-d H:i:s', $v ['member_time'] ) : '';
-                $member_list [$k] ['member_login_time'] = $v ['member_login_time'] ? date ( 'Y-m-d H:i:s', $v ['member_login_time'] ) : '';
+        if (is_array($member_list)) {
+            foreach ($member_list as $k => $v) {
+                $member_list [$k] ['member_time'] = $v ['member_time'] ? date('Y-m-d H:i:s', $v ['member_time']) : '';
+                $member_list [$k] ['member_login_time'] = $v ['member_login_time'] ? date('Y-m-d H:i:s', $v ['member_login_time']) : '';
             }
         }
 
 
-        Tpl::output ( 'member_id', trim ( $_GET ['member_id'] ) );
-        Tpl::output ( 'search_sort', trim ( $_GET ['search_sort'] ) );
-        Tpl::output ( 'search_field_name', trim ( $_GET ['search_field_name'] ) );
-        Tpl::output ( 'search_field_value', trim ( $_GET ['search_field_value'] ) );
-        Tpl::output ( 'member_list', $member_list );
-        Tpl::output ( 'page', $model_member->showpage () );
-        Tpl::showpage('healthplatform.call');
+        Tpl::output('member_id', trim($_GET ['member_id']));
+        Tpl::output('search_sort', trim($_GET ['search_sort']));
+        Tpl::output('search_field_name', trim($_GET ['search_field_name']));
+        Tpl::output('search_field_value', trim($_GET ['search_field_value']));
+        Tpl::output('member_list', $member_list);
+        Tpl::output('page', $model_member->showpage());
+        if ($status == '5') {
+            Tpl::showpage('healthplatform.calllog');
+        } else {
+            Tpl::showpage('healthplatform.call');
+        }
+    }
+
+    public function calllogOp()
+    {
+        $lang = Language::getLangContent();
+        $orderbys = array(
+            array('txt' => '卡号', 'col' => ' member_id '),
+            array('txt' => '预存余额', 'col' => ' available_predeposit '),
+            array('txt' => '赠送余额', 'col' => ' fConsumeBalance '),
+            array('txt' => '消费积分', 'col' => ' member_points '));
+        Tpl::output('orderbys', $orderbys);
+        $model_member = Model('member');
+        /**
+         * 检索条件
+         */
+        if ($_GET['orgids']) {
+            $condition ['CreateOrgID'] = array(
+                'in',
+                $_GET['orgids']
+            );
+        }
+
+        if (isset($_GET['cardtype']) and $_GET['cardtype'] != '') {
+            $condition ['cardtype'] = $_GET['cardtype'];
+        }
+
+        if (isset($_GET['cardgrade']) and $_GET['cardgrade'] != '') {
+            $condition ['cardgrade'] = $_GET['cardgrade'];
+        }
+
+
+        if (isset($_GET['idnumber']) and $_GET['idnumber'] != '') {
+            $condition ['sIDCard'] = $_GET['idnumber'];
+        }
+        if (isset($_GET['tel']) and $_GET['tel'] != '') {
+            $condition ['sLinkPhone'] = $_GET['tel'];
+        }
+        if (isset($_GET['name']) and $_GET['name'] != '') {
+            $condition ['member_truename'] = array('like', '%' . $_GET['name'] . '%');
+        }
+        if (isset($_GET['birthday']) and $_GET['birthday'] != '') {
+            $condition ['member_birthday'] = $_GET['birthday'];
+        }
+
+        if (!isset($_GET['orderby'])) {
+            $_GET['orderby'] = '卡号';
+        }
+
+
+        if (!isset($_GET['order'])) {
+            $ordersql = 'asc';
+        } else {
+            $ordersql = $_GET['order'];
+        }
+        if ($_GET['orderby']) {
+            foreach ($orderbys as $orderby) {
+                if ($orderby['txt'] == $_GET['orderby']) {
+                    $order = $orderby['col'] . ' ' . $ordersql;
+                    break;
+                }
+            }
+        }
+        if ($_GET ['search_field_value'] != '') {
+            switch ($_GET ['search_field_name']) {
+                case 'member_name' :
+                    $condition ['member_name'] = array(
+                        'like',
+                        '%' . trim($_GET ['search_field_value']) . '%'
+                    );
+                    break;
+                case 'member_email' :
+                    $condition ['member_email'] = array(
+                        'like',
+                        '%' . trim($_GET ['search_field_value']) . '%'
+                    );
+                    break;
+                case 'member_truename' :
+                    $condition ['member_truename'] = array(
+                        'like',
+                        '%' . trim($_GET ['search_field_value']) . '%'
+                    );
+                    break;
+            }
+        }
+        if ($_GET ['member_id'] != '') {
+            $condition ['member_id'] = array(
+                'like',
+                '%' . trim($_GET ['member_id']) . '%'
+            );
+        }
+        switch ($_GET ['search_state']) {
+            case 'no_informallow' :
+                $condition ['inform_allow'] = '2';
+                break;
+            case 'no_isbuy' :
+                $condition ['is_buy'] = '0';
+                break;
+            case 'no_isallowtalk' :
+                $condition ['is_allowtalk'] = '0';
+                break;
+            case 'no_memberstate' :
+                $condition ['member_state'] = '0';
+                break;
+        }
+
+        $field = 'member.*,call_main.changestr,call_main.status [call_status] ,call_main.result,call_main.remark ';
+
+        $condition['status'] = array('exp', " call_main.memberid = member.member_id  ");
+
+        /**
+         * 排序
+         */
+//		$order = trim ( $_GET ['search_sort'] );
+        if (empty ($order)) {
+            $order = 'member_id desc';
+        }
+        $member_list = $model_member->getMemberListNew($condition, $field, 10, $order);
+        /**
+         * 整理会员信息
+         */
+        if (is_array($member_list)) {
+            foreach ($member_list as $k => $v) {
+                $member_list [$k] ['member_time'] = $v ['member_time'] ? date('Y-m-d H:i:s', $v ['member_time']) : '';
+                $member_list [$k] ['member_login_time'] = $v ['member_login_time'] ? date('Y-m-d H:i:s', $v ['member_login_time']) : '';
+            }
+        }
+
+
+        Tpl::output('member_id', trim($_GET ['member_id']));
+        Tpl::output('search_sort', trim($_GET ['search_sort']));
+        Tpl::output('search_field_name', trim($_GET ['search_field_name']));
+        Tpl::output('search_field_value', trim($_GET ['search_field_value']));
+        Tpl::output('member_list', $member_list);
+        Tpl::output('page', $model_member->showpage());
+        Tpl::showpage('healthplatform.calllog');
     }
 
 
