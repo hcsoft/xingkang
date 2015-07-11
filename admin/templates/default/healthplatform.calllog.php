@@ -161,6 +161,7 @@
                 <th>回访结果</th>
                 <th>回访原因</th>
                 <th>备注</th>
+                <th>操作</th>
             </tr>
             <tbody>
             <?php if (!empty($output['member_list']) && is_array($output['member_list'])) { ?>
@@ -197,6 +198,10 @@
                         </td>
                         <td class="align-left">
                             <?php echo $v['remark']; ?>
+                        </td>
+                        <td class="align-center">
+                            <a href="javascript:void(0)"
+                               onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">回访</a>
                         </td>
                     </tr>
                 <?php } ?>
