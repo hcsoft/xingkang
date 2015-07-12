@@ -68,6 +68,13 @@ class memberControl extends SystemControl {
 			$condition ['member_birthday'] = $_GET['birthday'];
 		}
 
+		if (isset($_GET['createcard_begin']) and $_GET['createcard_begin'] != '') {
+			$condition ['createcard_begin'] = array('exp' , ' dCreateDate >= \''.$_GET['createcard_begin'].'\'');
+		}
+		if (isset($_GET['createcard_end']) and $_GET['createcard_end'] != '') {
+			$condition ['createcard_end'] = array('exp' , ' dCreateDate < dateadd(day,1,\''.$_GET['createcard_begin'].'\')');
+		}
+
 		if(!isset($_GET['orderby'])){
 			$_GET['orderby'] = '预存余额';
 		}

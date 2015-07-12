@@ -583,7 +583,7 @@
     });
     $(function () {
         //日期
-        $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
+        $('input.date').datepicker({dateFormat: 'yy-mm-dd',constrainInput:false}).removeAttr('readonly');   ;
         //初始化showmore
         var showmore = "<?php echo $_GET['showmore'] ?>";
         if (showmore == '1') {

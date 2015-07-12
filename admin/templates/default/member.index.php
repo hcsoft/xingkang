@@ -50,12 +50,7 @@
                     </select>
                 </td>
 
-                <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
-                       title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
-                    <?php if ($output['search_field_value'] != '' or $output['search_sort'] != '') { ?>
-                        <a href="index.php?act=member&op=member"
-                           class="btns "><span><?php echo $lang['nc_cancel_search'] ?></span></a>
-                    <?php } ?></td>
+
                 <td>
                     排序字段：
                     <select name="orderby">
@@ -95,9 +90,21 @@
                             <td>
                                 生日:
                                 <input type="text" value="<?php echo $_GET['birthday']; ?>" name="birthday"
-                                       class="txt">
+                                       class="txt date">
                             </td>
-
+                            <td>
+                                建卡日期:
+                                <input type="text" value="<?php echo $_GET['createcard_begin']; ?>" name="createcard_begin"
+                                       class="txt date ">至
+                                <input type="text" value="<?php echo $_GET['createcard_end']; ?>" name="createcard_end"
+                                       class="txt date">
+                            </td>
+                            <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
+                                   title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
+                                <?php if ($output['search_field_value'] != '' or $output['search_sort'] != '') { ?>
+                                    <a href="index.php?act=member&op=member"
+                                       class="btns "><span><?php echo $lang['nc_cancel_search'] ?></span></a>
+                                <?php } ?></td>
                         </tr>
                     </table>
                 </td>
@@ -121,6 +128,7 @@
             src="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.min.js"></script>
     <script>
         $(function () {
+            $('input.date').datepicker({dateFormat: 'yy-mm-dd'}).removeAttr('readonly');
             //生成机构下拉
             function orgtext(n1, n2, list) {
                 var texts = [];

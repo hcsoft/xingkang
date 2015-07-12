@@ -84,7 +84,14 @@
                             <td>
                                 生日:
                                 <input type="text" value="<?php echo $_GET['birthday']; ?>" name="birthday"
-                                       class="txt">
+                                       class="txt date">
+                            </td>
+                            <td>
+                                建卡日期:
+                                <input type="text" value="<?php echo $_GET['createcard_begin']; ?>" name="createcard_begin"
+                                       class="txt date ">至
+                                <input type="text" value="<?php echo $_GET['createcard_end']; ?>" name="createcard_end"
+                                       class="txt date">
                             </td>
                             <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                                    title="<?php echo $lang['nc_query']; ?>">&nbsp;</a></td>
@@ -109,7 +116,28 @@
     <script type="text/javascript"
             src="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.min.js"></script>
     <script>
+        jQuery.extend(jQuery.validator.messages, {
+            required: "不可空",
+//        remote: "Veuillez remplir ce champ pour continuer.",
+            email: "邮件格式不正确",
+//        url: "Veuillez entrer une URL valide.",
+            date: "日期格式不正确",
+//        dateISO: "Veuillez entrer une date valide (ISO).",
+            number: "数字格式不正确",
+            digits: "数字格式不正确",
+            creditcard: "信用卡格式不正确",
+            equalTo: "不相等",
+//        accept: "Veuillez entrer une valeur avec une extension valide.",
+            maxlength: jQuery.validator.format("超过最大长度{0}"),
+            minlength: jQuery.validator.format("未达到最小长度{0}"),
+            rangelength: jQuery.validator.format("不在{0} 至 {1} 的长度范围"),
+            range: jQuery.validator.format("不在{0} 至 {1} 的范围"),
+            max: jQuery.validator.format("超过了最大值{0}"),
+            min: jQuery.validator.format("未达到最小值{0}")
+        });
+
         $(function () {
+            $('input.date').datepicker({dateFormat: 'yy-mm-dd',constrainInput:false}).removeAttr('readonly');
             //生成机构下拉
             function orgtext(n1, n2, list) {
                 var texts = [];

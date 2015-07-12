@@ -81,7 +81,14 @@
                             <td>
                                 生日:
                                 <input type="text" value="<?php echo $_GET['birthday']; ?>" name="birthday"
-                                       class="txt">
+                                       class="txt date">
+                            </td>
+                            <td>
+                                建卡日期:
+                                <input type="text" value="<?php echo $_GET['createcard_begin']; ?>" name="createcard_begin"
+                                       class="txt date ">至
+                                <input type="text" value="<?php echo $_GET['createcard_end']; ?>" name="createcard_end"
+                                       class="txt date">
                             </td>
 
                             <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
@@ -353,6 +360,7 @@
       href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
 <script>
     $(function () {
+        $('input.date').datepicker({dateFormat: 'yy-mm-dd',constrainInput:false}).removeAttr('readonly');
         $('#ncsubmit').click(function () {
             $('input[name="op"]').val('calllog');
             $('#formSearch').submit();
