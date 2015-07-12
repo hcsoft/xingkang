@@ -172,6 +172,7 @@
                 <th>储值余额</th>
                 <th>赠送余额</th>
                 <th>消费积分</th>
+                <th>建卡日期</th>
             </tr>
             <tbody>
             <?php if (!empty($output['member_list']) && is_array($output['member_list'])) { ?>
@@ -197,6 +198,7 @@
                         <td class="nowrap"><?php echo $v['available_predeposit']; ?></td>
                         <td class="nowrap"><?php echo number_format($v['fConsumeBalance'], 2); ?></td>
                         <td class="nowrap"><?php echo $v['member_points']; ?></td>
+                        <td class="nowrap"><?php echo substr($v['dCreateDate'], 0, 10); ?></td>
                     </tr>
                 <?php } ?>
             <?php } else { ?>

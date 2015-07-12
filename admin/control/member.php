@@ -72,7 +72,7 @@ class memberControl extends SystemControl {
 			$condition ['createcard_begin'] = array('exp' , ' dCreateDate >= \''.$_GET['createcard_begin'].'\'');
 		}
 		if (isset($_GET['createcard_end']) and $_GET['createcard_end'] != '') {
-			$condition ['createcard_end'] = array('exp' , ' dCreateDate < dateadd(day,1,\''.$_GET['createcard_begin'].'\')');
+			$condition ['createcard_end'] = array('exp' , ' dCreateDate < dateadd(day,1,\''.$_GET['createcard_end'].'\')');
 		}
 
 		if(!isset($_GET['orderby'])){

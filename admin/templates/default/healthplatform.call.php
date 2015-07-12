@@ -182,6 +182,7 @@
                 <th>联系电话</th>
                 <th>地址</th>
                 <th>身份证</th>
+                <th>建卡日期</th>
                 <th>末次消费日期</th>
                 <th>末次消费地点</th>
                 <th>储值余额</th>
@@ -208,6 +209,7 @@
                                 style="display: inline-block;color:blue;"><?php echo $v['sLinkPhone']; ?></span></td>
                         <td class="nowrap"><?php echo $v['sAddress']; ?></td>
                         <td class="nowrap"><?php echo $v['sIDCard']; ?></td>
+                        <td class="nowrap"><?php echo substr($v['dCreateDate'], 0, 10); ?></td>
                         <td class="nowrap"><?php echo substr($v['LastPayDate'], 0, 10); ?></td>
                         <td class=""><?php echo $v['LastPayOrgName']; ?></td>
                         <td class="nowrap"><?php echo $v['available_predeposit']; ?></td>

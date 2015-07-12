@@ -225,7 +225,10 @@
                                 } ?></p>
 
                         </td>
-                        <td><p class="name">办卡渠道: <?php echo $v['GetWay']; ?></p>
+                        <td>
+                        <p class="name">建卡时间: <?php echo substr($v['dCreateDate'], 0, 10); ?></p>
+
+                        <p class="name">办卡渠道: <?php echo $v['GetWay']; ?></p>
 
                             <p class="smallfont">推荐人:&nbsp;<?php echo $v['Referrer']; ?></p>
 

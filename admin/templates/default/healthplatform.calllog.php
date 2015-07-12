@@ -159,6 +159,7 @@
                 <th>联系电话</th>
                 <th>地址</th>
                 <th>身份证</th>
+                <th>建卡日期</th>
                 <th>回访日期</th>
                 <th>录入日期</th>
                 <th>修改内容</th>
@@ -186,6 +187,7 @@
                                 style="display: inline-block;color:blue;"><?php echo $v['sLinkPhone']; ?></span></td>
                         <td class="nowrap"><?php echo $v['sAddress']; ?></td>
                         <td class="nowrap"><?php echo $v['sIDCard']; ?></td>
+                        <td class="nowrap"><?php echo substr($v['dCreateDate'], 0, 10); ?></td>
                         <td class="nowrap"><?php echo substr($v['spotdate'], 0, 10); ?></td>
                         <td class="nowrap"><?php echo substr($v['inputdate'], 0, 10); ?></td>
                         <td class="align-left">
