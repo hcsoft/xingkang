@@ -5,18 +5,14 @@
         <div class="item-title">
             <h3>呼叫中心</h3>
             <ul class="tab-base">
-                <li><a href="index.php?act=healthplatform&op=call&status=99"
-                       class="<?php if (!$_GET['status'] || $_GET['status'] == '99') echo 'current'; ?>"><span>全部</span></a>
+                <li><a href="index.php?act=healthplatform&op=call&status=99"><span>全部</span></a>
                 </li>
-                <li><a href="index.php?act=healthplatform&op=call&status=1"
-                       class="<?php if ($_GET['status'] == '1') echo 'current'; ?>"><span>待核实</span></a></li>
-                <li><a href="index.php?act=healthplatform&op=call&status=2"
-                       class="<?php if ($_GET['status'] == '2') echo 'current'; ?>"><span>真档</span></a></li>
-                <li><a href="index.php?act=healthplatform&op=call&status=3"
-                       class="<?php if ($_GET['status'] == '3') echo 'current'; ?>"><span>假档</span></a></li>
-                <li><a href="index.php?act=healthplatform&op=call&status=4"
-                       class="<?php if ($_GET['status'] == '4') echo 'current'; ?>"><span>未接电话</span></a></li>
-                <li><a href="index.php?act=healthplatform&op=calllog"><span>回访日志</span></a></li>
+                <li><a href="index.php?act=healthplatform&op=call&status=1"><span>待核实</span></a></li>
+                <li><a href="index.php?act=healthplatform&op=call&status=2"><span>真档</span></a></li>
+                <li><a href="index.php?act=healthplatform&op=call&status=3"><span>假档</span></a></li>
+                <li><a href="index.php?act=healthplatform&op=call&status=4"><span>未接电话</span></a></li>
+                <li><a href="index.php?act=healthplatform&op=calllog&status=5"
+                       class="current"><span>回访日志</span></a></li>
             </ul>
         </div>
     </div>
@@ -61,6 +57,7 @@
                     </select>
                 </td>
 
+
             </tr>
             <tr>
                 <td colspan="12">
@@ -93,6 +90,7 @@
                                 <input type="text" value="<?php echo $_GET['createcard_end']; ?>" name="createcard_end"
                                        class="txt date">
                             </td>
+
                             <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                                    title="<?php echo $lang['nc_query']; ?>">&nbsp;</a></td>
                         </tr>
@@ -116,28 +114,7 @@
     <script type="text/javascript"
             src="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.min.js"></script>
     <script>
-        jQuery.extend(jQuery.validator.messages, {
-            required: "不可空",
-//        remote: "Veuillez remplir ce champ pour continuer.",
-            email: "邮件格式不正确",
-//        url: "Veuillez entrer une URL valide.",
-            date: "日期格式不正确",
-//        dateISO: "Veuillez entrer une date valide (ISO).",
-            number: "数字格式不正确",
-            digits: "数字格式不正确",
-            creditcard: "信用卡格式不正确",
-            equalTo: "不相等",
-//        accept: "Veuillez entrer une valeur avec une extension valide.",
-            maxlength: jQuery.validator.format("超过最大长度{0}"),
-            minlength: jQuery.validator.format("未达到最小长度{0}"),
-            rangelength: jQuery.validator.format("不在{0} 至 {1} 的长度范围"),
-            range: jQuery.validator.format("不在{0} 至 {1} 的范围"),
-            max: jQuery.validator.format("超过了最大值{0}"),
-            min: jQuery.validator.format("未达到最小值{0}")
-        });
-
         $(function () {
-            $('input.date').datepicker({dateFormat: 'yy-mm-dd',constrainInput:false}).removeAttr('readonly');
             //生成机构下拉
             function orgtext(n1, n2, list) {
                 var texts = [];
@@ -183,11 +160,12 @@
                 <th>地址</th>
                 <th>身份证</th>
                 <th>建卡日期</th>
-                <th>末次消费日期</th>
-                <th>末次消费地点</th>
-                <th>储值余额</th>
-                <th>赠送余额</th>
-                <th>消费积分</th>
+                <th>回访日期</th>
+                <th>录入日期</th>
+                <th>修改内容</th>
+                <th>回访结果</th>
+                <th>回访原因</th>
+                <th>备注</th>
                 <th>操作</th>
             </tr>
             <tbody>
@@ -210,32 +188,36 @@
                         <td class="nowrap"><?php echo $v['sAddress']; ?></td>
                         <td class="nowrap"><?php echo $v['sIDCard']; ?></td>
                         <td class="nowrap"><?php echo substr($v['dCreateDate'], 0, 10); ?></td>
-                        <td class="nowrap"><?php echo substr($v['LastPayDate'], 0, 10); ?></td>
-                        <td class=""><?php echo $v['LastPayOrgName']; ?></td>
-                        <td class="nowrap"><?php echo $v['available_predeposit']; ?></td>
-                        <td class="nowrap"><?php echo number_format($v['fConsumeBalance'], 2); ?></td>
-                        <td class="nowrap"><?php echo $v['member_points']; ?></td>
+                        <td class="nowrap"><?php echo substr($v['spotdate'], 0, 10); ?></td>
+                        <td class="nowrap"><?php echo substr($v['inputdate'], 0, 10); ?></td>
+                        <td class="align-left">
+                            <?php echo $v['changestr']; ?>
+                        </td>
+                        <td class="align-left">
+                            <?php echo $v['call_status']; ?>
+                        </td>
+                        <td class="align-left">
+                            <?php echo $v['result']; ?>
+                        </td>
+                        <td class="align-left">
+                            <?php echo $v['remark']; ?>
+                        </td>
                         <td class="align-center">
-                            <?php if (!empty($_REQUEST['status']) && $_REQUEST['status'] == '5') { ?>
-<!--                                --><?php //echo json_encode($v); ?>
-                                <?php echo $v['changestr']; ?>
-                            <?php } else { ?>
-                                    <a href="javascript:void(0)"
-                                       onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">回访</a>
-                            <?php } ?>
+                            <a href="javascript:void(0)"
+                               onclick="showdetail('<?php echo htmlentities(json_encode($v),ENT_QUOTES ) ?>',this)">回访</a>
                         </td>
                     </tr>
                 <?php } ?>
             <?php } else { ?>
                 <tr class="no_data">
-                    <td colspan="15"><?php echo $lang['nc_no_record'] ?></td>
+                    <td colspan="18"><?php echo $lang['nc_no_record'] ?></td>
                 </tr>
             <?php } ?>
             </tbody>
             <tfoot class="tfoot">
             <?php if (!empty($output['member_list']) && is_array($output['member_list'])) { ?>
                 <tr>
-                    <td colspan="16">
+                    <td colspan="18">
                         <div class="pagination"> <?php echo $output['page']; ?> </div>
                     </td>
                 </tr>
@@ -319,47 +301,51 @@
 
                                                            rows="5"></textarea></p>
 
-            <p style="vertical-align: top;">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：<textarea style="color:blue;" id="remark" name="remark" value=""
-                                                         rows="5"></textarea></p>
+            <p style="vertical-align: top;">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：<textarea style="color:blue;" id="remark"
+                                                                                       name="remark" value=""
+                                                                                       rows="5"></textarea></p>
 
             <fieldset style="position: relative;padding:10px;margin-top:10px;">
-                <legend style="position:absolute;left:20px;background-color: #fff;top:-10px;padding:0 10px;font-weight: bold;">基本资料修改</legend>
+                <legend
+                    style="position:absolute;left:20px;background-color: #fff;top:-10px;padding:0 10px;font-weight: bold;">
+                    基本资料修改
+                </legend>
 
-            <p class="change">
-                <span>原姓名：</span>
-                <input id="oldname" name="oldname" type="text" readonly>
-                <span title="留空表示不修改">新姓名:</span>
-                <input placeholder="留空表示不修改" title="留空表示不修改" id="newname" name="newname" type="text">
-            </p>
+                <p class="change">
+                    <span>原姓名：</span>
+                    <input id="oldname" name="oldname" type="text" readonly>
+                    <span title="留空表示不修改">新姓名:</span>
+                    <input placeholder="留空表示不修改" title="留空表示不修改" id="newname" name="newname" type="text">
+                </p>
 
-            <p class="change">
-                <span>原电话：</span>
-                <input id="oldtel" name="oldtel" readonly type="text">
-                <span title="留空表示不修改">新电话:</span>
-                <input placeholder="留空表示不修改" title="留空表示不修改" id="newtel" name="newtel" type="text">
-            </p>
+                <p class="change">
+                    <span>原电话：</span>
+                    <input id="oldtel" name="oldtel" readonly type="text">
+                    <span title="留空表示不修改">新电话:</span>
+                    <input placeholder="留空表示不修改" title="留空表示不修改" id="newtel" name="newtel" type="text">
+                </p>
 
-            <p class="change">
-                <span>原生日：</span>
-                <input id="oldbirthday" name="oldbirthday" readonly
-                       type="text">
-                <span title="留空表示不修改">新生日:</span>
-                <input placeholder="留空表示不修改" title="留空表示不修改" id="newbirthday" name="newbirthday" type="text">
-            </p>
+                <p class="change">
+                    <span>原生日：</span>
+                    <input id="oldbirthday" name="oldbirthday" readonly
+                           type="text">
+                    <span title="留空表示不修改">新生日:</span>
+                    <input placeholder="留空表示不修改" title="留空表示不修改" id="newbirthday" name="newbirthday" type="text">
+                </p>
 
-            <p class="change">
-                <span>原身份证号：</span>
-                <input id="oldidcard" name="oldidcard"  style="width:150px;" readonly type="text">
-                <span title="留空表示不修改">新身份证号:</span>
-                <input placeholder="留空表示不修改" style="width:150px;" title="留空表示不修改" id="newidcard" name="newidcard" type="text">
-            </p>
+                <p class="change">
+                    <span>原身份证号：</span>
+                    <input id="oldidcard" name="oldidcard"  style="width:150px;" readonly type="text">
+                    <span title="留空表示不修改">新身份证号:</span>
+                    <input placeholder="留空表示不修改"   style="width:150px;" title="留空表示不修改" id="newidcard" name="newidcard" type="text">
+                </p>
 
-            <p class="change">
-                <span>原会员卡号：</span>
-                <input id="oldid" name="oldid" readonly type="text">
-                <span title="留空表示不修改">新会员卡号:</span>
-                <input placeholder="留空表示不修改" title="留空表示不修改" id="newid" name="newid" type="text">
-            </p>
+                <p class="change">
+                    <span>原会员卡号：</span>
+                    <input id="oldid" name="oldid" readonly type="text">
+                    <span title="留空表示不修改">新会员卡号:</span>
+                    <input placeholder="留空表示不修改" title="留空表示不修改" id="newid" name="newid" type="text">
+                </p>
 
             </fieldset>
 
@@ -376,8 +362,9 @@
       href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
 <script>
     $(function () {
+        $('input.date').datepicker({dateFormat: 'yy-mm-dd',constrainInput:false}).removeAttr('readonly');
         $('#ncsubmit').click(function () {
-            $('input[name="op"]').val('call');
+            $('input[name="op"]').val('calllog');
             $('#formSearch').submit();
         });
 

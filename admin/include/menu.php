@@ -194,6 +194,7 @@ $arr = array(
                 'list' => array(
                     array('args'=>'call,healthplatform,healthplatform',			'text'=>'呼叫中心'),
                     array('args'=>'index,healthplatform,healthplatform',			'text'=>'回访抽查'),
+					array('args'=>'sleep,healthplatform,healthplatform',			'text'=>'睡眠顾客查询'),
                     array('args'=>'statistical,healthplatform,healthplatform',			'text'=>'统计'),
                     array('args'=>'test,healthplatform,healthplatform',			'text'=>'测试')
                 )

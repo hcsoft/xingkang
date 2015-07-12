@@ -98,6 +98,7 @@ class Db
                 while ($tmp = $result->fetch(PDO::FETCH_OBJ)) {
                     $keys[] = $tmp->COLUMN_NAME;
                 }
+
                 $orderby = implode(',', $keys);
             }
             $selectindex = strpos($lowstr, 'select ');
@@ -126,21 +127,28 @@ class Db
         $sql = str_replace('FROM_UNIXTIME(','(',$sql);
         $sql = str_replace('HOUR(','datepart(hour,',$sql);
         $sql = str_replace('!(','not(',$sql);
+        Log::record( $sql, Log::SQL);
 //        echo $sql;
-        $query = self::$link[$host]->query($sql);
-        if (C('debug')) addUpTime('queryEndTime');
-        if ($query === false) {
-            $error = 'Db Error: ' . self::$link[$host]->errorInfo();
-            if (C('debug')) {
-                throw_exception($error . '<br/>' . $sql);
+        try{
+            $query = self::$link[$host]->query($sql);
+            if (C('debug')) addUpTime('queryEndTime');
+            if ($query === false) {
+                $error = 'Db Error: ' . self::$link[$host]->errorInfo();
+                if (C('debug')) {
+                    throw_exception($error . '<br/>' . $sql);
+                } else {
+                    Log::record($error . "\r\n" . $sql, Log::ERR);
+                    return false;
+                }
             } else {
-                Log::record($error . "\r\n" . $sql, Log::ERR);
-                return false;
+                Log::record($sql, Log::SQL);
+                return $query;
             }
-        } else {
-            Log::record($sql . " [ RunTime:" . addUpTime('queryStartTime', 'queryEndTime', 6) . "s ]", Log::SQL);
-            return $query;
+        }catch (Exception $e) {
+            Log::record($e->getMessage() . "\r\n" . $sql, Log::ERR);
+            return false;
         }
+
     }
     /**
      * 取得数组

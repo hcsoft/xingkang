@@ -674,11 +674,10 @@ class ModelDb{
         $presql = $this->selectSql;
         if(isset ($options['field'] )){
             $fields = explode(',', $options['field']);
-            $flag = false;
-            for($i=0;$i<count($fields);$i++){
-                if(strpos(strtolower($fields[$i]),'count(')<0){
-                    $flag = true;
-                }
+            $flag = true;
+            //修改为自由count的情况下才去掉orderby语句
+            if(count($fields) == 1 && strpos(strtolower($fields[0]),'count(')>0){
+                $flag = false;
             }
         }else{
             $flag = true;
@@ -693,6 +692,7 @@ class ModelDb{
     }
 
     public function parseSql($sql,$options=array()){
+
         $sql   = str_replace(
             array('%TABLE%','%DISTINCT%','%FIELD%','%JOIN%','%WHERE%','%GROUP%','%HAVING%','%ORDER%','%LIMIT%','%UNION%','%INDEX%'),
             array(
@@ -753,6 +753,7 @@ class ModelDb{
             $fieldsStr = implode(',', $array);
         }elseif(is_string($fields) && !empty($fields)) {
             $fieldsStr = $this->parseKey($fields);
+
         }else{
             $fieldsStr = '*';
         }
