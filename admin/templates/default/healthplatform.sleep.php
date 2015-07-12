@@ -197,15 +197,6 @@
                         <td class="nowrap"><?php echo $v['available_predeposit']; ?></td>
                         <td class="nowrap"><?php echo number_format($v['fConsumeBalance'], 2); ?></td>
                         <td class="nowrap"><?php echo $v['member_points']; ?></td>
-                        <td class="align-center">
-                            <?php if (!empty($_REQUEST['status']) && $_REQUEST['status'] == '5') { ?>
-                                <!--                                --><?php //echo json_encode($v); ?>
-                                <?php echo $v['changestr']; ?>
-                            <?php } else { ?>
-                                <a href="javascript:void(0)"
-                                   onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">回访</a>
-                            <?php } ?>
-                        </td>
                     </tr>
                 <?php } ?>
             <?php } else { ?>
