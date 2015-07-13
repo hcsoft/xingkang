@@ -1,5 +1,6 @@
 <?php defined('InShopNC') or exit('Access Invalid!'); ?>
 <link href="<?php echo ADMIN_TEMPLATES_URL; ?>/css/font/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="<?php echo ADMIN_TEMPLATES_URL; ?>/showLoading/css/showLoading.css" rel="stylesheet"/>
 <!--[if IE 7]>
 <link rel="stylesheet" href="<?php echo ADMIN_TEMPLATES_URL;?>/css/font/font-awesome/css/font-awesome-ie7.min.css">
 <![endif]-->
@@ -112,13 +113,13 @@
 	                                    href="javascript:void(0)"
 	                                    onclick="edit(<?php echo $v->goods_commonid ?>)">修改分类</a></p></td>
 	                        <td>
-	                        	<p>常规单位: <?php echo $v->sDrug_Unit; ?></p>
+	                        	<p><?php echo $v->sDrug_Unit; ?></p>
 	                        	<p>进价: <?php echo number_format($v->fDS_BuyPrice,2); ?></p>
 	                        	<p>零价: <?php echo number_format($v->fDS_RetailPrice,2); ?></p>
 	                        	<p>实际库存: <?php echo number_format($v->fDS_SStock,0); ?></p>
 	                        </td>
 							<td >
-	                        	<p>最小单位: <?php echo $v->sDrug_LeastUnit; ?></p>
+	                        	<p><?php echo $v->sDrug_LeastUnit; ?></p>
 	                        	<p>进价: <?php echo number_format($v->fDS_LeastBuyPrice,2); ?></p>
 	                        	<p>零价: <?php echo number_format($v->fDS_LeastRetailPrice,2); ?></p>
 	                        	<p>实际库存: <?php echo number_format($v->fDS_LeastSStock,0); ?></p>
@@ -127,12 +128,13 @@
 	                        
 	                        <td class="align-center"><p><a
 	                                   href="javascript:void(0)"
-	                                   onclick="goods_stock_account('<?php echo $v->goods_commonid; ?>','<?php echo $v->goods_name; ?>');">库存</a></p>
+	                                   onclick="goods_stock_account('<?php echo $v->goods_commonid; ?>',
+	                                   '<?php echo $v->goods_commonid . ',' . $v->goods_name . ',' . $v->brand_name . $v->gc_name; ?>');">库存</a></p>
 	                                    
 								<p><a href="javascript:void(0)"
 									 onclick="goods_machine_account('<?php echo $v->goods_commonid; ?>','<?php echo $v->goods_name; ?>');">台账</a></p>
 	                            <p><a href="javascript:void(0);"
-	                                  onclick="goods_change_price('<?php echo $v->goods_commonid; ?>','<?php echo $v->goods_name; ?>');">调价记录</a></p>
+	                                  onclick="goods_change_price('<?php echo $v->goods_commonid; ?>','<?php echo $v->goods_commonid . ',' . $v->goods_name; ?>');">调价记录</a></p>
 	                                  </td>
 	                        </td>
                         </tr>
@@ -351,11 +353,6 @@
             		</td>
             	</tr>
             	<tr>
-	                <th nowrap rowspan="3" style="min-width:80px;">商品编码</th>
-	                <th nowrap  rowspan="3" style="min-width:150px;"><?php echo $lang['goods_index_name']; ?></th>
-	                <th nowrap  colspan="3">规格</th>
-	
-	                <th nowrap  rowspan="3" style="min-width:150px;">厂家/产地</th>
 					<th nowrap  rowspan="3" style="min-width:150px;">机构</th>
 	                <th  nowrap colspan="5">常规单位</th>
 	                <th nowrap  colspan="5">最小单位</th>
@@ -364,22 +361,19 @@
 	                <th nowrap  rowspan="3">进销差</th>
 	            </tr>
 	            <tr>
-	                <th nowrap  rowspan="2" style="min-width:80px;">完整</th>
-	                <th nowrap  rowspan="2" style="min-width:80px;">含量</th>
-	                <th nowrap  rowspan="2" style="min-width:80px;">包装</th>
-	                <th nowrap  rowspan="2" style="min-width:80px;">单位</th>
-	                <th nowrap  colspan="2" style="min-width:80px;">库存</th>
-	                <th nowrap   rowspan="2" style="min-width:80px;">零价</th>
-	                <th  nowrap rowspan="2" style="min-width:80px;">进价</th>
-	                <th nowrap  rowspan="2" style="min-width:80px;">单位</th>
-	                <th nowrap  colspan="2" style="min-width:80px;">库存</th>
-	                <th nowrap   rowspan="2" style="min-width:80px;">零价</th>
-	                <th  nowrap rowspan="2" style="min-width:80px;">进价</th>
+	                <th nowrap  rowspan="2" style="min-width:40px;">单位</th>
+	                <th nowrap  colspan="2" style="min-width:40px;">库存</th>
+	                <th nowrap   rowspan="2" style="min-width:40px;">零价</th>
+	                <th  nowrap rowspan="2" style="min-width:40px;">进价</th>
+	                <th nowrap  rowspan="2" style="min-width:40px;">单位</th>
+	                <th nowrap  colspan="2" style="min-width:40px;">库存</th>
+	                <th nowrap   rowspan="2" style="min-width:40px;">零价</th>
+	                <th  nowrap rowspan="2" style="min-width:40px;">进价</th>
 	            <tr>
-	                <th nowrap style="min-width:80px;">可售</th>
-	                <th nowrap style="min-width:80px;">实际</th>
-	                <th nowrap style="min-width:80px;">可售</th>
-	                <th nowrap style="min-width:80px;">实际</th>
+	                <th nowrap style="min-width:40px;">可售</th>
+	                <th nowrap style="min-width:40px;">实际</th>
+	                <th nowrap style="min-width:40px;">可售</th>
+	                <th nowrap style="min-width:40px;">实际</th>
             </tr>
             </thead>
             <tbody>
@@ -426,8 +420,6 @@
             		</td>
             	</tr>
             	<tr>
-					<th>商品编码</th>
-		            <th>商品名称</th>
 		            <th>机构</th>
 		            <th>调前价</th>
 		            <th>调后价</th>
@@ -464,6 +456,7 @@
        	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
 		
 		<noscript><link rel="stylesheet" type="text/css" href="css/noJS.css" /></noscript>
+<script type="text/javascript" src="<?php echo ADMIN_TEMPLATES_URL; ?>/showLoading/js/jquery.showLoading.min.js"></script>		
 <script type="text/javascript">
     var SITEURL = "<?php echo SHOP_SITE_URL; ?>";
     $(function () {
@@ -481,7 +474,7 @@
             width: 1100,
             autoOpen: false,
             modal:true,
-            height:300,
+            height:500,
             buttons: {
                 "关闭": function () {
                     $(this).dialog("close");
@@ -496,7 +489,7 @@
             width: 1100,
             autoOpen: false,
             modal:true,
-            height:300,
+            height:500,
             buttons: {
                 "关闭": function () {
                     $(this).dialog("close");
@@ -510,7 +503,7 @@
             width: 1100,
             autoOpen: false,
             modal:true,
-            height:300,
+            height:500,
             buttons: {
                 "关闭": function () {
                     $(this).dialog("close");
@@ -566,6 +559,7 @@
 		$("#machineAccountDialog .errormsg").html('');
 		$("#machineAccountDialog .datamsg").html('正在查询....');
 		console.log($("#machineAccountDialog form").serialize());
+		$("body").showLoading();
         $.ajax({
             url: "index.php?act=goods&op=machineAccount",
             data: $("#machineAccountDialog form").serialize(), 
@@ -579,8 +573,10 @@
                         var row = data.data[i];
                         var rowstr = '<tr>';
                         console.log(row);
-                        rowstr += '<td>' + numtostr(row.iID) + '</td>';
-                        rowstr += '<td>' + textstr(row.dDate) + '</td>';
+                        var iId = row.iID;
+                        if(iId == null) iId = '';
+                        rowstr += '<td>' + iId + '</td>';
+                        rowstr += '<td>' + datestr(row.dDate) + '</td>';
                         rowstr += '<td>' + textstr(row.sCustomer_Name) + '</td>';
                         rowstr += '<td>' + textstr(row.sPromt) + '</td>';
                         rowstr += '<td>' + textstr(row.sShowInNum) + '</td>';
@@ -602,6 +598,7 @@
                 var sDrugName = $("#machineAccountDrugName").val();
                 $("#machineAccountDialog").dialog("option", "title", '台账（药品名称：' + sDrugName + '）');
                 $("#machineAccountDialog").dialog("open");
+                $("body").hideLoading();
             }
         });
 	}
@@ -610,6 +607,7 @@
 		$("#stockDialog .errormsg").html('');
 		$("#stockDialog .datamsg").html('正在查询....');
 		console.log($("#stockDialog form").serialize());
+		$("body").showLoading();
         $.ajax({
             url: "index.php?act=goods&op=stockAccount",
             data: $("#stockDialog form").serialize(), 
@@ -617,19 +615,14 @@
             success: function (data) {
                 console.log(data);
                 $("#stockDialog table tbody").html('');
+                var drugInfo = '';
                 if (data.data && data.data.length > 0) {
                     $("#stockDialog .datamsg").html('');
                     for (var i = 0; i < data.data.length; i++) {
                         var row = data.data[i];
                         var rowstr = '<tr>';
                         console.log(row);
-                        rowstr += '<td>' + textstr(row.goods_commonid) + '</td>';
-                        rowstr += '<td>' + textstr(row.goods_name) + '</td>';
-                        rowstr += '<td>' + textstr(row.sDrug_Spec) + '</td>';
-                        rowstr += '<td>' + textstr(row.sDrug_Content) + '</td>';
-                        rowstr += '<td>' + textstr(row.sDrug_PackSpec) + '</td>';
-                        rowstr += '<td><p>' + textstr(row.brand_name) + '</p></p>' + textstr(row.gc_name) + '</p></td>';
-                        rowstr += '<td>' + textstr(row.Name) + '</td>';
+                        rowstr += '<td style="text-align:left;">' + textstr(row.Name) + '</td>';
                         rowstr += '<td>' + textstr(row.sDrug_Unit) + '</td>';
                         rowstr += '<td>' + numtostr(row.fDS_OStock) + '</td>';
                         rowstr += '<td>' + numtostr(row.fDS_SStock) + '</td>';
@@ -649,9 +642,11 @@
                 } else {
                     $("#stockDialog .datamsg").html('无数据!');
                 }
+                
                 var sDrugName = $("#stockAccountDrugName").val();
-                $("#stockDialog").dialog("option", "title", '库存（药品名称：' + sDrugName + '）');
+                $("#stockDialog").dialog("option", "title", '库存（药品信息：' + sDrugName + '）');
                 $("#stockDialog").dialog("open");
+                $("body").hideLoading();
             }
         });
 	}
@@ -660,6 +655,7 @@
 	function ajaxGetGoodChangePrice(){
 		$("#changePriceDialog .errormsg").html('');
 		$("#changePriceDialog .datamsg").html('正在查询....');
+		$("body").showLoading();
         $.ajax({
             url: "index.php?act=goods&op=goodsChangePrice",
             data: $("#changePriceDialog form").serialize(), 
@@ -681,8 +677,6 @@
                         	iPrice_type = '二件价';
                         }
                         console.log(row);
-                        rowstr += '<td>' + textstr(row.iDrug_ID) + '</td>';
-                        rowstr += '<td style="text-align:left;">' + textstr(row.ItemName) + '</td>';
                         rowstr += '<td style="text-align:left;">' + textstr(row.Name) + '</td>';
                         rowstr += '<td>' + numtostr(row.fPrice_Before) + '</td>';
                         rowstr += '<td>' + numtostr(row.fPrice_After) + '</td>';
@@ -700,8 +694,9 @@
                     $("#changePriceDialog .datamsg").html('无数据!');
                 }
                 var sDrugName = $("#changePriceDrugName").val();
-                $("#changePriceDialog").dialog("option", "title", '调价记录（药品名称：' + sDrugName + '）');
+                $("#changePriceDialog").dialog("option", "title", '调价记录（药品信息：' + sDrugName + '）');
                 $("#changePriceDialog").dialog("open");
+                $("body").hideLoading();
             }
         });
 	}
@@ -781,6 +776,19 @@
         }
     }
     
+    function datestr(d){	
+    	if(d != null && d != ''){
+	    	var datetime = new Date(d);
+    		var year = datetime.getFullYear();
+		    var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+		    var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+		    var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
+		    var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+		    var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+		    return year + "-" + month + "-" + date+" "+hour+":"+minute+":"+second;
+    	}
+    	return '';
+    }
     function showmsg(msg) {
         $("#editdialog-message").html(msg);
         $("#editdialog").dialog("open");

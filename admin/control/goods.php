@@ -108,17 +108,25 @@ class goodsControl extends SystemControl
 //			$datestart = $_REQUEST['query_start_time'];
 //			$dateend = $_REQUEST['query_end_time'];
 			
-			$sql = 'select * from Center_DrugStock stock  left join shopnc_goods_common good   on good.goods_commonid = stock.iDrug_ID
-			            left join Organization org on stock.orgid = org.id
-			         where good.idrug_rectype in (0,1,3) ';
-			$sql = $sql . ' and good.goods_commonid = ' . intval($iDrug_Id);
-			if($orgid != null && $orgid != ''){
-				$sql = $sql . ' and stock.orgid =\'' . $orgid . '\'';
+//			$sql = 'select * from Center_DrugStock stock  left join shopnc_goods_common good   on good.goods_commonid = stock.iDrug_ID
+//			            left join Organization org on stock.orgid = org.id
+//			         where good.idrug_rectype in (0,1,3) ';
+//			$sql = $sql . ' and good.goods_commonid = ' . intval($iDrug_Id);
+//			if($orgid != null && $orgid != ''){
+//				$sql = $sql . ' and stock.orgid =\'' . $orgid . '\'';
+//			}
+//			$sql = $sql . '';
+			if($orgid == null || $orgid == ''){
+				$orgid = '\'-1\'';
+			}else{
+				$orgid = '\'' . $orgid . '\'';
 			}
-			$stmt = $conn->query($sql);
+			$sql = "SET NOCOUNT ON; exec pXGoodStockAccount $iDrug_Id,$orgid;SET NOCOUNT off; ";
+			$stmt = $conn->prepare($sql);
 
+			$stmt->execute();
  			$stockAccount = array();
-			while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			while ( $row = $stmt->fetchObject () ) {
 				array_push ( $stockAccount, $row );
 			}
 			echo json_encode(array('success' => true, 'msg' => '查询成功!' ,'data'=>$stockAccount ,'sql'=>$sql));
@@ -227,8 +235,17 @@ class goodsControl extends SystemControl
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
-        $sql = ' from shopnc_goods_common good join Center_DrugStock stock on good.goods_commonid = stock.iDrug_ID ' .
-        		' left join  Organization org on stock.orgid = org.id '.
+        $sql = ' from shopnc_goods_common good left join (Select iDrug_ID,Sum(fDS_OStock) As fDS_OStock,
+						Sum(fDS_SStock) As fDS_SStock,
+						Sum(fDS_LeastOStock) As fDS_LeastOStock,
+						Sum(fDS_LeastSStock) As fDS_LeastSStock,
+						Sum(fDS_AdjustNum) As fDS_AdjustNum,
+						Sum(fDS_LeastAdjustNum) As fDS_LeastAdjustNum,
+						Sum(fDS_RetailPrice) As fDS_RetailPrice,
+						Sum(fDS_LeastRetailPrice) As fDS_LeastRetailPrice,
+						Sum(fDS_BuyPrice) As fDS_BuyPrice,
+						Sum(fDS_LeastBuyPrice) As fDS_LeastBuyPrice
+					From Center_DrugStock  Group By iDrug_ID)stock on good.goods_commonid = stock.iDrug_ID ' .
         		' Where good.iDrug_RecType = 0';
         $where = array();
         if ($_GET['search_goods_name'] != '') {
@@ -272,8 +289,7 @@ class goodsControl extends SystemControl
                         stock.fDS_SStock,
                         stock.fDS_LeastBuyPrice,
                         stock.fDS_LeastRetailPrice,
-                        stock.fDS_LeastSStock,
-                        org.Name
+                        stock.fDS_LeastSStock
                         $sql order by  good.goods_commonid asc)zzzz where rownum>$startnum )zzzzz order by rownum";
      	Log::record($tsql,'SQL');
 //     	echo $tsql;
