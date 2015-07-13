@@ -680,9 +680,9 @@
                         rowstr += '<td style="text-align:left;">' + textstr(row.Name) + '</td>';
                         rowstr += '<td>' + numtostr(row.fPrice_Before) + '</td>';
                         rowstr += '<td>' + numtostr(row.fPrice_After) + '</td>';
-                        rowstr += '<td>' + textstr(row.dPrice_Date) + '</td>';
-                        rowstr += '<td>' + textstr(row.dPrice_BeginDate) + '</td>';
-                        rowstr += '<td>' + textstr(row.dPrice_EndDate) + '</td>';
+                        rowstr += '<td>' + datestr(row.dPrice_Date) + '</td>';
+                        rowstr += '<td>' + datestr(row.dPrice_BeginDate) + '</td>';
+                        rowstr += '<td>' + datestr(row.dPrice_EndDate) + '</td>';
                         rowstr += '<td>' + textstr(row.sPrice_Person) + '</td>';
                         rowstr += '<td>' + textstr(row.Unit) + '</td>';
                         rowstr += '<td>' + textstr(row.ItemType) + '</td>';
