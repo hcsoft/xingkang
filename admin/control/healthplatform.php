@@ -36,6 +36,14 @@ class healthplatformControl extends SystemControl
             Tpl::output('week_arr', $week_arr);
         }
         Tpl::output('search_arr', $this->search_arr);
+        $conn = require (BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $treesql = 'select  b.id , b.name,b.districtnumber,b.parentid pId from map_org_wechat a, Organization b where a.orgid = b.id ';
+        $treestmt = $conn->query ( $treesql );
+        $this->treedata_list = array ();
+        while ( $row = $treestmt->fetch ( PDO::FETCH_OBJ ) ) {
+            array_push ( $this->treedata_list, $row );
+        }
+        Tpl::output ( 'treelist', $this->treedata_list );
     }
 
     /**
