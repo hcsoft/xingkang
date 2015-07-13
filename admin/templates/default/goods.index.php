@@ -60,20 +60,19 @@
     </form>
     
     <div style='position: relative;display: block;'>
-    	<form method='post' id="form_goods" action="<?php echo urlAdmin('goods', 'goods_del'); ?>">
+    	<form method='post' id="form_goods">
         	<input type="hidden" name="form_submit" value="ok"/>
             <table class="table tb-type2 nobdb datatable">
                 <thead>
                 	 <tr class="thead">
-		                <th class="w24"></th>
+		                
 		                <th class="align-center">商品编码</th>
 		                <th colspan="2"><?php echo $lang['goods_index_name']; ?></th>
 		                <th class="align-center">规格</th>
-		                <th class="align-center">单位</th>
-		                <th>供应商</th>
 		                <th>产地</th>
-		                <th class="align-center">价格</th>
 		                <th class="align-center">财务分类</th>
+		                <th class="align-center">常规单位</th>
+		                <th class="align-center">最小单位</th>
 		                <th class="w48 align-center"><?php echo $lang['nc_handle']; ?> </th>
 		            </tr>
                 </thead>
@@ -81,8 +80,7 @@
                 	<?php if (!empty($output['goods_list']) && is_array($output['goods_list'])) { ?>
                     <?php foreach ($output['goods_list'] as $k => $v) { ?>
                     	<tr class="hover member">
-                        	<td nowrap><input type="checkbox" name="id[]" value="<?php echo $v->goods_commonid; ?>"
-                                   class="checkitem"></td>
+                        	
                             <td class="w60 align-center" nowrap><?php echo $v->goods_commonid; ?></td>
                             <td class="w60 picture">
                             	<div class="size-56x56"><span class="thumb size-56x56"><i></i><img
@@ -95,23 +93,13 @@
 	                        </td>
 	                        <td class="goods-name w270"><p><span><?php echo $v->goods_name; ?></span></p>
 	                        </td>
-	                        <td><p>完整规格: <?php echo $v->sDrug_Spec; ?></p>
-	
-	                            <p>含量规格: <?php echo $v->sDrug_Content; ?></p>
-	
-	                            <p>包装规格: <?php echo $v->sDrug_PackSpec; ?></p></td>
-	                        <td><p>常规单位: <?php echo $v->sDrug_Unit; ?></p>
-	
-	                            <p>最小单位: <?php echo $v->sDrug_LeastUnit; ?></p></td>
-	                        <td>
-	                        	<?php echo $v->sCustomer_Name; ?>
-	                        </td>
+	                        
+	                        <td><p>完整规格: <?php echo $v->sDrug_Spec; ?></p></td>
 	                        <td><p><?php echo $v->brand_name; ?></p>
 	
 	                            <p><?php echo $v->gc_name; ?></p></p>
 	                        </td>
-	                        <td class="align-center"><?php echo $lang['currency'] . number_format($v->goods_price, 2) ?></td>
-	
+	                        
 	                        <td class="align-center"><?php
 								foreach ($output['classtypes'] as $classtypesV) {
 									//                        		echo $classtypesV->iClass_ID . '====' . $classtypesV->sClass_Name;
@@ -122,7 +110,20 @@
 								}
 								?><p></p><p><a
 	                                    href="javascript:void(0)"
-	                                    onclick="edit(<?php echo $v->goods_commonid ?>)">修改财务分类</a></p></td>
+	                                    onclick="edit(<?php echo $v->goods_commonid ?>)">修改分类</a></p></td>
+	                        <td>
+	                        	<p>常规单位: <?php echo $v->sDrug_Unit; ?></p>
+	                        	<p>进价: <?php echo number_format($v->fDS_BuyPrice,2); ?></p>
+	                        	<p>零价: <?php echo number_format($v->fDS_RetailPrice,2); ?></p>
+	                        	<p>实际库存: <?php echo number_format($v->fDS_SStock,0); ?></p>
+	                        </td>
+							<td >
+	                        	<p>最小单位: <?php echo $v->sDrug_LeastUnit; ?></p>
+	                        	<p>进价: <?php echo number_format($v->fDS_LeastBuyPrice,2); ?></p>
+	                        	<p>零价: <?php echo number_format($v->fDS_LeastRetailPrice,2); ?></p>
+	                        	<p>实际库存: <?php echo number_format($v->fDS_LeastSStock,0); ?></p>
+	                        </td>
+	                        
 	                        
 	                        <td class="align-center"><p><a
 	                                   href="javascript:void(0)"
@@ -150,12 +151,7 @@
                 <tfoot class="tfoot">
                 <?php if (!empty($output['goods_list']) && is_array($output['goods_list'])) { ?>
                     <tr>
-                    	<td><input type="checkbox" class="checkall" id="checkallBottom"></td>
                         <td colspan="10">
-                        	<label for="checkallBottom"><?php echo $lang['nc_select_all']; ?></label>
-		                    &nbsp;&nbsp; <a
-		                        href="JavaScript:void(0);" class="btn"
-		                        nctype="del_batch"><span><?php echo $lang['nc_del']; ?></span></a>
                             <div class="pagination"> <?php echo $output['page']; ?> </div>
                         </td>
                     </tr>
@@ -166,7 +162,7 @@
     </div>
 </div>
 
-<div id="editdialog" title="修改财务分类">
+<div id="editdialog" title="修改分类">
     <span id="errormsg" style="color:red;width:100%;display:block;text-align: center;"></span>
     <form>
         <input type="hidden" id='spotid' name="spotid">
@@ -261,6 +257,7 @@
         font-weight: bold;
         padding: 5px;
         text-align: center;
+        font-size:12px;
     }
 </style>
 <!-- 台账 -->
@@ -270,12 +267,13 @@
         <table>
             <thead>
             	<tr>
-            		<td colspan="13">
+            		<td colspan="14">
             			<form>
 					        <input type="hidden" name="machineAccountDrugId" id="machineAccountDrugId">
 					        <input type="hidden" name="machineAccountDrugName" id="machineAccountDrugName">
 	            			<label>选择机构</label>
 	            			<select name="orgid" id="orgid" class="orgSelect">
+	            				<option value="" selected>全部</option>
 		                        <?php
 		                        $orgid = $_GET['orgid'];
 		                        if (!isset($orgids)) {
@@ -311,6 +309,7 @@
 		            <th>进价金额 </th>
 		            <th>售价</th>
 		            <th>售价金额</th>
+		            <th>机构</th>
             	</tr>
             </thead>
             <tbody>
@@ -328,12 +327,13 @@
         <table>
             <thead>
             	<tr>
-            		<td colspan="19">
+            		<td colspan="20">
             			<form>
 					        <input type="hidden" name="stockAccountDrugId" id="stockAccountDrugId">
 					        <input type="hidden" name="stockAccountDrugName" id="stockAccountDrugName">
 	            			<label>选择机构</label>
 	            			<select name="stockorgid" id="stockorgid" class="orgSelect">
+	            				<option value="" selected>全部</option>
 		                        <?php
 		                        $orgid = $_GET['orgid'];
 		                        if (!isset($orgids)) {
@@ -351,12 +351,12 @@
             		</td>
             	</tr>
             	<tr>
-	                <th nowrap rowspan="3">商品编码</th>
-	                <th nowrap  rowspan="3"><?php echo $lang['goods_index_name']; ?></th>
+	                <th nowrap rowspan="3" style="min-width:80px;">商品编码</th>
+	                <th nowrap  rowspan="3" style="min-width:150px;"><?php echo $lang['goods_index_name']; ?></th>
 	                <th nowrap  colspan="3">规格</th>
 	
-	                <th nowrap  rowspan="3" >厂家/产地</th>
-	
+	                <th nowrap  rowspan="3" style="min-width:150px;">厂家/产地</th>
+					<th nowrap  rowspan="3" style="min-width:150px;">机构</th>
 	                <th  nowrap colspan="5">常规单位</th>
 	                <th nowrap  colspan="5">最小单位</th>
 	                <th  nowrap rowspan="3">零价金额</th>
@@ -364,22 +364,22 @@
 	                <th nowrap  rowspan="3">进销差</th>
 	            </tr>
 	            <tr>
-	                <th nowrap  rowspan="2">完整</th>
-	                <th nowrap  rowspan="2">含量</th>
-	                <th nowrap  rowspan="2">包装</th>
-	                <th nowrap  rowspan="2">单位</th>
-	                <th nowrap  colspan="2">库存</th>
-	                <th nowrap   rowspan="2">零价</th>
-	                <th  nowrap rowspan="2">进价</th>
-	                <th nowrap  rowspan="2">单位</th>
-	                <th nowrap  colspan="2">库存</th>
-	                <th nowrap   rowspan="2">零价</th>
-	                <th  nowrap rowspan="2">进价</th>
+	                <th nowrap  rowspan="2" style="min-width:80px;">完整</th>
+	                <th nowrap  rowspan="2" style="min-width:80px;">含量</th>
+	                <th nowrap  rowspan="2" style="min-width:80px;">包装</th>
+	                <th nowrap  rowspan="2" style="min-width:80px;">单位</th>
+	                <th nowrap  colspan="2" style="min-width:80px;">库存</th>
+	                <th nowrap   rowspan="2" style="min-width:80px;">零价</th>
+	                <th  nowrap rowspan="2" style="min-width:80px;">进价</th>
+	                <th nowrap  rowspan="2" style="min-width:80px;">单位</th>
+	                <th nowrap  colspan="2" style="min-width:80px;">库存</th>
+	                <th nowrap   rowspan="2" style="min-width:80px;">零价</th>
+	                <th  nowrap rowspan="2" style="min-width:80px;">进价</th>
 	            <tr>
-	                <th nowrap>可售</th>
-	                <th nowrap>实际</th>
-	                <th nowrap>可售</th>
-	                <th nowrap>实际</th>
+	                <th nowrap style="min-width:80px;">可售</th>
+	                <th nowrap style="min-width:80px;">实际</th>
+	                <th nowrap style="min-width:80px;">可售</th>
+	                <th nowrap style="min-width:80px;">实际</th>
             </tr>
             </thead>
             <tbody>
@@ -403,6 +403,7 @@
 					        <input type="hidden" name="changePriceDrugName" id="changePriceDrugName">
 	            			<label>选择机构</label>
 	            			<select name="changePriceOrgid" id="changePriceOrgid" class="orgSelect">
+	            				<option value="" selected>全部</option>
 		                        <?php
 		                        $orgid = $_GET['orgid'];
 		                        if (!isset($orgids)) {
@@ -427,6 +428,7 @@
             	<tr>
 					<th>商品编码</th>
 		            <th>商品名称</th>
+		            <th>机构</th>
 		            <th>调前价</th>
 		            <th>调后价</th>
 		            <th>调价日期</th>
@@ -479,6 +481,7 @@
             width: 1100,
             autoOpen: false,
             modal:true,
+            height:300,
             buttons: {
                 "关闭": function () {
                     $(this).dialog("close");
@@ -493,6 +496,7 @@
             width: 1100,
             autoOpen: false,
             modal:true,
+            height:300,
             buttons: {
                 "关闭": function () {
                     $(this).dialog("close");
@@ -506,6 +510,7 @@
             width: 1100,
             autoOpen: false,
             modal:true,
+            height:300,
             buttons: {
                 "关闭": function () {
                     $(this).dialog("close");
@@ -515,7 +520,7 @@
         
         
 		//格式化日期
-        $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
+//        $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
 //		$("#query_start_time").datepicker({defaultDate : +7})
         // 批量删除
         $('a[nctype="del_batch"]').click(function () {
@@ -587,6 +592,7 @@
                         rowstr += '<td>' + numtostr(row.fCostMoney) + '</td>';
                         rowstr += '<td>' + numtostr(row.fPrice) + '</td>';
                         rowstr += '<td>' + numtostr(row.fMoney) + '</td>';
+                        rowstr += '<td>' + textstr(row.Name) + '</td>';
                         rowstr += '</tr>';
                         $("#machineAccountDialog table tbody").append(rowstr)
                     }
@@ -623,6 +629,7 @@
                         rowstr += '<td>' + textstr(row.sDrug_Content) + '</td>';
                         rowstr += '<td>' + textstr(row.sDrug_PackSpec) + '</td>';
                         rowstr += '<td><p>' + textstr(row.brand_name) + '</p></p>' + textstr(row.gc_name) + '</p></td>';
+                        rowstr += '<td>' + textstr(row.Name) + '</td>';
                         rowstr += '<td>' + textstr(row.sDrug_Unit) + '</td>';
                         rowstr += '<td>' + numtostr(row.fDS_OStock) + '</td>';
                         rowstr += '<td>' + numtostr(row.fDS_SStock) + '</td>';
@@ -676,6 +683,7 @@
                         console.log(row);
                         rowstr += '<td>' + textstr(row.iDrug_ID) + '</td>';
                         rowstr += '<td style="text-align:left;">' + textstr(row.ItemName) + '</td>';
+                        rowstr += '<td style="text-align:left;">' + textstr(row.Name) + '</td>';
                         rowstr += '<td>' + numtostr(row.fPrice_Before) + '</td>';
                         rowstr += '<td>' + numtostr(row.fPrice_After) + '</td>';
                         rowstr += '<td>' + textstr(row.dPrice_Date) + '</td>';
@@ -698,6 +706,7 @@
         });
 	}
 	function goods_machine_account(goods_commonid,sDrugName){
+		$('input.date').datepicker({dateFormat: 'yy-mm-dd'});
         $("#machineAccountDrugId").val(goods_commonid);
         $("#machineAccountDrugName").val(sDrugName);
         var curDate = new Date();
@@ -714,6 +723,7 @@
         ajaxGetGoodStockAccount();
 	}
 	function goods_change_price(goods_commonid,sDrugName){
+		$('input.date').datepicker({dateFormat: 'yy-mm-dd'});
         $("#changePriceDrugId").val(goods_commonid);
         $("#changePriceDrugName").val(sDrugName);
         var curDate = new Date();

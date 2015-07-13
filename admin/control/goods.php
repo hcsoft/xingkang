@@ -75,6 +75,11 @@ class goodsControl extends SystemControl
 //			$cardid = $_REQUEST['cardid1'];
 			$datestart = '\'' . $_REQUEST['query_start_time'] . '\'';
 			$dateend = '\'' . $_REQUEST['query_end_time'] . '\'';
+			if($orgid == null || $orgid == ''){
+				$orgid = '\'-1\'';
+			}else{
+				$orgid = '\'' . $orgid . '\'';
+			}
 			$sql = "SET NOCOUNT ON; exec pLStockAccount $iDrug_Id,$datestart,$dateend,$orgid;SET NOCOUNT off; ";
 			$stmt = $conn->prepare($sql);
 
@@ -102,12 +107,14 @@ class goodsControl extends SystemControl
 //			$cardid = $_REQUEST['cardid1'];
 //			$datestart = $_REQUEST['query_start_time'];
 //			$dateend = $_REQUEST['query_end_time'];
+			
 			$sql = 'select * from Center_DrugStock stock  left join shopnc_goods_common good   on good.goods_commonid = stock.iDrug_ID
 			            left join Organization org on stock.orgid = org.id
 			         where good.idrug_rectype in (0,1,3) ';
 			$sql = $sql . ' and good.goods_commonid = ' . intval($iDrug_Id);
-			$sql = $sql . ' and stock.orgid =\'' . $orgid . '\'';
-			Log::record($sql,'SQL');
+			if($orgid != null && $orgid != ''){
+				$sql = $sql . ' and stock.orgid =\'' . $orgid . '\'';
+			}
 			$stmt = $conn->query($sql);
 
  			$stockAccount = array();
@@ -132,7 +139,10 @@ class goodsControl extends SystemControl
 //			$cardid = $_REQUEST['cardid1'];
 //			$datestart = $_REQUEST['query_start_time'];
 //			$dateend = $_REQUEST['query_end_time'];
-			$sql = 'select * from Center_OrgPrice a where a.iDrug_ID=' . intval($iDrug_Id) . ' And a.OrgID=\'' . $orgid . '\'';
+			$sql = 'select * from Center_OrgPrice a left join  Organization org on a.OrgID = org.id where a.iDrug_ID=' . intval($iDrug_Id) ;
+			if($orgid != null && $orgid != ''){
+				$sql = $sql . ' And a.OrgID=\'' . $orgid . '\'';
+			}
 			$stmt = $conn->query($sql);
 
  			$changePrice = array();
@@ -212,12 +222,14 @@ class goodsControl extends SystemControl
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //处理数据
         $page = new Page();
-        $page->setEachNum(10);
+        $page->setEachNum(6);
         echo $_REQUEST["curpage"];
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
-        $sql = ' from shopnc_goods_common good Where good.iDrug_RecType = 0';
+        $sql = ' from shopnc_goods_common good join Center_DrugStock stock on good.goods_commonid = stock.iDrug_ID ' .
+        		' left join  Organization org on stock.orgid = org.id '.
+        		' Where good.iDrug_RecType = 0';
         $where = array();
         if ($_GET['search_goods_name'] != '') {
             $sql = $sql . ' And good.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
@@ -254,7 +266,14 @@ class goodsControl extends SystemControl
                         good.goods_price ,
                         good.iDrug_StatClass,
 						good.store_id,
-                        goods_image
+                        goods_image,
+                        stock.fDS_BuyPrice,
+                        stock.fDS_RetailPrice,
+                        stock.fDS_SStock,
+                        stock.fDS_LeastBuyPrice,
+                        stock.fDS_LeastRetailPrice,
+                        stock.fDS_LeastSStock,
+                        org.Name
                         $sql order by  good.goods_commonid asc)zzzz where rownum>$startnum )zzzzz order by rownum";
      	Log::record($tsql,'SQL');
 //     	echo $tsql;
@@ -286,9 +305,9 @@ class goodsControl extends SystemControl
             array_push($treedata_list, $row);
         }
         Tpl::output('treelist', $treedata_list);
-        if (!isset($_GET['orgid'])) {
-            $_GET['orgid'] = $treedata_list[0]->id;
-        }
+//        if (!isset($_GET['orgid'])) {
+//            $_GET['orgid'] = $treedata_list[0]->id;
+//        }
         
         Tpl::output('page', $page->show());  
         Tpl::showpage('goods.index');
