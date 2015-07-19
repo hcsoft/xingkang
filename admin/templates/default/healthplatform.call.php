@@ -185,6 +185,7 @@
                 <th>性别</th>
                 <th>卡类型</th>
                 <th>出生日期</th>
+                <th>档案编号</th>
                 <th>手机</th>
                 <th>联系电话</th>
                 <th>地址</th>
@@ -218,6 +219,7 @@
                                 echo '储值卡';
                             } ?></td>
                         <td class="nowrap"><?php echo substr($v['member_birthday'], 0, 10); ?></td>
+                        <td class="nowrap"><?php echo $v['HealthCardID']; ?></td>
                         <td class="nowrap"><span
                                 style="display: inline-block;color:blue;"><?php echo $v['Mobile']; ?></span></td>
                         <td class="nowrap"><span
@@ -243,14 +245,14 @@
                 <?php } ?>
             <?php } else { ?>
                 <tr class="no_data">
-                    <td colspan="15"><?php echo $lang['nc_no_record'] ?></td>
+                    <td colspan="18"><?php echo $lang['nc_no_record'] ?></td>
                 </tr>
             <?php } ?>
             </tbody>
             <tfoot class="tfoot">
             <?php if (!empty($output['member_list']) && is_array($output['member_list'])) { ?>
                 <tr>
-                    <td colspan="16">
+                    <td colspan="18">
                         <div class="pagination"> <?php echo $output['page']; ?> </div>
                     </td>
                 </tr>
