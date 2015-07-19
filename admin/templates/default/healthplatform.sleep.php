@@ -355,6 +355,11 @@
             $('input[name="op"]').val('sleep');
             $('#formSearch').submit();
         });
+        $("#formSearch input").keypress(function(event){
+            if(event.keyCode==13){
+                $('#ncsubmit').click();
+            }
+        });
 
         $("#detaildialog").dialog({
             resizable: false,

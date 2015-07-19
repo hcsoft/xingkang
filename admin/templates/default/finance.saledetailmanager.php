@@ -346,6 +346,11 @@
             $("#export").val('false');
             $('#formSearch').submit();
         });
+        $("#formSearch input").keypress(function(event){
+            if(event.keyCode==13){
+                $('#ncsubmit').click();
+            }
+        });
         $('#ncexport').click(function () {
             $("#export").val('true');
             $('#formSearch').submit();

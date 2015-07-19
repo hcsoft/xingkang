@@ -188,6 +188,11 @@
             }
 
         });
+        $("#formSearch input").keypress(function(event){
+            if(event.keyCode==13){
+                $('#ncsubmit').click();
+            }
+        });
     });
 
     function showmsg(msg) {

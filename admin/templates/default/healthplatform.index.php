@@ -255,6 +255,11 @@
             $('input[name="op"]').val('index');
             $('#formSearch').submit();
         });
+        $("#formSearch input").keypress(function(event){
+            if(event.keyCode==13){
+                $('#ncsubmit').click();
+            }
+        });
         $("#spotdialog").dialog({
             resizable: false,
 //            width:350,

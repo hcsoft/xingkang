@@ -250,6 +250,11 @@
             $("#search_type").val($('input[name="search_type_select"]:checked').val());
             $('#formSearch').submit();
         });
+        $("#formSearch input").keypress(function(event){
+            if(event.keyCode==13){
+                $('#ncsubmit').click();
+            }
+        });
         $('#ncexport').click(function () {
             $("#export").val('true');
             $("#search_type").val($('input[name="search_type_select"]:checked').val());

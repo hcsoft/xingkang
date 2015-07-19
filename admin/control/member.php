@@ -75,6 +75,14 @@ class memberControl extends SystemControl {
 			$condition ['createcard_end'] = array('exp' , ' dCreateDate < dateadd(day,1,\''.$_GET['createcard_end'].'\')');
 		}
 
+		if (isset($_GET['hasfile']) and $_GET['hasfile'] != '') {
+			if($_GET['hasfile']=='-1'){
+				$condition ['hasfile']  = array('exp' , ' ( hasfile = -1 or hasfile is null ) ');
+			}else{
+				$condition ['hasfile'] = $_GET['hasfile'];
+			}
+		}
+
 		if(!isset($_GET['orderby'])){
 			$_GET['orderby'] = '预存余额';
 		}

@@ -307,7 +307,11 @@
             $('input[name="op"]').val('check');
             $('#formSearch').submit();
         });
-
+        $("#formSearch input").keypress(function(event){
+            if(event.keyCode==13){
+                $('#ncsubmit').click();
+            }
+        });
         $("#detaildialog").dialog({
             resizable: false,
             maxHeight: 200,

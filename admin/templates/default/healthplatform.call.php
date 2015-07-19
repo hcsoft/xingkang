@@ -60,7 +60,13 @@
                         <option value="2" <?php if ('2' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康钻卡</option>
                     </select>
                 </td>
-
+                <td>是否建档</td>
+                <td><select name="hasfile">
+                        <option value="">全部</option>
+                        <option value="1" <?php if ('1' == $_GET['hasfile']){ ?>selected<?php } ?>>有健康档案</option>
+                        <option value="-1" <?php if ('-1' == $_GET['hasfile']){ ?>selected<?php } ?>>无健康档案</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td colspan="12">
@@ -177,6 +183,7 @@
                 <th>卡号</th>
                 <th>姓名</th>
                 <th>性别</th>
+                <th>卡类型</th>
                 <th>出生日期</th>
                 <th>手机</th>
                 <th>联系电话</th>
@@ -201,6 +208,14 @@
                                 echo '男';
                             } elseif ($v['member_sex'] == 2) {
                                 echo '女';
+                            } ?></td>
+                        <td class="">
+
+                            <?php
+                            if ($v['CardType'] == 0) {
+                                echo '普通卡';
+                            } elseif ($v['CardType'] == 1 ) {
+                                echo '储值卡';
                             } ?></td>
                         <td class="nowrap"><?php echo substr($v['member_birthday'], 0, 10); ?></td>
                         <td class="nowrap"><span
@@ -314,8 +329,11 @@
                 <label for="spotresult_unknown" style="cursor:pointer">待核实</label>
                 <input id="spotresult_noanswer" name="spotresult" type="radio" value="未接电话">
                 <label for="spotresult_noanswer" style="cursor:pointer">未接电话</label></p>
-
-            <p style="vertical-align: top;">回访原因：<textarea style="color:blue;" id="reason" name="reason" value=""
+            <p>健康档案：<input id="spotresult_nofile" name="hasfile" type="radio" value="-1" checked>
+                <label for="spotresult_nofile" style="cursor:pointer">无健康档案</label>
+                <input id="spotresult_hasfile" name="hasfile" type="radio" value="1">
+                <label for="spotresult_hasfile" style="cursor:pointer">有健康档案</label></p>
+            <p style="vertical-align: top;padding-top:5px;">回访原因：<textarea style="color:blue;" id="reason" name="reason" value=""
 
                                                            rows="5"></textarea></p>
 
@@ -379,6 +397,11 @@
         $('#ncsubmit').click(function () {
             $('input[name="op"]').val('call');
             $('#formSearch').submit();
+        });
+        $("#formSearch input").keypress(function(event){
+            if(event.keyCode==13){
+                $('#ncsubmit').click();
+            }
         });
 
         $("#detaildialog").dialog({

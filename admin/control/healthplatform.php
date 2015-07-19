@@ -366,7 +366,12 @@ class healthplatformControl extends SystemControl
                 $changestr = substr($changestr, 1);
             }
 
-            $sql = " insert into shopnc_call_main (id,memberid,spotdate,status,result,inputdate,spotopt,remark,changelog,changestr) values(newid(),'$id','$spotdate','$result','$reason',getdate(),'$opt','$remark','$changelogstr','$changestr')";
+            $hasfile = $_REQUEST['hasfile'];
+            if (!empty($hasfile)) {
+                $sql = " update shopnc_member set hasfile = $hasfile where member_id = '$id'";
+                $conn->exec($sql);
+            }
+            $sql = " insert into shopnc_call_main (id,memberid,spotdate,status,result,inputdate,spotopt,remark,changelog,changestr,hasfile) values(newid(),'$id','$spotdate','$result','$reason',getdate(),'$opt','$remark','$changelogstr','$changestr',$hasfile)";
             $conn->exec($sql);
 
             echo json_encode(array('success' => true, 'msg' => '保存成功!'));
@@ -423,6 +428,14 @@ class healthplatformControl extends SystemControl
         }
         if (isset($_GET['createcard_end']) and $_GET['createcard_end'] != '') {
             $condition ['createcard_end'] = array('exp' , ' dCreateDate < dateadd(day,1,\''.$_GET['createcard_end'].'\')');
+        }
+
+        if (isset($_GET['hasfile']) and $_GET['hasfile'] != '') {
+            if($_GET['hasfile']=='-1'){
+                $condition ['hasfile']  = array('exp' , ' ( hasfile = -1 or hasfile is null ) ');
+            }else{
+                $condition ['hasfile'] = $_GET['hasfile'];
+            }
         }
 
         if (!isset($_GET['orderby'])) {
@@ -589,14 +602,20 @@ class healthplatformControl extends SystemControl
         if (isset($_GET['birthday']) and $_GET['birthday'] != '') {
             $condition ['member_birthday'] = $_GET['birthday'];
         }
+
         if (isset($_GET['createcard_begin']) and $_GET['createcard_begin'] != '') {
             $condition ['createcard_begin'] = array('exp' , ' dCreateDate >= \''.$_GET['createcard_begin'].'\'');
         }
         if (isset($_GET['createcard_end']) and $_GET['createcard_end'] != '') {
             $condition ['createcard_end'] = array('exp' , ' dCreateDate < dateadd(day,1,\''.$_GET['createcard_end'].'\')');
         }
-
-
+        if (isset($_GET['hasfile']) and $_GET['hasfile'] != '') {
+            if($_GET['hasfile']=='-1'){
+                $condition ['hasfile']  = array('exp' , ' ( hasfile = -1 or hasfile is null ) ');
+            }else{
+                $condition ['hasfile'] = $_GET['hasfile'];
+            }
+        }
         if (!isset($_GET['orderby'])) {
             $_GET['orderby'] = '卡号';
         }
@@ -854,6 +873,186 @@ class healthplatformControl extends SystemControl
         Tpl::output('page', $model_member->showpage());
         Tpl::showpage('healthplatform.sleep');
     }
+
+
+    public function birthdayOp()
+    {
+        $lang = Language::getLangContent();
+        $orderbys = array(
+            array('txt' => '卡号', 'col' => ' member_id '),
+            array('txt' => '预存余额', 'col' => ' available_predeposit '),
+            array('txt' => '赠送余额', 'col' => ' fConsumeBalance '),
+            array('txt' => '消费积分', 'col' => ' member_points '));
+        Tpl::output('orderbys', $orderbys);
+        $model_member = Model('member');
+        /**
+         * 检索条件
+         */
+        if ($_GET['orgids']) {
+            $condition ['CreateOrgID'] = array(
+                'in',
+                $_GET['orgids']
+            );
+        }
+
+        if (isset($_GET['cardtype']) and $_GET['cardtype'] != '') {
+            $condition ['cardtype'] = $_GET['cardtype'];
+        }
+
+        if (isset($_GET['cardgrade']) and $_GET['cardgrade'] != '') {
+            $condition ['cardgrade'] = $_GET['cardgrade'];
+        }
+
+
+        if (isset($_GET['idnumber']) and $_GET['idnumber'] != '') {
+            $condition ['sIDCard'] = $_GET['idnumber'];
+        }
+        if (isset($_GET['tel']) and $_GET['tel'] != '') {
+            $condition ['sLinkPhone'] = $_GET['tel'];
+        }
+        if (isset($_GET['name']) and $_GET['name'] != '') {
+            $condition ['member_truename'] = array('like', '%' . $_GET['name'] . '%');
+        }
+        if (isset($_GET['birthday']) and $_GET['birthday'] != '') {
+            $condition ['member_birthday'] = $_GET['birthday'];
+        }
+
+        if (!empty($_GET['dayrange'])){
+            $dayrange = $_GET['dayrange'];
+            if($dayrange == "1"){
+                $condition ['dayrange'] = array('exp' , '  dbo.birthday(member_birthday)   = convert(date,getdate()) ');
+            }else if($dayrange == "2"){
+                $condition ['dayrange'] = array('exp' , ' dbo.birthday(member_birthday)   = convert(date,dateadd(day,1,getdate())) ');
+            }else if($dayrange == "3"){
+                $condition ['dayrange'] = array('exp' , ' dbo.birthday(member_birthday)  >= convert(date,getdate()) and  dbo.birthday(member_birthday) <= convert(date,dateadd(day,7,getdate())) ');
+            }else if($dayrange == "4"){
+                $condition ['dayrange'] = array('exp' , ' dbo.birthday(member_birthday)  >= convert(date,getdate()) and  dbo.birthday(member_birthday) <= convert(date,dateadd(day,30,getdate())) ');
+            }
+        }
+        if (isset($_GET['createcard_begin']) and $_GET['createcard_begin'] != '') {
+            $condition ['createcard_begin'] = array('exp' , ' dCreateDate >= \''.$_GET['createcard_begin'].'\'');
+        }
+        if (isset($_GET['createcard_end']) and $_GET['createcard_end'] != '') {
+            $condition ['createcard_end'] = array('exp' , ' dCreateDate < dateadd(day,1,\''.$_GET['createcard_end'].'\')');
+        }
+
+        if (!isset($_GET['orderby'])) {
+            $_GET['orderby'] = '卡号';
+        }
+
+
+        if (!isset($_GET['order'])) {
+            $ordersql = 'asc';
+        } else {
+            $ordersql = $_GET['order'];
+        }
+        if ($_GET['orderby']) {
+            foreach ($orderbys as $orderby) {
+                if ($orderby['txt'] == $_GET['orderby']) {
+                    $order = $orderby['col'] . ' ' . $ordersql;
+                    break;
+                }
+            }
+        }
+        if ($_GET ['search_field_value'] != '') {
+            switch ($_GET ['search_field_name']) {
+                case 'member_name' :
+                    $condition ['member_name'] = array(
+                        'like',
+                        '%' . trim($_GET ['search_field_value']) . '%'
+                    );
+                    break;
+                case 'member_email' :
+                    $condition ['member_email'] = array(
+                        'like',
+                        '%' . trim($_GET ['search_field_value']) . '%'
+                    );
+                    break;
+                case 'member_truename' :
+                    $condition ['member_truename'] = array(
+                        'like',
+                        '%' . trim($_GET ['search_field_value']) . '%'
+                    );
+                    break;
+            }
+        }
+        if ($_GET ['member_id'] != '') {
+            $condition ['member_id'] = array(
+                'like',
+                '%' . trim($_GET ['member_id']) . '%'
+            );
+        }
+        switch ($_GET ['search_state']) {
+            case 'no_informallow' :
+                $condition ['inform_allow'] = '2';
+                break;
+            case 'no_isbuy' :
+                $condition ['is_buy'] = '0';
+                break;
+            case 'no_isallowtalk' :
+                $condition ['is_allowtalk'] = '0';
+                break;
+            case 'no_memberstate' :
+                $condition ['member_state'] = '0';
+                break;
+        }
+
+        $field = '*, (select max(dCO_Date) from Center_CheckOut where sMemberID = member_id ) lastdate ';
+        $sleepunit = $_REQUEST['sleepunit'];
+        if ($sleepunit == '1') {
+            $dateunit = 'year';
+        } else if ($sleepunit == '3') {
+            $dateunit = 'day';
+        } else {
+            $dateunit = 'month';
+        }
+        $sleepnum = $_REQUEST['sleepnum'];
+        if (empty($sleepnum)) {
+            $sleepnum = '40';
+            $_GET['sleepnum'] = 40;
+        }
+
+        $haspay = $_REQUEST['haspay'];
+        $order = ' member_id desc ';
+        if (!empty($haspay)) {
+            if ($haspay == '1') {
+                $condition['haspay'] = array('exp', " not   exists (select 1 from Center_CheckOut where sMemberID = member_id  )  ");
+            } else if ($haspay == '2') {
+                $condition['haspay'] = array('exp', "  exists (select 1 from Center_CheckOut where sMemberID = member_id  )  ");
+                $order = '(select max(dCO_Date) from Center_CheckOut where sMemberID = member_id ) desc';
+            }
+        }
+
+        $condition['status'] = array('exp', " dCreateDate is  not null and dCreateDate < convert(date, dateadd($dateunit,-$sleepnum,getdate())) and  not exists (select 1 from Center_CheckOut where sMemberID = member_id and  dCO_Date >= convert(date, dateadd($dateunit,-$sleepnum,getdate())) )   ");
+
+        /**
+         * 排序
+         */
+//		$order = trim ( $_GET ['search_sort'] );
+        if (empty ($order)) {
+            $order = 'member_id desc';
+        }
+        $member_list = $model_member->getMemberList($condition, $field, 10, $order);
+        /**
+         * 整理会员信息
+         */
+        if (is_array($member_list)) {
+            foreach ($member_list as $k => $v) {
+                $member_list [$k] ['member_time'] = $v ['member_time'] ? date('Y-m-d H:i:s', $v ['member_time']) : '';
+                $member_list [$k] ['member_login_time'] = $v ['member_login_time'] ? date('Y-m-d H:i:s', $v ['member_login_time']) : '';
+            }
+        }
+
+
+        Tpl::output('member_id', trim($_GET ['member_id']));
+        Tpl::output('search_sort', trim($_GET ['search_sort']));
+        Tpl::output('search_field_name', trim($_GET ['search_field_name']));
+        Tpl::output('search_field_value', trim($_GET ['search_field_value']));
+        Tpl::output('member_list', $member_list);
+        Tpl::output('page', $model_member->showpage());
+        Tpl::showpage('healthplatform.birthday');
+    }
+
 
 
 }

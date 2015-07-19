@@ -597,6 +597,11 @@
                 $('#formSearch').submit();
             }
         });
+        $("#formSearch input").keypress(function(event){
+            if(event.keyCode==13){
+                $('#ncsubmit').click();
+            }
+        });
         //导出
         $('#ncexport').click(function () {
             $('input[name="op"]').val('changeprice');

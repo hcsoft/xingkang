@@ -49,7 +49,13 @@
                         <option value="2" <?php if ('2' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康钻卡</option>
                     </select>
                 </td>
-
+                <td>是否建档</td>
+                <td><select name="hasfile">
+                        <option value="">全部</option>
+                        <option value="1" <?php if ('1' == $_GET['hasfile']){ ?>selected<?php } ?>>有健康档案</option>
+                        <option value="-1" <?php if ('-1' == $_GET['hasfile']){ ?>selected<?php } ?>>无健康档案</option>
+                    </select>
+                </td>
 
                 <td>
                     排序字段：
@@ -357,6 +363,11 @@
         $('#ncsubmit').click(function () {
             $('input[name="op"]').val('member');
             $('#formSearch').submit();
+        });
+        $("#formSearch input").keypress(function(event){
+            if(event.keyCode==13){
+                $('#ncsubmit').click();
+            }
         });
         $("#psresetdialog").dialog({
             resizable: false,

@@ -360,6 +360,11 @@
             console.log(sumtypes);
             $('#formSearch').submit();
         });
+		$("#formSearch input").keypress(function(event){
+			if(event.keyCode==13){
+				$('#ncsubmit').click();
+			}
+		});
         
     });
     function makechecked(arr){

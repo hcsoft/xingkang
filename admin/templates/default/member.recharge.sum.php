@@ -239,6 +239,11 @@
             $("#checked").val(makechecked(checked));
             $('#formSearch').submit();
         });
+        $("#formSearch input").keypress(function(event){
+            if(event.keyCode==13){
+                $('#ncsubmit').click();
+            }
+        });
         $('#ncexport').click(function () {
             $("#export").val('true');
             var sumtypes =$(":checkbox[name='sumtype[]'][checked]");

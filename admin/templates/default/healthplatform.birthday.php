@@ -3,16 +3,19 @@
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>呼叫中心</h3>
+            <h3>顾客生日提醒</h3>
             <ul class="tab-base">
-                <li><a href="index.php?act=healthplatform&op=call&status=99"><span>全部</span></a>
+                <li><a href="index.php?act=healthplatform&op=birthday&dayrange=99"
+                       class="<?php if (!$_GET['dayrange'] || $_GET['dayrange'] == '99') echo 'current'; ?>"><span>全部</span></a>
                 </li>
-                <li><a href="index.php?act=healthplatform&op=call&status=1"><span>待核实</span></a></li>
-                <li><a href="index.php?act=healthplatform&op=call&status=2"><span>真档</span></a></li>
-                <li><a href="index.php?act=healthplatform&op=call&status=3"><span>假档</span></a></li>
-                <li><a href="index.php?act=healthplatform&op=call&status=4"><span>未接电话</span></a></li>
-                <li><a href="index.php?act=healthplatform&op=calllog&status=5"
-                       class="current"><span>回访日志</span></a></li>
+                <li><a href="index.php?act=healthplatform&op=birthday&dayrange=1"
+                       class="<?php if ($_GET['dayrange'] == '1') echo 'current'; ?>"><span>今天</span></a></li>
+                <li><a href="index.php?act=healthplatform&op=birthday&dayrange=2"
+                       class="<?php if ($_GET['dayrange'] == '2') echo 'current'; ?>"><span>明天</span></a></li>
+                <li><a href="index.php?act=healthplatform&op=birthday&dayrange=3"
+                       class="<?php if ($_GET['dayrange'] == '3') echo 'current'; ?>"><span>一周内</span></a></li>
+                <li><a href="index.php?act=healthplatform&op=birthday&dayrange=4"
+                       class="<?php if ($_GET['dayrange'] == '4') echo 'current'; ?>"><span>30天内</span></a></li>
             </ul>
         </div>
     </div>
@@ -24,83 +27,78 @@
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
-                <th><label>选择机构</label></th>
-                <td colspan="1"><select name="orgids[]" id="orgids" class="orgSelect" multiple>
-                        <?php
-                        $orgids = $_GET['orgids'];
-                        if (!isset($orgids)) {
-                            $orgids = array();
-                        }
-                        foreach ($output['treelist'] as $k => $v) {
-                            ?>
-                            <option value="<?php echo $v->id; ?>"
-                                    <?php if (in_array($v->id, $orgids)){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
-                        <?php } ?>
-                    </select></td>
-                </td>
-                <td>会员卡号</td>
-                <td><input type="text" value="<?php echo $output['member_id']; ?>" name="member_id"
-                           class="txt"></td>
-                <td>卡类型</td>
-                <td><select name="cardtype">
-                        <option value="">全部</option>
-                        <option value="0" <?php if ('0' == $_GET['cardtype']){ ?>selected<?php } ?>>普通卡</option>
-                        <option value="1" <?php if ('1' == $_GET['cardtype']){ ?>selected<?php } ?>>储值卡</option>
-                    </select>
-                </td>
-                <td>卡级别</td>
-                <td><select name="cardgrade">
-                        <option value="">全部</option>
-                        <option value="0" <?php if ('0' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康卡</option>
-                        <option value="1" <?php if ('1' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康金卡</option>
-                        <option value="2" <?php if ('2' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康钻卡</option>
-                    </select>
-                </td>
-                <td>是否建档</td>
-                <td><select name="hasfile">
-                        <option value="">全部</option>
-                        <option value="1" <?php if ('1' == $_GET['hasfile']){ ?>selected<?php } ?>>有健康档案</option>
-                        <option value="-1" <?php if ('-1' == $_GET['hasfile']){ ?>selected<?php } ?>>无健康档案</option>
-                    </select>
-                </td>
+                <td style="line-height: 35px;">
+                    <span class="nowrap">
+                        <label>选择机构:</label>
+                        <select name="orgids[]" id="orgids" class="orgSelect" multiple>
+                            <?php
+                            $orgids = $_GET['orgids'];
+                            if (!isset($orgids)) {
+                                $orgids = array();
+                            }
+                            foreach ($output['treelist'] as $k => $v) {
+                                ?>
+                                <option value="<?php echo $v->id; ?>"
+                                        <?php if (in_array($v->id, $orgids)){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
+                            <?php } ?>
+                        </select>
+                    </span>
+                    <span class="nowrap">
+                        <label>卡类型:</label>
+                        <select name="cardtype">
+                            <option value="">全部</option>
+                            <option value="0" <?php if ('0' == $_GET['cardtype']){ ?>selected<?php } ?>>普通卡</option>
+                            <option value="1" <?php if ('1' == $_GET['cardtype']){ ?>selected<?php } ?>>储值卡</option>
+                        </select>
+                    </span>
+                    <span class="nowrap">
+                        <label>卡级别:</label>
+                        <select name="cardgrade">
+                            <option value="">全部</option>
+                            <option value="0" <?php if ('0' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康卡</option>
+                            <option value="1" <?php if ('1' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康金卡</option>
+                            <option value="2" <?php if ('2' == $_GET['cardgrade']){ ?>selected<?php } ?>>健康钻卡</option>
+                        </select>
+                    </span>
+                    <span class="nowrap">
+                        <label>会员卡号:</label>
+                        <input type="text" value="<?php echo $output['member_id']; ?>" name="member_id"
+                                   class="txt">
+                    </span>
+                <span class="nowrap">
+                    <label>身份证号码:</label>
+                    <input type="text" value="<?php echo $_GET['idnumber']; ?>" name="idnumber"
+                           class="txt">
+                </span>
+                <span class="nowrap">
+                    <label>会员姓名:</label>
+                    <input type="text" value="<?php echo $_GET['name']; ?>" name="name"
+                           class="txt">
+                </span>
+                <span class="nowrap">
+                    <label>电话:</label>
+                    <input type="text" value="<?php echo $_GET['tel']; ?>" name="tel"
+                           class="txt">
+                </span>
 
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <table>
-                        <tr>
-                            <td>
-                                身份证号码:
-                                <input type="text" value="<?php echo $_GET['idnumber']; ?>" name="idnumber"
-                                       class="txt">
-                            </td>
-                            <td>
-                                会员姓名:
-                                <input type="text" value="<?php echo $_GET['name']; ?>" name="name"
-                                       class="txt">
-                            </td>
-                            <td>
-                                电话:
-                                <input type="text" value="<?php echo $_GET['tel']; ?>" name="tel"
-                                       class="txt">
-                            </td>
-                            <td>
-                                生日:
-                                <input type="text" value="<?php echo $_GET['birthday']; ?>" name="birthday"
-                                       class="txt date">
-                            </td>
-                            <td>
-                                建卡日期:
-                                <input type="text" value="<?php echo $_GET['createcard_begin']; ?>" name="createcard_begin"
-                                       class="txt date ">至
-                                <input type="text" value="<?php echo $_GET['createcard_end']; ?>" name="createcard_end"
-                                       class="txt date">
-                            </td>
+                <span class="nowrap">
+                    <label>生日:</label>
+                    <input type="text" value="<?php echo $_GET['birthday_begin']; ?>" name="birthday_begin"
+                           class="txt date">至
+                    <input type="text" value="<?php echo $_GET['birthday_end']; ?>" name="birthday_end"
+                           class="txt date">
+                </span>
+                <span class="nowrap">
+                    <label>建卡日期:</label>
+                    <input type="text" value="<?php echo $_GET['createcard_begin']; ?>"
+                           name="createcard_begin"
+                           class="txt date ">至
+                    <input type="text" value="<?php echo $_GET['createcard_end']; ?>" name="createcard_end"
+                           class="txt date">
+                </span>
+                <span class="nowrap"><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
+                       title="<?php echo $lang['nc_query']; ?>">&nbsp;</a></span>
 
-                            <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
-                                   title="<?php echo $lang['nc_query']; ?>">&nbsp;</a></td>
-                        </tr>
-                    </table>
                 </td>
             </tr>
             </tbody>
@@ -121,6 +119,7 @@
             src="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.min.js"></script>
     <script>
         $(function () {
+            $('input.date').datepicker({dateFormat: 'yy-mm-dd', constrainInput: false}).removeAttr('readonly');
             //生成机构下拉
             function orgtext(n1, n2, list) {
                 var texts = [];
@@ -160,20 +159,17 @@
                 <th>卡号</th>
                 <th>姓名</th>
                 <th>性别</th>
-                <th>卡类型</th>
                 <th>出生日期</th>
                 <th>手机</th>
                 <th>联系电话</th>
                 <th>地址</th>
                 <th>身份证</th>
+                <th>末次消费日期</th>
+                <th>末次消费地点</th>
+                <th>储值余额</th>
+                <th>赠送余额</th>
+                <th>消费积分</th>
                 <th>建卡日期</th>
-                <th>回访日期</th>
-                <th>录入日期</th>
-                <th>修改内容</th>
-                <th>回访结果</th>
-                <th>回访原因</th>
-                <th>备注</th>
-                <th>操作</th>
             </tr>
             <tbody>
             <?php if (!empty($output['member_list']) && is_array($output['member_list'])) { ?>
@@ -187,11 +183,6 @@
                             } elseif ($v['member_sex'] == 2) {
                                 echo '女';
                             } ?></td>
-                        <td class=""><?php if ($v['cardtype'] == '0') {
-                                echo '普通卡';
-                            } elseif ($v['cardtype'] == '1') {
-                                echo '储值卡';
-                            } ?></td>
                         <td class="nowrap"><?php echo substr($v['member_birthday'], 0, 10); ?></td>
                         <td class="nowrap"><span
                                 style="display: inline-block;color:blue;"><?php echo $v['Mobile']; ?></span></td>
@@ -199,37 +190,24 @@
                                 style="display: inline-block;color:blue;"><?php echo $v['sLinkPhone']; ?></span></td>
                         <td class="nowrap"><?php echo $v['sAddress']; ?></td>
                         <td class="nowrap"><?php echo $v['sIDCard']; ?></td>
+                        <td class="nowrap"><?php echo substr($v['lastdate'], 0, 10); ?></td>
+                        <td class=""><?php echo $v['LastPayOrgName']; ?></td>
+                        <td class="nowrap"><?php echo $v['available_predeposit']; ?></td>
+                        <td class="nowrap"><?php echo number_format($v['fConsumeBalance'], 2); ?></td>
+                        <td class="nowrap"><?php echo $v['member_points']; ?></td>
                         <td class="nowrap"><?php echo substr($v['dCreateDate'], 0, 10); ?></td>
-                        <td class="nowrap"><?php echo substr($v['spotdate'], 0, 10); ?></td>
-                        <td class="nowrap"><?php echo substr($v['inputdate'], 0, 10); ?></td>
-                        <td class="align-left">
-                            <?php echo $v['changestr']; ?>
-                        </td>
-                        <td class="align-left">
-                            <?php echo $v['call_status']; ?>
-                        </td>
-                        <td class="align-left">
-                            <?php echo $v['result']; ?>
-                        </td>
-                        <td class="align-left">
-                            <?php echo $v['remark']; ?>
-                        </td>
-                        <td class="align-center">
-                            <a href="javascript:void(0)"
-                               onclick="showdetail('<?php echo htmlentities(json_encode($v),ENT_QUOTES ) ?>',this)">回访</a>
-                        </td>
                     </tr>
                 <?php } ?>
             <?php } else { ?>
                 <tr class="no_data">
-                    <td colspan="18"><?php echo $lang['nc_no_record'] ?></td>
+                    <td colspan="15"><?php echo $lang['nc_no_record'] ?></td>
                 </tr>
             <?php } ?>
             </tbody>
             <tfoot class="tfoot">
             <?php if (!empty($output['member_list']) && is_array($output['member_list'])) { ?>
                 <tr>
-                    <td colspan="18">
+                    <td colspan="16">
                         <div class="pagination"> <?php echo $output['page']; ?> </div>
                     </td>
                 </tr>
@@ -281,7 +259,7 @@
     }
 
     p.change > input {
-        width: 150px;
+        width: 100px;
     }
 
     p.change > span, p.change > input {
@@ -347,9 +325,9 @@
 
                 <p class="change">
                     <span>原身份证号：</span>
-                    <input id="oldidcard" name="oldidcard"  style="width:150px;" readonly type="text">
+                    <input id="oldidcard" name="oldidcard" readonly type="text">
                     <span title="留空表示不修改">新身份证号:</span>
-                    <input placeholder="留空表示不修改"   style="width:150px;" title="留空表示不修改" id="newidcard" name="newidcard" type="text">
+                    <input placeholder="留空表示不修改" title="留空表示不修改" id="newidcard" name="newidcard" type="text">
                 </p>
 
                 <p class="change">
@@ -374,16 +352,21 @@
       href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
 <script>
     $(function () {
-        $('input.date').datepicker({dateFormat: 'yy-mm-dd',constrainInput:false}).removeAttr('readonly');
         $('#ncsubmit').click(function () {
-            $('input[name="op"]').val('calllog');
+            $('input[name="op"]').val('birthday');
             $('#formSearch').submit();
+        });
+
+        $("#formSearch input").keypress(function(event){
+            if(event.keyCode==13){
+                $('#ncsubmit').click();
+            }
         });
 
         $("#detaildialog").dialog({
             resizable: false,
             maxHeight: 200,
-            width: 560,
+            width: 500,
             modal: true,
             autoOpen: false,
             close: function () {
