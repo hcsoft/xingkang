@@ -913,8 +913,12 @@ class healthplatformControl extends SystemControl
         if (isset($_GET['name']) and $_GET['name'] != '') {
             $condition ['member_truename'] = array('like', '%' . $_GET['name'] . '%');
         }
-        if (isset($_GET['birthday']) and $_GET['birthday'] != '') {
-            $condition ['member_birthday'] = $_GET['birthday'];
+        if (isset($_GET['birthday_begin']) and $_GET['birthday_begin'] != '') {
+            $condition ['birthday_begin'] =  array('exp' , ' dbo.birthday( member_birthday ) >= dbo.birthday( '. $_GET['birthday_begin']); ;
+        }
+
+        if (isset($_GET['birthday_end']) and $_GET['birthday_end'] != '') {
+            $condition ['birthday_end'] =  array('exp' , '  dbo.birthday( member_birthday ) <= dbo.birthday( '. $_GET['birthday_end']); ;
         }
 
         if (!empty($_GET['dayrange'])){
