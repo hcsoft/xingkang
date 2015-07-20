@@ -998,19 +998,7 @@ class healthplatformControl extends SystemControl
         }
 
         $field = '*, (select max(dCO_Date) from Center_CheckOut where sMemberID = member_id ) lastdate ';
-        $sleepunit = $_REQUEST['sleepunit'];
-        if ($sleepunit == '1') {
-            $dateunit = 'year';
-        } else if ($sleepunit == '3') {
-            $dateunit = 'day';
-        } else {
-            $dateunit = 'month';
-        }
-        $sleepnum = $_REQUEST['sleepnum'];
-        if (empty($sleepnum)) {
-            $sleepnum = '40';
-            $_GET['sleepnum'] = 40;
-        }
+
 
         $haspay = $_REQUEST['haspay'];
         $order = ' member_id desc ';
@@ -1023,7 +1011,7 @@ class healthplatformControl extends SystemControl
             }
         }
 
-        $condition['status'] = array('exp', " dCreateDate is  not null and dCreateDate < convert(date, dateadd($dateunit,-$sleepnum,getdate())) and  not exists (select 1 from Center_CheckOut where sMemberID = member_id and  dCO_Date >= convert(date, dateadd($dateunit,-$sleepnum,getdate())) )   ");
+//        $condition['status'] = array('exp', " dCreateDate is  not null and dCreateDate < convert(date, dateadd($dateunit,-$sleepnum,getdate())) and  not exists (select 1 from Center_CheckOut where sMemberID = member_id and  dCO_Date >= convert(date, dateadd($dateunit,-$sleepnum,getdate())) )   ");
 
         /**
          * 排序
