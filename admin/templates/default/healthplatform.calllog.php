@@ -194,7 +194,7 @@
                                 echo '储值卡';
                             } ?></td>
                         <td class="nowrap"><?php echo substr($v['member_birthday'], 0, 10); ?></td>
-                        <td class="nowrap"><?php echo $v['HealthCardID']; ?></td>
+                        <td class="nowrap"><?php echo $v['FileNo']; ?></td>
                         <td class="nowrap"><span
                                 style="display: inline-block;color:blue;"><?php echo $v['Mobile']; ?></span></td>
                         <td class="nowrap"><span

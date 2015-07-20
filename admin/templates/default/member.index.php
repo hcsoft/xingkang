@@ -213,7 +213,7 @@
 
                             <p class="smallfont">医保卡:&nbsp;<?php echo $v['MediCardID']; ?></p>
 
-                            <p class="smallfont">健康档案:&nbsp;<?php echo $v['HealthCardID']; ?></p>
+                            <p class="smallfont">健康档案:&nbsp;<?php echo $v['FileNo']; ?></p>
                         </td>
 
                         <td><p class="name">卡类型: <?php if ($v['CardType'] == 0) {
