@@ -167,11 +167,12 @@ class communityControl extends SystemControl
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
-        $sql = 'from Center_CheckOut a  left join Center_ClinicLog log on a.sLogKey = log.ClinicKey  and a.orgid = log.orgid, Center_codes ico, Center_codes gather,
+        $sql = 'from Center_CheckOut a  left join Center_ClinicLog log on a.sLogKey = log.ClinicKey  and a.orgid = log.orgid
+                left join  Center_codes gather on a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
+            , Center_codes ico,
             Center_codes state,
              Organization org
           where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
-           and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
            and  a.iCO_State = state.code and state.type=\'iCO_State\'
            and a.orgid = org.id  ';
 //        if (!isset($_GET['search_type'])) {
@@ -714,10 +715,10 @@ class communityControl extends SystemControl
         $page = new Page();
         $page->setEachNum(10);
         $page->setNowPage($_REQUEST["curpage"]);
-        $sql = 'from Center_CheckOut a  , Center_codes ico, Center_codes gather,Center_codes state,
+        $sql = 'from Center_CheckOut a  left join  Center_codes gather on  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
+           , Center_codes ico,Center_codes state,
             Organization org
           where a.iCO_Type = ico.code and ico.type=\'iCO_Type\'
-           and  a.iCO_GatherType = gather.code and gather.type=\'iCO_GatherType\'
            and  a.iCO_State = state.code and state.type=\'iCO_State\'
            and a.orgid = org.id ';
 
