@@ -74,7 +74,7 @@ class storehouseControl extends SystemControl
             $sql = $sql . ' and a.dBuy_Date < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
         }
         if ($_GET['search_goods_name'] != '') {
-            $sql = $sql . ' and good.goods_name like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+            $sql = $sql . ' and good.sDrug_TradeName like \'%' .  trim($_GET['search_goods_name']) . '%\'';
         }
         if (intval($_GET['search_commonid']) > 0) {
             $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']) ;
@@ -111,7 +111,7 @@ class storehouseControl extends SystemControl
                         storetype.name as 'iBuy_Type',
                         d.name OrgId,
                         c.name SaleOrgID,
-                        good.goods_name,
+                        good.sDrug_TradeName,
                         good.spec_name,
                         good.sdrug_unit,
                         custom.sCustomer_Name,
@@ -133,7 +133,7 @@ class storehouseControl extends SystemControl
                         storetype.name as 'iBuy_Type',
                         c.name OrgId,
                         a.iDrug_ID,
-                        good.goods_name,
+                        good.sDrug_TradeName,
                         good.spec_name,
                         good.sdrug_unit,
                         custom.sCustomer_Name,
@@ -151,7 +151,7 @@ class storehouseControl extends SystemControl
                         null as iBuy_Type,
                         null as OrgId,
                         null as iDrug_ID,
-                        null as goods_name,
+                        null as sDrug_TradeName,
                         null as spec_name,
                         null as sdrug_unit,
                         null as sCustomer_Name,
@@ -280,7 +280,7 @@ class storehouseControl extends SystemControl
             'year' => ' year(a.dBuy_Date) as "year" ',
             'month' => ' left(convert(varchar,dBuy_Date,112),6) as  "month" ',
             'day' => ' convert(varchar,dBuy_Date,112) as "day" ',
-            'sDrug_TradeName' => ' goods.goods_name as "sDrug_TradeName"  ',
+            'sDrug_TradeName' => ' goods.sDrug_TradeName as "sDrug_TradeName"  ',
             'OrgID' => ' c.name as "OrgID" '
         );
         $config = array(0 => array('text' => '采购金额汇总',
@@ -370,7 +370,7 @@ class storehouseControl extends SystemControl
             $sql = $sql . ' and a.dBuy_Date < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
         }
         if ($_GET['search_goods_name'] != '') {
-            $sql = $sql . ' and goods.goods_name like \'%' .  trim($_GET['search_goods_name']) . '%\'';
+            $sql = $sql . ' and goods.sDrug_TradeName like \'%' .  trim($_GET['search_goods_name']) . '%\'';
         }
         if (intval($_GET['search_commonid']) > 0) {
             $sql = $sql . ' and goods.goods_commonid = ' . intval($_GET['search_commonid']) ;

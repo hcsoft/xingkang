@@ -174,7 +174,7 @@
                             <?php echo $v->iDrug_ID ?>
                         </td>
                         <td class=" align-left" nowrap>
-                            <?php echo $v->goods_name ?>
+                            <?php echo $v->sDrug_TradeName ?>
                         </td>
                         <td class=" align-left" nowrap>
                             <?php echo $v->spec_name ?>
