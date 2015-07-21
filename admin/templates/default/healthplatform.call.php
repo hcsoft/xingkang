@@ -312,6 +312,7 @@
         padding-left: 10px;
 
     }
+
 </style>
 
 <div id="detaildialog" title="回访">
@@ -339,11 +340,13 @@
 
                                                            rows="5"></textarea></p>
 
-            <p style="vertical-align: top;">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：<textarea style="color:blue;" id="remark" name="remark" value=""
-                                                         rows="5"></textarea></p>
+            <p style="vertical-align: top;">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：<textarea style="color:blue;display: inline-block;vertical-align: top;" id="remark" name="remark" value=""
+                                                         rows="5"></textarea>
 
-            <fieldset style="position: relative;padding:10px;margin-top:10px;">
-                <legend style="position:absolute;left:20px;background-color: #fff;top:-10px;padding:0 10px;font-weight: bold;">基本资料修改</legend>
+            </p>
+
+            <fieldset style="position: relative;padding:10px;margin-top:10px;line-height: 26px;">
+                <legend style="position:absolute;left:20px;background-color: #fff;top:-10px;padding:0 10px;font-weight: bold;line-height: 19px;">基本资料修改</legend>
 
             <p class="change">
                 <span>原姓名：</span>
@@ -358,7 +361,14 @@
                 <span title="留空表示不修改">新电话:</span>
                 <input placeholder="留空表示不修改" title="留空表示不修改" id="newtel" name="newtel" type="text">
             </p>
-
+            <p class="change">
+                <span>原性别：</span>
+                <label><input type="radio" name="oldsex" value="1">男</label>
+                <label><input type="radio" name="oldsex" value="2">女</label>
+                <span title="留空表示不修改">新性别:</span>
+                <label><input type="radio" name="newsex" value="1">男</label>
+                <label><input type="radio" name="newsex" value="2">女</label>
+            </p>
             <p class="change">
                 <span>原生日：</span>
                 <input id="oldbirthday" name="oldbirthday" readonly
@@ -455,7 +465,8 @@
             'oldtel': obj.sLinkPhone,
             'oldidcard': obj.sIDCard,
             'oldid': obj.member_id,
-            'oldbirthday': obj.member_birthday.substring(0, 10)
+            'oldbirthday': obj.member_birthday.substring(0, 10),
+            'oldsex':obj.member_sex
         }
         $("#detaildialog form").autofill(formdata);
         $("#callid").val(obj.member_id);

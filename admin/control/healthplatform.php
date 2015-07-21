@@ -347,6 +347,17 @@ class healthplatformControl extends SystemControl
                 $changelog['oldidcard'] = $_REQUEST["oldidcard"];
                 $changestr .= ',身份证由(' . $_REQUEST["oldidcard"] . ')改为(' . $newidcard . ')';
             }
+            //修改性别
+            $newsex = $_REQUEST["newsex"];
+            if (!empty($newsex)) {
+                $sql = " update shopnc_member set member_sex = '$newsex' where member_id = '$id'";
+                $conn->exec($sql);
+                $changelog['newsex'] = $newsex;
+                $changelog['oldsex'] = $_REQUEST["oldsex"];
+                $oldstr = $changelog['oldsex'] == '1' ? '男':'女';
+                $newstr = $changelog['newsex'] == '1' ? '男':'女';
+                $changestr .= ',性别由(' . $oldstr. ')改为(' . $newstr . ')';
+            }
             //修改会员卡号
             $newid = $_REQUEST["newid"];
             if (!empty($newid)) {
