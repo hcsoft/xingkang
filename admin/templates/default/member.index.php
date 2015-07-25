@@ -353,6 +353,9 @@
         <span class="datamsg">无数据!</span>
     </span>
 </div>
+<div id="indexdialog" title="健康服务索引">
+    <iframe classs="iframe" style="border:none;width:100%;height;100%;" src="_"></iframe>
+</div>
 
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"
@@ -396,7 +399,19 @@
                 }
             }
         });
-
+        $("#indexdialog").dialog({
+            resizable: false,
+            maxHeight: 800,
+            width: 1100,
+//            height:250,
+//            modal: true,
+            autoOpen: false,
+            buttons: {
+                "关闭": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
         $("#detaildialog").dialog({
             resizable: false,
             maxHeight: 200,
@@ -416,6 +431,10 @@
         $("#psresetdialog #cardid").val(id);
         $("#psresetdialog").dialog("option", "position", {my: "right top", at: "left bottom", of: $(elem)});
         $("#psresetdialog").dialog("open");
+    }
+    function showindex(src){
+        $("#indexdialog .iframe").attr("src",'/admin/index.php?act=dashboard&op=timeline')
+        $("#indexdialog").dialog("open");
     }
 
     function showdetail(objstr, elem) {
