@@ -56,6 +56,9 @@
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
+                <th><label for="search_commonid">商品编码</label></th>
+                <td><input type="text" value="<?php echo $_GET['search_commonid'] ?>" name="search_commonid"
+                           id="search_commonid" class="txt"/></td>
                 <th><label for="search_goods_name"> 商品名称</label></th>
                 <td><input type="text" value="<?php echo $_GET['search_goods_name']; ?>"
                            name="search_goods_name" id="search_goods_name" class="txt"></td>
@@ -70,11 +73,23 @@
 
             </tr>
             <tr>
-                <th><label for="search_commonid">商品编码</label></th>
-                <td><input type="text" value="<?php echo $_GET['search_commonid'] ?>" name="search_commonid"
-                           id="search_commonid" class="txt"/></td>
-                <th><label>选择机构</label></th>
-                <td colspan="3"><select name="orgids[]" id="orgids" class="orgSelect" multiple>
+
+                <th><label>配送机构</label></th>
+                <td colspan="1"><select name="sendorgids[]" id="sendorgids" class="orgSelect" multiple>
+                        <?php
+                        $sendorgids = $_GET['sendorgids'];
+                        if (!isset($sendorgids)) {
+                            $sendorgids = array();
+                        }
+                        foreach ($output['treelist'] as $k => $v) {
+                            ?>
+                            <option value="<?php echo $v->id; ?>"
+                                    <?php if (in_array($v->id, $sendorgids)){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
+                        <?php } ?>
+                    </select></td>
+                </td>
+                <th><label>制单机构</label></th>
+                <td colspan="1"><select name="orgids[]" id="orgids" class="orgSelect" multiple>
                         <?php
                         $orgids = $_GET['orgids'];
                         if (!isset($orgids)) {
@@ -87,6 +102,7 @@
                         <?php } ?>
                     </select></td>
                 </td>
+
                 <th><label>汇总类型</label></th>
                 <td colspan="1" id="sumtypetr">
                 </td>
@@ -194,7 +210,7 @@
             return texts.join('<br>');
         }
 
-        $("#orgids").multiselect(
+        $(".orgSelect").multiselect(
             {
                 checkAllText: '选择全部',
                 uncheckAllText: '清除选择',

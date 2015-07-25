@@ -55,7 +55,21 @@
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
-                <th><label>选择机构</label></th>
+                <th><label>配送机构</label></th>
+                <td colspan="1"><select name="sendorgids[]" id="sendorgids" class="orgSelect" multiple>
+                        <?php
+                        $sendorgids = $_GET['sendorgids'];
+                        if (!isset($sendorgids)) {
+                            $sendorgids = array();
+                        }
+                        foreach ($output['treelist'] as $k => $v) {
+                            ?>
+                            <option value="<?php echo $v->id; ?>"
+                                    <?php if (in_array($v->id, $sendorgids)){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
+                        <?php } ?>
+                    </select></td>
+                </td>
+                <th><label>制单机构</label></th>
                 <td colspan="1"><select name="orgids[]" id="orgids" class="orgSelect" multiple>
                         <?php
                         $orgids = $_GET['orgids'];
@@ -69,6 +83,9 @@
                         <?php } ?>
                     </select></td>
                 </td>
+
+            </tr>
+            <tr>
                 <th><label for="query_start_time">发生日期</label></th>
                 <td><input class="txt date" type="text" value="<?php echo $_GET['query_start_time']; ?>"
                            id="query_start_time" name="query_start_time">
@@ -236,7 +253,7 @@
             return texts.join('<br>');
         }
 
-        $("#orgids").multiselect(
+        $(".orgSelect").multiselect(
             {
                 checkAllText: '选择全部',
                 uncheckAllText: '清除选择',

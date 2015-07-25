@@ -81,16 +81,14 @@ class storehouseControl extends SystemControl
         }
 
         if ($_GET['orgids']) {
-            if ($_GET['search_type'] == 0 || $_GET['search_type'] == 1) {
-                $orgarray = array();
-                foreach ($_GET['orgids'] as $v) {
-                    $orgarray[] = -($v + 1000);
-                }
-                $sql = $sql . ' and a.SaleOrgID in (' . implode(',', $orgarray) . ' )';
-            } else {
-                $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+            $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+        }
+        if ($_GET['sendorgids']) {
+            $orgarray = array();
+            foreach ($_GET['orgids'] as $v) {
+                $orgarray[] = -($v + 1000);
             }
-
+            $sql = $sql . ' and a.SaleOrgID in (' . implode(',', $orgarray) . ' )';
         }
         //处理树的参数
         $checkednode = $_GET['checkednode'];
@@ -377,16 +375,26 @@ class storehouseControl extends SystemControl
         }
 
         //处理树的参数
+//        if ($_GET['orgids']) {
+//            if ($_GET['search_type'] == 0 || $_GET['search_type'] == 1) {
+//                $orgarray = array();
+//                foreach ($_GET['orgids'] as $v) {
+//                    $orgarray[] = -($v + 1000);
+//                }
+//                $sql = $sql . ' and a.SaleOrgID in (' . implode(',', $orgarray) . ' )';
+//            } else {
+//                $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+//            }
+//        }
         if ($_GET['orgids']) {
-            if ($_GET['search_type'] == 0 || $_GET['search_type'] == 1) {
-                $orgarray = array();
-                foreach ($_GET['orgids'] as $v) {
-                    $orgarray[] = -($v + 1000);
-                }
-                $sql = $sql . ' and a.SaleOrgID in (' . implode(',', $orgarray) . ' )';
-            } else {
-                $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+            $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+        }
+        if ($_GET['sendorgids']) {
+            $orgarray = array();
+            foreach ($_GET['orgids'] as $v) {
+                $orgarray[] = -($v + 1000);
             }
+            $sql = $sql . ' and a.SaleOrgID in (' . implode(',', $orgarray) . ' )';
         }
 
         $search_type = $_GET['search_type'];
