@@ -354,7 +354,7 @@
     </span>
 </div>
 <div id="indexdialog" title="健康服务索引">
-    <iframe classs="iframe" style="border:none;width:100%;height;100%;" src="_"></iframe>
+    <iframe class="iframe" style="border:none;width:100%;height;100%;" src="_"></iframe>
 </div>
 
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
