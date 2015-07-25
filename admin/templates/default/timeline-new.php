@@ -15,7 +15,7 @@
             <td class="w24"></td>
             <td class="w48 picture">
                 <div class="size-44x44"><span class="thumb size-44x44"><i></i><img
-                            src="http://localhost/xingkang/data/upload/shop/common/default_user_portrait.gif?0.14009400 1433639342"
+                            src="<?php echo UPLOAD_SITE_URL?>/shop/common/default_user_portrait.gif?0.14009400 1433639342"
                             onload="javascript:DrawImage(this,44,44);" width="44" height="44"></span></div>
             </td>
             <td>

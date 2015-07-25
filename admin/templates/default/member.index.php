@@ -354,7 +354,7 @@
     </span>
 </div>
 <div id="indexdialog" title="健康服务索引">
-    <iframe class="iframe" style="border:none;width:100%;height;700px;" src="_"></iframe>
+    <iframe class="iframe" style="border:none;width:100%;height;100%;" ></iframe>
 </div>
 
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
@@ -433,8 +433,12 @@
         $("#psresetdialog").dialog("open");
     }
     function showindex(src){
-        $("#indexdialog .iframe").attr("src",'/admin/index.php?act=dashboard&op=timeline')
+        $("#indexdialog").dialog("option", {width:$(window).width()-50,height:$(window).height()-50});
+
         $("#indexdialog").dialog("open");
+        $("#indexdialog .iframe").attr("src",'<?php echo ADMIN_SITE_URL ;?>/index.php?act=dashboard&op=timeline')
+        $("#indexdialog .iframe").css("height",'100%')
+
     }
 
     function showdetail(objstr, elem) {
