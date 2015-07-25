@@ -85,7 +85,7 @@ class storehouseControl extends SystemControl
         }
         if ($_GET['sendorgids']) {
             $orgarray = array();
-            foreach ($_GET['orgids'] as $v) {
+            foreach ($_GET['sendorgids'] as $v) {
                 $orgarray[] = -($v + 1000);
             }
             $sql = $sql . ' and a.SaleOrgID in (' . implode(',', $orgarray) . ' )';
@@ -391,7 +391,7 @@ class storehouseControl extends SystemControl
         }
         if ($_GET['sendorgids']) {
             $orgarray = array();
-            foreach ($_GET['orgids'] as $v) {
+            foreach ($_GET['sendorgids'] as $v) {
                 $orgarray[] = -($v + 1000);
             }
             $sql = $sql . ' and a.SaleOrgID in (' . implode(',', $orgarray) . ' )';
