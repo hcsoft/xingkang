@@ -401,8 +401,8 @@
         });
         $("#indexdialog").dialog({
             resizable: false,
-            maxHeight: 800,
-            width: 1100,
+            height: 800,
+            width: 1400,
 //            height:250,
 //            modal: true,
             autoOpen: false,
