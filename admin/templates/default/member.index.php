@@ -257,7 +257,7 @@
                             <a href="javascript:void(0)"
                                onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">充值消费明细</a><br>
                             <a href="javascript:void(0)" onclick="showpsreset('<?php echo $v['member_id'] ?>',this)">密码重置</a><br>
-                            <a href="/admin/index.php?act=dashboard&op=timeline">健康服务索引</a>
+                            <a href="/admin/index.php?act=dashboard&op=timeline" target="_blank">健康服务索引</a>
                             <!--<a
                                 href="index.php?act=member&op=member_edit&member_id=<?php echo $v['member_id']; ?>"><?php echo $lang['nc_edit'] ?></a>
                             | <a
