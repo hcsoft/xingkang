@@ -361,7 +361,7 @@ class storehouseControl extends SystemControl
                     left join Center_Customer custom on a.iCustomer_ID = custom.iCustomer_ID
                     left join  Organization c on a.SaleOrgID = -( c.id +1000)
                     left join Organization d on a.orgid = d.id
-                    left join shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
+                    left join shopnc_goods_common goods  on a.iDrug_ID = good.goods_commonid
                     ,Center_codes storetype
                      where a.iBuy_Type = storetype.code and storetype.type=\'iBuy_Type\' ' ;
 
