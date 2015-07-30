@@ -233,6 +233,7 @@
                         </td>
                         <td>
                         <p class="name">建卡时间: <?php echo substr($v['dCreateDate'], 0, 10); ?></p>
+                        <p class="name">建卡机构: <?php echo $output['treelist'][$v['CreateOrgID']]; ?></p>
 
                         <p class="name">办卡渠道: <?php echo $v['GetWay']; ?></p>
 
@@ -330,7 +331,6 @@
         <table>
             <thead>
             <tr>
-
                 <th>数据类型</th>
                 <th>id</th>
                 <th>业务日期</th>

@@ -20,10 +20,13 @@ class memberControl extends SystemControl {
 		$treesql = 'select  b.id , b.name,b.districtnumber,b.parentid pId from map_org_wechat a, Organization b where a.orgid = b.id ';
 		$treestmt = $conn->query ( $treesql );
 		$this->treedata_list = array ();
+		$orgmap = array();
 		while ( $row = $treestmt->fetch ( PDO::FETCH_OBJ ) ) {
 			array_push ( $this->treedata_list, $row );
+			$orgmap[$row->id] = $row->name;
 		}
 		Tpl::output ( 'treelist', $this->treedata_list );
+		Tpl::output ( 'orgmap', $orgmap );
 	}
 	
 	/**
