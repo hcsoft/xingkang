@@ -55,10 +55,13 @@ class storehouseControl extends SystemControl
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
-        $sql = 'from Center_Buy a  left join Center_Customer custom on a.iCustomer_ID = custom.iCustomer_ID ,  Organization c, Organization d,shopnc_goods_common good ,
-            Center_codes storetype
-            where  a.SaleOrgID = -( c.id +1000) and a.orgid = d.id and a.iDrug_ID = good.goods_commonid
-             and a.iBuy_Type = storetype.code and storetype.type=\'iBuy_Type\' ';
+        $sql = 'from Center_Buy a
+                left join Center_Customer custom on a.iCustomer_ID = custom.iCustomer_ID
+                left join  Organization c on a.SaleOrgID = -( c.id +1000)
+                left join Organization d on a.orgid = d.id
+                left join shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
+                ,Center_codes storetype
+                 where   a.iBuy_Type = storetype.code and storetype.type=\'iBuy_Type\'  ';
         if (!isset($_GET['search_type'])) {
             $_GET['search_type'] = '1';
         }
@@ -354,11 +357,13 @@ class storehouseControl extends SystemControl
         $page = new Page();
         $page->setEachNum(10);
         $page->setNowPage($_REQUEST["curpage"]);
-        $sql = 'from Center_Buy a   ,
-                    Organization c, Organization d ,
-                      shopnc_goods_common goods,Center_Customer custom ,
-                      Center_codes storetype  where  a.SaleOrgID = -( c.id +1000) and a.orgid = d.id  and a.iDrug_ID = goods.goods_commonid
-                and a.iCustomer_ID = custom.iCustomer_ID and a.iBuy_Type = storetype.code and storetype.type=\'iBuy_Type\'';
+        $sql = 'from Center_Buy a
+                    left join Center_Customer custom on a.iCustomer_ID = custom.iCustomer_ID
+                    left join  Organization c on a.SaleOrgID = -( c.id +1000)
+                    left join Organization d on a.orgid = d.id
+                    left join shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
+                    ,Center_codes storetype
+                     where a.iBuy_Type = storetype.code and storetype.type=\'iBuy_Type\' ' ;
 
         if ($_GET['query_start_time']) {
             $sql = $sql . ' and a.dBuy_Date >=\'' . $_GET['query_start_time'] . '\'';
