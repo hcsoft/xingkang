@@ -493,7 +493,7 @@ td.picture div { background:#FFF; float: left;/* if IE7/8/9*/ *text-align: cente
 .nobg{ background: transparent none no-repeat scroll 0 0 !important;}
 .space th { font-weight: 600; color: #329ED1; background-color: #F3FBFE;}
 table.search { margin: 12px 0 6px 4px;}
-
+table.search  td {white-space: nowrap}
 
 
 
