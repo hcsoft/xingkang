@@ -158,12 +158,12 @@ class memberControl extends SystemControl {
 		/**
 		 * 整理会员信息
 		 */
-		if (is_array ( $member_list )) {
-			foreach ( $member_list as $k => $v ) {
-				$member_list [$k] ['member_time'] = $v ['member_time'] ? date ( 'Y-m-d H:i:s', $v ['member_time'] ) : '';
-				$member_list [$k] ['member_login_time'] = $v ['member_login_time'] ? date ( 'Y-m-d H:i:s', $v ['member_login_time'] ) : '';
-			}
-		}
+//		if (is_array ( $member_list )) {
+//			foreach ( $member_list as $k => $v ) {
+//				$member_list [$k] ['member_time'] = $v ['member_time'] ? date ( 'Y-m-d H:i:s', $v ['member_time'] ) : '';
+//				$member_list [$k] ['member_login_time'] = $v ['member_login_time'] ? date ( 'Y-m-d H:i:s', $v ['member_login_time'] ) : '';
+//			}
+//		}
 		return array('list'=>$member_list,'md'=>$model_member);
 	}
 	/**
@@ -231,8 +231,8 @@ class memberControl extends SystemControl {
 				'CardGrade'=> array('0'=>'健康卡','1'=>'健康金卡','2'=>'健康钻卡'),
 				'CreateOrgID' => $this->orgmap,
 		];
-		Tpl::showpage ( 'member.index' );
-//		$this->exportxlsxbyObject($titles,$propertys,$propertymap,'会员信息',$member_list);
+//		Tpl::showpage ( 'member.index' );
+		$this->exportxlsxbyObject($titles,$propertys,$propertymap,'会员信息',$member_list);
 	}
 	
 	/**
