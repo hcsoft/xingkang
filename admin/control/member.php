@@ -20,20 +20,16 @@ class memberControl extends SystemControl {
 		$treesql = 'select  b.id , b.name,b.districtnumber,b.parentid pId from map_org_wechat a, Organization b where a.orgid = b.id ';
 		$treestmt = $conn->query ( $treesql );
 		$this->treedata_list = array ();
-		$orgmap = array();
+		$this->orgmap = array();
 		while ( $row = $treestmt->fetch ( PDO::FETCH_OBJ ) ) {
 			array_push ( $this->treedata_list, $row );
-			$orgmap[$row->id] = $row->name;
+			$this->orgmap[$row->id] = $row->name;
 		}
 		Tpl::output ( 'treelist', $this->treedata_list );
-		Tpl::output ( 'orgmap', $orgmap );
+		Tpl::output ( 'orgmap', $this->orgmap );
 	}
-	
-	/**
-	 * 会员管理
-	 */
-	public function memberOp() {
-		$lang = Language::getLangContent ();
+
+	private function  memberlist($flag = true){
 		$orderbys = array(
 			array('txt'=>'预存余额','col'=> ' available_predeposit '),
 			array('txt'=>'赠送余额','col'=> ' fConsumeBalance '),
@@ -46,7 +42,7 @@ class memberControl extends SystemControl {
 		if ($_GET['orgids']) {
 			$condition ['CreateOrgID'] = array (
 				'in',
-				 $_GET['orgids']
+				$_GET['orgids']
 			);
 		}
 
@@ -129,8 +125,8 @@ class memberControl extends SystemControl {
 //		}
 		if ($_GET ['member_id'] != '') {
 			$condition ['member_id'] = array (
-					'like',
-					'%' . trim ( $_GET ['member_id'] ) . '%' 
+				'like',
+				'%' . trim ( $_GET ['member_id'] ) . '%'
 			);
 		}
 		switch ($_GET ['search_state']) {
@@ -154,7 +150,11 @@ class memberControl extends SystemControl {
 		if (empty ( $order )) {
 			$order = 'member_id desc';
 		}
-		$member_list = $model_member->getMemberList ( $condition, '*', 10, $order );
+		if(empty($flag)){
+			$member_list = $model_member->getMemberList ( $condition, '*', 100000, $order );
+		}else{
+			$member_list = $model_member->getMemberList ( $condition, '*', 10, $order );
+		}
 		/**
 		 * 整理会员信息
 		 */
@@ -164,15 +164,74 @@ class memberControl extends SystemControl {
 				$member_list [$k] ['member_login_time'] = $v ['member_login_time'] ? date ( 'Y-m-d H:i:s', $v ['member_login_time'] ) : '';
 			}
 		}
-
-
+		return array('list'=>$member_list,'md'=>$model_member);
+	}
+	/**
+	 * 会员管理
+	 */
+	public function memberOp() {
+		$lang = Language::getLangContent ();
+		$data = $this->memberlist();
+		$member_list = $data['list'];
 		Tpl::output ( 'member_id', trim ( $_GET ['member_id'] ) );
 		Tpl::output ( 'search_sort', trim ( $_GET ['search_sort'] ) );
 		Tpl::output ( 'search_field_name', trim ( $_GET ['search_field_name'] ) );
 		Tpl::output ( 'search_field_value', trim ( $_GET ['search_field_value'] ) );
 		Tpl::output ( 'member_list', $member_list );
-		Tpl::output ( 'page', $model_member->showpage () );
+		Tpl::output ( 'page', $data['md']->showpage () );
 		Tpl::showpage ( 'member.index' );
+	}
+
+	public function member_exportOp(){
+		$data = $this->memberlist(false);
+		$member_list = $data['list'];
+		$titles = [
+			'序号',
+			'卡号',
+			'姓名',
+			'电话',
+			'地址',
+			'身份证',
+			'生日',
+			'医保卡',
+			'健康档案',
+			'卡类型',
+			'卡级别',
+			'建卡时间',
+			'建卡机构',
+			'办卡渠道',
+			'推荐人',
+			'末次消费日期',
+			'末次消费地点',
+			'储值余额',
+			'赠送余额',
+			'消费积分'];
+		$propertys = [
+			'member_id',
+			'member_truename',
+			'sLinkPhone',
+			'sAddress',
+			'sIDCard',
+			'member_birthday',
+			'MediCardID',
+			'FileNo',
+			'CardType',
+			'CardGrade',
+			'dCreateDate',
+			'CreateOrgID',
+			'GetWay',
+			'Referrer',
+			'LastPayDate',
+			'LastPayOrgName',
+			'available_predeposit',
+			'fConsumeBalance',
+			'member_points'];
+		$propertymap = [
+				'CardType'=> array('0'=>'普通卡','1'=>'储值卡'),
+				'CardGrade'=> array('0'=>'健康卡','1'=>'健康金卡','2'=>'健康钻卡'),
+				'CreateOrgID' => $this->orgmap,
+		];
+		$this->exportxlsxbyObject($titles,$propertys,$propertymap,'会员信息',$member_list);
 	}
 	
 	/**

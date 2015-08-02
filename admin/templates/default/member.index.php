@@ -107,6 +107,8 @@
                             </td>
                             <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                                    title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
+                                <a href="javascript:void(0);" id="ncexport" class="btn-export "
+                                   title="导出"></a>
                                 <?php if ($output['search_field_value'] != '' or $output['search_sort'] != '') { ?>
                                     <a href="index.php?act=member&op=member"
                                        class="btns "><span><?php echo $lang['nc_cancel_search'] ?></span></a>
@@ -368,6 +370,13 @@
             $('input[name="op"]').val('member');
             $('#formSearch').submit();
         });
+
+        $('#ncexport').click(function () {
+            $('input[name="op"]').val('member_export');
+            $('#formSearch').submit();
+        });
+
+
         $("#formSearch input").keypress(function(event){
             if(event.keyCode==13){
                 $('#ncsubmit').click();
