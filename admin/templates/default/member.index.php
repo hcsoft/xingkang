@@ -372,7 +372,7 @@
         });
 
         $('#ncexport').click(function () {
-            $('input[name="op"]').val('member_export');
+            $('input[name="op"]').val('mbdataexport');
             $('#formSearch').submit();
         });
 

@@ -44,7 +44,8 @@ $_limit =  array(
 		array('name'=>$lang['nc_s_snstrace'], 'op'=>null, 'act'=>'sns_strace'),
 		)),
 	array('name'=>$lang['nc_member'], 'child'=>array(
-		array('name'=>$lang['nc_member_manage'], 'op'=>null, 'act'=>'member'),
+		array('name'=>$lang['nc_member_manage'], 'op'=>'member', 'act'=>'member'),
+		array('name'=>'会员导出', 'op'=>'mbdataexport', 'act'=>'member'),
 		array('name'=>$lang['nc_member_notice'], 'op'=>null, 'act'=>'notice'),
 		array('name'=>$lang['nc_member_pointsmanage'], 'op'=>null, 'act'=>'points'),
 		array('name'=>$lang['nc_binding_manage'], 'op'=>null, 'act'=>'sns_sharesetting'),

@@ -182,7 +182,7 @@ class memberControl extends SystemControl {
 		Tpl::showpage ( 'member.index' );
 	}
 
-	public function member_exportOp(){
+	public function mbdataexportOp(){
 		$data = $this->memberlist(false);
 		$member_list = $data['list'];
 		$titles = [
@@ -231,7 +231,8 @@ class memberControl extends SystemControl {
 				'CardGrade'=> array('0'=>'健康卡','1'=>'健康金卡','2'=>'健康钻卡'),
 				'CreateOrgID' => $this->orgmap,
 		];
-		$this->exportxlsxbyObject($titles,$propertys,$propertymap,'会员信息',$member_list);
+		Tpl::showpage ( 'member.index' );
+//		$this->exportxlsxbyObject($titles,$propertys,$propertymap,'会员信息',$member_list);
 	}
 	
 	/**

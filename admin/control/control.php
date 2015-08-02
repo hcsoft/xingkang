@@ -107,7 +107,8 @@ class SystemControl{
 		//以下几项不需要验证
 		$tmp = array('index','dashboard','login','common','cms_base');
 		if (in_array($act,$tmp)) return true;
-
+		Log::record( $act, Log::SQL);
+		Log::record( json_encode( $permission), Log::SQL);
 		if (in_array($act,$permission) || in_array("$act.$op",$permission)){
 			return true;
 		}else{
@@ -117,6 +118,8 @@ class SystemControl{
 			}
 			//带前缀的都通过
 			foreach ($permission as $v) {
+				Log::record( "$act.$op", Log::SQL);
+				Log::record( $v.'_', Log::SQL);
 			    if (!empty($v) && strpos("$act.$op",$v.'_') !== false) {
 					return true;break;
 				}
@@ -356,8 +359,10 @@ class SystemControl{
 							$cellstr = strval($map[$v]);
 						}
 //						$cellstr=json_encode($metadata);
-						$sheet->setCellValue(chr($i+65).strval($rowindex),$cellstr);
-                    }
+//						$sheet->setCellValue(chr($i+65).strval($rowindex),$cellstr);
+						$sheet->setCellValueExplicit(chr($i+65).strval($rowindex),$cellstr,PHPExcel_Cell_DataType::TYPE_STRING);
+
+					}
                     $rowindex = $rowindex+1;
                 }
             }
@@ -394,7 +399,9 @@ class SystemControl{
             	$sheet->setCellValue(chr(65).strval($rowindex),strval($serial));
             	foreach($value as $i=>$v){
 					$cellstr = strval($v);
-					$sheet->setCellValue(chr($cellindex+65).strval($rowindex),$cellstr);
+//					$sheet->setCellValue(chr($cellindex+65).strval($rowindex),$cellstr);
+					$sheet->setCellValueExplicit(chr($cellindex+65).strval($rowindex),$cellstr,PHPExcel_Cell_DataType::TYPE_STRING);
+
 					$cellindex = $cellindex + 1;
             	}
          		$rowindex = $rowindex+1;
