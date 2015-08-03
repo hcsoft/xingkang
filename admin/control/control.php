@@ -118,8 +118,6 @@ class SystemControl{
 			}
 			//带前缀的都通过
 			foreach ($permission as $v) {
-				Log::record( "$act.$op", Log::SQL);
-				Log::record( $v.'_', Log::SQL);
 			    if (!empty($v) && strpos("$act.$op",$v.'_') !== false) {
 					return true;break;
 				}

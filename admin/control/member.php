@@ -880,7 +880,7 @@ class memberControl extends SystemControl {
 		Tpl::showpage ( 'member.recharge.sum' );
 	}
 
-	public function psresetOp()
+	public function member_psresetOp()
 	{
 		try {
 			$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
@@ -898,7 +898,7 @@ class memberControl extends SystemControl {
 
 
 
-	public function membermoneydetailOp(){
+	public function member_moneydetailOp(){
 		try {
 			$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 			$cardid = $_REQUEST['cardid1'];
