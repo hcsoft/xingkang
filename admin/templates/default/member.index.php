@@ -395,7 +395,7 @@
                 "确定重置": function () {
                     console.log($("#psresetdialog form").serialize());
                     $.ajax({
-                        url: "index.php?act=member&op=psreset",
+                        url: "index.php?act=member&op=member_psreset",
                         data: $("#psresetdialog form").serialize(), dataType: 'json', success: function (data) {
                             console.log(data);
                             if (data.success) {
@@ -456,7 +456,7 @@
         $("#cardid1").val(obj.member_id);
         $("#detaildialog .datamsg").html('正在查询....');
         $.ajax({
-            url: "index.php?act=member&op=membermoneydetail",
+            url: "index.php?act=member&op=member_moneydetail",
             data: $("#detaildialog form").serialize(), dataType: 'json', success: function (data) {
                 console.log(data);
                 if (data.data && data.data.length > 0) {
