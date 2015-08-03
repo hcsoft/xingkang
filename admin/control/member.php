@@ -877,6 +877,11 @@ class memberControl extends SystemControl {
 		// var_dump($col);
 		Tpl::output ( 'displaycol', $displaycol );
 		Tpl::output ( 'displaytext', $displaytext );
+		if(isset($_GET['export']) && $_GET['export']=='true'){
+			$this->exportxlsxwithoutsql(array('序号','期初预存','日常充值','日常下账','赠送金额','赠送下账','预存下账','赠送下账',
+				'积分下账','扣减积分','赠送积分'),'充值下账汇总',
+				$data_list);
+		}
 		Tpl::showpage ( 'member.recharge.sum' );
 	}
 
