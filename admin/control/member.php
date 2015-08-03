@@ -785,7 +785,10 @@ class memberControl extends SystemControl {
 		$groupbycol = array ();
 		
 		$sumtypeparam = array(0=>'0',1=>'0',2=>'0',3=>'0',4=>'0',5=>'0');
-		
+
+		$exporttitle = array('序号','期初预存','日常充值','日常下账','赠送金额','赠送下账','预存下账','赠送下账',
+			'积分下账','扣减积分','赠送积分');
+
 		foreach ( $sumtype as $i => $v ) {
 			// var_dump($colconfig['sumcol'][$v]);
 			if (isset ( $colconfig ['sqlwher'] )) {
@@ -798,6 +801,7 @@ class memberControl extends SystemControl {
 						// echo $item['name'] . '<br>';
 						
 						array_push ( $sumcol, $sqlarray [$item ['name']] );
+						array_push ( $exporttitle, $sqlarray [$item ['name']] ,0);
 						array_push ( $displaycol, $item ['name'] );
 						array_push ( $displaytext, $item ['text'] );
 						$itemsplit = explode ( ' as ', $sqlarray [$item ['name']] );
@@ -820,6 +824,8 @@ class memberControl extends SystemControl {
 				}
 			}
 		}
+		$exporttitle = array('序号','期初预存','日常充值','日常下账','赠送金额','赠送下账','预存下账','赠送下账',
+			'积分下账','扣减积分','赠送积分');
 		$param1 = implode('', $sumtypeparam);
 //		array_push ( $displaytext, '充值下账信息' );
 //		array_push ( $displaytext, '诊疗购买信息' );
@@ -878,8 +884,7 @@ class memberControl extends SystemControl {
 		Tpl::output ( 'displaycol', $displaycol );
 		Tpl::output ( 'displaytext', $displaytext );
 		if(isset($_GET['export']) && $_GET['export']=='true'){
-			$this->exportxlsxwithoutsql(array('序号','期初预存','日常充值','日常下账','赠送金额','赠送下账','预存下账','赠送下账',
-				'积分下账','扣减积分','赠送积分'),'充值下账汇总',
+			$this->exportxlsxwithoutsql($exporttitle,'充值下账汇总',
 				$data_list);
 		}
 		Tpl::showpage ( 'member.recharge.sum' );
