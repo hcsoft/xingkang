@@ -338,7 +338,7 @@
                 "保存": function () {
                     console.log($("#editdialog form").serialize());
                     $.ajax({
-                        url: "index.php?act=member&op=modifymoney",
+                        url: "index.php?act=member&op=check_modifymoney",
                         data: $("#editdialog form").serialize(), dataType: 'json', success: function (data) {
                             if (data.success) {
                                 success("#editdialog",data.msg);

@@ -1088,7 +1088,7 @@ class memberControl extends SystemControl {
 
 
 
-	public function modifymoneyOp()
+	public function check_modifymoneyOp()
 	{
 		try {
 			$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
