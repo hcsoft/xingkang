@@ -107,8 +107,8 @@ class SystemControl{
 		//以下几项不需要验证
 		$tmp = array('index','dashboard','login','common','cms_base');
 		if (in_array($act,$tmp)) return true;
-		Log::record( $act, Log::SQL);
-		Log::record( json_encode( $permission), Log::SQL);
+//		Log::record( $act, Log::SQL);
+//		Log::record( json_encode( $permission), Log::SQL);
 		if (in_array($act,$permission) || in_array("$act.$op",$permission)){
 			return true;
 		}else{
@@ -125,6 +125,7 @@ class SystemControl{
 		}
 //		Log::record( json_encode($permission), Log::ERR);
 //		showMessage(json_encode($op),'','html','succ',0);
+		echo(json_encode($php_errormsg));
 		showMessage(Language::get('nc_assign_right'),'','html','succ',0);
 	}
 

@@ -338,13 +338,20 @@
                 "保存": function () {
                     console.log($("#editdialog form").serialize());
                     $.ajax({
-                        url: "index.php?act=member&op=check_modifymoney",
+                        url: "index.php?act=member&op=modifymoney",
                         data: $("#editdialog form").serialize(), dataType: 'json', success: function (data) {
                             if (data.success) {
                                 success("#editdialog",data.msg);
                             } else {
                                 error("#editdialog",data.msg);
                             }
+                        }
+                    }).fail(function( jqxhr, textStatus, errortext ) {
+                        console.log(jqxhr, textStatus, errortext );
+                        if(jqxhr.responseText.indexOf("您不具备进行该操作的权限")>=0){
+                            error('#editdialog', "您不具备进行该操作的权限!");
+                        }else{
+                            error('#editdialog', "系统错误,请与管理员联系!");
                         }
                     });
                 }
@@ -358,7 +365,7 @@
         $("#cardid1").val(obj.member_id);
         $("#detaildialog .datamsg").html('正在查询....');
         $.ajax({
-            url: "index.php?act=member&op=membermoneydetail",
+            url: "index.php?act=member&op=member_check_moneydetail",
             data: $("#detaildialog form").serialize(), dataType: 'json', success: function (data) {
                 console.log(data);
                 if (data.data && data.data.length > 0) {

@@ -380,6 +380,17 @@ function load_history_information(){
         obj.find('.browse-history ul').html(text_append);
     });
 }
+
+
+function error(selector, msg) {
+    $(selector + " .errormsg").css("color", "red");
+    $(selector + " .errormsg").html(msg);
+}
+function success(selector, msg) {
+    $(selector + " .errormsg").css("color", "green");
+    $(selector + " .errormsg").html(msg);
+}
+
 /*
  * 登录窗口
  *

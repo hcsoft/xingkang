@@ -395,7 +395,7 @@
                 "确定重置": function () {
                     console.log($("#psresetdialog form").serialize());
                     $.ajax({
-                        url: "index.php?act=member&op=member_psreset",
+                        url: "index.php?act=member&op=psreset",
                         data: $("#psresetdialog form").serialize(), dataType: 'json', success: function (data) {
                             console.log(data);
                             if (data.success) {
@@ -404,6 +404,14 @@
                                 error('#psresetdialog', data.msg);
                             }
                         }
+                    }).fail(function( jqxhr, textStatus, errortext ) {
+                        console.log(jqxhr, textStatus, errortext );
+                        if(jqxhr.responseText.indexOf("您不具备进行该操作的权限")>=0){
+                            error('#psresetdialog', "您不具备进行该操作的权限!");
+                        }else{
+                            error('#psresetdialog', "系统错误,请与管理员联系!");
+                        }
+
                     });
                 }
             }
