@@ -125,7 +125,7 @@ class financeControl extends SystemControl
         $endnum = $page->getEachNum() * ($page->getNowPage());
         $sql = ' from Center_ClinicSale a
                 left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
-                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID
+                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID  and class.iClass_Type = 3
                 , Organization org
                 where   a.orgid = org.id  ';
         if ($_GET['itemtype']) {
@@ -531,7 +531,7 @@ class financeControl extends SystemControl
         $endnum = $page->getEachNum() * ($page->getNowPage());
         $sql = ' from Center_ClinicSale a
                 left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
-                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID
+                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID  and class.iClass_Type = 3
                 , Organization org
                 where   a.orgid = org.id  ';
         if ($_GET['itemtype']) {
@@ -669,7 +669,7 @@ class financeControl extends SystemControl
         $page->setNowPage($_REQUEST["curpage"]);
         $sql = 'from Center_ClinicSale a
                 left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
-                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID
+                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID and class.iClass_Type = 3
                 , Organization org
                 where   a.orgid = org.id  ';
 
@@ -843,7 +843,7 @@ class financeControl extends SystemControl
         $page->setNowPage($_REQUEST["curpage"]);
         $sql = 'from Center_ClinicSale a
                 left join  shopnc_goods_common goods  on a.iDrug_ID = goods.goods_commonid
-                left join Center_Class class on   goods.iDrug_StatClass = class.iClass_ID
+                left join Center_Class class on   goods.iDrug_StatClass = class.iClass_ID and class.iClass_Type = 3
                 , Organization org
                 where   a.orgid = org.id and  goods.idrug_rectype in (0,1,3)  ';
 
