@@ -34,7 +34,7 @@ class financeControl extends SystemControl
         Tpl::output('types', $this->types);
         $this->goodtype = array(0 => '药品', 1 => '卫生用品', 2 => '诊疗项目', 3 => '特殊材料');
         Tpl::output('goodtype', $this->goodtype);
-        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class ';
+        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class  where iClass_Type =3  ';
         $classstmt = $conn->query($classsql);
         $classtypes = array();
         while ($row = $classstmt->fetch(PDO::FETCH_OBJ)) {
@@ -150,9 +150,9 @@ class financeControl extends SystemControl
 
         if ($_GET['classtype'] != '') {
             if ($_GET['classtype'] == 'null') {
-                $sql = $sql . ' and good.iDrug_StatClass  is null ';
+                $sql = $sql . ' and class.iClass_ID  is null ';
             } else {
-                $sql = $sql . ' and good.iDrug_StatClass =  ' . trim($_GET['classtype']);
+                $sql = $sql . ' and class.iClass_ID =  ' . trim($_GET['classtype']);
             }
         }
 
