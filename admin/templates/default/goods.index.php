@@ -82,7 +82,7 @@
                     <?php foreach ($output['goods_list'] as $k => $v) { ?>
                     	<tr class="hover member">
                         	
-                            <td class="w60 align-center" nowrap><?php echo $v->goods_commonid; ?></td>
+                            <td class="w60 align-center" nowrap><?php echo $v->sDrug_ID; ?></td>
                             <td class="w60 picture">
                             	<div class="size-56x56"><span class="thumb size-56x56"><i></i><img
                                         src="<?php 
