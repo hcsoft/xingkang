@@ -270,7 +270,7 @@ class goodsControl extends SystemControl
         $page->setTotalNum($total[0]);
      
      	$tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.goods_commonid asc) rownum,
-                        good.goods_commonid,
+                        good.sDrug_ID,
                         good.goods_name ,
                         good.sDrug_Spec,
                         good.sDrug_Content ,
