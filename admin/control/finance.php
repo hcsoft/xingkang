@@ -764,7 +764,7 @@ class financeControl extends SystemControl
                     case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
                         $sql ";
         if (isset($_GET['export']) && $_GET['export'] == 'true') {
-            $this->exportxlsx(array(0 => $tsql, 1 => $totalsql), $displaytext, '收入统计');
+            $this->exportxlsx(array(0 => $tsql, 1 => $totalsql), $displaytext, '门诊收入统计');
         }
 
 //        echo $tsql;
@@ -939,7 +939,7 @@ class financeControl extends SystemControl
                     case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
                         $sql ";
         if (isset($_GET['export']) && $_GET['export'] == 'true') {
-            $this->exportxlsx(array(0 => $tsql, 1 => $totalsql), $displaytext, '收入统计');
+            $this->exportxlsx(array(0 => $tsql, 1 => $totalsql), $displaytext, '住院收入统计');
         }
 
 //        echo $tsql;
