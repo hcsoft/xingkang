@@ -271,6 +271,7 @@ class goodsControl extends SystemControl
      
      	$tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.goods_commonid asc) rownum,
                         good.sDrug_ID,
+                        good.goods_commonid,
                         good.goods_name ,
                         good.sDrug_Spec,
                         good.sDrug_Content ,
