@@ -113,13 +113,13 @@
 	                                    href="javascript:void(0)"
 	                                    onclick="edit(<?php echo $v->goods_commonid ?>)">修改分类</a></p></td>
 	                        <td>
-	                        	<p><?php echo $v->sDrug_Unit; ?></p>
+	                        	<p>常规单位: <?php echo $v->sDrug_Unit; ?></p>
 	                        	<p>进价: <?php echo number_format($v->fDS_BuyPrice,2); ?></p>
 	                        	<p>零价: <?php echo number_format($v->fDS_RetailPrice,2); ?></p>
 	                        	<p>实际库存: <?php echo number_format($v->fDS_SStock,0); ?></p>
 	                        </td>
 							<td >
-	                        	<p><?php echo $v->sDrug_LeastUnit; ?></p>
+	                        	<p>最小单位: <?php echo $v->sDrug_LeastUnit; ?></p>
 	                        	<p>进价: <?php echo number_format($v->fDS_LeastBuyPrice,2); ?></p>
 	                        	<p>零价: <?php echo number_format($v->fDS_LeastRetailPrice,2); ?></p>
 	                        	<p>实际库存: <?php echo number_format($v->fDS_LeastSStock,0); ?></p>

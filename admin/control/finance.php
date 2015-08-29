@@ -800,6 +800,181 @@ class financeControl extends SystemControl
         Tpl::showpage('finance.sum');
     }
 
+
+    public function financeinsumOp()
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        if (!isset($_GET['search_type'])) {
+            $_GET['search_type'] = '0';
+        }
+        $sqlarray = array(
+            'classname' => ' case when class.sClass_ID is not null then class.sClass_ID+\'.\'+class.sClass_Name  else \'\' end as "classname" ',
+            'Section' => 'a.StatSection as "Section"',
+            'execSection' => ' ',
+            'Doctor' => ' a.DoctorName as "Doctor" ',
+            'year' => ' year(a.dSale_GatherDate) as "year" ',
+            'month' => ' left(convert(varchar,dSale_GatherDate,112),6) as  "month" ',
+            'day' => ' convert(varchar,dSale_GatherDate,112) as "day" ',
+            'OrgID' => ' org.name as "OrgID" ',
+            'dSale_MakeDate' => ' replace( CONVERT( CHAR(10), a.dSale_MakeDate, 102), \'.\', \'-\') as "dSale_MakeDate" ',
+            'dSale_GatherDate' => ' replace( CONVERT( CHAR(10), a.dSale_GatherDate , 102), \'.\', \'-\') as "dSale_GatherDate" ',
+        );
+        $config = array('sumcol' => array(
+            'OrgID' => array(name => 'OrgID', 'text' => '机构'),
+
+            'Section' => array(name => 'Section', 'text' => '统计科室'),
+            'classname' => array(name => 'classname', 'text' => '财务分类'),
+//            'execSection' => array(name => 'execSection', 'text' => '执行科室'),
+            'Doctor' => array(name => 'Doctor', 'text' => '医生'),
+            'year' => array('text' => '年', name => 'year', uncheck => 'month,day'),
+            'month' => array('text' => '月', name => 'month', uncheck => 'year,day'),
+            'day' => array('text' => '日', name => 'day', uncheck => 'year,month'),
+        ));
+        Tpl::output('config', $config);
+
+        //处理汇总字段
+        $sumtype = $_GET['sumtype'];
+        if ($sumtype == null) {
+            $sumtype = array(0 => "OrgID", 1 => "classname");
+            $_GET['sumtype'] = $sumtype;
+        }
+        $checked = $_GET['checked'];
+        $page = new Page();
+        $page->setEachNum(10);
+        $page->setNowPage($_REQUEST["curpage"]);
+        $sql = 'from Center_InpatientSale a
+                left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
+                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID and class.iClass_Type = 3
+                , Organization org
+                where   a.orgid = org.id  ';
+
+        if ($_GET['query_start_time']) {
+            $sql = $sql . ' and a.dSale_MakeDate >=\'' . $_GET['query_start_time'] . '\'';
+        }
+
+        if ($_GET['query_end_time']) {
+            $sql = $sql . ' and a.dSale_MakeDate < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
+        }
+
+        if ($_GET['gather_start_time']) {
+            $sql = $sql . ' and a.dSale_GatherDate >=\'' . $_GET['gather_start_time'] . '\'';
+        }
+
+        if ($_GET['gather_end_time']) {
+            $sql = $sql . ' and a.dSale_GatherDate < dateadd(day,1,\'' . $_GET['gather_end_time'] . '\')';
+        }
+        if ($_GET['search_goods_name'] != '') {
+            $sql = $sql . ' and good.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
+        }
+        if (intval($_GET['search_commonid']) > 0) {
+            $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']);
+        }
+
+        //处理树的参数
+        if ($_GET['orgids']) {
+            $sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+        }
+
+        $search_type = $_GET['search_type'];
+//        echo $search_type;
+        $colconfig = $config;
+//        var_dump($config[intval($search_type)]);
+        $displaycol = array();
+        $displaytext = array();
+        $sumcol = array();
+        $totalcol = array();
+        $groupbycol = array();
+        foreach ($sumtype as $i => $v) {
+//            var_dump($colconfig['sumcol'][$v]);
+            if (isset($colconfig['sqlwher'])) {
+                $sql = $sql . $colconfig['sqlwher'];
+            }
+            if (isset($colconfig['sumcol'][$v])) {
+                if (isset($colconfig['sumcol'][$v]['cols'])) {
+                    foreach ($colconfig['sumcol'][$v]['cols'] as $item) {
+//                        echo $item['name'] . '<br>';
+                        array_push($sumcol, $sqlarray[$item['name']]);
+                        array_push($displaycol, $item['name']);
+                        array_push($displaytext, $item['text']);
+                        $itemsplit = explode(' as ', $sqlarray[$item['name']]);
+                        array_push($totalcol, ' null as ' . $itemsplit[1]);
+                        $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+                        if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+                            array_push($groupbycol, $itemsplit[0]);
+                    }
+                } else {
+                    $item = $colconfig['sumcol'][$v];
+                    array_push($sumcol, $sqlarray[$item['name']]);
+                    array_push($displaycol, $item['name']);
+                    array_push($displaytext, $item['text']);
+                    $itemsplit = explode(' as ', $sqlarray[$item['name']]);
+                    array_push($totalcol, ' null as ' . $itemsplit[1]);
+                    $str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+                    if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+                        array_push($groupbycol, $itemsplit[0]);
+                }
+            }
+        }
+        array_push($displaytext, '收入');
+        array_push($displaytext, '成本金额');
+        array_push($displaytext, '毛利');
+        array_push($displaytext, '毛利率');
+//        var_dump($totalcol);
+        $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
+//        var_dump($totalcol);
+        $totalcolstr = join(',', $totalcol);
+        $sumcolstr = join(',', $sumcol);
+        $groupbycolstr = join(',', $groupbycol);
+//        echo $sumcolstr;
+        $tsql = " select $sumcolstr ,
+                    sum(fSale_TaxFactMoney) taxmoney ,
+                    sum(fSale_NoTaxMoney) notaxmoney ,
+                    sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
+                    case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
+                        $sql group by $groupbycolstr order by $groupbycolstr ";
+//        echo $tsql;
+        $totalsql = " select $totalcolstr , sum(fSale_TaxFactMoney) taxmoney ,
+                    sum(fSale_NoTaxMoney) notaxmoney ,
+                    sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
+                    case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
+                        $sql ";
+        if (isset($_GET['export']) && $_GET['export'] == 'true') {
+            $this->exportxlsx(array(0 => $tsql, 1 => $totalsql), $displaytext, '收入统计');
+        }
+
+//        echo $tsql;
+        $stmt = $conn->query($tsql);
+        $data_list = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($data_list, $row);
+        }
+        //处理合计
+
+//        echo $totalsql;
+        $totalstmt = $conn->query($totalsql);
+        while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($data_list, $row);
+        }
+        Tpl::output('data_list', $data_list);
+        //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
+        Tpl::output('page', $page->show());
+
+
+        //处理需要显示的列
+        $col = array();
+        foreach ($sumtype as $i => $v) {
+            if (isset($sumtypestr[$v])) {
+                foreach ($sumtypestr[$v] as $key => $item) {
+                    $col[$key] = $item;
+                }
+            }
+        }
+//        var_dump($col);
+        Tpl::output('displaycol', $displaycol);
+        Tpl::output('displaytext', $displaytext);
+        Tpl::showpage('finance.insum');
+    }
+
     public function financegoodsumOp()
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
