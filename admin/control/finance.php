@@ -857,11 +857,11 @@ class financeControl extends SystemControl
         }
 
         if ($_GET['gather_start_time']) {
-            $sql = $sql . ' and a.dSale_GatherDate >=\'' . $_GET['gather_start_time'] . '\'';
+            $sql = $sql . ' and a.dSale_MakeDate >=\'' . $_GET['gather_start_time'] . '\'';
         }
 
         if ($_GET['gather_end_time']) {
-            $sql = $sql . ' and a.dSale_GatherDate < dateadd(day,1,\'' . $_GET['gather_end_time'] . '\')';
+            $sql = $sql . ' and a.dSale_MakeDate < dateadd(day,1,\'' . $_GET['gather_end_time'] . '\')';
         }
         if ($_GET['search_goods_name'] != '') {
             $sql = $sql . ' and good.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
