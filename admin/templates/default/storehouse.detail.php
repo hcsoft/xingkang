@@ -57,6 +57,7 @@
             <tr>
                 <th><label>配送机构</label></th>
                 <td colspan="1"><select name="sendorgids[]" id="sendorgids" class="orgSelect" multiple>
+                        <option value="1">配送中心</option>
                         <?php
                         $sendorgids = $_GET['sendorgids'];
                         if (!isset($sendorgids)) {
@@ -69,8 +70,9 @@
                         <?php } ?>
                     </select></td>
                 </td>
-                <th><label>制单机构</label></th>
+                <th><label>下级机构</label></th>
                 <td colspan="1"><select name="orgids[]" id="orgids" class="orgSelect" multiple>
+
                         <?php
                         $orgids = $_GET['orgids'];
                         if (!isset($orgids)) {
@@ -145,8 +147,8 @@
                 <th class="align-center">发生日期</th>
                 <th class="align-center">商品类型</th>
                 <th class="align-center">单据类型</th>
-                <!--            <th class="align-center">制单机构</th>-->
-                <th class="align-center">机构</th>
+                            <th class="align-center">制单机构</th>
+                <th class="align-center">下级机构</th>
                 <!--            <th class="align-center">供应商</th>-->
                 <th class="align-center">商品编码</th>
                 <th class="align-center">商品名称</th>
@@ -181,11 +183,10 @@
                             <?php echo $v->iBuy_Type ?>
                         </td>
                         <td class=" align-center">
-                            <?php if ($_GET['search_type'] == '1') {
-                                echo $v->SaleOrgID;
-                            } else {
-                                echo $v->OrgId;
-                            } ?>
+                            <?php echo $v->OrgId ?>
+                        </td>
+                        <td class=" align-center">
+                            <?php echo $v->SaleOrgID; ?>
                         </td>
                         <td class=" align-center" nowrap>
                             <?php echo $v->iDrug_ID ?>

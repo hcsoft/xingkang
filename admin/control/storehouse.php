@@ -110,7 +110,7 @@ class storehouseControl extends SystemControl
                         a.dBuy_Date,
                         good.iDrug_RecType,
                         storetype.name as 'iBuy_Type',
-                        d.name OrgId,
+                        case when a.orgid = 1 then '配送中心' else d.name end OrgId,
                         c.name SaleOrgID,
                         good.sDrug_TradeName,
                         good.spec_name,
@@ -124,7 +124,7 @@ class storehouseControl extends SystemControl
                         a.fBuy_RetailMoney - a.fBuy_TaxMoney as diffmoney
 
                         $sql order by  a.dBuy_Date)zzzz where rownum>$startnum )zzzzz order by rownum";
-//        echo $sql;
+//        echo $tsql;
         $exportsql = "SELECT
                         a.iBuy_TicketID,
                         a.iBuy_ID,
@@ -132,7 +132,8 @@ class storehouseControl extends SystemControl
                         a.dBuy_Date,
                         good.iDrug_RecType,
                         storetype.name as 'iBuy_Type',
-                        c.name OrgId,
+                        case when a.orgid = 1 then '配送中心' else d.name end OrgId,
+                        c.name SaleOrgID,
                         a.iDrug_ID,
                         good.sDrug_TradeName,
                         good.spec_name,
@@ -151,6 +152,7 @@ class storehouseControl extends SystemControl
                         null as iDrug_RecType,
                         null as iBuy_Type,
                         null as OrgId,
+                        null as SaleOrgID,
                         null as iDrug_ID,
                         null as sDrug_TradeName,
                         null as spec_name,
@@ -162,7 +164,7 @@ class storehouseControl extends SystemControl
                         sum(fBuy_RetailMoney)-sum(fBuy_TaxMoney) as diffmoney
                         $sql   ";
         if(isset($_GET['export']) && $_GET['export']=='true'){
-            $this->exportxlsx(array(0=>$exportsql,1=>$exporttotalsql),array('总票据','明细号','供货商','发生日期','商品类型','单据类型','机构','商品编码','商品名称','规格','单位','产地厂牌','数量','进价金额','零价金额','进销差'),'仓库单据明细');
+            $this->exportxlsx(array(0=>$exportsql,1=>$exporttotalsql),array('总票据','明细号','供货商','发生日期','商品类型','单据类型','制单机构','下级机构','商品编码','商品名称','规格','单位','产地厂牌','数量','进价金额','零价金额','进销差'),'仓库单据明细');
         }
         $stmt = $conn->query($tsql);
         $data_list = array();
