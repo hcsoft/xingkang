@@ -332,7 +332,7 @@ class communityControl extends SystemControl
 //        echo $_GET['export']=='true';
 //        echo $_GET['export'];
         $sumcols = array( array('txt'=>'处方金额汇总','col'=>'fCO_InComeMoney','decimal'=>2,'unit'=>'元'),
-                    array('txt'=>'现金支付汇总','col'=>'fCO_Card','decimal'=>2,'unit'=>'元'),
+                    array('txt'=>'现金支付汇总','col'=>'fCO_Cash','decimal'=>2,'unit'=>'元'),
                     array('txt'=>'总记录数','col'=>'rownum',sql=>'count(*) rownum','decimal'=>0,'unit'=>'条'));
         $sumcolsstr = $page->getSumsql($sumcols);
 
