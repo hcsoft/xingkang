@@ -147,7 +147,7 @@
                 <th class="align-center">发生日期</th>
                 <th class="align-center">商品类型</th>
                 <th class="align-center">单据类型</th>
-                            <th class="align-center">制单机构</th>
+                            <th class="align-center">配送机构</th>
                 <th class="align-center">下级机构</th>
                 <!--            <th class="align-center">供应商</th>-->
                 <th class="align-center">商品编码</th>
