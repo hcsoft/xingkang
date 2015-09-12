@@ -216,7 +216,13 @@ class Model{
         	$options['table'] =$this->getTableName();
         }elseif(false !== strpos(trim($options['table'],', '),',')){
         	foreach(explode(',', trim($options['table'],', ')) as $val){
-        		$tmp[] = $this->getTableName($val).' ['.$val.']';
+                if(strpos($val,' ')>0){
+                    $strs = explode(' ',$val);
+                    $tmp[] = $this->getTableName($strs[0]).' ['.$strs[1].']';
+                }else{
+                    $tmp[] = $this->getTableName($val).' ['.$val.']';
+                }
+
         	}
         	$options['table'] = implode(',',$tmp);
         }else{
@@ -481,7 +487,16 @@ class Model{
 	protected function getTableName($table = null){
 		if (is_null($table)){
 			$return = '['.$this->table_prefix.$this->table_name.']';
-		}else{
+		}else if(substr($table,0,2)=='__'){
+            $tablename = substr($table,2);
+            if(strpos($tablename,' ') >0){
+                $strs = explode(' ',$tablename);
+                $return = '['.$strs[0].']';
+            }else{
+                $return = '['.$tablename.']';
+            }
+
+        }else{
 			$return = '['.$this->table_prefix.$table.']';
 		}
 		return $return;

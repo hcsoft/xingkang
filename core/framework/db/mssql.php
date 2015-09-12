@@ -49,6 +49,7 @@ class Db
      */
     public static function query($sql, $host = 'sqlserver')
     {
+//        echo $sql;
         $host = 'sqlserver';
         self::connect($host);
         if (C('debug')) addUpTime('queryStartTime');
