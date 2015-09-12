@@ -48,6 +48,8 @@ $_limit =  array(
 		array('name'=>'会员导出', 'op'=>'mbdataexport', 'act'=>'member'),
 		array('name'=>'修改余额', 'op'=>'modifymoney', 'act'=>'member'),
 		array('name'=>'密码重置', 'op'=>'psreset', 'act'=>'member'),
+		array('name'=>'会员信息修改', 'op'=>'changebaseinfo', 'act'=>'member'),
+		array('name'=>'会员注销', 'op'=>'unregister', 'act'=>'member'),
 		array('name'=>$lang['nc_member_notice'], 'op'=>null, 'act'=>'notice'),
 		array('name'=>$lang['nc_member_pointsmanage'], 'op'=>null, 'act'=>'points'),
 		array('name'=>$lang['nc_binding_manage'], 'op'=>null, 'act'=>'sns_sharesetting'),

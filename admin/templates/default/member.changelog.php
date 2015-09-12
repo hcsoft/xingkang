@@ -5,8 +5,9 @@
         <div class="item-title">
             <h3><?php echo $lang['member_index_manage'] ?></h3>
             <ul class="tab-base">
-                <li><a href="JavaScript:void(0);" class="current"><span><?php echo $lang['nc_manage'] ?></span></a></li>
-                <li><a href="index.php?act=member&op=changelog"><span>修改日志</span></a></li>
+                <li><a  href="index.php?act=member&op=member"><span><?php echo $lang['nc_manage'] ?></span></a></li>
+<!--                <li><a href="index.php?act=member&op=member_add"><span>--><?php //echo $lang['nc_new'] ?><!--</span></a></li>-->
+                <li><a href="JavaScript:void(0);" class="current"><span>修改日志</span></a></li>
                 <li><a href="index.php?act=member&op=unregisterlog"><span>注销日志</span></a></li>
             </ul>
         </div>
@@ -14,7 +15,7 @@
     <div class="fixed-empty"></div>
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" value="member" name="act">
-        <input type="hidden" value="member" name="op">
+        <input type="hidden" value="changelog" name="op">
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
@@ -175,12 +176,14 @@
             <tr class="thead">
                 <th>&nbsp;</th>
                 <th class="align-center" colspan="2"><?php echo $lang['member_index_name'] ?></th>
+                <th class="align-center" >修改情况</th>
+                <th class="align-center" >修改内容</th>
                 <th class="align-center">基本信息</th>
+
                 <th class="align-center">卡情况</th>
                 <th class="align-center">办卡渠道</th>
                 <th class="align-center">消费情况</th>
                 <th class="align-center">账户余额</th>
-                <th class="align-center"><?php echo $lang['nc_handle']; ?></th>
             </tr>
             <tbody>
             <?php if (!empty($output['member_list']) && is_array($output['member_list'])) { ?>
@@ -210,6 +213,12 @@
                             <div class="im">
                             </div>
                         </td>
+                        <td>
+                            <p class="">修改时间:<strong  class="red"><?php echo substr($v['optdate'],0,19)?></strong></p>
+                            <p class="">操作人员:<strong  class="red"><?php echo $v['opt']?></strong></p>
+
+                        </td>
+                        <td><p class=""><strong  class="red"><?php echo $v['changestr']?></strong></p></td>
                         <td>
                             <p class="name">身份证: <?php echo $v['sIDCard']; ?></p>
                             <p class="name">生日: <?php echo substr($v['member_birthday'],0,10); ?></p>
@@ -257,21 +266,21 @@
                             <p>消费积分: <strong class="red"><?php echo $v['member_points']; ?></strong></p>
 
                         </td>
-                        <td class="align-center">
-                            <a href="javascript:void(0)"
+<!--                        <td class="align-center">-->
+                            <!--<a href="javascript:void(0)"
                                onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">充值消费明细</a><br>
                             <a href="javascript:void(0)" onclick="showpsreset('<?php echo $v['member_id'] ?>',this)">密码重置</a><br>
-                            <a href="javascript:void(0)" onclick="showchange('<?php echo htmlentities(json_encode($v)) ?>',this)">信息修改</a><br>
+                            <a href="javascript:void(0)" onclick="showchange('<?php echo htmlentities(json_encode($v)) ?>',this)">会员信息修改</a><br>
                             <a href="javascript:void(0)" onclick="showunregister('<?php echo htmlentities(json_encode($v)) ?>',this)">会员注销</a><br>
 
                             <a href="javascript:showindex()" target="_blank">健康服务索引</a>
-
+        -->
                             <!--<a
                                 href="index.php?act=member&op=member_edit&member_id=<?php echo $v['member_id']; ?>"><?php echo $lang['nc_edit'] ?></a>
                             | <a
                                 href="index.php?act=notice&op=notice&member_name=<?php echo ltrim(base64_encode($v['member_name']), '='); ?>"><?php echo $lang['member_index_to_message']; ?></a>
                                 -->
-                        </td>
+<!--                        </td>-->
                     </tr>
                 <?php } ?>
             <?php } else { ?>
@@ -496,12 +505,12 @@
 <script>
     $(function () {
         $('#ncsubmit').click(function () {
-            $('input[name="op"]').val('member');
+            $('input[name="op"]').val('changelog');
             $('#formSearch').submit();
         });
 
         $('#ncexport').click(function () {
-            $('input[name="op"]').val('mbdataexport');
+            $('input[name="op"]').val('changelog');
             $('#formSearch').submit();
         });
 
@@ -519,7 +528,7 @@
 //            modal: true,
             autoOpen: false,
             buttons: {
-                "关闭": function () {
+                "取消": function () {
                     $(this).dialog("close");
                 },
                 "确定重置": function () {
@@ -557,7 +566,7 @@
                 $(elem).parent().parent().removeClass('yellow');
             },
             buttons: {
-                "关闭": function () {
+                "取消": function () {
                     $(this).dialog("close");
                 },
                 "确定注销": function () {
