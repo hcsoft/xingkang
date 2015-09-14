@@ -57,7 +57,7 @@
                         <option value="-1" <?php if ('-1' == $_GET['hasfile']){ ?>selected<?php } ?>>无健康档案</option>
                     </select>
                 </td>
-                <td><label><input type="checkbox" name="containunreg" id="containunreg" value="1" <?php if ('1' == $_GET['containunreg']){ ?>checked<?php } ?> >包含注销</label>
+                <td><label><input type="checkbox" style="vertical-align: text-top;" name="containunreg" id="containunreg" value="1" <?php if ('1' == $_GET['containunreg']){ ?>checked<?php } ?> >包含注销</label>
                 </td>
                 <td>
                     排序字段：
