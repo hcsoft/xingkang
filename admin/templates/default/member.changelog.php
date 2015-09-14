@@ -241,6 +241,11 @@
                                 } elseif ($v['CardGrade'] == 2) {
                                     echo '健康钻卡';
                                 } ?></p>
+                            <p class="smallfont">卡状态: <?php if ($v['iMemberState'] == 99) {
+                                    echo '已注销';
+                                } else {
+                                    echo '正常';
+                                } ?></p>
 
                         </td>
                         <td>

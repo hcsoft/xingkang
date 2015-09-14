@@ -57,7 +57,8 @@
                         <option value="-1" <?php if ('-1' == $_GET['hasfile']){ ?>selected<?php } ?>>无健康档案</option>
                     </select>
                 </td>
-
+                <td><label>包含注销<input type="checkbox" name="containunreg" id="containunreg"></label>
+                </td>
                 <td>
                     排序字段：
                     <select name="orderby">
@@ -232,7 +233,11 @@
                                 } elseif ($v['CardGrade'] == 2) {
                                     echo '健康钻卡';
                                 } ?></p>
-
+                            <p class="smallfont">卡状态: <?php if ($v['iMemberState'] == 99) {
+                                    echo '已注销';
+                                } else {
+                                    echo '正常';
+                                } ?></p>
                         </td>
                         <td>
                         <p class="name">建卡时间: <?php echo substr($v['dCreateDate'], 0, 10); ?></p>
@@ -262,8 +267,10 @@
                                onclick="showdetail('<?php echo htmlentities(json_encode($v)) ?>',this)">充值消费明细</a><br>
                             <a href="javascript:void(0)" onclick="showpsreset('<?php echo $v['member_id'] ?>',this)">密码重置</a><br>
                             <a href="javascript:void(0)" onclick="showchange('<?php echo htmlentities(json_encode($v)) ?>',this)">信息修改</a><br>
-                            <a href="javascript:void(0)" onclick="showunregister('<?php echo htmlentities(json_encode($v)) ?>',this)">会员注销</a><br>
 
+                            <?php if ($v['iMemberState'] <> 99){ ?>
+                            <a href="javascript:void(0)" onclick="showunregister('<?php echo htmlentities(json_encode($v)) ?>',this)">会员注销</a><br>
+                            <?php } ?>
                             <a href="javascript:showindex()" target="_blank">健康服务索引</a>
 
                             <!--<a

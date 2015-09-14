@@ -36,6 +36,11 @@ class memberControl extends SystemControl {
 			array('txt'=>'消费积分','col'=> ' member_points '));
 		Tpl::output('orderbys',$orderbys);
 		$model_member = Model ( 'member' );
+        if(isset($_GET['containunreg']) and $_GET['containunreg'] != ''){
+
+        }else{
+            $condition ['containunreg']  = array('exp' , ' iMemberState <>99 ');
+        }
 		/**
 		 * 检索条件
 		 */
