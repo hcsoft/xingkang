@@ -172,6 +172,153 @@ class memberControl extends SystemControl {
 		return array('list'=>$member_list,'md'=>$model_member);
 	}
 
+
+    private function  exportmemberlist($propertys,$propertymap,$fp,$flag = true){
+        $orderbys = array(
+            array('txt'=>'预存余额','col'=> ' available_predeposit '),
+            array('txt'=>'赠送余额','col'=> ' fConsumeBalance '),
+            array('txt'=>'消费积分','col'=> ' member_points '));
+        Tpl::output('orderbys',$orderbys);
+        $model_member = Model ( 'member' );
+        if(isset($_GET['containunreg']) and $_GET['containunreg'] != ''){
+
+        }else{
+            $condition ['containunreg']  = array('exp' , ' iMemberState <>99 ');
+        }
+        /**
+         * 检索条件
+         */
+        if ($_GET['orgids']) {
+            $condition ['CreateOrgID'] = array (
+                'in',
+                $_GET['orgids']
+            );
+        }
+
+        if (isset($_GET['cardtype']) and $_GET['cardtype'] != '') {
+            $condition ['cardtype'] = $_GET['cardtype'];
+        }
+
+        if (isset($_GET['cardgrade']) and $_GET['cardgrade'] != '') {
+            $condition ['cardgrade'] = $_GET['cardgrade'];
+        }
+
+        if (isset($_GET['idnumber']) and $_GET['idnumber'] != '') {
+            $condition ['sIDCard'] = $_GET['idnumber'];
+        }
+        if (isset($_GET['tel']) and $_GET['tel'] != '') {
+            $condition ['sLinkPhone'] = $_GET['tel'];
+        }
+        if (isset($_GET['name']) and $_GET['name'] != '') {
+            $condition ['member_truename'] = array('like','%'.$_GET['name'].'%');
+        }
+        if (isset($_GET['birthday']) and $_GET['birthday'] != '') {
+            $condition ['member_birthday'] = $_GET['birthday'];
+        }
+
+        if (isset($_GET['createcard_begin']) and $_GET['createcard_begin'] != '') {
+            $condition ['createcard_begin'] = array('exp' , ' dCreateDate >= \''.$_GET['createcard_begin'].'\'');
+        }
+        if (isset($_GET['createcard_end']) and $_GET['createcard_end'] != '') {
+            $condition ['createcard_end'] = array('exp' , ' dCreateDate < dateadd(day,1,\''.$_GET['createcard_end'].'\')');
+        }
+
+        if (isset($_GET['hasfile']) and $_GET['hasfile'] != '') {
+            if($_GET['hasfile']=='-1'){
+                $condition ['hasfile']  = array('exp' , ' ( hasfile = -1 or hasfile is null ) ');
+            }else{
+                $condition ['hasfile'] = $_GET['hasfile'];
+            }
+        }
+
+        if(!isset($_GET['orderby'])){
+            $_GET['orderby'] = '预存余额';
+        }
+
+
+
+        if(!isset($_GET['order'])){
+            $ordersql = 'desc';
+        }else{
+            $ordersql = $_GET['order'];
+        }
+        if($_GET['orderby']){
+            foreach($orderbys as $orderby){
+                if($orderby['txt']==$_GET['orderby']){
+                    $order = $orderby['col'] .' ' . $ordersql;
+                    break;
+                }
+            }
+        }
+//		if ($_GET ['search_field_value'] != '') {
+//			switch ($_GET ['search_field_name']) {
+//				case 'member_name' :
+//					$condition ['member_name'] = array (
+//							'like',
+//							'%' . trim ( $_GET ['search_field_value'] ) . '%'
+//					);
+//					break;
+//				case 'member_email' :
+//					$condition ['member_email'] = array (
+//							'like',
+//							'%' . trim ( $_GET ['search_field_value'] ) . '%'
+//					);
+//					break;
+//				case 'member_truename' :
+//					$condition ['member_truename'] = array (
+//							'like',
+//							'%' . trim ( $_GET ['search_field_value'] ) . '%'
+//					);
+//					break;
+//			}
+//		}
+        if ($_GET ['member_id'] != '') {
+            $condition ['member_id'] = array (
+                'like',
+                '%' . trim ( $_GET ['member_id'] ) . '%'
+            );
+        }
+        switch ($_GET ['search_state']) {
+            case 'no_informallow' :
+                $condition ['inform_allow'] = '2';
+                break;
+            case 'no_isbuy' :
+                $condition ['is_buy'] = '0';
+                break;
+            case 'no_isallowtalk' :
+                $condition ['is_allowtalk'] = '0';
+                break;
+            case 'no_memberstate' :
+                $condition ['member_state'] = '0';
+                break;
+        }
+        /**
+         * 排序
+         */
+//		$order = trim ( $_GET ['search_sort'] );
+        if (empty ( $order )) {
+            $order = 'member_id desc';
+        }
+
+        if(empty($flag)){
+//            $member_list = $model_member->getMemberList ( $condition, , 100000, $order );
+            $model_member->field('*')->where($condition)->page(100000)->order($order)->exportcsv($propertys,$propertymap,$fp);
+        }else{
+//            $member_list = $model_member->getMemberList ( $condition, '*', 10, $order );
+            $model_member->field('*')->where($condition)->page(10)->order($order)->exportcsv($propertys,$propertymap,$fp);
+        }
+        /**
+         * 整理会员信息
+         */
+//		if (is_array ( $member_list )) {
+//			foreach ( $member_list as $k => $v ) {
+//				$member_list [$k] ['member_time'] = $v ['member_time'] ? date ( 'Y-m-d H:i:s', $v ['member_time'] ) : '';
+//				$member_list [$k] ['member_login_time'] = $v ['member_login_time'] ? date ( 'Y-m-d H:i:s', $v ['member_login_time'] ) : '';
+//			}
+//		}
+//        return array('list'=>$member_list,'md'=>$model_member);
+    }
+
 	private function  changeloglist($flag = true){
 		$orderbys = array(
 			array('txt'=>'预存余额','col'=> ' available_predeposit '),
@@ -498,10 +645,11 @@ class memberControl extends SystemControl {
 	}
 
 	public function mbdataexportOp(){
-		$data = $this->memberlist(false);
-		$member_list = $data['list'];
+//        $fp =  tmpfile();
+        $tmpfname = tempnam("./tmp/", '');
+        $filename = $tmpfname;
+        $fp = fopen($filename,"a");
 		$titles = [
-			'序号',
 			'卡号',
 			'姓名',
 			'电话',
@@ -521,33 +669,45 @@ class memberControl extends SystemControl {
 			'储值余额',
 			'赠送余额',
 			'消费积分'];
-		$propertys = [
-			'member_id',
-			'member_truename',
-			'sLinkPhone',
-			'sAddress',
-			'sIDCard',
-			'member_birthday',
-			'MediCardID',
-			'FileNo',
-			'CardType',
-			'CardGrade',
-			'dCreateDate',
-			'CreateOrgID',
-			'GetWay',
-			'Referrer',
-			'LastPayDate',
-			'LastPayOrgName',
-			'available_predeposit',
-			'fConsumeBalance',
-			'member_points'];
-		$propertymap = [
-				'CardType'=> array('0'=>'普通卡','1'=>'储值卡'),
-				'CardGrade'=> array('0'=>'健康卡','1'=>'健康金卡','2'=>'健康钻卡'),
-				'CreateOrgID' => $this->orgmap,
-		];
-//		Tpl::showpage ( 'member.index' );
-		$this->exportxlsxbyObject($titles,$propertys,$propertymap,'会员信息',$member_list);
+        foreach($titles as $i=>$v){
+            $titles[$i] = mb_convert_encoding($v, 'GBK','UTF-8');
+        }
+        fputcsv($fp, $titles);
+        $propertys = [
+            'member_id',
+            'member_truename',
+            'sLinkPhone',
+            'sAddress',
+            'sIDCard',
+            'member_birthday',
+            'MediCardID',
+            'FileNo',
+            'CardType',
+            'CardGrade',
+            'dCreateDate',
+            'CreateOrgID',
+            'GetWay',
+            'Referrer',
+            'LastPayDate',
+            'LastPayOrgName',
+            'available_predeposit',
+            'fConsumeBalance',
+            'member_points'];
+        $propertymap = [
+            'CardType'=> array('0'=>'普通卡','1'=>'储值卡'),
+            'CardGrade'=> array('0'=>'健康卡','1'=>'健康金卡','2'=>'健康钻卡'),
+            'CreateOrgID' => $this->orgmap,
+        ];
+        $this->exportmemberlist($propertys,$propertymap,$fp,false);
+        fclose($fp);
+        $fp1 = fopen($filename,"r");
+        header('Content-Type: application/text');
+        header('Content-Disposition: attachment;filename="会员.csv"');
+        header('Cache-Control: max-age=0');
+        fpassthru($fp1);
+        fclose($fp1);
+        unlink ($tmpfname);
+        exit;
 	}
 	
 	/**

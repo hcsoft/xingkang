@@ -37,6 +37,7 @@ class Db
             self::$link[$host] = @new PDO('sqlsrv:Server=' . $conf['dbhost'] . ',' . $conf['dbport'] . ';Database=' . $conf['dbname'], $conf['dbuser'], $conf['dbpwd']);
             self::$link[$host]->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
+            throw $e;
             die('Db Error: database connect failed');
         }
     }
@@ -168,6 +169,25 @@ class Db
             $array[] = $tmp;
         }
         return !empty($array) ? $array : null;
+    }
+
+    public static function exportAll($propertys,$propertymap,$fp,$sql, $host = 'sqlserver')
+    {
+        $host = 'sqlserver';
+        self::connect($host);
+        $result = self::query($sql, $host);
+        if ($result === false) return array();
+        while ($tmp = $result->fetch(PDO::FETCH_ASSOC)) {
+            $row = array();
+            foreach($propertys as $i=>$v){
+                $cellstr = mb_convert_encoding(strval($tmp[$v]), 'GBK','UTF-8');
+                if(! empty($propertymap[$v])){
+                    $cellstr = mb_convert_encoding(strval($propertymap[$v][$tmp[$v]]), 'GBK','UTF-8');
+                }
+                array_push($row, $cellstr);
+            }
+            fputcsv($fp, $row);
+        }
     }
 
     /**
