@@ -722,6 +722,11 @@ class ModelDb{
         DB::exportAll($propertys,$propertymap,$fp,$sql,$options['lock'] === true ? 'master' : 'slave');
     }
 
+    public function exportxlsx($propertys,$propertymap,$fp,$options=array()) {
+        $sql = $this->buildSelectSql($options);
+        DB::exportxlsxAll($propertys,$propertymap,$fp,$sql,$options['lock'] === true ? 'master' : 'slave');
+    }
+
     public function buildSelectSql($options=array()) {
     	if (is_numeric($options['page'])){
 			$page = pagecmd('obj');

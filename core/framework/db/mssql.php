@@ -184,11 +184,20 @@ class Db
                 if(! empty($propertymap[$v])){
                     $cellstr = mb_convert_encoding(strval($propertymap[$v][$tmp[$v]]), 'GBK','UTF-8');
                 }
-                array_push($row, $cellstr);
+                array_push($row, self::csv($cellstr));
             }
-            fputcsv($fp, $row);
+            fwrite($fp,join(',',$row)."\r\n");
         }
     }
+    private static function csv($str){
+        $ret = $str;
+        $ret =  str_replace('"','""',$ret);
+        $ret =  str_replace("\r" , ' ',$ret);
+        $ret =  str_replace("\n" , ' ',$ret);
+        $ret = '="'.$ret . '"';
+        return $ret;
+    }
+
 
     /**
      * SELECT查询

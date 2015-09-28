@@ -302,7 +302,7 @@ class memberControl extends SystemControl {
 
         if(empty($flag)){
 //            $member_list = $model_member->getMemberList ( $condition, , 100000, $order );
-            $model_member->field('*')->where($condition)->page(100000)->order($order)->exportcsv($propertys,$propertymap,$fp);
+            $model_member->field('*')->where($condition)->page(1000000)->order($order)->exportcsv($propertys,$propertymap,$fp);
         }else{
 //            $member_list = $model_member->getMemberList ( $condition, '*', 10, $order );
             $model_member->field('*')->where($condition)->page(10)->order($order)->exportcsv($propertys,$propertymap,$fp);
