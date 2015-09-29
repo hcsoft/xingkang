@@ -1310,7 +1310,7 @@ class memberControl extends SystemControl {
 		if(isset($_GET['export']) && $_GET['export']=='true'){
             $this->exportxlsxbyArrayObject($exporttitle,$exportproperty,array(),'充值下账汇总',$data_list);
 		}
-        echo json_encode($exportproperty);
+//        echo json_encode($exportproperty);
         Tpl::output ( 'data_list', $data_list );
         Tpl::output('page', $page->show());
         Tpl::output ( 'displaycol', $displaycol );
