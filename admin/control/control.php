@@ -508,7 +508,25 @@ class SystemControl{
 	public function notEmpty($value){
 		return (isset($value) &&  $value !='');
 	}
-
+    public final function prepareexportcsv($titles,$filename){
+        $fp = fopen($filename,"a");
+        foreach($titles as $i=>$v){
+            $titles[$i] = mb_convert_encoding($v, 'GBK','UTF-8');
+        }
+        fputcsv($fp, $titles);
+        return $fp;
+    }
+    public final function endexportcsv($filename,$csvname,$fp){
+        fclose($fp);
+        $fp1 = fopen($filename,"r");
+        header('Content-Type: application/text');
+        header('Content-Disposition: attachment;filename="'.$csvname.'.csv"');
+        header('Cache-Control: max-age=0');
+        fpassthru($fp1);
+        fclose($fp1);
+        unlink ($filename);
+        exit();
+    }
     public final function exportcsv($sqls = ' select \'测试成功\' ', $titles = array('测试导出'), $sheetname ='导出'
         ,$codevalues = array()){
 //        $excel = new SimpleExcel('csv');

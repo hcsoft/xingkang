@@ -189,7 +189,7 @@ class Db
             fwrite($fp,join(',',$row)."\r\n");
         }
     }
-    private static function csv($str){
+    public static function csv($str){
         $ret = $str;
         $ret =  str_replace('"','""',$ret);
         $ret =  str_replace("\r" , ' ',$ret);

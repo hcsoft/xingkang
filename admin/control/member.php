@@ -647,8 +647,7 @@ class memberControl extends SystemControl {
 	public function mbdataexportOp(){
 //        $fp =  tmpfile();
         $tmpfname = tempnam("./tmp/", '');
-        $filename = $tmpfname;
-        $fp = fopen($filename,"a");
+
 		$titles = [
 			'卡号',
 			'姓名',
@@ -669,10 +668,7 @@ class memberControl extends SystemControl {
 			'储值余额',
 			'赠送余额',
 			'消费积分'];
-        foreach($titles as $i=>$v){
-            $titles[$i] = mb_convert_encoding($v, 'GBK','UTF-8');
-        }
-        fputcsv($fp, $titles);
+        $fp=$this::prepareexportcsv($titles,$tmpfname);
         $propertys = [
             'member_id',
             'member_truename',
@@ -699,14 +695,7 @@ class memberControl extends SystemControl {
             'CreateOrgID' => $this->orgmap,
         ];
         $this->exportmemberlist($propertys,$propertymap,$fp,false);
-        fclose($fp);
-        $fp1 = fopen($filename,"r");
-        header('Content-Type: application/text');
-        header('Content-Disposition: attachment;filename="会员.csv"');
-        header('Cache-Control: max-age=0');
-        fpassthru($fp1);
-        fclose($fp1);
-        unlink ($tmpfname);
+        $this::endexportcsv($tmpfname,"会员",$fp);
         exit;
 	}
 	
@@ -1261,8 +1250,6 @@ class memberControl extends SystemControl {
 		
 		$sumtypeparam = array(0=>'0',1=>'0',2=>'0',3=>'0',4=>'0',5=>'0');
 
-		$exporttitle = array('序号','期初预存','日常充值','日常下账','赠送金额','赠送下账','预存下账','赠送下账',
-			'积分下账','扣减积分','赠送积分');
 
 		foreach ( $sumtype as $i => $v ) {
 			// var_dump($colconfig['sumcol'][$v]);
@@ -1276,7 +1263,6 @@ class memberControl extends SystemControl {
 						// echo $item['name'] . '<br>';
 						
 						array_push ( $sumcol, $sqlarray [$item ['name']] );
-						array_push ( $exporttitle, $sqlarray [$item ['name']] ,0);
 						array_push ( $displaycol, $item ['name'] );
 						array_push ( $displaytext, $item ['text'] );
 						$itemsplit = explode ( ' as ', $sqlarray [$item ['name']] );
@@ -1299,8 +1285,15 @@ class memberControl extends SystemControl {
 				}
 			}
 		}
-		$exporttitle = array('序号','期初预存','日常充值','日常下账','赠送金额','赠送下账','预存下账','赠送下账',
-			'积分下账','扣减积分','赠送积分');
+        $exporttitle =array('序号');
+        $exporttitle=  array_merge ($exporttitle,$displaytext);
+        $exportproperty =array('rowcount');
+        $exportproperty=  array_merge ($exportproperty,$displaycol);
+
+        $exporttitle = array_merge($exporttitle , array('普卡消费金额','期初预存','日常充值','日常下账','赠送金额','赠送下账','预存下账','赠送下账',
+			'积分下账','扣减积分','赠送积分'));
+        $exportproperty = array_merge($exportproperty , array('pkmoney','fRechargeInit','fRechargeAdd','fRechargeBuy','GiveMoney','GiveSaleMoney','fRecharge',
+            'fConsume','fScaleToMoney','fScale','fAddScale'));
 		$param1 = implode('', $sumtypeparam);
 //		array_push ( $displaytext, '充值下账信息' );
 //		array_push ( $displaytext, '诊疗购买信息' );
@@ -1314,54 +1307,13 @@ class memberControl extends SystemControl {
 		while ( $row = $stmt->fetchObject () ) {
 			array_push ( $data_list, $row );
 		}
-		
-		Tpl::output ( 'data_list', $data_list );
-		Tpl::output('page', $page->show());
-		// // var_dump($totalcol);
-		// $totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
-		// // var_dump($totalcol);
-		// $totalcolstr = join(',', $totalcol);
-		// $sumcolstr = join(',', $sumcol);
-		// $groupbycolstr = join(',', $groupbycol);
-		// // echo $sumcolstr;
-		// $tsql = " select $sumcolstr , sum(RechargeMoney) rechargemMoney,sum(GiveMoney) givemoney , sum(RechargeMoney+GiveMoney) allmoney
-		// $sql group by $groupbycolstr order by $groupbycolstr ";
-		// //处理合计
-		// $totalsql = " select $totalcolstr , count(1) cliniccount
-		// $sql ";
-		// if(isset($_GET['export']) && $_GET['export']=='true'){
-		// $this->exportxlsx(array(0=>$tsql,1=>$totalsql),$displaytext,'充值下账汇总');
-		// }
-		// $stmt = $conn->query($tsql);
-		// $data_list = array();
-		// while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-		// array_push($data_list, $row);
-		// }
-		
-		// // echo $totalsql;
-		// $totalstmt = $conn->query($totalsql);
-		// while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
-		// array_push($data_list, $row);
-		// }
-		// Tpl::output('data_list', $data_list);
-		// //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
-		// Tpl::output('page', $page->show());
-		// //处理需要显示的列
-		// $col = array();
-		// foreach ($sumtype as $i => $v) {
-		// if (isset($sumtypestr[$v])) {
-		// foreach ($sumtypestr[$v] as $key => $item) {
-		// $col[$key] = $item;
-		// }
-		// }
-		// }
-		// var_dump($col);
-		Tpl::output ( 'displaycol', $displaycol );
-		Tpl::output ( 'displaytext', $displaytext );
 		if(isset($_GET['export']) && $_GET['export']=='true'){
-			$this->exportxlsxwithoutsql($exporttitle,'充值下账汇总',
-				$data_list);
+            $this->exportxlsxbyArrayObject($exporttitle,$exportproperty,array(),'充值下账汇总',$data_list);
 		}
+        Tpl::output ( 'data_list', $data_list );
+        Tpl::output('page', $page->show());
+        Tpl::output ( 'displaycol', $displaycol );
+        Tpl::output ( 'displaytext', $displaytext );
 		Tpl::showpage ( 'member.recharge.sum' );
 	}
 
@@ -1443,6 +1395,7 @@ class memberControl extends SystemControl {
         array_push($exporttitle,'积分余额');
         array_push($exporttitle,'计算积分余额');
         $propertyarray = array();
+        array_push($propertyarray,'rownum');
         array_push($propertyarray,'member_id');
         array_push($propertyarray,'member_truename');
         array_push($propertyarray,'orgid');
@@ -1577,7 +1530,7 @@ class memberControl extends SystemControl {
 		$paramsql = str_replace('\'','\'\'',$paramsql);
         if($exportflag){
             $startnum = 0;
-            $endnum = 100000;
+            $endnum = 1000000;
         }
 		$tsql = "SET NOCOUNT ON; Exec p_query_member_check '$paramsql','$startnum','$endnum',$flag1,$flag2,$flag3;SET NOCOUNT off; ";
 //		echo $tsql;
@@ -1588,15 +1541,29 @@ class memberControl extends SystemControl {
 		//第二次获得数据
 		$stmt->nextRowset();
 		$data_list = array();
-		while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-			array_push($data_list, $row);
-		}
+        if($exportflag){
+            $tmpfname = tempnam("./tmp/", '');
+            $fp = $this::prepareexportcsv($exporttitle,$tmpfname);
+            while ($tmp = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $row = array();
+                foreach($propertyarray as $i=>$v){
+                    $cellstr = mb_convert_encoding(strval($tmp->$v), 'GBK','UTF-8');
+                    if(! empty($propertymap[$v])){
+                        $cellstr = mb_convert_encoding(strval($propertymap[$v][$tmp[$v]]), 'GBK','UTF-8');
+                    }
+                    array_push($row,  Db::csv($cellstr));
+                }
+                fwrite($fp,join(',',$row)."\r\n");
+            }
+            $this::endexportcsv($tmpfname,"会员储值积分对账",$fp);
+
+        }else{
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($data_list, $row);
+            }
+        }
 		Tpl::output('data_list', $data_list);
 		Tpl::output('orderbys',$orderbys);
-        if(isset($_GET['export']) && $_GET['export']=='true'){
-            $this->exportxlsxbyArrayObject($exporttitle,$propertyarray,array(),'充值下账汇总',
-                $data_list);
-        }
 		Tpl::output('page', $page->show());
 		Tpl::showpage ( 'member.check' );
 	}
