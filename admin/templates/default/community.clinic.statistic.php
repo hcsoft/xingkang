@@ -52,6 +52,7 @@
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" value="community" name="act">
         <input type="hidden" value="clinicstatistic" name="op">
+        <input type="hidden" value="false" name="export" id="export">
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
@@ -83,6 +84,7 @@
                 </td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
+                    <a href="javascript:void(0);" id="ncexport" class="btn-export " title="导出">&nbsp;</a>
                 </td>
             </tr>
             </tbody>
@@ -358,6 +360,14 @@
         $('#ncsubmit').click(function () {
             var sumtypes =$(":checkbox[name='sumtype[]'][checked]");
             console.log(sumtypes);
+            $("#export").val("false");
+            $('#formSearch').submit();
+        });
+
+        $('#ncexport').click(function () {
+            var sumtypes =$(":checkbox[name='sumtype[]'][checked]");
+            console.log(sumtypes);
+            $("#export").val("true");
             $('#formSearch').submit();
         });
 		$("#formSearch input").keypress(function(event){

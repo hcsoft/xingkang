@@ -462,6 +462,48 @@ class SystemControl{
 		$objWriter->save('php://output');
 		exit;
 	}
+
+    public final function exportxlsxbyArrayObject($titles = array(),$propertys=array(),$propertymap = array(), $sheetname ='导出',$exportobjlist){
+        require(BASE_PATH.'/include/PHPExcel.php');
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("hcsoft");
+        $sheet = $objPHPExcel->setActiveSheetIndex(0);
+        $sheet->setTitle($sheetname);
+        foreach($titles as $i =>$v){
+            $sheet->setCellValue(chr($i+65).'1',$v);
+        }
+        //查询sql
+        try{
+            $rowindex = 2;
+            $serial = 1;
+            foreach ($exportobjlist as $k=>$value){
+                $cellindex = 1;
+                $sheet->setCellValue(chr(65).strval($rowindex),strval($serial));
+                foreach($propertys as $i=>$v){
+                    $cellstr = strval($value->$v);
+                    if(! empty($propertymap[$v])){
+                        $cellstr = strval($propertymap[$v][$value->$v]);
+                    }
+                    $sheet->setCellValueExplicit(chr($cellindex+65).strval($rowindex),$cellstr,PHPExcel_Cell_DataType::TYPE_STRING);
+                    $cellindex = $cellindex + 1;
+                }
+                $rowindex = $rowindex+1;
+                $serial = $serial + 1;
+            }
+        }catch (Exception $e){
+            throw $e;
+//			Log::record($tsql,'SQL');
+//			$sheet->setCellValue(2,1,'导出异常!请与系统管理员联系!异常信息:'+$e->getMessage());
+//
+//			$sheet->setCellValue(2,1,'导出异常!请与系统管理员联系!异常信息:'+$e->getMessage());
+        }
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$sheetname.'.xlsx"');
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+        exit;
+    }
 	
 	public function notEmpty($value){
 		return (isset($value) &&  $value !='');
