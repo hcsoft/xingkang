@@ -1425,7 +1425,36 @@ class memberControl extends SystemControl {
 
 	public function checkOp()
 	{
-		$orderbys = array(
+        if(isset($_GET['export']) && $_GET['export']=='true'){
+            $exportflag = true;
+        }else{
+            $exportflag = false;
+        }
+        $exporttitle = array();
+        array_push($exporttitle,'序号');
+        array_push($exporttitle,'卡号');
+        array_push($exporttitle,'姓名');
+        array_push($exporttitle,'机构编码');
+        array_push($exporttitle,'机构名称');
+        array_push($exporttitle,'储值余额');
+        array_push($exporttitle,'计算储值余额');
+        array_push($exporttitle,'赠送余额');
+        array_push($exporttitle,'计算赠送余额');
+        array_push($exporttitle,'积分余额');
+        array_push($exporttitle,'计算积分余额');
+        $propertyarray = array();
+        array_push($propertyarray,'member_id');
+        array_push($propertyarray,'member_truename');
+        array_push($propertyarray,'orgid');
+        array_push($propertyarray,'orgname');
+        array_push($propertyarray,'available_predeposit');
+        array_push($propertyarray,'calc_predeposit');
+        array_push($propertyarray,'fConsumeBalance');
+        array_push($propertyarray,'calc_consume');
+        array_push($propertyarray,'member_points');
+        array_push($propertyarray,'calc_points');
+
+        $orderbys = array(
 			array('txt'=>'会员编号','col'=> ' member_id '),
 			array('txt'=>'机构编码','col'=> ' orgid '),
 			array('txt'=>'预存余额','col'=> ' available_predeposit '),
@@ -1546,6 +1575,10 @@ class memberControl extends SystemControl {
 
 		$paramsql = $sql . ' order by ' .$orderbysql .$ordersql;
 		$paramsql = str_replace('\'','\'\'',$paramsql);
+        if($exportflag){
+            $startnum = 0;
+            $endnum = 100000;
+        }
 		$tsql = "SET NOCOUNT ON; Exec p_query_member_check '$paramsql','$startnum','$endnum',$flag1,$flag2,$flag3;SET NOCOUNT off; ";
 //		echo $tsql;
 		$stmt = $conn->query($tsql);
@@ -1560,6 +1593,10 @@ class memberControl extends SystemControl {
 		}
 		Tpl::output('data_list', $data_list);
 		Tpl::output('orderbys',$orderbys);
+        if(isset($_GET['export']) && $_GET['export']=='true'){
+            $this->exportxlsxbyArrayObject($exporttitle,$propertyarray,array(),'充值下账汇总',
+                $data_list);
+        }
 		Tpl::output('page', $page->show());
 		Tpl::showpage ( 'member.check' );
 	}
