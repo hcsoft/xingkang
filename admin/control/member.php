@@ -1287,7 +1287,7 @@ class memberControl extends SystemControl {
 		}
         $exporttitle =array('序号');
         $exporttitle=  array_merge ($exporttitle,$displaytext);
-        $exportproperty =array('rowcount');
+        $exportproperty =array();
         $exportproperty=  array_merge ($exportproperty,$displaycol);
 
         $exporttitle = array_merge($exporttitle , array('普卡消费金额','期初预存','日常充值','日常下账','赠送金额','赠送下账','预存下账','赠送下账',
@@ -1310,6 +1310,7 @@ class memberControl extends SystemControl {
 		if(isset($_GET['export']) && $_GET['export']=='true'){
             $this->exportxlsxbyArrayObject($exporttitle,$exportproperty,array(),'充值下账汇总',$data_list);
 		}
+        echo json_encode($exportproperty);
         Tpl::output ( 'data_list', $data_list );
         Tpl::output('page', $page->show());
         Tpl::output ( 'displaycol', $displaycol );
