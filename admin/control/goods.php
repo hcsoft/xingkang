@@ -291,16 +291,16 @@ class goodsControl extends SystemControl
         } else {
             $sql = $sql . ' and  (stock.fDS_SStock <> 0 or  stock.fDS_LeastSStock  <> 0)  ';
         }
-        $exportflag =false;
-        if (isset ( $_GET ['export'] ) && $_GET ['export'] == 'true') {
-            $exportflag = true;
-        }
+
 
         $countsql = " select count(*)  $sql ";
         $stmt = $conn->query($countsql);
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
-
+        $exportflag =false;
+        if (isset ( $_GET ['export'] ) && $_GET ['export'] == 'true') {
+            $exportflag = true;
+        }
         if ($exportflag){
             $startnum = 0 ;
             $endnum = 100000;//excel仅允许导出10W条
@@ -385,7 +385,7 @@ class goodsControl extends SystemControl
             array_push($goods_list, $row);
         }
 
-        if (isset ( $_GET ['export'] ) && $_GET ['export'] == 'true') {
+        if ($exportflag) {
             $this->exportxlsxbyArrayObject($displaytext,$propertys,$propertysmap,'商品',$goods_list);
         }
 
@@ -547,16 +547,86 @@ class goodsControl extends SystemControl
 //        echo $countsql;
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
+
+        $exportflag =false;
+        if (isset ( $_GET ['export'] ) && $_GET ['export'] == 'true') {
+            $exportflag = true;
+        }
+        if ($exportflag){
+            $startnum = 0 ;
+            $endnum = 100000;//excel仅允许导出10W条
+            $displaytext = array();
+            array_push($displaytext,'序号');
+            array_push($displaytext,'商品编码');
+            array_push($displaytext,'系统编码');
+            array_push($displaytext,'商品名称');
+            array_push($displaytext,'完整规格');
+            array_push($displaytext,'含量规格');
+            array_push($displaytext,'包装规格');
+
+            array_push($displaytext,'供应商');
+            array_push($displaytext,'厂商');
+            array_push($displaytext,'产地');
+
+            array_push($displaytext,'常规单位');
+            array_push($displaytext,'进价');
+            array_push($displaytext,'零价');
+            array_push($displaytext,'实际库存');
+
+            array_push($displaytext,'最小单位');
+            array_push($displaytext,'进价');
+            array_push($displaytext,'零价');
+            array_push($displaytext,'实际库存');
+
+            array_push($displaytext,'价格');
+            $propertys = array();
+            array_push($propertys,'sDrug_ID');
+            array_push($propertys,'goods_commonid');
+            array_push($propertys,'goods_name');
+            array_push($propertys,'sDrug_Spec');
+            array_push($propertys,'sDrug_Content');
+            array_push($propertys,'sDrug_PackSpec');
+            array_push($propertys,'sCustomer_Name');
+            array_push($propertys,'brand_name');
+            array_push($propertys,'gc_name');
+
+            array_push($propertys,'sDrug_Unit');
+            array_push($propertys,'fDS_BuyPrice');
+            array_push($propertys,'fDS_RetailPrice');
+            array_push($propertys,'fDS_SStock');
+            array_push($propertys,'sDrug_LeastUnit');
+            array_push($propertys,'fDS_LeastBuyPrice');
+            array_push($propertys,'fDS_LeastRetailPrice');
+            array_push($propertys,'fDS_LeastSStock');
+
+            array_push($propertys,'price1');
+            array_push($propertys,'price2');
+            array_push($propertys,'price3');
+
+            $propertysmap =  array();
+            $propertysmap['iDrug_StatClass'] =$this->classmap ;
+
+        }
+
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.goods_commonid) rownum,
                         org.name as OrgName,  *
                             $sql order by  good.goods_commonid)zzzz where rownum>$startnum )zzzzz order by rownum";
         $stmt = $conn->query($tsql);
         $goods_list = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $goods_list[] = $row;
+
 //            $newstmt = $conn->query(" select * from Center_DrugStocksub where idrug_id = '$row->goods_commonid'");
 //            $row->detail = $newstmt->fetch(PDO::FETCH_OBJ);
+            $row['price1'] = $row['fDS_RetailPrice']*$row['fDS_OStock']+$row['fDS_LeastRetailPrice']*$row['fDS_LeastOStock'];
+            $row['price2'] = $row['fDS_BuyPrice']*$row['fDS_OStock']+$row['fDS_LeastBuyPrice']*$row['fDS_LeastOStock'];
+            $row['price3'] = $row['price1'] - $row['price2'];
+            $goods_list[] = $row;
+
         }
+        if ($exportflag) {
+            $this->exportxlsxbyObject($displaytext,$propertys,$propertysmap,'商品库存',$goods_list);
+        }
+
 
 //        var_dump($goods_list);
         Tpl::output('goods_list', $goods_list);
