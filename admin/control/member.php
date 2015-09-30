@@ -1222,8 +1222,8 @@ class memberControl extends SystemControl {
 		$page = new Page ();
 		$page->setEachNum ( 10 );
 		$page->setNowPage ( $_REQUEST ["curpage"] );
-		$startnum = $page->getEachNum() * ($page->getNowPage() - 1);
-		$endnum = $page->getEachNum() * ($page->getNowPage());
+		$startnum = 0;
+		$endnum = 1000000;
 		
 		if ($_GET ['query_start_time']) {
 			$starttime =  $_GET ['query_start_time'] ;
@@ -1304,9 +1304,30 @@ class memberControl extends SystemControl {
 		$stmt = $conn->prepare ( $tsql );
 		$stmt->execute ();
 		$data_list = array ();
+        $sumrow = (object)array();
+        foreach($exportproperty as $i=>$v){
+            if(in_array($v , $displaycol)){
+                $sumrow->$v = '';
+            }else{
+                $sumrow->$v = 0;
+            }
+            if($v == $displaycol[0]){
+                $sumrow->$v = '总计:';
+            }
+        }
 		while ( $row = $stmt->fetchObject () ) {
 			array_push ( $data_list, $row );
+            //计算合计
+            foreach($exportproperty as $i=>$v){
+                foreach($exportproperty as $i=>$v){
+                    if(!in_array($v , $displaycol)){
+                        $sumrow->$v = $sumrow->$v + $row->$v;
+                    }
+                }
+            }
 		}
+        array_push ( $data_list, $sumrow );
+
 		if(isset($_GET['export']) && $_GET['export']=='true'){
             $this->exportxlsxbyArrayObject($exporttitle,$exportproperty,array(),'充值下账汇总',$data_list);
 		}
