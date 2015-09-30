@@ -264,6 +264,13 @@ class goodsControl extends SystemControl
             $sql = $sql . ' and EXISTS (  select 1  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  good.goods_commonid = buy.iDrug_ID and cus.sCustomer_Name  like \'%' . $_GET['sCustomer_Name'] . '%\' )';
             $customsql = $customsql . ' and  cus.sCustomer_Name like   \'%' . $_GET['sCustomer_Name'].'%\'';
         }
+
+        if ($_GET['allowzero'] && $_GET['allowzero'] == 'true') {
+            $sql = $sql . '   ';
+        } else {
+            $sql = $sql . ' and  (stock.fDS_SStock <> 0 or  stock.fDS_LeastSStock  <> 0)  ';
+        }
+
         $countsql = " select count(*)  $sql ";
         $stmt = $conn->query($countsql);
         $total = $stmt->fetch(PDO::FETCH_NUM);
