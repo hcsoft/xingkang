@@ -8,10 +8,19 @@
 <style>
 	#editdialog table td{
 		padding:5px 5px;
+        border-collapse: collapse;
+        border:1px solid #ddd;
 	}
+    #editdialog table tr td:first-child{
+        background-color: #eee;
+        text-align: right;
+    }
 	#editdialog table td input{
 		width: 210px;
 	}
+    #editdialog p{
+        line-height: 25px;
+    }
 	#editdialog {
         display: none;
     }
@@ -31,6 +40,7 @@
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" name="act" value="goods">
         <input type="hidden" name="op" value="goods">
+        <input type="hidden" id ='export' name="export" value="false">
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
@@ -53,8 +63,12 @@
                 <th><label for="sCustomer_ID">供应商名称</label></th>
                 <td><input type="text" value="<?php echo $_GET['sCustomer_Name'] ?>" name="sCustomer_Name"
                            id="sCustomer_Name" class="txt"/></td>
+                <td><input type="checkbox" value="true" <?php if($output['search']['allowzero'] =='true')  echo checked; ?> name="allowzero"
+                           id="allowzero" /> <label for="allowzero">显示零库存</label></td>
                  <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
-                       title="<?php echo $lang['nc_query']; ?>">&nbsp;</a></td>
+                       title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
+                     <a href="javascript:void(0);" id="ncexport" class="btn-export "
+                        title="导出"></a></td>
             </tr>
             </tbody>
         </table>
@@ -164,21 +178,17 @@
     </div>
 </div>
 
-<div id="editdialog" title="修改分类">
+<div id="editdialog" title="修改分类" >
     <span id="errormsg" style="color:red;width:100%;display:block;text-align: center;"></span>
     <form>
         <input type="hidden" id='spotid' name="spotid">
-        <input type="hidden" id='spotid' name="spotid">
         <table>
             <tr>
-                <td>商品<br/>编号：</td>
+                <td>商品编号：</td>
                 <td><input style="color:blue;" id="goods_commonid" name="goods_commonid" readonly></td>
             </tr>
             <tr>
-<!--                <th><label for="search_store_name">--><?php //echo $lang['goods_index_store_name']; ?><!--</label></th>-->
-<!--                <td><input type="text" value="--><?php //echo $output['search']['search_store_name']; ?><!--"-->
-<!--                           name="search_store_name" id="search_store_name" class="txt"></td>-->
-                <th><label><?php echo $lang['goods_index_brand']; ?></label></th>
+                <td><?php echo $lang['goods_index_brand']; ?>：</td>
                 <td><select name="search_brand_id">
                         <option value=""><?php echo $lang['nc_please_choose']; ?>...</option>
                         <?php if (!empty($output['brand_list']) && is_array($output['brand_list'])) { ?>
@@ -187,7 +197,9 @@
                                         <?php if ($output['search']['search_brand_id'] == $v['brand_id']){ ?>selected<?php } ?>><?php echo $v['brand_name']; ?></option>
                             <?php } ?>
                         <?php } ?>
-                <td>商品<br/>名称：</td>
+                        </tr>
+            <tr>
+                <td>商品名称：</td>
                 <td><input style="color:blue;" id="goods_name" name="goods_name" readonly></td>
             </tr>
             <tr>
@@ -212,7 +224,7 @@
                 </td>
             </tr>
             <tr>
-                <td>财务<br/>分类：</td>
+                <td>财务分类：</td>
                 <td><select name="classtype" id="classtype">
                         <option value="">未分类</option>
                         <option value="11">011中成药</option>
@@ -474,9 +486,14 @@
     $(function () {
 //        gcategoryInit("gcategory");
         $('#ncsubmit').click(function () {
-//            $('input[name="op"]').val('goods');
+            $('input[name="op"]').val('goods');
+            $("#export").val('false');
             $('#formSearch').submit();
-            console.log(123);
+        });
+        $('#ncexport').click(function () {
+            $('input[name="op"]').val('goods');
+            $("#export").val('true');
+            $('#formSearch').submit();
         });
 	
 		//台账窗口初始化
@@ -540,6 +557,7 @@
         $("#editdialog").dialog({
             resizable: false,
             autoOpen: false,
+            width:400,
             close: function () {
 //                $('#formSearch').submit();
 //                console.log($('#formSearch').submit());
