@@ -565,7 +565,7 @@ class goodsControl extends SystemControl
             array_push($displaytext,'包装规格');
 
             array_push($displaytext,'供应商');
-            array_push($displaytext,'厂商');
+            array_push($displaytext,'厂家');
             array_push($displaytext,'产地');
 
             array_push($displaytext,'常规单位');
@@ -578,7 +578,9 @@ class goodsControl extends SystemControl
             array_push($displaytext,'零价');
             array_push($displaytext,'实际库存');
 
-            array_push($displaytext,'价格');
+            array_push($displaytext,'零价金额');
+            array_push($displaytext,'进价金额');
+            array_push($displaytext,'进销差');
             $propertys = array();
             array_push($propertys,'sDrug_ID');
             array_push($propertys,'goods_commonid');
