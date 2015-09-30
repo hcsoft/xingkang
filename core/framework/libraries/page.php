@@ -298,7 +298,7 @@ class Page{
         $this->right_inside_a_html = '</span>';
 		switch ($this->style) {
 			case '1':
-				$html_page .= '<ul>';
+				$html_page .= '<span class="counts">总记录数：<font color="#0D93BF">'.strval($this->total_num).'</font>条</span><ul>';
                 $html_page.= $this->getSumstr();
 				if ($this->getNowPage() == 1){
 					$html_page .= '<li>'.$this->left_inside_a_html.$this->pre_page.$this->right_inside_a_html.'</li>';
@@ -313,7 +313,7 @@ class Page{
 				$html_page .= '</ul>';
 				break;
 			case '2':
-				$html_page .= '<ul>';
+				$html_page .= '<span class="counts">总记录数：<font color="#0D93BF">'.strval($this->total_num).'</font>条</span><ul>';
                 $html_page.= $this->getSumstr();
 				if ($this->getNowPage() == 1){
 					$html_page .= '<li>'.$this->left_inside_a_html.$this->pre_home.$this->right_inside_a_html.'</li>';
@@ -333,7 +333,7 @@ class Page{
 				$html_page .= '</ul>';
 				break;
 			case '3':
-				$html_page .= '<ul>';
+				$html_page .= '<span class="counts">总记录数：<font color="#0D93BF">'.strval($this->total_num).'</font>条</span><ul>';
                 $html_page.= $this->getSumstr();
 				if ($this->getNowPage() == 1){
 					$html_page .= '<li>'.$this->left_inside_a_html.$this->pre_page.$this->right_inside_a_html.'</li>';
@@ -347,10 +347,10 @@ class Page{
 				}else {
 					$html_page .= '<li><a class="demo" href="'. $this->page_url . ($this->getNowPage()+1) .'">'.$this->left_inside_a_html.$this->next_page.$this->right_inside_a_html.'</a></li>';
 				}
-				$html_page .= '</ul>';
+				$html_page .= '<span class="counts">总记录数：'.strval($this->total_num).'</span></ul>';
 				break;
 			case '4':
-				$html_page .= '<ul>';
+				$html_page .= '<span class="counts">总记录数：<font color="#0D93BF">'.strval($this->total_num).'</font>条</span><ul>';
                 $html_page.= $this->getSumstr();
 				if ($this->getNowPage() == 1){
 					$html_page .= '<li>'.$this->left_inside_a_html.$this->pre_page.$this->right_inside_a_html.'</li>';
@@ -365,7 +365,7 @@ class Page{
 				$html_page .= '</ul>';
 				break;
 			case '5':
-				$html_page .= '<ul>';
+				$html_page .= '<span class="counts">总记录数：<font color="#0D93BF">'.strval($this->total_num).'</font>条</span><ul>';
                 $html_page.= $this->getSumstr();
 				if ($this->getNowPage() == 1){
 					$html_page .= '<li>'.$this->left_inside_a_html.$this->pre_home.$this->right_inside_a_html.'</li>';

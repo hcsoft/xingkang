@@ -156,7 +156,7 @@ class memberControl extends SystemControl {
 			$order = 'member_id desc';
 		}
 		if(empty($flag)){
-			$member_list = $model_member->getMemberList ( $condition, '*', 100000, $order );
+			$member_list = $model_member->getMemberList ( $condition, '*', 1000000, $order );
 		}else{
 			$member_list = $model_member->getMemberList ( $condition, '*', 10, $order );
 		}
