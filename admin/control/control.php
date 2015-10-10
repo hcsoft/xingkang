@@ -541,8 +541,6 @@ class SystemControl{
             array_push($row, Db::csv_encode($v));
         }
         fputcsv($fp, $row);
-//        array_push($data,$row);
-//        $excel->writer->addRow($row);
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
         //查询sql
         try{
@@ -551,7 +549,7 @@ class SystemControl{
                 foreach($sqls as $i=>$sql){
                     $stmt = $conn->query($sql);
                     while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-                        $row = array();
+                        $newrow = array();
                         foreach($row as $i=>$v){
                             $metadata = $stmt->getColumnMeta($i);
                             $map = $codevalues[$metadata['name']];
@@ -559,20 +557,15 @@ class SystemControl{
                             if(isset($map)){
                                 $cellstr = strval($map[$v]);
                             }
-                            array_push($row, Db::csv_encode($cellstr));
-//                            array_push($row, $cellstr);
+                            array_push($newrow, Db::csv_encode($cellstr));
                         }
-//                        fputcsv($fp, $row);
-                        fwrite($fp,join(',',$row)."\r\n");
-//                        $excel->writer->saveFile('d:/test.csv');
-                        $rowindex = $rowindex+1;
+                        fwrite($fp,join(',',$newrow)."\r\n");
                     }
                 }
             }else{
-//				echo $sqls;
                 $stmt = $conn->query($sqls);
                 while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-                    $row = array();
+                    $newrow = array();
                     foreach($row as $i=>$v){
                         $metadata = $stmt->getColumnMeta($i);
                         $map = $codevalues[$metadata['name']];
@@ -580,13 +573,10 @@ class SystemControl{
                         if(isset($map)){
                             $cellstr = strval($map[$v]);
                         }
-                        array_push($row, Db::csv_encode($cellstr));
+                        array_push($newrow, Db::csv_encode($cellstr));
 
                     }
-                    fwrite($fp,join(',',$row)."\r\n");
-//                    $excel->writer->addRow($row);
-//                    $excel->writer->saveFile('d:/test.csv');
-                    $rowindex = $rowindex+1;
+                    fwrite($fp,join(',',$newrow)."\r\n");
                 }
             }
         }catch (Exception $e){
