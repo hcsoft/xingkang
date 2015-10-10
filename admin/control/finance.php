@@ -1162,7 +1162,7 @@ class financeControl extends SystemControl
                         $sql ";
         }
         if (isset($_GET['export']) && $_GET['export'] == 'true') {
-            $this->exportxlsx(array(0 => $tsql, 1 => $totalsql), $displaytext, '收入统计');
+            $this->exportxlsx(array(0 => $tsql, 1 => $totalsql), $displaytext, '单品毛利分析');
         }
 
 //        echo $totalsql;
