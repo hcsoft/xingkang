@@ -512,7 +512,7 @@ class goodsControl extends SystemControl
             $sql = $sql . ' and good.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
         }
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']);
+            $sql = $sql . ' and good.sdrug_id = \'' . ($_GET['search_commonid']).'\'';
         }
         if ($_GET['search_store_name'] != '') {
             $sql = $sql . ' and good.store_name like \'%' . trim($_GET['search_store_name']) . '%\'';
