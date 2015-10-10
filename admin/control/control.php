@@ -531,7 +531,7 @@ class SystemControl{
         ,$codevalues = array()){
 //        $excel = new SimpleExcel('csv');
         $tmpfname = tempnam("./tmp/", '');
-        $fp = fopen($tmpfname, 'w');
+        $fp = fopen($tmpfname, 'a');
 
 
 //        $excel->parser->loadFile('d:/test.csv');
@@ -604,7 +604,7 @@ class SystemControl{
 	public final function exportcsvbyObject($titles = array(),$propertys=array(),$propertymap = array(), $sheetname ='导出',$exportobjlist){
 //		$excel = new SimpleExcel('csv');
         $tmpfname = tempnam("./tmp/", '');
-        $fp = fopen($tmpfname, 'w');
+        $fp = fopen($tmpfname, 'a');
 
 		$row = array();
 		foreach($titles as $i =>$v){
