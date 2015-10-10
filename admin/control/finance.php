@@ -224,7 +224,7 @@ class financeControl extends SystemControl
                         a.ida_id
                         $sql order by  a.dSale_MakeDate desc ";
         if (isset($_GET['export']) && $_GET['export'] == 'true') {
-            $this->exportxlsx($exportsql, array('序号' ,'商品编码', '单据编号', '制单日期','项目编码', '项目名称', '项目类型', '规格', '单位', '产地/厂商','供应商编码','供应商名称', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
+            $this->exportcsv($exportsql, array('序号' ,'商品编码', '单据编号', '制单日期','项目编码', '项目名称', '项目类型', '规格', '单位', '产地/厂商','供应商编码','供应商名称', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
         }
         $stmt = $conn->query($tsql);
         $data_list = array();
@@ -616,7 +616,7 @@ class financeControl extends SystemControl
                         a.ida_id
                         $sql order by  a.dSale_MakeDate desc ";
         if (isset($_GET['export']) && $_GET['export'] == 'true') {
-            $this->exportxlsx($exportsql, array('序号', '单据编号', '制单日期','项目编码', '项目名称', '项目类型', '规格', '单位', '产地/厂商', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
+            $this->exportcsv($exportsql, array('序号', '单据编号', '制单日期','项目编码', '项目名称', '项目类型', '规格', '单位', '产地/厂商', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
         }
         $stmt = $conn->query($tsql);
         $data_list = array();

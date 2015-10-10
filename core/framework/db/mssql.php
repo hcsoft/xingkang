@@ -198,6 +198,15 @@ class Db
         return $ret;
     }
 
+    public static function csv_encode($str){
+        $ret = mb_convert_encoding(strval($str), 'GBK','UTF-8');;
+        $ret =  str_replace('"','""',$ret);
+        $ret =  str_replace("\r" , ' ',$ret);
+        $ret =  str_replace("\n" , ' ',$ret);
+        $ret = '="'.$ret . '"';
+        return $ret;
+    }
+
 
     /**
      * SELECT查询

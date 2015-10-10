@@ -530,12 +530,15 @@ class SystemControl{
     public final function exportcsv($sqls = ' select \'测试成功\' ', $titles = array('测试导出'), $sheetname ='导出'
         ,$codevalues = array()){
 //        $excel = new SimpleExcel('csv');
-        $fp = fopen('d:/test.csv', 'w');
+        $tmpfname = tempnam("./tmp/", '');
+        $fp = fopen($tmpfname, 'w');
+
+
 //        $excel->parser->loadFile('d:/test.csv');
 //        $data = array();
         $row = array();
         foreach($titles as $i =>$v){
-            array_push($row, $v);
+            array_push($row, Db::csv_encode($v));
         }
         fputcsv($fp, $row);
 //        array_push($data,$row);
@@ -556,9 +559,11 @@ class SystemControl{
                             if(isset($map)){
                                 $cellstr = strval($map[$v]);
                             }
-                            array_push($row, $cellstr);
+                            array_push($row, Db::csv_encode($cellstr));
+//                            array_push($row, $cellstr);
                         }
-                        fputcsv($fp, $row);
+//                        fputcsv($fp, $row);
+                        fwrite($fp,join(',',$row)."\r\n");
 //                        $excel->writer->saveFile('d:/test.csv');
                         $rowindex = $rowindex+1;
                     }
@@ -575,10 +580,10 @@ class SystemControl{
                         if(isset($map)){
                             $cellstr = strval($map[$v]);
                         }
-                        array_push($row, $cellstr);
+                        array_push($row, Db::csv_encode($cellstr));
 
                     }
-                    fputcsv($fp, $row);
+                    fwrite($fp,join(',',$row)."\r\n");
 //                    $excel->writer->addRow($row);
 //                    $excel->writer->saveFile('d:/test.csv');
                     $rowindex = $rowindex+1;
@@ -589,10 +594,7 @@ class SystemControl{
 
         }
 //        $excel->writer->setData($data);
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="'.$sheetname.'.csv"');
-        header('Cache-Control: max-age=0');
-        fclose($fp);
+        self::endexportcsv($tmpfname,$sheetname,$fp);
 //        $excel->writer->saveFile('php://output');
 
         exit;
@@ -601,15 +603,16 @@ class SystemControl{
 
 	public final function exportcsvbyObject($titles = array(),$propertys=array(),$propertymap = array(), $sheetname ='导出',$exportobjlist){
 //		$excel = new SimpleExcel('csv');
-        $fp = fopen('f:/test.csv', 'a');
+        $tmpfname = tempnam("./tmp/", '');
+        $fp = fopen($tmpfname, 'w');
 
 		$row = array();
 		foreach($titles as $i =>$v){
-			array_push($row, $v);
+			array_push($row, Db::csv_encode($v));
 		}
 //		array_push($data,$row);
         fputcsv($fp, $row);
-        fclose($fp);
+
 		//查询sql
 		try{
 //			$rowindex = 2;
@@ -623,35 +626,18 @@ class SystemControl{
 					if(! empty($propertymap[$v])){
 						$cellstr = strval($propertymap[$v][$value[$v]]);
 					}
-					array_push($row, $cellstr);
+					array_push($row, Db::csv_encode($cellstr));
 //					$cellindex = $cellindex + 1;
 				}
 //				array_push($data,$row);
-                $fp = fopen('f:/test.csv', 'a');
-                fputcsv($fp, $row);
-                fclose($fp);
+                fwrite($fp,join(',',$row)."\r\n");
 //				$rowindex = $rowindex+1;
 //				$serial = $serial + 1;
 			}
 		}catch (Exception $e){
 			throw $e;
 		}
-//        fclose($fp);
-        $name = 'f:/test.csv';
-        $exportfile = fopen($name, 'r');
-
-// 发送合适的报头
-
-// 发送图片并终止脚本
-//        fpassthru($fp);
-//        exit;
-		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment;filename="'.$sheetname.'.csv"');
-		header('Cache-Control: max-age=0');
-
-//		$excel->writer->saveFile('php://output');
-        fpassthru($exportfile);
-		exit;
+        self::endexportcsv($tmpfname,$sheetname,$fp);
 	}
 
 
