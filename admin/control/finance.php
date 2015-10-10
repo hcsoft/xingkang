@@ -182,7 +182,7 @@ class financeControl extends SystemControl
         $page->setTotalNum($total[0]);
 
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
-                        goods.sDrug_ID iDrug_ID,
+                        good.sDrug_ID iDrug_ID,
                         a.sSale_id ,
                         a.dSale_MakeDate,
                         isnull(good.sDrug_TradeName,a.itemname) as sDrug_TradeName ,
@@ -206,7 +206,7 @@ class financeControl extends SystemControl
 
                         a.sSale_id ,
                         a.dSale_MakeDate,
-                        goods.sDrug_ID ,
+                        good.sDrug_ID ,
                         good.sDrug_TradeName ,
                         a.ItemType ,
                         good.sDrug_Spec ,
