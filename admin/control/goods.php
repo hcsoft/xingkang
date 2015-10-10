@@ -558,7 +558,7 @@ class goodsControl extends SystemControl
             $displaytext = array();
             array_push($displaytext,'序号');
             array_push($displaytext,'商品编码');
-            array_push($displaytext,'系统编码');
+//            array_push($displaytext,'系统编码');
             array_push($displaytext,'商品名称');
             array_push($displaytext,'完整规格');
             array_push($displaytext,'含量规格');
@@ -583,7 +583,7 @@ class goodsControl extends SystemControl
             array_push($displaytext,'进销差');
             $propertys = array();
             array_push($propertys,'sDrug_ID');
-            array_push($propertys,'goods_commonid');
+//            array_push($propertys,'goods_commonid');
             array_push($propertys,'goods_name');
             array_push($propertys,'sDrug_Spec');
             array_push($propertys,'sDrug_Content');
