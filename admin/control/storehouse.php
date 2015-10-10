@@ -80,7 +80,7 @@ class storehouseControl extends SystemControl
             $sql = $sql . ' and good.sDrug_TradeName like \'%' .  trim($_GET['search_goods_name']) . '%\'';
         }
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']) ;
+            $sql = $sql . ' and good.sdrug_id = \'' . ($_GET['search_commonid']).'\'' ;
         }
 
         if ($_GET['orgids']) {
@@ -116,7 +116,7 @@ class storehouseControl extends SystemControl
                         good.spec_name,
                         good.sdrug_unit,
                         custom.sCustomer_Name,
-                        a.iDrug_ID,
+                        good.sDrug_ID iDrug_ID,
                         a.fBuy_FactNum,
                         a.sBuy_DrugUnit,
                         a.fBuy_TaxMoney,
@@ -134,7 +134,7 @@ class storehouseControl extends SystemControl
                         storetype.name as 'iBuy_Type',
                         case when a.orgid = 1 then '配送中心' else d.name end OrgId,
                         c.name SaleOrgID,
-                        a.iDrug_ID,
+                        good.sDrug_ID iDrug_ID,
                         good.sDrug_TradeName,
                         good.spec_name,
                         good.sdrug_unit,
@@ -274,7 +274,7 @@ class storehouseControl extends SystemControl
             $_GET['search_type'] = '0';
         }
         $sqlarray = array('iBuy_Type' => 'storetype.name as "iBuy_Type"',
-            'iDrug_ID' => ' a.iDrug_ID as "iDrug_ID" ',
+            'iDrug_ID' => ' goods.sDrug_ID as "iDrug_ID" ',
             'customname' => ' custom.sCustomer_Name as "customname" ',
             'sDrug_Spec' => ' goods.sDrug_Spec as "sDrug_Spec" ',
             'sDrug_Unit' => ' goods.sDrug_Unit as "sDrug_Unit" ',
@@ -378,7 +378,7 @@ class storehouseControl extends SystemControl
             $sql = $sql . ' and goods.sDrug_TradeName like \'%' .  trim($_GET['search_goods_name']) . '%\'';
         }
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and goods.goods_commonid = ' . intval($_GET['search_commonid']) ;
+            $sql = $sql . ' and goods.sDrug_ID = \'' . ($_GET['search_commonid']).'\'' ;
         }
 
         //处理树的参数
