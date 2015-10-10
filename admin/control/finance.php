@@ -182,7 +182,7 @@ class financeControl extends SystemControl
         $page->setTotalNum($total[0]);
 
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
-                        a.iDrug_ID,
+                        goods.sDrug_ID iDrug_ID,
                         a.sSale_id ,
                         a.dSale_MakeDate,
                         isnull(good.sDrug_TradeName,a.itemname) as sDrug_TradeName ,
@@ -203,8 +203,10 @@ class financeControl extends SystemControl
                         $sql order by  a.dSale_MakeDate desc)zzzz where rownum>$startnum )zzzzz order by rownum";
 
         $exportsql = "SELECT  row_number() over( order by  a.dSale_MakeDate desc) rownum,
+
                         a.sSale_id ,
                         a.dSale_MakeDate,
+                        goods.sDrug_ID ,
                         good.sDrug_TradeName ,
                         a.ItemType ,
                         good.sDrug_Spec ,
@@ -222,7 +224,7 @@ class financeControl extends SystemControl
                         a.ida_id
                         $sql order by  a.dSale_MakeDate desc ";
         if (isset($_GET['export']) && $_GET['export'] == 'true') {
-            $this->exportxlsx($exportsql, array('序号', '单据编号', '制单日期', '项目名称', '项目类型', '规格', '单位', '产地/厂商','供应商编码','供应商名称', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
+            $this->exportxlsx($exportsql, array('序号' ,'商品编码', '单据编号', '制单日期','项目编码', '项目名称', '项目类型', '规格', '单位', '产地/厂商','供应商编码','供应商名称', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
         }
         $stmt = $conn->query($tsql);
         $data_list = array();
