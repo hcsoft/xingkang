@@ -1047,7 +1047,7 @@ class financeControl extends SystemControl
             $sql = $sql . ' and goods.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
         }
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and goods.goods_commonid = ' . intval($_GET['search_commonid']);
+            $sql = $sql . ' and goods.sDrug_ID = ' . intval($_GET['search_commonid']);
         }
 
         $search_type = $_GET['search_type'];
@@ -1114,7 +1114,7 @@ class financeControl extends SystemControl
 //        echo $sumcolstr;
         $tsql = " select
                     $sumcolstr
-                    a.iDrug_ID as iDrug_ID,
+                    a.sDrug_ID as iDrug_ID,
                     goods.sDrug_TradeName as sDrug_TradeName,
                     goods.sDrug_Spec as sDrug_Spec,
                     goods.sDrug_Unit as sDrug_Unit,
