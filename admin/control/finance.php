@@ -1114,7 +1114,7 @@ class financeControl extends SystemControl
 //        echo $sumcolstr;
         $tsql = " select
                     $sumcolstr
-                    a.sDrug_ID as iDrug_ID,
+                    goods.sDrug_ID as iDrug_ID,
                     goods.sDrug_TradeName as sDrug_TradeName,
                     goods.sDrug_Spec as sDrug_Spec,
                     goods.sDrug_Unit as sDrug_Unit,
