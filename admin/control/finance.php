@@ -1125,7 +1125,7 @@ class financeControl extends SystemControl
                     sum(fSale_NoTaxMoney) notaxmoney ,
                     sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
                     case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
-                        $sql group by  $groupbycolstr a.iDrug_ID, goods.sDrug_TradeName ,
+                        $sql group by  $groupbycolstr goods.sDrug_ID, goods.sDrug_TradeName ,
                     goods.sDrug_Spec ,
                     goods.sDrug_Unit ,
                     goods.sDrug_Brand  having sum(fSale_Num) >0  order by $groupbycolstr goods.sDrug_TradeName ,
