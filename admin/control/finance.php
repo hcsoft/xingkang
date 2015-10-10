@@ -157,7 +157,7 @@ class financeControl extends SystemControl
         }
 
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and a.iDrug_ID = ' . intval($_GET['search_commonid']);
+            $sql = $sql . ' and good.sDrug_ID = \'' . ($_GET['search_commonid']).'\'';
         }
 
         $customsql = 'from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID ' ;
