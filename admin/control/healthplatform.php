@@ -361,8 +361,8 @@ class healthplatformControl extends SystemControl
             //修改会员卡号
             $newid = $_REQUEST["newid"];
             if (!empty($newid)) {
-                $sql = " update shopnc_member set member_id = '$newid' where member_id = '$id'";
-                $conn->exec($sql);
+                $logsql = " exec pFChangeMemberLog 0,'$opt','会员信息修改','$id','$newid';  ";
+                $conn->exec($logsql);
                 $sql = " update shopnc_call_main set memberid = '$newid' where memberid = '$id'";
                 $conn->exec($sql);
                 $changelog['newid'] = $newid;

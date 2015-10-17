@@ -1441,3 +1441,5 @@ td.trigger i:hover { color: #27A9E3;}
 .stat-info { color: #0099CC; background-color: #F3FBFE; clear: both; padding: 15px; border: solid 1px #DEEFFB;}
 .stat-info span { font-size: 12px; margin-right: 50px; white-space: nowrap;}
 .stat-info span strong { font-size: 14px; font-family: Arial, Helvetica, sans-serif; color: #31444D; margin: 0 2px;}
+span.counts{display: inline-block; vertical-align: top; line-height: 28px; font-size: 13px; color: #AAA;}
+span.counts + ul{ display: inline-block; }

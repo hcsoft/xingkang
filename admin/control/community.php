@@ -20,8 +20,10 @@ class communityControl extends SystemControl
         $treesql = 'select  b.id , b.name,b.districtnumber,b.parentid pId from map_org_wechat a, Organization b where a.orgid = b.id ';
         $treestmt = $conn->query($treesql);
         $this->treedata_list = array();
-        while ($row = $treestmt->fetch(PDO::FETCH_OBJ)) {
-            array_push($this->treedata_list, $row);
+        $this->orgmap = array();
+        while ( $row = $treestmt->fetch ( PDO::FETCH_OBJ ) ) {
+            array_push ( $this->treedata_list, $row );
+            $this->orgmap[$row->id] = $row->name;
         }
         Tpl::output('treelist', $this->treedata_list);
         $this->getTreeData();
@@ -332,7 +334,7 @@ class communityControl extends SystemControl
 //        echo $_GET['export']=='true';
 //        echo $_GET['export'];
         $sumcols = array( array('txt'=>'处方金额汇总','col'=>'fCO_InComeMoney','decimal'=>2,'unit'=>'元'),
-                    array('txt'=>'现金支付汇总','col'=>'fCO_Card','decimal'=>2,'unit'=>'元'),
+                    array('txt'=>'现金支付汇总','col'=>'fCO_Cash','decimal'=>2,'unit'=>'元'),
                     array('txt'=>'总记录数','col'=>'rownum',sql=>'count(*) rownum','decimal'=>0,'unit'=>'条'));
         $sumcolsstr = $page->getSumsql($sumcols);
 
@@ -434,31 +436,89 @@ class communityControl extends SystemControl
 	 
 	public function clinicstatisticOp(){
 		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
-
+        $titlearray = array();
+        array_push($titlearray,'序号');
+        array_push($titlearray,'分支机构');
+        $propertyarray = array();
+        array_push($propertyarray,'Name');
         $OrgId = '-1';
-		if ($_GET['orgids']) {
+        if ($_GET['orgids']) {
             $OrgId = '\'' . implode(',', $_GET['orgids']) . '\'';;
         }
         $startTime = '-1';
-		if ($_GET['query_start_time']) {
+        if ($_GET['query_start_time']) {
             $startTime = '\'' . $_GET['query_start_time'] . '\'';
         }
-        
-		$endTime = '-1';
+
+        $endTime = '-1';
         if ($_GET['query_end_time']) {
-            $endTime = '\'' . $_GET['query_end_time'] . '\'';
+            $endTime = '$propertyarray' . $_GET['query_end_time'] . '\'';
         }
         $searchType = '';
         if ($_GET['statisticSection']) {
+            array_push($titlearray,'科室');
+            array_push($propertyarray,'sStatSection');
             $searchType = $searchType . '1';
         }else{
         	$searchType = $searchType . '0';
         }
         if ($_GET['statisticDoctor']) {
+            array_push($titlearray,'医生');
+            array_push($propertyarray,'sDoctor');
             $searchType = $searchType . '1';
         }else{
         	$searchType = $searchType . '0';
         }
+        array_push($titlearray,'中医收入');
+        array_push($titlearray,'中医人次');
+        array_push($titlearray,'西医收入');
+        array_push($titlearray,'西医人次');
+        array_push($titlearray,'药房零售收入');
+        array_push($titlearray,'药房零售人次');
+        array_push($titlearray,'理疗收入');
+        array_push($titlearray,'理疗人次');
+        array_push($titlearray,'计免收入');
+        array_push($titlearray,'计免人次');
+        array_push($titlearray,'检验收入');
+        array_push($titlearray,'检验人次');
+        array_push($titlearray,'成人体检收入');
+        array_push($titlearray,'成人体检人次');
+        array_push($titlearray,'儿童体检收入');
+        array_push($titlearray,'儿童体检人次');
+        array_push($titlearray,'妇科收入');
+        array_push($titlearray,'妇科人次');
+        array_push($titlearray,'口腔收入');
+        array_push($titlearray,'口腔人次');
+        array_push($titlearray,'健康咨询收入');
+        array_push($titlearray,'健康咨询人次');
+        array_push($titlearray,'验光配镜收入');
+        array_push($titlearray,'验光配镜人次');
+
+        array_push($propertyarray,'ZY_fCO_IncomeMoney');
+        array_push($propertyarray,'ZYRenCi');
+        array_push($propertyarray,'XY_fCO_IncomeMoney');
+        array_push($propertyarray,'XYRenCi');
+        array_push($propertyarray,'YF_fCO_IncomeMoney');
+        array_push($propertyarray,'YFRenCi');
+        array_push($propertyarray,'TN_fCO_IncomeMoney');
+        array_push($propertyarray,'TNRenCi');
+        array_push($propertyarray,'JM_fCO_IncomeMoney');
+        array_push($propertyarray,'JMRenCi');
+        array_push($propertyarray,'JY_fCO_IncomeMoney');
+        array_push($propertyarray,'JYRenCi');
+        array_push($propertyarray,'CRTJ_fCO_IncomeMoney');
+        array_push($propertyarray,'CrTJRenCi');
+        array_push($propertyarray,'ETTJ_fCO_IncomeMoney');
+        array_push($propertyarray,'ETTJRenCi');
+        array_push($propertyarray,'FK_fCO_IncomeMoney');
+        array_push($propertyarray,'FKRenCi');
+        array_push($propertyarray,'KQ_fCO_IncomeMoney');
+        array_push($propertyarray,'KQRenCi');
+        array_push($propertyarray,'MBCF_fCO_IncomeMoney');
+        array_push($propertyarray,'MBCFRenCi');
+        array_push($propertyarray,'YGPJ_fCO_IncomeMoney');
+        array_push($propertyarray,'YGPJRenCi');
+
         $searchType = '\'' . $searchType . '\'';
         Log::record($searchType,"SQL");
 		$sql = "exec pXClinicStatistic $OrgId,$startTime,$endTime,$searchType;";
@@ -470,6 +530,10 @@ class communityControl extends SystemControl
 		while ( $row = $stmt->fetchObject () ) {
 			array_push ( $clinicAccount, $row );
 		}
+        if(isset($_GET['export']) && $_GET['export']=='true'){
+            $this->exportxlsxbyArrayObject($titlearray,$propertyarray,array(),'收入明细',$clinicAccount);
+            exit;
+        }
 		Tpl::output('data_list', $clinicAccount);
 		Tpl::showpage('community.clinic.statistic');
 	}

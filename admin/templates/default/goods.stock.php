@@ -33,6 +33,7 @@
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" name="act" value="goods">
         <input type="hidden" name="op" value="stock">
+        <input type="hidden" id ='export' name="export" value="false">
         <input type="hidden" id = 'queryorgid' name="queryorgid" value="<?php echo $_GET['orgid']; ?>">
         <table class="tb-type1 noborder search">
             <tbody>
@@ -61,7 +62,9 @@
                 <td><input type="checkbox" value="true" <?php if($output['search']['allowzero'] =='true')  echo checked; ?> name="allowzero"
                            id="allowzero" /> <label for="allowzero">显示零库存</label></td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
-                       title="<?php echo $lang['nc_query']; ?>">&nbsp;</a></td>
+                       title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
+                    <a href="javascript:void(0);" id="ncexport" class="btn-export "
+                       title="导出"></a></td>
                 <td class="w120">&nbsp;</td>
             </tr>
 
@@ -141,7 +144,7 @@
                         <td nowrap><i class="icon-plus-sign" style="cursor: pointer;" nctype="ajaxGoodsList"
                                data-comminid="<?php echo $v['goods_commonid']; ?>"
                                title="点击展开查看此商品全部规格；规格值过多时请横向拖动区域内的滚动条进行浏览。"></i></td>
-                        <td nowrap class="w60 align-center"><?php echo $v['goods_commonid']; ?></td>
+                        <td nowrap class="w60 align-center"><?php echo $v['sDrug_ID']; ?></td>
 <!--                        <td class="w60 picture">-->
 <!--                            <div class="size-56x56"><span class="thumb size-56x56"><i></i><img-->
 <!--                                        src="--><?php //echo thumb($v, 60); ?><!--" onload="javascript:DrawImage(this,56,56);"/></span>-->
@@ -168,11 +171,9 @@
                         <td><?php echo number_format($v['fDS_LeastSStock'],3); ?></td>
                         <td><?php echo number_format($v['fDS_LeastRetailPrice'],3); ?></td>
                         <td><?php echo number_format($v['fDS_LeastBuyPrice'],3); ?></td>
-                        <td><?php echo number_format($v['fDS_RetailPrice']*$v['fDS_OStock']+$v['fDS_LeastRetailPrice']*$v['fDS_LeastOStock'],3); ?></td>
-                        <td><?php echo number_format($v['fDS_BuyPrice']*$v['fDS_OStock']+$v['fDS_LeastBuyPrice']*$v['fDS_LeastOStock'],3); ?></td>
-                        <td><?php echo number_format($v['fDS_RetailPrice']*$v['fDS_OStock']-$v['fDS_BuyPrice']*$v['fDS_OStock'] +
-                                $v['fDS_LeastRetailPrice']*$v['fDS_LeastOStock'] - $v['fDS_LeastBuyPrice']*$v['fDS_LeastOStock']
-                                ,3); ?></td>
+                        <td><?php echo number_format($v['price1'],3); ?></td>
+                        <td><?php echo number_format($v['price2'],3); ?></td>
+                        <td><?php echo number_format($v['price3'],3); ?></td>
 
 
                     </tr>
@@ -212,7 +213,14 @@
     $(function () {
 //        gcategoryInit("gcategory");
         $('#ncsubmit').click(function () {
-//            $('input[name="op"]').val('stock');
+            $('input[name="op"]').val('stock');
+            $("#export").val('false');
+            $('#formSearch').submit();
+        });
+
+        $('#ncexport').click(function () {
+            $('input[name="op"]').val('stock');
+            $("#export").val('true');
             $('#formSearch').submit();
         });
 

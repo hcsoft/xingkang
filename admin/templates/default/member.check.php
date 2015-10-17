@@ -12,6 +12,8 @@
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" value="member" name="act">
         <input type="hidden" value="check" name="op">
+        <input type="hidden" id ='export' name="export" value="false">
+
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
@@ -54,10 +56,8 @@
                 </td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
-                    <?php if ($output['search_field_value'] != '' or $output['search_sort'] != '') { ?>
-                        <a href="index.php?act=member&op=member"
-                           class="btns "><span><?php echo $lang['nc_cancel_search'] ?></span></a>
-                    <?php } ?></td>
+                    <a href="javascript:void(0);" id="ncexport" class="btn-export "
+                       title="导出"></a></td>
                 <td>
                     排序字段：
                     <select name="orderby">
@@ -304,6 +304,12 @@
 <script>
     $(function () {
         $('#ncsubmit').click(function () {
+            $("#export").val('false');
+            $('input[name="op"]').val('check');
+            $('#formSearch').submit();
+        });
+        $('#ncexport').click(function () {
+            $("#export").val('true');
             $('input[name="op"]').val('check');
             $('#formSearch').submit();
         });

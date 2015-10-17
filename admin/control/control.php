@@ -462,9 +462,172 @@ class SystemControl{
 		$objWriter->save('php://output');
 		exit;
 	}
+
+    public final function exportxlsxbyArrayObject($titles = array(),$propertys=array(),$propertymap = array(), $sheetname ='导出',$exportobjlist){
+        require(BASE_PATH.'/include/PHPExcel.php');
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("hcsoft");
+        $sheet = $objPHPExcel->setActiveSheetIndex(0);
+        $sheet->setTitle($sheetname);
+        foreach($titles as $i =>$v){
+            $sheet->setCellValue(chr($i+65).'1',$v);
+        }
+        //查询sql
+        try{
+            $rowindex = 2;
+            $serial = 1;
+            foreach ($exportobjlist as $k=>$value){
+                $cellindex = 1;
+                $sheet->setCellValue(chr(65).strval($rowindex),strval($serial));
+                foreach($propertys as $i=>$v){
+                    $cellstr = strval($value->$v);
+                    if(! empty($propertymap[$v])){
+                        $cellstr = strval($propertymap[$v][$value->$v]);
+                    }
+                    $sheet->setCellValueExplicit(chr($cellindex+65).strval($rowindex),$cellstr,PHPExcel_Cell_DataType::TYPE_STRING);
+                    $cellindex = $cellindex + 1;
+                }
+                $rowindex = $rowindex+1;
+                $serial = $serial + 1;
+            }
+        }catch (Exception $e){
+            throw $e;
+//			Log::record($tsql,'SQL');
+//			$sheet->setCellValue(2,1,'导出异常!请与系统管理员联系!异常信息:'+$e->getMessage());
+//
+//			$sheet->setCellValue(2,1,'导出异常!请与系统管理员联系!异常信息:'+$e->getMessage());
+        }
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$sheetname.'.xlsx"');
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+        exit;
+    }
 	
 	public function notEmpty($value){
 		return (isset($value) &&  $value !='');
+	}
+    public final function prepareexportcsv($titles,$filename){
+        $fp = fopen($filename,"a");
+        foreach($titles as $i=>$v){
+            $titles[$i] = mb_convert_encoding($v, 'GBK','UTF-8');
+        }
+        fputcsv($fp, $titles);
+        return $fp;
+    }
+    public final function endexportcsv($filename,$csvname,$fp){
+        fclose($fp);
+        $fp1 = fopen($filename,"r");
+        header('Content-Type: application/text');
+        header('Content-Disposition: attachment;filename="'.$csvname.'.csv"');
+        header('Cache-Control: max-age=0');
+        fpassthru($fp1);
+        fclose($fp1);
+        unlink ($filename);
+        exit();
+    }
+    public final function exportcsv($sqls = ' select \'测试成功\' ', $titles = array('测试导出'), $sheetname ='导出'
+        ,$codevalues = array()){
+//        $excel = new SimpleExcel('csv');
+        $tmpfname = tempnam("./tmp/", '');
+        $fp = fopen($tmpfname, 'a');
+
+
+//        $excel->parser->loadFile('d:/test.csv');
+//        $data = array();
+        $row = array();
+        foreach($titles as $i =>$v){
+            array_push($row, Db::csv_encode($v));
+        }
+        fputcsv($fp, $row);
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        //查询sql
+        try{
+            $rowindex = 2;
+            if(is_array($sqls)){
+                foreach($sqls as $i=>$sql){
+                    $stmt = $conn->query($sql);
+                    while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+                        $newrow = array();
+                        foreach($row as $i=>$v){
+                            $metadata = $stmt->getColumnMeta($i);
+                            $map = $codevalues[$metadata['name']];
+                            $cellstr = strval($v);
+                            if(isset($map)){
+                                $cellstr = strval($map[$v]);
+                            }
+                            array_push($newrow, Db::csv_encode($cellstr));
+                        }
+                        fwrite($fp,join(',',$newrow)."\r\n");
+                    }
+                }
+            }else{
+                $stmt = $conn->query($sqls);
+                while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+                    $newrow = array();
+                    foreach($row as $i=>$v){
+                        $metadata = $stmt->getColumnMeta($i);
+                        $map = $codevalues[$metadata['name']];
+                        $cellstr = strval($v);
+                        if(isset($map)){
+                            $cellstr = strval($map[$v]);
+                        }
+                        array_push($newrow, Db::csv_encode($cellstr));
+
+                    }
+                    fwrite($fp,join(',',$newrow)."\r\n");
+                }
+            }
+        }catch (Exception $e){
+            throw $e;
+
+        }
+//        $excel->writer->setData($data);
+        self::endexportcsv($tmpfname,$sheetname,$fp);
+//        $excel->writer->saveFile('php://output');
+
+        exit;
+    }
+
+
+	public final function exportcsvbyObject($titles = array(),$propertys=array(),$propertymap = array(), $sheetname ='导出',$exportobjlist){
+//		$excel = new SimpleExcel('csv');
+        $tmpfname = tempnam("./tmp/", '');
+        $fp = fopen($tmpfname, 'a');
+
+		$row = array();
+		foreach($titles as $i =>$v){
+			array_push($row, Db::csv_encode($v));
+		}
+//		array_push($data,$row);
+        fputcsv($fp, $row);
+
+		//查询sql
+		try{
+//			$rowindex = 2;
+//			$serial = 1;
+
+			foreach ($exportobjlist as $k=>$value){
+//				$cellindex = 1;
+				$row = array();
+				foreach($propertys as $i=>$v){
+					$cellstr = strval($value[$v]);
+					if(! empty($propertymap[$v])){
+						$cellstr = strval($propertymap[$v][$value[$v]]);
+					}
+					array_push($row, Db::csv_encode($cellstr));
+//					$cellindex = $cellindex + 1;
+				}
+//				array_push($data,$row);
+                fwrite($fp,join(',',$row)."\r\n");
+//				$rowindex = $rowindex+1;
+//				$serial = $serial + 1;
+			}
+		}catch (Exception $e){
+			throw $e;
+		}
+        self::endexportcsv($tmpfname,$sheetname,$fp);
 	}
 
 

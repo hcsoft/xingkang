@@ -37,6 +37,7 @@ class Db
             self::$link[$host] = @new PDO('sqlsrv:Server=' . $conf['dbhost'] . ',' . $conf['dbport'] . ';Database=' . $conf['dbname'], $conf['dbuser'], $conf['dbpwd']);
             self::$link[$host]->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
+            throw $e;
             die('Db Error: database connect failed');
         }
     }
@@ -49,6 +50,7 @@ class Db
      */
     public static function query($sql, $host = 'sqlserver')
     {
+//        echo $sql;
         $host = 'sqlserver';
         self::connect($host);
         if (C('debug')) addUpTime('queryStartTime');
@@ -168,6 +170,43 @@ class Db
         }
         return !empty($array) ? $array : null;
     }
+
+    public static function exportAll($propertys,$propertymap,$fp,$sql, $host = 'sqlserver')
+    {
+        $host = 'sqlserver';
+        self::connect($host);
+        $result = self::query($sql, $host);
+        if ($result === false) return array();
+        while ($tmp = $result->fetch(PDO::FETCH_ASSOC)) {
+            $row = array();
+            foreach($propertys as $i=>$v){
+                $cellstr = mb_convert_encoding(strval($tmp[$v]), 'GBK','UTF-8');
+                if(! empty($propertymap[$v])){
+                    $cellstr = mb_convert_encoding(strval($propertymap[$v][$tmp[$v]]), 'GBK','UTF-8');
+                }
+                array_push($row, self::csv($cellstr));
+            }
+            fwrite($fp,join(',',$row)."\r\n");
+        }
+    }
+    public static function csv($str){
+        $ret = $str;
+        $ret =  str_replace('"','""',$ret);
+        $ret =  str_replace("\r" , ' ',$ret);
+        $ret =  str_replace("\n" , ' ',$ret);
+        $ret = '="'.$ret . '"';
+        return $ret;
+    }
+
+    public static function csv_encode($str){
+        $ret = mb_convert_encoding(strval($str), 'GBK','UTF-8');
+        $ret =  str_replace('"','""',$ret);
+        $ret =  str_replace("\r" , ' ',$ret);
+        $ret =  str_replace("\n" , ' ',$ret);
+        $ret = '="'.$ret . '"';
+        return $ret;
+    }
+
 
     /**
      * SELECT查询

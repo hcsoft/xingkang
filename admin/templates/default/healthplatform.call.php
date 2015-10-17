@@ -291,7 +291,7 @@
     }
 
     .yellow {
-        background-color: yellow !important;
+        background-color: #f2c6ff !important;
     }
 
     p.change {
@@ -383,14 +383,14 @@
                 <span title="留空表示不修改">新身份证号:</span>
                 <input placeholder="留空表示不修改" style="width:150px;" title="留空表示不修改" id="newidcard" name="newidcard" type="text">
             </p>
-
+<!--
             <p class="change">
                 <span>原会员卡号：</span>
                 <input id="oldid" name="oldid" readonly type="text">
                 <span title="留空表示不修改">新会员卡号:</span>
                 <input placeholder="留空表示不修改" title="留空表示不修改" id="newid" name="newid" type="text">
             </p>
-
+-->
             </fieldset>
 
         </form>
@@ -472,41 +472,9 @@
         $("#callid").val(obj.member_id);
         $("#detaildialog .datamsg").html('正在查询....');
         $(elem).parent().parent().addClass('yellow');
-        $.ajax({
-            url: "index.php?act=healthplatform&op=calldetailajax",
-            data: $("#detaildialog form").serialize(), dataType: 'json', success: function (ret) {
-                console.log(ret);
-                if (ret && ret.data && ret.data.length > 0) {
-                    $("#detaildialog .datamsg").html('');
-                    $("#detaildialog table tbody").html('');
-                    for (var i = 0; i < ret.data.length; i++) {
-                        var row = ret.data[i];
-                        var rowstr = '<tr>';
-                        rowstr += '<td>' + textstr(row.datatypename) + '</td>';
-                        rowstr += '<td>' + textstr(row.id) + '</td>';
-                        rowstr += '<td>' + textstr(row.dPayDate) + '</td>';
-                        rowstr += '<td>' + textstr(row.MakePerson) + '</td>';
-                        rowstr += '<td>' + textstr(row.orgname) + '</td>';
-                        rowstr += '<td>' + numtostr(row.fRecharge) + '</td>';
-                        rowstr += '<td>' + numtostr(row.InitRecharge) + '</td>';
-//                        rowstr+='<td>'+numtostr(row.InitScale)+'</td>';
-                        rowstr += '<td>' + numtostr(row.fConsume) + '</td>';
-                        rowstr += '<td>' + numtostr(row.InitConsume) + '</td>';
-                        rowstr += '<td>' + numtostr(row.fScaleToMoney) + '</td>';
-                        rowstr += '<td>' + numtostr(row.fScale) + '</td>';
-                        rowstr += '<td>' + numtostr(row.fAddScale) + '</td>';
-                        rowstr += '<td>' + numtostr(row.InitScale) + '</td>';
-                        rowstr += '</tr>';
-                        $("#detaildialog table tbody").append(rowstr)
-                    }
-                } else {
-                    $("#detaildialog .datamsg").html('无数据!');
-                }
-                $("#detaildialog").dialog("option", "title", '回访  ' + obj.member_truename);
-                $("#detaildialog").dialog("option", "elem", elem);
-                $("#detaildialog").dialog("open");
-            }
-        });
+        $("#detaildialog").dialog("option", "title", '回访  ' + obj.member_truename);
+        $("#detaildialog").dialog("option", "elem", elem);
+        $("#detaildialog").dialog("open");
 
     }
     function numtostr(numstr) {

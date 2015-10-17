@@ -157,7 +157,7 @@ class financeControl extends SystemControl
         }
 
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and a.iDrug_ID = ' . intval($_GET['search_commonid']);
+            $sql = $sql . ' and good.sDrug_ID = \'' . ($_GET['search_commonid']).'\'';
         }
 
         $customsql = 'from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  a.iDrug_ID = buy.iDrug_ID ' ;
@@ -182,7 +182,7 @@ class financeControl extends SystemControl
         $page->setTotalNum($total[0]);
 
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
-                        a.iDrug_ID,
+                        good.sDrug_ID iDrug_ID,
                         a.sSale_id ,
                         a.dSale_MakeDate,
                         isnull(good.sDrug_TradeName,a.itemname) as sDrug_TradeName ,
@@ -203,8 +203,10 @@ class financeControl extends SystemControl
                         $sql order by  a.dSale_MakeDate desc)zzzz where rownum>$startnum )zzzzz order by rownum";
 
         $exportsql = "SELECT  row_number() over( order by  a.dSale_MakeDate desc) rownum,
+
                         a.sSale_id ,
                         a.dSale_MakeDate,
+                        good.sDrug_ID ,
                         good.sDrug_TradeName ,
                         a.ItemType ,
                         good.sDrug_Spec ,
@@ -222,7 +224,7 @@ class financeControl extends SystemControl
                         a.ida_id
                         $sql order by  a.dSale_MakeDate desc ";
         if (isset($_GET['export']) && $_GET['export'] == 'true') {
-            $this->exportxlsx($exportsql, array('序号', '单据编号', '制单日期', '项目名称', '项目类型', '规格', '单位', '产地/厂商','供应商编码','供应商名称', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
+            $this->exportcsv($exportsql, array('序号' , '单据编号', '制单日期','项目编码', '项目名称', '项目类型', '规格', '单位', '产地/厂商','供应商编码','供应商名称', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
         }
         $stmt = $conn->query($tsql);
         $data_list = array();
@@ -563,7 +565,7 @@ class financeControl extends SystemControl
         }
 
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and a.iDrug_ID = ' . intval($_GET['search_commonid']);
+            $sql = $sql . ' and good.sDrug_ID = \'' .($_GET['search_commonid']).'\'';
         }
         //处理树的参数
         $checkednode = $_GET['checkednode'];
@@ -576,7 +578,7 @@ class financeControl extends SystemControl
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  a.dSale_MakeDate desc) rownum,
-                        a.iDrug_ID,
+                        good.sDrug_ID iDrug_ID,
                         a.sSale_id ,
                         a.dSale_MakeDate,
                         isnull(good.sDrug_TradeName,a.itemname) as sDrug_TradeName ,
@@ -598,6 +600,7 @@ class financeControl extends SystemControl
         $exportsql = "SELECT  row_number() over( order by  a.dSale_MakeDate desc) rownum,
                         a.sSale_id ,
                         a.dSale_MakeDate,
+                        good.sDrug_ID,
                         good.sDrug_TradeName ,
                         a.ItemType ,
                         good.sDrug_Spec ,
@@ -613,7 +616,7 @@ class financeControl extends SystemControl
                         a.ida_id
                         $sql order by  a.dSale_MakeDate desc ";
         if (isset($_GET['export']) && $_GET['export'] == 'true') {
-            $this->exportxlsx($exportsql, array('序号', '单据编号', '制单日期', '项目名称', '项目类型', '规格', '单位', '产地/厂商', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
+            $this->exportcsv($exportsql, array('序号', '单据编号', '制单日期','项目编码', '项目名称', '项目类型', '规格', '单位', '产地/厂商', '数量', '单价', '金额', '机构', '科室', '医生', '就诊流水', '处方流水'), '销售明细');
         }
         $stmt = $conn->query($tsql);
         $data_list = array();
@@ -692,7 +695,7 @@ class financeControl extends SystemControl
             $sql = $sql . ' and good.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
         }
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']);
+            $sql = $sql . ' and good.sDrug_ID = \'' . ($_GET['search_commonid'])+'\'';
         }
 
         //处理树的参数
@@ -857,11 +860,11 @@ class financeControl extends SystemControl
         }
 
         if ($_GET['gather_start_time']) {
-            $sql = $sql . ' and a.dSale_GatherDate >=\'' . $_GET['gather_start_time'] . '\'';
+            $sql = $sql . ' and a.dSale_MakeDate >=\'' . $_GET['gather_start_time'] . '\'';
         }
 
         if ($_GET['gather_end_time']) {
-            $sql = $sql . ' and a.dSale_GatherDate < dateadd(day,1,\'' . $_GET['gather_end_time'] . '\')';
+            $sql = $sql . ' and a.dSale_MakeDate < dateadd(day,1,\'' . $_GET['gather_end_time'] . '\')';
         }
         if ($_GET['search_goods_name'] != '') {
             $sql = $sql . ' and good.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
@@ -1047,7 +1050,7 @@ class financeControl extends SystemControl
             $sql = $sql . ' and goods.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
         }
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and goods.goods_commonid = ' . intval($_GET['search_commonid']);
+            $sql = $sql . ' and goods.sDrug_ID = \'' . ($_GET['search_commonid']).'\'';
         }
 
         $search_type = $_GET['search_type'];
@@ -1114,7 +1117,7 @@ class financeControl extends SystemControl
 //        echo $sumcolstr;
         $tsql = " select
                     $sumcolstr
-                    a.iDrug_ID as iDrug_ID,
+                    goods.sDrug_ID as iDrug_ID,
                     goods.sDrug_TradeName as sDrug_TradeName,
                     goods.sDrug_Spec as sDrug_Spec,
                     goods.sDrug_Unit as sDrug_Unit,
@@ -1125,7 +1128,7 @@ class financeControl extends SystemControl
                     sum(fSale_NoTaxMoney) notaxmoney ,
                     sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
                     case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
-                        $sql group by  $groupbycolstr a.iDrug_ID, goods.sDrug_TradeName ,
+                        $sql group by  $groupbycolstr goods.sDrug_ID, goods.sDrug_TradeName ,
                     goods.sDrug_Spec ,
                     goods.sDrug_Unit ,
                     goods.sDrug_Brand  having sum(fSale_Num) >0  order by $groupbycolstr goods.sDrug_TradeName ,
@@ -1162,7 +1165,7 @@ class financeControl extends SystemControl
                         $sql ";
         }
         if (isset($_GET['export']) && $_GET['export'] == 'true') {
-            $this->exportxlsx(array(0 => $tsql, 1 => $totalsql), $displaytext, '收入统计');
+            $this->exportxlsx(array(0 => $tsql, 1 => $totalsql), $displaytext, '单品毛利分析');
         }
 
 //        echo $totalsql;

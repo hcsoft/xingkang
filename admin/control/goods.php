@@ -18,6 +18,27 @@ class goodsControl extends SystemControl
 
     public function __construct()
     {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class ';
+        $classstmt = $conn->query($classsql);
+        $classtypes = array();
+        $this->classmap = array();
+        while ($row = $classstmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($classtypes, $row);
+            $this->classmap[$row->iClass_ID] = $row->sClass_Name;
+        }
+        $this->classtypes = $classtypes;
+        Tpl::output('classtypes', $this->classtypes);
+
+        $treesql = 'select  b.id , b.name,b.districtnumber,b.parentid pId from map_org_wechat a, Organization b where a.orgid = b.id ';
+        $treestmt = $conn->query($treesql);
+        $treedata_list = array();
+        while ($row = $treestmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($treedata_list, $row);
+        }
+        $this->orgtree = $treedata_list;
+        Tpl::output('treelist', $this->orgtree);
+
         parent::__construct();
         Language::read('goods');
     }
@@ -264,11 +285,75 @@ class goodsControl extends SystemControl
             $sql = $sql . ' and EXISTS (  select 1  from  Center_Buy buy left join Center_Customer cus on buy.iCustomer_ID = cus.iCustomer_ID  where  good.goods_commonid = buy.iDrug_ID and cus.sCustomer_Name  like \'%' . $_GET['sCustomer_Name'] . '%\' )';
             $customsql = $customsql . ' and  cus.sCustomer_Name like   \'%' . $_GET['sCustomer_Name'].'%\'';
         }
+
+        if ($_GET['allowzero'] && $_GET['allowzero'] == 'true') {
+            $sql = $sql . '   ';
+        } else {
+            $sql = $sql . ' and  (stock.fDS_SStock <> 0 or  stock.fDS_LeastSStock  <> 0)  ';
+        }
+
+
         $countsql = " select count(*)  $sql ";
         $stmt = $conn->query($countsql);
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
-     
+        $exportflag =false;
+        if (isset ( $_GET ['export'] ) && $_GET ['export'] == 'true') {
+            $exportflag = true;
+        }
+        if ($exportflag){
+            $startnum = 0 ;
+            $endnum = 100000;//excel仅允许导出10W条
+            $displaytext = array();
+            array_push($displaytext,'序号');
+            array_push($displaytext,'商品编码');
+            array_push($displaytext,'系统编码');
+            array_push($displaytext,'商品名称');
+            array_push($displaytext,'完整规格');
+            array_push($displaytext,'含量规格');
+            array_push($displaytext,'包装规格');
+
+
+            array_push($displaytext,'供应商');
+            array_push($displaytext,'厂商');
+            array_push($displaytext,'产地');
+            array_push($displaytext,'价格');
+            array_push($displaytext,'财务分类');
+            array_push($displaytext,'常规单位');
+            array_push($displaytext,'进价');
+            array_push($displaytext,'零价');
+
+            array_push($displaytext,'实际库存');
+
+            array_push($displaytext,'最小单位');
+            array_push($displaytext,'进价');
+            array_push($displaytext,'零价');
+            array_push($displaytext,'实际库存');
+            $propertys = array();
+            array_push($propertys,'sDrug_ID');
+            array_push($propertys,'goods_commonid');
+            array_push($propertys,'goods_name');
+            array_push($propertys,'sDrug_Spec');
+            array_push($propertys,'sDrug_Content');
+            array_push($propertys,'sDrug_PackSpec');
+            array_push($propertys,'sCustomer_Name');
+            array_push($propertys,'brand_name');
+            array_push($propertys,'gc_name');
+            array_push($propertys,'goods_price');
+            array_push($propertys,'iDrug_StatClass');
+            array_push($propertys,'sDrug_Unit');
+            array_push($propertys,'fDS_BuyPrice');
+            array_push($propertys,'fDS_RetailPrice');
+            array_push($propertys,'fDS_SStock');
+            array_push($propertys,'sDrug_LeastUnit');
+            array_push($propertys,'fDS_LeastBuyPrice');
+            array_push($propertys,'fDS_LeastRetailPrice');
+            array_push($propertys,'fDS_LeastSStock');
+
+            $propertysmap =  array();
+            $propertysmap['iDrug_StatClass'] =$this->classmap ;
+
+        }
      	$tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.goods_commonid asc) rownum,
                         good.sDrug_ID,
                         good.goods_commonid,
@@ -299,6 +384,11 @@ class goodsControl extends SystemControl
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             array_push($goods_list, $row);
         }
+
+        if ($exportflag) {
+            $this->exportxlsxbyArrayObject($displaytext,$propertys,$propertysmap,'商品',$goods_list);
+        }
+
         Tpl::output('goods_list', $goods_list);
      
      	Tpl::output('search', $_GET);
@@ -307,21 +397,7 @@ class goodsControl extends SystemControl
          * 财务分类
          */
 //        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
-        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class ';
-        $classstmt = $conn->query($classsql);
-        $classtypes = array();
-        while ($row = $classstmt->fetch(PDO::FETCH_OBJ)) {
-            array_push($classtypes, $row);
-        }
-        Tpl::output('classtypes', $classtypes); 
-        
-        $treesql = 'select  b.id , b.name,b.districtnumber,b.parentid pId from map_org_wechat a, Organization b where a.orgid = b.id ';
-        $treestmt = $conn->query($treesql);
-        $treedata_list = array();
-        while ($row = $treestmt->fetch(PDO::FETCH_OBJ)) {
-            array_push($treedata_list, $row);
-        }
-        Tpl::output('treelist', $treedata_list);
+
 //        if (!isset($_GET['orgid'])) {
 //            $_GET['orgid'] = $treedata_list[0]->id;
 //        }
@@ -436,7 +512,7 @@ class goodsControl extends SystemControl
             $sql = $sql . ' and good.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
         }
         if (intval($_GET['search_commonid']) > 0) {
-            $sql = $sql . ' and good.goods_commonid = ' . intval($_GET['search_commonid']);
+            $sql = $sql . ' and good.sdrug_id = \'' . ($_GET['search_commonid']).'\'';
         }
         if ($_GET['search_store_name'] != '') {
             $sql = $sql . ' and good.store_name like \'%' . trim($_GET['search_store_name']) . '%\'';
@@ -471,16 +547,88 @@ class goodsControl extends SystemControl
 //        echo $countsql;
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
+
+        $exportflag =false;
+        if (isset ( $_GET ['export'] ) && $_GET ['export'] == 'true') {
+            $exportflag = true;
+        }
+        if ($exportflag){
+            $startnum = 0 ;
+            $endnum = 100000;//excel仅允许导出10W条
+            $displaytext = array();
+            array_push($displaytext,'序号');
+            array_push($displaytext,'商品编码');
+//            array_push($displaytext,'系统编码');
+            array_push($displaytext,'商品名称');
+            array_push($displaytext,'完整规格');
+            array_push($displaytext,'含量规格');
+            array_push($displaytext,'包装规格');
+
+            array_push($displaytext,'供应商');
+            array_push($displaytext,'厂家');
+            array_push($displaytext,'产地');
+
+            array_push($displaytext,'常规单位');
+            array_push($displaytext,'进价');
+            array_push($displaytext,'零价');
+            array_push($displaytext,'实际库存');
+
+            array_push($displaytext,'最小单位');
+            array_push($displaytext,'进价');
+            array_push($displaytext,'零价');
+            array_push($displaytext,'实际库存');
+
+            array_push($displaytext,'零价金额');
+            array_push($displaytext,'进价金额');
+            array_push($displaytext,'进销差');
+            $propertys = array();
+            array_push($propertys,'sDrug_ID');
+//            array_push($propertys,'goods_commonid');
+            array_push($propertys,'goods_name');
+            array_push($propertys,'sDrug_Spec');
+            array_push($propertys,'sDrug_Content');
+            array_push($propertys,'sDrug_PackSpec');
+            array_push($propertys,'sCustomer_Name');
+            array_push($propertys,'brand_name');
+            array_push($propertys,'gc_name');
+
+            array_push($propertys,'sDrug_Unit');
+            array_push($propertys,'fDS_BuyPrice');
+            array_push($propertys,'fDS_RetailPrice');
+            array_push($propertys,'fDS_SStock');
+            array_push($propertys,'sDrug_LeastUnit');
+            array_push($propertys,'fDS_LeastBuyPrice');
+            array_push($propertys,'fDS_LeastRetailPrice');
+            array_push($propertys,'fDS_LeastSStock');
+
+            array_push($propertys,'price1');
+            array_push($propertys,'price2');
+            array_push($propertys,'price3');
+
+            $propertysmap =  array();
+            $propertysmap['iDrug_StatClass'] =$this->classmap ;
+
+        }
+
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.goods_commonid) rownum,
                         org.name as OrgName,  *
                             $sql order by  good.goods_commonid)zzzz where rownum>$startnum )zzzzz order by rownum";
         $stmt = $conn->query($tsql);
         $goods_list = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $goods_list[] = $row;
+
 //            $newstmt = $conn->query(" select * from Center_DrugStocksub where idrug_id = '$row->goods_commonid'");
 //            $row->detail = $newstmt->fetch(PDO::FETCH_OBJ);
+            $row['price1'] = $row['fDS_RetailPrice']*$row['fDS_OStock']+$row['fDS_LeastRetailPrice']*$row['fDS_LeastOStock'];
+            $row['price2'] = $row['fDS_BuyPrice']*$row['fDS_OStock']+$row['fDS_LeastBuyPrice']*$row['fDS_LeastOStock'];
+            $row['price3'] = $row['price1'] - $row['price2'];
+            $goods_list[] = $row;
+
         }
+        if ($exportflag) {
+            $this->exportxlsxbyObject($displaytext,$propertys,$propertysmap,'商品库存',$goods_list);
+        }
+
 
 //        var_dump($goods_list);
         Tpl::output('goods_list', $goods_list);

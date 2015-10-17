@@ -178,6 +178,44 @@ class Model{
         return $resultSet;
     }
 
+    public function exportcsv($propertys,$propertymap,$fp,$options=array()) {
+        if(is_string($options) || is_numeric($options)) {
+            // 默认根据主键查询
+            $pk   =  $this->get_pk();
+            if(strpos($options,',')) {
+                $where[$pk] =  array('IN',$options);
+            }else{
+                $where[$pk]   =  $this->fields[$this->table_name]['_pk_type'] == 'int' ? intval($options) : $options;
+            }
+            $options =  array();
+            $options['where'] =  $where;
+        }
+        $options =  $this->parse_options($options);
+        if ($options['limit'] !== false) {
+            if (empty($options['where']) && empty($options['limit'])){
+                //如果无条件，默认检索30条数据
+                $options['limit'] = 30;
+            }elseif ($options['where'] !== true && empty($options['limit'])){
+                //如果带WHERE，但无LIMIT，最多只检索1000条记录
+                $options['limit'] = 1000;
+            }
+        }
+
+         $this->db->exportcsv($propertys,$propertymap,$fp,$options);
+
+//        if(empty($resultSet)) {
+//            return array();
+//        }
+//        if ($options['key'] != '' && is_array($resultSet)){
+//            $tmp = array();
+//            foreach ($resultSet as $value) {
+//                $tmp[$value[$options['key']]] = $value;
+//            }
+//            $resultSet = $tmp;
+//        }
+//        return $resultSet;
+    }
+
 	/**
 	 * 取得第N列内容
 	 *
@@ -216,7 +254,13 @@ class Model{
         	$options['table'] =$this->getTableName();
         }elseif(false !== strpos(trim($options['table'],', '),',')){
         	foreach(explode(',', trim($options['table'],', ')) as $val){
-        		$tmp[] = $this->getTableName($val).' ['.$val.']';
+                if(strpos($val,' ')>0){
+                    $strs = explode(' ',$val);
+                    $tmp[] = $this->getTableName($strs[0]).' ['.$strs[1].']';
+                }else{
+                    $tmp[] = $this->getTableName($val).' ['.$val.']';
+                }
+
         	}
         	$options['table'] = implode(',',$tmp);
         }else{
@@ -481,7 +525,16 @@ class Model{
 	protected function getTableName($table = null){
 		if (is_null($table)){
 			$return = '['.$this->table_prefix.$this->table_name.']';
-		}else{
+		}else if(substr($table,0,2)=='__'){
+            $tablename = substr($table,2);
+            if(strpos($tablename,' ') >0){
+                $strs = explode(' ',$tablename);
+                $return = '['.$strs[0].']';
+            }else{
+                $return = '['.$tablename.']';
+            }
+
+        }else{
 			$return = '['.$this->table_prefix.$table.']';
 		}
 		return $return;
@@ -662,6 +715,16 @@ class ModelDb{
         	$_cache[$key] = $result;
         }
         return $result;
+    }
+
+    public function exportcsv($propertys,$propertymap,$fp,$options=array()) {
+        $sql = $this->buildSelectSql($options);
+        DB::exportAll($propertys,$propertymap,$fp,$sql,$options['lock'] === true ? 'master' : 'slave');
+    }
+
+    public function exportxlsx($propertys,$propertymap,$fp,$options=array()) {
+        $sql = $this->buildSelectSql($options);
+        DB::exportxlsxAll($propertys,$propertymap,$fp,$sql,$options['lock'] === true ? 'master' : 'slave');
     }
 
     public function buildSelectSql($options=array()) {
