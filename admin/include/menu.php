@@ -233,7 +233,8 @@ $arr = array(
                     array('args'=>'financeinsum,finance,finance',			'text'=>'住院收入统计'),
                     array('args'=>'financegoodsum,finance,finance',			'text'=>'单品毛利分析'),
                     array('args'=>'detail,storehouse,finance',			'text'=>'仓库单据明细'),
-                    array('args'=>'sum,storehouse,finance',			'text'=>'仓库单据汇总')
+                    array('args'=>'sum,storehouse,finance',			'text'=>'仓库单据汇总'),
+                    array('args'=>'communitycheck,finance,finance',			'text'=>'社区考核')
                 )
             )
 		)

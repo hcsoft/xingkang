@@ -113,6 +113,94 @@ class financeControl extends SystemControl
         Tpl::output('treedata', $treedata_list);
     }
 
+	public function communitycheckOp()
+	{
+		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+		$plainStart = date('Y-m-01', strtotime(date("Y-m-d")));
+        $plainEnd = date('Y-m-d', strtotime(date('Y-m-01', strtotime(date("Y-m-d"))) . ' +1 month -1 day'));
+        $checkedPlain = 'select count(*) from Center_CheckPlan where dPlanBegin = \''. $plainStart .'\' and dPlanEnd = \''. $plainEnd .'\'';
+        $checkedPlaintmt = $conn->query($checkedPlain);
+        $total = $checkedPlaintmt->fetch(PDO::FETCH_NUM);
+        $wheresql = '';
+        if($total[0] > 0){
+        	$wheresql = ' where c.dPlanBegin = \''. $plainStart .'\' and c.dPlanEnd = \''. $plainEnd .'\'';
+        }
+        //查询机构树的类型
+        $centerCheckPlainsql = 'select  b.id , b.name,b.districtnumber,b.parentid pId,c.dPlanBegin,c.dPlanEnd,c.sPlanPerson,c.sMemo,c.fObject1,c.fObject2 from map_org_wechat a Join Organization b On a.orgid = b.id left join Center_CheckPlan c On a.orgid = c.OrgID ' . $wheresql;
+        $centerCheckPlaintmt = $conn->query($centerCheckPlainsql);
+        $centerCheckPlaindata_list = array();
+//
+        while ($row = $centerCheckPlaintmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($centerCheckPlaindata_list, $row);
+        }
+        
+        
+        Tpl::output('centerCheckPlaindata', $centerCheckPlaindata_list);
+        Tpl::output('total', $total);
+		Tpl::showpage('finance.community.check.index');
+	}
+	
+	public function communitycheckSummaryOp()
+	{
+		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+		$summaryStart = date('Y-m-01', strtotime(date("Y-m-d")));
+        $summaryEnd = date('Y-m-d', strtotime(date('Y-m-01', strtotime(date("Y-m-d"))) . ' +1 month -1 day'));
+	    if ($_GET['summaryBegin']) {
+	    	$summaryStart = date('Y-m-01', strtotime($_GET['summaryBegin'])); 
+	    	$summaryEnd = date('Y-m-d', strtotime("$summaryStart +1 month -1 day")); 
+	   	}
+		
+        $checkedPlain = 'select count(*) from Center_CheckPlan where dPlanBegin = \''. $summaryStart .'\' and dPlanEnd = \''. $summaryEnd .'\'';
+        $checkedPlaintmt = $conn->query($checkedPlain);
+        $total = $checkedPlaintmt->fetch(PDO::FETCH_NUM);
+        $centerCheckSummarydata_list = array();
+        Log::Record($summaryStart,"SQL");
+        Log::Record($summaryEnd,"SQL");
+        if($total[0] > 0){
+        	$sql = "exec pXCommunityStatistic '".$summaryStart ."','".$summaryEnd."';";
+        	Log::record($sql,"SQL");
+			$stmt = $conn->prepare($sql);
+	
+			$stmt->execute();
+			while ( $row = $stmt->fetchObject () ) {
+				array_push ( $centerCheckSummarydata_list, $row );
+			}
+        }
+        Tpl::output('centerCheckSummarydata', $centerCheckSummarydata_list);
+		Tpl::showpage('finance.community.checksummary.index');
+	}
+	
+	/**
+	 * 保存社会考核指标设置
+	 */
+	
+	public function saveCenterCheckPlainOp(){
+		 $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+		 $tmpsql = '';
+		 try{ 
+		 	$datas = $_REQUEST['data'];
+			$admin_info = $this->getAdminInfo();
+			$dPlanBegin = $_REQUEST['dPlanBegin'];
+			$dPlanEnd = $_REQUEST['dPlanEnd'];
+		 	$conn->beginTransaction(); 
+			foreach($datas as $key=>$val){
+				$fObject1 = $val['fObject1'] == null ? 0 : $val['fObject1'];
+				$fObject2 = $val['fObject2'] == null ? 0 : $val['fObject2'];
+				$sMemo = $val['sMemo'] == null ? '\'\'' : '\'' . $val['sMemo'] . '\'';
+				$sql = 'insert into Center_CheckPlan(OrgID,dPlanBegin,dPlanEnd,sPlanPerson,sMemo,fObject1,fObject2) ' .
+					' values(' . $val['orgId'] . ',\'' . $dPlanBegin . '\',\''. $dPlanEnd .'\',\''. $admin_info['name'] .'\','. $sMemo .
+					','. $fObject1 .','. $fObject2 .')' ;
+				$tmpsql = $tmpsql . $sql . ';';
+				$conn->exec($sql);
+			}
+		 	$conn->commit(); 
+		 	echo json_encode(array('success' => true, 'msg' => '保存成功!'));
+		 }catch(PDOException $ex){ 
+		 	$conn->rollBack(); 
+		 	echo json_encode(array('success' => false, 'msg' => '异常!'.$ex->getMessage()));
+		 } 
+		 exit;
+	}	
 
     public function saledetailOp()
     {
