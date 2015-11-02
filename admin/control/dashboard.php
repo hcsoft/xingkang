@@ -542,7 +542,7 @@ class dashboardControl extends SystemControl{
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             $row->details= array();
             array_push($healthfilelist, $row);
-        }
+		}
         return $healthfilelist;
     }
 
