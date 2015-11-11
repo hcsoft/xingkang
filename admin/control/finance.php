@@ -123,10 +123,10 @@ class financeControl extends SystemControl
         $total = $checkedPlaintmt->fetch(PDO::FETCH_NUM);
         $wheresql = '';
         if($total[0] > 0){
-        	$wheresql = ' where c.dPlanBegin = \''. $plainStart .'\' and c.dPlanEnd = \''. $plainEnd .'\'';
+        	$wheresql = ' and c.dPlanBegin = \''. $plainStart .'\' and c.dPlanEnd = \''. $plainEnd .'\'';
         }
         //查询机构树的类型
-        $centerCheckPlainsql = 'select  b.id , b.name,b.districtnumber,b.parentid pId,c.dPlanBegin,c.dPlanEnd,c.sPlanPerson,c.sMemo,c.fObject1,c.fObject2 from map_org_wechat a Join Organization b On a.orgid = b.id left join Center_CheckPlan c On a.orgid = c.OrgID ' . $wheresql;
+        $centerCheckPlainsql = 'select  b.id , b.name,b.districtnumber,b.parentid pId,c.dPlanBegin,c.dPlanEnd,c.sPlanPerson,c.sMemo,c.fObject1,c.fObject2 from map_org_wechat a Join Organization b On a.orgid = b.id left join Center_CheckPlan c On a.orgid = c.OrgID Where a.orgid not in (2004,2005,2006,2017) ' . $wheresql;
         $centerCheckPlaintmt = $conn->query($centerCheckPlainsql);
         $centerCheckPlaindata_list = array();
 //
