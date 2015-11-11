@@ -452,7 +452,7 @@ class communityControl extends SystemControl
 
         $endTime = '-1';
         if ($_GET['query_end_time']) {
-            $endTime = '$propertyarray' . $_GET['query_end_time'] . '\'';
+            $endTime = '\'' . $_GET['query_end_time'] . '\'';
         }
         $searchType = '';
         if ($_GET['statisticSection']) {
