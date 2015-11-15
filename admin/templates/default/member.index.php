@@ -427,6 +427,17 @@
                     <span title="留空表示不修改">新会员卡号:</span>
                     <input placeholder="留空表示不修改" title="留空表示不修改" id="newid" name="newid" type="text">
                 </p>
+                <p class="change">
+                    <span>原卡类型：</span>
+                    <input id="oldCardTypeText" name="oldCardTypeText" readonly type="text">
+                    <input id="oldCardType" name="oldCardType"  type="hidden">
+                    <span title="留空表示不修改">新卡类型:</span>
+                    <select id="newCardType" name="newCardType" >
+                            <option value="">--选此项表示不修改--</option>
+                            <option value="0">普通卡</option>
+                            <option value="1">储值卡</option>
+                    </select>
+                </p>
 
             </fieldset>
 
@@ -757,6 +768,8 @@
             'oldname': obj.member_truename,
             'oldtel': obj.sLinkPhone,
             'oldidcard': obj.sIDCard,
+            'oldCardTypeText': obj.CardType == 0? "普通卡" : "储值卡" ,
+            'oldCardType': obj.CardType,
             'oldid': obj.member_id,
             'oldbirthday': obj.member_birthday.substring(0, 10),
             'oldsex':obj.member_sex

@@ -1670,9 +1670,21 @@ class memberControl extends SystemControl {
 				$changelog['oldidcard'] = $_REQUEST["oldidcard"];
 				$changestr .= ',身份证由(' . $_REQUEST["oldidcard"] . ')改为(' . $newidcard . ')';
 			}
+
+            //修改卡类型
+            $newCardType = $_REQUEST["newCardType"];
+            if ($newCardType == '0' || !empty($newCardType)) {
+                $sql = " update shopnc_member set CardType = '$newCardType' where member_id = '$id'";
+                $conn->exec($sql);
+                $changelog['newCardType'] = $newCardType;
+                $changelog['oldCardType'] = $_REQUEST["oldCardType"];
+                $oldcardtext = $_REQUEST["oldCardType"] == '0' ? '普通卡' :'储值卡';
+                $newcardtext = $newCardType == '0' ? '普通卡' :'储值卡';
+                $changestr .= ',卡类型由(' . $oldcardtext. ')改为(' . $newcardtext . ')';
+            }
 			//修改性别
 			$newsex = $_REQUEST["newsex"];
-			if (!empty($newsex)) {
+			if ( !empty($newsex)) {
 				$sql = " update shopnc_member set member_sex = '$newsex' where member_id = '$id'";
 				$conn->exec($sql);
 				$changelog['newsex'] = $newsex;
@@ -1681,6 +1693,8 @@ class memberControl extends SystemControl {
 				$newstr = $changelog['newsex'] == '1' ? '男':'女';
 				$changestr .= ',性别由(' . $oldstr. ')改为(' . $newstr . ')';
 			}
+
+
 			//修改会员卡号
 			$newid = $_REQUEST["newid"];
 
