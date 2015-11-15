@@ -587,9 +587,9 @@ class memberControl extends SystemControl {
 		if(empty($flag)){
 //			$member_list = $model_member->getMemberList ( $condition, '*', 100000, $order );
 
-			$member_list = $model_member->field('member.*,log.dChangeDate,log.UpdatePerson,log.fRecharge logfRecharge,log.fConsume logfConsume,log.fScale logfScale ')->where($condition)->page(100000)->order($order)->select();
+			$member_list = $model_member->field('member.*,log.dChangeDate,log.sMemo,log.UpdatePerson,log.fRecharge logfRecharge,log.fConsume logfConsume,log.fScale logfScale ')->where($condition)->page(100000)->order($order)->select();
 		}else{
-			$member_list = $model_member->field('member.*,log.dChangeDate,log.UpdatePerson,log.fRecharge logfRecharge,log.fConsume logfConsume,log.fScale logfScale ')->where($condition)->page(10)->order($order)->select();
+			$member_list = $model_member->field('member.*,log.dChangeDate,log.sMemo,log.UpdatePerson,log.fRecharge logfRecharge,log.fConsume logfConsume,log.fScale logfScale ')->where($condition)->page(10)->order($order)->select();
 		}
 		/**
 		 * 整理会员信息
@@ -1720,11 +1720,11 @@ class memberControl extends SystemControl {
 		try {
 			$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 			$id = $_REQUEST['unregister_id'];
+			$memo = $_REQUEST['unregister_memo'];
 			$admin_info = $this->getAdminInfo();
 			$opt = $admin_info['name'];
 			if (!empty($id)) {
-				$logsql = " exec pFChangeMemberLog 1,'$opt','会员注销','$id',null;  ";
-
+				$logsql = " exec pFChangeMemberLog 1,'$opt','$memo','$id',null;  ";
 				$conn->exec($logsql);
 			}
 

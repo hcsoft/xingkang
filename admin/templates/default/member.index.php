@@ -311,11 +311,15 @@
 
 <div id="unregisterdialog" title="会员注销">
     <span class="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
-    <span>
+    <span style="width: 100%;">
+        <span style="font-weight: bold;text-align: center;width:100%;">会员将被注销，是否确认注销？</span><br>
         <form>
             <input type="hidden" id="unregister_id" name="unregister_id">
+            <br>
+            注销原因：<textarea style="vertical-align: top;" type="memo" id="unregister_memo" name="unregister_memo">中心注销会员卡</textarea>
         </form>
-        会员将被注销，是否确认注销？
+
+
     </span>
 </div>
 
