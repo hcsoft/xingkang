@@ -216,6 +216,7 @@
                         </td>
                         <td>
                             <p class="">注销时间:<strong  class="red"><?php echo substr($v['dChangeDate'],0,19)?></strong></p>
+                            <p class="">注销原因:<strong  class="red"><?php echo $v['sMemo']?></strong></p>
                             <p class="">操作人员:<strong  class="red"><?php echo $v['UpdatePerson']?></strong></p>
 
                         </td>

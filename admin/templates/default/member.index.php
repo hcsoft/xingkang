@@ -311,11 +311,15 @@
 
 <div id="unregisterdialog" title="会员注销">
     <span class="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
-    <span>
+    <span style="width: 100%;">
+        <span style="font-weight: bold;text-align: center;width:100%;">会员将被注销，是否确认注销？</span><br>
         <form>
             <input type="hidden" id="unregister_id" name="unregister_id">
+            <br>
+            注销原因：<textarea style="vertical-align: top;" type="memo" id="unregister_memo" name="unregister_memo">中心注销会员卡</textarea>
         </form>
-        会员将被注销，是否确认注销？
+
+
     </span>
 </div>
 
@@ -422,6 +426,17 @@
                     <input id="oldid" name="oldid" readonly type="text">
                     <span title="留空表示不修改">新会员卡号:</span>
                     <input placeholder="留空表示不修改" title="留空表示不修改" id="newid" name="newid" type="text">
+                </p>
+                <p class="change">
+                    <span>原卡类型：</span>
+                    <input id="oldCardTypeText" name="oldCardTypeText" readonly type="text">
+                    <input id="oldCardType" name="oldCardType"  type="hidden">
+                    <span title="留空表示不修改">新卡类型:</span>
+                    <select id="newCardType" name="newCardType" >
+                            <option value="">--选此项表示不修改--</option>
+                            <option value="0">普通卡</option>
+                            <option value="1">储值卡</option>
+                    </select>
                 </p>
 
             </fieldset>
@@ -753,6 +768,8 @@
             'oldname': obj.member_truename,
             'oldtel': obj.sLinkPhone,
             'oldidcard': obj.sIDCard,
+            'oldCardTypeText': obj.CardType == 0? "普通卡" : "储值卡" ,
+            'oldCardType': obj.CardType,
             'oldid': obj.member_id,
             'oldbirthday': obj.member_birthday.substring(0, 10),
             'oldsex':obj.member_sex
