@@ -115,6 +115,22 @@ class financeControl extends SystemControl
 
 	public function communitycheckOp()
 	{
+		if($_GET ['status'] != '')
+		{
+			$status = $_GET ['status'];
+			if ($status == '1') {
+                $this->communitycheck();
+            } else if ($status == '2') {
+                $this->communitycheckSummary();
+            } else if ($status == '3') {
+                $this->saveCenterCheckPlain();
+            }
+		}else{
+			$this->communitycheck();
+		}
+	}
+	
+	public function communitycheck(){
 		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 		$plainStart = date('Y-m-01', strtotime(date("Y-m-d")));
         $plainEnd = date('Y-m-d', strtotime(date('Y-m-01', strtotime(date("Y-m-d"))) . ' +1 month -1 day'));
@@ -129,18 +145,18 @@ class financeControl extends SystemControl
         $centerCheckPlainsql = 'select  b.id , b.name,b.districtnumber,b.parentid pId,c.dPlanBegin,c.dPlanEnd,c.sPlanPerson,c.sMemo,c.fObject1,c.fObject2 from map_org_wechat a Join Organization b On a.orgid = b.id left join Center_CheckPlan c On a.orgid = c.OrgID Where a.orgid not in (2004,2005,2006,2017) ' . $wheresql;
         $centerCheckPlaintmt = $conn->query($centerCheckPlainsql);
         $centerCheckPlaindata_list = array();
-//
+	//
         while ($row = $centerCheckPlaintmt->fetch(PDO::FETCH_OBJ)) {
             array_push($centerCheckPlaindata_list, $row);
         }
-        
-        
+	        
+		        
         Tpl::output('centerCheckPlaindata', $centerCheckPlaindata_list);
         Tpl::output('total', $total);
 		Tpl::showpage('finance.community.check.index');
 	}
 	
-	public function communitycheckSummaryOp()
+	public function communitycheckSummary()
 	{
 		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 		$summaryStart = date('Y-m-01', strtotime(date("Y-m-d")));
@@ -174,12 +190,12 @@ class financeControl extends SystemControl
 	 * 保存社会考核指标设置
 	 */
 	
-	public function saveCenterCheckPlainOp(){
+	public function saveCenterCheckPlain(){
 		 $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 		 $tmpsql = '';
 		 try{ 
 		 	$datas = $_REQUEST['data'];
-			$admin_info = $this->getAdminInfo();
+			$admin_info = 'xkggws001';
 			$dPlanBegin = $_REQUEST['dPlanBegin'];
 			$dPlanEnd = $_REQUEST['dPlanEnd'];
 		 	$conn->beginTransaction(); 
@@ -188,7 +204,7 @@ class financeControl extends SystemControl
 				$fObject2 = $val['fObject2'] == null ? 0 : $val['fObject2'];
 				$sMemo = $val['sMemo'] == null ? '\'\'' : '\'' . $val['sMemo'] . '\'';
 				$sql = 'insert into Center_CheckPlan(OrgID,dPlanBegin,dPlanEnd,sPlanPerson,sMemo,fObject1,fObject2) ' .
-					' values(' . $val['orgId'] . ',\'' . $dPlanBegin . '\',\''. $dPlanEnd .'\',\''. $admin_info['name'] .'\','. $sMemo .
+					' values(' . $val['orgId'] . ',\'' . $dPlanBegin . '\',\''. $dPlanEnd .'\',\''. $admin_info .'\','. $sMemo .
 					','. $fObject1 .','. $fObject2 .')' ;
 				$tmpsql = $tmpsql . $sql . ';';
 				$conn->exec($sql);
@@ -197,7 +213,7 @@ class financeControl extends SystemControl
 		 	echo json_encode(array('success' => true, 'msg' => '保存成功!'));
 		 }catch(PDOException $ex){ 
 		 	$conn->rollBack(); 
-		 	echo json_encode(array('success' => false, 'msg' => '异常!'.$ex->getMessage()));
+		 	echo json_encode(array('success' => false, 'msg' => '异常!'));
 		 } 
 		 exit;
 	}	
