@@ -5,8 +5,8 @@
         <div class="item-title">
             <h3>社区考核</h3>
             <ul class="tab-base">
-                <li><a href="index.php?act=finance&op=communitycheck"><span>考核指标设置</span></a></li>
-                <li><a href="index.php?act=finance&op=communitycheckSummary"><span>考核结果汇总</span></a></li>
+                <li><a href="index.php?act=finance&op=communitycheck&status=1"><span>考核指标设置</span></a></li>
+                <li><a href="index.php?act=finance&op=communitycheck&status=2"><span>考核结果汇总</span></a></li>
             </ul>
         </div>
     </div>
@@ -126,7 +126,7 @@
 		var dPlanBegin = $('.dPlanBegin').val();
 		var dPlanEnd = $('.dPlanEnd').val();
 		$.ajax({
-			url: "index.php?act=finance&op=saveCenterCheckPlain",
+			url: "index.php?act=finance&op=communitycheck&status=3",
             data: {"data":datas,"dPlanBegin":dPlanBegin,"dPlanEnd":dPlanEnd}, 
             dataType: 'json', 
             success: function (data) {
@@ -134,7 +134,7 @@
             },
             error:function(data){
             	console.log(data);
-            	$('#AlertMessageError').dialog('open');
+//            	$('#AlertMessageError').dialog('open');
             }
 		});
 	}
