@@ -1319,11 +1319,9 @@ class memberControl extends SystemControl {
 			array_push ( $data_list, $row );
             //计算合计
             foreach($exportproperty as $i=>$v){
-                foreach($exportproperty as $i=>$v){
-                    if(!in_array($v , $displaycol)){
-                        $sumrow->$v = $sumrow->$v + $row->$v;
-                    }
-                }
+				if(!in_array($v , $displaycol)){
+					$sumrow->$v = $sumrow->$v + $row->$v;
+				}
             }
 		}
         array_push ( $data_list, $sumrow );
