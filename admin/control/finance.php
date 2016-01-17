@@ -1349,7 +1349,7 @@ class financeControl extends SystemControl
     	if ($checkednode && isset($checkednode) && count($checkednode) > 0) {
     		$sql = $sql . " and a.SaleOrgID  in ($checkednode) ";
     	}
-    	$sql = $sql .' and a.iDrug_ID =\'637482\'';
+//     	$sql = $sql .' and a.iDrug_ID =\'637482\'';
 //     	if (!isset($_GET['search_type'])) {
 //     		$_GET['search_type'] = '0';
 //     	}
