@@ -129,6 +129,7 @@ $_limit =  array(
         array('name'=>'销售明细财务分类管理', 'op'=>'saledetailmanager', 'act'=>'finance'),
         array('name'=>'门诊收入统计', 'op'=>'financesum', 'act'=>'finance'),
         array('name'=>'住院收入统计', 'op'=>'financeinsum', 'act'=>'finance'),
+    	array('name'=>'药品汇总', 'op'=>'goodssum', 'act'=>'finance'),
         array('name'=>'单品毛利分析', 'op'=>'financegoodsum', 'act'=>'finance'),
         array('name'=>'仓库单据明细', 'op'=>'detail', 'act'=>'storehouse'),
         array('name'=>'仓库单据汇总', 'op'=>'sum', 'act'=>'storehouse'),
