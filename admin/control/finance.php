@@ -1349,7 +1349,8 @@ class financeControl extends SystemControl
     	if ($checkednode && isset($checkednode) && count($checkednode) > 0) {
     		$sql = $sql . " and a.SaleOrgID  in ($checkednode) ";
     	}
-//     	$sql = $sql .' and a.iDrug_ID =\'637482\'';
+//     	$sql = $sql .' and a.OrgID=\'48\' ';
+    	//and a.iDrug_ID =\'637482\'
 //     	if (!isset($_GET['search_type'])) {
 //     		$_GET['search_type'] = '0';
 //     	}
@@ -1358,7 +1359,7 @@ class financeControl extends SystemControl
     			//'Section' => 'a.StatSection as "Section"',
     			'execSection' => ' ',
     			'sDrug_ID' =>'good.sDrug_ID as "sDrug_ID" ',
-    			'sDrug_TradeName' =>'good.sDrug_TradeName as "sDrug_TradeName" ',
+    			'sDrug_TradeName' =>'isnull(good.sDrug_TradeName,a.itemname) as "sDrug_TradeName" ',
     			'ItemType' =>'a.ItemType as "ItemType" ',
     			'sDrug_Spec' =>'good.sDrug_Spec as "sDrug_Spec" ',
     			'sDrug_Unit' =>'good.sDrug_Unit as "sDrug_Unit" ',
@@ -1399,7 +1400,7 @@ class financeControl extends SystemControl
     	//处理汇总字段
     	$sumtype = $_GET['sumtype'];
     	if ($sumtype == null) {
-    		$sumtype = array(0 => "OrgID", 1 => "goods");
+    		$sumtype = array(0 => "OrgID");
     		$_GET['sumtype'] = $sumtype;
     	}
     	$checked = $_GET['checked'];
