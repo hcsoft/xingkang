@@ -1308,11 +1308,13 @@ class financeControl extends SystemControl
     public function goodssumOp()
     {
     	$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+    	$this->goodtype = array(0 => '药品', 1 => '卫生用品', 3 => '特殊材料');
+    	Tpl::output('goodtype', $this->goodtype);
     	$sql = ' from Center_ClinicSale a
                 left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
                 left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID  and class.iClass_Type = 3
                 , Organization org
-                where   a.orgid = org.id  ';
+                where   a.orgid = org.id  and a.itemtype <>\'诊疗项目\' '; 
     	if ($_GET['itemtype']) {
     		$sql = $sql . ' and a.itemtype =\'' . $_GET['itemtype'] . '\'';
     	}
@@ -1348,6 +1350,9 @@ class financeControl extends SystemControl
     	$checkednode = $_GET['checkednode'];
     	if ($checkednode && isset($checkednode) && count($checkednode) > 0) {
     		$sql = $sql . " and a.SaleOrgID  in ($checkednode) ";
+    	}
+    	if ($_GET['search_excutetype']) {
+    		$sql = $sql . ' and good.iDrug_ExcuteType = \'' .($_GET['search_excutetype']).'\'';
     	}
 //     	$sql = $sql .' and a.OrgID=\'48\' ';
     	//and a.iDrug_ID =\'637482\'
@@ -1450,14 +1455,6 @@ class financeControl extends SystemControl
     			}
     		}
     	}
-//     	array_push($displaytext, '项目编码');
-//     	array_push($displaytext, '项目名称');
-//     	array_push($displaytext, '项目类型');
-//     	array_push($displaytext, '规格');
-//     	array_push($displaytext, '单位');
-//     	array_push($displaytext, '产地/厂商');
-//     	array_push($displaytext, '数量');
-//     	array_push($displaytext, '单价');
     	array_push($displaytext, '金额');
     	//        var_dump($totalcol);
     	$totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
@@ -1465,38 +1462,17 @@ class financeControl extends SystemControl
     	$totalcolstr = join(',', $totalcol);
     	$sumcolstr = join(',', $sumcol);
     	$groupbycolstr = join(',', $groupbycol);
-//     	$groupbycolstr = $groupbycolstr .',good.sDrug_ID, good.sDrug_TradeName ,a.ItemType,good.sDrug_Spec,good.sDrug_Unit,good.sDrug_Brand,a.fSale_TaxPrice';
-    	//        echo $sumcolstr;
-//     	$tsql = ' select good.sDrug_ID, good.sDrug_TradeName ,a.ItemType ,
-//                         good.sDrug_Spec ,
-//                         good.sDrug_Unit ,
-//                         good.sDrug_Brand ,
-//                         sum(a.fSale_Num) as fSale_Num ,
-//                         a.fSale_TaxPrice ,
-//                         sum(a.fSale_TaxFactMoney) as fSale_TaxFactMoney,'.$sumcolstr .$sql." group by $groupbycolstr ";
     	$tsql = ' select '.$sumcolstr .',sum(a.fSale_TaxFactMoney) as fSale_TaxFactMoney'.$sql." group by $groupbycolstr ";
     	
     	$countsql = " select count(*)  from ($tsql) a ";
     	$stmt = $conn->query($countsql);
     	$total = $stmt->fetch(PDO::FETCH_NUM);
     	$page->setTotalNum($total[0]);
-//     	$pagesql = 'select * from (select top '. $endnum.' row_number() over( order by  '.$groupbycolstr.')rownum ,good.sDrug_ID, good.sDrug_TradeName ,a.ItemType ,
-//                         good.sDrug_Spec ,
-//                         good.sDrug_Unit ,
-//                         good.sDrug_Brand ,
-//                         sum(a.fSale_Num) as fSale_Num ,
-//                         a.fSale_TaxPrice ,
-//                         sum(a.fSale_TaxFactMoney) as fSale_TaxFactMoney,'.$sumcolstr.$sql.' group by '.$groupbycolstr.' order by '.$groupbycolstr.')zzzz where rownum>'.$startnum;
     	$pagesql = 'select * from (select top '. $endnum.' row_number() over( order by  '.$groupbycolstr.')rownum ,
                         sum(a.fSale_TaxFactMoney) as fSale_TaxFactMoney,'.$sumcolstr.$sql.' group by '.$groupbycolstr.' order by '.$groupbycolstr.')zzzz where rownum>'.$startnum;
     	
-//     	sum(fSale_TaxFactMoney) taxmoney ,
-//     	sum(fSale_NoTaxMoney) notaxmoney ,
-//     	sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney)  grossprofit,
-//     	case when sum(fSale_TaxFactMoney) =0 then 0 else (sum(fSale_TaxFactMoney) -sum(fSale_NoTaxMoney))/sum(fSale_TaxFactMoney) end  grossprofitrate
-    	//$sql group by $groupbycolstr order by $groupbycolstr ";
-//     	       echo $tsql;
-    	
+    	$totalsql = " select $totalcolstr , sum(a.fSale_TaxFactMoney) as fSale_TaxFactMoney
+			    	$sql ";
     	if (isset($_GET['export']) && $_GET['export'] == 'true') {
     	$this->exportxlsx(array(0 => $tsql), $displaytext, '药品汇总');
     	}
@@ -1510,10 +1486,10 @@ class financeControl extends SystemControl
     	//处理合计
     
     	//        echo $totalsql;
-//     		$totalstmt = $conn->query($totalsql);
-//     		while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
-//     			array_push($data_list, $row);
-//     		}
+    	$totalstmt = $conn->query($totalsql);
+    	while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
+    		array_push($data_list, $row);
+    	}
     Tpl::output('data_list', $data_list);
     //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
     Tpl::output('page', $page->show());
@@ -1533,4 +1509,5 @@ class financeControl extends SystemControl
     Tpl::output('displaytext', $displaytext);
     	Tpl::showpage('goods.sum');
     }
+    
 }

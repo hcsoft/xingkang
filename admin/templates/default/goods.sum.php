@@ -86,6 +86,14 @@
 	                    <?php } ?>
 	                </select>
 	            </td>
+	            <th><label>毛利分类</label></th>
+	            <td>
+	            	<select name="search_excutetype">
+	            		<option value="" <?php if ('' == $_GET['search_excutetype']){ ?>selected<?php } ?> >全部</option>
+						<option value="0" <?php if ('1' == $_GET['search_excutetype']){ ?>selected<?php } ?> >推荐商品</option>
+						<option value="1" <?php if ('2' == $_GET['search_excutetype']){ ?>selected<?php } ?> >负毛利商品</option>
+					</select>
+	            </td>
             </tr>
             <tr>
                 <th><label for="search_commonid">商品编码</label></th>
@@ -103,8 +111,9 @@
 	                        <option value="<?php echo $v->id; ?>"
 	                                <?php if (in_array($v->id, $orgids)){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
 	                    <?php } ?>
-	                </select></td>
+	                </select>
 	            </td>
+	            
                 <th><label>汇总类型</label></th>
                 <td colspan="1" id="sumtypetr">
                     <?php foreach ($output['config']['sumcol'] as $k => $v) { ?>

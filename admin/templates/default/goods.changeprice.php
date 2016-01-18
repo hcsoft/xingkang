@@ -80,7 +80,14 @@
                                     </option>
                                 </select>
                             </td>
-
+							<th> 审核状态：</th>
+                            <td>
+                                <select name="check_State">
+                                	<option value="0" <?php if ('0' == $_GET['check_State']){ ?>selected<?php } ?> >未审核
+                                    </option>
+                                    <option value="1" <?php if ('1' == $_GET['check_State']){ ?>selected<?php } ?> >已审核
+                                    </option>
+                                </select>
                             </td>
                             <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                                    title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
@@ -285,6 +292,7 @@
                 <th>单位</th>
                 <th>项目类型</th>
                 <th>价格类型</th>
+                <th>是否最<br/>小单位</th>
                 <th>操作</th>
             </tr>
             <tbody>
@@ -351,6 +359,9 @@
                         </td>
                         <td class=" align-center">
                             <?php echo $output['map_iPrice_Type'][$v->iPrice_Type] ?>
+                        </td>
+                        <td class=" align-center">
+                            <?php echo $output['map_iUnitType'][$v->iUnitType] ?>
                         </td>
                         <td class=" align-center">
                             <?php if (empty($v->sPrice_CheckPerson)) { ?>
