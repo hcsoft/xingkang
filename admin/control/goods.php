@@ -1366,7 +1366,7 @@ class goodsControl extends SystemControl
     	$totalsql = " select $totalcolstr , sum(a.fSale_TaxFactMoney) as fSale_TaxFactMoney
     	$sql ";
     	if (isset($_GET['export']) && $_GET['export'] == 'true') {
-    			$this->exportxlsx(array(0 => $tsql), $displaytext, '药品汇总');
+    			$this->exportxlsx(array(0 => $tsql,1=>$totalsql), $displaytext, '药品汇总');
     	}
     
     	//        echo $tsql;
