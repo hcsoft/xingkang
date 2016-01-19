@@ -196,6 +196,7 @@ $arr = array(
                     array('args'=>'call,healthplatform,healthplatform',			'text'=>'呼叫中心'),
                     array('args'=>'index,healthplatform,healthplatform',			'text'=>'回访抽查'),
 					array('args'=>'sleep,healthplatform,healthplatform',			'text'=>'睡眠顾客查询'),
+                	array('args'=>'consume,healthplatform,healthplatform',			'text'=>'消费频次提醒'),
 					array('args'=>'birthday,healthplatform,healthplatform',			'text'=>'顾客生日提醒'),
                     array('args'=>'statistical,healthplatform,healthplatform',			'text'=>'统计'),
                     array('args'=>'test,healthplatform,healthplatform',			'text'=>'测试')
