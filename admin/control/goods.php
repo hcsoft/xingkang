@@ -495,9 +495,10 @@ class goodsControl extends SystemControl
             array_push($treedata_list, $row);
         }
         Tpl::output('treelist', $treedata_list);
-        if (!isset($_GET['orgid'])) {
-            $_GET['orgid'] = $treedata_list[0]->id;
-        }
+        
+//         if (!isset($_GET['orgid'])) {
+//             $_GET['orgid'] = $treedata_list[0]->id;
+//         }
 
         $page = new Page();
         $page->setEachNum(10);
@@ -535,8 +536,11 @@ class goodsControl extends SystemControl
             $sql = $sql . ' and (stock.fDS_OStock <> 0 or  stock.fDS_LeastOStock  <> 0)  ';
         }
 
-        if ($_GET['orgid'] != '') {
-            $sql = $sql . ' and stock.orgid =\'' . $_GET['orgid'] . '\'';
+//         if ($_GET['orgid'] != '') {
+//             $sql = $sql . ' and stock.orgid =\'' . $_GET['orgid'] . '\'';
+//         }
+        if ($_GET['orgids']) {
+        	$sql = $sql .' and stock.orgid in ('.implode(',', $_GET['orgids']).')';
         }
 
 
@@ -1206,7 +1210,7 @@ class goodsControl extends SystemControl
                 left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
                 left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID  and class.iClass_Type = 3
                 , Organization org
-                where   a.orgid = org.id  and a.itemtype <>\'诊疗项目\' ';
+                where   a.orgid = org.id  and a.itemtype <>\'诊疗项目\' and a.iDrug_ID >0 ';
     	if ($_GET['itemtype']) {
     		$sql = $sql . ' and a.itemtype =\'' . $_GET['itemtype'] . '\'';
     	}
