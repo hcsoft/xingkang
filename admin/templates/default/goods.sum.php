@@ -90,8 +90,8 @@
 	            <td>
 	            	<select name="search_excutetype">
 	            		<option value="" <?php if ('' == $_GET['search_excutetype']){ ?>selected<?php } ?> >全部</option>
-						<option value="0" <?php if ('1' == $_GET['search_excutetype']){ ?>selected<?php } ?> >推荐商品</option>
-						<option value="1" <?php if ('2' == $_GET['search_excutetype']){ ?>selected<?php } ?> >负毛利商品</option>
+						<option value="1" <?php if ('1' == $_GET['search_excutetype']){ ?>selected<?php } ?> >推荐商品</option>
+						<option value="2" <?php if ('2' == $_GET['search_excutetype']){ ?>selected<?php } ?> >负毛利商品</option>
 					</select>
 	            </td>
             </tr>
