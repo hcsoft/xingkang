@@ -1,5 +1,7 @@
 <?php defined('InShopNC') or exit('Access Invalid!'); ?>
 <link href="<?php echo ADMIN_TEMPLATES_URL; ?>/css/font/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.css" rel="stylesheet"
+          type="text/css"/>
 <!--[if IE 7]>
 <link rel="stylesheet" href="<?php echo ADMIN_TEMPLATES_URL;?>/css/font/font-awesome/css/font-awesome-ie7.min.css">
 <![endif]-->
@@ -23,6 +25,20 @@
     border:none;
 }
 </style>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
+    <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"
+            charset="utf-8"></script>
+    <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery.validation.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
+    <link href="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.css" rel="stylesheet"
+          type="text/css"/>
+    <script type="text/javascript"
+            src="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/js/jquery.ztree.all-3.5.min.js"></script>
+    <script type="text/javascript"
+            src="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.min.js"></script>
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
@@ -34,25 +50,23 @@
         <input type="hidden" name="act" value="goods">
         <input type="hidden" name="op" value="stock">
         <input type="hidden" id ='export' name="export" value="false">
-        <input type="hidden" id = 'queryorgid' name="queryorgid" value="<?php echo $_GET['orgid']; ?>">
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
-                <th><label>选择机构</label></th>
-                <td colspan="1"><select name="orgid" id="orgid" class="orgSelect">
-<!--                        <option value="" >全部</option>-->
+            	<th><label>选择机构</label></th>
+                <td colspan="1"><select name="orgids[]" id="orgids" class="orgSelect" multiple>
                         <?php
-                        $orgid = $_GET['orgid'];
+                        $orgids = $_GET['orgids'];
                         if (!isset($orgids)) {
                             $orgids = array();
                         }
                         foreach ($output['treelist'] as $k => $v) {
                             ?>
                             <option value="<?php echo $v->id; ?>"
-                                    <?php if ($v->id == $orgid){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
+                                    <?php if (in_array($v->id, $orgids)){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
                         <?php } ?>
                     </select></td>
-                </td>
+                
                 <th><label for="search_goods_name"> <?php echo $lang['goods_index_name']; ?></label></th>
                 <td><input type="text" value="<?php echo $output['search']['search_goods_name']; ?>"
                            name="search_goods_name" id="search_goods_name" class="txt"></td>
@@ -231,7 +245,22 @@
                 goods_lockup(str);
             }
         });
-
+      //生成机构下拉
+        function orgtext(n1, n2, list) {
+            var texts = [];
+            for (var idx in list) {
+                texts.push($(list[idx]).attr("title"));
+            }
+            return texts.join('<br>');
+        }
+        $("#orgids").multiselect(
+                {
+                    checkAllText: '选择全部',
+                    uncheckAllText: '清除选择',
+                    noneSelectedText: '未选择',
+                    selectedText: orgtext
+                }
+            );
         // 批量删除
         $('a[nctype="del_batch"]').click(function () {
             if (confirm('<?php echo $lang['nc_ensure_del'];?>')) {

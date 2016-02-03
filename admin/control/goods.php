@@ -495,9 +495,10 @@ class goodsControl extends SystemControl
             array_push($treedata_list, $row);
         }
         Tpl::output('treelist', $treedata_list);
-        if (!isset($_GET['orgid'])) {
-            $_GET['orgid'] = $treedata_list[0]->id;
-        }
+        
+//         if (!isset($_GET['orgid'])) {
+//             $_GET['orgid'] = $treedata_list[0]->id;
+//         }
 
         $page = new Page();
         $page->setEachNum(10);
@@ -535,8 +536,11 @@ class goodsControl extends SystemControl
             $sql = $sql . ' and (stock.fDS_OStock <> 0 or  stock.fDS_LeastOStock  <> 0)  ';
         }
 
-        if ($_GET['orgid'] != '') {
-            $sql = $sql . ' and stock.orgid =\'' . $_GET['orgid'] . '\'';
+//         if ($_GET['orgid'] != '') {
+//             $sql = $sql . ' and stock.orgid =\'' . $_GET['orgid'] . '\'';
+//         }
+        if ($_GET['orgids']) {
+        	$sql = $sql .' and stock.orgid in ('.implode(',', $_GET['orgids']).')';
         }
 
 
@@ -1022,9 +1026,25 @@ class goodsControl extends SystemControl
         if ($this->notEmpty($_GET['Downloaded'])) {
             $sql = $sql . ' and a.Downloaded =  ' . intval($_GET['Downloaded']) . ' ';
         }
+        //审核状态
+        if ($this->notEmpty($_GET['check_State'])) {
+        	if(intval($_GET['check_State'])==0){
+        		$sql = $sql . ' and len(a.sPrice_CheckPerson)=0 ';
+        	}
+        	if(intval($_GET['check_State'])==1){
+        		$sql = $sql . ' and len(a.sPrice_CheckPerson) >0 ';
+        	}
+        	
+        }else {
+        	$_GET['check_State'] ='0';
+        	$sql = $sql . ' and len(a.sPrice_CheckPerson) =0 ';
+        }
         //是否下载 码值表
         $map_Downloaded = array('0' => '未下载', '1' => '已下载');
         Tpl::output('map_Downloaded', $map_Downloaded);
+        //是否小单位
+        $map_iUnitType = array('0' => '否', '1' => '是');
+        Tpl::output('map_iUnitType', $map_iUnitType);
         //设置orderby 顺序
         if (!$this->notEmpty($_GET['order'])) {
             $ordersql = 'desc';
@@ -1061,11 +1081,12 @@ class goodsControl extends SystemControl
                             [ItemType] ,
                             [iPrice_Type] ,
                             [fPrice_Before] ,
-                            [fPrice_After]
+                            [fPrice_After],
+                            [iUnitType]
                         $sql order by  $order ";
             $titlearray = array('序号', '商品编码', '商品名称', '调价日期', '执行开始日期', '执行结束日期'
-            , '调价人', '调价状态', '审核日期', '审核人', '机构', '商品单位', '项目类型', '单价类型', '调前价', '调后价');
-            $maparray = array('iPrice_Type' => $map_iPrice_Type, 'OrgID' => $org_map, 'iPrice_State' => $map_iPrice_State);
+            , '调价人', '调价状态', '审核日期', '审核人', '机构', '商品单位', '项目类型', '单价类型', '调前价', '调后价','是否小单位');
+            $maparray = array('iPrice_Type' => $map_iPrice_Type, 'OrgID' => $org_map, 'iPrice_State' => $map_iPrice_State,'map_iUnitType'=>$map_iUnitType);
             $this->exportxlsx($exportsql, $titlearray, '商品调价审核', $maparray);
         }
         //合计字段
@@ -1180,4 +1201,210 @@ class goodsControl extends SystemControl
         echo json_encode($goods_list);
     }
 
+    public function goodssum_goodsOp()
+    {
+    	$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+    	$this->goodtype = array(0 => '药品', 1 => '卫生用品', 3 => '特殊材料');
+    	Tpl::output('goodtype', $this->goodtype);
+    	$sql = ' from Center_ClinicSale a
+                left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
+                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID  and class.iClass_Type = 3
+                , Organization org
+                where   a.orgid = org.id   and a.iDrug_ID >0 ';
+    	if ($_GET['itemtype']) {
+    		$sql = $sql . ' and a.itemtype =\'' . $_GET['itemtype'] . '\'';
+    	}
+    
+    	if ($_GET['query_start_time']) {
+    		$sql = $sql . ' and a.dSale_MakeDate >=\'' . $_GET['query_start_time'] . '\'';
+    	}
+    
+    	if ($_GET['query_end_time']) {
+    		$sql = $sql . ' and a.dSale_MakeDate < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
+    	}
+    
+    	if ($_GET['orgids']) {
+    		$sql = $sql . ' and a.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+    		 
+    	}
+    	if ($_GET['search_goods_name'] != '') {
+    		$sql = $sql . ' and a.itemname like \'%' . trim($_GET['search_goods_name']) . '%\'';
+    	}
+    
+    	if ($_GET['classtype'] != '') {
+    		if ($_GET['classtype'] == 'null') {
+    			$sql = $sql . ' and good.iDrug_StatClass  is null ';
+    		} else {
+    			$sql = $sql . ' and good.iDrug_StatClass =  ' . trim($_GET['classtype']);
+    		}
+    	}
+    
+    	if (intval($_GET['search_commonid']) > 0) {
+    		$sql = $sql . ' and good.sDrug_ID = \'' .($_GET['search_commonid']).'\'';
+    	}
+    	//处理树的参数
+    	$checkednode = $_GET['checkednode'];
+    	if ($checkednode && isset($checkednode) && count($checkednode) > 0) {
+    		$sql = $sql . " and a.SaleOrgID  in ($checkednode) ";
+    	}
+    	if ($_GET['search_excutetype']) {
+    		$sql = $sql . ' and good.iDrug_ExcuteType = \'' .($_GET['search_excutetype']).'\'';
+    	}
+    	//     	$sql = $sql .' and a.OrgID=\'48\' ';
+    	//and a.iDrug_ID =\'637482\'
+    	//     	if (!isset($_GET['search_type'])) {
+    	//     		$_GET['search_type'] = '0';
+    	//     	}
+    	$sqlarray = array(
+    			//'classname' => ' case when class.sClass_ID is not null then class.sClass_ID+\'.\'+class.sClass_Name  else \'\' end as "classname" ',
+    			//'Section' => 'a.StatSection as "Section"',
+    			'execSection' => ' ',
+    			'sDrug_ID' =>'good.sDrug_ID as "sDrug_ID" ',
+    			'sDrug_TradeName' =>'isnull(good.sDrug_TradeName,a.itemname) as "sDrug_TradeName" ',
+    			'ItemType' =>'a.ItemType as "ItemType" ',
+    			'sDrug_Spec' =>'good.sDrug_Spec as "sDrug_Spec" ',
+    			'sDrug_Unit' =>'good.sDrug_Unit as "sDrug_Unit" ',
+    			'sDrug_Brand' =>'good.sDrug_Brand as "sDrug_Brand" ',
+    			'fSale_Num' =>'sum(a.fSale_Num) as "fSale_Num" ',
+    			'fSale_TaxPrice' =>'good.fSale_TaxPrice as "fSale_TaxPrice" ',
+    			'fPrice_OBuy' =>'a.fPrice_OBuy as "fPrice_OBuy" ',
+    			//     			'goods' => ' good.sDrug_ID, good.sDrug_TradeName ,a.ItemType, good.sDrug_Spec ,good.sDrug_Unit ,good.sDrug_Brand,sum(a.fSale_Num) as fSale_Num ,a.fSale_TaxPrice',
+    			'Doctor' => ' a.DoctorName as "Doctor" ',
+    			'year' => ' year(a.dSale_GatherDate) as "year" ',
+    			'month' => ' left(convert(varchar,dSale_GatherDate,112),6) as  "month" ',
+    			'day' => ' convert(varchar,dSale_GatherDate,112) as "day" ',
+    			'OrgID' => ' org.name as "OrgID" ',
+    			//'dSale_MakeDate' => ' replace( CONVERT( CHAR(10), a.dSale_MakeDate, 102), \'.\', \'-\') as "dSale_MakeDate" ',
+    			//'dSale_GatherDate' => ' replace( CONVERT( CHAR(10), a.dSale_GatherDate , 102), \'.\', \'-\') as "dSale_GatherDate" ',
+    	);
+    	$config = array('sumcol' => array(
+    			'OrgID' => array(name => 'OrgID', 'text' => '机构'),
+    			'Doctor' => array(name => 'Doctor', 'text' => '医生'),
+    			'goods' => array(name => 'goods', 'text' => '药品','cols'=>array('0'=>array(name => 'sDrug_ID', 'text' => '项目编码'),
+    					'1'=>array(name => 'sDrug_TradeName', 'text' => '项目名称'),
+    					'2'=>array(name => 'ItemType', 'text' => '项目类型'),
+    					'3'=>array(name => 'sDrug_Spec', 'text' => '规格'),
+    					'4'=>array(name => 'sDrug_Unit', 'text' => '单位'),
+    					'5'=>array(name => 'sDrug_Brand', 'text' => '产地/厂商'),
+    					'6'=>array(name => 'fSale_Num', 'text' => '数量'),
+    					'7'=>array(name => 'fSale_TaxPrice', 'text' => '单价'),
+    					'8'=>array(name => 'fPrice_OBuy', 'text' => '进价')
+    			)),
+    			//     			'goods' => array(name => ayyay('sDrug_ID','sDrug_TradeName'), 'text' => array('项目编码','项目名称')),
+    			//'classname' => array(name => 'classname', 'text' => '财务分类'),
+    			//            'execSection' => array(name => 'execSection', 'text' => '执行科室'),
+    
+    			'year' => array('text' => '年', name => 'year', uncheck => 'month,day'),
+    			'month' => array('text' => '月', name => 'month', uncheck => 'year,day'),
+    			'day' => array('text' => '日', name => 'day', uncheck => 'year,month'),
+    	));
+    	Tpl::output('config', $config);
+    
+    	//处理汇总字段
+    	$sumtype = $_GET['sumtype'];
+    	if ($sumtype == null) {
+    		$sumtype = array(0 => "OrgID");
+    		$_GET['sumtype'] = $sumtype;
+    	}
+    	$checked = $_GET['checked'];
+    	$page = new Page();
+    	$page->setEachNum(10);
+    	$page->setNowPage($_REQUEST["curpage"]);
+    	$startnum = $page->getEachNum() * ($page->getNowPage() - 1);
+    	$endnum = $page->getEachNum() * ($page->getNowPage());
+    
+    	$search_type = $_GET['search_type'];
+    	//        echo $search_type;
+    	$colconfig = $config;
+    	//        var_dump($config[intval($search_type)]);
+    	$displaycol = array();
+    	$displaytext = array();
+    	$sumcol = array();
+    	$totalcol = array();
+    	$groupbycol = array();
+    	foreach ($sumtype as $i => $v) {
+    		//            var_dump($colconfig['sumcol'][$v]);
+    		if (isset($colconfig['sqlwher'])) {
+    			$sql = $sql . $colconfig['sqlwher'];
+    		}
+    		if (isset($colconfig['sumcol'][$v])) {
+    			if (isset($colconfig['sumcol'][$v]['cols'])) {
+    				foreach ($colconfig['sumcol'][$v]['cols'] as $item) {
+    					//                        echo $item['name'] . '<br>';
+    					array_push($sumcol, $sqlarray[$item['name']]);
+    					array_push($displaycol, $item['name']);
+    					array_push($displaytext, $item['text']);
+    					$itemsplit = explode(' as ', $sqlarray[$item['name']]);
+    					array_push($totalcol, ' null as ' . $itemsplit[1]);
+    					$str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+    					if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+    						array_push($groupbycol, $itemsplit[0]);
+    				}
+    			} else {
+    				$item = $colconfig['sumcol'][$v];
+    				array_push($sumcol, $sqlarray[$item['name']]);
+    				array_push($displaycol, $item['name']);
+    				array_push($displaytext, $item['text']);
+    				$itemsplit = explode(' as ', $sqlarray[$item['name']]);
+    				array_push($totalcol, ' null as ' . $itemsplit[1]);
+    				$str = strtolower(str_replace(' ', '', trim($itemsplit[0])));
+    				if (substr($str, 0, 4) != 'sum(' && substr($str, 0, 6) != 'count(')
+    					array_push($groupbycol, $itemsplit[0]);
+    			}
+    		}
+    	}
+    	array_push($displaytext, '金额');
+    	//        var_dump($totalcol);
+    	$totalcol[0] = '\'总计：\' as ' . explode(' as ', $totalcol[0])[1];
+    	//        var_dump($totalcol);
+    	$totalcolstr = join(',', $totalcol);
+    	$sumcolstr = join(',', $sumcol);
+    	$groupbycolstr = join(',', $groupbycol);
+    	$tsql = ' select '.$sumcolstr .',sum(a.fSale_TaxFactMoney) as fSale_TaxFactMoney'.$sql." group by $groupbycolstr ";
+    
+    	$countsql = " select count(*)  from ($tsql) a ";
+    	$stmt = $conn->query($countsql);
+    	$total = $stmt->fetch(PDO::FETCH_NUM);
+    	$page->setTotalNum($total[0]);
+    	$pagesql = 'select * from (select top '. $endnum.' row_number() over( order by  '.$groupbycolstr.')rownum ,
+                        sum(a.fSale_TaxFactMoney) as fSale_TaxFactMoney,'.$sumcolstr.$sql.' group by '.$groupbycolstr.' order by '.$groupbycolstr.')zzzz where rownum>'.$startnum;
+    
+    	$totalsql = " select $totalcolstr , sum(a.fSale_TaxFactMoney) as fSale_TaxFactMoney
+    	$sql ";
+    	if (isset($_GET['export']) && $_GET['export'] == 'true') {
+    			$this->exportxlsx(array(0 => $tsql,1=>$totalsql), $displaytext, '药品汇总');
+    	}
+    
+    	//        echo $tsql;
+    	$stmt = $conn->query($pagesql);
+    	$data_list = array();
+    	while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+    	array_push($data_list, $row);
+    }
+    	//处理合计
+    
+    	//        echo $totalsql;
+    	$totalstmt = $conn->query($totalsql);
+    	while ($row = $totalstmt->fetch(PDO::FETCH_OBJ)) {
+    	array_push($data_list, $row);
+    }
+    Tpl::output('data_list', $data_list);
+    //--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
+    Tpl::output('page', $page->show());
+    
+    
+    	//处理需要显示的列
+    	$col = array();
+    	foreach ($sumtype as $i => $v) {
+    	if (isset($sumtypestr[$v])) {
+    	foreach ($sumtypestr[$v] as $key => $item) {
+    	$col[$key] = $item;
+    }
+    }
+    	}
+    		//        var_dump($col);
+    		Tpl::output('displaycol', $displaycol);
+    		Tpl::output('displaytext', $displaytext);
+    		Tpl::showpage('goods.sum');
+    }
 }

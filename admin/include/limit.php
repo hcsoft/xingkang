@@ -34,7 +34,8 @@ $_limit =  array(
 		array('name'=>$lang['nc_type_manage'], 'op'=>null, 'act'=>'type'),
 		array('name'=>$lang['nc_spec_manage'], 'op'=>null, 'act'=>'spec'),
 		array('name'=>$lang['nc_album_manage'], 'op'=>null, 'act'=>'goods_album'),
-		array('name'=>'商品调价审核', 'op'=>'changeprice', 'act'=>'goods')
+		array('name'=>'商品调价审核', 'op'=>'changeprice', 'act'=>'goods'),
+		array('name'=>'商品汇总', 'op'=>'finance', 'act'=>'goodssum_goods')
 		)),
 	array('name'=>$lang['nc_store'], 'child'=>array(
 		array('name'=>$lang['nc_store_manage'], 'op'=>null, 'act'=>'store'),
@@ -105,6 +106,7 @@ $_limit =  array(
         array('name'=>'回访日志', 'op'=>'calllog', 'act'=>'healthplatform'),
         array('name'=>'回访抽查', 'op'=>'index', 'act'=>'healthplatform'),
 		array('name'=>'睡眠顾客查询', 'op'=>'sleep', 'act'=>'healthplatform'),
+    	array('name'=>'消费频次提醒', 'op'=>'consume', 'act'=>'healthplatform'),
 		array('name'=>'顾客生日提醒', 'op'=>'birthday', 'act'=>'healthplatform'),
         array('name'=>'统计', 'op'=>'statistical', 'act'=>'healthplatform'),
         array('name'=>'测试', 'op'=>'test', 'act'=>'healthplatform'),
@@ -129,6 +131,7 @@ $_limit =  array(
         array('name'=>'销售明细财务分类管理', 'op'=>'saledetailmanager', 'act'=>'finance'),
         array('name'=>'门诊收入统计', 'op'=>'financesum', 'act'=>'finance'),
         array('name'=>'住院收入统计', 'op'=>'financeinsum', 'act'=>'finance'),
+    	array('name'=>'药品汇总', 'op'=>'goodssum', 'act'=>'finance'),
         array('name'=>'单品毛利分析', 'op'=>'financegoodsum', 'act'=>'finance'),
         array('name'=>'仓库单据明细', 'op'=>'detail', 'act'=>'storehouse'),
         array('name'=>'仓库单据汇总', 'op'=>'sum', 'act'=>'storehouse'),

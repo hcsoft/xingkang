@@ -1056,6 +1056,150 @@ class healthplatformControl extends SystemControl
         Tpl::showpage('healthplatform.birthday');
     }
 
+    /*
+     * 消费频次提醒
+     */
+    public function consumeOp()
+    {
+    	$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+    	$lang = Language::getLangContent();
+    	
+//     	$orderbys = array(
+//     			array('txt' => '卡号', 'col' => ' member_id '),
+//     			array('txt' => '预存余额', 'col' => ' available_predeposit '),
+//     			array('txt' => '赠送余额', 'col' => ' fConsumeBalance '),
+//     			array('txt' => '消费积分', 'col' => ' member_points '));
+//     	Tpl::output('orderbys', $orderbys);
+//     	$model_member = Model('member');
+    	$sql = "select a.member_id,a.member_truename,a.member_sex,a.member_birthday,a.Mobile,a.sLinkPhone,a.sAddress,a.sIDCard, count(b.iCO_ID) as consumnum 
+    			from 	shopnc_member a,Center_CheckOut b 
+    			where 1=1 and a.member_id = b.sMemberID and b.fCO_IncomeMoney >0 ";
+    	$groupby = ' group by a.member_id,a.member_truename,a.member_sex,a.member_birthday,a.Mobile,a.sLinkPhone,a.sAddress,a.sIDCard ';
+    	$having = '';
+    	/**
+    	 * 检索条件
+    	*/
+    	//消费机构
+    	if ($_GET['orgids']) {
+    		$sql = $sql . ' and b.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+    		 
+    	}
+    	if (isset($_GET['member_id']) and $_GET['member_id'] != '') {
+    		$sql = $sql . ' and a.member_id =\'' . $_GET['member_id'] . '\'';
+    	}
+    	if (isset($_GET['cardtype']) and $_GET['cardtype'] != '') {
+    		$sql = $sql . ' and a.cardtype =\'' . $_GET['cardtype'] . '\'';
+    	}
+    
+    	if (isset($_GET['cardgrade']) and $_GET['cardgrade'] != '') {
+    		$sql = $sql . ' and a.cardgrade =\'' . $_GET['cardgrade'] . '\'';
+    	}
+    
+    
+    	if (isset($_GET['idnumber']) and $_GET['idnumber'] != '') {
+    		$sql = $sql . ' and a.sIDCard =\'' . $_GET['idnumber'] . '\'';
+    	}
+    	if (isset($_GET['tel']) and $_GET['tel'] != '') {
+    		$sql = $sql . ' and a.sLinkPhone =\'' . $_GET['tel'] . '\'';
+    	}
+    	if (isset($_GET['name']) and $_GET['name'] != '') {
+    		$sql = $sql . ' and a.member_truename like \'%' . $_GET['name'] . '%\'';
+    	}
+//     	if (isset($_GET['birthday']) and $_GET['birthday'] != '') {
+//     		$condition ['member_birthday'] = $_GET['birthday'];
+//     	}
+    	if (!isset($_GET['dcodate_begin']) or $_GET['dcodate_begin'] == '') {
+    		$_GET['dcodate_begin'] =date('Y-m-d',time());    		
+    	}
+    	$sql = $sql . ' and b.dCO_Date >=\'' . $_GET['dcodate_begin'] . '\'';
+    	if (!isset($_GET['dcodate_end']) or $_GET['dcodate_end'] == '') {
+    		$_GET['dcodate_end'] =date('Y-m-d',time());
+    	}
+    	$sql = $sql . ' and b.dCO_Date <=\'' . $_GET['dcodate_end'] . '\'';
+    	if (!isset($_GET['orderby'])) {
+    		$_GET['orderby'] = '卡号';
+    	}
+    
+    
+    	if (!isset($_GET['order'])) {
+    		$ordersql = 'asc';
+    	} else {
+    		$ordersql = $_GET['order'];
+    	}
+//     	if ($_GET['orderby']) {
+//     		foreach ($orderbys as $orderby) {
+//     			if ($orderby['txt'] == $_GET['orderby']) {
+//     				$order = $orderby['col'] . ' ' . $ordersql;
+//     				break;
+//     			}
+//     		}
+//     	}
+    	
+    
+//     	$field = '*, (select max(dCO_Date) from Center_CheckOut where sMemberID = member_id ) lastdate ';
+//     	$sleepunit = $_REQUEST['sleepunit'];
+//     	if ($sleepunit == '1') {
+//     		$dateunit = 'year';
+//     	} else if ($sleepunit == '3') {
+//     		$dateunit = 'day';
+//     	} else {
+//     		$dateunit = 'month';
+//     	}
+    	$consumnum = $_REQUEST['consumnum'];
+    	if (empty($consumnum)) {
+    		$consumnum = '3';
+    		$_GET['consumnum'] = 3;
+    		
+    	}
+    	if (isset($_GET['consumnum']) and $_GET['consumnum'] != '') {
+    		$consumnum = $_GET['consumnum'];
+    		$having = " having count((b.iCO_ID)) >= $consumnum";
+    	}
+    
+//     	$haspay = $_REQUEST['haspay'];
+//     	$order = ' member_id desc ';
+//     	if (!empty($haspay)) {
+//     		if ($haspay == '1') {
+//     			$condition['haspay'] = array('exp', " not   exists (select 1 from Center_CheckOut where sMemberID = member_id  )  ");
+//     		} else if ($haspay == '2') {
+//     			$condition['haspay'] = array('exp', "  exists (select 1 from Center_CheckOut where sMemberID = member_id  )  ");
+//     			$order = '(select max(dCO_Date) from Center_CheckOut where sMemberID = member_id ) desc';
+//     		}
+//     	}
+    
+//     	$condition['status'] = array('exp', " dCreateDate is  not null and dCreateDate < convert(date, dateadd($dateunit,-$sleepnum,getdate())) and  not exists (select 1 from Center_CheckOut where sMemberID = member_id and  dCO_Date >= convert(date, dateadd($dateunit,-$sleepnum,getdate())) )   ");
+    
+    	/**
+    	 * 排序
+    	*/
+    	//		$order = trim ( $_GET ['search_sort'] );
+//     	if (empty ($order)) {
+//     		$order = 'member_id desc';
+//     	}
+//     	$member_list = $model_member->getMemberList($condition, $field, 10, $order);
+    	$page = new Page();
+    	$page->setEachNum(10);
+    	$page->setNowPage($_REQUEST["curpage"]);
+    	$startnum = $page->getEachNum() * ($page->getNowPage() - 1);
+    	$endnum = $page->getEachNum() * ($page->getNowPage());
+    	$allsql = $sql.$groupby.$having;
+    	$countsql = " select count(*)  from ($allsql) ccc ";
+    	$stmt = $conn->query($countsql);
+    	$total = $stmt->fetch(PDO::FETCH_NUM);
+    	$page->setTotalNum($total[0]);
+    	$pagesql = 'select * from (select top '. $endnum.' row_number() over( order by  member_id)rownum ,* from ('.$allsql.')zz1 )zz2 where rownum>'.$startnum;
+    	if (isset($_GET['export']) && $_GET['export'] == 'true') {
+    		$this->exportxlsx(array(0 => $allsql), $displaytext, '消费频次提醒');
+    	}
+    	$stmt = $conn->query($pagesql);
+    	$data_list = array();
+    	while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+    		array_push($data_list, $row);
+    	}
+    	Tpl::output('data_list', $data_list);
+    	Tpl::output('page', $page->show());
+    	Tpl::showpage('healthplatform.consume');
+    }
 
 
 }
