@@ -1210,7 +1210,7 @@ class goodsControl extends SystemControl
                 left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
                 left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID  and class.iClass_Type = 3
                 , Organization org
-                where   a.orgid = org.id  and a.itemtype <>\'诊疗项目\' and a.iDrug_ID >0 ';
+                where   a.orgid = org.id   and a.iDrug_ID >0 ';
     	if ($_GET['itemtype']) {
     		$sql = $sql . ' and a.itemtype =\'' . $_GET['itemtype'] . '\'';
     	}
