@@ -77,7 +77,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="12">
+                <td colspan="15">
                     <table>
                         <tr>
                             <td >
@@ -107,17 +107,88 @@
                                 <input type="text" value="<?php echo $_GET['createcard_end']; ?>" name="createcard_end"
                                        class="txt date">
                             </td>
-                            <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
+                            <td>
+                            	当月生日会员:
+                            </td>
+                            <td>
+                            	<select name="memberbirthday">
+			                        <option value="">全部</option>
+			                        <option value="1" <?php if ('1' == $_GET['memberbirthday']){ ?>selected<?php } ?>>1月</option>
+			                        <option value="2" <?php if ('2' == $_GET['memberbirthday']){ ?>selected<?php } ?>>2月</option>
+			                        <option value="3" <?php if ('3' == $_GET['memberbirthday']){ ?>selected<?php } ?>>3月</option>
+			                        <option value="4" <?php if ('4' == $_GET['memberbirthday']){ ?>selected<?php } ?>>4月</option>
+			                        <option value="5" <?php if ('5' == $_GET['memberbirthday']){ ?>selected<?php } ?>>5月</option>
+			                        <option value="6" <?php if ('6' == $_GET['memberbirthday']){ ?>selected<?php } ?>>6月</option>
+			                        <option value="7" <?php if ('7' == $_GET['memberbirthday']){ ?>selected<?php } ?>>7月</option>
+			                        <option value="8" <?php if ('8' == $_GET['memberbirthday']){ ?>selected<?php } ?>>8月</option>
+			                        <option value="9" <?php if ('9' == $_GET['memberbirthday']){ ?>selected<?php } ?>>9月</option>
+			                        <option value="10" <?php if ('10' == $_GET['memberbirthday']){ ?>selected<?php } ?>>10月</option>
+			                        <option value="11" <?php if ('11' == $_GET['memberbirthday']){ ?>selected<?php } ?>>11月</option>
+			                        <option value="12" <?php if ('12' == $_GET['memberbirthday']){ ?>selected<?php } ?>>12月</option>
+			                    </select>
+                            </td>
+                            <td>
+                        		性别：
+                        	</td>
+                        	<td>
+                        		<select name="membersex">
+			                        <option value="">全部</option>
+			                        <option value="1" <?php if ('1' == $_GET['membersex']){ ?>selected<?php } ?>>男</option>
+			                        <option value="2" <?php if ('2' == $_GET['membersex']){ ?>selected<?php } ?>>女</option>
+			                    </select>
+                        	</td>
+                        </tr>
+                        
+                    </table>
+                </td>
+            </tr>
+            <tr>
+            	<td  colspan="15">
+            		<table>
+            			<tr>
+                        	<td>
+                        		积分：
+                        	</td>
+                        	<td>
+                        		<select name="jifen" id="memberjifen">
+			                        <option value="">全部</option>
+			                        <option value="0" <?php if ('0' == $_GET['jifen']){ ?>selected<?php } ?>>0分</option>
+			                        <option value="1" <?php if ('1' == $_GET['jifen']){ ?>selected<?php } ?>>1000分以下</option>
+			                        <option value="2" <?php if ('2' == $_GET['jifen']){ ?>selected<?php } ?>>1000分以上</option>
+			                        <option value="3" <?php if ('3' == $_GET['jifen']){ ?>selected<?php } ?>>3000分以上</option>
+			                        <option value="4" <?php if ('4' == $_GET['jifen']){ ?>selected<?php } ?>>1万份以上</option>
+			                        <option value="99" <?php if ('99' == $_GET['jifen']){ ?>selected<?php } ?>>自定义</option>
+			                    </select>
+			                    <input type="text" class="txt" name="definejifen" id="definejifen" style="display:none;width:100px;" value="0" />
+                        	</td>
+                        	<td>
+                        		年龄：
+                        	</td>
+                        	<td>
+                        		<select name="memberage" id="memberage">
+			                        <option value="">全部</option>
+			                        <option value="0" <?php if ('0' == $_GET['memberage']){ ?>selected<?php } ?>>60岁以上</option>
+			                        <option value="1" <?php if ('1' == $_GET['memberage']){ ?>selected<?php } ?>>6岁以下</option>
+			                        <option value="99" <?php if ('99' == $_GET['memberage']){ ?>selected<?php } ?>>自定义</option>
+			                    </select>
+			                    <span id="definememberage" style="display:none;"><input type="text" class="txt" name="definememberagestart" style="width:100px;" value="0" />
+			                    <span>至</span>
+			                    <input type="text" class="txt" name="definememberageend" style="width:100px;" value="100" /></span>
+                        	</td>
+                        	
+			            	<td>
+			            	<a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                                    title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
                                 <a href="javascript:void(0);" id="ncexport" class="btn-export "
                                    title="导出"></a>
                                 <?php if ($output['search_field_value'] != '' or $output['search_sort'] != '') { ?>
                                     <a href="index.php?act=member&op=member"
                                        class="btns "><span><?php echo $lang['nc_cancel_search'] ?></span></a>
-                                <?php } ?></td>
-                        </tr>
-                    </table>
-                </td>
+                                <?php } ?>
+			            	</td>
+			            </tr>
+            		</table>
+            	</td>
             </tr>
             </tbody>
         </table>
@@ -156,6 +227,20 @@
                     selectedText: orgtext
                 }
             );
+            $('#memberjifen').change(function(){
+            	if($(this).val() == '99'){
+            		$('#definejifen').show();
+            	}else{
+            		$('#definejifen').hide();
+            	}
+			});
+			$('#memberage').change(function(){
+            	if($(this).val() == '99'){
+            		$('#definememberage').show();
+            	}else{
+            		$('#definememberage').hide();
+            	}
+			});
         });
     </script>
     <table class="table tb-type2" id="prompt">
@@ -206,8 +291,8 @@
 
                             <p class="smallfont">电话:&nbsp;<?php echo $v['sLinkPhone']; ?></p>
 
-                            <p class="smallfont">地址:&nbsp;<?php echo $v['sAddress']; ?></p>
-
+                            <p class="smallfont">年龄:&nbsp;<?php echo $v['sShowAge']; ?></p>
+							<p class="smallfont">性别:&nbsp;<?php if($v['member_sex'] == '1'){ echo '男';}else if($v['member_sex'] == '2'){echo '女';} ?></p>
                             <div class="im">
                             </div>
                         </td>
@@ -218,6 +303,8 @@
                             <p class="smallfont">医保卡:&nbsp;<?php echo $v['MediCardID']; ?></p>
 
                             <p class="smallfont">健康档案:&nbsp;<?php echo $v['FileNo']; ?></p>
+                            <p class="smallfont">地址:&nbsp;<?php echo $v['sAddress']; ?></p>
+							
                         </td>
 
                         <td><p class="name">卡类型: <?php if ($v['CardType'] == 0) {
@@ -271,7 +358,23 @@
                             <?php if ($v['iMemberState'] <> 99){ ?>
                             <a href="javascript:void(0)" onclick="showunregister('<?php echo htmlentities(json_encode($v)) ?>',this)">会员注销</a><br>
                             <?php } ?>
-                            <a href="javascript:showindex()" target="_blank">健康服务索引</a>
+                            <a href="javascript:showindex('<?php echo $v['member_id']; ?>',
+                            	'<?php echo $v['member_truename']; ?>',
+                            	'<?php echo $v['sLinkPhone']; ?>',
+                            	'<?php echo $v['sAddress']; ?>',
+                            	'<?php echo $v['sIDCard']; ?>',
+                            	'<?php echo $v['MediCardID']; ?>',
+                            	'<?php echo $v['FileNo']; ?>',
+                            	'<?php echo $v['CardType']; ?>',
+                            	'<?php echo $v['CardGrade']; ?>',
+                            	'<?php echo $v['GetWay']; ?>',
+                            	'<?php echo $v['Referrer']; ?>',
+                            	'<?php echo $v['available_predeposit']; ?>',
+                            	'<?php echo $v['fConsumeBalance']; ?>',
+                            	'<?php echo $v['member_points']; ?>',
+                            	'<?php echo substr($v['LastPayDate'], 0, 10); ?>',
+                            	'<?php echo $v['LastPayOrgName']; ?>',
+                            	this)" target="_blank">健康服务索引</a>
 
                             <!--<a
                                 href="index.php?act=member&op=member_edit&member_id=<?php echo $v['member_id']; ?>"><?php echo $lang['nc_edit'] ?></a>
@@ -438,7 +541,11 @@
                             <option value="1">储值卡</option>
                     </select>
                 </p>
-
+				<p class="change">
+					<span>地址：</span>
+					<input placeholder="留空表示不修改" style="width:150px;" title="留空表示不修改" id="newaddress" name="newaddress" type="text">
+					<input id="oldaddress" name="oldaddress"  type="hidden">
+				</p>
             </fieldset>
 
         </form>
@@ -686,11 +793,20 @@
         $("#unregisterdialog").dialog("option", "elem", elem);
         $("#unregisterdialog").dialog("open");
     }
-    function showindex(src){
+    function showindex(member_id,member_truename,sLinkPhone,sAddress,sIDCard,MediCardID,FileNo,CardType,CardGrade,GetWay,Referrer,
+    	available_predeposit,fConsumeBalance,member_points,LastPayDate,LastPayOrgName,elem){
         $("#indexdialog").dialog("option", {width:$(window).width()-50,height:$(window).height()-50});
 
+		var params = '&member_id=' + member_id + '&member_truename=' + member_truename + '&sLinkPhone=' + sLinkPhone + 
+        	'&sAddress=' + sAddress + '&sIDCard=' + sIDCard + '&MediCardID=' + MediCardID + 
+        	'&FileNo=' + FileNo + '&CardType=' + CardType + '&CardGrade=' + CardGrade + 
+        	'&GetWay=' + GetWay + '&Referrer=' + Referrer + '&available_predeposit=' + available_predeposit + 
+        	'&fConsumeBalance=' + fConsumeBalance + '&member_points=' + member_points + 
+        	'&LastPayDate=' + LastPayDate + '&LastPayOrgName=' + LastPayOrgName;
+        var src = '<?php echo ADMIN_SITE_URL ;?>/index.php?act=dashboard&op=timeline' + params;
+       
         $("#indexdialog").dialog("open");
-        $("#indexdialog .iframe").attr("src",'<?php echo ADMIN_SITE_URL ;?>/index.php?act=dashboard&op=timeline')
+        $("#indexdialog .iframe").attr("src",src)
         $("#indexdialog .iframe").css("height",'100%')
 
     }
@@ -772,7 +888,8 @@
             'oldCardType': obj.CardType,
             'oldid': obj.member_id,
             'oldbirthday': obj.member_birthday.substring(0, 10),
-            'oldsex':obj.member_sex
+            'oldsex':obj.member_sex,
+            'oldaddress':obj.sAddress
         }
         $("#changedialog form").autofill(formdata);
         $("#change_id").val(obj.member_id);
