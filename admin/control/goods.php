@@ -19,7 +19,7 @@ class goodsControl extends SystemControl
     public function __construct()
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
-        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class ';
+        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class where iClass_Type =3 ';
         $classstmt = $conn->query($classsql);
         $classtypes = array();
         $this->classmap = array();
@@ -1231,12 +1231,16 @@ class goodsControl extends SystemControl
     		$sql = $sql . ' and a.itemname like \'%' . trim($_GET['search_goods_name']) . '%\'';
     	}
     
-    	if ($_GET['classtype'] != '') {
-    		if ($_GET['classtype'] == 'null') {
-    			$sql = $sql . ' and good.iDrug_StatClass  is null ';
-    		} else {
-    			$sql = $sql . ' and good.iDrug_StatClass =  ' . trim($_GET['classtype']);
-    		}
+//     	if ($_GET['classtype'] != '') {
+//     		if ($_GET['classtype'] == 'null') {
+//     			$sql = $sql . ' and good.iDrug_StatClass  is null ';
+//     		} else {
+//     			$sql = $sql . ' and good.iDrug_StatClass =  ' . trim($_GET['classtype']);
+//     		}
+//     	}
+    	if ($_GET['classtypes']) {
+    		$sql = $sql . ' and good.iDrug_StatClass in ( ' . implode(',', $_GET['classtypes']) . ')';
+    		 
     	}
     
     	if (intval($_GET['search_commonid']) > 0) {

@@ -87,6 +87,61 @@ class memberControl extends SystemControl {
 			}
 		}
 
+		if (isset($_GET['membersex']) and $_GET['membersex'] != '') {
+			$condition ['member_sex'] = $_GET['membersex'];
+		}
+		
+		if (isset($_GET['memberbirthday']) and $_GET['memberbirthday'] != '') {
+			$condition ['member_birthday'] = array('exp' , ' MONTH(member_birthday) = '.$_GET['memberbirthday']);
+		}
+		
+		if (isset($_GET['memberage']) and $_GET['memberage'] != '') {
+			$memberage = $_GET['memberage'];
+			if ($memberage == '0'){
+				$condition ['iAge'] = array('exp' , ' iAge >= 65 ');
+			}else if($memberage == '1'){
+				$condition ['iAge'] = array('exp' , ' iAge <= 6');
+			}else if($memberage == '99'){
+				$definememberagestart = 0;
+				$definememberageend = 100; 
+				if (isset($_GET['definememberagestart']) and $_GET['definememberagestart'] != ''){
+					if(is_numberic($_GET['definememberagestart'])){
+						$definememberage = $_GET['definememberagestart'];
+					}
+				}
+				if (isset($_GET['definememberageend']) and $_GET['definememberageend'] != ''){
+					if(is_numberic($_GET['definememberageend'])){
+						$definememberageend = $_GET['definememberageend'];
+					}
+				}
+				$condition ['iAge'] = array('exp' , ' iAge >=' . $definememberage .' and iAge <= ' . $definememberageend);
+			}
+		}
+		if (isset($_GET['jifen']) and $_GET['jifen'] != '') {
+			$jifen = $_GET['jifen'];
+			if ($jifen == '0'){
+				$condition ['member_points'] = array('exp' , ' member_points = 0 ');
+			}else if($jifen == '1'){
+				$condition ['member_points'] = array('exp' , ' member_points <= 1000');
+			}else if($jifen == '2'){
+				$condition ['member_points'] = array('exp' , ' member_points > 1000');
+			}else if($jifen == '3'){
+				$condition ['member_points'] = array('exp' , ' member_points > 3000');
+			}else if($jifen == '4'){
+				$condition ['member_points'] = array('exp' , ' member_points > 10000');
+			}else if($jifen == '99'){
+				$definejifen = 0;
+				if (isset($_GET['definejifen']) and $_GET['definejifen'] != ''){
+					if(is_numberic($_GET['definejifen'])){
+						$definejifen = $_GET['definejifen'];
+					}
+				}
+				$condition ['member_points'] = array('exp' , ' member_points =' . $definejifen);
+			}
+			
+		}
+		
+		
 		if(!isset($_GET['orderby'])){
 			$_GET['orderby'] = '预存余额';
 		}
@@ -1668,7 +1723,17 @@ class memberControl extends SystemControl {
 				$changelog['oldidcard'] = $_REQUEST["oldidcard"];
 				$changestr .= ',身份证由(' . $_REQUEST["oldidcard"] . ')改为(' . $newidcard . ')';
 			}
-
+			
+			//修改地址
+			$newaddress = $_REQUEST["newaddress"];
+			if (!empty($newaddress)) {
+				$sql = " update shopnc_member set sAddress = '$newaddress' where member_id = '$id'";
+				$conn->exec($sql);
+				$changelog['newaddress'] = $newaddress;
+				$changelog['oldaddress'] = $_REQUEST["oldaddress"];
+				$changestr .= ',地址由(' . $_REQUEST["oldaddress"] . ')改为(' . $newaddress . ')';
+			}
+			
             //修改卡类型
             $newCardType = $_REQUEST["newCardType"];
             if ($newCardType == '0' || !empty($newCardType)) {

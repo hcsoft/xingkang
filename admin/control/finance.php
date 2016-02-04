@@ -1335,12 +1335,17 @@ class financeControl extends SystemControl
     		$sql = $sql . ' and a.itemname like \'%' . trim($_GET['search_goods_name']) . '%\'';
     	}
     	
-    	if ($_GET['classtype'] != '') {
-    		if ($_GET['classtype'] == 'null') {
-    			$sql = $sql . ' and good.iDrug_StatClass  is null ';
-    		} else {
-    			$sql = $sql . ' and good.iDrug_StatClass =  ' . trim($_GET['classtype']);
-    		}
+    
+//     	if ($_GET['classtype'] != '') {
+//     		if ($_GET['classtype'] == 'null') {
+//     			$sql = $sql . ' and good.iDrug_StatClass  is null ';
+//     		} else {
+//     			$sql = $sql . ' and good.iDrug_StatClass =  ' . trim($_GET['classtype']);
+//     		}
+//     	}
+    	if ($_GET['classtypes']) {
+    		$sql = $sql . ' and good.iDrug_StatClass in ( ' . implode(',', $_GET['classtypes']) . ')';
+    		 
     	}
     	
     	if (intval($_GET['search_commonid']) > 0) {
