@@ -34,7 +34,7 @@ class financeControl extends SystemControl
         Tpl::output('types', $this->types);
         $this->goodtype = array(0 => '药品', 1 => '卫生用品', 2 => '诊疗项目', 3 => '特殊材料');
         Tpl::output('goodtype', $this->goodtype);
-        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class  where iClass_Type =3  ';
+        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class   ';
         $classstmt = $conn->query($classsql);
         $classtypes = array();
         while ($row = $classstmt->fetch(PDO::FETCH_OBJ)) {

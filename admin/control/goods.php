@@ -19,7 +19,7 @@ class goodsControl extends SystemControl
     public function __construct()
     {
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
-        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class where iClass_Type =3 ';
+        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class  ';
         $classstmt = $conn->query($classsql);
         $classtypes = array();
         $this->classmap = array();
