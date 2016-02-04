@@ -390,6 +390,17 @@ class goodsControl extends SystemControl
         }
 
         Tpl::output('goods_list', $goods_list);
+        
+        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class  where iClass_Type=3 ';
+        $classstmt = $conn->query($classsql);
+        $classtypes = array();
+        $this->classmap = array();
+        while ($row = $classstmt->fetch(PDO::FETCH_OBJ)) {
+        	array_push($classtypes, $row);
+        	$this->classmap[$row->iClass_ID] = $row->sClass_Name;
+        }
+        $this->classtypes = $classtypes;
+        Tpl::output('classtypes', $this->classtypes);
      
      	Tpl::output('search', $_GET);
         
