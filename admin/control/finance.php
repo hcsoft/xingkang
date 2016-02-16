@@ -1320,11 +1320,11 @@ class financeControl extends SystemControl
     	}
     	
     	if ($_GET['query_start_time']) {
-    		$sql = $sql . ' and a.dSale_MakeDate >=\'' . $_GET['query_start_time'] . '\'';
+    		$sql = $sql . ' and a.dSale_GatherDate >=\'' . $_GET['query_start_time'] . '\'';
     	}
     	
     	if ($_GET['query_end_time']) {
-    		$sql = $sql . ' and a.dSale_MakeDate < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
+    		$sql = $sql . ' and a.dSale_GatherDate < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
     	}
     	
     	if ($_GET['orgids']) {
