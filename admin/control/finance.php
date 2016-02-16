@@ -1376,7 +1376,7 @@ class financeControl extends SystemControl
     			'sDrug_Brand' =>'good.sDrug_Brand as "sDrug_Brand" ',
     			'fSale_Num' =>'sum(a.fSale_Num) as "fSale_Num" ',
     			'fSale_TaxPrice' =>'a.fSale_TaxPrice as "fSale_TaxPrice" ',
-    			'fPrice_OBuy' =>'good.fPrice_OBuy as "fPrice_OBuy" ',
+    			'fSale_NoTaxPrice' =>'a.fSale_NoTaxPrice as "fSale_NoTaxPrice" ',
 //     			'goods' => ' good.sDrug_ID, good.sDrug_TradeName ,a.ItemType, good.sDrug_Spec ,good.sDrug_Unit ,good.sDrug_Brand,sum(a.fSale_Num) as fSale_Num ,a.fSale_TaxPrice',
     			'Doctor' => ' a.DoctorName as "Doctor" ',
     			'year' => ' year(a.dSale_GatherDate) as "year" ',
@@ -1397,7 +1397,7 @@ class financeControl extends SystemControl
 														    					'5'=>array(name => 'sDrug_Brand', 'text' => '产地/厂商'),
 														    					'6'=>array(name => 'fSale_Num', 'text' => '数量'),
 														    					'7'=>array(name => 'fSale_TaxPrice', 'text' => '单价'),
-    																			'8'=>array(name => 'fPrice_OBuy', 'text' => '进价')
+    																			'8'=>array(name => 'fSale_NoTaxPrice', 'text' => '进价')
     			)),
 //     			'goods' => array(name => ayyay('sDrug_ID','sDrug_TradeName'), 'text' => array('项目编码','项目名称')),
     			//'classname' => array(name => 'classname', 'text' => '财务分类'),
