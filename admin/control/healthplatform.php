@@ -1072,8 +1072,9 @@ class healthplatformControl extends SystemControl
 //     	Tpl::output('orderbys', $orderbys);
 //     	$model_member = Model('member');
     	$sql = "select a.member_id,a.member_truename,a.member_sex,a.member_birthday,a.Mobile,a.sLinkPhone,a.sAddress,a.sIDCard, count(b.iCO_ID) as consumnum 
-    			from 	shopnc_member a,Center_CheckOut b 
-    			where 1=1 and a.member_id = b.sMemberID and b.fCO_IncomeMoney >0 ";
+    			from 	shopnc_member a left join Center_CheckOut b   on  a.member_id = b.sMemberID and b.fCO_IncomeMoney >0 ";
+    	$where = " where 1=1 ";
+    	$joinwhere = '';
     	$groupby = ' group by a.member_id,a.member_truename,a.member_sex,a.member_birthday,a.Mobile,a.sLinkPhone,a.sAddress,a.sIDCard ';
     	$having = '';
     	/**
@@ -1081,29 +1082,29 @@ class healthplatformControl extends SystemControl
     	*/
     	//消费机构
     	if ($_GET['orgids']) {
-    		$sql = $sql . ' and b.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
+    		$where = $where . ' and b.OrgID in ( ' . implode(',', $_GET['orgids']) . ')';
     		 
     	}
     	if (isset($_GET['member_id']) and $_GET['member_id'] != '') {
-    		$sql = $sql . ' and a.member_id =\'' . $_GET['member_id'] . '\'';
+    		$where = $where . ' and a.member_id =\'' . $_GET['member_id'] . '\'';
     	}
     	if (isset($_GET['cardtype']) and $_GET['cardtype'] != '') {
-    		$sql = $sql . ' and a.cardtype =\'' . $_GET['cardtype'] . '\'';
+    		$where = $where . ' and a.cardtype =\'' . $_GET['cardtype'] . '\'';
     	}
     
     	if (isset($_GET['cardgrade']) and $_GET['cardgrade'] != '') {
-    		$sql = $sql . ' and a.cardgrade =\'' . $_GET['cardgrade'] . '\'';
+    		$where = $where . ' and a.cardgrade =\'' . $_GET['cardgrade'] . '\'';
     	}
     
     
     	if (isset($_GET['idnumber']) and $_GET['idnumber'] != '') {
-    		$sql = $sql . ' and a.sIDCard =\'' . $_GET['idnumber'] . '\'';
+    		$where = $where . ' and a.sIDCard =\'' . $_GET['idnumber'] . '\'';
     	}
     	if (isset($_GET['tel']) and $_GET['tel'] != '') {
-    		$sql = $sql . ' and a.sLinkPhone =\'' . $_GET['tel'] . '\'';
+    		$where = $where . ' and a.sLinkPhone =\'' . $_GET['tel'] . '\'';
     	}
     	if (isset($_GET['name']) and $_GET['name'] != '') {
-    		$sql = $sql . ' and a.member_truename like \'%' . $_GET['name'] . '%\'';
+    		$where = $where . ' and a.member_truename like \'%' . $_GET['name'] . '%\'';
     	}
 //     	if (isset($_GET['birthday']) and $_GET['birthday'] != '') {
 //     		$condition ['member_birthday'] = $_GET['birthday'];
@@ -1111,11 +1112,11 @@ class healthplatformControl extends SystemControl
     	if (!isset($_GET['dcodate_begin']) or $_GET['dcodate_begin'] == '') {
     		$_GET['dcodate_begin'] =date('Y-m-d',time());    		
     	}
-    	$sql = $sql . ' and b.dCO_Date >=\'' . $_GET['dcodate_begin'] . '\'';
+    	$joinwhere = $joinwhere . ' and b.dCO_Date >=\'' . $_GET['dcodate_begin'] . '\'';
     	if (!isset($_GET['dcodate_end']) or $_GET['dcodate_end'] == '') {
     		$_GET['dcodate_end'] =date('Y-m-d',time());
     	}
-    	$sql = $sql . ' and b.dCO_Date <=\'' . $_GET['dcodate_end'] . '\'';
+    	$joinwhere = $joinwhere . ' and b.dCO_Date <=\'' . $_GET['dcodate_end'] . '\'';
     	if (!isset($_GET['orderby'])) {
     		$_GET['orderby'] = '卡号';
     	}
@@ -1145,15 +1146,25 @@ class healthplatformControl extends SystemControl
 //     	} else {
 //     		$dateunit = 'month';
 //     	}
-    	$consumnum = $_REQUEST['consumnum'];
-    	if (empty($consumnum)) {
-    		$consumnum = '3';
-    		$_GET['consumnum'] = 3;
+//     	$consumnum = $_REQUEST['consumnum'];
+//     	if (empty($consumnum) && $consumnum !=0) {
+//     		$consumnum = '3';
+//     		$_GET['consumnum'] = 3;
     		
+//     	}
+		if($_GET['consumnumstart'] == ''){
+			$_GET['consumnumstart'] = 1;
+		}
+		if($_GET['consumnumend'] == ''){
+			$_GET['consumnumend'] = 3;
+		}
+    	if (isset($_GET['consumnumstart']) and $_GET['consumnumstart'] != '') {
+    		$consumnumstart = $_GET['consumnumstart'];
+    		$having = " having count((b.iCO_ID)) >= $consumnumstart";
     	}
-    	if (isset($_GET['consumnum']) and $_GET['consumnum'] != '') {
-    		$consumnum = $_GET['consumnum'];
-    		$having = " having count((b.iCO_ID)) >= $consumnum";
+    	if (isset($_GET['consumnumend']) and $_GET['consumnumend'] != '') {
+    		$consumnumend = $_GET['consumnumend'];
+    		$having = " $having and count((b.iCO_ID)) <= $consumnumend";
     	}
     
 //     	$haspay = $_REQUEST['haspay'];
@@ -1182,7 +1193,7 @@ class healthplatformControl extends SystemControl
     	$page->setNowPage($_REQUEST["curpage"]);
     	$startnum = $page->getEachNum() * ($page->getNowPage() - 1);
     	$endnum = $page->getEachNum() * ($page->getNowPage());
-    	$allsql = $sql.$groupby.$having;
+    	$allsql = $sql.$joinwhere.$where.$groupby.$having;
     	$countsql = " select count(*)  from ($allsql) ccc ";
     	$stmt = $conn->query($countsql);
     	$total = $stmt->fetch(PDO::FETCH_NUM);
