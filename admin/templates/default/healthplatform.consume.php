@@ -259,8 +259,8 @@
             $('input[name="op"]').val('consume');
             var consumnum = $('#consumnum').val();
             var   r   =   /^[0-9]*[1-9][0-9]*$/ ;
-            if(!r.test(consumnum) || parseInt(consumnum)<3){
-                alert('消费次数必须为正整数，且必须大于等于3');
+            if(!r.test(consumnum)){
+                alert('消费次数必须为正整数!');
                 return;
             }
             $('#formSearch').submit();
