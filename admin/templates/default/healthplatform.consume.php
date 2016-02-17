@@ -46,7 +46,8 @@
                     </select>
                 </td>
                 <td>消费次数</td>
-                <td><input id = 'consumnum' name="consumnum" value="<?php echo $_GET['consumnum']; ?>" type="text" style="width:50px;">
+                <td><input id = 'consumnumstart' name="consumnumstart" value="<?php echo $_GET['consumnumstart']; ?>" type="text" style="width:50px;">~
+                <input id = 'consumnumend' name="consumnumend" value="<?php echo $_GET['consumnumend']; ?>" type="text" style="width:50px;">
                 </td>
                 <td>
                                 消费日期:
@@ -257,10 +258,16 @@
     $(function () {
         $('#ncsubmit').click(function () {
             $('input[name="op"]').val('consume');
-            var consumnum = $('#consumnum').val();
-            var   r   =   /^[0-9]*[1-9][0-9]*$/ ;
-            if(!r.test(consumnum) || parseInt(consumnum)<3){
-                alert('消费次数必须为正整数，且必须大于等于3');
+            var consumnumstart = $('#consumnumstart').val();
+            var consumnumend = $('#consumnumend').val();
+            //var   r   =   /^[0-9]*[1-9][0-9]*$/ ;
+            var r =/(^[1-9]([0-9]*)$|^[0-9]$)/;
+            if(!r.test(consumnumstart) || !r.test(consumnumend)){
+                alert('消费次数必须数字!');
+                return;
+            }
+            if(consumnumstart>consumnumend){
+            	alert('消费次数区间有误！');
                 return;
             }
             $('#formSearch').submit();

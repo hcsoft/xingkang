@@ -34,7 +34,7 @@ class financeControl extends SystemControl
         Tpl::output('types', $this->types);
         $this->goodtype = array(0 => '药品', 1 => '卫生用品', 2 => '诊疗项目', 3 => '特殊材料');
         Tpl::output('goodtype', $this->goodtype);
-        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class  where iClass_Type =3  ';
+        $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class   ';
         $classstmt = $conn->query($classsql);
         $classtypes = array();
         while ($row = $classstmt->fetch(PDO::FETCH_OBJ)) {
@@ -1312,7 +1312,7 @@ class financeControl extends SystemControl
     	Tpl::output('goodtype', $this->goodtype);
     	$sql = ' from Center_ClinicSale a
                 left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
-                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID  and class.iClass_Type = 3
+                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID 
                 , Organization org
                 where   a.orgid = org.id  and a.iDrug_ID >0 '; 
     	if ($_GET['itemtype']) {
@@ -1320,11 +1320,11 @@ class financeControl extends SystemControl
     	}
     	
     	if ($_GET['query_start_time']) {
-    		$sql = $sql . ' and a.dSale_MakeDate >=\'' . $_GET['query_start_time'] . '\'';
+    		$sql = $sql . ' and a.dSale_GatherDate >=\'' . $_GET['query_start_time'] . '\'';
     	}
     	
     	if ($_GET['query_end_time']) {
-    		$sql = $sql . ' and a.dSale_MakeDate < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
+    		$sql = $sql . ' and a.dSale_GatherDate < dateadd(day,1,\'' . $_GET['query_end_time'] . '\')';
     	}
     	
     	if ($_GET['orgids']) {
@@ -1335,13 +1335,22 @@ class financeControl extends SystemControl
     		$sql = $sql . ' and a.itemname like \'%' . trim($_GET['search_goods_name']) . '%\'';
     	}
     	
-    	if ($_GET['classtype'] != '') {
-    		if ($_GET['classtype'] == 'null') {
-    			$sql = $sql . ' and good.iDrug_StatClass  is null ';
-    		} else {
-    			$sql = $sql . ' and good.iDrug_StatClass =  ' . trim($_GET['classtype']);
+    
+//     	if ($_GET['classtype'] != '') {
+//     		if ($_GET['classtype'] == 'null') {
+//     			$sql = $sql . ' and good.iDrug_StatClass  is null ';
+//     		} else {
+//     			$sql = $sql . ' and good.iDrug_StatClass =  ' . trim($_GET['classtype']);
+//     		}
+//     	}
+    	if ($_GET['classtypes']) {
+    		$sql = $sql . ' and (good.iDrug_StatClass in ( ' . implode(',', $_GET['classtypes']) . ')';
+    		if(strpos($sql,'999999')>=1){
+    			$sql = $sql .' or good.iDrug_StatClass in (select iClass_ID from Center_Class  where iClass_Type <>3) or  good.iDrug_StatClass =0 ';
     		}
+    		$sql = $sql .')';
     	}
+    	
     	
     	if (intval($_GET['search_commonid']) > 0) {
     		$sql = $sql . ' and good.sDrug_ID = \'' .($_GET['search_commonid']).'\'';
@@ -1371,7 +1380,7 @@ class financeControl extends SystemControl
     			'sDrug_Brand' =>'good.sDrug_Brand as "sDrug_Brand" ',
     			'fSale_Num' =>'sum(a.fSale_Num) as "fSale_Num" ',
     			'fSale_TaxPrice' =>'a.fSale_TaxPrice as "fSale_TaxPrice" ',
-    			'fPrice_OBuy' =>'good.fPrice_OBuy as "fPrice_OBuy" ',
+    			'fSale_NoTaxPrice' =>'a.fSale_NoTaxPrice as "fSale_NoTaxPrice" ',
 //     			'goods' => ' good.sDrug_ID, good.sDrug_TradeName ,a.ItemType, good.sDrug_Spec ,good.sDrug_Unit ,good.sDrug_Brand,sum(a.fSale_Num) as fSale_Num ,a.fSale_TaxPrice',
     			'Doctor' => ' a.DoctorName as "Doctor" ',
     			'year' => ' year(a.dSale_GatherDate) as "year" ',
@@ -1392,7 +1401,7 @@ class financeControl extends SystemControl
 														    					'5'=>array(name => 'sDrug_Brand', 'text' => '产地/厂商'),
 														    					'6'=>array(name => 'fSale_Num', 'text' => '数量'),
 														    					'7'=>array(name => 'fSale_TaxPrice', 'text' => '单价'),
-    																			'8'=>array(name => 'fPrice_OBuy', 'text' => '进价')
+    																			'8'=>array(name => 'fSale_NoTaxPrice', 'text' => '进价')
     			)),
 //     			'goods' => array(name => ayyay('sDrug_ID','sDrug_TradeName'), 'text' => array('项目编码','项目名称')),
     			//'classname' => array(name => 'classname', 'text' => '财务分类'),
@@ -1506,6 +1515,17 @@ class financeControl extends SystemControl
     }
     }
     }
+    $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class  where iClass_Type=3 ';
+    $classstmt = $conn->query($classsql);
+    $classtypes = array();
+    while ($row = $classstmt->fetch(PDO::FETCH_OBJ)) {
+    	array_push($classtypes, $row);
+    }
+    $otherclass = new stdClass();
+    $otherclass->iClass_ID='999999';
+    $otherclass->sClass_Name='其他分类';
+    array_push($classtypes, $otherclass);
+    Tpl::output('classtypes', $classtypes);
     //        var_dump($col);
     Tpl::output('displaycol', $displaycol);
     Tpl::output('displaytext', $displaytext);

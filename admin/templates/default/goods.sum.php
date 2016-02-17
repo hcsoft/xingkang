@@ -48,8 +48,8 @@
     <div class="fixed-empty"></div>
 
     <form method="get" name="formSearch" id="formSearch">
-        <input type="hidden" value="finance" name="act">
-        <input type="hidden" value="goodssum" name="op">
+        <input type="hidden" value="goods" name="act">
+        <input type="hidden" value="goodssum_goods" name="op">
         <input type="hidden" id ='export' name="export" value="false">
         <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
         <input type="hidden" name="checked" id="checked" value="<?php echo $_GET['checked']?>"/>
@@ -70,19 +70,24 @@
 	                    <?php } ?>
 	                </select>
 	            </td>
-	            <th><label for="query_start_time">制单日期</label></th>
+	            <th><label for="query_start_time">结算日期</label></th>
 	            <td><input class="txt date" type="text" value="<?php echo $_GET['query_start_time']; ?>"
 	                       id="query_start_time" name="query_start_time">
 	                <input class="txt date" type="text" value="<?php echo $_GET['query_end_time']; ?>"
 	                       id="query_end_time"
 	                       name="query_end_time"/></td>
 	            <th><label>财务分类</label></th>
-	            <td><select name="classtype" id='classtype'>
-	                    <option value="">全部</option>
-	                    <option value="null" <?php if ('null' == $_GET['classtype']){ ?>selected<?php } ?>>未分类</option>
-	                    <?php foreach ($output['classtypes'] as $k => $v) { ?>
+	            <td>
+	            	<select name="classtypes[]" id="classtypes" class="orgSelect" multiple>
+	                    <?php
+	                    $classtypes = $_GET['classtypes'];
+	                    if (!isset($classtypes)) {
+	                        $classtypes = array();
+	                    }
+	                    foreach ($output['classtypes'] as $k => $v) {
+	                        ?>
 	                        <option value="<?php echo $v->iClass_ID; ?>"
-	                                <?php if ($v->iClass_ID == $_GET['classtype']){ ?>selected<?php } ?>><?php echo $v->sClass_ID . $v->sClass_Name; ?></option>
+	                                <?php if (in_array($v->iClass_ID, $classtypes)){ ?>selected<?php } ?>><?php echo $v->sClass_Name; ?></option>
 	                    <?php } ?>
 	                </select>
 	            </td>
@@ -224,6 +229,14 @@
                 selectedText: orgtext
             }
         );
+        $("#classtypes").multiselect(
+                {
+                    checkAllText: '选择全部',
+                    uncheckAllText: '清除选择',
+                    noneSelectedText: '未选择',
+                    selectedText: orgtext
+                }
+            );
 
         //生成日期
         $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
