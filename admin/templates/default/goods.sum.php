@@ -48,8 +48,8 @@
     <div class="fixed-empty"></div>
 
     <form method="get" name="formSearch" id="formSearch">
-        <input type="hidden" value="finance" name="act">
-        <input type="hidden" value="goodssum" name="op">
+        <input type="hidden" value="goods" name="act">
+        <input type="hidden" value="goodssum_goods" name="op">
         <input type="hidden" id ='export' name="export" value="false">
         <input type="hidden" name="search_type" id="search_type" value="<?php echo $_GET['search_type']?>"/>
         <input type="hidden" name="checked" id="checked" value="<?php echo $_GET['checked']?>"/>

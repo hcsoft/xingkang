@@ -1312,7 +1312,7 @@ class financeControl extends SystemControl
     	Tpl::output('goodtype', $this->goodtype);
     	$sql = ' from Center_ClinicSale a
                 left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
-                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID  and class.iClass_Type = 3
+                left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID 
                 , Organization org
                 where   a.orgid = org.id  and a.iDrug_ID >0 '; 
     	if ($_GET['itemtype']) {
@@ -1346,6 +1346,9 @@ class financeControl extends SystemControl
     	if ($_GET['classtypes']) {
     		$sql = $sql . ' and good.iDrug_StatClass in ( ' . implode(',', $_GET['classtypes']) . ')';
     		 
+    	}
+    	if(strpos($sql,'999999')>=1){
+    		$sql = $sql .' and good.iDrug_StatClass in (select iClass_ID from Center_Class  where iClass_Type <>3) ';
     	}
     	
     	if (intval($_GET['search_commonid']) > 0) {
@@ -1511,6 +1514,17 @@ class financeControl extends SystemControl
     }
     }
     }
+    $classsql = ' select iClass_ID,sClass_ID,sClass_Name from Center_Class  where iClass_Type=3 ';
+    $classstmt = $conn->query($classsql);
+    $classtypes = array();
+    while ($row = $classstmt->fetch(PDO::FETCH_OBJ)) {
+    	array_push($classtypes, $row);
+    }
+    $otherclass = new stdClass();
+    $otherclass->iClass_ID='999999';
+    $otherclass->sClass_Name='其他分类';
+    array_push($classtypes, $otherclass);
+    Tpl::output('classtypes', $classtypes);
     //        var_dump($col);
     Tpl::output('displaycol', $displaycol);
     Tpl::output('displaytext', $displaytext);
