@@ -1344,12 +1344,13 @@ class financeControl extends SystemControl
 //     		}
 //     	}
     	if ($_GET['classtypes']) {
-    		$sql = $sql . ' and good.iDrug_StatClass in ( ' . implode(',', $_GET['classtypes']) . ')';
-    		 
+    		$sql = $sql . ' and (good.iDrug_StatClass in ( ' . implode(',', $_GET['classtypes']) . ')';
+    		if(strpos($sql,'999999')>=1){
+    			$sql = $sql .' or good.iDrug_StatClass in (select iClass_ID from Center_Class  where iClass_Type <>3) or  good.iDrug_StatClass =0 ';
+    		}
+    		$sql = $sql .')';
     	}
-    	if(strpos($sql,'999999')>=1){
-    		$sql = $sql .' and good.iDrug_StatClass in (select iClass_ID from Center_Class  where iClass_Type <>3) ';
-    	}
+    	
     	
     	if (intval($_GET['search_commonid']) > 0) {
     		$sql = $sql . ' and good.sDrug_ID = \'' .($_GET['search_commonid']).'\'';
