@@ -103,14 +103,7 @@
                     <span class="arrow"></span></div>
             </th>
         </tr>
-        <tr>
-            <td>
-                <ul>
-                    <li><?php echo $lang['goods_index_help1']; ?></li>
-                    <li><?php echo $lang['goods_index_help2']; ?></li>
-                </ul>
-            </td>
-        </tr>
+  
         </tbody>
     </table>
     <form method='post' id="form_goods" action="<?php echo urlAdmin('goods', 'goods_del'); ?>">
