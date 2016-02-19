@@ -65,6 +65,8 @@
                            id="sCustomer_Name" class="txt"/></td>
                 <td><input type="checkbox" value="true" <?php if($output['search']['allowzero'] =='true')  echo checked; ?> name="allowzero"
                            id="allowzero" /> <label for="allowzero">显示零库存</label></td>
+                <td><input type="checkbox" value="true" <?php if($output['search']['repeatid'] =='true')  echo checked; ?> name="repeatid"
+                           id="repeatid" /> <label for="repeatid">商品编码重复</label></td>
                  <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
                      <a href="javascript:void(0);" id="ncexport" class="btn-export "
@@ -82,10 +84,11 @@
                 	 <tr class="thead">
 		                
 		                <th class="align-center">商品编码</th>
-		                <th colspan="2"><?php echo $lang['goods_index_name']; ?></th>
-		                <th class="align-center">规格</th>
-		                <th>产地</th>
-		                <th class="align-center">财务分类</th>
+		                <th class="align-center">系统编码</th>
+		                <th ><?php echo $lang['goods_index_name']; ?></th>
+                         <th class="align-center">财务分类</th>
+                         <th class="align-left">规格</th>
+                         <th>产地</th>
 		                <th class="align-center">常规单位</th>
 		                <th class="align-center">最小单位</th>
 		                <th class="w48 align-center"><?php echo $lang['nc_handle']; ?> </th>
@@ -96,36 +99,33 @@
                     <?php foreach ($output['goods_list'] as $k => $v) { ?>
                     	<tr class="hover member">
                         	
-                            <td class="w60 align-center" nowrap><?php echo $v->sDrug_ID; ?></td>
-                            <td class="w60 picture">
-                            	<div class="size-56x56"><span class="thumb size-56x56"><i></i><img
-                                        src="<?php 
-                                        	$imgthumb = array();
-                                        	$imgthumb['store_id'] = $v->store_id;
-                                        	$imgthumb['goods_image'] = $v->goods_image;
-                                        echo thumb($imgthumb, 60); ?>" onload="javascript:DrawImage(this,56,56);"/></span>
-	                            </div>
+                            <td style="vertical-align: middle" class="w60 align-center" >
+                                <p nowrap><?php echo $v->sDrug_ID; ?></p>
+                                </td>
+                            <td>
+                                <p nowrap><span><?php echo $v->goods_commonid; ?></span></p>
+                            </td>
+	                        <td style="vertical-align: middle" class="goods-name w100">
+                                <p><span><?php echo $v->sDrug_TradeName; ?></span></p>
 	                        </td>
-	                        <td class="goods-name w270"><p><span><?php echo $v->goods_name; ?></span></p>
-	                        </td>
-	                        
+                            <td class="align-center"><?php
+                                foreach ($output['classtypes'] as $classtypesV) {
+                                    //                        		echo $classtypesV->iClass_ID . '====' . $classtypesV->sClass_Name;
+                                    if (intval($classtypesV->iClass_ID) == intval($v->iDrug_StatClass)) {
+                                        echo $classtypesV->sClass_ID . '  ' . $classtypesV->sClass_Name;
+                                        break;
+                                    }
+                                }
+                                ?><p></p><p><a
+                                        href="javascript:void(0)"
+                                        onclick="edit(<?php echo $v->goods_commonid ?>)">修改分类</a></p></td>
 	                        <td><p>完整规格: <?php echo $v->sDrug_Spec; ?></p></td>
 	                        <td><p><?php echo $v->brand_name; ?></p>
 	
 	                            <p><?php echo $v->gc_name; ?></p></p>
 	                        </td>
 	                        
-	                        <td class="align-center"><?php
-								foreach ($output['classtypes'] as $classtypesV) {
-									//                        		echo $classtypesV->iClass_ID . '====' . $classtypesV->sClass_Name;
-									if (intval($classtypesV->iClass_ID) == intval($v->iDrug_StatClass)) {
-										echo $classtypesV->sClass_ID . '  ' . $classtypesV->sClass_Name;
-										break;
-									}
-								}
-								?><p></p><p><a
-	                                    href="javascript:void(0)"
-	                                    onclick="edit(<?php echo $v->goods_commonid ?>)">修改分类</a></p></td>
+
 	                        <td>
 	                        	<p>常规单位: <?php echo $v->sDrug_Unit; ?></p>
 	                        	<p>进价: <?php echo number_format($v->fDS_BuyPrice,2); ?></p>

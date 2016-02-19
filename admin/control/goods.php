@@ -252,7 +252,6 @@ class goodsControl extends SystemControl
         //处理数据
         $page = new Page();
         $page->setEachNum(6);
-        echo $_REQUEST["curpage"];
         $page->setNowPage($_REQUEST["curpage"]);
         $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
         $endnum = $page->getEachNum() * ($page->getNowPage());
@@ -267,13 +266,13 @@ class goodsControl extends SystemControl
 						Sum(fDS_BuyPrice) As fDS_BuyPrice,
 						Sum(fDS_LeastBuyPrice) As fDS_LeastBuyPrice
 					From Center_DrugStock  Group By iDrug_ID)stock on good.goods_commonid = stock.iDrug_ID ' .
-        		' Where good.iDrug_RecType = 0';
+        		' Where good.iDrug_RecType  in (0,1,3) ';
         $where = array();
         if ($_GET['search_goods_name'] != '') {
             $sql = $sql . ' And good.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
         }
         if (intval($_GET['search_commonid']) > 0) {
-        	$sql = $sql . ' And good.sDrug_ID = ' . $_GET['search_commonid'];
+        	$sql = $sql . ' And good.sDrug_ID = \'' . $_GET['search_commonid'].'\'';
         }
         if (intval($_GET['classtype']) > 0 ) {
         	$sql = $sql . ' And good.iDrug_StatClass = ' . $_GET['classtype'];
@@ -286,6 +285,13 @@ class goodsControl extends SystemControl
             $customsql = $customsql . ' and  cus.sCustomer_Name like   \'%' . $_GET['sCustomer_Name'].'%\'';
         }
 
+
+
+        if ($_GET['repeatid'] && $_GET['repeatid'] == 'true') {
+            $_GET['allowzero'] = true;
+            $sql = $sql . '  and exists (select 1 from  shopnc_goods_common repeat where repeat.iDrug_RecType  in (0,1,3) and  repeat.sDrug_ID = good.sDrug_ID having count(*) >1) ';
+        }
+
         if ($_GET['allowzero'] && $_GET['allowzero'] == 'true') {
             $sql = $sql . '   ';
         } else {
@@ -294,6 +300,8 @@ class goodsControl extends SystemControl
 
 
         $countsql = " select count(*)  $sql ";
+//        Log::record($countsql,'SQL');
+//        echo $countsql;
         $stmt = $conn->query($countsql);
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
@@ -332,7 +340,7 @@ class goodsControl extends SystemControl
             $propertys = array();
             array_push($propertys,'sDrug_ID');
             array_push($propertys,'goods_commonid');
-            array_push($propertys,'goods_name');
+            array_push($propertys,'sDrug_TradeName');
             array_push($propertys,'sDrug_Spec');
             array_push($propertys,'sDrug_Content');
             array_push($propertys,'sDrug_PackSpec');
@@ -354,10 +362,10 @@ class goodsControl extends SystemControl
             $propertysmap['iDrug_StatClass'] =$this->classmap ;
 
         }
-     	$tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.goods_commonid asc) rownum,
+     	$tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.sDrug_ID asc) rownum,
                         good.sDrug_ID,
                         good.goods_commonid,
-                        good.goods_name ,
+                        good.sDrug_TradeName ,
                         good.sDrug_Spec,
                         good.sDrug_Content ,
                         good.sDrug_PackSpec ,
@@ -370,13 +378,13 @@ class goodsControl extends SystemControl
                         good.iDrug_StatClass,
 						good.store_id,
                         goods_image,
-                        stock.fDS_BuyPrice,
-                        stock.fDS_RetailPrice,
+                        good.fPrice_OBuy 'fDS_BuyPrice',
+                        good.fPrice_Retail 'fDS_RetailPrice',
                         stock.fDS_SStock,
-                        stock.fDS_LeastBuyPrice,
-                        stock.fDS_LeastRetailPrice,
+                        good.fDrug_NoTaxAvgPrice 'fDS_LeastBuyPrice',
+                        good.fPrice_LeastRetail 'fDS_LeastRetailPrice',
                         stock.fDS_LeastSStock
-                        $sql order by  good.goods_commonid asc)zzzz where rownum>$startnum )zzzzz order by rownum";
+                        $sql order by  good.sDrug_ID asc)zzzz where rownum>$startnum )zzzzz order by rownum";
      	Log::record($tsql,'SQL');
 //     	echo $tsql;
      	$stmt = $conn->query($tsql);
