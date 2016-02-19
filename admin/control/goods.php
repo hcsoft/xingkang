@@ -817,6 +817,7 @@ class goodsControl extends SystemControl
                             $orgcol
                             sDrug_Spec,
                             sDrug_Content,
+                            sDrug_PackSpec,
                             brand_name,
                             gc_name,
                             sDrug_Unit,
@@ -832,6 +833,7 @@ class goodsControl extends SystemControl
                             $orggroup
                             sDrug_Spec,
                             sDrug_Content,
+                            sDrug_PackSpec,
                             brand_name,
                             gc_name,
                             sDrug_Unit,
