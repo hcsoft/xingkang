@@ -111,6 +111,7 @@
             <tr class="thead">
                 <th nowrap rowspan="3" class="w24"></th>
                 <th nowrap rowspan="3"  class="w24"></th>
+                <th nowrap rowspan="3"  class="align-center">机构名称</th>
                 <th nowrap rowspan="3"  class="align-center">商品编码</th>
                 <th nowrap  rowspan="3"  colspan=""><?php echo $lang['goods_index_name']; ?></th>
                 <th nowrap  colspan="3"  class="align-center">规格</th>
@@ -158,12 +159,8 @@
                         <td nowrap><i class="icon-plus-sign" style="cursor: pointer;" nctype="ajaxGoodsList"
                                data-comminid="<?php echo $v['goods_commonid']; ?>"
                                title="点击展开查看此商品全部规格；规格值过多时请横向拖动区域内的滚动条进行浏览。"></i></td>
+                        <td nowrap class="w60 align-center"><?php echo $v['OrgName']; ?></td>
                         <td nowrap class="w60 align-center"><?php echo $v['sDrug_ID']; ?></td>
-<!--                        <td class="w60 picture">-->
-<!--                            <div class="size-56x56"><span class="thumb size-56x56"><i></i><img-->
-<!--                                        src="--><?php //echo thumb($v, 60); ?><!--" onload="javascript:DrawImage(this,56,56);"/></span>-->
-<!--                            </div>-->
-<!--                        </td>-->
                         <td class="goods-name w270"><p><span><?php echo $v['goods_name']; ?></span></p>
                         </td>
                         <td><?php echo $v['sDrug_Spec']; ?></td>

@@ -572,8 +572,8 @@ class goodsControl extends SystemControl
             $endnum = 100000;//excel仅允许导出10W条
             $displaytext = array();
             array_push($displaytext,'序号');
+            array_push($displaytext,'机构名称');
             array_push($displaytext,'商品编码');
-//            array_push($displaytext,'系统编码');
             array_push($displaytext,'商品名称');
             array_push($displaytext,'完整规格');
             array_push($displaytext,'含量规格');
@@ -584,19 +584,22 @@ class goodsControl extends SystemControl
             array_push($displaytext,'产地');
 
             array_push($displaytext,'常规单位');
-            array_push($displaytext,'进价');
-            array_push($displaytext,'零价');
+            array_push($displaytext,'可售库存');
             array_push($displaytext,'实际库存');
+            array_push($displaytext,'零价');
+            array_push($displaytext,'进价');
 
             array_push($displaytext,'最小单位');
-            array_push($displaytext,'进价');
-            array_push($displaytext,'零价');
+            array_push($displaytext,'可售库存');
             array_push($displaytext,'实际库存');
+            array_push($displaytext,'零价');
+            array_push($displaytext,'进价');
 
             array_push($displaytext,'零价金额');
             array_push($displaytext,'进价金额');
             array_push($displaytext,'进销差');
             $propertys = array();
+            array_push($propertys,'OrgName');
             array_push($propertys,'sDrug_ID');
 //            array_push($propertys,'goods_commonid');
             array_push($propertys,'goods_name');
@@ -608,13 +611,15 @@ class goodsControl extends SystemControl
             array_push($propertys,'gc_name');
 
             array_push($propertys,'sDrug_Unit');
-            array_push($propertys,'fDS_BuyPrice');
-            array_push($propertys,'fDS_RetailPrice');
+            array_push($propertys,'fDS_OStock');
             array_push($propertys,'fDS_SStock');
+            array_push($propertys,'fDS_RetailPrice');
+            array_push($propertys,'fDS_BuyPrice');
             array_push($propertys,'sDrug_LeastUnit');
-            array_push($propertys,'fDS_LeastBuyPrice');
-            array_push($propertys,'fDS_LeastRetailPrice');
+            array_push($propertys,'fDS_LeastOStock');
             array_push($propertys,'fDS_LeastSStock');
+            array_push($propertys,'fDS_LeastRetailPrice');
+            array_push($propertys,'fDS_LeastBuyPrice');
 
             array_push($propertys,'price1');
             array_push($propertys,'price2');
