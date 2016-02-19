@@ -805,7 +805,7 @@ class goodsControl extends SystemControl
             $orgcol = 'org.name as OrgName, ';
             $orggroup = 'org.name ,';
         }
-        $countsql = " select count(*)   FROM (SELECT TOP $endnum row_number() over( order by  good.sDrug_ID) rownum,
+        $countsql = " select count(*)   FROM (SELECT
                         sDrug_ID,
                             goods_name,
                             $orgcol
@@ -831,8 +831,7 @@ class goodsControl extends SystemControl
                             brand_name,
                             gc_name,
                             sDrug_Unit,
-                            sDrug_LeastUnit
-                              order by  good.sDrug_ID)zzzz ";
+                            sDrug_LeastUnit)zzzz ";
         $stmt = $conn->query($countsql);
         $total = $stmt->fetch(PDO::FETCH_NUM);
         $page->setTotalNum($total[0]);
