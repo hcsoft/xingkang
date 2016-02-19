@@ -1,59 +1,63 @@
 <?php defined('InShopNC') or exit('Access Invalid!'); ?>
 <link href="<?php echo ADMIN_TEMPLATES_URL; ?>/css/font/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
 <link href="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.css" rel="stylesheet"
-          type="text/css"/>
+      type="text/css"/>
 <!--[if IE 7]>
 <link rel="stylesheet" href="<?php echo ADMIN_TEMPLATES_URL;?>/css/font/font-awesome/css/font-awesome-ie7.min.css">
 <![endif]-->
 <style>
 
-.datatable th, .datatable td {
-    border: solid 1px #DEEFFB;
-}
-.subdatatable  th{
-    text-align: center;
-    word-break:keep-all;
-}
-.subdatatable  th, .subdatatable td {
-    border: solid 1px #79a1fb;
-}
-.subdatatable .thead{
-    background-color: #d3d3d3;
-}
-.ncsc-goods-sku.ps-container{
-    background-color:transparent;
-    border:none;
-}
+    .datatable th, .datatable td {
+        border: solid 1px #DEEFFB;
+    }
+
+    .subdatatable th {
+        text-align: center;
+        word-break: keep-all;
+    }
+
+    .subdatatable th, .subdatatable td {
+        border: solid 1px #79a1fb;
+    }
+
+    .subdatatable .thead {
+        background-color: #d3d3d3;
+    }
+
+    .ncsc-goods-sku.ps-container {
+        background-color: transparent;
+        border: none;
+    }
 </style>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
-    <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"
-            charset="utf-8"></script>
-    <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery.validation.min.js"></script>
-    <link rel="stylesheet" type="text/css"
-          href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
-    <link href="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet"
-          type="text/css"/>
-    <link href="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.css" rel="stylesheet"
-          type="text/css"/>
-    <script type="text/javascript"
-            src="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/js/jquery.ztree.all-3.5.min.js"></script>
-    <script type="text/javascript"
-            src="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.min.js"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"
+        charset="utf-8"></script>
+<script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery.validation.min.js"></script>
+<link rel="stylesheet" type="text/css"
+      href="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/themes/smoothness/jquery.ui.css"/>
+<link href="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet"
+      type="text/css"/>
+<link href="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.css" rel="stylesheet"
+      type="text/css"/>
+<script type="text/javascript"
+        src="<?php echo RESOURCE_SITE_URL; ?>/js/ztree/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript"
+        src="<?php echo RESOURCE_SITE_URL; ?>/js/multiselect/jquery.multiselect.min.js"></script>
 <div class="page">
     <div class="fixed-bar">
         <div class="item-title">
-            <h3>库存管理</h3>
+            <h3>库存汇总查询</h3>
         </div>
     </div>
     <div class="fixed-empty"></div>
     <form method="get" name="formSearch" id="formSearch">
         <input type="hidden" name="act" value="goods">
-        <input type="hidden" name="op" value="stock">
-        <input type="hidden" id ='export' name="export" value="false">
+        <input type="hidden" name="op" value="stocksum">
+        <input type="hidden" id='export' name="export" value="false">
         <table class="tb-type1 noborder search">
             <tbody>
             <tr>
-            	<th><label>选择机构</label></th>
+                <th><label>选择机构</label></th>
                 <td colspan="1"><select name="orgids[]" id="orgids" class="orgSelect" multiple>
                         <?php
                         $orgids = $_GET['orgids'];
@@ -66,15 +70,20 @@
                                     <?php if (in_array($v->id, $orgids)){ ?>selected<?php } ?>><?php echo $v->name; ?></option>
                         <?php } ?>
                     </select></td>
-                
+
                 <th><label for="search_goods_name"> <?php echo $lang['goods_index_name']; ?></label></th>
                 <td><input type="text" value="<?php echo $output['search']['search_goods_name']; ?>"
                            name="search_goods_name" id="search_goods_name" class="txt"></td>
                 <th><label for="search_commonid">商品编码</label></th>
                 <td><input type="text" value="<?php echo $output['search']['search_commonid'] ?>" name="search_commonid"
                            id="search_commonid" class="txt"/></td>
-                <td><input type="checkbox" value="true" <?php if($output['search']['allowzero'] =='true')  echo checked; ?> name="allowzero"
-                           id="allowzero" /> <label for="allowzero">显示零库存</label></td>
+                <td><input type="checkbox"
+                           value="true" <?php if ($output['search']['allowzero'] == 'true') echo checked; ?>
+                           name="allowzero"
+                           id="allowzero"/> <label for="allowzero">显示零库存</label></td>
+                <td><input type="checkbox"
+                           value="true" <?php if ($output['search']['orgsum'] == 'true') echo checked; ?> name="orgsum"
+                           id="orgsum"/> <label for="orgsum">按机构汇总</label></td>
                 <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search "
                        title="<?php echo $lang['nc_query']; ?>">&nbsp;</a>
                     <a href="javascript:void(0);" id="ncexport" class="btn-export "
@@ -109,53 +118,43 @@
         <table class="table tb-type2 datatable">
             <thead>
             <tr class="thead">
-                <th nowrap rowspan="3"  class="align-center">商品编码</th>
-                <th nowrap  rowspan="3"  colspan=""><?php echo $lang['goods_index_name']; ?></th>
-                <th nowrap rowspan="3"  class="align-center">机构名称</th>
-                <th nowrap  colspan="3"  class="align-center">规格</th>
+                <th nowrap rowspan="3" class="align-center">商品编码</th>
+                <th nowrap rowspan="3" colspan=""><?php echo $lang['goods_index_name']; ?></th>
+                <?php if ($output['search']['orgsum'] == 'true') { ?>
+                    <th nowrap rowspan="3" class="align-center">机构名称</th>
+                <?php } ?>
+                <th nowrap colspan="3" class="align-center">规格</th>
 
-                <th nowrap  rowspan="3" >厂家/产地</th>
-<!--                <th class="align-center" >库存</th>-->
-<!--                <th class="align-center" >最小单位库存</th>-->
-<!--                <th class="align-center">常规单位价格</th>-->
-<!--                <th class="align-center">最小单位价格</th>-->
-<!--                <th class="align-center">金额</th>-->
-<!--                <th class="align-center">进销差</th>-->
-
-                <th  nowrap colspan="5" class="align-center" >常规单位</th>
-                <th nowrap  colspan="5" class="align-center" >最小单位</th>
-                <th  nowrap rowspan="3" class="align-center">零价金额</th>
-                <th nowrap  rowspan="3" class="align-center">进价金额</th>
-                <th nowrap  rowspan="3" class="align-center">进销差</th>
+                <th nowrap rowspan="3">厂家/产地</th>
+                <th nowrap colspan="3" class="align-center">常规单位</th>
+                <th nowrap colspan="3" class="align-center">最小单位</th>
             </tr>
             <tr>
-                <th nowrap  rowspan="2" class="align-center" >完整</th>
-                <th nowrap  rowspan="2" class="align-center" >含量</th>
-                <th nowrap  rowspan="2" class="align-center" >包装</th>
-                <th nowrap  rowspan="2" class="align-center" >单位</th>
-                <th nowrap  colspan="2" class="align-center" >库存</th>
-                <th nowrap   rowspan="2" class="align-center">零价</th>
-                <th  nowrap rowspan="2"  class="align-center">进价</th>
-                <th nowrap  rowspan="2" class="align-center" >单位</th>
-                <th nowrap  colspan="2" class="align-center" >库存</th>
-                <th nowrap   rowspan="2" class="align-center">零价</th>
-                <th  nowrap rowspan="2"  class="align-center">进价</th>
+                <th nowrap rowspan="2" class="align-center">完整</th>
+                <th nowrap rowspan="2" class="align-center">含量</th>
+                <th nowrap rowspan="2" class="align-center">包装</th>
+                <th nowrap rowspan="2" class="align-center">单位</th>
+                <th nowrap colspan="2" class="align-center">库存</th>
+                <th nowrap rowspan="2" class="align-center">单位</th>
+                <th nowrap colspan="2" class="align-center">库存</th>
             <tr>
-                <th nowrap  class="align-center" >可售</th>
-                <th nowrap  class="align-center" >实际</th>
-                <th nowrap  class="align-center" >可售</th>
-                <th nowrap  class="align-center" >实际</th>
+                <th nowrap class="align-center">可售</th>
+                <th nowrap class="align-center">实际</th>
+                <th nowrap class="align-center">可售</th>
+                <th nowrap class="align-center">实际</th>
             </tr>
             </thead>
             <tbody>
             <?php if (!empty($output['goods_list']) && is_array($output['goods_list'])) {
                 ?>
-                <?php foreach ($output['goods_list'] as $k => $v) {                 ?>
+                <?php foreach ($output['goods_list'] as $k => $v) { ?>
                     <tr class="hover edit">
                         <td nowrap class="w60 align-center"><?php echo $v['sDrug_ID']; ?></td>
                         <td class="goods-name w270"><p><span><?php echo $v['goods_name']; ?></span></p>
                         </td>
-                        <td nowrap class="w60 align-left"><?php echo $v['OrgName']; ?></td>
+                        <?php if ($output['search']['orgsum'] == 'true') { ?>
+                            <td nowrap class="w60 align-left"><?php echo $v['OrgName']; ?></td>
+                        <?php } ?>
                         <td><?php echo $v['sDrug_Spec']; ?></td>
                         <td><?php echo $v['sDrug_Content']; ?></td>
                         <td><?php echo $v['sDrug_PackSpec']; ?></td>
@@ -166,24 +165,17 @@
                             <p><?php echo $v['gc_name']; ?></p></p>
                         </td>
                         <td><?php echo $v['sDrug_Unit']; ?></td>
-                        <td><?php echo number_format($v['fDS_OStock'],0); ?></td>
-                        <td><?php echo number_format($v['fDS_SStock'],0); ?></td>
-                        <td><?php echo number_format($v['fDS_RetailPrice'],3); ?></td>
-                        <td><?php echo number_format($v['fDS_BuyPrice'],3); ?></td>
+                        <td><?php echo number_format($v['fDS_OStock'], 0); ?></td>
+                        <td><?php echo number_format($v['fDS_SStock'], 0); ?></td>
                         <td><?php echo $v['sDrug_LeastUnit'] ?></td>
-                        <td><?php echo number_format($v['fDS_LeastOStock'],3); ?></td>
-                        <td><?php echo number_format($v['fDS_LeastSStock'],3); ?></td>
-                        <td><?php echo number_format($v['fDS_LeastRetailPrice'],3); ?></td>
-                        <td><?php echo number_format($v['fDS_LeastBuyPrice'],3); ?></td>
-                        <td><?php echo number_format($v['price1'],3); ?></td>
-                        <td><?php echo number_format($v['price2'],3); ?></td>
-                        <td><?php echo number_format($v['price3'],3); ?></td>
-
-
+                        <td><?php echo number_format($v['fDS_LeastOStock'], 3); ?></td>
+                        <td><?php echo number_format($v['fDS_LeastSStock'], 3); ?></td>
                     </tr>
                     <tr style="display:none;">
                         <td colspan="21">
-                            <div><input onchange="rowzeroallowchange(this)" type="checkbox" class="rowzeroallow" id="rowzeroallow_<?php echo $k;?>"/> <label for="rowzeroallow_<?php echo $k;?>">显示零库存</label> </div>
+                            <div><input onchange="rowzeroallowchange(this)" type="checkbox" class="rowzeroallow"
+                                        id="rowzeroallow_<?php echo $k; ?>"/> <label
+                                    for="rowzeroallow_<?php echo $k; ?>">显示零库存</label></div>
                             <div class="ncsc-goods-sku ps-container"></div>
                         </td>
                     </tr>
@@ -217,13 +209,13 @@
     $(function () {
 //        gcategoryInit("gcategory");
         $('#ncsubmit').click(function () {
-            $('input[name="op"]').val('stock');
+            $('input[name="op"]').val('stocksum');
             $("#export").val('false');
             $('#formSearch').submit();
         });
 
         $('#ncexport').click(function () {
-            $('input[name="op"]').val('stock');
+            $('input[name="op"]').val('stocksum');
             $("#export").val('true');
             $('#formSearch').submit();
         });
@@ -235,7 +227,7 @@
                 goods_lockup(str);
             }
         });
-      //生成机构下拉
+        //生成机构下拉
         function orgtext(n1, n2, list) {
             var texts = [];
             for (var idx in list) {
@@ -243,14 +235,15 @@
             }
             return texts.join('<br>');
         }
+
         $("#orgids").multiselect(
-                {
-                    checkAllText: '选择全部',
-                    uncheckAllText: '清除选择',
-                    noneSelectedText: '未选择',
-                    selectedText: orgtext
-                }
-            );
+            {
+                checkAllText: '选择全部',
+                uncheckAllText: '清除选择',
+                noneSelectedText: '未选择',
+                selectedText: orgtext
+            }
+        );
         // 批量删除
         $('a[nctype="del_batch"]').click(function () {
             if (confirm('<?php echo $lang['nc_ensure_del'];?>')) {
@@ -270,54 +263,54 @@
                 var _commonid = $(obj).attr('data-comminid');
                 var _div = _parenttr.next().find('.ncsc-goods-sku');
 //                if (_div.html() == '') {
-                var param = {commonid: _commonid,orgid:$("#queryorgid").val()};
+                var param = {commonid: _commonid, orgid: $("#queryorgid").val()};
                 _div.html('');
-                    if($(this).children("input.rowzeroallow").length>0){
-                        if($(this).children("input.rowzeroallow")[0].prop("checked")=="true"){
-                            param['zeroallow']='true';
-                        }
+                if ($(this).children("input.rowzeroallow").length > 0) {
+                    if ($(this).children("input.rowzeroallow")[0].prop("checked") == "true") {
+                        param['zeroallow'] = 'true';
                     }
-                    $.getJSON('index.php?act=goods&op=get_goods_stock_ajax', param, function (data) {
-                        console.trace(data);
+                }
+                $.getJSON('index.php?act=goods&op=get_goods_stock_ajax', param, function (data) {
+                    console.trace(data);
 
-                        if (data != 'false' && data.length>0) {
-                            var vtable = $('<table class="table tb-type2 nobdb subdatatable"></table>');
-                            var vtrhead = $('<tr class="thead"></tr>')
-                            $('<th rowspan="2">机构</th>').appendTo(vtrhead);
-                            $('<th rowspan="2">批号</th>').appendTo(vtrhead);
-                            $('<th rowspan="2">有效期</th>').appendTo(vtrhead);
-                            $('<th colspan="2">常规单位库存</th>').appendTo(vtrhead);
-                            $('<th colspan="2">最小单位库存</th>').appendTo(vtrhead);
+                    if (data != 'false' && data.length > 0) {
+                        var vtable = $('<table class="table tb-type2 nobdb subdatatable"></table>');
+                        var vtrhead = $('<tr class="thead"></tr>')
+                        $('<th rowspan="2">机构</th>').appendTo(vtrhead);
+                        $('<th rowspan="2">批号</th>').appendTo(vtrhead);
+                        $('<th rowspan="2">有效期</th>').appendTo(vtrhead);
+                        $('<th colspan="2">常规单位库存</th>').appendTo(vtrhead);
+                        $('<th colspan="2">最小单位库存</th>').appendTo(vtrhead);
 //                            $('<th rowspan="2">零价金额</th>').appendTo(vtrhead);
 //                            $('<th rowspan="2">进价金额</th>').appendTo(vtrhead);
 //                            $('<th rowspan="2">进销差</th>').appendTo(vtrhead);
-                            var vtrhead1 = $('<tr class="thead"></tr>');
-                            $('<th>可售</th>').appendTo(vtrhead1);
-                            $('<th>实际</th>').appendTo(vtrhead1);
-                            $('<th>可售</th>').appendTo(vtrhead1);
-                            $('<th>实际</th>').appendTo(vtrhead1);
-                            vtrhead.appendTo(vtable);
-                            vtrhead1.appendTo(vtable);
-                            $.each(data, function (i, o) {
-                                $('<tr><td class="align-left">' + o.OrgName + '</td>'+
-                                 '<td class="align-center">' + o.sBS_Batch + '</td>'+
-                                '<td class="align-center">'  + (""+ o.dBS_UsefulLife).substr(0,10) + '</td>'+
-                                '<td class="align-right">' + Math.round(o.fBS_OStock) + '</td>'+
-                                '<td class="align-right">' + Math.round(o.fBS_SStock) + '</td>'+
-                                '<td class="align-right">' + Math.round(o.fBS_LeastOStock) + '</td>'+
-                                '<td class="align-right">' + Math.round(o.fBS_LeastSStock) + '</td>'+
+                        var vtrhead1 = $('<tr class="thead"></tr>');
+                        $('<th>可售</th>').appendTo(vtrhead1);
+                        $('<th>实际</th>').appendTo(vtrhead1);
+                        $('<th>可售</th>').appendTo(vtrhead1);
+                        $('<th>实际</th>').appendTo(vtrhead1);
+                        vtrhead.appendTo(vtable);
+                        vtrhead1.appendTo(vtable);
+                        $.each(data, function (i, o) {
+                            $('<tr><td class="align-left">' + o.OrgName + '</td>' +
+                                '<td class="align-center">' + o.sBS_Batch + '</td>' +
+                                '<td class="align-center">' + ("" + o.dBS_UsefulLife).substr(0, 10) + '</td>' +
+                                '<td class="align-right">' + Math.round(o.fBS_OStock) + '</td>' +
+                                '<td class="align-right">' + Math.round(o.fBS_SStock) + '</td>' +
+                                '<td class="align-right">' + Math.round(o.fBS_LeastOStock) + '</td>' +
+                                '<td class="align-right">' + Math.round(o.fBS_LeastSStock) + '</td>' +
 //                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_RetailPrice  + o.fBS_LeastOStock * o.fBS_LeastRetailPrice  )*1000)/1000 + '</td>'+
 //                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_BuyPrice +  o.fBS_LeastOStock * o.fBS_LeastBuyPrice)*1000)/1000 + '</td>'+
 //                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_RetailPrice - o.fBS_OStock * o.fBS_BuyPrice + o.fBS_LeastOStock * o.fBS_LeastRetailPrice - o.fBS_LeastOStock * o.fBS_LeastBuyPrice)*1000)/1000 + '</td>'+
-                                    '</tr>').appendTo(vtable);
-                            });
-                            vtable.appendTo(_div);
-                            _parenttr.next().show();
-                            // 计算div的宽度
-                            _div.css('width', document.body.clientWidth - 54);
+                                '</tr>').appendTo(vtable);
+                        });
+                        vtable.appendTo(_div);
+                        _parenttr.next().show();
+                        // 计算div的宽度
+                        _div.css('width', document.body.clientWidth - 54);
 //                            _div.perfectScrollbar();
-                        }
-                    });
+                    }
+                });
 //                } else {
 //                    _parenttr.next().show()
 //                }
@@ -331,22 +324,22 @@
 
     });
 
-    function rowzeroallowchange ( src) {
+    function rowzeroallowchange(src) {
         var obj = $(src).parent().parent().parent().prev().find('i[nctype="ajaxGoodsList"]');
         var _parenttr = $(src).parent().parent().parent().prev();
         var _commonid = $(obj).attr('data-comminid');
         var _div = _parenttr.next().find('.ncsc-goods-sku');
 //                if (_div.html() == '') {
-        var param = {commonid: _commonid,orgid:$("#queryorgid").val()};
+        var param = {commonid: _commonid, orgid: $("#queryorgid").val()};
 
-        if($(src).prop("checked")==true){
-            param['zeroallow']='true';
+        if ($(src).prop("checked") == true) {
+            param['zeroallow'] = 'true';
         }
         _div.html('');
         $.getJSON('index.php?act=goods&op=get_goods_stock_ajax', param, function (data) {
             console.trace(data);
 
-            if (data != 'false' && data.length>0) {
+            if (data != 'false' && data.length > 0) {
                 var vtable = $('<table class="table tb-type2 nobdb subdatatable"></table>');
                 var vtrhead = $('<tr class="thead"></tr>')
                 $('<th rowspan="2">机构</th>').appendTo(vtrhead);
@@ -365,17 +358,17 @@
                 vtrhead.appendTo(vtable);
                 vtrhead1.appendTo(vtable);
                 $.each(data, function (i, o) {
-                    $('<tr><td class="align-left">' + o.OrgName + '</td>'+
-                    '<td class="align-center">' + o.sBS_Batch + '</td>'+
-                    '<td class="align-center">'  + (""+ o.dBS_UsefulLife).substr(0,10) + '</td>'+
-                    '<td class="align-right">' + Math.round(o.fBS_OStock) + '</td>'+
-                    '<td class="align-right">' + Math.round(o.fBS_SStock) + '</td>'+
-                    '<td class="align-right">' + Math.round(o.fBS_LeastOStock) + '</td>'+
-                    '<td class="align-right">' + Math.round(o.fBS_LeastSStock) + '</td>'+
+                    $('<tr><td class="align-left">' + o.OrgName + '</td>' +
+                        '<td class="align-center">' + o.sBS_Batch + '</td>' +
+                        '<td class="align-center">' + ("" + o.dBS_UsefulLife).substr(0, 10) + '</td>' +
+                        '<td class="align-right">' + Math.round(o.fBS_OStock) + '</td>' +
+                        '<td class="align-right">' + Math.round(o.fBS_SStock) + '</td>' +
+                        '<td class="align-right">' + Math.round(o.fBS_LeastOStock) + '</td>' +
+                        '<td class="align-right">' + Math.round(o.fBS_LeastSStock) + '</td>' +
 //                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_RetailPrice  + o.fBS_LeastOStock * o.fBS_LeastRetailPrice  )*1000)/1000 + '</td>'+
 //                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_BuyPrice +  o.fBS_LeastOStock * o.fBS_LeastBuyPrice)*1000)/1000 + '</td>'+
 //                                '<td class="align-right">￥' + Math.round((o.fBS_OStock * o.fBS_RetailPrice - o.fBS_OStock * o.fBS_BuyPrice + o.fBS_LeastOStock * o.fBS_LeastRetailPrice - o.fBS_LeastOStock * o.fBS_LeastBuyPrice)*1000)/1000 + '</td>'+
-                    '</tr>').appendTo(vtable);
+                        '</tr>').appendTo(vtable);
                 });
                 vtable.appendTo(_div);
                 _parenttr.next().show();

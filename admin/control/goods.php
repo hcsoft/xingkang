@@ -580,9 +580,9 @@ class goodsControl extends SystemControl
             $endnum = 100000;//excel仅允许导出10W条
             $displaytext = array();
             array_push($displaytext,'序号');
-            array_push($displaytext,'机构名称');
             array_push($displaytext,'商品编码');
             array_push($displaytext,'商品名称');
+            array_push($displaytext,'机构名称');
             array_push($displaytext,'完整规格');
             array_push($displaytext,'含量规格');
             array_push($displaytext,'包装规格');
@@ -607,10 +607,10 @@ class goodsControl extends SystemControl
             array_push($displaytext,'进价金额');
             array_push($displaytext,'进销差');
             $propertys = array();
-            array_push($propertys,'OrgName');
             array_push($propertys,'sDrug_ID');
 //            array_push($propertys,'goods_commonid');
             array_push($propertys,'goods_name');
+            array_push($propertys,'OrgName');
             array_push($propertys,'sDrug_Spec');
             array_push($propertys,'sDrug_Content');
             array_push($propertys,'sDrug_PackSpec');
@@ -638,9 +638,9 @@ class goodsControl extends SystemControl
 
         }
 
-        $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.goods_commonid) rownum,
+        $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.sDrug_ID) rownum,
                         org.name as OrgName,  *
-                            $sql order by  good.goods_commonid)zzzz where rownum>$startnum )zzzzz order by rownum";
+                            $sql order by  good.sDrug_ID)zzzz where rownum>$startnum )zzzzz order by rownum";
         $stmt = $conn->query($tsql);
         $goods_list = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -677,6 +677,198 @@ class goodsControl extends SystemControl
         Tpl::output('verify', array('1' => '通过', '0' => '未通过', '10' => '等待审核'));
 
         Tpl::showpage('goods.stock');
+    }
+
+    /**
+     * 库存管理
+     */
+
+    public function stocksumOp()
+    {
+
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $treesql = 'select  b.id , b.name,b.districtnumber,b.parentid pId from map_org_wechat a, Organization b where a.orgid = b.id ';
+        $treestmt = $conn->query($treesql);
+        $treedata_list = array();
+        while ($row = $treestmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($treedata_list, $row);
+        }
+        Tpl::output('treelist', $treedata_list);
+
+//         if (!isset($_GET['orgid'])) {
+//             $_GET['orgid'] = $treedata_list[0]->id;
+//         }
+
+        $page = new Page();
+        $page->setEachNum(10);
+        $page->setNowPage($_REQUEST["curpage"]);
+        $startnum = $page->getEachNum() * ($page->getNowPage() - 1);
+        $endnum = $page->getEachNum() * ($page->getNowPage());
+        $sql = 'from Center_DrugStock stock  left join shopnc_goods_common good   on good.goods_commonid = stock.iDrug_ID
+            left join Organization org on stock.orgid = org.id
+         where good.idrug_rectype in (0,1,3) ';
+
+        if ($_GET['search_goods_name'] != '') {
+            $sql = $sql . ' and good.goods_name like \'%' . trim($_GET['search_goods_name']) . '%\'';
+        }
+        if (intval($_GET['search_commonid']) > 0) {
+            $sql = $sql . ' and good.sdrug_id = \'' . ($_GET['search_commonid']).'\'';
+        }
+        if ($_GET['search_store_name'] != '') {
+            $sql = $sql . ' and good.store_name like \'%' . trim($_GET['search_store_name']) . '%\'';
+        }
+        if (intval($_GET['search_brand_id']) > 0) {
+            $sql = $sql . ' and good.brand_id = ' . intval($_GET['search_brand_id']) . '';
+        }
+        if (intval($_GET['cate_id']) > 0) {
+            $sql = $sql . ' and good.gc_id = ' . intval($_GET['cate_id']);
+        }
+        if (in_array($_GET['search_state'], array('0', '1', '10'))) {
+            $sql = $sql . ' and good.goods_state  =' . $_GET['search_state'];
+        }
+        if (in_array($_GET['search_verify'], array('0', '1', '10'))) {
+            $sql = $sql . ' and good.goods_verify = ' . $_GET['search_verify'];
+        }
+        if ($_GET['allowzero'] && $_GET['allowzero'] == 'true') {
+            $sql = $sql . '   ';
+        } else {
+            $sql = $sql . ' and (stock.fDS_OStock <> 0 or  stock.fDS_LeastOStock  <> 0)  ';
+        }
+
+//         if ($_GET['orgid'] != '') {
+//             $sql = $sql . ' and stock.orgid =\'' . $_GET['orgid'] . '\'';
+//         }
+        if ($_GET['orgids']) {
+            $sql = $sql .' and stock.orgid in ('.implode(',', $_GET['orgids']).')';
+        }
+
+
+        $countsql = " select count(*)  $sql ";
+
+//        echo $countsql;
+        $stmt = $conn->query($countsql);
+//        echo $countsql;
+        $total = $stmt->fetch(PDO::FETCH_NUM);
+        $page->setTotalNum($total[0]);
+
+        $exportflag =false;
+        if (isset ( $_GET ['export'] ) && $_GET ['export'] == 'true') {
+            $exportflag = true;
+        }
+        if ($exportflag){
+            $startnum = 0 ;
+            $endnum = 100000;//excel仅允许导出10W条
+            $displaytext = array();
+            array_push($displaytext,'序号');
+            array_push($displaytext,'商品编码');
+            array_push($displaytext,'商品名称');
+            if($_GET['orgsum'] && $_GET['orgsum'] == 'true'){
+                array_push($displaytext,'机构名称');
+            }
+            array_push($displaytext,'完整规格');
+            array_push($displaytext,'含量规格');
+            array_push($displaytext,'包装规格');
+
+            array_push($displaytext,'供应商');
+            array_push($displaytext,'厂家');
+            array_push($displaytext,'产地');
+
+            array_push($displaytext,'常规单位');
+            array_push($displaytext,'可售库存');
+            array_push($displaytext,'实际库存');
+
+            array_push($displaytext,'最小单位');
+            array_push($displaytext,'可售库存');
+            array_push($displaytext,'实际库存');
+
+            $propertys = array();
+            array_push($propertys,'sDrug_ID');
+//            array_push($propertys,'goods_commonid');
+            array_push($propertys,'goods_name');
+            if($_GET['orgsum'] && $_GET['orgsum'] == 'true'){
+                array_push($propertys,'OrgName');
+            }
+            array_push($propertys,'sDrug_Spec');
+            array_push($propertys,'sDrug_Content');
+            array_push($propertys,'sDrug_PackSpec');
+            array_push($propertys,'sCustomer_Name');
+            array_push($propertys,'brand_name');
+            array_push($propertys,'gc_name');
+
+            array_push($propertys,'sDrug_Unit');
+            array_push($propertys,'fDS_OStock');
+            array_push($propertys,'fDS_SStock');
+            array_push($propertys,'sDrug_LeastUnit');
+            array_push($propertys,'fDS_LeastOStock');
+            array_push($propertys,'fDS_LeastSStock');
+
+
+            $propertysmap =  array();
+            $propertysmap['iDrug_StatClass'] =$this->classmap ;
+
+        }
+        if($_GET['orgsum'] && $_GET['orgsum'] == 'true'){
+            $orgcol = 'org.name as OrgName, ';
+            $orggroup = 'org.name ,';
+        }
+        $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.sDrug_ID) rownum,
+                        sDrug_ID,
+                            goods_name,
+                            $orgcol
+                            sDrug_Spec,
+                            sDrug_Content,
+                            brand_name,
+                            gc_name,
+                            sDrug_Unit,
+                            sum(fDS_OStock) 'fDS_OStock',
+                            sum(fDS_SStock) 'fDS_SStock',
+                            sDrug_LeastUnit,
+                            sum(fDS_LeastOStock) 'fDS_LeastOStock',
+                            sum(fDS_LeastSStock) 'fDS_LeastSStock'
+                            $sql
+                            group by
+                            sDrug_ID,
+                            goods_name,
+                            $orggroup
+                            sDrug_Spec,
+                            sDrug_Content,
+                            brand_name,
+                            gc_name,
+                            sDrug_Unit,
+                            sDrug_LeastUnit
+                              order by  good.sDrug_ID)zzzz where rownum>$startnum )zzzzz order by rownum";
+//        echo $tsql;
+        $stmt = $conn->query($tsql);
+        $goods_list = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+            $goods_list[] = $row;
+
+        }
+        if ($exportflag) {
+            $this->exportxlsxbyObject($displaytext,$propertys,$propertysmap,'库存汇总',$goods_list);
+        }
+
+
+//        var_dump($goods_list);
+        Tpl::output('goods_list', $goods_list);
+        Tpl::output('page', $page->show());
+
+        $goods_class = Model('goods_class')->getTreeClassList(1);
+        // 品牌
+        $condition = array();
+        $condition['brand_apply'] = '1';
+        $brand_list = Model('brand')->getBrandList($condition);
+
+        Tpl::output('search', $_GET);
+        Tpl::output('goods_class', $goods_class);
+        Tpl::output('brand_list', $brand_list);
+
+        Tpl::output('state', array('1' => '出售中', '0' => '仓库中', '10' => '违规下架'));
+
+        Tpl::output('verify', array('1' => '通过', '0' => '未通过', '10' => '等待审核'));
+
+        Tpl::showpage('goods.stocksum');
     }
     //审核调价
     public function checkChangePriceOp()

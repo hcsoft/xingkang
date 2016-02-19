@@ -101,6 +101,7 @@ $arr = array(
 					array('args'=>'brand,brand,goods',						'text'=>$lang['nc_brand_manage']),
 					array('args'=>'goods,goods,goods',						'text'=>$lang['nc_goods_manage']),
                     array('args'=>'stock,goods,goods',						'text'=>'库存管理'),
+                    array('args'=>'stocksum,goods,goods',						'text'=>'库存汇总'),
 					array('args'=>'type,type,goods',						'text'=>$lang['nc_type_manage']),
 					array('args'=>'spec,spec,goods',						'text'=>$lang['nc_spec_manage']),
 					array('args'=>'list,goods_album,goods',					'text'=>$lang['nc_album_manage']),
