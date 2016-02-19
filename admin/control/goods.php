@@ -743,13 +743,7 @@ class goodsControl extends SystemControl
         }
 
 
-        $countsql = " select count(*)  $sql ";
 
-//        echo $countsql;
-        $stmt = $conn->query($countsql);
-//        echo $countsql;
-        $total = $stmt->fetch(PDO::FETCH_NUM);
-        $page->setTotalNum($total[0]);
 
         $exportflag =false;
         if (isset ( $_GET ['export'] ) && $_GET ['export'] == 'true') {
@@ -811,6 +805,37 @@ class goodsControl extends SystemControl
             $orgcol = 'org.name as OrgName, ';
             $orggroup = 'org.name ,';
         }
+        $countsql = " select count(*)   FROM (SELECT TOP $endnum row_number() over( order by  good.sDrug_ID) rownum,
+                        sDrug_ID,
+                            goods_name,
+                            $orgcol
+                            sDrug_Spec,
+                            sDrug_Content,
+                            sDrug_PackSpec,
+                            brand_name,
+                            gc_name,
+                            sDrug_Unit,
+                            sum(fDS_OStock) 'fDS_OStock',
+                            sum(fDS_SStock) 'fDS_SStock',
+                            sDrug_LeastUnit,
+                            sum(fDS_LeastOStock) 'fDS_LeastOStock',
+                            sum(fDS_LeastSStock) 'fDS_LeastSStock'
+                            $sql
+                            group by
+                            sDrug_ID,
+                            goods_name,
+                            $orggroup
+                            sDrug_Spec,
+                            sDrug_Content,
+                            sDrug_PackSpec,
+                            brand_name,
+                            gc_name,
+                            sDrug_Unit,
+                            sDrug_LeastUnit
+                              order by  good.sDrug_ID)zzzz ";
+        $stmt = $conn->query($countsql);
+        $total = $stmt->fetch(PDO::FETCH_NUM);
+        $page->setTotalNum($total[0]);
         $tsql = "SELECT * FROM  ( SELECT  * FROM (SELECT TOP $endnum row_number() over( order by  good.sDrug_ID) rownum,
                         sDrug_ID,
                             goods_name,
