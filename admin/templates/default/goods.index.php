@@ -87,7 +87,7 @@
 		                <th class="align-center">系统编码</th>
 		                <th ><?php echo $lang['goods_index_name']; ?></th>
                          <th class="align-center">财务分类</th>
-                         <th class="align-left">规格</th>
+                         <th class="align-left">完整规格</th>
                          <th>产地</th>
 		                <th class="align-center">常规单位</th>
 		                <th class="align-center">最小单位</th>
@@ -119,7 +119,7 @@
                                 ?><p></p><p><a
                                         href="javascript:void(0)"
                                         onclick="edit(<?php echo $v->goods_commonid ?>)">修改分类</a></p></td>
-	                        <td><p>完整规格: <?php echo $v->sDrug_Spec; ?></p></td>
+	                        <td><p><?php echo $v->sDrug_Spec; ?></p></td>
 	                        <td><p><?php echo $v->brand_name; ?></p>
 	
 	                            <p><?php echo $v->gc_name; ?></p></p>
