@@ -159,7 +159,7 @@
                         <td nowrap><i class="icon-plus-sign" style="cursor: pointer;" nctype="ajaxGoodsList"
                                data-comminid="<?php echo $v['goods_commonid']; ?>"
                                title="点击展开查看此商品全部规格；规格值过多时请横向拖动区域内的滚动条进行浏览。"></i></td>
-                        <td nowrap class="w60 align-center"><?php echo $v['OrgName']; ?></td>
+                        <td nowrap class="w60 align-left"><?php echo $v['OrgName']; ?></td>
                         <td nowrap class="w60 align-center"><?php echo $v['sDrug_ID']; ?></td>
                         <td class="goods-name w270"><p><span><?php echo $v['goods_name']; ?></span></p>
                         </td>
