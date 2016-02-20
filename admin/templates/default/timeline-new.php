@@ -142,7 +142,7 @@
 	if (!empty($output['ServiceIndexInfo']) && is_array($output['ServiceIndexInfo'])) {
 		foreach ($output['ServiceIndexInfo'] as $k => $v) {
 			$date1 = $v->ServiceDate;
-			$tmpMonthDay = date('m月d日',strtotime($date1));
+			$tmpMonthDay = date('Y年m月d日',strtotime($date1));
 			$tmpHours = date('A H:i',strtotime($date1));
 			$flag = substr($tmpHours,0,2);
 			if($flag == 'AM'){

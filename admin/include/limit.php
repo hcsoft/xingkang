@@ -29,6 +29,7 @@ $_limit =  array(
 	array('name'=>$lang['nc_goods'], 'child'=>array(
 		array('name'=>$lang['nc_goods_manage'], 'op'=>null, 'act'=>'goods'),
         array('name'=>'库存管理', 'op'=>'stock', 'act'=>'goods'),
+        array('name'=>'库存汇总', 'op'=>'stocksum', 'act'=>'goods'),
 		array('name'=>$lang['nc_class_manage'], 'op'=>null, 'act'=>'goods_class'),
 		array('name'=>$lang['nc_brand_manage'], 'op'=>null, 'act'=>'brand'),
 		array('name'=>$lang['nc_type_manage'], 'op'=>null, 'act'=>'type'),
