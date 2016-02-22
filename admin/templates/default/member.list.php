@@ -495,7 +495,6 @@ function band(){
 			return;
 		}
 	}
-	return;
 	$('input[name="op"]').val('ajax_bandhealthfile');
 	//alert($("input[name='check']:checked").val());
 	var params = $("#form_memberlist").serialize();
