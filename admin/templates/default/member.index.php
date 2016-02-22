@@ -302,9 +302,14 @@
 
                             <p class="smallfont">医保卡:&nbsp;<?php echo $v['MediCardID']; ?></p>
 
-                            <p class="smallfont">健康档案:&nbsp;<?php echo $v['FileNo']; ?></p>
-                            <p class="smallfont">地址:&nbsp;<?php echo $v['sAddress']; ?></p>
-							
+                            <p class="smallfont">健康档案:&nbsp;<?php if($v['FileNo']!='' ) {?>
+                            			<a href="javascript:void(0)"
+                                    			onclick="addhealthfile('<?php echo $v['member_id'] ?>','<?php echo $v['member_truename'] ?>','<?php echo $v['sIDCard'] ?>','<?php echo $v['FileNo'] ?>')"><?php echo $v['FileNo']; ?></a>
+                                   <?php }else{?>
+                                    	<a href="javascript:void(0)"
+                                    			onclick="addhealthfile('<?php echo $v['member_id'] ?>','<?php echo $v['member_truename'] ?>','<?php echo $v['sIDCard'] ?>','')">快速建档</a>
+                                    <?php }?></p>
+							<p class="smallfont">地址:&nbsp;<?php echo $v['sAddress']; ?></p>
                         </td>
 
                         <td><p class="name">卡类型: <?php if ($v['CardType'] == 0) {
@@ -338,6 +343,7 @@
                         <td><p class="name">末次消费日期: <?php echo substr($v['LastPayDate'], 0, 10); ?></p>
 
                             <p class="smallfont">末次消费地点: <?php echo $v['LastPayOrgName']; ?></p>
+                            <p class="smallfont">消费次数: <?php echo $v['consumenum']; ?></p>
 
                         </td>
                         <td class=""><p>储值余额:&nbsp;<strong
@@ -614,7 +620,10 @@
 <div id="indexdialog" title="健康服务索引">
     <iframe class="iframe" style="border:none;width:100%;height;100%;" ></iframe>
 </div>
-
+<div id="healthfiledialog" title="健康档案">
+	<span class="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
+    <iframe class="iframe" style="border:none;width:100%;height;100%;" ></iframe>
+</div>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/jquery.ui.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL; ?>/js/jquery-ui/i18n/zh-CN.js"
         charset="utf-8"></script>
@@ -777,6 +786,19 @@
                 }
             }
         });
+        $("#healthfiledialog").dialog({
+            resizable: false,
+            height: 800,
+            width: 1300,
+//            height:250,
+            modal: true,
+            autoOpen: false,
+            buttons: {
+                "关闭": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
     });
     function showpsreset(id, elem) {
         $("#psresetdialog .errormsg").html('');
@@ -808,6 +830,19 @@
         $("#indexdialog").dialog("open");
         $("#indexdialog .iframe").attr("src",src)
         $("#indexdialog .iframe").css("height",'100%')
+
+    }
+
+    function addhealthfile(id,name,idno,fileno){
+        $("#healthfiledialog").dialog("option", {width:$(window).width()-50,height:$(window).height()-50});
+
+        $("#healthfiledialog").dialog("open");
+        if(fileno ==''){
+        	$("#healthfiledialog .iframe").attr("src",'<?php echo ADMIN_SITE_URL ;?>/index.php?act=member&op=member2&queryname='+name+'&queryidnumber='+idno+'&member_id='+id);
+        }else{
+        	$("#healthfiledialog .iframe").attr("src",'<?php echo ADMIN_SITE_URL ;?>/index.php?act=member&op=member2&queryfileno='+fileno+'&member_id='+id);
+        }
+        $("#healthfiledialog .iframe").css("height",'100%')
 
     }
 
