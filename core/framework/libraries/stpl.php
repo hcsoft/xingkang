@@ -69,8 +69,7 @@ class STpl{
 		self::$smarty->assign('BASE_DATA_PATH',BASE_DATA_PATH);
 		self::$smarty->assign('BASE_UPLOAD_PATH',BASE_UPLOAD_PATH);
 		self::$smarty->assign('BASE_RESOURCE_PATH',BASE_RESOURCE_PATH);
-		global  $lang;
-		self::$smarty->assign('lang',$lang);
+		self::$smarty->assign('lang',Language::getLangContent());
 		self::$smarty->assign('html_title','');
 		self::$smarty->assign('CHARSET','utf8');
 	}
