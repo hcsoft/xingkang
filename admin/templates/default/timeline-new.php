@@ -63,12 +63,16 @@
             <td>
                 <p class="name"> <strong>末次消费日期:</strong> <?php echo $output['LastPayDate']; ?></p>
                 <p class="name"> <strong>末次消费地点:</strong> <?php echo $output['LastPayOrgName']; ?></p>
-                <p class="name"> <strong>充值次数:</strong> <a href="javascript:setdata('充值')">1次</a></p>
-                <p class="name"> <strong>消费次数:</strong> <a href="javascript:setdata('消费')">4次</a></p>
+                <p class="name"> <strong>充值次数:</strong> <a href="javascript:setdata('充值')">
+                	<?php echo $output['ServiceIndexCount'][0]->RechargeCount; ?>次</a></p>
+                <p class="name"> <strong>消费次数:</strong> <a href="javascript:setdata('消费')">
+					<?php echo $output['ServiceIndexCount'][0]->ConsumeCount; ?>次</a></p>
             </td>
             <td>
-                <p class="name"> <strong>门诊次数:</strong> <a href="javascript:setdata('门诊')">2次</a></p>
-                <p class="name"> <strong>住院次数:</strong> <a href="javascript:setdata('住院')">1次</a></p>
+                <p class="name"> <strong>门诊次数:</strong> <a href="javascript:setdata('门诊')">
+                	<?php echo $output['ServiceIndexCount'][0]->OutpatientCount; ?>次</a></p>
+                <p class="name"> <strong>住院次数:</strong> <a href="javascript:setdata('住院')">
+                	<?php echo $output['ServiceIndexCount'][0]->InpatientCount; ?>次</a></p>
                 <p class="name"> <strong>健康体检:</strong> <a href="javascript:setdata('健康体检')">
                 	<?php echo $output['ServiceIndexCount'][0]->MedicalExamCount; ?>次
                 </a></p>
@@ -102,9 +106,9 @@
 }
 
 .form_tbl td {
-	border-top: 1px solid #000;
-	border-left: 1px solid #000;
-	border-right: 1px solid #000;
+	border-top: 1px solid #DEEFFB;
+	border-left: 1px solid #DEEFFB;
+	border-right: 1px solid #DEEFFB;
 	height:25px;
 	line-height:25px;
 	padding:5px;
@@ -115,16 +119,14 @@
   	<div id="tabs" style="margin-top:-15px;">
 	  <ul>
 	    <li><a href="#key-value-list">键值列表</a></li>
-	    <li><a href="#pmhs-standard-display">标准公卫显示</a></li>
+	    <li id="showTitle"><a href="#pmhs-standard-display">标准公卫显示</a></li>
 	  </ul>
 	  <div id="key-value-list">
 	  	<input placeholder="元素名称" id="locationCond"/><button onclick="locationFun()">定位</button><a href="#" style="display:none;" id="locationSearch"></a>
 	    <div class="key-value-html">
-	    	
 	    </div>
 	  </div>
 	  <div id="pmhs-standard-display">
-	    
 	  </div>
 	</div>
 </div>
@@ -164,7 +166,12 @@
 		document.getElementById('locationSearch').click();
 //		
 	}
-	
+	function locationFunHis(){
+		var cond = $('#locationCondHis').val();
+		$('#locationSearchHis').attr('href','#' + cond);
+		document.getElementById('locationSearchHis').click();
+//		
+	}
 	function linkDetailInfo(id,type,title){
 		console.log(id + ':' + type);
 		
@@ -176,28 +183,82 @@
             success: function (data) {
             	console.dir(data);
                 if (data.success) {
-                	
-                	var filldata = {};
-                	if(data.data.length > 0){
-                		filldata = data.data[0];
+                	if(type != '20' && type != '21' && type != '22' && type != '23'){
+                		var filldata = {};
+	                	if(data.data.length > 0){
+	                		filldata = data.data[0];
+	                	}
+	                	console.log(filldata)
+	                	var keyvaluehtml = data.keyvaluehtml;
+	                	var displayhtml = data.standarddisplayhtml;
+	                	$.each(filldata,function(key,val){
+	//                		console.log(key + ':' + val);
+	                		if(val == null) val = '';
+	                		keyvaluehtml = keyvaluehtml.replace('${' + key + '}',val);
+	                		displayhtml = displayhtml.replace('${' + key + '}',val);
+	                	});
+	                	$('#pmhsdetaildialog #showTitle a').html('公卫标准显示');
+	                	$('#pmhsdetaildialog #showTitle').show();
+	                	$('#pmhsdetaildialog #key-value-list .key-value-html').html(keyvaluehtml);
+	                	$('#pmhsdetaildialog #pmhs-standard-display').html(displayhtml);
+	                	$('#pmhsdetaildialog').dialog("option","title", title);
+						$("#pmhsdetaildialog").dialog("open");
+                	}else{
+                		var filldata = {};
+	                	if(data.data.length > 0){
+	                		filldata = data.data[0];
+	                	}
+	                	var keyvaluehtml = data.keyvaluehtml;
+	                	var displayhtml = data.standarddisplayhtml;
+	                	$.each(filldata,function(key,val){
+	//                		console.log(key + ':' + val);
+	                		if(val == null) val = '';
+	                		keyvaluehtml = keyvaluehtml.replace('${' + key + '}',val);
+//	                		displayhtml = displayhtml.replace('${' + key + '}',val);
+	                	});
+	                	console.log(displayhtml);
+	                	
+	                	$('#pmhsdetaildialog #showTitle a').html('就诊明细');
+	                	var tbodyinfo = '';
+	                	if(type == '21'){
+	                		$('#pmhsdetaildialog #showTitle').hide();
+	                	}else{
+	                		$('#pmhsdetaildialog #showTitle').show();
+	                		
+	                		if(data.hisdata.length > 0){
+	                			$.each(data.hisdata,function(i,v){
+	                				tbodyinfo = tbodyinfo + '<tr>';
+	                				if(i == data.hisdata.length -1){
+	                					tbodyinfo = tbodyinfo + '<tr><td style="border-bottom: 1px solid #DEEFFB;">' + (i+1) + '</td>';
+	                				}else{
+	                					tbodyinfo = tbodyinfo + '<tr><td>' + (i+1) + '</td>';
+	                				}
+	                				
+	                				$.each(v,function(key,val){
+	                					if(val == null) val = '';
+	                					if(i == data.hisdata.length -1){
+	                						tbodyinfo = tbodyinfo + '<td style="border-bottom: 1px solid #DEEFFB;">' + val + '</td>';
+	                					}else{
+	                						tbodyinfo = tbodyinfo + '<td>' + val + '</td>';
+	                					}
+	                				});
+	                				tbodyinfo = tbodyinfo + '</tr>';
+	                			});
+	                		}
+	                	}
+	                	
+	                	$('#pmhsdetaildialog #key-value-list .key-value-html').html(keyvaluehtml);
+	                	$('#pmhsdetaildialog #pmhs-standard-display').html(displayhtml);
+	                	if(type != '21'){
+	                		$('#pmhsdetaildialog #pmhs-standard-display table tbody').html(tbodyinfo);
+	                	}
+	                	$('#pmhsdetaildialog').dialog("option","title", title);
+						$("#pmhsdetaildialog").dialog("open");
                 	}
-                	console.log(filldata)
-                	var keyvaluehtml = data.keyvaluehtml;
-                	var displayhtml = data.standarddisplayhtml;
-                	$.each(filldata,function(key,val){
-//                		console.log(key + ':' + val);
-                		if(val == null) val = '';
-                		keyvaluehtml = keyvaluehtml.replace('${' + key + '}',val);
-                		displayhtml = displayhtml.replace('${' + key + '}',val);
-                	});
-                	$('#pmhsdetaildialog #key-value-list .key-value-html').html(keyvaluehtml);
-                	$('#pmhsdetaildialog #pmhs-standard-display').html(displayhtml);
-                	$('#pmhsdetaildialog').dialog("option","title", title);
-					$("#pmhsdetaildialog").dialog("open");
-					 $("body").hideLoading();
+                	$("body").hideLoading();
                 } else {
                     //...
-                     $("body").hideLoading();
+                    $("body").hideLoading();
                 }
             }
         });
