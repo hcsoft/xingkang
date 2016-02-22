@@ -343,7 +343,6 @@
                         <td><p class="name">末次消费日期: <?php echo substr($v['LastPayDate'], 0, 10); ?></p>
 
                             <p class="smallfont">末次消费地点: <?php echo $v['LastPayOrgName']; ?></p>
-                            <p class="smallfont">消费次数: <?php echo $v['consumenum']; ?></p>
 
                         </td>
                         <td class=""><p>储值余额:&nbsp;<strong
