@@ -142,6 +142,7 @@ final class Base{
 
 	public static function autoload($class){
 		$class = strtolower($class);
+
 		if (ucwords(substr($class,-5)) == 'Class' ){
 			if (!@include_once(BASE_PATH.'/framework/libraries/'.substr($class,0,-5).'.class.php')){
 				exit("Class Error: {$class}.isn't exists!");
@@ -161,7 +162,14 @@ final class Base{
             if (!@include_once($pClassFilePath)){
                 exit("Class Error: {$class}.isn't exists!");
             }
-        }else{
+        }elseif (substr($class,0,6) == 'smarty'){
+//			$pClassFilePath = SMARTY_DIR.'sysplugins/' .$class .	'.php';
+//			if (!@include_once($pClassFilePath)){
+////				exit("Smarty Class Error: {$class}.isn't exists!");
+//				return false;
+//			}
+			return false;
+		}else{
 			if (!@include_once(BASE_CORE_PATH.'/framework/libraries/'.$class.'.php')){
 				exit("Class Error: {$class}.isn't exists!");
 			}
