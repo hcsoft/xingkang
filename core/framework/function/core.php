@@ -1961,3 +1961,27 @@ function getStoreStateClassName($store_info) {
     }
     return $result;
 }
+//PHP stdClass Object转array
+function object_array($array) {
+	if(is_object($array)) {
+		$array = (array)$array;
+	} if(is_array($array)) {
+		foreach($array as $key=>$value) {
+			$array[$key] = object_array($value);
+		}
+	}
+	return $array;
+}
+
+function mergeObject($source, $dest, $overWrite = false) {
+// 	$sourceName = get_class($source);
+	foreach ($source as $key => $aProp) {
+		if(!$overWrite && isset($dest->$key)) {
+			$propName =  $key;
+			$dest->$propName = $aProp;
+		} else {
+			$dest->$key = $aProp;
+		}
+	}
+	return $dest;
+}

@@ -27,6 +27,7 @@ class memberControl extends SystemControl {
 		}
 		Tpl::output ( 'treelist', $this->treedata_list );
 		Tpl::output ( 'orgmap', $this->orgmap );
+		
 	}
 
 	private function  memberlist($flag = true){
@@ -86,7 +87,7 @@ class memberControl extends SystemControl {
 				$condition ['hasfile'] = $_GET['hasfile'];
 			}
 		}
-
+		
 		if (isset($_GET['membersex']) and $_GET['membersex'] != '') {
 			$condition ['member_sex'] = $_GET['membersex'];
 		}
@@ -103,7 +104,7 @@ class memberControl extends SystemControl {
 				$condition ['iAge'] = array('exp' , ' iAge <= 6');
 			}else if($memberage == '99'){
 				$definememberagestart = 0;
-				$definememberageend = 100; 
+				$definememberageend = 100;
 				if (isset($_GET['definememberagestart']) and $_GET['definememberagestart'] != ''){
 					if(is_numberic($_GET['definememberagestart'])){
 						$definememberage = $_GET['definememberagestart'];
@@ -138,10 +139,8 @@ class memberControl extends SystemControl {
 				}
 				$condition ['member_points'] = array('exp' , ' member_points =' . $definejifen);
 			}
-			
+				
 		}
-		
-		
 		if(!isset($_GET['orderby'])){
 			$_GET['orderby'] = '预存余额';
 		}
@@ -227,7 +226,7 @@ class memberControl extends SystemControl {
 		return array('list'=>$member_list,'md'=>$model_member);
 	}
 
-
+	
     private function  exportmemberlist($propertys,$propertymap,$fp,$flag = true){
         $orderbys = array(
             array('txt'=>'预存余额','col'=> ' available_predeposit '),
@@ -662,17 +661,95 @@ class memberControl extends SystemControl {
 	 */
 	public function memberOp() {
 		$lang = Language::getLangContent ();
+		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 		$data = $this->memberlist();
-		$member_list = $data['list'];
+		$member_list = $data['list'];	
+// 		var_dump($member_list);
 		Tpl::output ( 'member_id', trim ( $_GET ['member_id'] ) );
 		Tpl::output ( 'search_sort', trim ( $_GET ['search_sort'] ) );
 		Tpl::output ( 'search_field_name', trim ( $_GET ['search_field_name'] ) );
 		Tpl::output ( 'search_field_value', trim ( $_GET ['search_field_value'] ) );
 		Tpl::output ( 'member_list', $member_list );
-		Tpl::output ( 'page', $data['md']->showpage () );
+		Tpl::output ( 'page', $data['md']->showpage());
 		Tpl::showpage ( 'member.index' );
 	}
+	
+	public function member2Op() {
+		$lang = Language::getLangContent ();
+		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+// 		$mo
+		$model_member = Model ( 'member' );
+		$condition ['member_id'] = intval ( $_GET ['member_id'] );
+		$member_array = $model_member->getMemberInfo ( $condition );
+// 		var_dump($member_array['member_truename']);
+		$initsql ='select a.FileNo,b.Name,a.Sex,a.Birthday,a.IDNumber,a.TEL,b.Address from PersonalInfo a,HealthFile b where 1=1 and a.FileNo = b.FileNo ';
 
+		if((isset($_REQUEST['queryname']) and $_REQUEST['queryname'] != '')){
+			$initsql = $initsql . ' and Name like \'%'.$_REQUEST['queryname'].'%\'';
+		}
+		if((isset($_REQUEST['queryidnumber']) and $_REQUEST['queryidnumber'] != '')){
+			$initsql = $initsql . ' and IDNumber = \''.$_REQUEST['queryidnumber'].'\'';
+		}
+		if((isset($_REQUEST['queryfileno']) and $_REQUEST['queryfileno'] != '')){
+			$initsql = $initsql . ' and a.FileNo = \''.$_REQUEST['queryfileno'].'\'';
+		}
+		if((isset($_REQUEST['querytel']) and $_REQUEST['querytel'] != '')){
+			$initsql = $initsql . ' and a.TEL = \''.$_REQUEST['querytel'].'\'';
+		}
+		$stmt = $conn->query($initsql);
+// 		var_dump($initsql);
+		$data_list = array();
+		while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+			array_push($data_list, $row);
+		}
+// 		$treedata_list = array();
+//530100
+		$pid = 5301;
+// 		$t = $this->getTreeData($pid);
+		$treesql = 'select  ID as id, Name as name, ParentID as pId from District where 1=1 and ID like \''.$pid.'%\'';
+		$treestmt = $conn->query($treesql);
+		$treedata_list = array();
+		
+		while ($row = $treestmt->fetch(PDO::FETCH_OBJ)) {
+			array_push($treedata_list, $row);
+		}
+		Tpl::output('treedata', $treedata_list);
+// 		$this->getTreeData();
+// 		var_dump($sql);
+// 		$stmt = $conn->query($sql);
+// 		$data_list = array();
+// 		while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+// 			array_push($data_list, $row);
+// 		}$member_array['member_truename']
+		Tpl::output ( 'member_id', $member_array['member_id'] );
+		Tpl::output ( 'member_truename', $member_array['member_truename'] );
+		Tpl::output ( 'member_idnumber', $member_array['sIDCard'] );
+		Tpl::output ( 'member_list', $data_list );
+		Tpl::showpage ( 'member.list' );
+	}
+	
+	public function gethealthfiledetailOp() {
+		$lang = Language::getLangContent ();
+		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+		$initsql ='select a.*,b.* from PersonalInfo a,HealthFile b where 1=1 and a.FileNo = b.FileNo ' ;
+		if((isset($_GET['fileno']) and $_GET['fileno'] != '')){
+			$sql = $initsql . ' and b.FileNo = \''.$_GET['fileno'].'\'';
+			$stmt = $conn->query($sql);
+			$data_list = array();
+			while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+				array_push($data_list, $row);
+			}
+			if(!empty($data_list)){
+				
+				echo json_encode(array('success' => true, 'msg' => '查询成功!' ,'data'=>$data_list[0]));
+				exit;
+				//return $data_list[0];
+			}
+		}
+		echo json_encode(array('success' => false, 'msg' => '查询失败!' ));
+		exit;
+	}
+	
 	public function changelogOp() {
 		$lang = Language::getLangContent ();
 		$data = $this->changeloglist();
@@ -1723,17 +1800,7 @@ class memberControl extends SystemControl {
 				$changelog['oldidcard'] = $_REQUEST["oldidcard"];
 				$changestr .= ',身份证由(' . $_REQUEST["oldidcard"] . ')改为(' . $newidcard . ')';
 			}
-			
-			//修改地址
-			$newaddress = $_REQUEST["newaddress"];
-			if (!empty($newaddress)) {
-				$sql = " update shopnc_member set sAddress = '$newaddress' where member_id = '$id'";
-				$conn->exec($sql);
-				$changelog['newaddress'] = $newaddress;
-				$changelog['oldaddress'] = $_REQUEST["oldaddress"];
-				$changestr .= ',地址由(' . $_REQUEST["oldaddress"] . ')改为(' . $newaddress . ')';
-			}
-			
+
             //修改卡类型
             $newCardType = $_REQUEST["newCardType"];
             if ($newCardType == '0' || !empty($newCardType)) {
@@ -1811,4 +1878,442 @@ class memberControl extends SystemControl {
 		}
 		exit;
 	}
+	/**
+	 * 未使用
+	 * @param string $flag
+	 */
+	private function  memberlistnew($flag = true){
+		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+		$page = new Page();
+		$page->setEachNum(10);
+		$page->setNowPage($_REQUEST["curpage"]);
+		$startnum = $page->getEachNum() * ($page->getNowPage() - 1);
+		$endnum = $page->getEachNum() * ($page->getNowPage());
+		$orderbys = array(
+				array('txt'=>'预存余额','col'=> ' a.available_predeposit '),
+				array('txt'=>'赠送余额','col'=> ' a.fConsumeBalance '),
+				array('txt'=>'消费积分','col'=> ' a.member_points '),
+				array('txt'=>'消费次数','col'=> ' consumenum ')
+		);
+		Tpl::output('orderbys',$orderbys);
+		$where = 'where 1=1 ';
+// 		$model_member = Model ( 'member' );
+		if(isset($_GET['containunreg']) and $_GET['containunreg'] != ''){
+	
+		}else{
+// 			$condition ['containunreg']  = array('exp' , ' iMemberState <>99 ');
+			$where = $where .' and a.iMemberState <>99 ';
+		}
+		/**
+		 * 检索条件
+		 */
+		if ($_GET['orgids']) {
+// 			$condition ['CreateOrgID'] = array (
+// 					'in',
+// 					$_GET['orgids']
+// 			);
+			$where = $where .' and a.CreateOrgID in ('.implode(',', $_GET['orgids']).')';
+		}
+	
+		if (isset($_GET['cardtype']) and $_GET['cardtype'] != '') {
+			$where = $where .' and a.cardtype=\''.$_GET['cardtype'].'\'';
+// 			$condition ['cardtype'] = $_GET['cardtype'];
+		}
+	
+		if (isset($_GET['cardgrade']) and $_GET['cardgrade'] != '') {
+// 			$condition ['cardgrade'] = $_GET['cardgrade'];
+			$where = $where .' and a.cardgrade=\''.$_GET['cardgrade'].'\'';
+		}
+	
+		if (isset($_GET['idnumber']) and $_GET['idnumber'] != '') {
+// 			$condition ['sIDCard'] = $_GET['idnumber'];
+			$where = $where .' and a.sIDCard=\''.$_GET['idnumber'].'\'';
+		}
+		if (isset($_GET['tel']) and $_GET['tel'] != '') {
+// 			$condition ['sLinkPhone'] = $_GET['tel'];
+			$where = $where .' and a.sLinkPhone=\''.$_GET['tel'].'\'';
+		}
+		if (isset($_GET['name']) and $_GET['name'] != '') {
+			$where = $where .' and a.member_truename like \'%'.$_GET['tel'].'%\'';
+// 			$condition ['member_truename'] = array('like','%'.$_GET['name'].'%');
+		}
+		if (isset($_GET['birthday']) and $_GET['birthday'] != '') {
+			$where = $where .' and a.member_birthday=\''.$_GET['birthday'].'\'';
+// 			$condition ['member_birthday'] = $_GET['birthday'];
+		}
+	
+		if (isset($_GET['createcard_begin']) and $_GET['createcard_begin'] != '') {
+			$where = $where .' and a.createcard_begin >=\''.$_GET['createcard_begin'].'\'';
+// 			$condition ['createcard_begin'] = array('exp' , ' dCreateDate >= \''.$_GET['createcard_begin'].'\'');
+		}
+		if (isset($_GET['createcard_end']) and $_GET['createcard_end'] != '') {
+			$where = $where .' and a.createcard_end <=dateadd(day,1,\''.$_GET['createcard_end'].'\')';
+// 			$condition ['createcard_end'] = array('exp' , ' dCreateDate < dateadd(day,1,\''.$_GET['createcard_end'].'\')');
+		}
+	
+		if (isset($_GET['hasfile']) and $_GET['hasfile'] != '') {
+			if($_GET['hasfile']=='-1'){
+				$where = $where .' and (hasfile = -1 or hasfile is null) ';
+// 				$condition ['hasfile']  = array('exp' , ' ( hasfile = -1 or hasfile is null ) ');
+			}else{
+				$where = $where .' and a.hasfile='.$_GET['hasfile'];
+// 				$condition ['hasfile'] = $_GET['hasfile'];
+			}
+		}
+		
+		if (isset($_GET['membersex']) and $_GET['membersex'] != '') {
+			$where = $where.' and a.member_sex =\''.$_GET['membersex'].'\'';
+// 			$condition ['member_sex'] = $_GET['membersex'];
+		}
+		
+		if (isset($_GET['memberbirthday']) and $_GET['memberbirthday'] != '') {
+			$where = $where.' and MONTH(a.member_birthday) ='.$_GET['memberbirthday'];
+// 			$condition ['member_birthday'] = array('exp' , ' MONTH(member_birthday) = '.$_GET['memberbirthday']);
+		}
+		
+		if (isset($_GET['memberage']) and $_GET['memberage'] != '') {
+			$memberage = $_GET['memberage'];
+			if ($memberage == '0'){
+				$where = $where.' and a.iAge >= 65';
+// 				$condition ['iAge'] = array('exp' , ' iAge >= 65 ');
+			}else if($memberage == '1'){
+				$where = $where.' and a.iAge <=6 ';
+// 				$condition ['iAge'] = array('exp' , ' iAge <= 6');
+			}else if($memberage == '99'){
+				$definememberagestart = 0;
+				$definememberageend = 100;
+				if (isset($_GET['definememberagestart']) and $_GET['definememberagestart'] != ''){
+					if(is_numberic($_GET['definememberagestart'])){
+						$definememberage = $_GET['definememberagestart'];
+					}
+				}
+				if (isset($_GET['definememberageend']) and $_GET['definememberageend'] != ''){
+					if(is_numberic($_GET['definememberageend'])){
+						$definememberageend = $_GET['definememberageend'];
+					}
+				}
+				$where = $where.' and a.iAge >='.$definememberage.' and a.iAge <='.$definememberageend;
+// 				$condition ['iAge'] = array('exp' , ' iAge >=' . $definememberage .' and iAge <= ' . $definememberageend);
+			}
+		}
+		if (isset($_GET['jifen']) and $_GET['jifen'] != '') {
+			$jifen = $_GET['jifen'];
+			if ($jifen == '0'){
+				$where = $where.' and a.member_points =0 ';
+// 				$condition ['member_points'] = array('exp' , ' member_points = 0 ');
+			}else if($jifen == '1'){
+				$where = $where.' and a.member_points <=1000 ';
+// 				$condition ['member_points'] = array('exp' , ' member_points <= 1000');
+			}else if($jifen == '2'){
+				$where = $where.' and a.member_points >1000 ';
+// 				$condition ['member_points'] = array('exp' , ' member_points > 1000');
+			}else if($jifen == '3'){
+				$where = $where.' and a.member_points >3000 ';
+// 				$condition ['member_points'] = array('exp' , ' member_points > 3000');
+			}else if($jifen == '4'){
+				$where = $where.' and a.member_points >10000 ';
+// 				$condition ['member_points'] = array('exp' , ' member_points > 10000');
+			}else if($jifen == '99'){
+				$definejifen = 0;
+				if (isset($_GET['definejifen']) and $_GET['definejifen'] != ''){
+					if(is_numberic($_GET['definejifen'])){
+						$definejifen = $_GET['definejifen'];
+					}
+				}
+				$where = $where.' and a.member_points ='.$definejifen;
+// 				$condition ['member_points'] = array('exp' , ' member_points =' . $definejifen);
+			}
+				
+		}
+	
+		if(!isset($_GET['orderby'])){
+			$_GET['orderby'] = '预存余额';
+		}
+	
+	
+	
+		if(!isset($_GET['order'])){
+			$ordersql = 'desc';
+		}else{
+			$ordersql = $_GET['order'];
+		}
+		$order = ' order by ';
+		if($_GET['orderby']){
+			foreach($orderbys as $orderby){
+				if($orderby['txt']==$_GET['orderby']){
+					$order = $order.$orderby['col'] .' ' . $ordersql;
+					break;
+				}
+			}
+		}
+		//		if ($_GET ['search_field_value'] != '') {
+		//			switch ($_GET ['search_field_name']) {
+		//				case 'member_name' :
+		//					$condition ['member_name'] = array (
+		//							'like',
+		//							'%' . trim ( $_GET ['search_field_value'] ) . '%'
+		//					);
+		//					break;
+		//				case 'member_email' :
+		//					$condition ['member_email'] = array (
+		//							'like',
+		//							'%' . trim ( $_GET ['search_field_value'] ) . '%'
+		//					);
+		//					break;
+		//				case 'member_truename' :
+		//					$condition ['member_truename'] = array (
+		//							'like',
+		//							'%' . trim ( $_GET ['search_field_value'] ) . '%'
+		//					);
+		//					break;
+		//			}
+		//		}
+		if ($_GET ['member_id'] != '') {
+// 			$condition ['member_id'] = array (
+// 					'like',
+// 					'%' . trim ( $_GET ['member_id'] ) . '%'
+// 			);
+			$where = $where .' and a.member_id like \'%'.trim ($_GET['member_id']).'%\'';
+		}
+		switch ($_GET ['search_state']) {
+			case 'no_informallow' :
+				$where = $where .' and a.inform_allow=\'2\'';
+// 				$condition ['inform_allow'] = '2';
+				break;
+			case 'no_isbuy' :
+// 				$condition ['is_buy'] = '0';
+				$where = $where .' and a.is_buy=\'0\'';
+				break;
+			case 'no_isallowtalk' :
+// 				$condition ['is_allowtalk'] = '0';
+				$where = $where .' and a.is_allowtalk=\'0\'';
+				break;
+			case 'no_memberstate' :
+// 				$condition ['member_state'] = '0';
+				$where = $where .' and a.no_memberstate=\'0\'';
+				break;
+		}
+		/**
+		 * 排序
+		 */
+		//		$order = trim ( $_GET ['search_sort'] );
+		if (empty ( $order )) {
+			$order = 'member_id desc';
+		}
+		$groupby = ' group by a.member_id,a.available_predeposit,a.fConsumeBalance,a.member_points ';
+		$sqlall = ' a.member_id,a.available_predeposit,a.fConsumeBalance,a.member_points,count(b.iCO_ID) as consumenum from shopnc_member a LEFT JOIN Center_CheckOut b on a.member_id = b.sMemberID and b.fCO_IncomeMoney >0 '.$where.$groupby.$order;
+		$countsql = 'select count(*) from shopnc_member a '.$where;
+		$stmt = $conn->query($countsql);
+		$total = $stmt->fetch(PDO::FETCH_NUM);
+		$page->setTotalNum($total[0]);
+		$pagesql = 'select * from (select top '.$endnum.' row_number() over( order by  a.member_id)rownum, '.$sqlall.')zzzz where rownum>'.$startnum;
+		$stmt = $conn->query($pagesql);
+		
+		$member_ids = array();
+		$consume_list = array();
+		while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+			array_push($member_ids, $row->member_id);
+			array_push($consume_list, $row);
+		}
+// 		$consume_list=object_array($consume_list);
+// 		$consume_list = array_under_reset($consume_list,'member_id');
+		$return_list = array();
+		if($member_ids){
+			$sql = 'select * from shopnc_member where member_id in (\'' . implode('\',\'',$member_ids) . '\') ';
+			$stmt = $conn->query($sql);
+			$data_list = array();
+			while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+				array_push($data_list, $row);
+			}
+			$data_list=object_array($data_list);
+			$data_list = array_under_reset($data_list,'member_id');
+			foreach ($consume_list as $v){
+				$row = mergeObject($data_list[$v->member_id],$v);
+				array_push($return_list, $row);
+// 				var_dump($row);
+			}
+			$return_list=object_array($return_list);
+// 			$return_list = $consume_list+$data_list;
+// 			foreach ($data_list as $key){
+// 				$key['consumenum'] = $consume_list[$key['member_id']]['consumenum'];
+// 				array_push($return_list, $key);
+// 			}
+		}
+		return array('list'=>$return_list,'md'=>$page);
+	}
+	
+	/*
+	 * 递归获取行政区划树，不使用
+	 */
+	private function getTreeData($pid,$result =array()){
+		//var_dump($pid);
+		if($pid=='' || $pid ==null){
+			$pid= $_GET['pid'];
+		}
+		//var_dump($pid);
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+		$treesql = 'select  ID as id, Name as name, ParentID as pId from District where 1=1 and ParentID =\''.$pid.'\'';
+        $treestmt = $conn->query($treesql);
+        $treedata_list = array();
+
+        while ($row = $treestmt->fetch(PDO::FETCH_OBJ)) {
+            array_push($treedata_list, $row);
+        }
+        $result = array_merge($result,$treedata_list);
+        if(!empty($treedata_list)){
+        	foreach ($treedata_list as $v){
+        		$this->getTreeData($v->id,$result);
+        	}
+        }
+        return $result;
+        
+    }
+    public function ajax_savehealthfileOp()
+    {
+    	//spotcheck_spot
+    	try {
+    		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+    		//校验身份证号
+    		$IDNumber = $_GET['IDNumber'];
+    		
+    		$Name = $_GET['Name'];
+    		$Address = $_GET['Address'];
+    		$ResidenceAddress = $_GET['ResidenceAddress'];
+    		$TEL = $_GET['TEL'];
+    		$Village = $_GET['Village'];
+    		$districtid = $_GET['districtid'];
+    		$FileNo = $this->getfileno($districtid);
+    		$FileNoSub = substr($FileNo, 10);
+    		$pid = $_GET['pid'];
+    		$sql ="select * from District where ID ='$pid' ";
+    		$stmt = $conn->query($sql); 
+    		$data_list = array();
+    		while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+    			array_push($data_list, $row);
+    		}
+    		if(!empty($data_list)){
+    			$Township = $data_list[0]->Name;
+    		}
+    		$user_id = $this->admin_info['id'];
+    		$user_name = $this->admin_info['name'];
+    		$Doctor = $_GET['Doctor'];
+    		$PaperFileNo =  $_GET['PaperFileNo'];
+    		$Nation =  $_GET['Nation'];
+    		
+    		$Sex = $_GET['Sex'];
+    		$Birthday = $_GET['Birthday'];
+    		
+    		$WorkUnit = $_GET['WorkUnit'];
+    		$Folk = $_GET['Folk'];
+    		$ResideType = $_GET['ResideType'];
+    		$farmStatus = $_GET['farmStatus'];
+    		$TownStatus = $_GET['TownStatus'];
+    		$sql = "insert into HealthFile(FileNo,Name,Address,ResidenceAddress,TEL,Township,Village,BuildUnit,BuildPerson,Doctor,BuildDate,DistrictNumber,InputPersonID,InputDate,PaperFileNo,Nation) 
+    				values('$FileNo','$Name','$Address','$ResidenceAddress','$TEL','$Township','$Village','系统后端','$user_name','$Doctor',getdate(),'$districtid','$user_id',getdate(),'$PaperFileNo','$Nation')";
+    		$conn->exec($sql);
+    		$sql = "insert into PersonalInfo(ID,FileNo,FileNoSub,Sex,Birthday,IDNumber,WorkUnit,TEL,Folk,ResideType,InputPersonID,InputDate,farmStatus,TownStatus)
+    		values(NEWID(),'$FileNo','$FileNoSub','$Sex','$Birthday','$IDNumber','$WorkUnit','$TEL','$Folk','$ResideType','$user_id',getdate(),'$farmStatus','$TownStatus')";
+    		$conn->exec($sql);
+//     		$spotid = $_REQUEST['spotid'];
+//     		$spotdate = $_REQUEST['spotdate'];
+//     		$result = $_REQUEST['spotresult'] == null ?"":$_REQUEST['spotresult'];
+//     		$reason = $_REQUEST['reason'] == null ?"":$_REQUEST['reason'];
+//     		$sql = " insert into spotcheck_spot (spotid,spotdate,result,reason,inputdate) values('$spotid','$spotdate','$result','$reason',getdate())";
+//     		$conn->exec($sql);
+    		echo json_encode(array('success' => true, 'msg' => '保存成功!'));
+    	} catch (Exception $e) {
+    		echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+    	}
+    	exit;
+    }
+    
+    public function getfileno($districtnumber)
+    {
+    	try {
+    		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+    		$sql = 'select * from HealthFileKey where DistrictNumber=\''.$districtnumber.'\'';
+    		$stmt = $conn->query($sql);
+    		$key_list = array();
+    		$key = 1;
+    		while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+    			array_push($key_list, $row);
+    		}
+    		if(!empty($key_list)){
+    			$fialkey = $key_list[0]->MaxKey;
+    			$filekey = $fialkey +1;
+    			$sql ='update HealthFileKey set MaxKey ='.$filekey.' where DistrictNumber=\''.$districtnumber.'\'';
+    			$conn->exec($sql);
+    		}else{
+    			$sql = "insert into HealthFileKey values('$districtnumber',1)";
+    			$conn->exec($sql);
+    			$filekey = 1;
+    		}
+    		//int spaces = 5 - strKey.length();
+    		$length = 5- strlen($filekey);
+    		if ($length < 0) {
+    			$msg = "流水号超长！！！！！";
+    			echo json_encode(array('success' => false, 'msg' => '异常!'.$e->$msg));
+    		}
+    		
+    		for($i = 0; $i < $length; $i++) {
+    			$filekey = "0".$filekey;
+    		}
+    		return $districtnumber.$filekey;
+    	} catch (Exception $e) {
+    		echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+    	}
+    	exit;
+    }
+    public function ajax_bandhealthfileOp(){
+    	//spotcheck_spot
+    	try {
+    		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+    		$member_id = $_GET['member_id'];
+    		$fileno = $_GET['fileno'];
+    		$model_member = Model ( 'member' );
+    		$param = array();
+    		$param['FileNo'] = $fileno;
+    		$model_member->updateMember($param,$member_id);
+    		echo json_encode(array('success' => true, 'msg' => '关联成功!'));
+    	} catch (Exception $e) {
+    	echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+    	}
+    	exit;
+    }
+    
+    public function ajax_loadmemberOp(){
+    	//spotcheck_spot
+    	try {
+    		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+    		$member_id = $_REQUEST['member_id'];
+    		$sql = "select member_truename as Name,case when member_sex=1 then '男' else '女' end as Sex,member_birthday as Birthday,sAddress as Address,
+    		sIDCard as IDNumber,sFolk as Folk 
+    		from shopnc_member where 1=1 and member_id = '$member_id'";
+    		$stmt = $conn->query($sql);
+    		$row = $stmt->fetch(PDO::FETCH_OBJ);
+    		echo json_encode(array('success' => true, 'msg' => '查询成功!' ,'data'=>$row));
+    	} catch (Exception $e) {
+    		echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+    	}
+    	exit;
+    }
+    
+    public function ajax_checkidnumberOp(){
+    	//spotcheck_spot
+    	try {
+    		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+    		$idnumber = $_REQUEST['idnumber'];
+    		$sql ="select * from PersonalInfo where IDNumber ='$idnumber'";
+    		$stmt = $conn->query($sql);
+    		$row = $stmt->fetch(PDO::FETCH_OBJ);
+    		if(!empty($row)){
+    			echo json_encode(array('result' => true));
+    		}else{
+    			echo json_encode(array('result' => false));
+    		}
+    	} catch (Exception $e) {
+    		echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+    	}
+    	exit;
+    }
 }
