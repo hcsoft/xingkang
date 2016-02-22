@@ -845,7 +845,7 @@
         $("#healthfiledialog .iframe").css("height",'100%')
 
     }
-
+ 
     function showdetail(objstr, elem) {
         var obj = eval('(' + unescape(objstr) + ')');
         $("#detaildialog .errormsg").html('');

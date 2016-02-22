@@ -1983,5 +1983,5 @@ function mergeObject($source, $dest, $overWrite = false) {
 			$dest->$key = $aProp;
 		}
 	}
-	return $dest;
+	return $dest; 
 }
