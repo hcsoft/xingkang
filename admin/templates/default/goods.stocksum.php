@@ -103,7 +103,7 @@
                     <span class="arrow"></span></div>
             </th>
         </tr>
-  
+
         </tbody>
     </table>
     <form method='post' id="form_goods" action="<?php echo urlAdmin('goods', 'goods_del'); ?>">

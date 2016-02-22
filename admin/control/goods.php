@@ -654,7 +654,7 @@ class goodsControl extends SystemControl
 
         }
         if ($exportflag) {
-            $this->exportxlsxbyObject($displaytext,$propertys,$propertysmap,'商品库存',$goods_list);
+            $this->exportcsvbyObject($displaytext,$propertys,$propertysmap,'商品库存',$goods_list);
         }
 
 
@@ -872,7 +872,7 @@ class goodsControl extends SystemControl
 
         }
         if ($exportflag) {
-            $this->exportxlsxbyObject($displaytext,$propertys,$propertysmap,'库存汇总',$goods_list);
+            $this->exportcsvbyObject($displaytext,$propertys,$propertysmap,'库存汇总',$goods_list);
         }
 
 
