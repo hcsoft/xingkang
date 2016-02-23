@@ -2275,8 +2275,8 @@ class memberControl extends SystemControl {
     	//spotcheck_spot
     	try {
     		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
-    		$member_id = $_GET['member_id'];
-    		$fileno = $_GET['fileno'];
+    		$member_id = $_REQUEST['member_id'];
+    		$fileno = $_REQUEST['fileno'];
     		$model_member = Model ( 'member' );
     		$param = array();
     		$param['FileNo'] = $fileno;

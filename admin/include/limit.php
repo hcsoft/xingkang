@@ -64,6 +64,12 @@ $_limit =  array(
         array('name'=>'消费汇总', 'op'=>'consumesum', 'act'=>'member'),
         array('name'=>'充值下账汇总', 'op'=>'rechargesum', 'act'=>'member'),
         array('name'=>'会员储值积分对账', 'op'=>'check', 'act'=>'member'),
+		array('name'=>'会员健康档案查看', 'op'=>'member2', 'act'=>'member'),
+		array('name'=>'查看会员健康档案查看', 'op'=>'gethealthfiledetail', 'act'=>'member'),
+		array('name'=>'快速建档', 'op'=>'ajax_loadmember', 'act'=>'member'),
+		array('name'=>'关联健康档案', 'op'=>'ajax_bandhealthfile', 'act'=>'member'),
+		array('name'=>'身份证号码校验', 'op'=>'ajax_checkidnumber', 'act'=>'member'),
+		array('name'=>'保存健康档案', 'op'=>'ajax_savehealthfile', 'act'=>'member'),
 		)),
 	array('name'=>$lang['nc_trade'], 'child'=>array(
 		array('name'=>$lang['nc_order_manage'], 'op'=>null, 'act'=>'order'),

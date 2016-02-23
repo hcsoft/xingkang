@@ -498,7 +498,7 @@ function band(){
 	$('input[name="op"]').val('ajax_bandhealthfile');
 	//alert($("input[name='check']:checked").val());
 	var params = $("#form_memberlist").serialize();
-	params.fileno = bandfileno;
+	params= params+'&fileno='+bandfileno;
 	$.ajax({
         url: "index.php?act=member&op=ajax_bandhealthfile",
         data: params, dataType: 'json', success: function (data) {
