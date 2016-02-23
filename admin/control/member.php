@@ -725,15 +725,22 @@ class memberControl extends SystemControl {
 		Tpl::output ( 'member_truename', $member_array['member_truename'] );
 		Tpl::output ( 'member_idnumber', $member_array['sIDCard'] );
 		Tpl::output ( 'member_list', $data_list );
-		Tpl::showpage ( 'member.list' );
+		if((isset($_REQUEST['queryfileno']) and $_REQUEST['queryfileno'] != '')){
+			Tpl::output ( 'fileno',$_REQUEST['queryfileno'] );
+			Tpl::showpage ( 'member.list2' );
+		}else {
+			Tpl::showpage ( 'member.list' );
+		}
+		
 	}
 	
 	public function gethealthfiledetailOp() {
 		$lang = Language::getLangContent ();
 		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 		$initsql ='select a.*,b.* from PersonalInfo a,HealthFile b where 1=1 and a.FileNo = b.FileNo ' ;
-		if((isset($_GET['fileno']) and $_GET['fileno'] != '')){
-			$sql = $initsql . ' and b.FileNo = \''.$_GET['fileno'].'\'';
+		if((isset($_REQUEST['fileno']) and $_REQUEST['fileno'] != '')){
+			$sql = $initsql . ' and b.FileNo = \''.$_REQUEST['fileno'].'\'';
+			//echo $sql;
 			$stmt = $conn->query($sql);
 			$data_list = array();
 			while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
