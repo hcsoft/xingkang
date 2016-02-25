@@ -633,6 +633,7 @@
 <script>
     $(function () {
         $('#ncsubmit').click(function () {
+            //alert(1111);
             $('input[name="op"]').val('member');
             $('#formSearch').submit();
         });
@@ -933,5 +934,9 @@
         $("#changedialog").dialog("option", "elem", elem);
         $("#changedialog").dialog("open");
 
+    }
+    function querymember(){
+    	$('input[name="op"]').val('member');
+        $('#formSearch').submit();
     }
 </script>

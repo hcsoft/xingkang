@@ -724,14 +724,15 @@ class memberControl extends SystemControl {
 		Tpl::output ( 'member_id', $member_array['member_id'] );
 		Tpl::output ( 'member_truename', $member_array['member_truename'] );
 		Tpl::output ( 'member_idnumber', $member_array['sIDCard'] );
+		Tpl::output ( 'member_fileno', $member_array['FileNo'] );
 		Tpl::output ( 'member_list', $data_list );
-		if((isset($_REQUEST['queryfileno']) and $_REQUEST['queryfileno'] != '')){
-			Tpl::output ( 'fileno',$_REQUEST['queryfileno'] );
-			Tpl::showpage ( 'member.list2' );
-		}else {
-			Tpl::showpage ( 'member.list' );
-		}
-		
+// 		if((isset($_REQUEST['queryfileno']) and $_REQUEST['queryfileno'] != '')){
+// 			Tpl::output ( 'fileno',$_REQUEST['queryfileno'] );
+// 			Tpl::showpage ( 'member.list2' );
+// 		}else {
+// 			Tpl::showpage ( 'member.list' );
+// 		}
+		Tpl::showpage ( 'member.list' );
 	}
 	
 	public function gethealthfiledetailOp() {
@@ -2278,10 +2279,29 @@ class memberControl extends SystemControl {
     		$member_id = $_REQUEST['member_id'];
     		$fileno = $_REQUEST['fileno'];
     		$model_member = Model ( 'member' );
+    		$condition ['member_id'] = $member_id;
+    		$memberinfo = $model_member->getMemberInfo ( $condition );
     		$param = array();
     		$param['FileNo'] = $fileno;
     		$model_member->updateMember($param,$member_id);
-    		echo json_encode(array('success' => true, 'msg' => '关联成功!'));
+    		$changelog = array();
+    		$changestr = '';
+    		$admin_info = $this->getAdminInfo();
+    		$opt = $admin_info['name'];
+    		//修改名字
+    		$newname = $_REQUEST['newname'];
+    		$changelog['newfileno'] = $fileno;
+    		$changelog['oldfileno'] = $memberinfo["FileNo"];
+    		$changestr .= ',健康档案编号由(' . $memberinfo["FileNo"]. ')改为(' . $fileno . ')';
+    		$changelogstr = json_encode($changelog);
+    		//生成中文日志
+    		if (count($changestr) > 0) {
+    			$changestr = substr($changestr, 1);
+    		}
+    		
+    		$sql = " insert into Center_MemberInfoChangeLog (id,memberid,optdate,changelog,changestr,opt) values(newid(),'$member_id',getdate(),'$changelogstr','$changestr','$opt')";
+    		$conn->exec($sql);
+    		echo json_encode(array('success' => true, 'msg' => '操作成功!'));
     	} catch (Exception $e) {
     	echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
     	}

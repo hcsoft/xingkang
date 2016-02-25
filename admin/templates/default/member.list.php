@@ -56,6 +56,10 @@
 <div class="container" id ="memberinfo">
 	<a href="JavaScript:void(0);" class="button2" onclick="query()"><span>查询</span></a>&nbsp;&nbsp;&nbsp;
 	<a href="JavaScript:void(0);" class="button2" onclick="band()"><span>关联</span></a>&nbsp;&nbsp;&nbsp;
+	<?php if ($output['member_fileno'] !=''){ ?>
+		<a href="JavaScript:void(0);" class="button2" onclick="unband()"><span>取消关联</span></a>&nbsp;&nbsp;&nbsp;
+		
+	<?php }?>
     <a href="JavaScript:void(0);" class="button2" onclick="add()"><span>快速建档</span></a>
     <span class="errormsg" style="color:red;width:100%;display:block;text-align: center;font-weight: bold;"></span>
 	<div class="row clearfix" style="overflow: auto;">
@@ -485,16 +489,17 @@ function band(){
 		alert("请选择要关联的档案！");
 		return;
 	}
-	if(bandname != $('#member_truename').val()){
-		alert("关联的档案名称与会员名称不一致");
-		return;
-	}
-	if(bandidnumber !='' && bandidnumber != undefined && $('#member_idnumber').val() != '' && $('#member_idnumber').val() != undefined){
-		if(bandidnumber != $('#member_idnumber').val()){
-			alert("关联的档案身份证号码与会员身份证号码不一致");
-			return;
-		}
-	}
+	
+// 	if(bandname != $('#member_truename').val()){
+// 		alert("关联的档案名称与会员名称不一致");
+// 		return;
+// 	}
+// 	if(bandidnumber !='' && bandidnumber != undefined && $('#member_idnumber').val() != '' && $('#member_idnumber').val() != undefined){
+// 		if(bandidnumber != $('#member_idnumber').val()){
+// 			alert("关联的档案身份证号码与会员身份证号码不一致");
+// 			return;
+// 		}
+// 	}
 	$('input[name="op"]').val('ajax_bandhealthfile');
 	//alert($("input[name='check']:checked").val());
 	var params = $("#form_memberlist").serialize();
@@ -506,7 +511,9 @@ function band(){
             if (data.success) {
                 //query();
 //                 alert(data.msg);
+				
                 success('#memberinfo', data.msg);
+                window.parent.querymember();
             } else {
                error('#memberinfo', data.msg);
             }
@@ -520,42 +527,37 @@ function band(){
         }
 
     });
-// 	$.ajax({
-//         url: "index.php?act=member&op=member_moneydetail",
-//         data: $("#detaildialog form").serialize(), dataType: 'json', success: function (data) {
-//             console.log(data);
-//             if (data.data && data.data.length > 0) {
-//                 $("#detaildialog .datamsg").html('');
-//                 $("#detaildialog table tbody").html('');
-//                 for (var i = 0; i < data.data.length; i++) {
-//                     var row = data.data[i];
-//                     var rowstr = '<tr>';
-//                     rowstr += '<td>' + textstr(row.datatypename) + '</td>';
-//                     rowstr += '<td>' + textstr(row.id) + '</td>';
-//                     rowstr += '<td>' + textstr(row.dPayDate) + '</td>';
-//                     rowstr += '<td>' + textstr(row.MakePerson) + '</td>';
-//                     rowstr += '<td>' + textstr(row.orgname) + '</td>';
-//                     rowstr += '<td>' + numtostr(row.fRecharge) + '</td>';
-//                     rowstr += '<td>' + numtostr(row.InitRecharge) + '</td>';
-// //                    rowstr+='<td>'+numtostr(row.InitScale)+'</td>';
-//                     rowstr += '<td>' + numtostr(row.fConsume) + '</td>';
-//                     rowstr += '<td>' + numtostr(row.InitConsume) + '</td>';
-//                     rowstr += '<td>' + numtostr(row.fScaleToMoney) + '</td>';
-//                     rowstr += '<td>' + numtostr(row.fScale) + '</td>';
-//                     rowstr += '<td>' + numtostr(row.fAddScale) + '</td>';
-//                     rowstr += '<td>' + numtostr(row.InitScale) + '</td>';
-//                     rowstr += '</tr>';
-//                     $("#detaildialog table tbody").append(rowstr)
-//                 }
-//             } else {
-//                 $("#detaildialog .datamsg").html('无数据!');
-//             }
-//             $("#detaildialog").dialog("option", "title", '充值消费明细  ' + obj.member_truename);
-//             $("#detaildialog").dialog("open");
-//         }
-//     });
 }
 
+function unband(){
+	$('input[name="op"]').val('ajax_bandhealthfile');
+	//alert($("input[name='check']:checked").val());
+	var params = $("#form_memberlist").serialize();
+	params= params+'&fileno=';
+	$.ajax({
+        url: "index.php?act=member&op=ajax_bandhealthfile",
+        data: params, dataType: 'json', success: function (data) {
+            //console.log(data);
+            if (data.success) {
+                //query();
+//                 alert(data.msg);
+                success('#memberinfo', data.msg);
+                window.parent.querymember();
+                //$('#formSearch').submit();
+            } else {
+               error('#memberinfo', data.msg);
+            }
+        }
+    }).fail(function( jqxhr, textStatus, errortext ) {
+        console.log(jqxhr, textStatus, errortext );
+        if(jqxhr.responseText.indexOf("您不具备进行该操作的权限")>=0){
+            error('#memberinfo', "您不具备进行该操作的权限!");
+        }else{
+            error('#memberinfo', "系统错误,请与管理员联系!");
+        }
+
+    });
+}
 function add(){
 	clearform();
 	var param = {};
