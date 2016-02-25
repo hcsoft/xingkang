@@ -55,7 +55,11 @@ $arr = array(
             12 => array(
                 'args' => 'finance',
                 'text' => '财务'
-            )
+            ),
+			13 => array(
+				'args' => 'kpi',
+				'text' => '指标'
+			)
 		),
 		'left' =>array(
 
@@ -240,7 +244,15 @@ $arr = array(
                     array('args'=>'sum,storehouse,finance',			'text'=>'仓库单据汇总'),
                     array('args'=>'communitycheck,finance,finance',			'text'=>'社区考核')
                 )
-            )
+            ),
+			13=> array(
+				'nav' => 'kpi',
+				'text' => '指标',
+				'list' => array(
+					array('args'=>'kpi,kpi,kpi','text'=>'考核指标'),
+					array('args'=>'kpiset,kpi,kpi','text'=>'考核指标设置'),
+				)
+			)
 		)
 );
 

@@ -137,7 +137,11 @@ $_limit =  array(
         array('name'=>'仓库单据明细', 'op'=>'detail', 'act'=>'storehouse'),
         array('name'=>'仓库单据汇总', 'op'=>'sum', 'act'=>'storehouse'),
         array('name'=>'社区考核', 'op'=>'communitycheck', 'act'=>'finance')
-    ))
+    )),
+	array('name'=>'指标', 'child'=>array(
+		array('name'=>'考核指标', 'op'=>'kpi', 'act'=>'kpi'),
+		array('name'=>'考核指标设置', 'op'=>'kpiset', 'act'=>'kpi')
+	))
 );
 
 if (C('mobile_isuse') !== NULL){
