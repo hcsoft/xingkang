@@ -83,7 +83,7 @@ class kpiControl extends SystemControl
         while ($row = $stmt->fetch()) {
             if($row['type']=='0'){
                 if(!$row['helptext'])
-                    $row['helptext'] ='可修改值,次月10日后不能修改';
+                    $row['helptext'] ='手工录入';
                 $row['value'] = $this->getInputValue($month,$row);
                 //取值
             }else{
@@ -115,6 +115,33 @@ class kpiControl extends SystemControl
             $idx++;
 
         }
+        $exportflag =false;
+        if (isset ( $_GET ['export'] ) && $_GET ['export'] == 'true') {
+            $exportflag = true;
+        }
+        if ($exportflag) {
+            $displaytext = array();
+            array_push($displaytext,'序号');
+            array_push($displaytext,'时间');
+            array_push($displaytext,'部门');
+            array_push($displaytext,'考核对象');
+            array_push($displaytext,'考核指标');
+            array_push($displaytext,'值');
+            array_push($displaytext,'说明');
+
+            $propertys = array();
+            array_push($propertys,'month');
+            array_push($propertys,'orgname');
+            array_push($propertys,'target');
+            array_push($propertys,'name');
+            array_push($propertys,'value');
+            array_push($propertys,'helptext');
+
+            $propertysmap =  array();
+//            $propertysmap['iDrug_StatClass'] =$this->classmap ;
+            $this->exportxlsxbyObject($displaytext,$propertys,$propertysmap,$month.'指标',$cfg);
+            exit ;
+        }
         STpl::output('cfg', $cfg);
         STpl::output('query', $_REQUEST);
         //计算月份
@@ -138,22 +165,46 @@ class kpiControl extends SystemControl
         return vsprintf($display,$value);
     }
 
-    private function getSqlValue($month,$row){
+    private function getSqlValue($month, $cfg){
         $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
-        $method = $this::decode($row['method']);
+        $method = $this::decode($cfg['method']);
 
-//        echo ($method);
-//        exit;
+        $monthcolstr = $cfg['datecol'];
+        $monthcols = explode(',',$monthcolstr);
+        $monthsqls = array();
+        $idx = 0 ;
+        for($i = 0 ; $i< count($monthcols);$i++){
+            $col = $monthcols[$i];
+            if($col){
+                $monthparam1 = ':monthparam'.$idx;
+                $idx++;
+                $monthparam2 = ':monthparam'.$idx;
+                $idx++;
+                $sqlstr = "  $col>=convert(date,$monthparam1) and $col<  dateadd(month,1,convert(date,$monthparam2)) ";
+                $method = str_replace('##monthsql_'.$i.'##',$sqlstr,$method);
+            }
+        }
+        $this->execsql = $method;
         $stmt = $conn->prepare($method);
+
+        if(count($monthcols)>0){
+            $monthstr = $month.'01';
+            //named params 不能绑定多次 (sqlserver的bug)
+            for($i =0 ; $i<$idx;$i++){
+                $stmt->bindValue(':monthparam'.$i, $monthstr);
+            }
+        }
         $stmt->execute();
         $data = array();
         if ($row = $stmt->fetch()) {
             $data = $row;
         }
-        $display = $row['display'];
+        $display = $cfg['display'];
+
         if(!$display || $display==''){
             $display = '%s';
         }
+
         return vsprintf($display,$data);
     }
     public function kpiSaveCfg_ajaxOp()
@@ -204,7 +255,7 @@ class kpiControl extends SystemControl
 
     public function getParam($name)
     {
-        return stripslashes(html_entity_decode($_REQUEST[$name], ENT_COMPAT | ENT_HTML401 | ENT_QUOTES));
+        return $this::decode($_REQUEST[$name]);
     }
 
     public static function decode($value)
@@ -226,6 +277,7 @@ class kpiControl extends SystemControl
             }
 
             $ret['params'] = $_REQUEST;
+            $ret['execsql'] = $this->execsql;
             echo json_encode($ret);
         } catch (Exception $e) {
             echo json_encode(array('success' => false, 'msg' => '错误!', 'exception' => $e->xdebug_message, 'e' => $e));
