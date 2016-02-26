@@ -490,16 +490,16 @@ function band(){
 		return;
 	}
 	
-// 	if(bandname != $('#member_truename').val()){
-// 		alert("关联的档案名称与会员名称不一致");
-// 		return;
-// 	}
-// 	if(bandidnumber !='' && bandidnumber != undefined && $('#member_idnumber').val() != '' && $('#member_idnumber').val() != undefined){
-// 		if(bandidnumber != $('#member_idnumber').val()){
-// 			alert("关联的档案身份证号码与会员身份证号码不一致");
-// 			return;
-// 		}
-// 	}
+	if(bandname != $('#member_truename').val()){
+		alert("关联的档案名称与会员名称不一致");
+		return;
+	}
+	if(bandidnumber !='' && bandidnumber != undefined && $('#member_idnumber').val() != '' && $('#member_idnumber').val() != undefined){
+		if(bandidnumber != $('#member_idnumber').val()){
+			alert("关联的档案身份证号码与会员身份证号码不一致");
+			return;
+		}
+	}
 	$('input[name="op"]').val('ajax_bandhealthfile');
 	//alert($("input[name='check']:checked").val());
 	var params = $("#form_memberlist").serialize();
