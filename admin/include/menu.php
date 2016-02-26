@@ -247,10 +247,10 @@ $arr = array(
             ),
 			13=> array(
 				'nav' => 'kpi',
-				'text' => '指标',
+				'text' => '绩效考核',
 				'list' => array(
-					array('args'=>'kpi,kpi,kpi','text'=>'考核指标'),
-					array('args'=>'kpiset,kpi,kpi','text'=>'考核指标设置'),
+					array('args'=>'kpi,kpi,kpi','text'=>'绩效考核指标'),
+					array('args'=>'kpiset,kpi,kpi','text'=>'绩效考核指标设置'),
 				)
 			)
 		)

@@ -9,3 +9,4 @@
 .idea
 /admin/tmp
 /admin/templates_c
+/core/framework/db/mssqlpdo.php
