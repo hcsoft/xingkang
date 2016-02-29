@@ -753,7 +753,6 @@ class goodsControl extends SystemControl
             $startnum = 0 ;
             $endnum = 100000;//excel仅允许导出10W条
             $displaytext = array();
-            array_push($displaytext,'序号');
             array_push($displaytext,'商品编码');
             array_push($displaytext,'商品名称');
             if($_GET['orgsum'] && $_GET['orgsum'] == 'true'){
@@ -763,9 +762,7 @@ class goodsControl extends SystemControl
             array_push($displaytext,'含量规格');
             array_push($displaytext,'包装规格');
 
-            array_push($displaytext,'供应商');
-            array_push($displaytext,'厂家');
-            array_push($displaytext,'产地');
+            array_push($displaytext,'厂家/产地');
 
             array_push($displaytext,'常规单位');
             array_push($displaytext,'可售库存');
@@ -785,9 +782,9 @@ class goodsControl extends SystemControl
             array_push($propertys,'sDrug_Spec');
             array_push($propertys,'sDrug_Content');
             array_push($propertys,'sDrug_PackSpec');
-            array_push($propertys,'sCustomer_Name');
+//             array_push($propertys,'sCustomer_Name');
             array_push($propertys,'brand_name');
-            array_push($propertys,'gc_name');
+//             array_push($propertys,'gc_name');
 
             array_push($propertys,'sDrug_Unit');
             array_push($propertys,'fDS_OStock');
@@ -874,7 +871,7 @@ class goodsControl extends SystemControl
         if ($exportflag) {
             $this->exportcsvbyObject($displaytext,$propertys,$propertysmap,'库存汇总',$goods_list);
         }
-
+	
 
 //        var_dump($goods_list);
         Tpl::output('goods_list', $goods_list);
