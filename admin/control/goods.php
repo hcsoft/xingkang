@@ -1448,7 +1448,7 @@ public function goodssum_goodsOp()
     	$sql = ' from Center_ClinicSale a
                 left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
                 left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID  
-    			left join Center_CheckOut checkout on   checkout.iCO_ID = a.iCO_ID
+    			left join Center_CheckOut checkout on   checkout.iCO_ID = a.iCO_ID and checkout.OrgID = a.OrgID
                 , Organization org
                 where   a.orgid = org.id  and a.iDrug_ID >0 '; 
     	if ($_GET['itemtype']) {
