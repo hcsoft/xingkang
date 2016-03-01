@@ -2,7 +2,7 @@
 /**
  * 控制台
  *
- * 
+ *
  *
  *
  * @copyright  Copyright (c) 2014-2020 SZGR Inc. (http://www.szgr.com.cn)
@@ -12,10 +12,10 @@
  */
 defined('InShopNC') or exit('Access Invalid!');
 
-class dashboardControl extends SystemControl{
+class dashboardnewControl extends SystemControl{
 	public function __construct(){
 		parent::__construct();
-		Language::read('dashboard');
+		Language::read('dashboardnew');
 	}
 	/**
 	 * 欢迎页面
@@ -42,21 +42,21 @@ class dashboardControl extends SystemControl{
 		$statistics['setup_date'] = substr($setup_date,0,10);
 		Tpl::output('statistics',$statistics);
 		Tpl::output('admin_info',$admin_info);
-		Tpl::showpage('welcome');
+		Tpl::showpage('dashboard-new');
 	}
 
     public function chartpageOp(){
          Tpl::showpage('chartPage');
     }
-	
+
 	/**
 	 * 关于我们
 	 */
 	public function aboutusOp(){
-		
+
 		Tpl::showpage('aboutus');
 	}
-	
+
 	/**
 	 * 统计
 	 */
@@ -87,7 +87,7 @@ class dashboardControl extends SystemControl{
         $statistics['store_expire'] = $model_store->getStoreCount(array('store_state'=>1, 'store_end_time'=>array('between', array(TIMESTAMP, TIMESTAMP + 864000))));
         // 已经到期
         $statistics['store_expired'] = $model_store->getStoreCount(array('store_state'=>1, 'store_end_time'=>array('between', array(1, TIMESTAMP))));
-        
+
         /**
          * 商品
          */
@@ -102,7 +102,7 @@ class dashboardControl extends SystemControl{
         $statistics['inform_list'] = Model('inform')->getInformCount(array('inform_state'=>1));
         // 品牌申请
         $statistics['brand_apply'] = Model('brand')->getBrandCount(array('brand_apply' => '0'));
-		
+
         /**
          * 交易
          */
@@ -135,7 +135,7 @@ class dashboardControl extends SystemControl{
 		//待支付账单
 		$condition = array();
 		$condition['ob_state'] = BILL_STATE_SYSTEM_CHECK;
-		$statistics['pay_billno'] = $model_bill->getOrderBillCount($condition);		
+		$statistics['pay_billno'] = $model_bill->getOrderBillCount($condition);
         /**
          * CMS
          */
@@ -603,7 +603,7 @@ class dashboardControl extends SystemControl{
 			$keyvaluehtml = '';
 			if($type == '0'){
 				$standarddisplayhtml = '<div class="display_medialexam standard-display">	<table class="form_tbl">		<tr>			<td>编号</td>			<td colspan="5">${FileNo}</td>		</tr>		<tr>			<td>纸质档案编号</td>			<td colspan="5">${PaperFileNo}</td>		</tr>		<tr>			<td>姓名<font size="2" color="red">（必填）</font></td>			<td colspan="5">${Name}</td>		</tr>		<tr>			<td>现住址<font size="2" color="red">（必填）</font></td>			<td colspan="5">${Address}</td>		</tr>		<tr>			<td>户籍地址</td>			<td colspan="5">${ResidenceAddress}</td>		</tr>		<tr>			<td>联系电话<font size="2" color="red">（必填）</font></td>			<td colspan="5">${TEL}</td>		</tr>		<tr>			<td>行政区划编码</td>			<td colspan="5">${DistrictNumber}</td>		</tr>		<tr>			<td>乡镇(街道)名称</td>			<td colspan="5">${Township}</td>		</tr>		<tr>			<td>村(居)委会名称</td>			<td colspan="5">${Village}</td>		</tr>		<tr>			<td>建档单位</td>			<td colspan="5">${BuildUnit}</td>		</tr>		<tr>			<td>建档人</td>			<td colspan="5">${BuildPerson}</td>		</tr>		<tr>			<td>责任医生</td>			<td colspan="5">${Doctor}</td>		</tr>		<tr>			<td>建档日期<font size="2" color="red">（必填）</font></td>			<td colspan="5">${BuildDate}</td>		</tr>		<tr>			<td>条形码</td>			<td colspan="5">${BarCode}</td>		</tr>		<tr>			<td>户主</td>			<td colspan="5">${HouseMaster}</td>		</tr>		<tr>			<td>柜号</td>			<td colspan="5">${CupboardNo}</td>		</tr>		<tr>			<td>盒号</td>			<td colspan="5">${BoxNo}</td>		</tr>		<tr>			<td>性别<font size="2" color="red">（必填）</font></td>			<td>${Sex}</td>			<td>出生日期<font size="2" color="red">（必填）</font></td>			<td>${Birthday}</td>			<td>国籍</td>			<td>${Nation}</td>		</tr>		<tr>			<td>身份证号码</td>			<td colspan="2">${IDNumber}</td>			<td>工作单位</td>			<td colspan="2">${WorkUnit}</td>		</tr>		<tr>			<td>本人电话</td>			<td>${MeTel}</td>			<td>联系人姓名</td>			<td>${Linkman}</td>			<td>联系人电话</td>			<td>${LinkmanTEL}</td>		</tr>		<tr>			<td>常住类型</td>			<td colspan="2">${ResideType}</td>			<td>民族</td>			<td colspan="2">${Folk}</td>		</tr>		<tr>			<td>血型</td>			<td colspan="3">${BloodTypeABO}</td>			<td colspan="2">RH阴性: <span>${BloodTypeRH}</span></td>		</tr>		<tr>			<td>文化程度</td>			<td colspan="5">${Education}</td>		</tr>		<tr>			<td>职业</td>			<td colspan="5">${Occupation}</td>		</tr>		<tr>			<td>婚姻状况</td>			<td colspan="5">${MaritalStatus}</td>		</tr>		<tr>			<td>农业人口<font size="2" color="red">（必填）</font></td>			<td colspan="5">${farmStatus}</td>		</tr>		<tr>			<td>城镇居民<font size="2" color="red">（必填）</font></td>			<td colspan="5">${TownStatus}</td>		</tr>		<tr>			<td>是否孕产妇</td>			<td colspan="5">${bornStatus}</td>		</tr>		<tr>			<td>医疗费用支付方式</td>			<td colspan="5">${PaymentMode}</td>		</tr>		<tr>			<td>药物过敏史</td>			<td colspan="5">${AllergiesHistory}</td>		</tr>		<tr>			<td>暴露史</td>			<td colspan="5">				<div>${ExposeHistory}</div>			</td>		</tr>		<tr>			<td rowspan="4">既往史</td>			<td>疾病</td>			<td colspan="4" id="diseaseHistory">${DiseaseHistory}</td>		</tr>		<tr>			<td>手术</td>			<td colspan="4">${OPSHistory}</td>		</tr>		<tr>			<td>外伤</td>			<td colspan="4">${TraumaHistory}</td>		</tr>		<tr>			<td>输血</td>			<td colspan="4">${BloodTrans}</td>		</tr>		<tr>			<td rowspan="4">家族史</td>			<td>父亲</td>			<td colspan="4">${FatherHistory}</td>		</tr>		<tr>			<td>母亲</td>			<td colspan="4">${MatherHistory}</td>		</tr>		<tr>			<td>兄弟姐妹</td>			<td colspan="4">${BrotherHistory}</td>		</tr>		<tr>			<td>子女</td>			<td colspan="4">${FamilyHistory}</td>		</tr>		<tr>			<td>遗传病史</td>			<td colspan="5">${GeneticHistory}</td>		</tr>		<tr>			<td>残疾情况</td>			<td colspan="5">${DisabilityStatus}</td>		</tr>		<tr>			<td rowspan="5" style="border-bottom: 1px solid #DEEFFB;">生活环境</td>			<td>厨房排风设施</td>			<td colspan="4">${Kitchen}</td>		</tr>		<tr>			<td>燃料类型</td>			<td colspan="4">${Bunkers}</td>		</tr>		<tr>			<td>饮水</td>			<td colspan="4">${DrinkingWater}</td>		</tr>		<tr>			<td>厕所</td>			<td colspan="4">${Toilet}</td>		</tr>		<tr>			<td style="border-bottom: 1px solid #DEEFFB;">禽畜栏</td>			<td style="border-bottom: 1px solid #DEEFFB;" colspan="4">${Poultry}</td>		</tr>	</table></div>';
-				$keyvaluehtml = '<div class="display_keyvalue_medialexam key-value-display">	<table class="form_tbl">		<tr>			<td id="编号">编号</td>			<td>${FileNo}</td>		</tr>		<tr>			<td id="纸质档案编号">纸质档案编号</td>			<td>${PaperFileNo}</td>		</tr>		<tr>			<td id="姓名">姓名</td>			<td>${Name}</td>		</tr>		<tr>			<td id="现住址">现住址</td>			<td>${Address}</td>		</tr>		<tr>			<td id="户籍地址">户籍地址</td>			<td>${ResidenceAddress}</td>		</tr>		<tr>			<td id="联系电话">联系电话</td>			<td>${TEL}</td>		</tr>		<tr>			<td id="行政区划编码">行政区划编码</td>			<td>${DistrictNumber}</td>		</tr>		<tr>			<td id="乡镇街道名称">乡镇(街道)名称</td>			<td>${Township}</td>		</tr>		<tr>			<td id="村居委会名称">村(居)委会名称</td>			<td>${Village}</td>		</tr>		<tr>			<td id="建档单位">建档单位</td>			<td>${BuildUnit}</td>		</tr>		<tr>			<td id="建档人">建档人</td>			<td>${BuildPerson}</td>		</tr>		<tr>			<td id="责任医生">责任医生</td>			<td>${Doctor}</td>		</tr>		<tr>			<td id="建档日期">建档日期</td>			<td>${BuildDate}</td>		</tr>		<tr>			<td id="条形码">条形码</td>			<td>${BarCode}</td>		</tr>		<tr>			<td id="户主">户主</td>			<td>${HouseMaster}</td>		</tr>		<tr>			<td id="柜号">柜号</td>			<td>${CupboardNo}</td>		</tr>		<tr>			<td id="盒号">盒号</td>			<td>${BoxNo}</td>		</tr>		<tr>			<td id="性别">性别</td>			<td>${Sex}</td>		</tr>		<tr>			<td id="出生日期">出生日期</td>			<td>${Birthday}</td>		</tr>		<tr>			<td id="国籍">国籍</td>			<td>${Nation}</td>		</tr>		<tr>			<td id="身份证号码">身份证号码</td>			<td>${IDNumber}</td>		</tr>		<tr>			<td id="工作单位">工作单位</td>			<td>${WorkUnit}</td>		</tr>		<tr>			<td id="本人电话">本人电话</td>			<td>${MeTel}</td>		</tr>		<tr>			<td id="联系人姓名">联系人姓名</td>			<td>${Linkman}</td>		</tr>		<tr>			<td id="联系人电话">联系人电话</td>			<td>${LinkmanTEL}</td>		</tr>		<tr>			<td id="常住类型">常住类型</td>			<td>${ResideType}</td>		</tr>		<tr>			<td id="民族">民族</td>			<td>${Folk}</td>		</tr>		<tr>			<td id="血型">血型</td>			<td>${BloodTypeABO}</td>		</tr>		<tr>			<td id="RH阴性">RH阴性</td>			<td>${BloodTypeRH}</td>		</tr>		<tr>			<td id="文化程度">文化程度</td>			<td>${Education}</td>		</tr>		<tr>			<td id="职业">职业</td>			<td>${Occupation}</td>		</tr>		<tr>			<td id="婚姻状况">婚姻状况</td>			<td>${MaritalStatus}</td>		</tr>		<tr>			<td id="农业人口">农业人口</td>			<td>${farmStatus}</td>		</tr>		<tr>			<td id="城镇居民">城镇居民</td>			<td>${TownStatus}</td>		</tr>		<tr>			<td id="是否孕产妇">是否孕产妇</td>			<td>${bornStatus}</td>		</tr>		<tr>			<td id="医疗费用支付方式">医疗费用支付方式</td>			<td>${PaymentMode}</td>		</tr>		<tr>			<td id="药物过敏史">药物过敏史</td>			<td>${AllergiesHistory}</td>		</tr>		<tr>			<td id="暴露史">暴露史</td>			<td>${ExposeHistory}</td>		</tr>		<tr>			<td id="疾病">疾病</td>			<td>${DiseaseHistory}</td>		</tr>		<tr>			<td id="手术">手术</td>			<td>${OPSHistory}</td>		</tr>		<tr>			<td id="外伤">外伤</td>			<td>${TraumaHistory}</td>		</tr>		<tr>			<td id="输血">输血</td>			<td>${BloodTrans}</td>		</tr>		<tr>			<td id="父亲">父亲</td>			<td>${FatherHistory}</td>		</tr>		<tr>			<td id="母亲">母亲</td>			<td>${MatherHistory}</td>		</tr>		<tr>			<td id="兄弟姐妹">兄弟姐妹</td>			<td>${BrotherHistory}</td>		</tr>		<tr>			<td id="子女">子女</td>			<td>${FamilyHistory}			</td>		</tr>		<tr>			<td id="遗传病史">遗传病史</td>			<td>${GeneticHistory}</td>		</tr>		<tr>			<td id="残疾情况">残疾情况</td>			<td>${DisabilityStatus}			</td>		</tr>		<tr>			<td id="厨房排风设施">厨房排风设施</td>			<td>${Kitchen}</td>		</tr>		<tr>			<td id="燃料类型">燃料类型</td>			<td>${Bunkers}</td>		</tr>		<tr>			<td id="饮水">饮水</td>			<td>${DrinkingWater}</td>		</tr>		<tr>			<td id="厕所">厕所</td>			<td>${Toilet}</td>		</tr>		<tr>			<td style="border-bottom: 1px solid #DEEFFB;" id="禽畜栏">禽畜栏</td>			<td style="border-bottom: 1px solid #DEEFFB;">${Poultry}</td>		</tr>	</table></div>';				
+				$keyvaluehtml = '<div class="display_keyvalue_medialexam key-value-display">	<table class="form_tbl">		<tr>			<td id="编号">编号</td>			<td>${FileNo}</td>		</tr>		<tr>			<td id="纸质档案编号">纸质档案编号</td>			<td>${PaperFileNo}</td>		</tr>		<tr>			<td id="姓名">姓名</td>			<td>${Name}</td>		</tr>		<tr>			<td id="现住址">现住址</td>			<td>${Address}</td>		</tr>		<tr>			<td id="户籍地址">户籍地址</td>			<td>${ResidenceAddress}</td>		</tr>		<tr>			<td id="联系电话">联系电话</td>			<td>${TEL}</td>		</tr>		<tr>			<td id="行政区划编码">行政区划编码</td>			<td>${DistrictNumber}</td>		</tr>		<tr>			<td id="乡镇街道名称">乡镇(街道)名称</td>			<td>${Township}</td>		</tr>		<tr>			<td id="村居委会名称">村(居)委会名称</td>			<td>${Village}</td>		</tr>		<tr>			<td id="建档单位">建档单位</td>			<td>${BuildUnit}</td>		</tr>		<tr>			<td id="建档人">建档人</td>			<td>${BuildPerson}</td>		</tr>		<tr>			<td id="责任医生">责任医生</td>			<td>${Doctor}</td>		</tr>		<tr>			<td id="建档日期">建档日期</td>			<td>${BuildDate}</td>		</tr>		<tr>			<td id="条形码">条形码</td>			<td>${BarCode}</td>		</tr>		<tr>			<td id="户主">户主</td>			<td>${HouseMaster}</td>		</tr>		<tr>			<td id="柜号">柜号</td>			<td>${CupboardNo}</td>		</tr>		<tr>			<td id="盒号">盒号</td>			<td>${BoxNo}</td>		</tr>		<tr>			<td id="性别">性别</td>			<td>${Sex}</td>		</tr>		<tr>			<td id="出生日期">出生日期</td>			<td>${Birthday}</td>		</tr>		<tr>			<td id="国籍">国籍</td>			<td>${Nation}</td>		</tr>		<tr>			<td id="身份证号码">身份证号码</td>			<td>${IDNumber}</td>		</tr>		<tr>			<td id="工作单位">工作单位</td>			<td>${WorkUnit}</td>		</tr>		<tr>			<td id="本人电话">本人电话</td>			<td>${MeTel}</td>		</tr>		<tr>			<td id="联系人姓名">联系人姓名</td>			<td>${Linkman}</td>		</tr>		<tr>			<td id="联系人电话">联系人电话</td>			<td>${LinkmanTEL}</td>		</tr>		<tr>			<td id="常住类型">常住类型</td>			<td>${ResideType}</td>		</tr>		<tr>			<td id="民族">民族</td>			<td>${Folk}</td>		</tr>		<tr>			<td id="血型">血型</td>			<td>${BloodTypeABO}</td>		</tr>		<tr>			<td id="RH阴性">RH阴性</td>			<td>${BloodTypeRH}</td>		</tr>		<tr>			<td id="文化程度">文化程度</td>			<td>${Education}</td>		</tr>		<tr>			<td id="职业">职业</td>			<td>${Occupation}</td>		</tr>		<tr>			<td id="婚姻状况">婚姻状况</td>			<td>${MaritalStatus}</td>		</tr>		<tr>			<td id="农业人口">农业人口</td>			<td>${farmStatus}</td>		</tr>		<tr>			<td id="城镇居民">城镇居民</td>			<td>${TownStatus}</td>		</tr>		<tr>			<td id="是否孕产妇">是否孕产妇</td>			<td>${bornStatus}</td>		</tr>		<tr>			<td id="医疗费用支付方式">医疗费用支付方式</td>			<td>${PaymentMode}</td>		</tr>		<tr>			<td id="药物过敏史">药物过敏史</td>			<td>${AllergiesHistory}</td>		</tr>		<tr>			<td id="暴露史">暴露史</td>			<td>${ExposeHistory}</td>		</tr>		<tr>			<td id="疾病">疾病</td>			<td>${DiseaseHistory}</td>		</tr>		<tr>			<td id="手术">手术</td>			<td>${OPSHistory}</td>		</tr>		<tr>			<td id="外伤">外伤</td>			<td>${TraumaHistory}</td>		</tr>		<tr>			<td id="输血">输血</td>			<td>${BloodTrans}</td>		</tr>		<tr>			<td id="父亲">父亲</td>			<td>${FatherHistory}</td>		</tr>		<tr>			<td id="母亲">母亲</td>			<td>${MatherHistory}</td>		</tr>		<tr>			<td id="兄弟姐妹">兄弟姐妹</td>			<td>${BrotherHistory}</td>		</tr>		<tr>			<td id="子女">子女</td>			<td>${FamilyHistory}			</td>		</tr>		<tr>			<td id="遗传病史">遗传病史</td>			<td>${GeneticHistory}</td>		</tr>		<tr>			<td id="残疾情况">残疾情况</td>			<td>${DisabilityStatus}			</td>		</tr>		<tr>			<td id="厨房排风设施">厨房排风设施</td>			<td>${Kitchen}</td>		</tr>		<tr>			<td id="燃料类型">燃料类型</td>			<td>${Bunkers}</td>		</tr>		<tr>			<td id="饮水">饮水</td>			<td>${DrinkingWater}</td>		</tr>		<tr>			<td id="厕所">厕所</td>			<td>${Toilet}</td>		</tr>		<tr>			<td style="border-bottom: 1px solid #DEEFFB;" id="禽畜栏">禽畜栏</td>			<td style="border-bottom: 1px solid #DEEFFB;">${Poultry}</td>		</tr>	</table></div>';
 			}else if($type == '1'){
 				$standarddisplayhtml = '<div class="display_medialexam standard-display"><table class="form_tbl">	<tr>		<td>姓名</td>		<td colspan="2">${Name}</td>		<td>编号：</td>		<td colspan="4">${FileNo}</td>	</tr>	<tr>		<td>体检日期</td>		<td colspan="2">${ExamDate}</td>		<td>责任医生</td>		<td colspan="4">${Doctor}</td>	</tr>	<tr>		<td>内容</td>		<td colspan="7">检 查 项 目</td>	</tr>	<tr>		<td>症状</td>		<td colspan="7">${ExamSymptom}</td>	</tr>	<tr>		<td rowspan="9">一般状况</td>		<td>体温</td>		<td>${General01}℃</td>		<td colspan="2">脉率</td>		<td colspan="3">${General02}次/分钟</td>	</tr>	<tr>		<td rowspan="2">呼吸频率</td>		<td rowspan="2">${General03}次/分钟</td>		<td rowspan="2">血压</td>		<td>左侧</td>		<td colspan="3">${General04}/${General05}mmHg</td>	</tr>	<tr>		<td>右侧</td>		<td colspan="3">${General06}/${General07}mmHg</td>	</tr>	<tr>		<td>身高</td>		<td>${General08}cm</td>		<td>体重</td>		<td colspan="4">${General09}kg</td>	</tr>	<tr>		<td>腰围</td>		<td>${General10}cm</td>		<td>体质指数</td>		<td colspan="4">${General11}</td>	</tr>	<tr>		<td colspan="2">老年人健康状态自我评估*</td>		<td colspan="5">${OldManHealthEstimate}</td>	</tr>	<tr>		<td colspan="2">老年人生活自理能力自我评估*</td>		<td colspan="5">${OldManLifeEstimate}</td>	</tr>	<tr>		<td colspan="1">老年人认知功能</td>		<td colspan="2">${General14}</td>		<td>简易智力状态检查</td>		<td colspan="3">${General15}</td>	</tr>	<tr>		<td>老年人情感状态</td>		<td colspan="2">${General16}</td>		<td>老年人抑郁评分检查</td>		<td colspan="3">${General17}</td>	</tr>	<tr>		<td rowspan="18">生活方式</td>		<td rowspan="3">体育锻炼</td>		<td>锻炼频率</td>		<td colspan="5">${Life01}</td>	</tr>	<tr>		<td>每次锻炼时间</td>		<td>${Life02}分钟</td>		<td>坚持锻炼时间</td>		<td colspan="3">${Life03}年</td>	</tr>	<tr>		<td>锻炼方式</td>		<td colspan="5">${Life04}</td>	</tr>	<tr>		<td>饮食习惯</td>		<td colspan="6">${EatHabit}</td>	</tr>	<tr>		<td rowspan="3">吸烟情况</td>		<td>吸烟状况</td>		<td colspan="5">${Life06}</td>	</tr>	<tr>		<td>日吸烟量</td>		<td colspan="5"><span>平均</span>${Life07}支</td>	</tr>	<tr>		<td>开始吸烟年龄</td>		<td>${Life08}岁</td>		<td>戒烟年龄</td>		<td colspan="3">${Life09}岁</td>	</tr>	<tr>		<td rowspan="5">饮酒情况</td>		<td>饮酒频率</td>		<td colspan="5">${Life10}</td>	</tr>	<tr>		<td>日饮酒量</td>		<td colspan="5">平均${Life11}两</td>	</tr>	<tr>		<td>是否戒酒</td>		<td>${Life12}</td>		<td>戒酒年龄</td>		<td colspan="3">${Life13}岁</td>	</tr>	<tr>		<td>开始饮酒年龄</td>		<td>${Life14}岁</td>		<td colspan="2">近一年内是否曾醉酒</td>		<td colspan=2>${Life15}</td>	</tr>	<tr>		<td>饮酒种类</td>		<td colspan="5">${DrinkHabit}</td>	</tr>	<tr>		<td rowspan="6">职业病危害因素<br>接触史		</td>		<td colspan="6">${Life17}${Life18}{Life19}</td>	</tr>	<tr>		<td rowspan="5">毒物种类</td>		<td>粉尘:${Life20}</td>		<!-- <td id="life20"></td> -->		<td>防护措施</td>		<td colspan=2>${Life21}</td>	</tr>	<tr>		<td>放射物质:${Life22}</td>		<!-- <td id="life22"></td> -->		<td>防护措施</td>		<td colspan=2>${Life23}</td>	</tr>	<tr>		<td>物理因素:${Life24}</td>		<!-- <td id="life24"></td> -->		<td>防护措施</td>		<td colspan=2>${Life25}</td>	</tr>	<tr>		<td>化学物质:${Life26}</td>		<!-- <td id="life26"></td> -->		<td>防护措施</td>		<td colspan=2>${Life27}</td>	</tr>	<tr>		<td>其他:${Life28}</td>		<!-- <td id="life28"></td> -->		<td>防护措施</td>		<td colspan=2>${Life29}</td>	</tr>	<tr>		<td rowspan="6" style="border-bottom: 1px solid #DEEFFB;">脏器功能</td>		<td rowspan="3">口腔</td>		<td>口唇</td>		<td colspan="5">${Viscera01}</td>	</tr>	<tr>		<td>齿列</td>		<td>${Viscera02}</td>		<td colspan="2">齿列描述</td>		<td colspan=2>			<table cellpadding="0" cellspacing="0"				style="margin: 0px; padding: 0px; border: 0px; border-collapse: collapse; height: 100%;">				<tr>					<td>${Viscera02Description}</td>					<td>${Viscera02Description1}</td>				</tr>				<tr>					<td>${Viscera02Description2}</td>					<td>${Viscera02Description3}</td>				</tr>			</table>		</td>	</tr>	<tr>		<td>咽部</td>		<td colspan="5">${Viscera03}</td>	</tr>	<tr>		<td>视力</td>		<td colspan="6">左眼${Viscera04}右眼${Viscera05} <span>(矫正视力：左眼</span>${Viscera06}右眼${Viscera07})		</td>	</tr>	<tr>		<td>听力</td>		<td colspan="6">${Viscera08}</td>	</tr>	<tr>		<td style="border-bottom: 1px solid #DEEFFB;">运动能力</td>		<td style="border-bottom: 1px solid #DEEFFB;" colspan="6">${Viscera09}</td>	</tr>	<tr>		<td rowspan="24" style="border-bottom: 1px solid #DEEFFB;">查体</td>		<td>眼底*<br /> <font size="2px" color="red">（空代表未测）</font></td>		<td colspan="5">${Exam29}</td>	</tr>	<tr>		<td>皮肤</td>		<td colspan="5">${Body01}</td>	</tr>	<tr>		<td>巩膜</td>		<td colspan="5">${Body02}</td>	</tr>	<tr>		<td>淋巴结</td>		<td colspan="5">${Body03}</td>	</tr>	<tr>		<td rowspan="3">肺</td>		<td>桶状胸</td>		<td colspan="4">${Body04}</td>	</tr>	<tr>		<td>呼吸音</td>		<td colspan="4">${Body05}</td>	</tr>	<tr>		<td>罗音</td>		<td colspan="4">${Body06}</td>	</tr>	<tr>		<td rowspan="2">心脏</td>		<td>心率</td>		<td>${Body07}次/分钟</td>		<td>心律</td>		<td colspan=2>${Body08}</td>	</tr>	<tr>		<td>杂音</td>		<td colspan="4">${Body09}</td>	</tr>	<tr>		<td rowspan="5">腹部</td>		<td>压痛</td>		<td colspan="4">${Body10}</td>	</tr>	<tr>		<td>包块</td>		<td colspan="4">${Body12}</td>	</tr>	<tr>		<td>肝大</td>		<td colspan="4">${Body13}</td>	</tr>	<tr>		<td>脾大</td>		<td colspan="4">${Body14}</td>	</tr>	<tr>		<td>移动性浊音</td>		<td colspan="4">${Body15}</td>	</tr>	<tr>		<td>下肢水肿</td>		<td colspan="5">${Body16}</td>	</tr>	<tr>		<td>足背动脉博动</td>		<td colspan="5">${Body17}</td>	</tr>	<tr>		<td>肛门指诊*<br /> <font size="2px" color="red">（空代表未测）</font></td>		<td colspan="5">${Body18}</td>	</tr>	<tr>		<td>乳腺*</td>		<td colspan="5">${Galactophore}</td>	</tr>	<tr>		<td rowspan="5">妇科</td>		<td>外阴*</td>		<td colspan="4">${Body20}</td>	</tr>	<tr>		<td>阴道*</td>		<td colspan="4">${Body21}</td>	</tr>	<tr>		<td>宫颈*</td>		<td colspan="4">${Body22}</td>	</tr>	<tr>		<td>宫体*</td>		<td colspan="4">${Body23}</td>	</tr>	<tr>		<td>附件*</td>		<td colspan="4">${Body24}</td>	</tr>	<tr>		<td style="border-bottom: 1px solid #DEEFFB;">其它*</td>		<td style="border-bottom: 1px solid #DEEFFB;" colspan="5">${Body25}</td>	</tr>	<tr>		<td rowspan="30" style="border-bottom: 1px solid #DEEFFB;">辅助检查</td>		<td rowspan="2">血常规*</td>		<td>血红蛋白<span>${Exam03}</span>g/L		</td>		<td>白细胞<span>${Exam04}</span>×10<sup>9</sup>/L		</td>		<td colspan="3">血小板<span>${Exam05}</span>×10<sup>9</sup>/L		</td>	</tr>	<tr>		<td colspan="5">其它<span>${Exam06}</span></td>	</tr>	<tr>		<td rowspan="2">尿常规*</td>		<td>尿蛋白<span>${Exam07}</span></td>		<td>尿糖<span>${Exam08}</span></td>		<td colspan="3">尿酮体<span>${Exam09}</span></td>	</tr>	<tr>		<td>尿潜血<span>${Exam10}</span></td>		<td colspan="4">其它<span>${Exam11}</span></td>	</tr>	<tr>		<td>空腹血糖*</td>		<td colspan="5"><span>${Exam01}</span>mmol/L 或 (餐后)<span>${Exam02}</span>mmol/L</td>	</tr>	<tr>		<td>心电图*<br /> <font size="2px" color="red">（空代表未测）</font></td>		<td colspan="5">${Exam30}</td>	</tr>	<tr>		<td>尿微量白蛋白*</td>		<td colspan="5"><span>${Exam12}</span></td>	</tr>	<tr>		<td>大便潜血*<br /> <font size="2px" color="red">（空代表未测）</font></td>		<td colspan="5"><span>${Exam13}</span></td>	</tr>	<tr>		<td>糖化血红蛋白*</td>		<td colspan="5"><span>${Exam27}</span></td>	</tr>	<tr>		<td>乙型肝炎表面抗原*<br /> <font size="2px" color="red">（空代表未测）</font></td>		<td colspan="5"><span>${Exam28}</span></td>	</tr>	<tr>		<td rowspan="2">肝功能*</td>		<td>血清谷丙转氨酶<span>${Exam14}</span>U/L		</td>		<td>血清谷草转氨酶<span>${Exam15}</span>U/L		</td>		<td colspan="4">白蛋白<span>${Exam16}</span>g/L		</td>	</tr>	<tr>		<td>总胆红素<span>${Exam17}</span>µmol		</td>		<td colspan="4">结合胆红素<span>${Exam18}</span>µmol		</td>	</tr>	<tr>		<td rowspan="2">肾功能*</td>		<td>血清肌酐<span>${Exam19}</span>µmol		</td>		<td colspan="4">血尿素氮<span>${Exam20}</span>mmol		</td>	</tr>	<tr>		<td>血钾浓度<span>${Exam21}</span>mmol		</td>		<td colspan="4">血纳浓度<span>${Exam22}</span>mmol		</td>	</tr>	<tr>		<td rowspan="3">血脂*</td>		<td>总胆固醇<span>${Exam23}</span>mmol/L		</td>		<td colspan="4">甘油三酯<span>${Exam24}</span>mmol/L		</td>	</tr>	<tr>		<td colspan="5">血清低密度脂蛋白胆固醇<span>${Exam25}</span>mmol/L		</td>	</tr>	<tr>		<td colspan="6">血清高密度脂蛋白胆固醇<span>${Exam26}</span>mmol/L		</td>	</tr>	<tr>		<td>胸片X线片*<br /> <font size="2px" color="red">（空代表未测）</font></td>		<td colspan="5">${Exam31}</td>	</tr>	<tr>		<td>B超*<br /> <font size="2px" color="red">（空代表未测）</font></td>		<td colspan="5">${Exam32}</td>	</tr>	<tr>		<td>宫颈涂片*<br /> <font size="2px" color="red">（空代表未测）</font></td>		<td colspan="5">${Exam33}</td>	</tr>	<tr>		<td>其他*</td>		<td colspan="5">${Exam34}</td>	</tr>	<tr>		<td rowspan="9" style="border-bottom: 1px solid #DEEFFB;">中医体质辨识*<br />			<font size="2px" color="red">（空代表未测）</font></td>		<td>平和质</td>		<td colspan="5"><span>${CHN01}</span></td>	</tr>	<tr>		<td>气虚质</td>		<td colspan="5"><span>${CHN02}</span></td>	</tr>	<tr>		<td>阳虚质</td>		<td colspan="5"><span>${CHN03}</span></td>	</tr>	<tr>		<td>阴虚质</td>		<td colspan="5"><span>${CHN04}</span></td>	</tr>	<tr>		<td>痰湿质</td>		<td colspan="5"><span>${CHN05}</span></td>	</tr>	<tr>		<td>湿热质</td>		<td colspan="5"><span>${CHN06}</span></td>	</tr>	<tr>		<td>血瘀质</td>		<td colspan="5"><span>${CHN07}</span></td>	</tr>	<tr>		<td>气郁质</td>		<td colspan="5"><span>${CHN08}</span></td>	</tr>	<tr>		<td style="border-bottom: 1px solid #DEEFFB;">特秉质</td>		<td style="border-bottom: 1px solid #DEEFFB;" colspan="5"><span>${CHN09}</span></td>	</tr>	<tr>		<td rowspan="7">现在主要健康问题</td>		<td>脑血管疾病</td>		<td colspan="5">${HarnsSick}</td>	</tr>	<tr>		<td>肾脏疾病</td>		<td colspan="5">${KidneySick}</td>	</tr>	<tr>		<td>心脏疾病</td>		<td colspan="5">${HeartSick}</td>	</tr>	<tr>		<td>血管疾病</td>		<td colspan="5">${VasSick}</td>	</tr>	<tr>		<td>眼部疾病</td>		<td colspan="5">${EyeSick}</td>	</tr>	<tr>		<td>神经系统疾病</td>		<td colspan="5">${Problem06}</td>	</tr>	<tr>		<td>其它系统疾病</td>		<td colspan="5">${Problem07}</td>	</tr>	<tr>		<td>住院治疗情况</td>		<td colspan="6"><span>${Hospitalization}</span></td>	</tr>	<tr>		<td>主要用药情况</td>		<td colspan="6"><span>${ExamMedication}</span></td>	</tr>	<tr>		<td>非免疫规划预防接种史</td>		<td colspan="6"><span>${VaccinateHistory}</span></td>	</tr>	<tr>		<td class="hearder" rowspan="5">健康评价</td>		<td colspan="6">${Judge01}</td>	</tr>	<tr>		<td colspan="6">异常1<span>${Judge02}</span></td>	</tr>	<tr>		<td colspan="6">异常2<span>${Judge03}</span></td>	</tr>	<tr>		<td colspan="6">异常3<span>${Judge04}</span></td>	</tr>	<tr>		<td colspan="6">异常4<span>${Judge05}</span></td>	</tr>	<tr>		<td>健康指导</td>		<td colspan="6"><span>${HealthDirect}</span></td>	</tr>	<tr>		<td style="border-bottom: 1px solid #DEEFFB;">危险因素控制</td>		<td style="border-bottom: 1px solid #DEEFFB;" colspan="6"><span>${DangerControl}</span><span>${DangerControlOther1}</span><span>${DangerControlOther2}</span><span>${DangerControlOther3}</span></td>	</tr></table></div>';
 				$keyvaluehtml = '<div class="display_keyvalue_medialexam key-value-display">	<table class="form_tbl">		<tr>			<td id="姓名">姓名</td>			<td>${Name}</td>		</tr>		<tr>			<td id="编号">编号</td>			<td>${FileNo}</td>		</tr>		<tr>			<td id="体检日期">体检日期</td>			<td>${ExamDate}</td>		</tr>		<tr>			<td id="责任医生">责任医生</td>			<td>${Doctor}</td>		</tr>		<tr>			<td id="症状">症状</td>			<td>${ExamSymptom}</td>		</tr>		<tr>			<td id="体温">体温</td>			<td>${General01}</td>		</tr>		<tr>			<td id="脉率">脉率</td>			<td>${General02}次/分钟</td>		</tr>		<tr>			<td id="呼吸频率">呼吸频率</td>			<td>${General03}次/分钟</td>		</tr>		<tr>			<td id="血压">血压</td>			<td>左侧：${General04}/${General05}mmHg，右侧：${General06}/${General07}mmHg</td>		</tr>		<tr>			<td id="身高">身高</td>			<td>${General08}cm</td>		</tr>		<tr>			<td id="体重">体重</td>			<td>${General09}kg</td>		</tr>		<tr>			<td id="腰围">腰围</td>			<td>${General10}cm</td>		</tr>		<tr>			<td id="体质指数">体质指数</td>			<td>${General11}</td>		</tr>		<tr>			<td id="老年人健康状态自我评估">老年人健康状态自我评估*</td>			<td>${OldManHealthEstimate}</td>		</tr>		<tr>			<td id="老年人生活自理能力自我评估">老年人生活自理能力自我评估*</td>			<td>${OldManLifeEstimate}</td>		</tr>		<tr>			<td id="老年人认知功能">老年人认知功能</td>			<td>${General14}</td>		</tr>		<tr>			<td id="简易智力状态检查">简易智力状态检查</td>			<td>${General15}</td>		</tr>		<tr>			<td id="老年人情感状态">老年人情感状态</td>			<td>${General16}</td>		</tr>		<tr>			<td id="老年人抑郁评分检查">老年人抑郁评分检查</td>			<td>${General17}</td>		</tr>		<tr>			<td id="锻炼频率">锻炼频率</td>			<td>${Life01}</td>		</tr>		<tr>			<td id="每次锻炼时间">每次锻炼时间</td>			<td>${Life02}分钟</td>		</tr>		<tr>			<td id="坚持锻炼时间">坚持锻炼时间</td>			<td>${Life03}年</td>		</tr>		<tr>			<td id="锻炼方式">锻炼方式</td>			<td>${Life04}</td>		</tr>		<tr>			<td id="饮食习惯">饮食习惯</td>			<td>${EatHabit}</td>		</tr>		<tr>			<td id="吸烟状况">吸烟状况</td>			<td>${Life06}</td>		</tr>		<tr>			<td id="日吸烟量">日吸烟量</td>			<td><span>平均</span>${Life07}支</td>		</tr>		<tr>			<td id="开始吸烟年龄">开始吸烟年龄</td>			<td>${Life08}岁</td>		</tr>		<tr>			<td id="戒烟年龄">戒烟年龄</td>			<td>${Life09}岁</td>		</tr>		<tr>			<td id="饮酒频率">饮酒频率</td>			<td>${Life10}</td>		</tr>		<tr>			<td id="日饮酒量">日饮酒量</td>			<td>平均${Life11}两</td>		</tr>		<tr>			<td id="是否戒酒">是否戒酒</td>			<td>${Life12}</td>		</tr>		<tr>			<td id="戒酒年龄">戒酒年龄</td>			<td>${Life13}岁</td>		</tr>		<tr>			<td id="开始饮酒年龄">开始饮酒年龄</td>			<td>${Life14}岁</td>		</tr>		<tr>			<td id="近一年内是否曾醉酒">近一年内是否曾醉酒</td>			<td>${Life15}</td>		</tr>		<tr>			<td id="饮酒种类">饮酒种类</td>			<td>${DrinkHabit}</td>		</tr>		<tr>			<td id="职业病危害因素接触史">职业病危害因素接触史</td>			<td>${Life17}${Life18}{Life19}</td>		</tr>		<tr>			<td id="粉尘">粉尘</td>			<td>${Life20};防护措施:${Life21}</td>		</tr>		<tr>			<td id="放射物质">放射物质</td>			<td>${Life22};防护措施:${Life23}</td>		</tr>		<tr>			<td id="物理因素">物理因素</td>			<td>${Life24};防护措施:${Life25}</td>		</tr>		<tr>			<td id="化学物质">化学物质</td>			<td>${Life26};防护措施:${Life27}</td>		</tr>		<tr>			<td id="毒物种类其他">毒物种类其他</td>			<td>${Life28};防护措施:${Life29}</td>		</tr>		<tr>			<td id="口唇">口唇</td>			<td>${Viscera01}</td>		</tr>		<tr>			<td id="齿列">齿列</td>			<td>${Viscera02}</td>		</tr>		<tr>			<td id="齿列描述">齿列描述</td>			<td>上:${Viscera02Description},右:${Viscera02Description1},下:${Viscera02Description2},左:${Viscera02Description3}			</td>		</tr>		<tr>			<td id="咽部">咽部</td>			<td>${Viscera03}</td>		</tr>		<tr>			<td id="视力">视力</td>			<td>左眼${Viscera04}右眼${Viscera05} <span>(矫正视力：左眼</span>${Viscera06}右眼${Viscera07})			</td>		</tr>		<tr>			<td id="听力">听力</td>			<td>${Viscera08}</td>		</tr>		<tr>			<td id="运动能力">运动能力</td>			<td>${Viscera09}</td>		</tr>		<tr>			<td id="眼底">眼底*<br /> <font size="2px" color="red">（空代表未测）</font></td>			<td>${Exam29}</td>		</tr>		<tr>			<td id="皮肤">皮肤</td>			<td>${Body01}</td>		</tr>		<tr>			<td id="巩膜">巩膜</td>			<td>${Body02}</td>		</tr>		<tr>			<td id="淋巴结">淋巴结</td>			<td>${Body03}</td>		</tr>		<tr>			<td id="桶状胸">桶状胸</td>			<td>${Body04}</td>		</tr>		<tr>			<td id="呼吸音">呼吸音</td>			<td>${Body05}</td>		</tr>		<tr>			<td id="罗音">罗音</td>			<td>${Body06}</td>		</tr>		<tr>			<td id="心率">心率</td>			<td>${Body07}次/分钟</td>		</tr>		<tr>			<td id="心律">心律</td>			<td>${Body08}</td>		</tr>		<tr>			<td id="杂音">杂音</td>			<td>${Body09}</td>		</tr>		<tr>			<td id="压痛">压痛</td>			<td>${Body10}</td>		</tr>		<tr>			<td id="包块">包块</td>			<td>${Body12}</td>		</tr>		<tr>			<td id="肝大">肝大</td>			<td>${Body13}</td>		</tr>		<tr>			<td id="脾大">脾大</td>			<td>${Body14}</td>		</tr>		<tr>			<td id="移动性浊音">移动性浊音</td>			<td>${Body15}</td>		</tr>		<tr>			<td id="下肢水肿">下肢水肿</td>			<td>${Body16}</td>		</tr>		<tr>			<td id="足背动脉博动">足背动脉博动</td>			<td>${Body17}</td>		</tr>		<tr>			<td id="肛门指诊">肛门指诊*<br /> <font size="2px" color="red">（空代表未测）</font></td>			<td>${Body18}</td>		</tr>		<tr>			<td id="乳腺">乳腺*</td>			<td>${Galactophore}</td>		</tr>		<tr>			<td id="外阴">外阴*</td>			<td>${Body20}</td>		</tr>		<tr>			<td id="阴道">阴道*</td>			<td>${Body21}</td>		</tr>		<tr>			<td id="宫颈">宫颈*</td>			<td>${Body22}</td>		</tr>		<tr>			<td id="宫体">宫体*</td>			<td>${Body23}</td>		</tr>		<tr>			<td id="附件">附件*</td>			<td>${Body24}</td>		</tr>		<tr>			<td id="妇科其它">妇科其它*</td>			<td>${Body25}</td>		</tr>		<tr>			<td id="血红蛋白">血红蛋白</td>			<td>${Exam03}g/L</td>		</tr>		<tr>			<td id="白细胞">白细胞</td>			<td><span>${Exam04}</span>×10<sup>9</sup>/L</td>		</tr>		<tr>			<td id="血小板">血小板</td>			<td><span>${Exam05}</span>×10<sup>9</sup>/L</td>		</tr>		<tr>			<td id="血常规其它">血常规其它</td>			<td>${Exam06}</td>		</tr>		<tr>			<td id="尿蛋白">尿蛋白</td>			<td>${Exam07}</td>		</tr>		<tr>			<td id="尿糖">尿糖</td>			<td>${Exam08}</td>		</tr>		<tr>			<td id="尿酮体">尿酮体</td>			<td>${Exam09}</td>		</tr>		<tr>			<td id="尿潜血">尿潜血</td>			<td>${Exam10}</td>		</tr>		<tr>			<td id="尿常规其它">尿常规其它</td>			<td>${Exam11}</td>		</tr>		<tr>			<td id="空腹血糖">空腹血糖*</td>			<td><span>${Exam01}</span>mmol/L 或 (餐后)<span>${Exam02}</span>mmol/L</td>		</tr>		<tr>			<td id="心电图">心电图*<br /> <font size="2px" color="red">（空代表未测）</font></td>			<td>${Exam30}</td>		</tr>		<tr>			<td id="尿微量白蛋白">尿微量白蛋白*</td>			<td><span>${Exam12}</span></td>		</tr>		<tr>			<td id="大便潜血">大便潜血*<br /> <font size="2px" color="red">（空代表未测）</font></td>			<td><span>${Exam13}</span></td>		</tr>		<tr>			<td id="糖化血红蛋白">糖化血红蛋白*</td>			<td><span>${Exam27}</span></td>		</tr>		<tr>			<td id="乙型肝炎表面抗原">乙型肝炎表面抗原*<br /> <font size="2px" color="red">（空代表未测）</font></td>			<td><span>${Exam28}</span></td>		</tr>		<tr>			<td id="血清谷丙转氨酶">血清谷丙转氨酶</td>			<td><span>${Exam14}</span>U/L</td>		</tr>		<tr>			<td id="血清谷草转氨酶">血清谷草转氨酶</td>			<td><span>${Exam15}</span>U/L</td>		</tr>		<tr>			<td id="白蛋白">白蛋白</td>			<td><span>${Exam16}</span>U/L</td>		</tr>		<tr>			<td id="总胆红素">总胆红素</td>			<td><span>${Exam17}</span>µmol		</tr>		<tr>			<td id="血清肌酐">血清肌酐</td>			<td><span>${Exam19}</span>µmol</td>		</tr>		<tr>			<td id="结合胆红素">结合胆红素</td>			<td><span>${Exam18}</span>µmol</td>		</tr>		<tr>			<td id="血尿素氮">血尿素氮</td>			<td><span>${Exam20}</span>mmol</td>		</tr>		<tr>			<td id="血钾浓度">血钾浓度</td>			<td><span>${Exam21}</span>mmol</td>		</tr>		<tr>			<td id="血纳浓度">血纳浓度</td>			<td><span>${Exam22}</span>mmol</td>		</tr>		<tr>			<td id="总胆固醇">总胆固醇</td>			<td><span>${Exam23}</span>mmol/L</td>		</tr>		<tr>			<td id="甘油三酯">甘油三酯</td>			<td><span>${Exam24}</span>mmol/L</td>		</tr>		<tr>			<td id="血清低密度脂蛋白胆固醇">血清低密度脂蛋白胆固醇</td>			<td><span>${Exam25}</span>mmol/L</td>		</tr>		<tr>			<td id="血清高密度脂蛋白胆固醇">血清高密度脂蛋白胆固醇</td>			<td><span>${Exam26}</span>mmol/L</td>		</tr>		<tr>			<td id="胸片X线片">胸片X线片*<br /> <font size="2px" color="red">（空代表未测）</font></td>			<td>${Exam31}</td>		</tr>		<tr>			<td id="B超">B超*<br /> <font size="2px" color="red">（空代表未测）</font></td>			<td>${Exam32}</td>		</tr>		<tr>			<td id="宫颈涂片">宫颈涂片*<br /> <font size="2px" color="red">（空代表未测）</font></td>			<td>${Exam33}</td>		</tr>		<tr>			<td id="辅助检查其他">辅助检查其他*</td>			<td>${Exam34}</td>		</tr>		<tr>			<td id="平和质">平和质</td>			<td><span>${CHN01}</span></td>		</tr>		<tr>			<td id="气虚质">气虚质</td>			<td><span>${CHN02}</span></td>		</tr>		<tr>			<td id="阳虚质">阳虚质</td>			<td><span>${CHN03}</span></td>		</tr>		<tr>			<td id="阴虚质">阴虚质</td>			<td><span>${CHN04}</span></td>		</tr>		<tr>			<td id="痰湿质">痰湿质</td>			<td><span>${CHN05}</span></td>		</tr>		<tr>			<td id="湿热质">湿热质</td>			<td><span>${CHN06}</span></td>		</tr>		<tr>			<td id="血瘀质">血瘀质</td>			<td><span>${CHN07}</span></td>		</tr>		<tr>			<td id="气郁质">气郁质</td>			<td><span>${CHN08}</span></td>		</tr>		<tr>			<td id="特秉质">特秉质</td>			<td><span>${CHN09}</span></td>		</tr>		<tr>			<td id="脑血管疾病">脑血管疾病</td>			<td>${HarnsSick}</td>		</tr>		<tr>			<td id="肾脏疾病">肾脏疾病</td>			<td>${KidneySick}</td>		</tr>		<tr>			<td id="心脏疾病">心脏疾病</td>			<td>${HeartSick}</td>		</tr>		<tr>			<td id="血管疾病">血管疾病</td>			<td>${VasSick}</td>		</tr>		<tr>			<td id="眼部疾病">眼部疾病</td>			<td>${EyeSick}</td>		</tr>		<tr>			<td id="神经系统疾病">神经系统疾病</td>			<td>${Problem06}</td>		</tr>		<tr>			<td id="其它系统疾病">其它系统疾病</td>			<td>${Problem07}</td>		</tr>		<tr>			<td id="住院治疗情况">住院治疗情况</td>			<td><span>${Hospitalization}</span></td>		</tr>		<tr>			<td id="主要用药情况">主要用药情况</td>			<td><span>${ExamMedication}</span></td>		</tr>		<tr>			<td id="非免疫规划预防接种史">非免疫规划预防接种史</td>			<td><span>${VaccinateHistory}</span></td>		</tr>		<tr>			<td id="健康评价">健康评价</td>			<td>${Judge01}</td>		</tr>		<tr>			<td id="健康评价异常1">健康评价异常1</td>			<td><span>${Judge02}</span></td>		</tr>		<tr>			<td id="健康评价异常2">健康评价异常2</td>			<td>异常2<span>${Judge03}</span></td>		</tr>		<tr>			<td id="健康评价异常3">健康评价异常3</td>			<td>异常3<span>${Judge04}</span></td>		</tr>		<tr>			<td id="健康评价异常4">健康评价异常4</td>			<td>异常4<span>${Judge05}</span></td>		</tr>		<tr>			<td id="健康指导">健康指导</td>			<td><span>${HealthDirect}</span></td>		</tr>		<tr>			<td style="border-bottom: 1px solid #DEEFFB;" id="危险因素控制">危险因素控制</td>			<td style="border-bottom: 1px solid #DEEFFB;" colspan="6"><span>${DangerControl}</span><span>${DangerControlOther1}</span><span>${DangerControlOther2}</span><span>${DangerControlOther3}</span></td>		</tr>	</table></div>';
@@ -643,12 +643,12 @@ class dashboardControl extends SystemControl{
 					array_push ($hisinfo_list, $row );
 				}
 			}
-	    	
+
 			echo json_encode(array('success' => true, 'msg' => '保存成功!','data' => $serviceIndexCount_list,'hisdata' => $hisinfo_list,
 				'standarddisplayhtml' => $standarddisplayhtml,'keyvaluehtml' => $keyvaluehtml,'type' => $type));
 		}else{
 			$member_id = trim($_GET ['member_id']);
-	    	
+
 	    	$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 	    	$sql = "exec pXMemberHealthFileServiceIndexCount '". $member_id ."';";
 			$stmt = $conn->prepare($sql);
@@ -657,7 +657,7 @@ class dashboardControl extends SystemControl{
 			while ( $row = $stmt->fetchObject () ) {
 				array_push ($serviceIndexCount_list, $row );
 			}
-	    	
+
 	    	$sql = "exec pXMemberHealthFileServiceIndexInfo '". $member_id ."';";
 			$stmt = $conn->prepare($sql);
 			$stmt->execute();
@@ -685,5 +685,609 @@ class dashboardControl extends SystemControl{
 	    	Tpl::output('ServiceIndexInfo',$serviceIndexInfo_list);
 	        Tpl::showpage('timeline-new');
 		}
+    }
+
+    private function businessCount($type)
+    {
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        //查询业务开展数量情况
+        $timenum = 1; //必须能被60整除
+        $timetype = 'min';
+        $timefmt = 'Y-m-d H:i:0';
+        $timestr = strval($type * $timenum) .' '.$timetype;
+
+        $now = getdate();
+        $seconds = $now['minutes'];
+        if ($seconds < $timenum) {
+            $begitime = 0;
+        } else {
+            $begitime = $seconds - $seconds % $timenum;
+        }
+
+        $begindatetime = new DateTime();
+        date_time_set($begindatetime, $now['hours'], $begitime, 0 );
+        date_add($begindatetime, date_interval_create_from_date_string($timestr));
+        $strbegin = date_format($begindatetime, $timefmt);
+        date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
+        $strend = date_format($begindatetime, $timefmt);
+        $datesql = ' and a.InputDate>= \'' . $strbegin . '\' and a.InputDate< \'' . $strend . '\'';
+        $sql = "select  sum(num) num
+                from(
+                select count(1) num from MedicalExam  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from HealthFileMaternal  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from FirstVistBeforeBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from VisitBeforeBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from VisitAfterBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from HealthFileChildren  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from ChildrenMediExam  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from ChildrenMediExam3_6  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from HypertensionVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from DiabetesVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from FuriousVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                ) uniontable   ";
+        $stmt = $conn->query($sql);
+        $ret = array();
+        $ret['begintime'] = $strbegin;
+        $ret['num'] = $stmt->fetch(PDO::FETCH_NUM)[0];
+        $ret['ttt'] =$timestr;
+//        $ret['sql'] = $sql;
+        return $ret;
+    }
+
+    private function getBusiTime($type,$flag){
+        //查询业务开展数量情况
+        $flag = 2;
+        if($flag == 1){
+            $timenum = 1; //必须能被60整除
+            $timetype = 'hour';
+            $timefmt = 'Y-m-d H:i:s';
+            $timefmtnew = 'Y-m-d H:0:0';
+            $timestr = strval($type * $timenum) .' '.$timetype;
+
+            $now = getdate();
+            $seconds = $now['hours'];
+            if ($seconds < $timenum) {
+                $begitime = 0;
+            } else {
+                $begitime = $seconds - $seconds % $timenum;
+            }
+
+            $begindatetime = new DateTime();
+            date_time_set($begindatetime,  $begitime, 0,0 );
+            date_add($begindatetime, date_interval_create_from_date_string($timestr));
+            $strbegin = date_format($begindatetime, $timefmtnew);
+            date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
+            $strend = date_format($begindatetime, $timefmtnew);
+        }else if($flag == 2){
+            $timenum = 1; //必须能被60整除
+            $timetype = 'minute';
+            $timefmt = 'Y-m-d H:i:s';
+            $timefmtnew = 'Y-m-d H:i:0';
+            $timestr = strval($type * $timenum) .' '.$timetype;
+
+            $now = getdate();
+            $seconds = $now['minutes'];
+            if ($seconds < $timenum) {
+                $begitime = 0;
+            } else {
+                $begitime = $seconds - $seconds % $timenum;
+            }
+
+            $begindatetime = new DateTime();
+            date_time_set($begindatetime, $now['hours'] , $seconds,0 );
+            date_add($begindatetime, date_interval_create_from_date_string($timestr));
+            $strbegin = date_format($begindatetime, $timefmtnew);
+            date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
+            $strend = date_format($begindatetime, $timefmtnew);
+        }else{
+            $timenum = 10; //必须能被60整除
+            $timetype = 'sec';
+            $timefmt = 'Y-m-d H:i:s';
+            $timefmtnew = 'Y-m-d H:0:0';
+            $timestr = strval($type * $timenum) .' '.$timetype;
+
+            $now = getdate();
+            $seconds = $now['seconds'];
+            if ($seconds < $timenum) {
+                $begitime = 0;
+            } else {
+                $begitime = $seconds - $seconds % $timenum;
+            }
+
+            $begindatetime = new DateTime();
+            date_time_set($begindatetime, $now['hours'], $now['minutes'], $begitime );
+            date_add($begindatetime, date_interval_create_from_date_string($timestr));
+            $strbegin = date_format($begindatetime, $timefmtnew);
+            date_add($begindatetime, date_interval_create_from_date_string($timenum.' '.$timetype));
+            $strend = date_format($begindatetime, $timefmt);
+        }
+        $ret = array();
+        $ret['beginstr']= $strbegin;
+        $ret['endstr']= $strend;
+        return $ret;
+    }
+    private function businessCountNew($type ,$flag)
+    {
+        //return $this->businessCounttest($type,$flag);
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        //查询业务开展数量情况
+        $times =$this->getBusiTime($type,$flag);
+        $strbegin = $times['beginstr'];
+        $strend = $times['endstr'];
+
+        $datesql = ' and a.InputDate>= \'' . $strbegin . '\' and a.InputDate< \'' . $strend . '\'';
+        $sql = "select  sum(num) num
+                from(
+                select count(1) num from MedicalExam  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from HealthFileMaternal  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from FirstVistBeforeBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname  and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from VisitBeforeBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from VisitAfterBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from HealthFileChildren  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from ChildrenMediExam  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from ChildrenMediExam3_6  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from HypertensionVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from DiabetesVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                union all
+                select count(1) num from FuriousVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname   and b.org_id in (select orgid from map_org_wechat)
+                $datesql
+                ) uniontable   ";
+        $stmt = $conn->query($sql);
+        $ret = array();
+        $ret['begintime'] = $strend;
+        $ret['num'] = $stmt->fetch(PDO::FETCH_NUM)[0];
+        $ret['ttt'] =$timestr;
+//        $ret['sql'] = $sql;
+        return $ret;
+    }
+    private function businessCounttest($type,$flag){
+        $ret = array();
+        //查询业务开展数量情况
+        $times =$this->getBusiTime($type,$flag);
+        $strbegin = $times['beginstr'];
+        $strend = $times['endstr'];
+
+        $ret['begintime'] = $strend;
+        $ret['num'] = rand();
+        return $ret;
+    }
+
+    public function busidataOp(){
+        echo json_encode($this->businessCountNew(0,false));
+        exit;
+    }
+
+    public function cacheChartOp(){
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+        $stmt = $conn->query('select * from cache_values where [key] like \'dashboard_%\' ');
+        $ret = array();
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $ret[substr($row[0],strlen('dashboard_'))]= json_decode($row[1]);
+        }
+
+        echo json_encode($ret);
+        exit();
+    }
+
+    public function newchartOp()
+    {
+        $ret = array();
+        $type= $_GET['charttype'];
+        $conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+//        1,新增档案数 /档案总数
+//        $ret['type']=$type;
+        if($type=='1'){
+            $stmt = $conn->query("select count(*) from healthfile where status=0");
+            $ret["file_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $stmt = $conn->query("select count(*) from healthfile where inputdate>=convert(date,getdate()) and inputdate<dateadd(day,1,convert(date,getdate())) and status=0");
+            $ret["file_new"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+        }
+//        2,孕妇新增建册 /新增结案/未结案总数
+        if($type=='2') {
+            $stmt = $conn->query("select count(*) from HealthFileMaternal where IsClosed=0");
+            $ret["pregnant_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $stmt = $conn->query("select count(*) from HealthFileMaternal where IsClosed=0 and inputdate>=convert(date,getdate()) and inputdate<dateadd(day,1,convert(date,getdate()))");
+            $ret["pregnant_new"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $stmt = $conn->query("select count(*) from HealthFileMaternal where IsClosed=1 and inputdate>=convert(date,getdate()) and inputdate<dateadd(day,1,convert(date,getdate()))");
+            $ret["pregnant_close"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+        }
+//        3,高血压/糖尿病/重性精神病 总数
+        if($type=='3') {
+            $stmt = $conn->query("select count(*) from healthfile a,  personalinfo b ,diseasehistory c  where a.fileno = b.fileno and a.status = 0 and b.id = c.personalinfoid and c.diseaseid = 2");
+            $ret["chronic_hyp"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $stmt = $conn->query("select count(*) from healthfile a,  personalinfo b ,diseasehistory c  where a.fileno = b.fileno and a.status = 0 and b.id = c.personalinfoid and c.diseaseid = 3");
+            $ret["chronic_diab"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $stmt = $conn->query("select count(*) from healthfile a,  personalinfo b ,diseasehistory c  where a.fileno = b.fileno and a.status = 0 and b.id = c.personalinfoid and c.diseaseid = 8");
+            $ret["chronic_holergasia"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+        }
+//        4,传染病报告数
+        if($type=='4') {
+            $ret["infectious_count"] = 0;
+            $ret["infectious_new"] = 0;
+        }
+//        5,公卫开展业务数
+        if($type=='5') {
+            $ret['busi_counts'] = array();
+            for ($i = -100; $i < 1; $i++) {
+                array_push($ret['busi_counts'], $this->businessCountNew($i, false));
+            }
+        }
+//        6, 当天各个医疗机构的收入柱状图
+        if($type=='6') {
+            $stmt = $conn->query(" select  b.id , b.name , sum(fCO_IncomeMoney) as num
+                    from  Center_CheckOut checkout left join  Organization b   on checkout.OrgID = b.id
+                    where checkout.OrgID in (select orgid from map_org_wechat) and
+                    dCO_Date>=convert(date,getdate()) and dCO_Date<dateadd(day,1,convert(date,getdate()))
+              group by b.id , b.name order by  b.id desc   ");
+            $ret['income_counts'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['income_counts'], $row);
+            }
+        }
+//        7, 当天各个医疗机构的门诊住院人次柱状图
+        if($type=='7') {
+            $stmt = $conn->query("  select id,name, sum(num) num
+                                from (
+                                select org.id ,org.name , count(1) as num from Center_ClinicLog a  , Organization org  where  a.orgid = org.id
+                                group by org.id ,org.name
+                                union all
+                                select org.id ,org.name , count(1) as num  from Center_InpatientLog a  , Organization org  where  a.orgid = org.id
+                                group by org.id ,org.name
+                                ) sumtable group by id ,name order by id");
+            $ret['preperson_counts'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['preperson_counts'], $row);
+            }
+        }
+//        8,门诊和住院收入的当月折线30天
+        if($type=='8') {
+            $stmt = $conn->query(" select  year(dCO_Date) syear, month(dCO_Date) smonth,day(dCO_Date) sday, sum(fCO_IncomeMoney) as num
+                    from  Center_CheckOut checkout left join  Organization b   on checkout.OrgID = b.id
+                    where checkout.OrgID in (select orgid from map_org_wechat) and
+                    dCO_Date>=dateadd(day,-30,convert(date,getdate())) and dCO_Date<dateadd(day,1,convert(date,getdate()))
+                    group by  year(dCO_Date), month(dCO_Date),day(dCO_Date)
+                     order by  year(dCO_Date), month(dCO_Date),day(dCO_Date)    ");
+            $ret['income_30days'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['income_30days'], $row);
+            }
+        }
+//        9. 妇保业务
+        if($type=='9') {
+            //妇保业务总数
+            $datesql = ' ';
+            $stmt = $conn->query(
+                "select  sum(num) num
+                from(
+                select count(1) num from HealthFileMaternal  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from FirstVistBeforeBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from VisitBeforeBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from VisitAfterBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                ) uniontable   "
+            );
+            $ret["pregnantbusi_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //妇保业务当月数
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', time()) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query(
+                "select  sum(num) num
+                from(
+                select count(1) num from HealthFileMaternal  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from FirstVistBeforeBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from VisitBeforeBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from VisitAfterBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                ) uniontable   "
+            );
+            $ret["pregnantbusi_monthcount"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-d', strtotime('-14 day')) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query("select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  sum(num) num
+                from(
+                select a.inputdate ,count(1) num from HealthFileMaternal  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                group by a.inputdate
+                union all
+                select a.inputdate ,count(1) num from FirstVistBeforeBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                group by a.inputdate
+                union all
+                select a.inputdate ,count(1) num from VisitBeforeBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                group by a.inputdate
+                union all
+                select a.inputdate ,count(1) num from VisitAfterBorn  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                group by a.inputdate
+                ) uniontable
+                 group by  year(inputdate), month(inputdate),day(inputdate)
+                     order by  year(inputdate), month(inputdate),day(inputdate)   ");
+            $ret['pregnantbusi_14day'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['pregnantbusi_14day'], $row);
+            }
+        }
+//        10,儿保业务
+        if($type=='10') {
+            //儿保业务总数
+            $datesql = ' ';
+            $stmt = $conn->query(
+                "select  sum(num) num
+                from(
+                select count(1) num from HealthFileChildren  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from ChildrenMediExam  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from ChildrenMediExam3_6  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                ) uniontable   "
+            );
+            $ret["childbusi_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //儿保业务当月数
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', time()) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query(
+                "select  sum(num) num
+                from(
+                select count(1) num from HealthFileChildren  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from ChildrenMediExam  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from ChildrenMediExam3_6  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                ) uniontable   "
+            );
+            $ret["childbusi_monthcount"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //儿保14天数据
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', strtotime('-14 day')) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query("select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  sum(num) num
+                from(
+                select a.inputdate,count(1) num from HealthFileChildren  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                group by a.inputdate
+                union all
+                select a.inputdate, count(1) num from ChildrenMediExam  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                group by a.inputdate
+                union all
+                select a.inputdate, count(1) num from ChildrenMediExam3_6  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                group by a.inputdate
+                ) uniontable
+                 group by  year(inputdate), month(inputdate),day(inputdate)
+                     order by  year(inputdate), month(inputdate),day(inputdate)   ");
+            $ret['childbusi_14day'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['childbusi_14day'], $row);
+            }
+        }
+//        11,慢病业务
+        if($type=='11') {
+            //慢病业务总数
+            $datesql = ' ';
+            $stmt = $conn->query(
+                "select  sum(num) num
+                from(
+                select count(1) num from HypertensionVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from DiabetesVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from FuriousVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                ) uniontable   "
+            );
+            $ret["chronicbusi_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //慢病业务当月数
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', time()) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query(
+                "select  sum(num) num
+                from(
+                select count(1) num from HypertensionVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from DiabetesVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                union all
+                select count(1) num from FuriousVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                ) uniontable   "
+            );
+            $ret["chronicbusi_monthcount"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //慢病14天数据
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', strtotime('-14 day')) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query("select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  sum(num) num
+                from(
+                select a.inputdate,count(1) num from HypertensionVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                group by a.inputdate
+                union all
+                select a.inputdate, count(1) num from DiabetesVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                group by a.inputdate
+                union all
+                select a.inputdate, count(1) num from FuriousVisit  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                group by a.inputdate
+                ) uniontable
+                 group by  year(inputdate), month(inputdate),day(inputdate)
+                     order by  year(inputdate), month(inputdate),day(inputdate)   ");
+            $ret['chronicbusi_14day'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['chronicbusi_14day'], $row);
+            }
+        }
+//        12,分娩业务
+        if($type=='12') {
+            $datesql = ' ';
+            $stmt = $conn->query(
+                "   select count(1) num from ChildBirthRecord  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname      "
+            );
+            $ret["childbirth_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //分娩业务当月数
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', time()) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query("select count(1) num from ChildBirthRecord  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql  "
+            );
+            $ret["childbirth_monthcount"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //分娩14天数据
+            $datesql = ' and a.InputDate>= \'' . date('Y-m-1', strtotime('-14 day')) . '\' and a.InputDate< \'' . date('Y-m-d', strtotime('+1 day')) . '\'';
+            $stmt = $conn->query("select  year(inputdate) syear, month(inputdate) smonth,day(inputdate) sday,  count(1) num
+                from ChildBirthRecord  a  , sam_taxempcode b
+                where a.InputPersonID = b.loginname
+                $datesql
+                group by  year(inputdate), month(inputdate),day(inputdate)
+                     order by  year(inputdate), month(inputdate),day(inputdate)   ");
+            $ret['childbirth_14day'] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+                array_push($ret['childbirth_14day'], $row);
+            }
+        }
+//        13,卫生监督
+        if($type=='13') {
+            $ret['health_14day'] = array();
+        }
+//        14,档案分布
+        if($type=='14') {
+            //男女比例
+            $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and b.sex='男' and a.fileno = b.fileno");
+            $result = $stmt->fetch(PDO::FETCH_NUM);
+            $ret["file_male_count"] = $result[0];
+            $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0  and a.fileno = b.fileno");
+            $result = $stmt->fetch(PDO::FETCH_NUM);
+            $ret["all"] = $result[0];
+            //老年人比例
+            $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and a.fileno = b.fileno
+                    and b.birthday <=convert(datetime,convert(nvarchar,(YEAR(getdate())-64))+'-01-01')
+                    ");
+            $ret["file_old_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //孕产妇比例
+            $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 AND a.fileno =b.fileno and
+                      a.fileno in (select fileno from HealthFileMaternal where IsClosed = 0 )
+                    ");
+            $ret["file_pregnant_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //儿童比例
+            $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and a.fileno = b.fileno
+                    and b.birthday >=convert(datetime,convert(nvarchar,(YEAR(getdate())-7))+'-01-01')
+                    ");
+            $ret["file_child_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            //慢病比例
+            $stmt = $conn->query("select  count(*) from healthfile  a, personalinfo b  where status=0 and a.fileno = b.fileno
+                    and b.id in( select  personalinfoid from diseasehistory  where  diseaseid in(2,3,8) )
+                    ");
+            $ret["file_chronic_count"] = $stmt->fetch(PDO::FETCH_NUM)[0];
+            $ret["file_other_count"] = $ret["all"] - $ret["file_old_count"] - $ret["file_pregnant_count"] - $ret["file_child_count"] - $ret["file_chronic_count"];
+        }
+        echo json_encode($ret);
+        exit;
     }
 }
