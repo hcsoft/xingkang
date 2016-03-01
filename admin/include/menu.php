@@ -238,7 +238,7 @@ $arr = array(
                     array('args'=>'saledetailmanager,finance,finance',			'text'=>'销售明细财务分类管理'),
                     array('args'=>'financesum,finance,finance',			'text'=>'门诊收入统计'),
                     array('args'=>'financeinsum,finance,finance',			'text'=>'住院收入统计'),
-                	array('args'=>'goodssum,finance,finance',			'text'=>'药品汇总'),
+                	array('args'=>'goodssum_goods,goods,goods',			'text'=>'药品汇总'),
                     array('args'=>'financegoodsum,finance,finance',			'text'=>'单品毛利分析'),
                     array('args'=>'detail,storehouse,finance',			'text'=>'仓库单据明细'),
                     array('args'=>'sum,storehouse,finance',			'text'=>'仓库单据汇总'),

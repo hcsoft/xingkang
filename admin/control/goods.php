@@ -753,7 +753,6 @@ class goodsControl extends SystemControl
             $startnum = 0 ;
             $endnum = 100000;//excel仅允许导出10W条
             $displaytext = array();
-            array_push($displaytext,'序号');
             array_push($displaytext,'商品编码');
             array_push($displaytext,'商品名称');
             if($_GET['orgsum'] && $_GET['orgsum'] == 'true'){
@@ -763,9 +762,7 @@ class goodsControl extends SystemControl
             array_push($displaytext,'含量规格');
             array_push($displaytext,'包装规格');
 
-            array_push($displaytext,'供应商');
-            array_push($displaytext,'厂家');
-            array_push($displaytext,'产地');
+            array_push($displaytext,'厂家/产地');
 
             array_push($displaytext,'常规单位');
             array_push($displaytext,'可售库存');
@@ -785,9 +782,9 @@ class goodsControl extends SystemControl
             array_push($propertys,'sDrug_Spec');
             array_push($propertys,'sDrug_Content');
             array_push($propertys,'sDrug_PackSpec');
-            array_push($propertys,'sCustomer_Name');
+//             array_push($propertys,'sCustomer_Name');
             array_push($propertys,'brand_name');
-            array_push($propertys,'gc_name');
+//             array_push($propertys,'gc_name');
 
             array_push($propertys,'sDrug_Unit');
             array_push($propertys,'fDS_OStock');
@@ -874,7 +871,7 @@ class goodsControl extends SystemControl
         if ($exportflag) {
             $this->exportcsvbyObject($displaytext,$propertys,$propertysmap,'库存汇总',$goods_list);
         }
-
+	
 
 //        var_dump($goods_list);
         Tpl::output('goods_list', $goods_list);
@@ -1451,6 +1448,7 @@ public function goodssum_goodsOp()
     	$sql = ' from Center_ClinicSale a
                 left join  shopnc_goods_common good  on a.iDrug_ID = good.goods_commonid
                 left join Center_Class class on   good.iDrug_StatClass = class.iClass_ID  
+    			left join Center_CheckOut checkout on   checkout.iCO_ID = a.iCO_ID
                 , Organization org
                 where   a.orgid = org.id  and a.iDrug_ID >0 '; 
     	if ($_GET['itemtype']) {
@@ -1520,6 +1518,7 @@ public function goodssum_goodsOp()
     			'fSale_NoTaxPrice' =>'a.fSale_NoTaxPrice as "fSale_NoTaxPrice" ',
 //     			'goods' => ' good.sDrug_ID, good.sDrug_TradeName ,a.ItemType, good.sDrug_Spec ,good.sDrug_Unit ,good.sDrug_Brand,sum(a.fSale_Num) as fSale_Num ,a.fSale_TaxPrice',
     			'Doctor' => ' a.DoctorName as "Doctor" ',
+    			'MakePerson' => ' checkout.sMakePerson as "MakePerson" ',
     			'year' => ' year(a.dSale_GatherDate) as "year" ',
     			'month' => ' left(convert(varchar,dSale_GatherDate,112),6) as  "month" ',
     			'day' => ' convert(varchar,dSale_GatherDate,112) as "day" ',
@@ -1530,6 +1529,7 @@ public function goodssum_goodsOp()
     	$config = array('sumcol' => array(
     			'OrgID' => array(name => 'OrgID', 'text' => '机构'),
     			'Doctor' => array(name => 'Doctor', 'text' => '医生'),
+    			'MakePerson' => array(name => 'MakePerson', 'text' => '收银员'),
     			'goods' => array(name => 'goods', 'text' => '药品','cols'=>array('0'=>array(name => 'sDrug_ID', 'text' => '项目编码'),
     																			'1'=>array(name => 'sDrug_TradeName', 'text' => '项目名称'),
 														    					'2'=>array(name => 'ItemType', 'text' => '项目类型'),
@@ -1611,7 +1611,7 @@ public function goodssum_goodsOp()
     	$sumcolstr = join(',', $sumcol);
     	$groupbycolstr = join(',', $groupbycol);
     	$tsql = ' select '.$sumcolstr .',sum(a.fSale_TaxFactMoney) as fSale_TaxFactMoney'.$sql." group by $groupbycolstr ";
-    	
+//     	var_dump($tsql);
     	$countsql = " select count(*)  from ($tsql) a ";
     	$stmt = $conn->query($countsql);
     	$total = $stmt->fetch(PDO::FETCH_NUM);
