@@ -590,7 +590,7 @@ Purchase: http://wrapbootstrap.com
             $('#dashboard-bandwidth-chart')
                 .data('width', $('.box-tabbs')
                         .width() - 20);
-            $.getJSON("index.php?act=dashboard&op=cacheChart", function (data) {
+            $.getJSON("index.php?act=dashboardnew&op=cacheChart", function (data) {
                 console.log(data);
                 //1,新增档案数 /档案总数;
                 $("#file_new").html(data["file_new"][0]["num"]);
@@ -690,7 +690,7 @@ Purchase: http://wrapbootstrap.com
                 });
 
                 function update() {
-                    $.getJSON("index.php?act=dashboard&op=busidata", function (data) {
+                    $.getJSON("index.php?act=dashboardnew&op=busidata", function (data) {
 
                         realtimeplot.setData(getSeriesObj(data));
                         realtimeplot.setupGrid();
@@ -1013,7 +1013,7 @@ Purchase: http://wrapbootstrap.com
             return ;
             //1,新增档案数 /档案总数;
             doTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 1}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 1}, function (data) {
                     $("#file_new").html(data["file_new"]);
 //                     window.myCounter = new flipCounter('file_new', {value: parseInt(data["file_new"]), inc: 11111, pace: 1000, auto: false});
 //                    window.myCounter.add(12345);
@@ -1025,7 +1025,7 @@ Purchase: http://wrapbootstrap.com
             });
             //2,孕妇新增建册 /新增结案/未结案总数
             doTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 2}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 2}, function (data) {
                     $("#pregnant_count").html(data["pregnant_count"]);
                     $("#pregnant_new").html(data["pregnant_new"]);
                     $("#pregnant_close").html(data["pregnant_close"]);
@@ -1036,7 +1036,7 @@ Purchase: http://wrapbootstrap.com
             });
             //3,高血压/糖尿病/重性精神病 总数
             doTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 3}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 3}, function (data) {
                     $("#chronic_hyp").html(data["chronic_hyp"]);
                     $("#chronic_diab").html(data["chronic_diab"]);
                     $("#chronic_holergasia").html(data["chronic_holergasia"]);
@@ -1048,7 +1048,7 @@ Purchase: http://wrapbootstrap.com
             });
             //4,传染病报告数
             doTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 4}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 4}, function (data) {
                     $("#infectious_new").html(data["infectious_new"]);
                     $("#infectious_pie_rate").data("percent", 0);
                     InitiateEasyPieChart.update("#infectious_pie_rate");
@@ -1056,14 +1056,14 @@ Purchase: http://wrapbootstrap.com
             });
             //5,公卫开展业务数
             doOneTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 5}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 5}, function (data) {
                     var busi_counts = data['busi_counts'];
                     var updateInterval = 60000;
 
 
 
                     function update() {
-                        $.getJSON("index.php?act=dashboard&op=busidata", function (data) {
+                        $.getJSON("index.php?act=dashboardnew&op=busidata", function (data) {
 
                             realtimeplot.setData(getSeriesObj(data));
                             realtimeplot.setupGrid();
@@ -1077,7 +1077,7 @@ Purchase: http://wrapbootstrap.com
             });
             // 6, 当天各个医疗机构的收入柱状图
             doOneTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 6}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 6}, function (data) {
                     var income_counts = data['income_counts'];
                     var income_data = [];
                     for (var i = 0; i < income_counts.length; i++) {
@@ -1128,7 +1128,7 @@ Purchase: http://wrapbootstrap.com
             });
             // 7, 当天各个医疗机构的门诊住院人次柱状图
             doOneTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 7}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 7}, function (data) {
                     var preperson_counts = data['preperson_counts'];
                     var preperson_data = [];
                     for (var i = 0; i < preperson_counts.length; i++) {
@@ -1180,7 +1180,7 @@ Purchase: http://wrapbootstrap.com
 
             //8,门诊和住院收入的当月折线30天
             doOneTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 8}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 8}, function (data) {
                     var income_30days = data['income_30days'];
                     var income_30days_data = [];
                     for (var i = 0; i < income_30days.length; i++) {
@@ -1237,7 +1237,7 @@ Purchase: http://wrapbootstrap.com
             });
             //9. 妇保业务
             doOneTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 9}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 9}, function (data) {
                     var pregnantbusi_count = data['pregnantbusi_count'];
                     var pregnantbusi_monthcount = data['pregnantbusi_monthcount'];
                     var pregnantbusi_14day = data['pregnantbusi_14day'];
@@ -1267,7 +1267,7 @@ Purchase: http://wrapbootstrap.com
             });
             //10. 儿保业务
             doOneTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 10}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 10}, function (data) {
                     var childbusi_count = data['childbusi_count'];
                     var childbusi_monthcount = data['childbusi_monthcount'];
                     var childbusi_14day = data['childbusi_14day'];
@@ -1296,7 +1296,7 @@ Purchase: http://wrapbootstrap.com
             });
             //11. 慢病业务
             doOneTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 11}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 11}, function (data) {
                     var chronicbusi_count = data['chronicbusi_count'];
                     var chronicbusi_monthcount = data['chronicbusi_monthcount'];
                     var chronicbusi_14day = data['chronicbusi_14day'];
@@ -1325,7 +1325,7 @@ Purchase: http://wrapbootstrap.com
             });
             //12. 分娩情况
             doOneTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 12}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 12}, function (data) {
                     var childbirth_count = data['childbirth_count'];
                     var childbirth_monthcount = data['childbirth_monthcount'];
                     var childbirth_14day = data['childbirth_14day'];
@@ -1354,14 +1354,14 @@ Purchase: http://wrapbootstrap.com
             });
             //13,卫生监督
             doOneTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 13}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 13}, function (data) {
                     var today = new Date();
                     $("#today").html(today.getMonth() + "月" + today.getDate() + "日");
                 });
             });
             //14,档案分布
             doOneTime(function () {
-                $.getJSON("index.php?act=dashboard&op=newchart", {charttype: 14}, function (data) {
+                $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 14}, function (data) {
                     var file_male_count = parseInt(data['file_male_count']);
                     var all = parseInt(data['all']);
                     $("#allcount").html(all);
