@@ -58,12 +58,45 @@ class SystemControl{
 	protected final function systemLogin(){
 		//取得cookie内容，解密，和系统匹配
 		$user = unserialize(decrypt(cookie('sys_key'),MD5_KEY));
+		
 		if (!key_exists('gid',(array)$user) || !isset($user['sp']) || (empty($user['name']) || empty($user['id']))){
-			@header('Location: index.php?act=login&op=login');exit;
+			if($_REQUEST['autologin']==true){
+				$user = $this->autologin();
+			}else{
+				@header('Location: index.php?act=login&op=login');exit;
+			}
 		}else {
 			$this->systemSetKey($user);
 		}
 		return $user;
+	}
+	/*
+	 * 自动登录，只有当参数autologin=true时有效
+	 * 参数user_name
+	 * password
+	 */
+	protected final function autologin(){
+		$model_admin = Model('admin');
+		$array	= array();
+		$array['admin_name']	= $_REQUEST['user_name'];
+		$array['admin_password']= md5(trim($_REQUEST['password']));
+		$admin_info = $model_admin->infoAdmin($array);
+		if(is_array($admin_info) and !empty($admin_info)) {
+			$this->systemSetKey(array('name'=>$admin_info['admin_name'], 'id'=>$admin_info['admin_id'],'gid'=>$admin_info['admin_gid'],'sp'=>$admin_info['admin_is_super']));
+			$update_info	= array(
+					'admin_id'=>$admin_info['admin_id'],
+					'admin_login_num'=>($admin_info['admin_login_num']+1),
+					'admin_login_time'=>TIMESTAMP
+			);
+			$model_admin->updateAdmin($update_info);
+			$this->log(L('nc_login'),1);
+		}
+		$res	= array();
+		$res['name'] = $admin_info['admin_name'];
+		$res['id'] = $admin_info['admin_id'];
+		$res['gid'] = $admin_info['admin_gid'];
+		$res['sp'] = $admin_info['admin_is_super'];
+		return $res;
 	}
 
 	/**
