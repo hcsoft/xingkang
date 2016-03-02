@@ -58,7 +58,7 @@ $arr = array(
             ),
 			13 => array(
 				'args' => 'kpi',
-				'text' => '指标'
+				'text' => '绩效考核'
 			)
 		),
 		'left' =>array(
