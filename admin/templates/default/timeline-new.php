@@ -218,7 +218,7 @@
 	                	});
 	                	console.log(displayhtml);
 	                	
-	                	$('#pmhsdetaildialog #showTitle a').html('就诊明细');
+	                	$('#pmhsdetaildialog #showTitle a').html('处方明细');
 	                	var tbodyinfo = '';
 	                	if(type == '21'){
 	                		$('#pmhsdetaildialog #showTitle').hide();
@@ -254,6 +254,37 @@
 	                	}
 	                	$('#pmhsdetaildialog').dialog("option","title", title);
 						$("#pmhsdetaildialog").dialog("open");
+						$('#pmhsdetaildialog #pmhs-standard-display table tr:first-child td ').each(function(a,b,c){
+							console.log(a,b,c);
+							var text = $(this).text();
+							if(text=='序号'){
+								console.log(a+',')
+							}else if(text=='项目名称'){
+								console.log(a+',')
+							}else if(text=='处方数量' && a==25){
+								console.log(a+',')
+							}else if(text=='单位'){
+								console.log(a+',')
+							}else if(text=='医生'){
+								console.log(a+',')
+							}else if(text=='科室'){
+								console.log(a+',')
+							}else if(text=='机构'){
+								console.log(a+',')
+							}else{
+								$(this).hide();
+							}
+						});
+						$('#pmhsdetaildialog #pmhs-standard-display table tr:not(:first-child) ').each(function(a,b,c){
+							var tr = $(this);
+							tr.children().each(function(idx,ele){
+								if(idx == 0 || idx == 2  || idx == 13  || idx == 14  || idx == 18  || idx == 19  || idx == 25){
+
+								}else{
+									$(this).hide();
+								}
+							});
+						});
                 	}
                 	$("body").hideLoading();
                 } else {
