@@ -189,7 +189,7 @@ Purchase: http://wrapbootstrap.com
                             </div>
                         </div>
                         <div class="box-progress" id="year_days">
-                            <div class="progress-handle" >0 天</div>
+                            <div class="progress-handle">0 天</div>
                             <div class="progress progress-xs progress-no-radius bg-whitesmoke">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
                                      aria-valuemax="100" style="width: 0%">
@@ -543,7 +543,7 @@ Purchase: http://wrapbootstrap.com
     <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.resize.js"></script>
     <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.time.js"></script>
     <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.pie.js"></script>
-    <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.tooltip.js"></script>
+    <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.tooltip.min.js"></script>
     <script src="<?php echo RESOURCE_SITE_URL; ?>/bootstrap/js/charts/flot/jquery.flot.orderBars.js"></script>
     <script src="<?php echo RESOURCE_SITE_URL; ?>/js/moment.js"></script>
     <script src="<?php echo RESOURCE_SITE_URL; ?>/js/moment-timezone-with-data.js"></script>
@@ -571,13 +571,13 @@ Purchase: http://wrapbootstrap.com
             window.myCounter.add(123456)
         }
         var dayofyear = moment().dayOfYear();
-        var year_rate = dayofyear*100/365;
-        $("#year_last_day").html(365-dayofyear);
-        $("#year_days > div:first-child").html(dayofyear+"天");
-        $("#year_days > div:first-child").css("left",year_rate+'%');
-        $("#year_days > div:first-child").css("margin-left",'-30px');
-        $("#year_days > div:first-child+div >div").attr("aria-valuenow",year_rate)
-        $("#year_days > div:first-child+div >div").css("width",year_rate+'%');
+        var year_rate = dayofyear * 100 / 365;
+        $("#year_last_day").html(365 - dayofyear);
+        $("#year_days > div:first-child").html(dayofyear + "天");
+        $("#year_days > div:first-child").css("left", year_rate + '%');
+        $("#year_days > div:first-child").css("margin-left", '-30px');
+        $("#year_days > div:first-child+div >div").attr("aria-valuenow", year_rate)
+        $("#year_days > div:first-child+div >div").css("width", year_rate + '%');
         $(function () {
             //初始化
             /*Sets Themed Colors Based on Themes*/
@@ -639,54 +639,33 @@ Purchase: http://wrapbootstrap.com
                 }
 
                 var getSeriesObj = function (cudata) {
-                    return [
-                        {
-                            data: getBusiRealTimeData(cudata),
-                            lines: {
-                                show: true,
-                                lineWidth: 1,
-                                fill: true,
-                                fillColor: {
-                                    colors: [
-                                        {
-                                            opacity: 0
-                                        }, {
-                                            opacity: 1
-                                        }
-                                    ]
-                                },
-                                steps: false
-                            },
-                            shadowSize: 0
-                        }
-                    ];
+                    return [{
+                        data: getBusiRealTimeData(cudata), lines: {
+                            show: true, lineWidth: 1, fill: true, fillColor: {
+                                colors: [{
+                                    opacity: 0
+                                }, {
+                                    opacity: 1
+                                }]
+                            }, steps: false
+                        }, shadowSize: 0
+                    }];
                 };
 
                 var realtimeplot = $.plot("#dashboard-chart-realtime", getSeriesObj(), {
                     yaxis: {
-                        color: '#f3f3f3',
-                        min: 0,
-                        minTickSize: 1,
-                        tickFormatter: function (val, axis) {
+                        color: '#f3f3f3', min: 0, minTickSize: 1, tickFormatter: function (val, axis) {
                             return val.toFixed(0);
                         }
                         // max: 9,
 
-                    },
-                    xaxis: {
-                        mode: "time",
-                        timeformat: "%H:%M",
-                        color: '#f3f3f3'
+                    }, xaxis: {
+                        mode: "time", timeformat: "%H:%M", color: '#f3f3f3'
                         // min: 0,
                         // max: 100
-                    },
-                    grid: {
-                        hoverable: true,
-                        clickable: false,
-                        borderWidth: 0,
-                        aboveData: false
-                    },
-                    colors: [themeprimary]
+                    }, grid: {
+                        hoverable: true, clickable: false, borderWidth: 0, aboveData: false
+                    }, colors: [themeprimary]
                 });
 
                 function update() {
@@ -707,30 +686,21 @@ Purchase: http://wrapbootstrap.com
                 }
                 $('#dashboard-chart-visits').highcharts({
                     chart: {
-                        type: 'column',
-                        style: "width:100%;height:100%;",
-                        reflow: false
-                    },
-                    title: {
+                        type: 'column', style: "width:100%;height:100%;", reflow: false
+                    }, title: {
                         text: '当天机构门诊住院收入'
-                    },
-                    xAxis: {
+                    }, xAxis: {
                         type: 'category'
-                    },
-                    yAxis: {
+                    }, yAxis: {
                         title: {
                             text: '收入金额'
                         }
-                    },
-                    legend: {
+                    }, legend: {
                         enabled: false
-                    },
-                    plotOptions: {
+                    }, plotOptions: {
                         series: {
-                            borderWidth: 0,
-                            dataLabels: {
-                                enabled: true,
-                                format: '{point.y}元'
+                            borderWidth: 0, dataLabels: {
+                                enabled: true, format: '{point.y}元'
                             }
                         }
                     },
@@ -741,9 +711,7 @@ Purchase: http://wrapbootstrap.com
                     },
 
                     series: [{
-                        name: '收入',
-                        colorByPoint: true,
-                        data: income_data
+                        name: '收入', colorByPoint: true, data: income_data
                     }]
                 });
                 // 7, 当天各个医疗机构的门诊住院人次柱状图
@@ -754,30 +722,21 @@ Purchase: http://wrapbootstrap.com
                 }
                 $('#dashboard-bandwidth-chart').highcharts({
                     chart: {
-                        type: 'column',
-                        style: "width:100%;height:100%;",
-                        reflow: false
-                    },
-                    title: {
+                        type: 'column', style: "width:100%;height:100%;", reflow: false
+                    }, title: {
                         text: '年内机构门诊人次'
-                    },
-                    xAxis: {
+                    }, xAxis: {
                         type: 'category'
-                    },
-                    yAxis: {
+                    }, yAxis: {
                         title: {
                             text: '人次'
                         }
-                    },
-                    legend: {
+                    }, legend: {
                         enabled: false
-                    },
-                    plotOptions: {
+                    }, plotOptions: {
                         series: {
-                            borderWidth: 0,
-                            dataLabels: {
-                                enabled: true,
-                                format: '{point.y}人次'
+                            borderWidth: 0, dataLabels: {
+                                enabled: true, format: '{point.y}人次'
                             }
                         }
                     },
@@ -788,9 +747,7 @@ Purchase: http://wrapbootstrap.com
                     },
 
                     series: [{
-                        name: '人次',
-                        colorByPoint: true,
-                        data: preperson_data
+                        name: '人次', colorByPoint: true, data: preperson_data
                     }]
                 });
 
@@ -798,55 +755,40 @@ Purchase: http://wrapbootstrap.com
                 var income_30days = data['income_30days'];
                 var income_30days_data = [];
                 for (var i = 0; i < income_30days.length; i++) {
-                    income_30days_data.push([moment.tz(income_30days[i]['syear'] + '-' + income_30days[i]['smonth'] + '-' + income_30days[i]['sday'], "Africa/Abidjan"),
-                        parseFloat(income_30days[i]['num'])]);
+                    income_30days_data.push([moment.tz(income_30days[i]['syear'] + '-' + income_30days[i]['smonth'] + '-' + income_30days[i]['sday'], "Africa/Abidjan"), parseFloat(income_30days[i]['num'])]);
                 }
-                var income_30days_chart = $.plot("#dashboard-income-30days-chart",
-                    [{
-                        data: income_30days_data,
-                        lines: {
-                            show: true,
-                            lineWidth: 1,
-                            fill: true,
-                            fillColor: {
-                                colors: [
-                                    {
-                                        opacity: 0
-                                    }, {
-                                        opacity: 1
-                                    }
-                                ]
-                            },
-                            steps: false
-                        },
-                        shadowSize: 0
-                    }], {
-                        yaxis: {
-                            color: '#f3f3f3',
-                            min: 0,
-                            minTickSize: 1,
-                            tickFormatter: function (val, axis) {
-                                return val.toFixed(0);
-                            }
-                            // max: 9,
+                var income_30days_chart = $.plot("#dashboard-income-30days-chart", [{
+                    data: income_30days_data, lines: {
+                        show: true, lineWidth: 1, fill: true, fillColor: {
+                            colors: [{
+                                opacity: 0
+                            }, {
+                                opacity: 1
+                            }]
+                        }, steps: false
+                    }, shadowSize: 1
+                }], {
+                    yaxis: {
+                        color: '#f3f3f3', min: 0, minTickSize: 1, tickFormatter: function (val, axis) {
+                            return val.toFixed(0);
+                        }
+                        // max: 9,
 
-                        },
-                        xaxis: {
-                            mode: "time",
-                            timeformat: "%m-%d",
-                            color: '#f3f3f3',
-                            labelWidth: 100
-                            // min: 0,
-                            // max: 100
-                        },
-                        grid: {
-                            hoverable: true,
-                            clickable: false,
-                            borderWidth: 0,
-                            aboveData: false
-                        },
-                        colors: [themesecondary]
-                    });
+                    }, xaxis: {
+                        mode: "time",
+                        timeformat: "%m-%d",
+                        color: '#f3f3f3', labelWidth: 100,
+                        tickFormatter:'%y-%m-%d'
+
+                        // min: 0,
+                        // max: 100
+                    }, grid: {
+                        hoverable: true, clickable: false, borderWidth: 0, aboveData: false
+                    }, colors: [themesecondary], tooltip: {
+                        show: true,
+                        content : "日期 : %x<br>金额: %y 元"
+                    }
+                });
                 //9. 妇保业务
                 var pregnantbusi_count = data['pregnantbusi_count'][0]['num'];
                 var pregnantbusi_monthcount = data['pregnantbusi_monthcount'][0]['num'];
@@ -858,19 +800,7 @@ Purchase: http://wrapbootstrap.com
                     pregnantbusi_14day_str += ',' + pregnantbusi_14day[i]['num'];
                 }
                 pregnantbusi_14day_str = pregnantbusi_14day_str.substring(1);
-                $("#pregnantbusi_14day").html(
-                    '<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' +
-                    'data-barcolor="#b0dc81"' +
-                    'data-barwidth="10px" data-barspacing="5px"' +
-                    'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' +
-                    'data-linewidth="2"' +
-                    'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' +
-                    'data-maxspotcolor="#fff"' +
-                    'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' +
-                    'data-composite="' + pregnantbusi_14day_str + '">' +
-                    pregnantbusi_14day_str +
-                    '</span>'
-                );
+                $("#pregnantbusi_14day").html('<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' + 'data-barcolor="#b0dc81"' + 'data-barwidth="10px" data-barspacing="5px"' + 'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' + 'data-linewidth="2"' + 'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' + 'data-maxspotcolor="#fff"' + 'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' + 'data-composite="' + pregnantbusi_14day_str + '">' + pregnantbusi_14day_str + '</span>');
                 InitiateSparklineCharts.update("#pregnantbusi_14day");
 
                 //10. 儿保业务
@@ -884,19 +814,7 @@ Purchase: http://wrapbootstrap.com
                     childbusi_14day_str += ',' + childbusi_14day[i]['num'];
                 }
                 childbusi_14day_str = childbusi_14day_str.substring(1);
-                $("#childbusi_14day").html(
-                    '<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' +
-                    'data-barcolor="#fb7d64"' +
-                    'data-barwidth="10px" data-barspacing="5px"' +
-                    'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' +
-                    'data-linewidth="2"' +
-                    'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' +
-                    'data-maxspotcolor="#fff"' +
-                    'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' +
-                    'data-composite="' + childbusi_14day_str + '">' +
-                    childbusi_14day_str +
-                    '</span>'
-                );
+                $("#childbusi_14day").html('<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' + 'data-barcolor="#fb7d64"' + 'data-barwidth="10px" data-barspacing="5px"' + 'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' + 'data-linewidth="2"' + 'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' + 'data-maxspotcolor="#fff"' + 'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' + 'data-composite="' + childbusi_14day_str + '">' + childbusi_14day_str + '</span>');
                 InitiateSparklineCharts.update("#childbusi_14day");
                 //11. 慢病业务
                 var chronicbusi_count = data['chronicbusi_count'][0]['num'];
@@ -909,19 +827,7 @@ Purchase: http://wrapbootstrap.com
                     chronicbusi_14day_str += ',' + chronicbusi_14day[i]['num'];
                 }
                 chronicbusi_14day_str = chronicbusi_14day_str.substring(1);
-                $("#chronicbusi_14day").html(
-                    '<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' +
-                    'data-barcolor="#3bcbef"' +
-                    'data-barwidth="10px" data-barspacing="5px"' +
-                    'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' +
-                    'data-linewidth="2"' +
-                    'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' +
-                    'data-maxspotcolor="#fff"' +
-                    'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' +
-                    'data-composite="' + chronicbusi_14day_str + '">' +
-                    chronicbusi_14day_str +
-                    '</span>'
-                );
+                $("#chronicbusi_14day").html('<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' + 'data-barcolor="#3bcbef"' + 'data-barwidth="10px" data-barspacing="5px"' + 'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' + 'data-linewidth="2"' + 'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' + 'data-maxspotcolor="#fff"' + 'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' + 'data-composite="' + chronicbusi_14day_str + '">' + chronicbusi_14day_str + '</span>');
                 InitiateSparklineCharts.update("#chronicbusi_14day");
                 //12. 分娩情况
                 var childbirth_count = data['childbirth_count'][0]['num'];
@@ -934,19 +840,7 @@ Purchase: http://wrapbootstrap.com
                     childbirth_14day_str += ',' + childbirth_14day[i]['num'];
                 }
                 childbirth_14day_str = childbirth_14day_str.substring(1);
-                $("#childbirth_14day").html(
-                    '<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' +
-                    'data-barcolor="#b0dc81"' +
-                    'data-barwidth="10px" data-barspacing="5px"' +
-                    'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' +
-                    'data-linewidth="2"' +
-                    'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' +
-                    'data-maxspotcolor="#fff"' +
-                    'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' +
-                    'data-composite="' + childbirth_14day_str + '">' +
-                    childbirth_14day_str +
-                    '</span>'
-                );
+                $("#childbirth_14day").html('<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' + 'data-barcolor="#b0dc81"' + 'data-barwidth="10px" data-barspacing="5px"' + 'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' + 'data-linewidth="2"' + 'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' + 'data-maxspotcolor="#fff"' + 'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' + 'data-composite="' + childbirth_14day_str + '">' + childbirth_14day_str + '</span>');
                 InitiateSparklineCharts.update("#childbirth_14day");
                 //13,卫生监督
                 var today = new Date();
@@ -961,7 +855,7 @@ Purchase: http://wrapbootstrap.com
                 var file_pregnant_count = parseInt(data['file_pregnant_count'][0]['num']);
                 var file_child_count = parseInt(data['file_child_count'][0]['num']);
                 var file_chronic_count = parseInt(data['file_chronic_count'][0]['num']);
-                var file_other_count = all -file_old_count-file_pregnant_count-file_child_count-file_chronic_count ;
+                var file_other_count = all - file_old_count - file_pregnant_count - file_child_count - file_chronic_count;
 
                 var oldman_rate = getnum((file_old_count * 100) / all);
                 $("#oldman_rate").html(oldman_rate + "%");
@@ -974,43 +868,30 @@ Purchase: http://wrapbootstrap.com
                 var other_rate = getnum((file_other_count * 100) / all);
                 $("#other_rate").html(other_rate + "%");
 
-                var chartdata = [
-                    {
-                        data: [[1, pregnant_rate]],
-                        color: '#fb6e52'
-                    },
-                    {
-                        data: [[1, child_rate]],
-                        color: '#e75b8d'
-                    },
-                    {
-                        data: [[1, chronic_rate]],
-                        color: '#a0d468'
-                    },
-                    {
-                        data: [[1, other_rate]],
-                        color: '#ffce55'
-                    },
-                    {
-                        data: [[1, oldman_rate]],
-                        color: '#5db2ff'
-                    }
-                ];
+                var chartdata = [{
+                    data: [[1, pregnant_rate]], color: '#fb6e52'
+                }, {
+                    data: [[1, child_rate]], color: '#e75b8d'
+                }, {
+                    data: [[1, chronic_rate]], color: '#a0d468'
+                }, {
+                    data: [[1, other_rate]], color: '#ffce55'
+                }, {
+                    data: [[1, oldman_rate]], color: '#5db2ff'
+                }];
                 var placeholder = $("#dashboard-pie-chart-sources");
 //                    placeholder.unbind();
                 $.plot(placeholder, chartdata, {
                     series: {
                         pie: {
-                            innerRadius: 0.45,
-                            show: true,
-                            stroke: {
+                            innerRadius: 0.45, show: true, stroke: {
                                 width: 4
                             }
                         }
                     }
                 });
             });
-            return ;
+            return;
             //1,新增档案数 /档案总数;
             doTime(function () {
                 $.getJSON("index.php?act=dashboardnew&op=newchart", {charttype: 1}, function (data) {
@@ -1061,7 +942,6 @@ Purchase: http://wrapbootstrap.com
                     var updateInterval = 60000;
 
 
-
                     function update() {
                         $.getJSON("index.php?act=dashboardnew&op=busidata", function (data) {
 
@@ -1085,30 +965,21 @@ Purchase: http://wrapbootstrap.com
                     }
                     $('#dashboard-chart-visits').highcharts({
                         chart: {
-                            type: 'column',
-                            style: "width:100%;height:100%;",
-                            reflow: false
-                        },
-                        title: {
+                            type: 'column', style: "width:100%;height:100%;", reflow: false
+                        }, title: {
                             text: '当天机构门诊住院收入'
-                        },
-                        xAxis: {
+                        }, xAxis: {
                             type: 'category'
-                        },
-                        yAxis: {
+                        }, yAxis: {
                             title: {
                                 text: '收入金额'
                             }
-                        },
-                        legend: {
+                        }, legend: {
                             enabled: false
-                        },
-                        plotOptions: {
+                        }, plotOptions: {
                             series: {
-                                borderWidth: 0,
-                                dataLabels: {
-                                    enabled: true,
-                                    format: '{point.y}元'
+                                borderWidth: 0, dataLabels: {
+                                    enabled: true, format: '{point.y}元'
                                 }
                             }
                         },
@@ -1119,9 +990,7 @@ Purchase: http://wrapbootstrap.com
                         },
 
                         series: [{
-                            name: '收入',
-                            colorByPoint: true,
-                            data: income_data
+                            name: '收入', colorByPoint: true, data: income_data
                         }]
                     });
                 });
@@ -1136,30 +1005,21 @@ Purchase: http://wrapbootstrap.com
                     }
                     $('#dashboard-bandwidth-chart').highcharts({
                         chart: {
-                            type: 'column',
-                            style: "width:100%;height:100%;",
-                            reflow: false
-                        },
-                        title: {
+                            type: 'column', style: "width:100%;height:100%;", reflow: false
+                        }, title: {
                             text: '年内机构门诊人次'
-                        },
-                        xAxis: {
+                        }, xAxis: {
                             type: 'category'
-                        },
-                        yAxis: {
+                        }, yAxis: {
                             title: {
                                 text: '人次'
                             }
-                        },
-                        legend: {
+                        }, legend: {
                             enabled: false
-                        },
-                        plotOptions: {
+                        }, plotOptions: {
                             series: {
-                                borderWidth: 0,
-                                dataLabels: {
-                                    enabled: true,
-                                    format: '{point.y}人次'
+                                borderWidth: 0, dataLabels: {
+                                    enabled: true, format: '{point.y}人次'
                                 }
                             }
                         },
@@ -1170,9 +1030,7 @@ Purchase: http://wrapbootstrap.com
                         },
 
                         series: [{
-                            name: '人次',
-                            colorByPoint: true,
-                            data: preperson_data
+                            name: '人次', colorByPoint: true, data: preperson_data
                         }]
                     });
                 });
@@ -1184,55 +1042,33 @@ Purchase: http://wrapbootstrap.com
                     var income_30days = data['income_30days'];
                     var income_30days_data = [];
                     for (var i = 0; i < income_30days.length; i++) {
-                        income_30days_data.push([moment.tz(income_30days[i]['syear'] + '-' + income_30days[i]['smonth'] + '-' + income_30days[i]['sday'], "Africa/Abidjan"),
-                            parseFloat(income_30days[i].num)]);
+                        income_30days_data.push([moment.tz(income_30days[i]['syear'] + '-' + income_30days[i]['smonth'] + '-' + income_30days[i]['sday'], "Africa/Abidjan"), parseFloat(income_30days[i].num)]);
                     }
-                    var income_30days_chart = $.plot("#dashboard-income-30days-chart",
-                        [{
-                            data: income_30days_data,
-                            lines: {
-                                show: true,
-                                lineWidth: 1,
-                                fill: true,
-                                fillColor: {
-                                    colors: [
-                                        {
-                                            opacity: 0
-                                        }, {
-                                            opacity: 1
-                                        }
-                                    ]
-                                },
-                                steps: false
-                            },
-                            shadowSize: 0
-                        }], {
-                            yaxis: {
-                                color: '#f3f3f3',
-                                min: 0,
-                                minTickSize: 1,
-                                tickFormatter: function (val, axis) {
-                                    return val.toFixed(0);
-                                }
-                                // max: 9,
+                    var income_30days_chart = $.plot("#dashboard-income-30days-chart", [{
+                        data: income_30days_data, lines: {
+                            show: true, lineWidth: 1, fill: true, fillColor: {
+                                colors: [{
+                                    opacity: 0
+                                }, {
+                                    opacity: 1
+                                }]
+                            }, steps: false
+                        }, shadowSize: 0
+                    }], {
+                        yaxis: {
+                            color: '#f3f3f3', min: 0, minTickSize: 1, tickFormatter: function (val, axis) {
+                                return val.toFixed(0);
+                            }
+                            // max: 9,
 
-                            },
-                            xaxis: {
-                                mode: "time",
-                                timeformat: "%m-%d",
-                                color: '#f3f3f3',
-                                labelWidth: 100
-                                // min: 0,
-                                // max: 100
-                            },
-                            grid: {
-                                hoverable: true,
-                                clickable: false,
-                                borderWidth: 0,
-                                aboveData: false
-                            },
-                            colors: [themesecondary]
-                        });
+                        }, xaxis: {
+                            mode: "time", timeformat: "%m-%d", color: '#f3f3f3', labelWidth: 100
+                            // min: 0,
+                            // max: 100
+                        }, grid: {
+                            hoverable: true, clickable: false, borderWidth: 0, aboveData: false
+                        }, colors: [themesecondary]
+                    });
                 });
             });
             //9. 妇保业务
@@ -1248,19 +1084,7 @@ Purchase: http://wrapbootstrap.com
                         pregnantbusi_14day_str += ',' + pregnantbusi_14day[i]['num'];
                     }
                     pregnantbusi_14day_str = pregnantbusi_14day_str.substring(1);
-                    $("#pregnantbusi_14day").html(
-                        '<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' +
-                        'data-barcolor="#b0dc81"' +
-                        'data-barwidth="10px" data-barspacing="5px"' +
-                        'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' +
-                        'data-linewidth="2"' +
-                        'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' +
-                        'data-maxspotcolor="#fff"' +
-                        'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' +
-                        'data-composite="' + pregnantbusi_14day_str + '">' +
-                        pregnantbusi_14day_str +
-                        '</span>'
-                    );
+                    $("#pregnantbusi_14day").html('<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' + 'data-barcolor="#b0dc81"' + 'data-barwidth="10px" data-barspacing="5px"' + 'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' + 'data-linewidth="2"' + 'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' + 'data-maxspotcolor="#fff"' + 'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' + 'data-composite="' + pregnantbusi_14day_str + '">' + pregnantbusi_14day_str + '</span>');
                     InitiateSparklineCharts.update("#pregnantbusi_14day");
 
                 });
@@ -1278,19 +1102,7 @@ Purchase: http://wrapbootstrap.com
                         childbusi_14day_str += ',' + childbusi_14day[i]['num'];
                     }
                     childbusi_14day_str = childbusi_14day_str.substring(1);
-                    $("#childbusi_14day").html(
-                        '<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' +
-                        'data-barcolor="#fb7d64"' +
-                        'data-barwidth="10px" data-barspacing="5px"' +
-                        'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' +
-                        'data-linewidth="2"' +
-                        'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' +
-                        'data-maxspotcolor="#fff"' +
-                        'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' +
-                        'data-composite="' + childbusi_14day_str + '">' +
-                        childbusi_14day_str +
-                        '</span>'
-                    );
+                    $("#childbusi_14day").html('<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' + 'data-barcolor="#fb7d64"' + 'data-barwidth="10px" data-barspacing="5px"' + 'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' + 'data-linewidth="2"' + 'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' + 'data-maxspotcolor="#fff"' + 'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' + 'data-composite="' + childbusi_14day_str + '">' + childbusi_14day_str + '</span>');
                     InitiateSparklineCharts.update("#childbusi_14day");
                 });
             });
@@ -1307,19 +1119,7 @@ Purchase: http://wrapbootstrap.com
                         chronicbusi_14day_str += ',' + chronicbusi_14day[i]['num'];
                     }
                     chronicbusi_14day_str = chronicbusi_14day_str.substring(1);
-                    $("#chronicbusi_14day").html(
-                        '<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' +
-                        'data-barcolor="#3bcbef"' +
-                        'data-barwidth="10px" data-barspacing="5px"' +
-                        'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' +
-                        'data-linewidth="2"' +
-                        'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' +
-                        'data-maxspotcolor="#fff"' +
-                        'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' +
-                        'data-composite="' + chronicbusi_14day_str + '">' +
-                        chronicbusi_14day_str +
-                        '</span>'
-                    );
+                    $("#chronicbusi_14day").html('<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' + 'data-barcolor="#3bcbef"' + 'data-barwidth="10px" data-barspacing="5px"' + 'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' + 'data-linewidth="2"' + 'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' + 'data-maxspotcolor="#fff"' + 'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' + 'data-composite="' + chronicbusi_14day_str + '">' + chronicbusi_14day_str + '</span>');
                     InitiateSparklineCharts.update("#chronicbusi_14day");
                 });
             });
@@ -1336,19 +1136,7 @@ Purchase: http://wrapbootstrap.com
                         childbirth_14day_str += ',' + childbirth_14day[i]['num'];
                     }
                     childbirth_14day_str = childbirth_14day_str.substring(1);
-                    $("#childbirth_14day").html(
-                        '<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' +
-                        'data-barcolor="#b0dc81"' +
-                        'data-barwidth="10px" data-barspacing="5px"' +
-                        'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' +
-                        'data-linewidth="2"' +
-                        'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' +
-                        'data-maxspotcolor="#fff"' +
-                        'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' +
-                        'data-composite="' + childbirth_14day_str + '">' +
-                        childbirth_14day_str +
-                        '</span>'
-                    );
+                    $("#childbirth_14day").html('<span data-sparkline="compositebar" data-height="82px" data-width="100%" ' + 'data-barcolor="#b0dc81"' + 'data-barwidth="10px" data-barspacing="5px"' + 'data-fillcolor="false" data-linecolor="#fff" data-spotradius="3"' + 'data-linewidth="2"' + 'data-spotcolor="#fafafa" data-minspotcolor="#fafafa"' + 'data-maxspotcolor="#fff"' + 'data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"' + 'data-composite="' + childbirth_14day_str + '">' + childbirth_14day_str + '</span>');
                     InitiateSparklineCharts.update("#childbirth_14day");
                 });
             });
@@ -1384,36 +1172,23 @@ Purchase: http://wrapbootstrap.com
                     var other_rate = getnum((file_other_count * 100) / all);
                     $("#other_rate").html(other_rate + "%");
 
-                    var chartdata = [
-                        {
-                            data: [[1, pregnant_rate]],
-                            color: '#fb6e52'
-                        },
-                        {
-                            data: [[1, child_rate]],
-                            color: '#e75b8d'
-                        },
-                        {
-                            data: [[1, chronic_rate]],
-                            color: '#a0d468'
-                        },
-                        {
-                            data: [[1, other_rate]],
-                            color: '#ffce55'
-                        },
-                        {
-                            data: [[1, oldman_rate]],
-                            color: '#5db2ff'
-                        }
-                    ];
+                    var chartdata = [{
+                        data: [[1, pregnant_rate]], color: '#fb6e52'
+                    }, {
+                        data: [[1, child_rate]], color: '#e75b8d'
+                    }, {
+                        data: [[1, chronic_rate]], color: '#a0d468'
+                    }, {
+                        data: [[1, other_rate]], color: '#ffce55'
+                    }, {
+                        data: [[1, oldman_rate]], color: '#5db2ff'
+                    }];
                     var placeholder = $("#dashboard-pie-chart-sources");
 //                    placeholder.unbind();
                     $.plot(placeholder, chartdata, {
                         series: {
                             pie: {
-                                innerRadius: 0.45,
-                                show: true,
-                                stroke: {
+                                innerRadius: 0.45, show: true, stroke: {
                                     width: 4
                                 }
                             }
