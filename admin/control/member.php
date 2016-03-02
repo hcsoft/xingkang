@@ -679,8 +679,14 @@ class memberControl extends SystemControl {
 		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
 // 		$mo
 		$model_member = Model ( 'member' );
-		$condition ['member_id'] = intval ( $_GET ['member_id'] );
+		$condition ['member_id'] = intval ( $_REQUEST ['member_id'] );
 		$member_array = $model_member->getMemberInfo ( $condition );
+		if($member_array['FileNo']!= ''){
+			$_REQUEST['queryfileno'] = $member_array['FileNo'];
+		}else {
+			$_REQUEST['queryname'] = $member_array['member_truename'];
+			$_REQUEST['queryidnumber'] = $member_array['sIDCard'];
+		}
 // 		var_dump($member_array['member_truename']);
 		$initsql ='select a.FileNo,b.Name,a.Sex,a.Birthday,a.IDNumber,a.TEL,b.Address from PersonalInfo a,HealthFile b where 1=1 and a.FileNo = b.FileNo ';
 
