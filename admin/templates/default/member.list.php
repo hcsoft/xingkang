@@ -285,11 +285,11 @@ $(function () {
 	            $(this).dialog("close");
 	        },
 	        "保存": function () {
-	            console.log($("#changedialog form").serialize());
+	            //console.log($("#changedialog form").serialize());
 	            $.ajax({
 	                url: "index.php?act=member&op=changebaseinfo",
 	                data: $("#changedialog form").serialize(), dataType: 'json', success: function (data) {
-	                    console.log(data);
+	                    //console.log(data);
 	                    if (data.success) {
 	                        success('#changedialog', data.msg);
 	                    } else {
@@ -297,7 +297,7 @@ $(function () {
 	                    }
 	                }
 	            }).fail(function( jqxhr, textStatus, errortext ) {
-	                console.log(jqxhr, textStatus, errortext );
+	                //console.log(jqxhr, textStatus, errortext );
 	                if(jqxhr.responseText.indexOf("您不具备进行该操作的权限")>=0){
 	                    error('#changedialog', "您不具备进行该操作的权限!");
 	                }else{
@@ -319,7 +319,7 @@ $(function () {
 	         data: param, 
 	         dataType: 'json', 
 	         success: function (data) {
-	             console.log(data);
+	             //console.log(data);
 	             data.data.Birthday = data.data.Birthday.substring(0, 10);
 	             data.data.BuildDate = data.data.BuildDate.substring(0, 10);
 	             $("#detailform").autofill(data.data);
@@ -344,7 +344,7 @@ $(function () {
 			onClick: onClick
 		}
 	};
-	console.log(<?php echo json_encode($output['treedata']); ?>);
+	//console.log(<?php echo json_encode($output['treedata']); ?>);
     var zNodes =<?php echo json_encode($output['treedata']); ?>;
     //var lefttreeObj = $.fn.zTree.init($("#lefttree"), setting, zNodes);
     $.fn.zTree.init($("#treeDemo"), setting, zNodes);
@@ -375,7 +375,7 @@ $(function () {
             url:"index.php?act=member&op=ajax_checkidnumber",
             data:"idnumber="+user,
             success:function(response){
-                console.log(response);
+                //console.log(response);
                 if(response.result){
                     res = false;
                 }else{
@@ -507,7 +507,7 @@ function band(){
 	$.ajax({
         url: "index.php?act=member&op=ajax_bandhealthfile",
         data: params, dataType: 'json', success: function (data) {
-            //console.log(data);
+            ////console.log(data);
             if (data.success) {
                 //query();
 //                 alert(data.msg);
@@ -519,7 +519,7 @@ function band(){
             }
         }
     }).fail(function( jqxhr, textStatus, errortext ) {
-        console.log(jqxhr, textStatus, errortext );
+        //console.log(jqxhr, textStatus, errortext );
         if(jqxhr.responseText.indexOf("您不具备进行该操作的权限")>=0){
             error('#memberinfo', "您不具备进行该操作的权限!");
         }else{
@@ -537,7 +537,7 @@ function unband(){
 	$.ajax({
         url: "index.php?act=member&op=ajax_bandhealthfile",
         data: params, dataType: 'json', success: function (data) {
-            //console.log(data);
+            ////console.log(data);
             if (data.success) {
                 //query();
 //                 alert(data.msg);
@@ -549,7 +549,7 @@ function unband(){
             }
         }
     }).fail(function( jqxhr, textStatus, errortext ) {
-        console.log(jqxhr, textStatus, errortext );
+        //console.log(jqxhr, textStatus, errortext );
         if(jqxhr.responseText.indexOf("您不具备进行该操作的权限")>=0){
             error('#memberinfo', "您不具备进行该操作的权限!");
         }else{
@@ -567,7 +567,7 @@ function add(){
          data: param, 
          dataType: 'json', 
          success: function (data) {
-             console.log(data);
+             //console.log(data);
              data.data.Birthday = data.data.Birthday.substring(0, 10);
              $("#detailform").autofill(data.data);
          },
@@ -617,7 +617,7 @@ function save(){
 	$.ajax({
         url: "index.php?act=member&op=ajax_savehealthfile",
         data: $("#detailform").serialize(), dataType: 'json', success: function (data) {
-            console.log(data);
+            //console.log(data);
             if (data.success) {
                 query();
                 success('#memberinfo', data.msg);
@@ -626,7 +626,7 @@ function save(){
             }
         }
     }).fail(function( jqxhr, textStatus, errortext ) {
-        console.log(jqxhr, textStatus, errortext );
+        //console.log(jqxhr, textStatus, errortext );
         if(jqxhr.responseText.indexOf("您不具备进行该操作的权限")>=0){
             error('#memberinfo', "您不具备进行该操作的权限!");
         }else{

@@ -2349,4 +2349,75 @@ class memberControl extends SystemControl {
     	}
     	exit;
     }
+    
+    
+    public function  memberhistoryOp($flag = true){
+    	$page = new Page();
+    	$page->setEachNum(10);
+    	$page->setNowPage($_REQUEST["curpage"]);
+    	$startnum = $page->getEachNum() * ($page->getNowPage() - 1);
+    	$endnum = $page->getEachNum() * ($page->getNowPage());
+    	$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+    	$sql = " a.ID,a.member_id,b.Name,b.TEL,a.Sex,a.IDNumber,a.Birthday,a.dCreateDate,b.Address,a.activeflag from PersonalInfo a,HealthFile b";
+    	/**
+    	 * 检索条件 
+    	 */
+    	$where = " where a.FileNo=b.FileNo ";
+    
+    	if (isset($_GET['idnumber']) and $_GET['idnumber'] != '') {
+    		$where = $where.' and a.IDNumber=\''.$_GET['idnumber'].'\'';
+    	}
+    	if (isset($_GET['tel']) and $_GET['tel'] != '') {
+    		$where = $where.' and b.TEL=\''.$_GET['tel'].'\'';
+    	}
+    	if (isset($_GET['name']) and $_GET['name'] != '') {
+    		$where = $where.' and b.Name like \'%'.$_GET['name'].'%\'';
+//     		$condition ['member_truename'] = array('like','%'.$_GET['name'].'%');
+    	}
+    	if (isset($_GET['birthday']) and $_GET['birthday'] != '') {
+    		$where = $where.' and a.Birthday=\''.$_GET['birthday'].'\'';
+//     		$condition ['member_birthday'] = $_GET['birthday'];
+    	}
+    
+    	if (isset($_GET['createcard_begin']) and $_GET['createcard_begin'] != '') {
+    		$where = $where.' and a.dCreateDate >=\''.$_GET['createcard_begin'].'\'';
+    	}
+    	if (isset($_GET['createcard_end']) and $_GET['createcard_end'] != '') {
+    		$where = $where.' and a.dCreateDate <=\''.$_GET['createcard_end'].'\'';
+    	}
+    
+    
+    	if (isset($_GET['activeflag']) and $_GET['activeflag'] != '') {
+    		$where = $where.' and a.activeflag=\''.$_GET['activeflag'].'\'';
+    	}
+    	if (isset($_GET['membersex']) and $_GET['membersex'] != '') {
+    		$where = $where.' and a.Sex=\''.$_GET['membersex'].'\'';
+    	}
+    
+    	if ($_GET ['member_id'] != '') {
+    		$where = $where.' and a.member_id like \'%'.$_GET['member_id'].'%\'';
+    	}
+    	$countsql = ' select count(*)  from (select '.$sql.$where.') a ';
+    	
+    	$stmt = $conn->query($countsql);
+    	$total = $stmt->fetch(PDO::FETCH_NUM);
+    	$page->setTotalNum($total[0]);
+    	$pagesql = 'select * from (select top '. $endnum.' row_number() over( order by  a.member_id)rownum ,'.$sql.$where.' order by a.member_id)zzzz where rownum>'.$startnum;
+//     	var_dump($pagesql);
+    	$titlearray = array('会员卡号', '姓名', '电话', '性别', '身份证', '生日'
+    			, '地址', '建卡日期', '激活状态');
+    	if (isset($_GET['export']) && $_GET['export'] == 'true') {
+    		$exportsql = " a.member_id,b.Name,b.TEL,a.Sex,a.IDNumber,CONVERT(varchar(100), a.Birthday, 23),CONVERT(varchar(100), a.dCreateDate, 23),b.Address,a.activeflag from PersonalInfo a,HealthFile b";
+    		$this->exportxlsx(array(0 => 'select'.$exportsql.$where), $titlearray, '历史会员');
+    	}
+    	$stmt = $conn->query($pagesql);
+    	$data_list = array();
+    	while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+    		array_push($data_list, $row);
+    	}
+    	Tpl::output('member_list', $data_list);
+    	//--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
+    	Tpl::output('page', $page->show());
+    	Tpl::showpage ( 'memberhistory.index' );
+    }
 }
