@@ -284,7 +284,7 @@ class storehouseControl extends SystemControl
             'month' => ' left(convert(varchar,dBuy_Date,112),6) as  "month" ',
             'day' => ' convert(varchar,dBuy_Date,112) as "day" ',
             'sDrug_TradeName' => ' goods.sDrug_TradeName as "sDrug_TradeName"  ',
-            'OrgID' => ' c.name as "OrgID" '
+            'OrgID' => ' d.name as "OrgID" '
         );
         $config = array(0 => array('text' => '采购金额汇总',
             'sqlwher' => ' and iBuy_Type in (1,2) ',
