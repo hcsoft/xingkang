@@ -20,10 +20,10 @@
                            class="txt"></td>
                 
                 <td>是否激活：</td>
-                <td><select name="hasfile">
-                        <option value="">全部</option>
-                        <option value="1" <?php if ('1' == $_GET['activeflag']){ ?>selected<?php } ?>>已激活</option>
+                <td><select name="activeflag">
                         <option value="0" <?php if ('0' == $_GET['activeflag']){ ?>selected<?php } ?>>未激活</option>
+                        <option value="1" <?php if ('1' == $_GET['activeflag']){ ?>selected<?php } ?>>已激活</option>
+                        
                     </select>
                 </td>
                 <td >
@@ -233,14 +233,15 @@
                 },
                 "确定激活": function () {
                     $.ajax({
-                        url: "index.php?act=member&op=unregister",
-                        data: $("#unregisterdialog form").serialize(), dataType: 'json', success: function (data) {
+                        url: "index.php?act=member&op=ajax_active",
+                        data: $("#activedialog form").serialize(), dataType: 'json', success: function (data) {
                             console.log(data);
                             if (data.success) {
-                                success('#unregisterdialog', data.msg);
+                                success('#activedialog', data.msg);
                             } else {
-                                error('#unregisterdialog', data.msg);
+                                error('#activedialog', data.msg);
                             }
+                            $('#formSearch').submit();
                         }
                     }).fail(function( jqxhr, textStatus, errortext ) {
                         console.log(jqxhr, textStatus, errortext );

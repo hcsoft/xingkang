@@ -2362,7 +2362,7 @@ class memberControl extends SystemControl {
     	/**
     	 * 检索条件 
     	 */
-    	$where = " where a.FileNo=b.FileNo ";
+    	$where = " where a.FileNo=b.FileNo and substring(b.DistrictNumber,1,6) in ('530102','530103','530111','530112') ";
     
     	if (isset($_GET['idnumber']) and $_GET['idnumber'] != '') {
     		$where = $where.' and a.IDNumber=\''.$_GET['idnumber'].'\'';
@@ -2388,6 +2388,9 @@ class memberControl extends SystemControl {
     
     
     	if (isset($_GET['activeflag']) and $_GET['activeflag'] != '') {
+    		$where = $where.' and a.activeflag=\''.$_GET['activeflag'].'\'';
+    	}else{
+    		$_GET['activeflag']= 0;
     		$where = $where.' and a.activeflag=\''.$_GET['activeflag'].'\'';
     	}
     	if (isset($_GET['membersex']) and $_GET['membersex'] != '') {
@@ -2419,5 +2422,20 @@ class memberControl extends SystemControl {
     	//--0:期初入库 1:采购入库 2:购进退回 3:盘盈 5:领用 12:盘亏 14:领用退回 50:采购计划
     	Tpl::output('page', $page->show());
     	Tpl::showpage ( 'memberhistory.index' );
+    }
+    
+    public function ajax_activeOp(){
+    	//spotcheck_spot
+    	try {
+    		$conn = require(BASE_DATA_PATH . '/../core/framework/db/mssqlpdo.php');
+    		$id = $_REQUEST['id'];
+    		$sql = "update PersonalInfo set activeflag=1 where ID='$id'";
+    		$stmt = $conn->prepare($sql);
+			$stmt->execute();
+			echo json_encode(array('success' => true, 'msg' => '激活成功!'));
+		} catch (Exception $e) {
+			echo json_encode(array('success' => false, 'msg' => '异常!'.$e->getMessage()));
+		}
+		exit;
     }
 }
